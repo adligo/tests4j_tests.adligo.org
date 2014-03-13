@@ -6,12 +6,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.adligo.jtests.base.shared.I_AbstractTest;
+import org.adligo.jtests.base.shared.asserts.I_AssertData;
 import org.adligo.jtests.models.shared.results.I_ExhibitResult;
 import org.adligo.jtests.models.shared.results.I_TestFailure;
 import org.adligo.jtests.models.shared.results.I_TestResult;
 import org.adligo.jtests.models.shared.run.I_AllTestsDoneListener;
 import org.adligo.jtests.models.shared.run.I_TestResultsProcessor;
 import org.adligo.jtests.models.shared.run.RunParameters;
+import org.adligo.jtests.run.JTestUncaughtExceptionHandler;
 import org.adligo.jtests.run.JTests;
 import org.adligo.jtests_tests.use_case_tests.Run_ClassTest_Test;
 import org.adligo.jtests_tests.use_case_tests.Run_FunctionalTest_Test;
@@ -33,6 +35,7 @@ public class RunAllTests implements I_TestResultsProcessor, I_AllTestsDoneListen
 
 	public void go() {
 		try {
+			Thread.currentThread().setUncaughtExceptionHandler(JTestUncaughtExceptionHandler.HANDLER);
 			RunParameters params = new RunParameters();
 			List<Class<? extends I_AbstractTest>> tests = new ArrayList<Class<? extends I_AbstractTest>>();
 			tests.add(Run_FunctionalTest_Test.class);
@@ -77,6 +80,16 @@ public class RunAllTests implements I_TestResultsProcessor, I_AllTestsDoneListen
 
 	private void printFailure(I_TestFailure failure) {
 		originalOut.println(failure.getMessage());
+		
+		I_AssertData data = failure.getData();
+		if (data != null) {
+			List<String> keys = data.getKeys();
+			for (String key: keys) {
+				originalOut.println(key + "=" + data.getData(key));
+			}
+			
+			originalOut.println(failure.getMessage());
+		}
 		Throwable location = failure.getLocationFailed();
 		if (location != null) {
 			location.printStackTrace(originalOut);
@@ -88,8 +101,8 @@ public class RunAllTests implements I_TestResultsProcessor, I_AllTestsDoneListen
 
 	@Override
 	public void whenFinished() {
-		int minExhibits = 1;
-		int minAsserts = 2;
+		int minExhibits = 2;
+		int minAsserts = 8;
 		if (exhibits >= minExhibits && asserts >= minAsserts) {
 			originalOut.println("");
 			originalOut.println("All " + allTests + " tests passed sucessfully ");
