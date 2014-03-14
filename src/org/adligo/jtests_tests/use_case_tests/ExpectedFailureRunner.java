@@ -6,8 +6,8 @@ import java.util.List;
 import org.adligo.jtests.models.shared.I_AbstractTest;
 import org.adligo.jtests.models.shared.results.I_TestResult;
 import org.adligo.jtests.models.shared.results.I_TestRunResult;
-import org.adligo.jtests.models.shared.run.I_TestRunListener;
-import org.adligo.jtests.models.shared.run.RunParameters;
+import org.adligo.jtests.models.shared.system.I_TestRunListener;
+import org.adligo.jtests.models.shared.system.RunParameters;
 import org.adligo.jtests.run.JTests;
 
 public class ExpectedFailureRunner implements I_TestRunListener {

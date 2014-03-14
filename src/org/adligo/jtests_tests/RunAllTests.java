@@ -12,8 +12,8 @@ import org.adligo.jtests.models.shared.results.I_ExhibitResult;
 import org.adligo.jtests.models.shared.results.I_TestFailure;
 import org.adligo.jtests.models.shared.results.I_TestResult;
 import org.adligo.jtests.models.shared.results.I_TestRunResult;
-import org.adligo.jtests.models.shared.run.I_TestRunListener;
-import org.adligo.jtests.models.shared.run.RunParameters;
+import org.adligo.jtests.models.shared.system.I_TestRunListener;
+import org.adligo.jtests.models.shared.system.RunParameters;
 import org.adligo.jtests.reports.console.LineTextComparisonReport;
 import org.adligo.jtests.run.JTestUncaughtExceptionHandler;
 import org.adligo.jtests.run.JTests;
@@ -83,8 +83,8 @@ public class RunAllTests implements I_TestRunListener {
 	@Override
 	public void onRunCompleted(I_TestRunResult result) {
 		originalOut.println("Tests completed in " + result.getRunTimeSecs() + " secs");
-		int minExhibits = 2;
-		int minAsserts = 8;
+		int minExhibits = 6;
+		int minAsserts = 30;
 		if (exhibits >= minExhibits && asserts >= minAsserts) {
 			originalOut.println("");
 			originalOut.println("All " + allTests + " tests passed sucessfully in " + result.getRunTimeSecs() + " secs");
