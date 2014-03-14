@@ -7,12 +7,14 @@ import java.util.Set;
 
 import org.adligo.jtests.models.shared.I_AbstractTest;
 import org.adligo.jtests.models.shared.asserts.I_AssertionData;
+import org.adligo.jtests.models.shared.asserts.line_text.LineTextCompareResult;
 import org.adligo.jtests.models.shared.results.I_ExhibitResult;
 import org.adligo.jtests.models.shared.results.I_TestFailure;
 import org.adligo.jtests.models.shared.results.I_TestResult;
 import org.adligo.jtests.models.shared.results.I_TestRunResult;
 import org.adligo.jtests.models.shared.run.I_TestRunListener;
 import org.adligo.jtests.models.shared.run.RunParameters;
+import org.adligo.jtests.reports.console.LineTextComparisonReport;
 import org.adligo.jtests.run.JTestUncaughtExceptionHandler;
 import org.adligo.jtests.run.JTests;
 import org.adligo.jtests_tests.use_case_tests.Run_FunctionalTest_Test;
@@ -57,10 +59,15 @@ public class RunAllTests implements I_TestRunListener {
 		I_AssertionData data = failure.getData();
 		if (data != null) {
 			Set<String> keys = data.getKeys();
-			for (String key: keys) {
-				originalOut.println(key + "=" + data.getData(key));
+			if (keys.contains(I_AssertionData.LINE_TEXT_RESULT)) {
+				LineTextCompareResult result = (LineTextCompareResult)
+						data.getData(I_AssertionData.LINE_TEXT_RESULT);
+				LineTextComparisonReport.display(originalOut, originalErr, result);
+			} else {
+				for (String key: keys) {
+					originalOut.println(key + "=" + data.getData(key));
+				}
 			}
-			
 			originalOut.println(failure.getMessage());
 		}
 		Throwable location = failure.getLocationFailed();
