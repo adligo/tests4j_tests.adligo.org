@@ -7,7 +7,7 @@ import org.adligo.jtests.models.shared.results.I_TestResult;
 import org.adligo.jtests_tests.use_case_tests.mock_functional.AbstractExhibit;
 import org.adligo.jtests_tests.use_case_tests.mock_functional.AfterTestHasParams;
 import org.adligo.jtests_tests.use_case_tests.mock_functional.AfterTestNotStatic;
-import org.adligo.jtests_tests.use_case_tests.mock_functional.BadConstructor;
+import org.adligo.jtests_tests.use_case_tests.mock_functional.FunctionalBadConstructor;
 import org.adligo.jtests_tests.use_case_tests.mock_functional.BeforeTestHasParams;
 import org.adligo.jtests_tests.use_case_tests.mock_functional.BeforeTestNotStatic;
 import org.adligo.jtests_tests.use_case_tests.mock_functional.ExhibitWithParams;
@@ -29,14 +29,14 @@ public class Run_FunctionalTest_Test extends FunctionalTest {
 		assertEquals("Methods Annotated with @Exhibit must NOT be abstract.", failure.getMessage());
 		Throwable exception = failure.getException();
 		assertUniform(new IllegalArgumentException(
-				"class org.adligo.jtests_tests.use_case_tests.mock_functional.AbstractExhibit.exhibitFoo was not annotated correctly."), 
+				"org.adligo.jtests_tests.use_case_tests.mock_functional.AbstractExhibit.exhibitFoo was not annotated correctly."), 
 				exception);
 	}
 	
 	@Exhibit
 	public void exhibitBadConstructor() {
 		ExpectedFailureRunner runner = new ExpectedFailureRunner();
-		runner.runExpectedFailure(BadConstructor.class);
+		runner.runExpectedFailure(FunctionalBadConstructor.class);
 		I_TestResult result = runner.getResult();
 		assertNotNull(result);
 		assertFalse(result.isPassed());
@@ -46,7 +46,7 @@ public class Run_FunctionalTest_Test extends FunctionalTest {
 				failure.getMessage());
 		Throwable exception = failure.getException();
 		assertUniform(new NoSuchMethodException(
-				"org.adligo.jtests_tests.use_case_tests.mock_functional.BadConstructor.<init>()"), 
+				"org.adligo.jtests_tests.use_case_tests.mock_functional.FunctionalBadConstructor.<init>()"), 
 				exception);
 		
 	}
@@ -63,7 +63,7 @@ public class Run_FunctionalTest_Test extends FunctionalTest {
 		assertEquals("Methods Annotated with @BeforeTest must be static.", failure.getMessage());
 		Throwable exception = failure.getException();
 		assertUniform(new IllegalArgumentException(
-				"class org.adligo.jtests_tests.use_case_tests.mock_functional.BeforeTestNotStatic was not annotated correctly."), 
+				"org.adligo.jtests_tests.use_case_tests.mock_functional.BeforeTestNotStatic was not annotated correctly."), 
 				exception);
 	}
 	
@@ -79,7 +79,7 @@ public class Run_FunctionalTest_Test extends FunctionalTest {
 		assertEquals("Methods Annotated with @BeforeTest must not take any parameters.", failure.getMessage());
 		Throwable exception = failure.getException();
 		assertUniform(new IllegalArgumentException(
-				"class org.adligo.jtests_tests.use_case_tests.mock_functional.BeforeTestHasParams was not annotated correctly."), 
+				"org.adligo.jtests_tests.use_case_tests.mock_functional.BeforeTestHasParams was not annotated correctly."), 
 				exception);
 	}
 	
@@ -95,7 +95,7 @@ public class Run_FunctionalTest_Test extends FunctionalTest {
 		assertEquals("Methods Annotated with @AfterTest must be static.", failure.getMessage());
 		Throwable exception = failure.getException();
 		assertUniform(new IllegalArgumentException(
-				"class org.adligo.jtests_tests.use_case_tests.mock_functional.AfterTestNotStatic was not annotated correctly."), 
+				"org.adligo.jtests_tests.use_case_tests.mock_functional.AfterTestNotStatic was not annotated correctly."), 
 				exception);
 	}
 	
@@ -111,7 +111,7 @@ public class Run_FunctionalTest_Test extends FunctionalTest {
 		assertEquals("Methods Annotated with @AfterTest must not take any parameters.", failure.getMessage());
 		Throwable exception = failure.getException();
 		assertUniform(new IllegalArgumentException(
-				"class org.adligo.jtests_tests.use_case_tests.mock_functional.AfterTestHasParams was not annotated correctly."), 
+				"org.adligo.jtests_tests.use_case_tests.mock_functional.AfterTestHasParams was not annotated correctly."), 
 				exception);
 	}
 	
@@ -127,7 +127,7 @@ public class Run_FunctionalTest_Test extends FunctionalTest {
 		assertEquals("Methods Annotated with @Exhibit must not take any parameters", failure.getMessage());
 		Throwable exception = failure.getException();
 		assertUniform(new IllegalArgumentException(
-				"class org.adligo.jtests_tests.use_case_tests.mock_functional.ExhibitWithParams.exhibitFoo was not annotated correctly."), 
+				"org.adligo.jtests_tests.use_case_tests.mock_functional.ExhibitWithParams.exhibitFoo was not annotated correctly."), 
 				exception);
 	}
 	
@@ -145,7 +145,7 @@ public class Run_FunctionalTest_Test extends FunctionalTest {
 		assertEquals("Test Classes must have at least one method annotated with @Exhibit.", failure.getMessage());
 		Throwable exception = failure.getException();
 		assertUniform(new IllegalArgumentException(
-				"class org.adligo.jtests_tests.use_case_tests.mock_functional.NoExhibits was not annotated correctly."), 
+				"org.adligo.jtests_tests.use_case_tests.mock_functional.NoExhibits was not annotated correctly."), 
 				exception);
 	}
 	
@@ -161,7 +161,7 @@ public class Run_FunctionalTest_Test extends FunctionalTest {
 		assertEquals("Test Classes must have at least one method annotated with @Exhibit.", failure.getMessage());
 		Throwable exception = failure.getException();
 		assertUniform(new IllegalArgumentException(
-				"class org.adligo.jtests_tests.use_case_tests.mock_functional.ProtectedExhibit was not annotated correctly."), 
+				"org.adligo.jtests_tests.use_case_tests.mock_functional.ProtectedExhibit was not annotated correctly."), 
 				exception);
 	}
 	
@@ -177,7 +177,7 @@ public class Run_FunctionalTest_Test extends FunctionalTest {
 		assertEquals("Methods Annotated with @Exhibit must NOT be static.", failure.getMessage());
 		Throwable exception = failure.getException();
 		assertUniform(new IllegalArgumentException(
-				"class org.adligo.jtests_tests.use_case_tests.mock_functional.StaticExhibit.exhibitFoo was not annotated correctly."), 
+				"org.adligo.jtests_tests.use_case_tests.mock_functional.StaticExhibit.exhibitFoo was not annotated correctly."), 
 				exception);
 	}
 	

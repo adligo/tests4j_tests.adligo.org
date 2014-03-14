@@ -13,9 +13,9 @@ import org.adligo.jtests.models.shared.FunctionalTest;
  * @author scott
  *
  */
-public class BadConstructor extends FunctionalTest {
+public class FunctionalBadConstructor extends FunctionalTest {
 
-	public BadConstructor(String p) {}
+	public FunctionalBadConstructor(String p) {}
 	
 	@Exhibit
 	public void exhibitFoo() {}

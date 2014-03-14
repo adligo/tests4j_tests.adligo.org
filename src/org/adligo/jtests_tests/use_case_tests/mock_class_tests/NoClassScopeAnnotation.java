@@ -1,4 +1,4 @@
-package org.adligo.jtests_tests.use_case_tests.mock_test_classes;
+package org.adligo.jtests_tests.use_case_tests.mock_class_tests;
 
 import org.adligo.jtests.models.shared.ClassTest;
 
@@ -12,6 +12,6 @@ import org.adligo.jtests.models.shared.ClassTest;
  * @author scott
  *
  */
-public class ClassTestWithBadConstructor extends ClassTest {
+public class NoClassScopeAnnotation extends ClassTest {
 
 }

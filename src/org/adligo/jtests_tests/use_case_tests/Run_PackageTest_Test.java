@@ -4,16 +4,16 @@ import org.adligo.jtests.models.shared.Exhibit;
 import org.adligo.jtests.models.shared.FunctionalTest;
 import org.adligo.jtests.models.shared.results.I_TestFailure;
 import org.adligo.jtests.models.shared.results.I_TestResult;
-import org.adligo.jtests_tests.use_case_tests.mock_class_tests.BadConstructor;
 import org.adligo.jtests_tests.use_case_tests.mock_class_tests.NoClassScopeAnnotation;
-import org.adligo.jtests_tests.use_case_tests.mock_functional.StaticExhibit;
+import org.adligo.jtests_tests.use_case_tests.mock_package_tests.BadPackageConstructor;
+import org.adligo.jtests_tests.use_case_tests.mock_package_tests.NoPackageScopeAnnotation;
 
-public class Run_ClassTest_Test extends FunctionalTest {
+public class Run_PackageTest_Test extends FunctionalTest {
 
 	@Exhibit
-	public void exhibitClassTestWithBadConstructor() {
+	public void exhibitPackageTestWithBadConstructor() {
 		ExpectedFailureRunner runner = new ExpectedFailureRunner();
-		runner.runExpectedFailure(BadConstructor.class);
+		runner.runExpectedFailure(BadPackageConstructor.class);
 		I_TestResult result = runner.getResult();
 		assertNotNull(result);
 		assertFalse(result.isPassed());
@@ -22,23 +22,23 @@ public class Run_ClassTest_Test extends FunctionalTest {
 		assertEquals("Classes which implement I_AbstractTest must have a zero argument constructor.", failure.getMessage());
 		Throwable exception = failure.getException();
 		assertUniform(new NoSuchMethodException(
-				"org.adligo.jtests_tests.use_case_tests.mock_class_tests.BadConstructor.<init>()"), 
+				"org.adligo.jtests_tests.use_case_tests.mock_package_tests.BadPackageConstructor.<init>()"), 
 				exception);
 	}
 	
 	@Exhibit
-	public void exhibitClassTestWithNoScopeAnnotation() {
+	public void exhibitPackageTestWithNoScopeAnnotation() {
 		ExpectedFailureRunner runner = new ExpectedFailureRunner();
-		runner.runExpectedFailure(NoClassScopeAnnotation.class);
+		runner.runExpectedFailure(NoPackageScopeAnnotation.class);
 		I_TestResult result = runner.getResult();
 		assertNotNull(result);
 		assertFalse(result.isPassed());
 		I_TestFailure failure = result.getFailure();
 		assertNotNull(failure);
-		assertEquals("ClassTests must be annotated with ClassTestScope.", failure.getMessage());
+		assertEquals("PackageTests must be annotated with a PackageTestScope annotation.", failure.getMessage());
 		Throwable exception = failure.getException();
 		assertUniform(new IllegalArgumentException(
-				"org.adligo.jtests_tests.use_case_tests.mock_class_tests.NoClassScopeAnnotation was not annotated correctly."), 
+				"org.adligo.jtests_tests.use_case_tests.mock_package_tests.NoPackageScopeAnnotation was not annotated correctly."), 
 				exception);
 	}
 }
