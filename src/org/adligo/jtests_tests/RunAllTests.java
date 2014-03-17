@@ -17,6 +17,7 @@ import org.adligo.jtests.models.shared.system.RunParameters;
 import org.adligo.jtests.reports.console.LineTextComparisonReport;
 import org.adligo.jtests.run.JTestUncaughtExceptionHandler;
 import org.adligo.jtests.run.JTests;
+import org.adligo.jtests_tests.use_case_tests.Passing_Asserts_Test;
 import org.adligo.jtests_tests.use_case_tests.Run_ClassTest_Test;
 import org.adligo.jtests_tests.use_case_tests.Run_FunctionalTest_Test;
 import org.adligo.jtests_tests.use_case_tests.Run_PackageTest_Test;
@@ -40,10 +41,12 @@ public class RunAllTests implements I_TestRunListener {
 			Thread.currentThread().setUncaughtExceptionHandler(JTestUncaughtExceptionHandler.HANDLER);
 			RunParameters params = new RunParameters();
 			List<Class<? extends I_AbstractTest>> tests = new ArrayList<Class<? extends I_AbstractTest>>();
+			
 			tests.add(Run_FunctionalTest_Test.class);
 			tests.add(Run_ClassTest_Test.class);
 			tests.add(Run_PackageTest_Test.class);
-			
+		
+			tests.add(Passing_Asserts_Test.class);
 			params.setTests(tests);
 			allTests = tests.size();
 			
