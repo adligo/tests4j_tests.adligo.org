@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-import org.adligo.jtests.models.shared.I_AbstractTest;
+import org.adligo.jtests.models.shared.I_AbstractTrial;
 import org.adligo.jtests.models.shared.asserts.I_AssertionData;
 import org.adligo.jtests.models.shared.asserts.line_text.LineTextCompareResult;
 import org.adligo.jtests.models.shared.results.I_TestResult;
@@ -18,17 +18,17 @@ import org.adligo.jtests.models.shared.system.RunParameters;
 import org.adligo.jtests.reports.console.LineTextComparisonReport;
 import org.adligo.jtests.run.JTestUncaughtExceptionHandler;
 import org.adligo.jtests.run.JTests;
-import org.adligo.jtests_tests.use_case_tests.Assert_PassConditions_Test;
-import org.adligo.jtests_tests.use_case_tests.Run_ClassTest_Test;
-import org.adligo.jtests_tests.use_case_tests.Run_FunctionalTest_Test;
-import org.adligo.jtests_tests.use_case_tests.Run_PackageTest_Test;
+import org.adligo.jtests_tests.use_case_trials.Assert_PassConditions_Trial;
+import org.adligo.jtests_tests.use_case_trials.Run_ClassTrial_Trial;
+import org.adligo.jtests_tests.use_case_trials.Run_FunctionalTrial_Trial;
+import org.adligo.jtests_tests.use_case_trials.Run_PackageTrial_Trial;
 
 public class RunAllTests implements I_TestRunListener {
 	private PrintStream originalOut = System.out;
 	private PrintStream originalErr = System.err;
 	private int allTests;
-	private int passedTests;
-	private int exhibits;
+	private int passedTrials;
+	private int tests;
 	private int asserts;
 	
 	public static void main(String [] args) {
@@ -41,13 +41,13 @@ public class RunAllTests implements I_TestRunListener {
 		try {
 			Thread.currentThread().setUncaughtExceptionHandler(JTestUncaughtExceptionHandler.HANDLER);
 			RunParameters params = new RunParameters();
-			List<Class<? extends I_AbstractTest>> tests = new ArrayList<Class<? extends I_AbstractTest>>();
+			List<Class<? extends I_AbstractTrial>> tests = new ArrayList<Class<? extends I_AbstractTrial>>();
 			
-			tests.add(Run_FunctionalTest_Test.class);
-			tests.add(Run_ClassTest_Test.class);
-			tests.add(Run_PackageTest_Test.class);
+			tests.add(Run_FunctionalTrial_Trial.class);
+			tests.add(Run_ClassTrial_Trial.class);
+			tests.add(Run_PackageTrial_Trial.class);
 		
-			tests.add(Assert_PassConditions_Test.class);
+			tests.add(Assert_PassConditions_Trial.class);
 			params.setTests(tests);
 			allTests = tests.size();
 			
@@ -96,15 +96,15 @@ public class RunAllTests implements I_TestRunListener {
 	@Override
 	public void onRunCompleted(I_TestRunResult result) {
 		originalOut.println("Tests completed in " + result.getRunTimeSecs() + " secs");
-		int minExhibits = 14;
+		int minTests = 14;
 		int minAsserts = 70;
-		if (exhibits >= minExhibits && asserts >= minAsserts) {
+		if (tests >= minTests && asserts >= minAsserts) {
 			originalOut.println("");
-			originalOut.println("All " + allTests + " tests passed sucessfully in " + result.getRunTimeSecs() + " secs");
-			originalOut.println("" + exhibits + " exhibits and " + asserts + " asserts");
-		} else if (exhibits < minExhibits) {
-			originalOut.println("Not enough exhibits expected at least "
-					+ minExhibits + " and there were " + exhibits);
+			originalOut.println("All " + allTests + " trials passed sucessfully in " + result.getRunTimeSecs() + " secs");
+			originalOut.println("" + tests + " exhibits and " + asserts + " asserts");
+		} else if (tests < minTests) {
+			originalOut.println("Not enough tests expected at least "
+					+ minTests + " and there were " + tests);
 		} else {
 			originalOut.println("Not enough assert expected at least "
 					+ minAsserts + " and there were " + asserts);
@@ -113,22 +113,22 @@ public class RunAllTests implements I_TestRunListener {
 	}
 
 	@Override
-	public void onTestCompleted(Class<? extends I_AbstractTest> testClass,
-			I_AbstractTest test, I_TrialResult result) {
+	public void onTestCompleted(Class<? extends I_AbstractTrial> testClass,
+			I_AbstractTrial test, I_TrialResult result) {
 		if (result.isPassed()) {
-			passedTests++;
-			originalOut.println("The test " + result.getTestName() + " passed!");
-			exhibits += result.getExhibitCount();
+			passedTrials++;
+			originalOut.println("The trial " + result.getName() + " passed!");
+			tests += result.getExhibitCount();
 			asserts += result.getAssertionCount();
-			originalOut.println("Exhibits: " + result.getExhibitCount() + 
+			originalOut.println("Tests: " + result.getExhibitCount() + 
 					" Assertions: " + result.getAssertionCount());
 		} else {
-			originalOut.println("The test " + result.getTestName() + " FAILED!");
+			originalOut.println("The trial " + result.getName() + " FAILED!");
 			I_TrialFailure failure = result.getFailure();
 			if (failure != null) {
 				printFailure(failure);
 			} else {
-				List<I_TestResult> ers =  result.getExhibitResults();
+				List<I_TestResult> ers =  result.getResults();
 				for (I_TestResult er: ers) {
 					if (!er.isPassed()) {
 						printFailure(er.getFailure());

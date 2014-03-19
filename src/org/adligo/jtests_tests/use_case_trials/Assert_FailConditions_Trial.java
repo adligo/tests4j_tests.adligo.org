@@ -1,11 +1,11 @@
-package org.adligo.jtests_tests.use_case_tests;
+package org.adligo.jtests_tests.use_case_trials;
 
-import org.adligo.jtests.models.shared.Exhibit;
-import org.adligo.jtests.models.shared.FunctionalTest;
+import org.adligo.jtests.models.shared.Test;
+import org.adligo.jtests.models.shared.FunctionalTrial;
 
-public class Assert_FailConditions_Test extends FunctionalTest {
+public class Assert_FailConditions_Trial extends FunctionalTrial {
 
-	@Exhibit
+	@Test
 	public void exhibitAbstractExhibit() {
 		assertEquals("a", "a");
 		assertEquals("hey","a","a");

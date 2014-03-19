@@ -1,14 +1,14 @@
-package org.adligo.jtests_tests.use_case_tests;
+package org.adligo.jtests_tests.use_case_trials;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
 
-import org.adligo.jtests.models.shared.Exhibit;
-import org.adligo.jtests.models.shared.FunctionalTest;
+import org.adligo.jtests.models.shared.Test;
+import org.adligo.jtests.models.shared.FunctionalTrial;
 
-public class Assert_PassConditions_Test extends FunctionalTest {
+public class Assert_PassConditions_Trial extends FunctionalTrial {
 
-	@Exhibit
+	@Test
 	public void exhibitEquals() {
 		assertEquals(new BigDecimal("0.00"), new BigDecimal("0.00"));
 		
@@ -26,7 +26,7 @@ public class Assert_PassConditions_Test extends FunctionalTest {
 		
 	}
 	
-	@Exhibit
+	@Test
 	public void exhibitNotEquals() {
 		assertNotEquals(new BigDecimal("0.00"), new BigDecimal("0.01"));
 		

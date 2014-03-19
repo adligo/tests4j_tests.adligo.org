@@ -1,9 +1,9 @@
-package org.adligo.jtests_tests.use_case_tests;
+package org.adligo.jtests_tests.use_case_trials;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import org.adligo.jtests.models.shared.I_AbstractTest;
+import org.adligo.jtests.models.shared.I_AbstractTrial;
 import org.adligo.jtests.models.shared.results.I_TrialResult;
 import org.adligo.jtests.models.shared.results.I_TestRunResult;
 import org.adligo.jtests.models.shared.system.I_TestRunListener;
@@ -15,9 +15,9 @@ public class ExpectedFailureRunner implements I_TestRunListener {
 	private I_TrialResult result;
 	
 
-	public void runExpectedFailure(Class<? extends I_AbstractTest> clazz) {
+	public void runExpectedFailure(Class<? extends I_AbstractTrial> clazz) {
 		RunParameters params = new RunParameters();
-		List<Class<? extends I_AbstractTest>> tests = new ArrayList<Class<? extends I_AbstractTest>>();
+		List<Class<? extends I_AbstractTrial>> tests = new ArrayList<Class<? extends I_AbstractTrial>>();
 		tests.add(clazz);
 		params.setTests(tests);
 		params.setSilent(true);
@@ -39,8 +39,8 @@ public class ExpectedFailureRunner implements I_TestRunListener {
 	}
 
 	@Override
-	public void onTestCompleted(Class<? extends I_AbstractTest> testClass,
-			I_AbstractTest test, I_TrialResult pResult) {
+	public void onTestCompleted(Class<? extends I_AbstractTrial> testClass,
+			I_AbstractTrial test, I_TrialResult pResult) {
 		result = pResult;
 	}
 

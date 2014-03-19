@@ -1,183 +1,183 @@
-package org.adligo.jtests_tests.use_case_tests;
+package org.adligo.jtests_tests.use_case_trials;
 
-import org.adligo.jtests.models.shared.Exhibit;
-import org.adligo.jtests.models.shared.FunctionalTest;
+import org.adligo.jtests.models.shared.FunctionalTrial;
+import org.adligo.jtests.models.shared.Test;
 import org.adligo.jtests.models.shared.results.I_TrialFailure;
 import org.adligo.jtests.models.shared.results.I_TrialResult;
-import org.adligo.jtests_tests.use_case_tests.mock_functional.AbstractExhibit;
-import org.adligo.jtests_tests.use_case_tests.mock_functional.AfterTestHasParams;
-import org.adligo.jtests_tests.use_case_tests.mock_functional.AfterTestNotStatic;
-import org.adligo.jtests_tests.use_case_tests.mock_functional.FunctionalBadConstructor;
-import org.adligo.jtests_tests.use_case_tests.mock_functional.BeforeTestHasParams;
-import org.adligo.jtests_tests.use_case_tests.mock_functional.BeforeTestNotStatic;
-import org.adligo.jtests_tests.use_case_tests.mock_functional.ExhibitWithParams;
-import org.adligo.jtests_tests.use_case_tests.mock_functional.NoExhibits;
-import org.adligo.jtests_tests.use_case_tests.mock_functional.ProtectedExhibit;
-import org.adligo.jtests_tests.use_case_tests.mock_functional.StaticExhibit;
+import org.adligo.jtests_tests.use_case_trials.mock_functional_trials.AbstractTestTrial;
+import org.adligo.jtests_tests.use_case_trials.mock_functional_trials.AfterTrialHasParamsTrial;
+import org.adligo.jtests_tests.use_case_trials.mock_functional_trials.AfterTrialNotStaticTrial;
+import org.adligo.jtests_tests.use_case_trials.mock_functional_trials.BeforeTrialHasParamsTrial;
+import org.adligo.jtests_tests.use_case_trials.mock_functional_trials.BeforeTrialNotStaticTrial;
+import org.adligo.jtests_tests.use_case_trials.mock_functional_trials.FunctionalBadConstructorTrial;
+import org.adligo.jtests_tests.use_case_trials.mock_functional_trials.NoTestsTrial;
+import org.adligo.jtests_tests.use_case_trials.mock_functional_trials.ProtectedTestTrial;
+import org.adligo.jtests_tests.use_case_trials.mock_functional_trials.StaticTestTrial;
+import org.adligo.jtests_tests.use_case_trials.mock_functional_trials.TestWithParamsTrial;
 
-public class Run_FunctionalTest_Test extends FunctionalTest {
+public class Run_FunctionalTrial_Trial extends FunctionalTrial {
 
-	@Exhibit
+	@Test
 	public void exhibitAbstractExhibit() {
 		ExpectedFailureRunner runner = new ExpectedFailureRunner();
-		runner.runExpectedFailure(AbstractExhibit.class);
+		runner.runExpectedFailure(AbstractTestTrial.class);
 		I_TrialResult result = runner.getResult();
 		assertNotNull(result);
 		assertFalse(result.isPassed());
 		I_TrialFailure failure = result.getFailure();
 		assertNotNull(failure);
-		assertEquals("Methods Annotated with @Exhibit must NOT be abstract.", failure.getMessage());
+		assertEquals("Methods Annotated with @Test must NOT be abstract.", failure.getMessage());
 		Throwable exception = failure.getException();
 		assertUniform(new IllegalArgumentException(
-				"org.adligo.jtests_tests.use_case_tests.mock_functional.AbstractExhibit.exhibitFoo was not annotated correctly."), 
+				"org.adligo.jtests_tests.use_case_trials.mock_functional_trials.AbstractTestTrial.exhibitFoo was not annotated correctly."), 
 				exception);
 	}
 	
-	@Exhibit
+	@Test
 	public void exhibitBadConstructor() {
 		ExpectedFailureRunner runner = new ExpectedFailureRunner();
-		runner.runExpectedFailure(FunctionalBadConstructor.class);
+		runner.runExpectedFailure(FunctionalBadConstructorTrial.class);
 		I_TrialResult result = runner.getResult();
 		assertNotNull(result);
 		assertFalse(result.isPassed());
 		I_TrialFailure failure = result.getFailure();
 		assertNotNull(failure);
-		assertEquals("Classes which implement I_AbstractTest must have a zero argument constructor.", 
+		assertEquals("Classes which implement I_AbstractTrial must have a zero argument constructor.", 
 				failure.getMessage());
 		Throwable exception = failure.getException();
 		assertUniform(new NoSuchMethodException(
-				"org.adligo.jtests_tests.use_case_tests.mock_functional.FunctionalBadConstructor.<init>()"), 
+				"org.adligo.jtests_tests.use_case_trials.mock_functional_trials.FunctionalBadConstructorTrial.<init>()"), 
 				exception);
 		
 	}
 	
-	@Exhibit
+	@Test
 	public void exhibitBeforeTestNotStatic() {
 		ExpectedFailureRunner runner = new ExpectedFailureRunner();
-		runner.runExpectedFailure(BeforeTestNotStatic.class);
+		runner.runExpectedFailure(BeforeTrialNotStaticTrial.class);
 		I_TrialResult result = runner.getResult();
 		assertNotNull(result);
 		assertFalse(result.isPassed());
 		I_TrialFailure failure = result.getFailure();
 		assertNotNull(failure);
-		assertEquals("Methods Annotated with @BeforeTest must be static.", failure.getMessage());
+		assertEquals("Methods Annotated with @BeforeTrial must be static.", failure.getMessage());
 		Throwable exception = failure.getException();
 		assertUniform(new IllegalArgumentException(
-				"org.adligo.jtests_tests.use_case_tests.mock_functional.BeforeTestNotStatic was not annotated correctly."), 
+				"org.adligo.jtests_tests.use_case_trials.mock_functional_trials.BeforeTrialNotStaticTrial was not annotated correctly."), 
 				exception);
 	}
 	
-	@Exhibit
+	@Test
 	public void exhibitBeforeTestHasParams() {
 		ExpectedFailureRunner runner = new ExpectedFailureRunner();
-		runner.runExpectedFailure(BeforeTestHasParams.class);
+		runner.runExpectedFailure(BeforeTrialHasParamsTrial.class);
 		I_TrialResult result = runner.getResult();
 		assertNotNull(result);
 		assertFalse(result.isPassed());
 		I_TrialFailure failure = result.getFailure();
 		assertNotNull(failure);
-		assertEquals("Methods Annotated with @BeforeTest must not take any parameters.", failure.getMessage());
+		assertEquals("Methods Annotated with @BeforeTrial must not take any parameters.", failure.getMessage());
 		Throwable exception = failure.getException();
 		assertUniform(new IllegalArgumentException(
-				"org.adligo.jtests_tests.use_case_tests.mock_functional.BeforeTestHasParams was not annotated correctly."), 
+				"org.adligo.jtests_tests.use_case_trials.mock_functional_trials.BeforeTrialHasParamsTrial was not annotated correctly."), 
 				exception);
 	}
 	
-	@Exhibit
+	@Test
 	public void exhibitAfterTestNotStatic() {
 		ExpectedFailureRunner runner = new ExpectedFailureRunner();
-		runner.runExpectedFailure(AfterTestNotStatic.class);
+		runner.runExpectedFailure(AfterTrialNotStaticTrial.class);
 		I_TrialResult result = runner.getResult();
 		assertNotNull(result);
 		assertFalse(result.isPassed());
 		I_TrialFailure failure = result.getFailure();
 		assertNotNull(failure);
-		assertEquals("Methods Annotated with @AfterTest must be static.", failure.getMessage());
+		assertEquals("Methods Annotated with @AfterTrial must be static.", failure.getMessage());
 		Throwable exception = failure.getException();
 		assertUniform(new IllegalArgumentException(
-				"org.adligo.jtests_tests.use_case_tests.mock_functional.AfterTestNotStatic was not annotated correctly."), 
+				"org.adligo.jtests_tests.use_case_trials.mock_functional_trials.AfterTrialNotStaticTrial was not annotated correctly."), 
 				exception);
 	}
 	
-	@Exhibit
+	@Test
 	public void exhibitAfterTestHasParams() {
 		ExpectedFailureRunner runner = new ExpectedFailureRunner();
-		runner.runExpectedFailure(AfterTestHasParams.class);
+		runner.runExpectedFailure(AfterTrialHasParamsTrial.class);
 		I_TrialResult result = runner.getResult();
 		assertNotNull(result);
 		assertFalse(result.isPassed());
 		I_TrialFailure failure = result.getFailure();
 		assertNotNull(failure);
-		assertEquals("Methods Annotated with @AfterTest must not take any parameters.", failure.getMessage());
+		assertEquals("Methods Annotated with @AfterTrial must not take any parameters.", failure.getMessage());
 		Throwable exception = failure.getException();
 		assertUniform(new IllegalArgumentException(
-				"org.adligo.jtests_tests.use_case_tests.mock_functional.AfterTestHasParams was not annotated correctly."), 
+				"org.adligo.jtests_tests.use_case_trials.mock_functional_trials.AfterTrialHasParamsTrial was not annotated correctly."), 
 				exception);
 	}
 	
-	@Exhibit
+	@Test
 	public void exhibitExhibitWithParams() {
 		ExpectedFailureRunner runner = new ExpectedFailureRunner();
-		runner.runExpectedFailure(ExhibitWithParams.class);
+		runner.runExpectedFailure(TestWithParamsTrial.class);
 		I_TrialResult result = runner.getResult();
 		assertNotNull(result);
 		assertFalse(result.isPassed());
 		I_TrialFailure failure = result.getFailure();
 		assertNotNull(failure);
-		assertEquals("Methods Annotated with @Exhibit must not take any parameters", failure.getMessage());
+		assertEquals("Methods Annotated with @Test must not take any parameters", failure.getMessage());
 		Throwable exception = failure.getException();
 		assertUniform(new IllegalArgumentException(
-				"org.adligo.jtests_tests.use_case_tests.mock_functional.ExhibitWithParams.exhibitFoo was not annotated correctly."), 
+				"org.adligo.jtests_tests.use_case_trials.mock_functional_trials.TestWithParamsTrial.exhibitFoo was not annotated correctly."), 
 				exception);
 	}
 	
 	
 	
-	@Exhibit
+	@Test
 	public void exhibitNoExhibits() {
 		ExpectedFailureRunner runner = new ExpectedFailureRunner();
-		runner.runExpectedFailure(NoExhibits.class);
+		runner.runExpectedFailure(NoTestsTrial.class);
 		I_TrialResult result = runner.getResult();
 		assertNotNull(result);
 		assertFalse(result.isPassed());
 		I_TrialFailure failure = result.getFailure();
 		assertNotNull(failure);
-		assertEquals("Test Classes must have at least one method annotated with @Exhibit.", failure.getMessage());
+		assertEquals("Trial Classes must have at least one method annotated with @Test.", failure.getMessage());
 		Throwable exception = failure.getException();
 		assertUniform(new IllegalArgumentException(
-				"org.adligo.jtests_tests.use_case_tests.mock_functional.NoExhibits was not annotated correctly."), 
+				"org.adligo.jtests_tests.use_case_trials.mock_functional_trials.NoTestsTrial was not annotated correctly."), 
 				exception);
 	}
 	
-	@Exhibit
+	@Test
 	public void exhibitProtectedExhibit() {
 		ExpectedFailureRunner runner = new ExpectedFailureRunner();
-		runner.runExpectedFailure(ProtectedExhibit.class);
+		runner.runExpectedFailure(ProtectedTestTrial.class);
 		I_TrialResult result = runner.getResult();
 		assertNotNull(result);
 		assertFalse(result.isPassed());
 		I_TrialFailure failure = result.getFailure();
 		assertNotNull(failure);
-		assertEquals("Test Classes must have at least one method annotated with @Exhibit.", failure.getMessage());
+		assertEquals("Trial Classes must have at least one method annotated with @Test.", failure.getMessage());
 		Throwable exception = failure.getException();
 		assertUniform(new IllegalArgumentException(
-				"org.adligo.jtests_tests.use_case_tests.mock_functional.ProtectedExhibit was not annotated correctly."), 
+				"org.adligo.jtests_tests.use_case_trials.mock_functional_trials.ProtectedTestTrial was not annotated correctly."), 
 				exception);
 	}
 	
-	@Exhibit
+	@Test
 	public void exhibitStaticExhibit() {
 		ExpectedFailureRunner runner = new ExpectedFailureRunner();
-		runner.runExpectedFailure(StaticExhibit.class);
+		runner.runExpectedFailure(StaticTestTrial.class);
 		I_TrialResult result = runner.getResult();
 		assertNotNull(result);
 		assertFalse(result.isPassed());
 		I_TrialFailure failure = result.getFailure();
 		assertNotNull(failure);
-		assertEquals("Methods Annotated with @Exhibit must NOT be static.", failure.getMessage());
+		assertEquals("Methods Annotated with @Test must NOT be static.", failure.getMessage());
 		Throwable exception = failure.getException();
 		assertUniform(new IllegalArgumentException(
-				"org.adligo.jtests_tests.use_case_tests.mock_functional.StaticExhibit.exhibitFoo was not annotated correctly."), 
+				"org.adligo.jtests_tests.use_case_trials.mock_functional_trials.StaticTestTrial.exhibitFoo was not annotated correctly."), 
 				exception);
 	}
 	
