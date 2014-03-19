@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.adligo.jtests.models.shared.I_AbstractTest;
-import org.adligo.jtests.models.shared.results.I_TestResult;
+import org.adligo.jtests.models.shared.results.I_TrialResult;
 import org.adligo.jtests.models.shared.results.I_TestRunResult;
 import org.adligo.jtests.models.shared.system.I_TestRunListener;
 import org.adligo.jtests.models.shared.system.RunParameters;
@@ -12,7 +12,7 @@ import org.adligo.jtests.run.JTests;
 
 public class ExpectedFailureRunner implements I_TestRunListener {
 	private volatile Thread running;
-	private I_TestResult result;
+	private I_TrialResult result;
 	
 
 	public void runExpectedFailure(Class<? extends I_AbstractTest> clazz) {
@@ -34,13 +34,13 @@ public class ExpectedFailureRunner implements I_TestRunListener {
 		}
 	}
 
-	public I_TestResult getResult() {
+	public I_TrialResult getResult() {
 		return result;
 	}
 
 	@Override
 	public void onTestCompleted(Class<? extends I_AbstractTest> testClass,
-			I_AbstractTest test, I_TestResult pResult) {
+			I_AbstractTest test, I_TrialResult pResult) {
 		result = pResult;
 	}
 

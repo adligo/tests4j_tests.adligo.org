@@ -8,16 +8,17 @@ import java.util.Set;
 import org.adligo.jtests.models.shared.I_AbstractTest;
 import org.adligo.jtests.models.shared.asserts.I_AssertionData;
 import org.adligo.jtests.models.shared.asserts.line_text.LineTextCompareResult;
-import org.adligo.jtests.models.shared.results.I_ExhibitResult;
-import org.adligo.jtests.models.shared.results.I_TestFailure;
 import org.adligo.jtests.models.shared.results.I_TestResult;
+import org.adligo.jtests.models.shared.results.I_TestFailure;
+import org.adligo.jtests.models.shared.results.I_TrialResult;
 import org.adligo.jtests.models.shared.results.I_TestRunResult;
+import org.adligo.jtests.models.shared.results.I_TrialFailure;
 import org.adligo.jtests.models.shared.system.I_TestRunListener;
 import org.adligo.jtests.models.shared.system.RunParameters;
 import org.adligo.jtests.reports.console.LineTextComparisonReport;
 import org.adligo.jtests.run.JTestUncaughtExceptionHandler;
 import org.adligo.jtests.run.JTests;
-import org.adligo.jtests_tests.use_case_tests.Passing_Asserts_Test;
+import org.adligo.jtests_tests.use_case_tests.Assert_PassConditions_Test;
 import org.adligo.jtests_tests.use_case_tests.Run_ClassTest_Test;
 import org.adligo.jtests_tests.use_case_tests.Run_FunctionalTest_Test;
 import org.adligo.jtests_tests.use_case_tests.Run_PackageTest_Test;
@@ -46,7 +47,7 @@ public class RunAllTests implements I_TestRunListener {
 			tests.add(Run_ClassTest_Test.class);
 			tests.add(Run_PackageTest_Test.class);
 		
-			tests.add(Passing_Asserts_Test.class);
+			tests.add(Assert_PassConditions_Test.class);
 			params.setTests(tests);
 			allTests = tests.size();
 			
@@ -86,6 +87,12 @@ public class RunAllTests implements I_TestRunListener {
 	}
 
 
+	private void printFailure(I_TrialFailure failure) {
+		originalOut.println(failure.getMessage());
+		Throwable exception = failure.getException();
+		exception.printStackTrace(originalOut);
+	}
+	
 	@Override
 	public void onRunCompleted(I_TestRunResult result) {
 		originalOut.println("Tests completed in " + result.getRunTimeSecs() + " secs");
@@ -107,7 +114,7 @@ public class RunAllTests implements I_TestRunListener {
 
 	@Override
 	public void onTestCompleted(Class<? extends I_AbstractTest> testClass,
-			I_AbstractTest test, I_TestResult result) {
+			I_AbstractTest test, I_TrialResult result) {
 		if (result.isPassed()) {
 			passedTests++;
 			originalOut.println("The test " + result.getTestName() + " passed!");
@@ -117,12 +124,12 @@ public class RunAllTests implements I_TestRunListener {
 					" Assertions: " + result.getAssertionCount());
 		} else {
 			originalOut.println("The test " + result.getTestName() + " FAILED!");
-			I_TestFailure failure = result.getFailure();
+			I_TrialFailure failure = result.getFailure();
 			if (failure != null) {
 				printFailure(failure);
 			} else {
-				List<I_ExhibitResult> ers =  result.getExhibitResults();
-				for (I_ExhibitResult er: ers) {
+				List<I_TestResult> ers =  result.getExhibitResults();
+				for (I_TestResult er: ers) {
 					if (!er.isPassed()) {
 						printFailure(er.getFailure());
 					}

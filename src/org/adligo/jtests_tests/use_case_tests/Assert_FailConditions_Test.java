@@ -3,7 +3,7 @@ package org.adligo.jtests_tests.use_case_tests;
 import org.adligo.jtests.models.shared.Exhibit;
 import org.adligo.jtests.models.shared.FunctionalTest;
 
-public class Passing_Asserts_Test extends FunctionalTest {
+public class Assert_FailConditions_Test extends FunctionalTest {
 
 	@Exhibit
 	public void exhibitAbstractExhibit() {

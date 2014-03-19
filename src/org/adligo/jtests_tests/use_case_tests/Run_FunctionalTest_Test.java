@@ -2,8 +2,8 @@ package org.adligo.jtests_tests.use_case_tests;
 
 import org.adligo.jtests.models.shared.Exhibit;
 import org.adligo.jtests.models.shared.FunctionalTest;
-import org.adligo.jtests.models.shared.results.I_TestFailure;
-import org.adligo.jtests.models.shared.results.I_TestResult;
+import org.adligo.jtests.models.shared.results.I_TrialFailure;
+import org.adligo.jtests.models.shared.results.I_TrialResult;
 import org.adligo.jtests_tests.use_case_tests.mock_functional.AbstractExhibit;
 import org.adligo.jtests_tests.use_case_tests.mock_functional.AfterTestHasParams;
 import org.adligo.jtests_tests.use_case_tests.mock_functional.AfterTestNotStatic;
@@ -21,10 +21,10 @@ public class Run_FunctionalTest_Test extends FunctionalTest {
 	public void exhibitAbstractExhibit() {
 		ExpectedFailureRunner runner = new ExpectedFailureRunner();
 		runner.runExpectedFailure(AbstractExhibit.class);
-		I_TestResult result = runner.getResult();
+		I_TrialResult result = runner.getResult();
 		assertNotNull(result);
 		assertFalse(result.isPassed());
-		I_TestFailure failure = result.getFailure();
+		I_TrialFailure failure = result.getFailure();
 		assertNotNull(failure);
 		assertEquals("Methods Annotated with @Exhibit must NOT be abstract.", failure.getMessage());
 		Throwable exception = failure.getException();
@@ -37,10 +37,10 @@ public class Run_FunctionalTest_Test extends FunctionalTest {
 	public void exhibitBadConstructor() {
 		ExpectedFailureRunner runner = new ExpectedFailureRunner();
 		runner.runExpectedFailure(FunctionalBadConstructor.class);
-		I_TestResult result = runner.getResult();
+		I_TrialResult result = runner.getResult();
 		assertNotNull(result);
 		assertFalse(result.isPassed());
-		I_TestFailure failure = result.getFailure();
+		I_TrialFailure failure = result.getFailure();
 		assertNotNull(failure);
 		assertEquals("Classes which implement I_AbstractTest must have a zero argument constructor.", 
 				failure.getMessage());
@@ -55,10 +55,10 @@ public class Run_FunctionalTest_Test extends FunctionalTest {
 	public void exhibitBeforeTestNotStatic() {
 		ExpectedFailureRunner runner = new ExpectedFailureRunner();
 		runner.runExpectedFailure(BeforeTestNotStatic.class);
-		I_TestResult result = runner.getResult();
+		I_TrialResult result = runner.getResult();
 		assertNotNull(result);
 		assertFalse(result.isPassed());
-		I_TestFailure failure = result.getFailure();
+		I_TrialFailure failure = result.getFailure();
 		assertNotNull(failure);
 		assertEquals("Methods Annotated with @BeforeTest must be static.", failure.getMessage());
 		Throwable exception = failure.getException();
@@ -71,10 +71,10 @@ public class Run_FunctionalTest_Test extends FunctionalTest {
 	public void exhibitBeforeTestHasParams() {
 		ExpectedFailureRunner runner = new ExpectedFailureRunner();
 		runner.runExpectedFailure(BeforeTestHasParams.class);
-		I_TestResult result = runner.getResult();
+		I_TrialResult result = runner.getResult();
 		assertNotNull(result);
 		assertFalse(result.isPassed());
-		I_TestFailure failure = result.getFailure();
+		I_TrialFailure failure = result.getFailure();
 		assertNotNull(failure);
 		assertEquals("Methods Annotated with @BeforeTest must not take any parameters.", failure.getMessage());
 		Throwable exception = failure.getException();
@@ -87,10 +87,10 @@ public class Run_FunctionalTest_Test extends FunctionalTest {
 	public void exhibitAfterTestNotStatic() {
 		ExpectedFailureRunner runner = new ExpectedFailureRunner();
 		runner.runExpectedFailure(AfterTestNotStatic.class);
-		I_TestResult result = runner.getResult();
+		I_TrialResult result = runner.getResult();
 		assertNotNull(result);
 		assertFalse(result.isPassed());
-		I_TestFailure failure = result.getFailure();
+		I_TrialFailure failure = result.getFailure();
 		assertNotNull(failure);
 		assertEquals("Methods Annotated with @AfterTest must be static.", failure.getMessage());
 		Throwable exception = failure.getException();
@@ -103,10 +103,10 @@ public class Run_FunctionalTest_Test extends FunctionalTest {
 	public void exhibitAfterTestHasParams() {
 		ExpectedFailureRunner runner = new ExpectedFailureRunner();
 		runner.runExpectedFailure(AfterTestHasParams.class);
-		I_TestResult result = runner.getResult();
+		I_TrialResult result = runner.getResult();
 		assertNotNull(result);
 		assertFalse(result.isPassed());
-		I_TestFailure failure = result.getFailure();
+		I_TrialFailure failure = result.getFailure();
 		assertNotNull(failure);
 		assertEquals("Methods Annotated with @AfterTest must not take any parameters.", failure.getMessage());
 		Throwable exception = failure.getException();
@@ -119,10 +119,10 @@ public class Run_FunctionalTest_Test extends FunctionalTest {
 	public void exhibitExhibitWithParams() {
 		ExpectedFailureRunner runner = new ExpectedFailureRunner();
 		runner.runExpectedFailure(ExhibitWithParams.class);
-		I_TestResult result = runner.getResult();
+		I_TrialResult result = runner.getResult();
 		assertNotNull(result);
 		assertFalse(result.isPassed());
-		I_TestFailure failure = result.getFailure();
+		I_TrialFailure failure = result.getFailure();
 		assertNotNull(failure);
 		assertEquals("Methods Annotated with @Exhibit must not take any parameters", failure.getMessage());
 		Throwable exception = failure.getException();
@@ -137,10 +137,10 @@ public class Run_FunctionalTest_Test extends FunctionalTest {
 	public void exhibitNoExhibits() {
 		ExpectedFailureRunner runner = new ExpectedFailureRunner();
 		runner.runExpectedFailure(NoExhibits.class);
-		I_TestResult result = runner.getResult();
+		I_TrialResult result = runner.getResult();
 		assertNotNull(result);
 		assertFalse(result.isPassed());
-		I_TestFailure failure = result.getFailure();
+		I_TrialFailure failure = result.getFailure();
 		assertNotNull(failure);
 		assertEquals("Test Classes must have at least one method annotated with @Exhibit.", failure.getMessage());
 		Throwable exception = failure.getException();
@@ -153,10 +153,10 @@ public class Run_FunctionalTest_Test extends FunctionalTest {
 	public void exhibitProtectedExhibit() {
 		ExpectedFailureRunner runner = new ExpectedFailureRunner();
 		runner.runExpectedFailure(ProtectedExhibit.class);
-		I_TestResult result = runner.getResult();
+		I_TrialResult result = runner.getResult();
 		assertNotNull(result);
 		assertFalse(result.isPassed());
-		I_TestFailure failure = result.getFailure();
+		I_TrialFailure failure = result.getFailure();
 		assertNotNull(failure);
 		assertEquals("Test Classes must have at least one method annotated with @Exhibit.", failure.getMessage());
 		Throwable exception = failure.getException();
@@ -169,10 +169,10 @@ public class Run_FunctionalTest_Test extends FunctionalTest {
 	public void exhibitStaticExhibit() {
 		ExpectedFailureRunner runner = new ExpectedFailureRunner();
 		runner.runExpectedFailure(StaticExhibit.class);
-		I_TestResult result = runner.getResult();
+		I_TrialResult result = runner.getResult();
 		assertNotNull(result);
 		assertFalse(result.isPassed());
-		I_TestFailure failure = result.getFailure();
+		I_TrialFailure failure = result.getFailure();
 		assertNotNull(failure);
 		assertEquals("Methods Annotated with @Exhibit must NOT be static.", failure.getMessage());
 		Throwable exception = failure.getException();
