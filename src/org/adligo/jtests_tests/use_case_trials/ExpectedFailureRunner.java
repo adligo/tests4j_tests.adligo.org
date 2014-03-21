@@ -5,13 +5,12 @@ import java.util.List;
 
 import org.adligo.jtests.models.shared.I_AbstractTrial;
 import org.adligo.jtests.models.shared.results.I_TrialResult;
-import org.adligo.jtests.models.shared.results.I_TestRunResult;
+import org.adligo.jtests.models.shared.results.I_TrialRunResult;
 import org.adligo.jtests.models.shared.system.I_TestRunListener;
 import org.adligo.jtests.models.shared.system.RunParameters;
 import org.adligo.jtests.run.JTests;
 
 public class ExpectedFailureRunner implements I_TestRunListener {
-	private volatile Thread running;
 	private I_TrialResult result;
 	
 
@@ -19,20 +18,12 @@ public class ExpectedFailureRunner implements I_TestRunListener {
 		RunParameters params = new RunParameters();
 		List<Class<? extends I_AbstractTrial>> tests = new ArrayList<Class<? extends I_AbstractTrial>>();
 		tests.add(clazz);
-		params.setTests(tests);
+		params.setTrials(tests);
 		params.setSilent(true);
 		
-		running = JTests.run(params, this);
-		waitThis();
+		JTests.run(params, this);
 	}
 
-	private synchronized void waitThis() {
-		try {
-			this.wait();
-		} catch (InterruptedException x) {
-			x.printStackTrace();
-		}
-	}
 
 	public I_TrialResult getResult() {
 		return result;
@@ -45,13 +36,8 @@ public class ExpectedFailureRunner implements I_TestRunListener {
 	}
 
 	@Override
-	public synchronized void onRunCompleted(I_TestRunResult result) {
-		try {
-			this.notify();
-			running.join(1);
-		} catch (InterruptedException x) {
-			x.printStackTrace();
-		}
+	public synchronized void onRunCompleted(I_TrialRunResult result) {
+		//do nothing
 	}
 
 }
