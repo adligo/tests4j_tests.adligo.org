@@ -1,4 +1,4 @@
-package org.adligo.jtests_tests.use_case_trials;
+package org.adligo.jtests_tests.api_trials;
 
 import java.util.ArrayList;
 import java.util.List;

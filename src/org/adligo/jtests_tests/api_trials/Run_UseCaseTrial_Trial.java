@@ -1,21 +1,23 @@
-package org.adligo.jtests_tests.use_case_trials;
+package org.adligo.jtests_tests.api_trials;
 
-import org.adligo.jtests.models.shared.FunctionalTrial;
+import org.adligo.jtests.models.shared.API_Trial;
+import org.adligo.jtests.models.shared.PackageScope;
 import org.adligo.jtests.models.shared.Test;
 import org.adligo.jtests.models.shared.results.I_TrialFailure;
 import org.adligo.jtests.models.shared.results.I_TrialResult;
-import org.adligo.jtests_tests.use_case_trials.mock_functional_trials.AbstractTestTrial;
-import org.adligo.jtests_tests.use_case_trials.mock_functional_trials.AfterTrialHasParamsTrial;
-import org.adligo.jtests_tests.use_case_trials.mock_functional_trials.AfterTrialNotStaticTrial;
-import org.adligo.jtests_tests.use_case_trials.mock_functional_trials.BeforeTrialHasParamsTrial;
-import org.adligo.jtests_tests.use_case_trials.mock_functional_trials.BeforeTrialNotStaticTrial;
-import org.adligo.jtests_tests.use_case_trials.mock_functional_trials.FunctionalBadConstructorTrial;
-import org.adligo.jtests_tests.use_case_trials.mock_functional_trials.NoTestsTrial;
-import org.adligo.jtests_tests.use_case_trials.mock_functional_trials.ProtectedTestTrial;
-import org.adligo.jtests_tests.use_case_trials.mock_functional_trials.StaticTestTrial;
-import org.adligo.jtests_tests.use_case_trials.mock_functional_trials.TestWithParamsTrial;
+import org.adligo.jtests_tests.api_trials.mock_functional_trials.AbstractTestTrial;
+import org.adligo.jtests_tests.api_trials.mock_functional_trials.AfterTrialHasParamsTrial;
+import org.adligo.jtests_tests.api_trials.mock_functional_trials.AfterTrialNotStaticTrial;
+import org.adligo.jtests_tests.api_trials.mock_functional_trials.BeforeTrialHasParamsTrial;
+import org.adligo.jtests_tests.api_trials.mock_functional_trials.BeforeTrialNotStaticTrial;
+import org.adligo.jtests_tests.api_trials.mock_functional_trials.FunctionalBadConstructorTrial;
+import org.adligo.jtests_tests.api_trials.mock_functional_trials.NoTestsTrial;
+import org.adligo.jtests_tests.api_trials.mock_functional_trials.ProtectedTestTrial;
+import org.adligo.jtests_tests.api_trials.mock_functional_trials.StaticTestTrial;
+import org.adligo.jtests_tests.api_trials.mock_functional_trials.TestWithParamsTrial;
 
-public class Run_FunctionalTrial_Trial extends FunctionalTrial {
+@PackageScope (packageName = "org.adligo.jtests")
+public class Run_UseCaseTrial_Trial extends API_Trial {
 
 	@Test
 	public void exhibitAbstractExhibit() {
@@ -29,7 +31,7 @@ public class Run_FunctionalTrial_Trial extends FunctionalTrial {
 		assertEquals("Methods Annotated with @Test must NOT be abstract.", failure.getMessage());
 		Throwable exception = failure.getException();
 		assertUniform(new IllegalArgumentException(
-				"org.adligo.jtests_tests.use_case_trials.mock_functional_trials.AbstractTestTrial.exhibitFoo was not annotated correctly."), 
+				"org.adligo.jtests_tests.api_trials.mock_functional_trials.AbstractTestTrial.exhibitFoo was not annotated correctly."), 
 				exception);
 	}
 	
@@ -46,7 +48,7 @@ public class Run_FunctionalTrial_Trial extends FunctionalTrial {
 				failure.getMessage());
 		Throwable exception = failure.getException();
 		assertUniform(new NoSuchMethodException(
-				"org.adligo.jtests_tests.use_case_trials.mock_functional_trials.FunctionalBadConstructorTrial.<init>()"), 
+				"org.adligo.jtests_tests.api_trials.mock_functional_trials.FunctionalBadConstructorTrial.<init>()"), 
 				exception);
 		
 	}
@@ -63,7 +65,7 @@ public class Run_FunctionalTrial_Trial extends FunctionalTrial {
 		assertEquals("Methods Annotated with @BeforeTrial must be static.", failure.getMessage());
 		Throwable exception = failure.getException();
 		assertUniform(new IllegalArgumentException(
-				"org.adligo.jtests_tests.use_case_trials.mock_functional_trials.BeforeTrialNotStaticTrial was not annotated correctly."), 
+				"org.adligo.jtests_tests.api_trials.mock_functional_trials.BeforeTrialNotStaticTrial was not annotated correctly."), 
 				exception);
 	}
 	
@@ -79,7 +81,7 @@ public class Run_FunctionalTrial_Trial extends FunctionalTrial {
 		assertEquals("Methods Annotated with @BeforeTrial must not take any parameters.", failure.getMessage());
 		Throwable exception = failure.getException();
 		assertUniform(new IllegalArgumentException(
-				"org.adligo.jtests_tests.use_case_trials.mock_functional_trials.BeforeTrialHasParamsTrial was not annotated correctly."), 
+				"org.adligo.jtests_tests.api_trials.mock_functional_trials.BeforeTrialHasParamsTrial was not annotated correctly."), 
 				exception);
 	}
 	
@@ -95,7 +97,7 @@ public class Run_FunctionalTrial_Trial extends FunctionalTrial {
 		assertEquals("Methods Annotated with @AfterTrial must be static.", failure.getMessage());
 		Throwable exception = failure.getException();
 		assertUniform(new IllegalArgumentException(
-				"org.adligo.jtests_tests.use_case_trials.mock_functional_trials.AfterTrialNotStaticTrial was not annotated correctly."), 
+				"org.adligo.jtests_tests.api_trials.mock_functional_trials.AfterTrialNotStaticTrial was not annotated correctly."), 
 				exception);
 	}
 	
@@ -111,7 +113,7 @@ public class Run_FunctionalTrial_Trial extends FunctionalTrial {
 		assertEquals("Methods Annotated with @AfterTrial must not take any parameters.", failure.getMessage());
 		Throwable exception = failure.getException();
 		assertUniform(new IllegalArgumentException(
-				"org.adligo.jtests_tests.use_case_trials.mock_functional_trials.AfterTrialHasParamsTrial was not annotated correctly."), 
+				"org.adligo.jtests_tests.api_trials.mock_functional_trials.AfterTrialHasParamsTrial was not annotated correctly."), 
 				exception);
 	}
 	
@@ -127,7 +129,7 @@ public class Run_FunctionalTrial_Trial extends FunctionalTrial {
 		assertEquals("Methods Annotated with @Test must not take any parameters", failure.getMessage());
 		Throwable exception = failure.getException();
 		assertUniform(new IllegalArgumentException(
-				"org.adligo.jtests_tests.use_case_trials.mock_functional_trials.TestWithParamsTrial.exhibitFoo was not annotated correctly."), 
+				"org.adligo.jtests_tests.api_trials.mock_functional_trials.TestWithParamsTrial.exhibitFoo was not annotated correctly."), 
 				exception);
 	}
 	
@@ -145,7 +147,7 @@ public class Run_FunctionalTrial_Trial extends FunctionalTrial {
 		assertEquals("Trial Classes must have at least one method annotated with @Test.", failure.getMessage());
 		Throwable exception = failure.getException();
 		assertUniform(new IllegalArgumentException(
-				"org.adligo.jtests_tests.use_case_trials.mock_functional_trials.NoTestsTrial was not annotated correctly."), 
+				"org.adligo.jtests_tests.api_trials.mock_functional_trials.NoTestsTrial was not annotated correctly."), 
 				exception);
 	}
 	
@@ -161,7 +163,7 @@ public class Run_FunctionalTrial_Trial extends FunctionalTrial {
 		assertEquals("Trial Classes must have at least one method annotated with @Test.", failure.getMessage());
 		Throwable exception = failure.getException();
 		assertUniform(new IllegalArgumentException(
-				"org.adligo.jtests_tests.use_case_trials.mock_functional_trials.ProtectedTestTrial was not annotated correctly."), 
+				"org.adligo.jtests_tests.api_trials.mock_functional_trials.ProtectedTestTrial was not annotated correctly."), 
 				exception);
 	}
 	
@@ -177,7 +179,7 @@ public class Run_FunctionalTrial_Trial extends FunctionalTrial {
 		assertEquals("Methods Annotated with @Test must NOT be static.", failure.getMessage());
 		Throwable exception = failure.getException();
 		assertUniform(new IllegalArgumentException(
-				"org.adligo.jtests_tests.use_case_trials.mock_functional_trials.StaticTestTrial.exhibitFoo was not annotated correctly."), 
+				"org.adligo.jtests_tests.api_trials.mock_functional_trials.StaticTestTrial.exhibitFoo was not annotated correctly."), 
 				exception);
 	}
 	

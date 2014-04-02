@@ -1,7 +1,7 @@
-package org.adligo.jtests_tests.use_case_trials.mock_package_trials;
+package org.adligo.jtests_tests.api_trials.mock_package_trials;
 
 import org.adligo.jtests.models.shared.Test;
-import org.adligo.jtests.models.shared.PackageTrial;
+import org.adligo.jtests.models.shared.API_Trial;
 import org.adligo.jtests.models.shared.PackageScope;
 
 /**
@@ -14,8 +14,8 @@ import org.adligo.jtests.models.shared.PackageScope;
  * @author scott
  *
  */
-@PackageScope (testedPackageName = "org.adligo.jtests.foo")
-public class BadPackageConstructorTrial extends PackageTrial {
+@PackageScope (packageName = "org.adligo.jtests.foo")
+public class BadPackageConstructorTrial extends API_Trial {
 
 	public BadPackageConstructorTrial(String p) {}
 	

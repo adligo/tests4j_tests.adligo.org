@@ -1,12 +1,14 @@
-package org.adligo.jtests_tests.use_case_trials;
+package org.adligo.jtests_tests.api_trials;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
 
+import org.adligo.jtests.models.shared.API_Trial;
+import org.adligo.jtests.models.shared.PackageScope;
 import org.adligo.jtests.models.shared.Test;
-import org.adligo.jtests.models.shared.FunctionalTrial;
 
-public class Assert_PassConditions_Trial extends FunctionalTrial {
+@PackageScope (packageName = "org.adligo.jtests")
+public class Assert_PassConditions_Trial extends API_Trial {
 
 	@Test
 	public void exhibitEquals() {

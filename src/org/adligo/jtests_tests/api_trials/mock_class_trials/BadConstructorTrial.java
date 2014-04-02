@@ -1,4 +1,4 @@
-package org.adligo.jtests_tests.use_case_trials.mock_class_trials;
+package org.adligo.jtests_tests.api_trials.mock_class_trials;
 
 import org.adligo.jtests.models.shared.ClassTrial;
 import org.adligo.jtests.models.shared.ClassScope;

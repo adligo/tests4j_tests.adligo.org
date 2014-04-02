@@ -10,13 +10,18 @@ public class RunAllTests {
 
 	
 	public static void main(String [] args) {
-		List<I_RunList> runLists = new ArrayList<I_RunList>();
-		
-		runLists.add(new org.adligo.jtests_tests.models.shared.system.RunPkgTrials());
-		runLists.add(new org.adligo.jtests_tests.use_case_trials.RunPkgTrials());
+		List<I_RunList> runLists = getTests();
 		
 		ConsoleTestRunner.run(runLists, true);
 		
+	}
+
+	private static List<I_RunList> getTests() {
+		List<I_RunList> runLists = new ArrayList<I_RunList>();
+		
+		runLists.add(new org.adligo.jtests_tests.models.shared.system.RunPkgTrials());
+		runLists.add(new org.adligo.jtests_tests.api_trials.RunPkgTrials());
+		return runLists;
 	}
 
 

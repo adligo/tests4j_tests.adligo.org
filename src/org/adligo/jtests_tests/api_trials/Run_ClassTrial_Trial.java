@@ -1,14 +1,15 @@
-package org.adligo.jtests_tests.use_case_trials;
+package org.adligo.jtests_tests.api_trials;
 
+import org.adligo.jtests.models.shared.API_Trial;
+import org.adligo.jtests.models.shared.PackageScope;
 import org.adligo.jtests.models.shared.Test;
-import org.adligo.jtests.models.shared.FunctionalTrial;
 import org.adligo.jtests.models.shared.results.I_TrialFailure;
 import org.adligo.jtests.models.shared.results.I_TrialResult;
-import org.adligo.jtests_tests.use_case_trials.mock_class_trials.BadConstructorTrial;
-import org.adligo.jtests_tests.use_case_trials.mock_class_trials.NoClassScopeAnnotationTrial;
-import org.adligo.jtests_tests.use_case_trials.mock_functional_trials.StaticTestTrial;
+import org.adligo.jtests_tests.api_trials.mock_class_trials.BadConstructorTrial;
+import org.adligo.jtests_tests.api_trials.mock_class_trials.NoClassScopeAnnotationTrial;
 
-public class Run_ClassTrial_Trial extends FunctionalTrial {
+@PackageScope (packageName = "org.adligo.jtests")
+public class Run_ClassTrial_Trial extends API_Trial {
 
 	@Test
 	public void exhibitClassTestWithBadConstructor() {
@@ -22,7 +23,7 @@ public class Run_ClassTrial_Trial extends FunctionalTrial {
 		assertEquals("Classes which implement I_AbstractTrial must have a zero argument constructor.", failure.getMessage());
 		Throwable exception = failure.getException();
 		assertUniform(new NoSuchMethodException(
-				"org.adligo.jtests_tests.use_case_trials.mock_class_trials.BadConstructorTrial.<init>()"), 
+				"org.adligo.jtests_tests.api_trials.mock_class_trials.BadConstructorTrial.<init>()"), 
 				exception);
 	}
 	
@@ -38,7 +39,7 @@ public class Run_ClassTrial_Trial extends FunctionalTrial {
 		assertEquals("ClassTrials must be annotated with ClassScope.", failure.getMessage());
 		Throwable exception = failure.getException();
 		assertUniform(new IllegalArgumentException(
-				"org.adligo.jtests_tests.use_case_trials.mock_class_trials.NoClassScopeAnnotationTrial was not annotated correctly."), 
+				"org.adligo.jtests_tests.api_trials.mock_class_trials.NoClassScopeAnnotationTrial was not annotated correctly."), 
 				exception);
 	}
 }
