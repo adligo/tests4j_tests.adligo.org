@@ -1,27 +1,27 @@
 package org.adligo.jtests_tests;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import org.adligo.jacoco4jtests.run.JacocoRunner;
+import org.adligo.jtests.models.shared.system.RunParameters;
 import org.adligo.jtests.reports.console.ConsoleTestRunner;
-import org.adligo.jtests.reports.console.I_RunList;
 
 public class RunAllTests {
 
 	
 	public static void main(String [] args) {
-		List<I_RunList> runLists = getTests();
+		RunParameters params = getTests();
+		params.setCheckMins(true);
 		
-		ConsoleTestRunner.run(runLists, true);
+		ConsoleTestRunner.run(params);
+		//ConsoleTestRunner.run(params, new JacocoRunner());
 		
 	}
 
-	private static List<I_RunList> getTests() {
-		List<I_RunList> runLists = new ArrayList<I_RunList>();
+	private static RunParameters getTests() {
+		RunParameters toRet = new RunParameters();
 		
-		runLists.add(new org.adligo.jtests_tests.models.shared.system.RunPkgTrials());
-		runLists.add(new org.adligo.jtests_tests.api_trials.RunPkgTrials());
-		return runLists;
+		toRet.addTrials(new org.adligo.jtests_tests.models.shared.system.RunPkgTrials());
+		toRet.addTrials(new org.adligo.jtests_tests.api_trials.RunPkgTrials());
+		return toRet;
 	}
 
 

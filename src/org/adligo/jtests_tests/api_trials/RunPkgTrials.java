@@ -4,18 +4,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.adligo.jtests.models.shared.I_AbstractTrial;
+import org.adligo.jtests.models.shared.system.I_TrialList;
+import org.adligo.jtests.models.shared.system.RunParameters;
 import org.adligo.jtests.reports.console.ConsoleTestRunner;
-import org.adligo.jtests.reports.console.I_RunList;
-import org.adligo.jtests_tests.api_trials.Assert_PassConditions_Trial;
-import org.adligo.jtests_tests.api_trials.Run_ApiTrial_Trial;
-import org.adligo.jtests_tests.api_trials.Run_ClassTrial_Trial;
-import org.adligo.jtests_tests.api_trials.Run_UseCaseTrial_Trial;
 
-public class RunPkgTrials implements I_RunList {
+public class RunPkgTrials implements I_TrialList {
 
 	
 	public static void main(String [] args) {
-		ConsoleTestRunner.run(new RunPkgTrials(), true);
+		RunParameters params = new RunParameters();
+		params.addTrials(new RunPkgTrials());
+		ConsoleTestRunner.run(params);
 	}
 
 
@@ -47,7 +46,7 @@ public class RunPkgTrials implements I_RunList {
 	}
 
 	@Override
-	public int getMinAssertions() {
+	public int getMinAsserts() {
 		return 92;
 	}
 }

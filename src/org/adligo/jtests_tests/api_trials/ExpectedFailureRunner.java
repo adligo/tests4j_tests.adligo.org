@@ -21,7 +21,8 @@ public class ExpectedFailureRunner implements I_TestRunListener {
 		params.setTrials(tests);
 		params.setSilent(true);
 		
-		JTests.run(params, this);
+		JTests jt = new JTests();
+		jt.run(params, this);
 	}
 
 
