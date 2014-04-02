@@ -10,9 +10,9 @@ public class RunAllTests {
 	public static void main(String [] args) {
 		RunParameters params = getTests();
 		params.setCheckMins(true);
-		
-		ConsoleTestRunner.run(params);
-		//ConsoleTestRunner.run(params, new JacocoRunner());
+		params.setSilent(false);
+		//ConsoleTestRunner.run(params);
+		ConsoleTestRunner.run(params, new JacocoRunner());
 		
 	}
 

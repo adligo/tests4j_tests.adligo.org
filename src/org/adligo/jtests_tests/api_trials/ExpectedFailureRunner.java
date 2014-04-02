@@ -6,11 +6,11 @@ import java.util.List;
 import org.adligo.jtests.models.shared.I_AbstractTrial;
 import org.adligo.jtests.models.shared.results.I_TrialResult;
 import org.adligo.jtests.models.shared.results.I_TrialRunResult;
-import org.adligo.jtests.models.shared.system.I_TestRunListener;
+import org.adligo.jtests.models.shared.system.I_TrialRunListener;
 import org.adligo.jtests.models.shared.system.RunParameters;
 import org.adligo.jtests.run.JTests;
 
-public class ExpectedFailureRunner implements I_TestRunListener {
+public class ExpectedFailureRunner implements I_TrialRunListener {
 	private I_TrialResult result;
 	
 
@@ -30,15 +30,18 @@ public class ExpectedFailureRunner implements I_TestRunListener {
 		return result;
 	}
 
+	
 	@Override
-	public void onTestCompleted(Class<? extends I_AbstractTrial> testClass,
+	public synchronized void onTestCompleted(Class<? extends I_AbstractTrial> testClass,
 			I_AbstractTrial test, I_TrialResult pResult) {
 		result = pResult;
 	}
 
+
 	@Override
-	public synchronized void onRunCompleted(I_TrialRunResult result) {
-		//do nothing
+	public void onRunCompleted(I_TrialRunResult result) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
