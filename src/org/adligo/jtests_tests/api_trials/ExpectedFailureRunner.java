@@ -7,7 +7,7 @@ import org.adligo.jtests.models.shared.I_AbstractTrial;
 import org.adligo.jtests.models.shared.results.I_TrialResult;
 import org.adligo.jtests.models.shared.results.I_TrialRunResult;
 import org.adligo.jtests.models.shared.system.I_TrialRunListener;
-import org.adligo.jtests.models.shared.system.RunParameters;
+import org.adligo.jtests.models.shared.system.JTestParameters;
 import org.adligo.jtests.run.JTests;
 
 public class ExpectedFailureRunner implements I_TrialRunListener {
@@ -15,7 +15,7 @@ public class ExpectedFailureRunner implements I_TrialRunListener {
 	
 
 	public void runExpectedFailure(Class<? extends I_AbstractTrial> clazz) {
-		RunParameters params = new RunParameters();
+		JTestParameters params = new JTestParameters();
 		List<Class<? extends I_AbstractTrial>> tests = new ArrayList<Class<? extends I_AbstractTrial>>();
 		tests.add(clazz);
 		params.setTrials(tests);

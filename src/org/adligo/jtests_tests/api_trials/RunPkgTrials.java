@@ -5,14 +5,14 @@ import java.util.List;
 
 import org.adligo.jtests.models.shared.I_AbstractTrial;
 import org.adligo.jtests.models.shared.system.I_TrialList;
-import org.adligo.jtests.models.shared.system.RunParameters;
+import org.adligo.jtests.models.shared.system.JTestParameters;
 import org.adligo.jtests.reports.console.ConsoleTestRunner;
 
 public class RunPkgTrials implements I_TrialList {
 
 	
 	public static void main(String [] args) {
-		RunParameters params = new RunParameters();
+		JTestParameters params = new JTestParameters();
 		params.addTrials(new RunPkgTrials());
 		ConsoleTestRunner.run(params);
 	}
