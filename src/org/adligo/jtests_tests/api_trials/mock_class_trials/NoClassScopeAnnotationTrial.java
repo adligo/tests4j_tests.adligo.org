@@ -1,6 +1,6 @@
 package org.adligo.jtests_tests.api_trials.mock_class_trials;
 
-import org.adligo.jtests.models.shared.ClassTrial;
+import org.adligo.jtests.models.shared.SourceFileTrial;
 
 /**
  * note this test NOT RUN DIRECTLY 
@@ -12,6 +12,6 @@ import org.adligo.jtests.models.shared.ClassTrial;
  * @author scott
  *
  */
-public class NoClassScopeAnnotationTrial extends ClassTrial {
+public class NoClassScopeAnnotationTrial extends SourceFileTrial {
 
 }

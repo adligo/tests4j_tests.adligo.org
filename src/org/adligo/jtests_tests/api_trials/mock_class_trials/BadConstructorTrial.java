@@ -1,7 +1,7 @@
 package org.adligo.jtests_tests.api_trials.mock_class_trials;
 
-import org.adligo.jtests.models.shared.ClassTrial;
-import org.adligo.jtests.models.shared.ClassScope;
+import org.adligo.jtests.models.shared.SourceFileTrial;
+import org.adligo.jtests.models.shared.SourceFileScope;
 import org.adligo.jtests.models.shared.Test;
 
 /**
@@ -14,8 +14,8 @@ import org.adligo.jtests.models.shared.Test;
  * @author scott
  *
  */
-@ClassScope (testedClass = NoClassScopeAnnotationTrial.class)
-public class BadConstructorTrial extends ClassTrial {
+@SourceFileScope (testedClass = NoClassScopeAnnotationTrial.class)
+public class BadConstructorTrial extends SourceFileTrial {
 
 	public BadConstructorTrial(String p) {}
 	

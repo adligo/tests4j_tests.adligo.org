@@ -2,14 +2,14 @@ package org.adligo.jtests_tests.models.shared.system;
 
 import java.io.IOException;
 
-import org.adligo.jtests.models.shared.ClassScope;
-import org.adligo.jtests.models.shared.ClassTrial;
+import org.adligo.jtests.models.shared.SourceFileScope;
+import org.adligo.jtests.models.shared.SourceFileTrial;
 import org.adligo.jtests.models.shared.IgnoreTest;
 import org.adligo.jtests.models.shared.Test;
 import org.adligo.jtests.models.shared.system.ByteListOutputStream;
 
-@ClassScope(testedClass=ByteListOutputStream.class)
-public class ByteListOutputStreamTrial extends ClassTrial {
+@SourceFileScope(testedClass=ByteListOutputStream.class)
+public class ByteListOutputStreamTrial extends SourceFileTrial {
 
 	
 	@Test(timout=600000)
