@@ -38,17 +38,14 @@ public class RunPkgTrials implements I_TrialList {
 		return trials;
 	}
 
-	@Override
 	public int getMinTests() {
 		return 16;
 	}
 
-	@Override
 	public int getMinUniqueAssertions() {
 		return 84;
 	}
 
-	@Override
 	public int getMinAsserts() {
 		return 92;
 	}

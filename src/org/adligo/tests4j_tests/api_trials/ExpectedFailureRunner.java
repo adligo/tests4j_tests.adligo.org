@@ -23,7 +23,7 @@ public class ExpectedFailureRunner implements I_TrialRunListener {
 		List<Class<? extends I_AbstractTrial>> tests = new ArrayList<Class<? extends I_AbstractTrial>>();
 		tests.add(clazz);
 		params.setTrials(tests);
-		params.setLogger(new ConsoleLogger(false));
+		params.setLog(new ConsoleLogger(false));
 		params.setThreadPoolSize(1);
 		params.setExitAfterLastNotification(false);
 		
