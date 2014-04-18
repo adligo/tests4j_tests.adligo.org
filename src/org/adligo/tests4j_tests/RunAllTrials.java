@@ -9,7 +9,7 @@ public class RunAllTrials {
 	
 	public static void main(String [] args) {
 		Tests4J_Params params = getTests();
-		params.setCheckMins(true);
+		params.setCheckMins(false);
 		params.setCoveragePlugin(new JacocoPlugin());
 		Tests4J.run(params);
 	}
