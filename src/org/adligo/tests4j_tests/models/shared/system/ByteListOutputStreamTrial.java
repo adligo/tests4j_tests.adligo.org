@@ -1,6 +1,7 @@
 package org.adligo.tests4j_tests.models.shared.system;
 
 import java.io.IOException;
+import java.util.Map;
 
 import org.adligo.tests4j.models.shared.SourceFileScope;
 import org.adligo.tests4j.models.shared.SourceFileTrial;
@@ -9,7 +10,6 @@ import org.adligo.tests4j.models.shared.system.ByteListOutputStream;
 
 @SourceFileScope(sourceClass=ByteListOutputStream.class)
 public class ByteListOutputStreamTrial extends SourceFileTrial {
-
 	
 	@Test(timout=600000)
 	public void test10BytesTo2ByteChunksize() throws IOException {
