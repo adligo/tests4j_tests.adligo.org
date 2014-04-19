@@ -2,7 +2,7 @@ package org.adligo.tests4j_tests;
 
 import org.adligo.tests4j.models.shared.system.Tests4J_Params;
 import org.adligo.tests4j.run.Tests4J;
-import org.adligo.tests4j_4jacoco.plugin.JacocoPlugin;
+import org.adligo.tests4j_4jacoco.plugin.SimpleJacocoPlugin;
 
 public class RunAllTrials {
 
@@ -10,7 +10,7 @@ public class RunAllTrials {
 	public static void main(String [] args) {
 		Tests4J_Params params = getTests();
 		params.setCheckMins(false);
-		params.setCoveragePlugin(new JacocoPlugin());
+		params.setCoveragePlugin(new SimpleJacocoPlugin());
 		Tests4J.run(params);
 	}
 

@@ -6,9 +6,8 @@ import java.util.List;
 import org.adligo.tests4j.models.shared.I_AbstractTrial;
 import org.adligo.tests4j.models.shared.system.I_TrialList;
 import org.adligo.tests4j.models.shared.system.Tests4J_Params;
-import org.adligo.tests4j.reports.console.ConsoleTestRunner;
 import org.adligo.tests4j.run.Tests4J;
-import org.adligo.tests4j_4jacoco.plugin.JacocoPlugin;
+import org.adligo.tests4j_4jacoco.plugin.SimpleJacocoPlugin;
 
 public class RunPkgTrials implements I_TrialList {
 
@@ -17,7 +16,7 @@ public class RunPkgTrials implements I_TrialList {
 		Tests4J_Params params = new Tests4J_Params();
 		params.addTrials(new RunPkgTrials());
 		params.setCheckMins(false);
-		params.setCoveragePlugin(new JacocoPlugin());
+		params.setCoveragePlugin(new SimpleJacocoPlugin());
 		Tests4J.run(params);
 	}
 
