@@ -3,12 +3,12 @@ package org.adligo.tests4j_tests.api_trials;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 
-import org.adligo.tests4j.models.shared.API_Trial;
+import org.adligo.tests4j.models.shared.ApiTrial;
 import org.adligo.tests4j.models.shared.PackageScope;
 import org.adligo.tests4j.models.shared.Test;
 
 @PackageScope (packageName = "org.adligo.tests4j")
-public class Assert_PassConditions_Trial extends API_Trial {
+public class Assert_PassConditions_Trial extends ApiTrial {
 
 	@Test
 	public void exhibitEquals() {

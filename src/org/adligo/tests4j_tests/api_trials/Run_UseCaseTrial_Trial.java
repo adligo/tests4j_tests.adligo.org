@@ -1,6 +1,6 @@
 package org.adligo.tests4j_tests.api_trials;
 
-import org.adligo.tests4j.models.shared.API_Trial;
+import org.adligo.tests4j.models.shared.ApiTrial;
 import org.adligo.tests4j.models.shared.PackageScope;
 import org.adligo.tests4j.models.shared.Test;
 import org.adligo.tests4j.models.shared.results.I_TrialFailure;
@@ -17,7 +17,7 @@ import org.adligo.tests4j_tests.api_trials.mock_functional_trials.StaticTestTria
 import org.adligo.tests4j_tests.api_trials.mock_functional_trials.TestWithParamsTrial;
 
 @PackageScope (packageName = "org.adligo.tests4j")
-public class Run_UseCaseTrial_Trial extends API_Trial {
+public class Run_UseCaseTrial_Trial extends ApiTrial {
 
 	@Test
 	public void exhibitAbstractExhibit() {
@@ -110,7 +110,7 @@ public class Run_UseCaseTrial_Trial extends API_Trial {
 		assertFalse(result.isPassed());
 		I_TrialFailure failure = result.getFailure();
 		assertNotNull(failure);
-		assertEquals("Methods Annotated with @AfterTrial must not take any parameters.", failure.getMessage());
+		assertEquals("Use Case Trial Methods Annotated with @AfterTrial must not take any parameters.", failure.getMessage());
 		Throwable exception = failure.getException();
 		assertUniform(new IllegalArgumentException(
 				"org.adligo.tests4j_tests.api_trials.mock_functional_trials.AfterTrialHasParamsTrial was not annotated correctly."), 

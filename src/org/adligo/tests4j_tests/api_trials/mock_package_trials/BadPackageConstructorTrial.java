@@ -1,6 +1,6 @@
 package org.adligo.tests4j_tests.api_trials.mock_package_trials;
 
-import org.adligo.tests4j.models.shared.API_Trial;
+import org.adligo.tests4j.models.shared.ApiTrial;
 import org.adligo.tests4j.models.shared.PackageScope;
 import org.adligo.tests4j.models.shared.Test;
 
@@ -15,7 +15,7 @@ import org.adligo.tests4j.models.shared.Test;
  *
  */
 @PackageScope (packageName = "org.adligo.tests4j.foo")
-public class BadPackageConstructorTrial extends API_Trial {
+public class BadPackageConstructorTrial extends ApiTrial {
 
 	public BadPackageConstructorTrial(String p) {}
 	

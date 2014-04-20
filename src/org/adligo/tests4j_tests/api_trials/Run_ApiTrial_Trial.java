@@ -1,20 +1,50 @@
 package org.adligo.tests4j_tests.api_trials;
 
-import org.adligo.tests4j.models.shared.API_Trial;
+import java.util.List;
+
+import org.adligo.tests4j.models.shared.ApiTrial;
 import org.adligo.tests4j.models.shared.PackageScope;
 import org.adligo.tests4j.models.shared.Test;
+import org.adligo.tests4j.models.shared.metadata.I_TestMetadata;
+import org.adligo.tests4j.models.shared.metadata.I_TrialMetadata;
+import org.adligo.tests4j.models.shared.metadata.I_TrialRunMetadata;
 import org.adligo.tests4j.models.shared.results.I_TrialFailure;
 import org.adligo.tests4j.models.shared.results.I_TrialResult;
 import org.adligo.tests4j_tests.api_trials.mock_package_trials.BadPackageConstructorTrial;
 import org.adligo.tests4j_tests.api_trials.mock_package_trials.NoPackageScopeAnnotationTrial;
 
 @PackageScope (packageName = "org.adligo.tests4j")
-public class Run_ApiTrial_Trial extends API_Trial {
+public class Run_ApiTrial_Trial extends ApiTrial {
 
 	@Test
 	public void exhibitPackageTestWithBadConstructor() {
 		ExpectedFailureRunner runner = new ExpectedFailureRunner();
 		runner.runExpectedFailure(BadPackageConstructorTrial.class);
+		
+		I_TrialRunMetadata metadata = runner.getMetadata();
+		assertNotNull(metadata);
+		List<? extends I_TrialMetadata> trialsMetadata = metadata.getTrials();
+		assertNotNull(trialsMetadata);
+		assertEquals("java.util.Collections$UnmodifiableRandomAccessList", 
+				trialsMetadata.getClass().getName());
+		assertEquals(1, trialsMetadata.size());
+		I_TrialMetadata trialMeta = trialsMetadata.get(0);
+		assertNotNull(trialMeta);
+		assertEquals("org.adligo.tests4j_tests.api_trials.mock_package_trials.BadPackageConstructorTrial", 
+				trialMeta.getTrialName());
+		assertEquals(0L, trialMeta.getTimeout());
+		assertFalse(trialMeta.isSkipped());
+		
+		List<? extends I_TestMetadata> testsMetadata = trialMeta.getTests();
+		assertNotNull(testsMetadata);
+		assertEquals("java.util.Collections$UnmodifiableRandomAccessList", 
+				testsMetadata.getClass().getName());
+		I_TestMetadata testMeta = testsMetadata.get(0);
+		assertNotNull(testMeta);
+		assertEquals("exhibitA", testMeta.getTestName());
+		assertEquals(0L, testMeta.getTimeout());
+		
+		
 		I_TrialResult result = runner.getResult();
 		assertNotNull(result);
 		assertFalse(result.isPassed());

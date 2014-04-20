@@ -1,6 +1,6 @@
 package org.adligo.tests4j_tests.api_trials;
 
-import org.adligo.tests4j.models.shared.API_Trial;
+import org.adligo.tests4j.models.shared.ApiTrial;
 import org.adligo.tests4j.models.shared.PackageScope;
 import org.adligo.tests4j.models.shared.Test;
 import org.adligo.tests4j.models.shared.results.I_TrialFailure;
@@ -9,7 +9,7 @@ import org.adligo.tests4j_tests.api_trials.mock_class_trials.BadConstructorTrial
 import org.adligo.tests4j_tests.api_trials.mock_class_trials.NoClassScopeAnnotationTrial;
 
 @PackageScope (packageName = "org.adligo.tests4j")
-public class Run_SourceFileTrial_Trial extends API_Trial {
+public class Run_SourceFileTrial_Trial extends ApiTrial {
 
 	@Test
 	public void exhibitClassTestWithBadConstructor() {

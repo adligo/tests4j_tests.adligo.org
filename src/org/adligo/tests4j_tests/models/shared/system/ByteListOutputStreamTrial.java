@@ -11,7 +11,7 @@ import org.adligo.tests4j.models.shared.system.ByteListOutputStream;
 @SourceFileScope(sourceClass=ByteListOutputStream.class)
 public class ByteListOutputStreamTrial extends SourceFileTrial {
 	
-	@Test(timout=600000)
+	@Test(timeout=600000)
 	public void test10BytesTo2ByteChunksize() throws IOException {
 		ByteListOutputStream blos = new ByteListOutputStream(2);
 		String alpha10 = "0123456789";
@@ -25,7 +25,7 @@ public class ByteListOutputStreamTrial extends SourceFileTrial {
 		blos.close();
 	}
 	
-	@Test(timout=6000000)
+	@Test(timeout=6000000)
 	public void test90BytesTo32ByteChunksize() throws IOException {
 		ByteListOutputStream blos = new ByteListOutputStream(32);
 		String alphabet90 = "abcdefghijklmnopqrstuvwxyz0123456789" +

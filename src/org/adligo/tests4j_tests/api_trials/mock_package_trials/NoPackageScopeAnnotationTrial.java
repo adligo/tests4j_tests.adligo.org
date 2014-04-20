@@ -1,6 +1,6 @@
 package org.adligo.tests4j_tests.api_trials.mock_package_trials;
 
-import org.adligo.tests4j.models.shared.API_Trial;
+import org.adligo.tests4j.models.shared.ApiTrial;
 
 /**
  * note this test NOT RUN DIRECTLY 
@@ -12,6 +12,6 @@ import org.adligo.tests4j.models.shared.API_Trial;
  * @author scott
  *
  */
-public class NoPackageScopeAnnotationTrial extends API_Trial {
+public class NoPackageScopeAnnotationTrial extends ApiTrial {
 
 }
