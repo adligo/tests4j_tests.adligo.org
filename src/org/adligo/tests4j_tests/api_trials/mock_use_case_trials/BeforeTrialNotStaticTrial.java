@@ -1,4 +1,4 @@
-package org.adligo.tests4j_tests.api_trials.mock_functional_trials;
+package org.adligo.tests4j_tests.api_trials.mock_use_case_trials;
 
 import org.adligo.tests4j.models.shared.BeforeTrial;
 import org.adligo.tests4j.models.shared.Test;
@@ -8,9 +8,9 @@ public class BeforeTrialNotStaticTrial extends UseCaseTrial {
 
 	
 	@BeforeTrial
-	public void beforeTest() {}
+	public void beforeTrial() {}
 	
 	@Test
-	public void exhibitFoo() {}
+	public void testFoo() {}
 
 }

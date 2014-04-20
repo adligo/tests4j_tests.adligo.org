@@ -11,6 +11,7 @@ public class RunAllTrials {
 		Tests4J_Params params = getTests();
 		params.setCheckMins(false);
 		params.setCoveragePlugin(new SimpleJacocoPlugin());
+		//params.setCoveragePlugin(new TieredJacocoPlugin());
 		Tests4J.run(params);
 	}
 

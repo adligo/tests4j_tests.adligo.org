@@ -1,4 +1,4 @@
-package org.adligo.tests4j_tests.api_trials.mock_package_trials;
+package org.adligo.tests4j_tests.api_trials.mock_api_trials;
 
 import org.adligo.tests4j.models.shared.ApiTrial;
 import org.adligo.tests4j.models.shared.PackageScope;

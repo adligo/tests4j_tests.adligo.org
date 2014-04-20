@@ -1,4 +1,4 @@
-package org.adligo.tests4j_tests.api_trials.mock_class_trials;
+package org.adligo.tests4j_tests.api_trials.mock_source_file_trials;
 
 import org.adligo.tests4j.models.shared.SourceFileScope;
 import org.adligo.tests4j.models.shared.SourceFileTrial;

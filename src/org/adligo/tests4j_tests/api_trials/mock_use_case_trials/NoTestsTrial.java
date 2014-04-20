@@ -1,6 +1,5 @@
-package org.adligo.tests4j_tests.api_trials.mock_functional_trials;
+package org.adligo.tests4j_tests.api_trials.mock_use_case_trials;
 
-import org.adligo.tests4j.models.shared.Test;
 import org.adligo.tests4j.models.shared.UseCaseTrial;
 
 /**
@@ -13,8 +12,7 @@ import org.adligo.tests4j.models.shared.UseCaseTrial;
  * @author scott
  *
  */
-public class TestWithParamsTrial extends UseCaseTrial {
+public class NoTestsTrial extends UseCaseTrial {
 
-	@Test
-	public void exhibitFoo(String p) {}
+	public NoTestsTrial(String p) {}
 }

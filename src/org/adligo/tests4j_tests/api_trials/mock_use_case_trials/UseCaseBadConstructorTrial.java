@@ -1,4 +1,4 @@
-package org.adligo.tests4j_tests.api_trials.mock_functional_trials;
+package org.adligo.tests4j_tests.api_trials.mock_use_case_trials;
 
 import org.adligo.tests4j.models.shared.Test;
 import org.adligo.tests4j.models.shared.UseCaseTrial;
@@ -13,10 +13,10 @@ import org.adligo.tests4j.models.shared.UseCaseTrial;
  * @author scott
  *
  */
-public class FunctionalBadConstructorTrial extends UseCaseTrial {
+public class UseCaseBadConstructorTrial extends UseCaseTrial {
 
-	public FunctionalBadConstructorTrial(String p) {}
+	public UseCaseBadConstructorTrial(String p) {}
 	
 	@Test
-	public void exhibitFoo() {}
+	public void testFoo() {}
 }

@@ -10,8 +10,8 @@ import org.adligo.tests4j.models.shared.metadata.I_TrialMetadata;
 import org.adligo.tests4j.models.shared.metadata.I_TrialRunMetadata;
 import org.adligo.tests4j.models.shared.results.I_TrialFailure;
 import org.adligo.tests4j.models.shared.results.I_TrialResult;
-import org.adligo.tests4j_tests.api_trials.mock_package_trials.BadPackageConstructorTrial;
-import org.adligo.tests4j_tests.api_trials.mock_package_trials.NoPackageScopeAnnotationTrial;
+import org.adligo.tests4j_tests.api_trials.mock_api_trials.BadPackageConstructorTrial;
+import org.adligo.tests4j_tests.api_trials.mock_api_trials.NoPackageScopeAnnotationTrial;
 
 @PackageScope (packageName = "org.adligo.tests4j")
 public class Run_ApiTrial_Trial extends ApiTrial {
@@ -30,7 +30,7 @@ public class Run_ApiTrial_Trial extends ApiTrial {
 		assertEquals(1, trialsMetadata.size());
 		I_TrialMetadata trialMeta = trialsMetadata.get(0);
 		assertNotNull(trialMeta);
-		assertEquals("org.adligo.tests4j_tests.api_trials.mock_package_trials.BadPackageConstructorTrial", 
+		assertEquals("org.adligo.tests4j_tests.api_trials.mock_api_trials.BadPackageConstructorTrial", 
 				trialMeta.getTrialName());
 		assertEquals(0L, trialMeta.getTimeout());
 		assertFalse(trialMeta.isSkipped());
@@ -39,9 +39,10 @@ public class Run_ApiTrial_Trial extends ApiTrial {
 		assertNotNull(testsMetadata);
 		assertEquals("java.util.Collections$UnmodifiableRandomAccessList", 
 				testsMetadata.getClass().getName());
+		assertEquals(1, testsMetadata.size());
 		I_TestMetadata testMeta = testsMetadata.get(0);
 		assertNotNull(testMeta);
-		assertEquals("exhibitA", testMeta.getTestName());
+		assertEquals("exhibitB", testMeta.getTestName());
 		assertEquals(0L, testMeta.getTimeout());
 		
 		
@@ -53,7 +54,7 @@ public class Run_ApiTrial_Trial extends ApiTrial {
 		assertEquals("Classes which implement I_AbstractTrial must have a zero argument constructor.", failure.getMessage());
 		Throwable exception = failure.getException();
 		assertUniform(new NoSuchMethodException(
-				"org.adligo.tests4j_tests.api_trials.mock_package_trials.BadPackageConstructorTrial.<init>()"), 
+				"org.adligo.tests4j_tests.api_trials.mock_api_trials.BadPackageConstructorTrial.<init>()"), 
 				exception);
 	}
 	
@@ -61,6 +62,27 @@ public class Run_ApiTrial_Trial extends ApiTrial {
 	public void exhibitPackageTestWithNoScopeAnnotation() {
 		ExpectedFailureRunner runner = new ExpectedFailureRunner();
 		runner.runExpectedFailure(NoPackageScopeAnnotationTrial.class);
+		
+		I_TrialRunMetadata metadata = runner.getMetadata();
+		assertNotNull(metadata);
+		List<? extends I_TrialMetadata> trialsMetadata = metadata.getTrials();
+		assertNotNull(trialsMetadata);
+		assertEquals("java.util.Collections$UnmodifiableRandomAccessList", 
+				trialsMetadata.getClass().getName());
+		assertEquals(1, trialsMetadata.size());
+		I_TrialMetadata trialMeta = trialsMetadata.get(0);
+		assertNotNull(trialMeta);
+		assertEquals("org.adligo.tests4j_tests.api_trials.mock_api_trials.NoPackageScopeAnnotationTrial", 
+				trialMeta.getTrialName());
+		assertEquals(0L, trialMeta.getTimeout());
+		assertFalse(trialMeta.isSkipped());
+		
+		List<? extends I_TestMetadata> testsMetadata = trialMeta.getTests();
+		assertNotNull(testsMetadata);
+		assertEquals("java.util.Collections$UnmodifiableRandomAccessList", 
+				testsMetadata.getClass().getName());
+		assertEquals(0, testsMetadata.size());
+		
 		I_TrialResult result = runner.getResult();
 		assertNotNull(result);
 		assertFalse(result.isPassed());
@@ -69,7 +91,7 @@ public class Run_ApiTrial_Trial extends ApiTrial {
 		assertEquals("PackageTrials must be annotated with a PackageScope annotation.", failure.getMessage());
 		Throwable exception = failure.getException();
 		assertUniform(new IllegalArgumentException(
-				"org.adligo.tests4j_tests.api_trials.mock_package_trials.NoPackageScopeAnnotationTrial was not annotated correctly."), 
+				"org.adligo.tests4j_tests.api_trials.mock_api_trials.NoPackageScopeAnnotationTrial was not annotated correctly."), 
 				exception);
 	}
 }

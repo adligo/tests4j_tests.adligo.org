@@ -1,4 +1,4 @@
-package org.adligo.tests4j_tests.api_trials.mock_functional_trials;
+package org.adligo.tests4j_tests.api_trials.mock_use_case_trials;
 
 import org.adligo.tests4j.models.shared.Test;
 import org.adligo.tests4j.models.shared.UseCaseTrial;
@@ -13,8 +13,8 @@ import org.adligo.tests4j.models.shared.UseCaseTrial;
  * @author scott
  *
  */
-public abstract class AbstractTestTrial extends UseCaseTrial {
+public class ProtectedTestTrial extends UseCaseTrial {
 
 	@Test
-	public abstract void exhibitFoo();
+	protected void testFoo() {}
 }
