@@ -47,7 +47,7 @@ public class Run_UseCaseTrial_Trial extends ApiTrial {
 		assertNotNull(testsMetadata);
 		assertEquals("java.util.Collections$UnmodifiableRandomAccessList", 
 				testsMetadata.getClass().getName());
-		assertEquals(0, testsMetadata.size());
+		assertEquals(1, testsMetadata.size());
 		
 		I_TrialResult result = runner.getResult();
 		assertNotNull(result);

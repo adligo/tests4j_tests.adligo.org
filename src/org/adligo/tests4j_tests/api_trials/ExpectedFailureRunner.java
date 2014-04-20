@@ -19,20 +19,22 @@ public class ExpectedFailureRunner implements I_TrialRunListener {
 	private I_TrialResult result;
 	
 	private ArrayBlockingQueue<I_TrialResult> block = new ArrayBlockingQueue<>(1);
-
+	private ArrayBlockingQueue<I_TrialRunMetadata> metaBlock = new ArrayBlockingQueue<>(1);
+	
 	public void runExpectedFailure(Class<? extends AbstractTrial> clazz) {
 		Tests4J_Params params = new Tests4J_Params();
 		List<Class<? extends I_AbstractTrial>> tests = 
 				new ArrayList<Class<? extends I_AbstractTrial>>();
 		tests.add(clazz);
 		params.setTrials(tests);
-		//params.setLog(new ConsoleLogger("L" + clazz.getName() + ": ", true));
-		params.setLog(new ConsoleLogger( false));
+		params.setLog(new ConsoleLogger("L" + clazz.getName() + ": ", true));
+		//params.setLog(new ConsoleLogger( false));
 		params.setThreadPoolSize(1);
 		params.setExitAfterLastNotification(false);
 		
 		Tests4J.run(params, this);
 		try {
+			metadata = metaBlock.take();
 			result = block.take();
 		} catch (InterruptedException x) {
 			throw new RuntimeException(x);
@@ -64,7 +66,7 @@ public class ExpectedFailureRunner implements I_TrialRunListener {
 
 	@Override
 	public synchronized void onMetadataCalculated(I_TrialRunMetadata p) {
-		metadata = p;
+		metaBlock.add(p);
 	}
 
 
