@@ -283,6 +283,32 @@ public class Run_UseCaseTrial_Trial extends ApiTrial {
 	public void testtestWithParams() {
 		ExpectedFailureRunner runner = new ExpectedFailureRunner();
 		runner.runExpectedFailure(TestWithParamsTrial.class);
+		
+		I_TrialRunMetadata metadata = runner.getMetadata();
+		assertNotNull(metadata);
+		List<? extends I_TrialMetadata> trialsMetadata = metadata.getTrials();
+		assertNotNull(trialsMetadata);
+		assertEquals("java.util.Collections$UnmodifiableRandomAccessList", 
+				trialsMetadata.getClass().getName());
+		assertEquals(1, trialsMetadata.size());
+		I_TrialMetadata trialMeta = trialsMetadata.get(0);
+		assertNotNull(trialMeta);
+		assertEquals("org.adligo.tests4j_tests.api_trials.mock_use_case_trials.TestWithParamsTrial", 
+				trialMeta.getTrialName());
+		assertEquals(0L, trialMeta.getTimeout());
+		assertFalse(trialMeta.isSkipped());
+		
+		
+		List<? extends I_TestMetadata> testsMetadata = trialMeta.getTests();
+		assertNotNull(testsMetadata);
+		assertEquals("java.util.Collections$UnmodifiableRandomAccessList", 
+				testsMetadata.getClass().getName());
+		assertEquals(1, testsMetadata.size());
+		I_TestMetadata testMeta = testsMetadata.get(0);
+		assertNotNull(testMeta);
+		assertEquals("testFoo", testMeta.getTestName());
+		assertEquals(0L, testMeta.getTimeout());
+		
 		I_TrialResult result = runner.getResult();
 		assertNotNull(result);
 		assertFalse(result.isPassed());
@@ -302,6 +328,28 @@ public class Run_UseCaseTrial_Trial extends ApiTrial {
 		ExpectedFailureRunner runner = new ExpectedFailureRunner();
 		runner.runExpectedFailure(NoTestsTrial.class);
 		I_TrialResult result = runner.getResult();
+		
+		I_TrialRunMetadata metadata = runner.getMetadata();
+		assertNotNull(metadata);
+		List<? extends I_TrialMetadata> trialsMetadata = metadata.getTrials();
+		assertNotNull(trialsMetadata);
+		assertEquals("java.util.Collections$UnmodifiableRandomAccessList", 
+				trialsMetadata.getClass().getName());
+		assertEquals(1, trialsMetadata.size());
+		I_TrialMetadata trialMeta = trialsMetadata.get(0);
+		assertNotNull(trialMeta);
+		assertEquals("org.adligo.tests4j_tests.api_trials.mock_use_case_trials.NoTestsTrial", 
+				trialMeta.getTrialName());
+		assertEquals(0L, trialMeta.getTimeout());
+		assertFalse(trialMeta.isSkipped());
+		
+		
+		List<? extends I_TestMetadata> testsMetadata = trialMeta.getTests();
+		assertNotNull(testsMetadata);
+		assertEquals("java.util.Collections$UnmodifiableRandomAccessList", 
+				testsMetadata.getClass().getName());
+		assertEquals(0, testsMetadata.size());
+		
 		assertNotNull(result);
 		assertFalse(result.isPassed());
 		I_TrialFailure failure = result.getFailure();
@@ -317,6 +365,21 @@ public class Run_UseCaseTrial_Trial extends ApiTrial {
 	public void testProtectedtest() {
 		ExpectedFailureRunner runner = new ExpectedFailureRunner();
 		runner.runExpectedFailure(ProtectedTestTrial.class);
+		
+		I_TrialRunMetadata metadata = runner.getMetadata();
+		assertNotNull(metadata);
+		List<? extends I_TrialMetadata> trialsMetadata = metadata.getTrials();
+		assertNotNull(trialsMetadata);
+		assertEquals("java.util.Collections$UnmodifiableRandomAccessList", 
+				trialsMetadata.getClass().getName());
+		assertEquals(1, trialsMetadata.size());
+		I_TrialMetadata trialMeta = trialsMetadata.get(0);
+		assertNotNull(trialMeta);
+		assertEquals("org.adligo.tests4j_tests.api_trials.mock_use_case_trials.ProtectedTestTrial", 
+				trialMeta.getTrialName());
+		assertEquals(0L, trialMeta.getTimeout());
+		assertFalse(trialMeta.isSkipped());
+		
 		I_TrialResult result = runner.getResult();
 		assertNotNull(result);
 		assertFalse(result.isPassed());
@@ -333,6 +396,21 @@ public class Run_UseCaseTrial_Trial extends ApiTrial {
 	public void testStatictest() {
 		ExpectedFailureRunner runner = new ExpectedFailureRunner();
 		runner.runExpectedFailure(StaticTestTrial.class);
+		
+		I_TrialRunMetadata metadata = runner.getMetadata();
+		assertNotNull(metadata);
+		List<? extends I_TrialMetadata> trialsMetadata = metadata.getTrials();
+		assertNotNull(trialsMetadata);
+		assertEquals("java.util.Collections$UnmodifiableRandomAccessList", 
+				trialsMetadata.getClass().getName());
+		assertEquals(1, trialsMetadata.size());
+		I_TrialMetadata trialMeta = trialsMetadata.get(0);
+		assertNotNull(trialMeta);
+		assertEquals("org.adligo.tests4j_tests.api_trials.mock_use_case_trials.StaticTestTrial", 
+				trialMeta.getTrialName());
+		assertEquals(0L, trialMeta.getTimeout());
+		assertFalse(trialMeta.isSkipped());
+		
 		I_TrialResult result = runner.getResult();
 		assertNotNull(result);
 		assertFalse(result.isPassed());
