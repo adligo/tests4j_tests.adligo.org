@@ -1,6 +1,9 @@
 package org.adligo.tests4j_tests.models.shared.system;
 
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 import org.adligo.tests4j.models.shared.AbstractTrial;
 import org.adligo.tests4j.models.shared.I_AbstractTrial;
@@ -31,6 +34,8 @@ public class Tests4J_ParamsTrial extends SourceFileTrial {
 	
 	@Test
 	public void testOneTrialRunParams() {
+		Map covargeData = init2();
+		System.out.println(covargeData.get(3));
 		Tests4J_Params params = new Tests4J_Params();
 		params.addTrial(Tests4J_ParamsTrial.class);
 		
@@ -38,6 +43,10 @@ public class Tests4J_ParamsTrial extends SourceFileTrial {
 		assertNotNull(trials);
 		assertEquals(1, trials.size());
 		assertEquals(Tests4J_ParamsTrial.class, trials.get(0));
-		assertEquals(1, params.getThreadPoolSize());
+		assertEquals(2, params.getThreadPoolSize());
+	}
+	
+	private static Map<Integer, Boolean> init2() {
+		return Collections.EMPTY_MAP;
 	}
 }
