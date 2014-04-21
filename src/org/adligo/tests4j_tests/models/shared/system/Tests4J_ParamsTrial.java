@@ -43,7 +43,7 @@ public class Tests4J_ParamsTrial extends SourceFileTrial {
 		assertNotNull(trials);
 		assertEquals(1, trials.size());
 		assertEquals(Tests4J_ParamsTrial.class, trials.get(0));
-		assertEquals(2, params.getThreadPoolSize());
+		assertEquals(1, params.getThreadPoolSize());
 	}
 	
 	private static Map<Integer, Boolean> init2() {
