@@ -16,7 +16,6 @@ public class Tests4J_ParamsTrial extends SourceFileTrial {
 
 	@Test
 	public void testDefaultParams() {
-		System.out.println("hey you guys");
 		Tests4J_Params params = new Tests4J_Params();
 		List<Class<? extends I_AbstractTrial>> trials = params.getTrials();
 		assertNotNull(trials);

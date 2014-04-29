@@ -3,6 +3,7 @@ package org.adligo.tests4j_tests;
 import org.adligo.tests4j.models.shared.system.Tests4J_Params;
 import org.adligo.tests4j.run.Tests4J;
 import org.adligo.tests4j_4jacoco.plugin.SimpleJacocoPlugin;
+import org.adligo.tests4j_4jacoco.plugin.asm.BytecodeInjectionDebuger;
 
 public class RunAllTrials {
 
