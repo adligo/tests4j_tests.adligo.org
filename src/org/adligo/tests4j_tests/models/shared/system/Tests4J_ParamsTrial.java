@@ -1,6 +1,8 @@
 package org.adligo.tests4j_tests.models.shared.system;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.adligo.tests4j.models.shared.I_AbstractTrial;
 import org.adligo.tests4j.models.shared.SourceFileScope;
@@ -14,8 +16,8 @@ public class Tests4J_ParamsTrial extends SourceFileTrial {
 
 	@Test
 	public void testDefaultParams() {
+		System.out.println("hey you guys");
 		Tests4J_Params params = new Tests4J_Params();
-		
 		List<Class<? extends I_AbstractTrial>> trials = params.getTrials();
 		assertNotNull(trials);
 		assertEquals(0, trials.size());
@@ -25,19 +27,19 @@ public class Tests4J_ParamsTrial extends SourceFileTrial {
 			params.addTrial(Tests4J_ParamsTrial.class);
 		}
 		assertEquals(32, params.getThreadPoolSize());
-		
 	}
 	
 	@Test
 	public void testOneTrialRunParams() {
 		Tests4J_Params params = new Tests4J_Params();
 		params.addTrial(Tests4J_ParamsTrial.class);
-		
 		List<Class<? extends I_AbstractTrial>> trials = params.getTrials();
 		assertNotNull(trials);
 		assertEquals(1, trials.size());
 		assertEquals(Tests4J_ParamsTrial.class, trials.get(0));
 		assertEquals(1, params.getThreadPoolSize());
+		Long random = System.currentTimeMillis();
+		
 	}
 	
 }

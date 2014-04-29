@@ -1,6 +1,6 @@
 package org.adligo.tests4j_tests;
 
-import org.adligo.tests4j_4jacoco.plugin.instrumentation.JacocoMethodInstrumenter;
+import org.adligo.tests4j_4jacoco.plugin.SimpleJacocoPlugin;
 import org.objectweb.asm.Type;
 import org.objectweb.asm.util.ASMifier;
 
@@ -15,8 +15,9 @@ public class AsmVerifier {
 
 	public static void main(String [] args) {
 		try {
-			String internalName = Type.getInternalName(JacocoMethodInstrumenter.class);
-			internalName = "./org.adligo.tests4j_tests.models.shared.system.Tests4J_ParamsTrial.class";
+			String internalName = Type.getInternalName(SimpleJacocoPlugin.class);
+			//internalName = "./org.adligo.tests4j_tests.models.shared.system.Tests4J_ParamsTrial.class";
+			internalName = "./bin/org/adligo/tests4j_tests/models/shared/system/Tests4J_ParamsTrial.class";
 			
 			ASMifier.main(new String[]{
 					internalName});
