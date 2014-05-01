@@ -19,7 +19,6 @@ public class RunPkgTrials implements I_TrialList {
 		
 		SimpleJacocoPlugin covargePlugin =new SimpleJacocoPlugin();
 		//TieredJacocoPlugin covargePlugin =new TieredJacocoPlugin();
-		covargePlugin.setWriteOutInstrumentedClassFiles(true);
 		params.setCoveragePlugin(covargePlugin);
 		Tests4J.run(params);
 	}

@@ -14,15 +14,7 @@ import org.adligo.tests4j.models.shared.system.Tests4J_Params;
 @SourceFileScope(sourceClass=Tests4J_Params.class)
 public class Tests4J_ParamsTrial extends SourceFileTrial {
 
-	public Tests4J_ParamsTrial() {
-		Map<Integer,Boolean> foo = getFoo();
-		foo.put(1, true);
-		for (int i = 0; i < 10; i++) {
-			System.out.println(" hey " + i);
-			foo.put(i, true);
-		}
-		foo.put(11, false);
-	}
+	
 	@Test
 	public void testDefaultParams() {
 		Tests4J_Params params = new Tests4J_Params();

@@ -74,4 +74,26 @@ public class ExpectedFailureRunner implements I_TrialRunListener {
 		return metadata;
 	}
 
+
+	@Override
+	public void onStartingTrail(String trialName) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void onStartingTest(String trialName, String testName) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void onTestCompleted(String trialName, String testName,
+			boolean passed) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

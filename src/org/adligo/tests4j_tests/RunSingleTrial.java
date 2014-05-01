@@ -15,7 +15,6 @@ public class RunSingleTrial {
 		params.setCheckMins(false);
 		//SimpleJacocoPlugin plugin = new SimpleJacocoPlugin();
 		ScopedJacocoPlugin plugin = new ScopedJacocoPlugin();
-		plugin.setWriteOutInstrumentedClassFiles(true);
 		params.setCoveragePlugin(plugin);
 		Tests4J.run(params);
 	}
