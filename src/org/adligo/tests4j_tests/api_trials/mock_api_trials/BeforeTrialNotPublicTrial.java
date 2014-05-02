@@ -1,8 +1,10 @@
 package org.adligo.tests4j_tests.api_trials.mock_api_trials;
 
 import org.adligo.tests4j.models.shared.ApiTrial;
+import org.adligo.tests4j.models.shared.BeforeTrial;
 import org.adligo.tests4j.models.shared.PackageScope;
 import org.adligo.tests4j.models.shared.Test;
+import org.adligo.tests4j_tests.api_trials.Run_ApiTrial_Trial;
 
 /**
  * note this test NOT RUN DIRECTLY 
@@ -15,10 +17,12 @@ import org.adligo.tests4j.models.shared.Test;
  *
  */
 @PackageScope (packageName = "org.adligo.tests4j.foo")
-public class BadPackageConstructorTrial extends ApiTrial {
+public class BeforeTrialNotPublicTrial extends ApiTrial {
 
-	public BadPackageConstructorTrial(String p) {}
+	@BeforeTrial
+	protected static void beforeTrial() {}
 	
 	@Test
-	public void exhibitB() {}
+	public void testNada() {}
+
 }

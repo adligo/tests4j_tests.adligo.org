@@ -12,6 +12,6 @@ import org.adligo.tests4j.models.shared.SourceFileTrial;
  * @author scott
  *
  */
-public class NoClassScopeAnnotationTrial extends SourceFileTrial {
+public class NoSourceFileScopeAnnotationTrial extends SourceFileTrial {
 
 }

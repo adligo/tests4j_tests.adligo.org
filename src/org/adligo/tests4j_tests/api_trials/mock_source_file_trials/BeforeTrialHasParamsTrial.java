@@ -1,24 +1,25 @@
 package org.adligo.tests4j_tests.api_trials.mock_source_file_trials;
 
+import org.adligo.tests4j.models.shared.BeforeTrial;
 import org.adligo.tests4j.models.shared.SourceFileScope;
 import org.adligo.tests4j.models.shared.SourceFileTrial;
 import org.adligo.tests4j.models.shared.Test;
 
 /**
- * note this test NOT RUN DIRECTLY 
- * as it is suppose to fail!
- * 
- * is run by another test 
- * @see RunClassTestUseCase
+ * note this trial is run by the Run_SourceFileTrial_Trial,
+ * and is intended to fail.
  * 
  * @author scott
  *
  */
 @SourceFileScope (sourceClass = NoSourceFileScopeAnnotationTrial.class)
-public class BadConstructorTrial extends SourceFileTrial {
+public class BeforeTrialHasParamsTrial extends SourceFileTrial {
 
-	public BadConstructorTrial(String p) {}
+	
+	@BeforeTrial
+	public static void beforeTrial(String p) {}
 	
 	@Test
-	public void exhibitA() {}
+	public void testFoo() {}
+
 }
