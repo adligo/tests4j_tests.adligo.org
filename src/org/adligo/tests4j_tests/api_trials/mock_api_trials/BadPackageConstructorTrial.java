@@ -9,7 +9,7 @@ import org.adligo.tests4j.models.shared.Test;
  * as it is suppose to fail!
  * 
  * is run by another test 
- * @see Run_ApiTrial_Trial
+ * @see Run_ApiTrial_ApiTrial
  * 
  * @author scott
  *
