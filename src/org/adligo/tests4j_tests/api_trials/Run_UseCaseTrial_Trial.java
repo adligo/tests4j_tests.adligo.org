@@ -193,6 +193,51 @@ public class Run_UseCaseTrial_Trial extends ApiTrial {
 				"org.adligo.tests4j_tests.api_trials.mock_use_case_trials.UseCaseAnnotationNoVerbTrial was not annotated correctly."), 
 				exception);
 	}
+	
+	@Test
+	public void testBadConstructor() {
+		ExpectedFailureRunner runner = new ExpectedFailureRunner();
+		runner.runExpectedFailure(BadConstructorTrial.class);
+		
+		I_TrialRunMetadata metadata = runner.getMetadata();
+		assertNotNull(metadata);
+		List<? extends I_TrialMetadata> trialsMetadata = metadata.getTrials();
+		assertNotNull(trialsMetadata);
+		assertEquals("java.util.Collections$UnmodifiableRandomAccessList", 
+				trialsMetadata.getClass().getName());
+		assertEquals(1, trialsMetadata.size());
+		I_TrialMetadata trialMeta = trialsMetadata.get(0);
+		assertNotNull(trialMeta);
+		assertEquals("org.adligo.tests4j_tests.api_trials.mock_use_case_trials.BadConstructorTrial", 
+				trialMeta.getTrialName());
+		assertEquals(0L, trialMeta.getTimeout());
+		assertFalse(trialMeta.isSkipped());
+		
+		
+		List<? extends I_TestMetadata> testsMetadata = trialMeta.getTests();
+		assertNotNull(testsMetadata);
+		assertEquals("java.util.Collections$UnmodifiableRandomAccessList", 
+				testsMetadata.getClass().getName());
+		assertEquals(1, testsMetadata.size());
+		I_TestMetadata testMeta = testsMetadata.get(0);
+		assertNotNull(testMeta);
+		assertEquals("testFoo", testMeta.getTestName());
+		assertEquals(0L, testMeta.getTimeout());
+		
+		I_TrialResult result = runner.getResult();
+		assertNotNull(result);
+		assertFalse(result.isPassed());
+		I_TrialFailure failure = result.getFailure();
+		assertNotNull(failure);
+		assertEquals("Classes which implement I_AbstractTrial must have a zero argument constructor.", 
+				failure.getMessage());
+		Throwable exception = failure.getException();
+		assertUniform(new NoSuchMethodException(
+				"org.adligo.tests4j_tests.api_trials.mock_use_case_trials.BadConstructorTrial.<init>()"), 
+				exception);
+		
+	}
+	
 	@Test
 	public void testBeforeTrialNotStatic() {
 		ExpectedFailureRunner runner = new ExpectedFailureRunner();
@@ -400,49 +445,7 @@ public class Run_UseCaseTrial_Trial extends ApiTrial {
 				exception);
 	}
 	
-	@Test
-	public void testBadConstructor() {
-		ExpectedFailureRunner runner = new ExpectedFailureRunner();
-		runner.runExpectedFailure(BadConstructorTrial.class);
-		
-		I_TrialRunMetadata metadata = runner.getMetadata();
-		assertNotNull(metadata);
-		List<? extends I_TrialMetadata> trialsMetadata = metadata.getTrials();
-		assertNotNull(trialsMetadata);
-		assertEquals("java.util.Collections$UnmodifiableRandomAccessList", 
-				trialsMetadata.getClass().getName());
-		assertEquals(1, trialsMetadata.size());
-		I_TrialMetadata trialMeta = trialsMetadata.get(0);
-		assertNotNull(trialMeta);
-		assertEquals("org.adligo.tests4j_tests.api_trials.mock_use_case_trials.BadConstructorTrial", 
-				trialMeta.getTrialName());
-		assertEquals(0L, trialMeta.getTimeout());
-		assertFalse(trialMeta.isSkipped());
-		
-		
-		List<? extends I_TestMetadata> testsMetadata = trialMeta.getTests();
-		assertNotNull(testsMetadata);
-		assertEquals("java.util.Collections$UnmodifiableRandomAccessList", 
-				testsMetadata.getClass().getName());
-		assertEquals(1, testsMetadata.size());
-		I_TestMetadata testMeta = testsMetadata.get(0);
-		assertNotNull(testMeta);
-		assertEquals("testFoo", testMeta.getTestName());
-		assertEquals(0L, testMeta.getTimeout());
-		
-		I_TrialResult result = runner.getResult();
-		assertNotNull(result);
-		assertFalse(result.isPassed());
-		I_TrialFailure failure = result.getFailure();
-		assertNotNull(failure);
-		assertEquals("Classes which implement I_AbstractTrial must have a zero argument constructor.", 
-				failure.getMessage());
-		Throwable exception = failure.getException();
-		assertUniform(new NoSuchMethodException(
-				"org.adligo.tests4j_tests.api_trials.mock_use_case_trials.BadConstructorTrial.<init>()"), 
-				exception);
-		
-	}
+	
 	
 	@Test
 	public void testTestWithParams() {

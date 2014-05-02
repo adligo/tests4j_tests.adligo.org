@@ -13,5 +13,4 @@ import org.adligo.tests4j.models.shared.UseCaseTrial;
 @UseCaseScope(system="tests4j.adligo.org",verb="reveal",nown="mistake")
 public class NoTestsTrial extends UseCaseTrial {
 
-	public NoTestsTrial(String p) {}
 }
