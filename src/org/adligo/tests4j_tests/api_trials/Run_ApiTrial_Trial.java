@@ -88,7 +88,7 @@ public class Run_ApiTrial_Trial extends ApiTrial {
 		assertFalse(result.isPassed());
 		I_TrialFailure failure = result.getFailure();
 		assertNotNull(failure);
-		assertEquals("PackageTrials must be annotated with a PackageScope annotation.", failure.getMessage());
+		assertEquals("ApiTrials must be annotated with a @PackageScope annotation.", failure.getMessage());
 		Throwable exception = failure.getException();
 		assertUniform(new IllegalArgumentException(
 				"org.adligo.tests4j_tests.api_trials.mock_api_trials.NoPackageScopeAnnotationTrial was not annotated correctly."), 

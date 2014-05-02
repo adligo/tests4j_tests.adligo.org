@@ -12,6 +12,7 @@ import org.adligo.tests4j.models.shared.results.I_TrialFailure;
 import org.adligo.tests4j.models.shared.results.I_TrialResult;
 import org.adligo.tests4j_tests.api_trials.mock_use_case_trials.AbstractTestTrial;
 import org.adligo.tests4j_tests.api_trials.mock_use_case_trials.AfterTrialHasParamsTrial;
+import org.adligo.tests4j_tests.api_trials.mock_use_case_trials.AfterTrialNotPublicTrial;
 import org.adligo.tests4j_tests.api_trials.mock_use_case_trials.AfterTrialNotStaticTrial;
 import org.adligo.tests4j_tests.api_trials.mock_use_case_trials.AfterTrialTestsTrial;
 import org.adligo.tests4j_tests.api_trials.mock_use_case_trials.BadConstructorTrial;
@@ -26,86 +27,7 @@ import org.adligo.tests4j_tests.api_trials.mock_use_case_trials.TestWithParamsTr
 @PackageScope (packageName = "org.adligo.tests4j")
 public class Run_UseCaseTrial_Trial extends ApiTrial {
 
-	@Test
-	public void testAbstractTest() {
-		ExpectedFailureRunner runner = new ExpectedFailureRunner();
-		runner.runExpectedFailure(AbstractTestTrial.class);
-		
-		I_TrialRunMetadata metadata = runner.getMetadata();
-		assertNotNull(metadata);
-		List<? extends I_TrialMetadata> trialsMetadata = metadata.getTrials();
-		assertNotNull(trialsMetadata);
-		assertEquals("java.util.Collections$UnmodifiableRandomAccessList", 
-				trialsMetadata.getClass().getName());
-		assertEquals(1, trialsMetadata.size());
-		I_TrialMetadata trialMeta = trialsMetadata.get(0);
-		assertNotNull(trialMeta);
-		assertEquals("org.adligo.tests4j_tests.api_trials.mock_use_case_trials.AbstractTestTrial", 
-				trialMeta.getTrialName());
-		assertEquals(0L, trialMeta.getTimeout());
-		assertFalse(trialMeta.isSkipped());
-		
-		List<? extends I_TestMetadata> testsMetadata = trialMeta.getTests();
-		assertNotNull(testsMetadata);
-		assertEquals("java.util.Collections$UnmodifiableRandomAccessList", 
-				testsMetadata.getClass().getName());
-		assertEquals(1, testsMetadata.size());
-		
-		I_TrialResult result = runner.getResult();
-		assertNotNull(result);
-		assertFalse(result.isPassed());
-		I_TrialFailure failure = result.getFailure();
-		assertNotNull(failure);
-		assertEquals("Methods Annotated with @Test must NOT be abstract.", failure.getMessage());
-		Throwable exception = failure.getException();
-		assertUniform(new IllegalArgumentException(
-				"org.adligo.tests4j_tests.api_trials.mock_use_case_trials.AbstractTestTrial.testFoo was not annotated correctly."), 
-				exception);
-	}
 	
-	@Test
-	public void testBadConstructor() {
-		ExpectedFailureRunner runner = new ExpectedFailureRunner();
-		runner.runExpectedFailure(BadConstructorTrial.class);
-		
-		I_TrialRunMetadata metadata = runner.getMetadata();
-		assertNotNull(metadata);
-		List<? extends I_TrialMetadata> trialsMetadata = metadata.getTrials();
-		assertNotNull(trialsMetadata);
-		assertEquals("java.util.Collections$UnmodifiableRandomAccessList", 
-				trialsMetadata.getClass().getName());
-		assertEquals(1, trialsMetadata.size());
-		I_TrialMetadata trialMeta = trialsMetadata.get(0);
-		assertNotNull(trialMeta);
-		assertEquals("org.adligo.tests4j_tests.api_trials.mock_use_case_trials.BadConstructorTrial", 
-				trialMeta.getTrialName());
-		assertEquals(0L, trialMeta.getTimeout());
-		assertFalse(trialMeta.isSkipped());
-		
-		
-		List<? extends I_TestMetadata> testsMetadata = trialMeta.getTests();
-		assertNotNull(testsMetadata);
-		assertEquals("java.util.Collections$UnmodifiableRandomAccessList", 
-				testsMetadata.getClass().getName());
-		assertEquals(1, testsMetadata.size());
-		I_TestMetadata testMeta = testsMetadata.get(0);
-		assertNotNull(testMeta);
-		assertEquals("testFoo", testMeta.getTestName());
-		assertEquals(0L, testMeta.getTimeout());
-		
-		I_TrialResult result = runner.getResult();
-		assertNotNull(result);
-		assertFalse(result.isPassed());
-		I_TrialFailure failure = result.getFailure();
-		assertNotNull(failure);
-		assertEquals("Classes which implement I_AbstractTrial must have a zero argument constructor.", 
-				failure.getMessage());
-		Throwable exception = failure.getException();
-		assertUniform(new NoSuchMethodException(
-				"org.adligo.tests4j_tests.api_trials.mock_use_case_trials.BadConstructorTrial.<init>()"), 
-				exception);
-		
-	}
 	
 	@Test
 	public void testBeforeTrialNotStatic() {
@@ -234,11 +156,13 @@ public class Run_UseCaseTrial_Trial extends ApiTrial {
 				"org.adligo.tests4j_tests.api_trials.mock_use_case_trials.BeforeTrialNotPublicTrial was not annotated correctly."), 
 				exception);
 	}
+	
+	
+	
 	@Test
-	public void testHasAfterTrialTests() {
+	public void testAbstractTest() {
 		ExpectedFailureRunner runner = new ExpectedFailureRunner();
-		runner.runExpectedFailure(AfterTrialTestsTrial.class);
-		
+		runner.runExpectedFailure(AbstractTestTrial.class);
 		
 		I_TrialRunMetadata metadata = runner.getMetadata();
 		assertNotNull(metadata);
@@ -249,35 +173,33 @@ public class Run_UseCaseTrial_Trial extends ApiTrial {
 		assertEquals(1, trialsMetadata.size());
 		I_TrialMetadata trialMeta = trialsMetadata.get(0);
 		assertNotNull(trialMeta);
-		assertEquals("org.adligo.tests4j_tests.api_trials.mock_use_case_trials.AfterTrialTestsTrial", 
+		assertEquals("org.adligo.tests4j_tests.api_trials.mock_use_case_trials.AbstractTestTrial", 
 				trialMeta.getTrialName());
 		assertEquals(0L, trialMeta.getTimeout());
 		assertFalse(trialMeta.isSkipped());
-		
 		
 		List<? extends I_TestMetadata> testsMetadata = trialMeta.getTests();
 		assertNotNull(testsMetadata);
 		assertEquals("java.util.Collections$UnmodifiableRandomAccessList", 
 				testsMetadata.getClass().getName());
-		assertEquals(0, testsMetadata.size());
+		assertEquals(1, testsMetadata.size());
 		
 		I_TrialResult result = runner.getResult();
 		assertNotNull(result);
 		assertFalse(result.isPassed());
 		I_TrialFailure failure = result.getFailure();
 		assertNotNull(failure);
-		assertEquals("Use Case Trial Methods may not be Annotated with @AfterTrialTests.", failure.getMessage());
+		assertEquals("Methods Annotated with @Test must NOT be abstract.", failure.getMessage());
 		Throwable exception = failure.getException();
 		assertUniform(new IllegalArgumentException(
-				"org.adligo.tests4j_tests.api_trials.mock_use_case_trials.AfterTrialTestsTrial was not annotated correctly."), 
+				"org.adligo.tests4j_tests.api_trials.mock_use_case_trials.AbstractTestTrial.testFoo was not annotated correctly."), 
 				exception);
 	}
 	
 	@Test
-	public void testAfterTrialNotStatic() {
+	public void testBadConstructor() {
 		ExpectedFailureRunner runner = new ExpectedFailureRunner();
-		runner.runExpectedFailure(AfterTrialNotStaticTrial.class);
-		
+		runner.runExpectedFailure(BadConstructorTrial.class);
 		
 		I_TrialRunMetadata metadata = runner.getMetadata();
 		assertNotNull(metadata);
@@ -288,7 +210,7 @@ public class Run_UseCaseTrial_Trial extends ApiTrial {
 		assertEquals(1, trialsMetadata.size());
 		I_TrialMetadata trialMeta = trialsMetadata.get(0);
 		assertNotNull(trialMeta);
-		assertEquals("org.adligo.tests4j_tests.api_trials.mock_use_case_trials.AfterTrialNotStaticTrial", 
+		assertEquals("org.adligo.tests4j_tests.api_trials.mock_use_case_trials.BadConstructorTrial", 
 				trialMeta.getTrialName());
 		assertEquals(0L, trialMeta.getTimeout());
 		assertFalse(trialMeta.isSkipped());
@@ -304,61 +226,18 @@ public class Run_UseCaseTrial_Trial extends ApiTrial {
 		assertEquals("testFoo", testMeta.getTestName());
 		assertEquals(0L, testMeta.getTimeout());
 		
-		
 		I_TrialResult result = runner.getResult();
 		assertNotNull(result);
 		assertFalse(result.isPassed());
 		I_TrialFailure failure = result.getFailure();
 		assertNotNull(failure);
-		assertEquals("Methods Annotated with @AfterTrial must be static.", failure.getMessage());
+		assertEquals("Classes which implement I_AbstractTrial must have a zero argument constructor.", 
+				failure.getMessage());
 		Throwable exception = failure.getException();
-		assertUniform(new IllegalArgumentException(
-				"org.adligo.tests4j_tests.api_trials.mock_use_case_trials.AfterTrialNotStaticTrial was not annotated correctly."), 
+		assertUniform(new NoSuchMethodException(
+				"org.adligo.tests4j_tests.api_trials.mock_use_case_trials.BadConstructorTrial.<init>()"), 
 				exception);
-	}
-	
-	@Test
-	public void testAfterTrialHasParams() {
-		ExpectedFailureRunner runner = new ExpectedFailureRunner();
-		runner.runExpectedFailure(AfterTrialHasParamsTrial.class);
 		
-		
-		I_TrialRunMetadata metadata = runner.getMetadata();
-		assertNotNull(metadata);
-		List<? extends I_TrialMetadata> trialsMetadata = metadata.getTrials();
-		assertNotNull(trialsMetadata);
-		assertEquals("java.util.Collections$UnmodifiableRandomAccessList", 
-				trialsMetadata.getClass().getName());
-		assertEquals(1, trialsMetadata.size());
-		I_TrialMetadata trialMeta = trialsMetadata.get(0);
-		assertNotNull(trialMeta);
-		assertEquals("org.adligo.tests4j_tests.api_trials.mock_use_case_trials.AfterTrialHasParamsTrial", 
-				trialMeta.getTrialName());
-		assertEquals(0L, trialMeta.getTimeout());
-		assertFalse(trialMeta.isSkipped());
-		
-		
-		List<? extends I_TestMetadata> testsMetadata = trialMeta.getTests();
-		assertNotNull(testsMetadata);
-		assertEquals("java.util.Collections$UnmodifiableRandomAccessList", 
-				testsMetadata.getClass().getName());
-		assertEquals(1, testsMetadata.size());
-		I_TestMetadata testMeta = testsMetadata.get(0);
-		assertNotNull(testMeta);
-		assertEquals("testFoo", testMeta.getTestName());
-		assertEquals(0L, testMeta.getTimeout());
-		
-		
-		I_TrialResult result = runner.getResult();
-		assertNotNull(result);
-		assertFalse(result.isPassed());
-		I_TrialFailure failure = result.getFailure();
-		assertNotNull(failure);
-		assertEquals("Methods Annotated with @AfterTrial must NOT take any parameters.", failure.getMessage());
-		Throwable exception = failure.getException();
-		assertUniform(new IllegalArgumentException(
-				"org.adligo.tests4j_tests.api_trials.mock_use_case_trials.AfterTrialHasParamsTrial was not annotated correctly."), 
-				exception);
 	}
 	
 	@Test
@@ -406,7 +285,7 @@ public class Run_UseCaseTrial_Trial extends ApiTrial {
 	
 	
 	@Test
-	public void testNotests() {
+	public void testNoTests() {
 		ExpectedFailureRunner runner = new ExpectedFailureRunner();
 		runner.runExpectedFailure(NoTestsTrial.class);
 		I_TrialResult result = runner.getResult();
@@ -505,4 +384,173 @@ public class Run_UseCaseTrial_Trial extends ApiTrial {
 				exception);
 	}
 	
+	@Test
+	public void testHasAfterTrialTests() {
+		ExpectedFailureRunner runner = new ExpectedFailureRunner();
+		runner.runExpectedFailure(AfterTrialTestsTrial.class);
+		
+		
+		I_TrialRunMetadata metadata = runner.getMetadata();
+		assertNotNull(metadata);
+		List<? extends I_TrialMetadata> trialsMetadata = metadata.getTrials();
+		assertNotNull(trialsMetadata);
+		assertEquals("java.util.Collections$UnmodifiableRandomAccessList", 
+				trialsMetadata.getClass().getName());
+		assertEquals(1, trialsMetadata.size());
+		I_TrialMetadata trialMeta = trialsMetadata.get(0);
+		assertNotNull(trialMeta);
+		assertEquals("org.adligo.tests4j_tests.api_trials.mock_use_case_trials.AfterTrialTestsTrial", 
+				trialMeta.getTrialName());
+		assertEquals(0L, trialMeta.getTimeout());
+		assertFalse(trialMeta.isSkipped());
+		
+		
+		List<? extends I_TestMetadata> testsMetadata = trialMeta.getTests();
+		assertNotNull(testsMetadata);
+		assertEquals("java.util.Collections$UnmodifiableRandomAccessList", 
+				testsMetadata.getClass().getName());
+		assertEquals(1, testsMetadata.size());
+		
+		I_TrialResult result = runner.getResult();
+		assertNotNull(result);
+		assertFalse(result.isPassed());
+		I_TrialFailure failure = result.getFailure();
+		assertNotNull(failure);
+		assertEquals("Use Case Trial Methods may not be Annotated with @AfterTrialTests.", failure.getMessage());
+		Throwable exception = failure.getException();
+		assertUniform(new IllegalArgumentException(
+				"org.adligo.tests4j_tests.api_trials.mock_use_case_trials.AfterTrialTestsTrial was not annotated correctly."), 
+				exception);
+	}
+	
+	@Test
+	public void testAfterTrialNotStatic() {
+		ExpectedFailureRunner runner = new ExpectedFailureRunner();
+		runner.runExpectedFailure(AfterTrialNotStaticTrial.class);
+		
+		
+		I_TrialRunMetadata metadata = runner.getMetadata();
+		assertNotNull(metadata);
+		List<? extends I_TrialMetadata> trialsMetadata = metadata.getTrials();
+		assertNotNull(trialsMetadata);
+		assertEquals("java.util.Collections$UnmodifiableRandomAccessList", 
+				trialsMetadata.getClass().getName());
+		assertEquals(1, trialsMetadata.size());
+		I_TrialMetadata trialMeta = trialsMetadata.get(0);
+		assertNotNull(trialMeta);
+		assertEquals("org.adligo.tests4j_tests.api_trials.mock_use_case_trials.AfterTrialNotStaticTrial", 
+				trialMeta.getTrialName());
+		assertEquals(0L, trialMeta.getTimeout());
+		assertFalse(trialMeta.isSkipped());
+		
+		
+		List<? extends I_TestMetadata> testsMetadata = trialMeta.getTests();
+		assertNotNull(testsMetadata);
+		assertEquals("java.util.Collections$UnmodifiableRandomAccessList", 
+				testsMetadata.getClass().getName());
+		assertEquals(1, testsMetadata.size());
+		I_TestMetadata testMeta = testsMetadata.get(0);
+		assertNotNull(testMeta);
+		assertEquals("testFoo", testMeta.getTestName());
+		assertEquals(0L, testMeta.getTimeout());
+		
+		
+		I_TrialResult result = runner.getResult();
+		assertNotNull(result);
+		assertFalse(result.isPassed());
+		I_TrialFailure failure = result.getFailure();
+		assertNotNull(failure);
+		assertEquals("Methods Annotated with @AfterTrial must be static.", failure.getMessage());
+		Throwable exception = failure.getException();
+		assertUniform(new IllegalArgumentException(
+				"org.adligo.tests4j_tests.api_trials.mock_use_case_trials.AfterTrialNotStaticTrial was not annotated correctly."), 
+				exception);
+	}
+	
+	@Test
+	public void testAfterTrialNotPublic() {
+		ExpectedFailureRunner runner = new ExpectedFailureRunner();
+		runner.runExpectedFailure(AfterTrialNotPublicTrial.class);
+		
+		
+		I_TrialRunMetadata metadata = runner.getMetadata();
+		assertNotNull(metadata);
+		List<? extends I_TrialMetadata> trialsMetadata = metadata.getTrials();
+		assertNotNull(trialsMetadata);
+		assertEquals("java.util.Collections$UnmodifiableRandomAccessList", 
+				trialsMetadata.getClass().getName());
+		assertEquals(1, trialsMetadata.size());
+		I_TrialMetadata trialMeta = trialsMetadata.get(0);
+		assertNotNull(trialMeta);
+		assertEquals("org.adligo.tests4j_tests.api_trials.mock_use_case_trials.AfterTrialNotPublicTrial", 
+				trialMeta.getTrialName());
+		assertEquals(0L, trialMeta.getTimeout());
+		assertFalse(trialMeta.isSkipped());
+		
+		
+		List<? extends I_TestMetadata> testsMetadata = trialMeta.getTests();
+		assertNotNull(testsMetadata);
+		assertEquals("java.util.Collections$UnmodifiableRandomAccessList", 
+				testsMetadata.getClass().getName());
+		assertEquals(1, testsMetadata.size());
+		I_TestMetadata testMeta = testsMetadata.get(0);
+		assertNotNull(testMeta);
+		assertEquals("testFoo", testMeta.getTestName());
+		assertEquals(0L, testMeta.getTimeout());
+		
+		
+		I_TrialResult result = runner.getResult();
+		assertNotNull(result);
+		assertFalse(result.isPassed());
+		I_TrialFailure failure = result.getFailure();
+		assertNotNull(failure);
+		assertEquals("Methods Annotated with @AfterTrial must be public.", failure.getMessage());
+		Throwable exception = failure.getException();
+		assertUniform(new IllegalArgumentException(
+				"org.adligo.tests4j_tests.api_trials.mock_use_case_trials.AfterTrialNotPublicTrial was not annotated correctly."), 
+				exception);
+	}
+	@Test
+	public void testAfterTrialHasParams() {
+		ExpectedFailureRunner runner = new ExpectedFailureRunner();
+		runner.runExpectedFailure(AfterTrialHasParamsTrial.class);
+		
+		
+		I_TrialRunMetadata metadata = runner.getMetadata();
+		assertNotNull(metadata);
+		List<? extends I_TrialMetadata> trialsMetadata = metadata.getTrials();
+		assertNotNull(trialsMetadata);
+		assertEquals("java.util.Collections$UnmodifiableRandomAccessList", 
+				trialsMetadata.getClass().getName());
+		assertEquals(1, trialsMetadata.size());
+		I_TrialMetadata trialMeta = trialsMetadata.get(0);
+		assertNotNull(trialMeta);
+		assertEquals("org.adligo.tests4j_tests.api_trials.mock_use_case_trials.AfterTrialHasParamsTrial", 
+				trialMeta.getTrialName());
+		assertEquals(0L, trialMeta.getTimeout());
+		assertFalse(trialMeta.isSkipped());
+		
+		
+		List<? extends I_TestMetadata> testsMetadata = trialMeta.getTests();
+		assertNotNull(testsMetadata);
+		assertEquals("java.util.Collections$UnmodifiableRandomAccessList", 
+				testsMetadata.getClass().getName());
+		assertEquals(1, testsMetadata.size());
+		I_TestMetadata testMeta = testsMetadata.get(0);
+		assertNotNull(testMeta);
+		assertEquals("testFoo", testMeta.getTestName());
+		assertEquals(0L, testMeta.getTimeout());
+		
+		
+		I_TrialResult result = runner.getResult();
+		assertNotNull(result);
+		assertFalse(result.isPassed());
+		I_TrialFailure failure = result.getFailure();
+		assertNotNull(failure);
+		assertEquals("Methods Annotated with @AfterTrial must NOT take any parameters.", failure.getMessage());
+		Throwable exception = failure.getException();
+		assertUniform(new IllegalArgumentException(
+				"org.adligo.tests4j_tests.api_trials.mock_use_case_trials.AfterTrialHasParamsTrial was not annotated correctly."), 
+				exception);
+	}
 }

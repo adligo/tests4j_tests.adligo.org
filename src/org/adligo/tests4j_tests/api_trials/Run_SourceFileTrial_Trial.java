@@ -88,7 +88,7 @@ public class Run_SourceFileTrial_Trial extends ApiTrial {
 		assertFalse(result.isPassed());
 		I_TrialFailure failure = result.getFailure();
 		assertNotNull(failure);
-		assertEquals("SourceFileTrials must be annotated with SourceFileScope.", failure.getMessage());
+		assertEquals("SourceFileTrials must be annotated with @SourceFileScope.", failure.getMessage());
 		Throwable exception = failure.getException();
 		assertUniform(new IllegalArgumentException(
 				"org.adligo.tests4j_tests.api_trials.mock_source_file_trials.NoClassScopeAnnotationTrial was not annotated correctly."), 

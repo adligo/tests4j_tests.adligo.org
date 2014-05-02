@@ -1,5 +1,6 @@
 package org.adligo.tests4j_tests.api_trials.mock_use_case_trials;
 
+import org.adligo.tests4j.models.shared.AfterTrial;
 import org.adligo.tests4j.models.shared.Test;
 import org.adligo.tests4j.models.shared.UseCaseScope;
 import org.adligo.tests4j.models.shared.UseCaseTrial;
@@ -12,8 +13,12 @@ import org.adligo.tests4j.models.shared.UseCaseTrial;
  *
  */
 @UseCaseScope(system="tests4j.adligo.org",verb="reveal",nown="mistake")
-public class ProtectedTestTrial extends UseCaseTrial {
+public class AfterTrialNotPublicTrial extends UseCaseTrial {
 
+	@AfterTrial
+	protected static void afterTrial() {}
+	
 	@Test
-	protected void testFoo() {}
+	public void testFoo() {}
+
 }
