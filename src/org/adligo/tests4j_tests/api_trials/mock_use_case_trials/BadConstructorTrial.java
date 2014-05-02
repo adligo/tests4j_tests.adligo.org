@@ -13,9 +13,9 @@ import org.adligo.tests4j.models.shared.UseCaseTrial;
  * @author scott
  *
  */
-public class UseCaseBadConstructorTrial extends UseCaseTrial {
+public class BadConstructorTrial extends UseCaseTrial {
 
-	public UseCaseBadConstructorTrial(String p) {}
+	public BadConstructorTrial(String p) {}
 	
 	@Test
 	public void testFoo() {}

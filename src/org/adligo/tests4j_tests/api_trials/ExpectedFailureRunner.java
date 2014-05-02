@@ -9,9 +9,9 @@ import org.adligo.tests4j.models.shared.I_AbstractTrial;
 import org.adligo.tests4j.models.shared.metadata.I_TrialRunMetadata;
 import org.adligo.tests4j.models.shared.results.I_TrialResult;
 import org.adligo.tests4j.models.shared.results.I_TrialRunResult;
-import org.adligo.tests4j.models.shared.system.ConsoleLogger;
 import org.adligo.tests4j.models.shared.system.I_TrialRunListener;
 import org.adligo.tests4j.models.shared.system.Tests4J_Params;
+import org.adligo.tests4j.models.shared.system.report.ConsoleReporter;
 import org.adligo.tests4j.run.Tests4J;
 
 public class ExpectedFailureRunner implements I_TrialRunListener {
@@ -27,7 +27,11 @@ public class ExpectedFailureRunner implements I_TrialRunListener {
 				new ArrayList<Class<? extends I_AbstractTrial>>();
 		tests.add(clazz);
 		params.setTrials(tests);
-		params.setLog(new ConsoleLogger("L" + clazz.getName() + ": ", false));
+		ConsoleReporter silentReporter = new ConsoleReporter();
+		silentReporter.setLogEnabled(false);
+		silentReporter.setRedirect(false);
+		
+		params.setReporter(silentReporter);
 		//params.setLog(new ConsoleLogger( false));
 		params.setThreadPoolSize(1);
 		params.setExitAfterLastNotification(false);

@@ -8,12 +8,14 @@ public class RunAllTrials {
 
 	
 	public static void main(String [] args) {
+
 		Tests4J_Params params = getTests();
 		params.setCheckMins(false);
 		//params.setLog(new ConsoleLogger(false));
 		params.setCoveragePlugin(new SimpleJacocoPlugin());
 		//params.setCoveragePlugin(new TieredJacocoPlugin());
 		Tests4J.run(params);
+		
 	}
 
 	private static Tests4J_Params getTests() {
