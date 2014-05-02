@@ -13,6 +13,7 @@ import org.adligo.tests4j.models.shared.system.I_TrialRunListener;
 import org.adligo.tests4j.models.shared.system.Tests4J_Params;
 import org.adligo.tests4j.models.shared.system.report.ConsoleReporter;
 import org.adligo.tests4j.run.Tests4J;
+import org.adligo.tests4j.run.helpers.TrialDescription;
 
 public class ExpectedFailureRunner implements I_TrialRunListener {
 	private I_TrialRunMetadata metadata;
@@ -28,7 +29,8 @@ public class ExpectedFailureRunner implements I_TrialRunListener {
 		tests.add(clazz);
 		params.setTrials(tests);
 		ConsoleReporter silentReporter = new ConsoleReporter();
-		silentReporter.setLogEnabled(false);
+		silentReporter.setLogOff();
+		//silentReporter.setLogOn(TrialDescription.class.getName());
 		silentReporter.setRedirect(false);
 		
 		params.setReporter(silentReporter);
