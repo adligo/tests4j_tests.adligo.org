@@ -2,7 +2,7 @@ package org.adligo.tests4j_tests;
 
 import org.adligo.tests4j.models.shared.system.Tests4J_Params;
 import org.adligo.tests4j.run.Tests4J;
-import org.adligo.tests4j_4jacoco.plugin.SimpleJacocoPlugin;
+import org.adligo.tests4j_4jacoco.plugin.OldScopedJacocoPlugin;
 
 public class RunAllTrials {
 
@@ -12,7 +12,8 @@ public class RunAllTrials {
 		Tests4J_Params params = getTests();
 		params.setCheckMins(false);
 		//params.setLog(new ConsoleLogger(false));
-		params.setCoveragePlugin(new SimpleJacocoPlugin());
+		OldScopedJacocoPlugin plugin = new OldScopedJacocoPlugin();
+		params.setCoveragePlugin(plugin);
 		//params.setThreadPoolSize(1);
 		//params.setCoveragePlugin(new TieredJacocoPlugin());
 		Tests4J.run(params);
