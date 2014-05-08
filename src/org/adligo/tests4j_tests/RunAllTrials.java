@@ -13,6 +13,7 @@ public class RunAllTrials {
 		params.setCheckMins(false);
 		//params.setLog(new ConsoleLogger(false));
 		params.setCoveragePlugin(new SimpleJacocoPlugin());
+		//params.setThreadPoolSize(1);
 		//params.setCoveragePlugin(new TieredJacocoPlugin());
 		Tests4J.run(params);
 		
