@@ -13,6 +13,7 @@ import org.adligo.tests4j.models.shared.system.Tests4J_Params;
 import org.adligo.tests4j_4jacoco.plugin.ScopedJacocoPlugin;
 
 @PackageScope (packageName="org.adligo.tests4j_4jacoco")
+@IgnoreTrial
 public class MultiRecordingTrial extends ApiTrial {
 
 	@Test
