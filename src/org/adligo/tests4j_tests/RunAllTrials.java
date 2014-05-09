@@ -20,7 +20,6 @@ public class RunAllTrials implements I_TrialRunListener {
 		
 		Tests4J_Params params = getTests();
 		reporter =  params.getReporter();
-		params.setCheckMins(false);
 		//params.setLog(new ConsoleLogger(false));
 		OldScopedJacocoPlugin plugin = new OldScopedJacocoPlugin();
 		params.setCoveragePlugin(plugin);
@@ -77,7 +76,7 @@ public class RunAllTrials implements I_TrialRunListener {
 		long dur = end - start;
 		BigDecimal durD = new BigDecimal(dur).divide(new BigDecimal(1000));
 		//use the reporter to log to the original System.out
-		reporter.log("Total run time " +durD + " Seconds.");
+		reporter.log("Total run time " +durD + " seconds.");
 	}
 
 

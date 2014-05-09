@@ -15,25 +15,11 @@ public class RunPkgTrials implements I_TrialList {
 	public static void main(String [] args) {
 		Tests4J_Params params = new Tests4J_Params();
 		params.addTrials(new RunPkgTrials());
-		params.setCheckMins(false);
 		
 		SimpleJacocoPlugin covargePlugin =new SimpleJacocoPlugin();
 		//TieredJacocoPlugin covargePlugin =new TieredJacocoPlugin();
 		params.setCoveragePlugin(covargePlugin);
 		Tests4J.run(params);
-	}
-
-
-	public int getMinAsserts() {
-		return 4;
-	}
-	
-	public int getMinUniqueAssertions() {
-		return 4;
-	}
-	
-	public int getMinTests(){
-		return 2;
 	}
 
 	@Override

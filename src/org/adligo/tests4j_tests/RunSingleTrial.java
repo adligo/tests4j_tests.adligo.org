@@ -19,7 +19,6 @@ public class RunSingleTrial {
 		params.addTrial(Run_UseCaseTrial_ApiTrial.class);
 		//params.addTrial(Tests4J_ParamsTrial.class);
 		//params.addTrial(ByteListOutputStreamTrial.class);
-		params.setCheckMins(false);
 		ConsoleReporter reporter = new ConsoleReporter();
 		
 		//reporter.setLogOn(Tests4J_NotificationManager.class);
