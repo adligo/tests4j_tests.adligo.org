@@ -5,6 +5,7 @@ import org.adligo.tests4j.models.shared.PackageScope;
 import org.adligo.tests4j.models.shared.SourceFileScope;
 import org.adligo.tests4j.models.shared.SourceFileTrial;
 import org.adligo.tests4j.models.shared.Test;
+import org.adligo.tests4j.models.shared.TrialRecursion;
 
 /**
  * note this trial is run by the Run_UseCaseTrial_Trial,
@@ -14,6 +15,7 @@ import org.adligo.tests4j.models.shared.Test;
  *
  */
 @PackageScope (packageName = "org.adligo.tests4j.foo")
+@TrialRecursion
 public abstract class AbstractTestTrial extends ApiTrial {
 	
 	@Test

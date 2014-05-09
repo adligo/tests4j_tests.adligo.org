@@ -1,6 +1,7 @@
 package org.adligo.tests4j_tests.api_trials.mock_use_case_trials;
 
 import org.adligo.tests4j.models.shared.Test;
+import org.adligo.tests4j.models.shared.TrialRecursion;
 import org.adligo.tests4j.models.shared.UseCaseTrial;
 
 /**
@@ -10,6 +11,7 @@ import org.adligo.tests4j.models.shared.UseCaseTrial;
  * @author scott
  *
  */
+@TrialRecursion
 public class NoUseCaseAnnotationTrial extends UseCaseTrial {
 
 	@Test

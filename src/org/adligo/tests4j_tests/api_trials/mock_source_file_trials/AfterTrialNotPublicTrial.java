@@ -4,6 +4,7 @@ import org.adligo.tests4j.models.shared.AfterTrial;
 import org.adligo.tests4j.models.shared.SourceFileScope;
 import org.adligo.tests4j.models.shared.SourceFileTrial;
 import org.adligo.tests4j.models.shared.Test;
+import org.adligo.tests4j.models.shared.TrialRecursion;
 
 /**
  * note this trial is run by the Run_UseCaseTrial_Trial,
@@ -13,6 +14,7 @@ import org.adligo.tests4j.models.shared.Test;
  *
  */
 @SourceFileScope (sourceClass = NoSourceFileScopeAnnotationTrial.class)
+@TrialRecursion
 public class AfterTrialNotPublicTrial extends SourceFileTrial {
 
 	@AfterTrial

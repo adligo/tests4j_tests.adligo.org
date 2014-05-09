@@ -4,6 +4,7 @@ import org.adligo.tests4j.models.shared.AfterTrial;
 import org.adligo.tests4j.models.shared.ApiTrial;
 import org.adligo.tests4j.models.shared.PackageScope;
 import org.adligo.tests4j.models.shared.Test;
+import org.adligo.tests4j.models.shared.TrialRecursion;
 import org.adligo.tests4j_tests.api_trials.Run_ApiTrial_ApiTrial;
 
 /**
@@ -17,6 +18,7 @@ import org.adligo.tests4j_tests.api_trials.Run_ApiTrial_ApiTrial;
  *
  */
 @PackageScope (packageName = "org.adligo.tests4j.foo")
+@TrialRecursion
 public class MultipleAfterTrialTrial extends ApiTrial {
 
 	@AfterTrial

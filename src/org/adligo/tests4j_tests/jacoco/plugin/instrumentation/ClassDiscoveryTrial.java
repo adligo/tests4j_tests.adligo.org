@@ -14,6 +14,7 @@ import org.adligo.tests4j.models.shared.PackageScope;
 import org.adligo.tests4j.models.shared.SourceFileScope;
 import org.adligo.tests4j.models.shared.SourceFileTrial;
 import org.adligo.tests4j.models.shared.Test;
+import org.adligo.tests4j.models.shared.TrialRecursion;
 import org.adligo.tests4j.models.shared.TrialTimeout;
 import org.adligo.tests4j.models.shared.TrialType;
 import org.adligo.tests4j.models.shared.UseCaseScope;
@@ -72,10 +73,11 @@ public class ClassDiscoveryTrial extends SourceFileTrial {
 		assertContains(classNames, Test.class.getName());
 		assertContains(classNames, TrialTimeout.class.getName());
 		assertContains(classNames, TrialType.class.getName());
+		assertContains(classNames, TrialRecursion.class.getName());
 		assertContains(classNames, UseCaseScope.class.getName());
 		assertContains(classNames, UseCaseTrial.class.getName());
 		
-		assertEquals(15, classNames.size());
+		assertEquals(16, classNames.size());
 		List<ClassDiscovery> children =  cd.getSubPackages();
 		
 		
