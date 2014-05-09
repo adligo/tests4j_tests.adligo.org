@@ -22,13 +22,13 @@ public class RunSingleTrial {
 		params.setCheckMins(false);
 		ConsoleReporter reporter = new ConsoleReporter();
 		
-		reporter.setLogOn(Tests4J_NotificationManager.class);
-		reporter.setLogOn(TrialInstancesProcessor.class);
-		reporter.setLogOn(Tests4J_Memory.class);
+		//reporter.setLogOn(Tests4J_NotificationManager.class);
+		//reporter.setLogOn(TrialInstancesProcessor.class);
+		//reporter.setLogOn(Tests4J_Memory.class);
 		
 		//logging from jacoco
 		//reporter.setLogOn(AbstractPlugin.class);
-		reporter.setLogOn(Recorder.class);
+		//reporter.setLogOn(Recorder.class);
 		
 		params.setReporter(reporter);
 		//SimpleJacocoPlugin plugin = new SimpleJacocoPlugin();

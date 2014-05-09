@@ -25,6 +25,8 @@ public class RunAllTrials {
 		
 		toRet.addTrials(new org.adligo.tests4j_tests.models.shared.system.RunPkgTrials());
 		toRet.addTrials(new org.adligo.tests4j_tests.api_trials.RunPkgTrials());
+		toRet.addTrials(new org.adligo.tests4j_tests.jacoco.api_trials.RunPkgTrials());
+		toRet.addTrials(new org.adligo.tests4j_tests.jacoco.plugin.instrumentation.RunPkgTrials());
 		return toRet;
 	}
 
