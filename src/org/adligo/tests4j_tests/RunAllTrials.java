@@ -9,7 +9,7 @@ import org.adligo.tests4j.models.shared.system.I_TrialRunListener;
 import org.adligo.tests4j.models.shared.system.Tests4J_Params;
 import org.adligo.tests4j.models.shared.system.report.I_Tests4J_Reporter;
 import org.adligo.tests4j.run.Tests4J;
-import org.adligo.tests4j_4jacoco.plugin.OldScopedJacocoPlugin;
+import org.adligo.tests4j_4jacoco.plugin.ScopedJacocoPlugin;
 
 public class RunAllTrials implements I_TrialRunListener {
 	static long start = System.currentTimeMillis();
@@ -21,8 +21,8 @@ public class RunAllTrials implements I_TrialRunListener {
 		Tests4J_Params params = getTests();
 		reporter =  params.getReporter();
 		//params.setLog(new ConsoleLogger(false));
-		OldScopedJacocoPlugin plugin = new OldScopedJacocoPlugin();
-		params.setCoveragePlugin(plugin);
+		//ScopedJacocoPlugin plugin = new ScopedJacocoPlugin();
+		//params.setCoveragePlugin(plugin);
 		//params.setThreadPoolSize(1);
 		//params.setCoveragePlugin(new TieredJacocoPlugin());
 		Tests4J.run(params, new RunAllTrials());

@@ -7,6 +7,7 @@ import org.adligo.tests4j.models.shared.AbstractTrial;
 import org.adligo.tests4j.models.shared.system.I_TrialList;
 import org.adligo.tests4j.models.shared.system.Tests4J_Params;
 import org.adligo.tests4j.run.Tests4J;
+import org.adligo.tests4j_4jacoco.plugin.ScopedJacocoPlugin;
 import org.adligo.tests4j_4jacoco.plugin.SimpleJacocoPlugin;
 
 public class RunPkgTrials implements I_TrialList {
@@ -16,9 +17,11 @@ public class RunPkgTrials implements I_TrialList {
 		Tests4J_Params params = new Tests4J_Params();
 		params.addTrials(new RunPkgTrials());
 		
-		SimpleJacocoPlugin covargePlugin =new SimpleJacocoPlugin();
+		ScopedJacocoPlugin plugin = new ScopedJacocoPlugin();
+		plugin.setWriteOutInstrumentedClassFiles(true);
+		
 		//TieredJacocoPlugin covargePlugin =new TieredJacocoPlugin();
-		params.setCoveragePlugin(covargePlugin);
+		params.setCoveragePlugin(plugin);
 		Tests4J.run(params);
 	}
 
