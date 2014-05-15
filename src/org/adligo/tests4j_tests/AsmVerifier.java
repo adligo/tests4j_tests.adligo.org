@@ -17,7 +17,7 @@ public class AsmVerifier {
 		try {
 			String internalName = Type.getInternalName(SimpleJacocoPlugin.class);
 			//internalName = "./org.adligo.tests4j_tests.models.shared.system.Tests4J_ParamsTrial.class";
-			internalName = "./bin/org/adligo/tests4j_tests/models/shared/system/Tests4J_ParamsTrial.class";
+			internalName = "./bin/org/adligo/tests4j_tests/Foo.class";
 			
 			ASMifier.main(new String[]{
 					internalName});

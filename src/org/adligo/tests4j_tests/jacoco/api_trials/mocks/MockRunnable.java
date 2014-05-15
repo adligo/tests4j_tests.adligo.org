@@ -6,7 +6,7 @@ public class MockRunnable implements Runnable {
 	int i = 0;
 	int j = 0;
 	
-	public MockRunnable(boolean pa, boolean pb) {
+	public MockRunnable(Boolean pa, Boolean pb) {
 		a = pa;
 		b = pb;
 	}
