@@ -9,8 +9,8 @@ import org.adligo.tests4j.models.shared.system.Tests4J_Params;
 import org.adligo.tests4j.models.shared.system.report.ConsoleReporter;
 import org.adligo.tests4j.run.Tests4J;
 import org.adligo.tests4j_4jacoco.plugin.AbstractPlugin;
-import org.adligo.tests4j_4jacoco.plugin.OldScopedJacocoPlugin;
 import org.adligo.tests4j_4jacoco.plugin.Recorder;
+import org.adligo.tests4j_4jacoco.plugin.ScopedJacocoPlugin;
 
 public class RunPkgTrials implements I_TrialList {
 
@@ -30,7 +30,7 @@ public class RunPkgTrials implements I_TrialList {
 		
 		params.setReporter(reporter);
 		
-		OldScopedJacocoPlugin covargePlugin =new OldScopedJacocoPlugin();
+		ScopedJacocoPlugin covargePlugin =new ScopedJacocoPlugin();
 		params.setCoveragePlugin(covargePlugin);
 		Tests4J.run(params);
 	}

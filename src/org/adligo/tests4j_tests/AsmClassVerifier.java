@@ -4,7 +4,6 @@ import java.io.ByteArrayOutputStream;
 import java.io.PrintWriter;
 
 import org.adligo.tests4j.models.shared.SourceFileTrial;
-import org.adligo.tests4j_4jacoco.plugin.SimpleJacocoPlugin;
 import org.adligo.tests4j_tests.models.shared.system.Tests4J_ParamsTrial;
 import org.objectweb.asm.ClassWriter;
 import org.objectweb.asm.Opcodes;

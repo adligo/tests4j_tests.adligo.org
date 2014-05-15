@@ -8,7 +8,6 @@ import org.adligo.tests4j.models.shared.system.I_TrialList;
 import org.adligo.tests4j.models.shared.system.Tests4J_Params;
 import org.adligo.tests4j.run.Tests4J;
 import org.adligo.tests4j_4jacoco.plugin.ScopedJacocoPlugin;
-import org.adligo.tests4j_4jacoco.plugin.SimpleJacocoPlugin;
 
 public class RunPkgTrials implements I_TrialList {
 
