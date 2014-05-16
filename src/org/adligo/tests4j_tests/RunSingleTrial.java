@@ -15,6 +15,8 @@ public class RunSingleTrial {
 	public static void main(String [] args) {
 		Tests4J_Params params = new Tests4J_Params();
 		params.addTrial(ByteListOutputStreamTrial.class);
+		params.addTest(ByteListOutputStreamTrial.class.getName() +
+				".test10BytesTo2ByteChunksize");
 		//params.addTrial(Tests4J_ParamsTrial.class);
 		//params.addTrial(ByteListOutputStreamTrial.class);
 		ConsoleReporter reporter = new ConsoleReporter();

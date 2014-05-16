@@ -7,5 +7,6 @@
 	<classpathentry combineaccessrules="false" kind="src" path="/tests4j"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/tests4j_4jacoco"/>
 	<classpathentry kind="lib" path="/tests4j_4jacoco/bin"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/tests4j_4eclipse"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
