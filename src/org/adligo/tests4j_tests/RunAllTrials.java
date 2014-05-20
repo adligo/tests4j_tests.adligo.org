@@ -5,13 +5,16 @@ import java.math.BigDecimal;
 import org.adligo.tests4j.models.shared.metadata.I_TrialRunMetadata;
 import org.adligo.tests4j.models.shared.results.I_TrialResult;
 import org.adligo.tests4j.models.shared.results.I_TrialRunResult;
+import org.adligo.tests4j.models.shared.system.I_Tests4J_Controls;
 import org.adligo.tests4j.models.shared.system.I_TrialRunListener;
 import org.adligo.tests4j.models.shared.system.Tests4J_Params;
 import org.adligo.tests4j.models.shared.system.report.ConsoleReporter;
 import org.adligo.tests4j.run.Tests4J;
 import org.adligo.tests4j.run.helpers.TestRunable;
 import org.adligo.tests4j.run.helpers.Tests4J_NotificationManager;
+import org.adligo.tests4j.run.helpers.ThreadStateHelper;
 import org.adligo.tests4j.run.helpers.TrialInstancesProcessor;
+import org.adligo.tests4j.run.helpers.TrialProcessorControls;
 import org.adligo.tests4j_4jacoco.plugin.ScopedJacocoPlugin;
 
 public class RunAllTrials implements I_TrialRunListener {
@@ -24,7 +27,8 @@ public class RunAllTrials implements I_TrialRunListener {
 		Tests4J_Params params = getTests();
 		reporter = new ConsoleReporter();
 		
-		//reporter.setLogOn(Tests4J_NotificationManager.class);
+		reporter.setLogOn(Tests4J_NotificationManager.class);
+		reporter.setLogOn(TrialProcessorControls.class);
 		//reporter.setLogOn(TrialInstancesProcessor.class);
 		//reporter.setLogOn(TestRunable.class);
 		//reporter.setLogOn(Tests4J_Memory.class);
@@ -34,14 +38,24 @@ public class RunAllTrials implements I_TrialRunListener {
 		//reporter.setLogOn(Recorder.class);
 		
 		params.setReporter(reporter);
-		
+		params.setExitAfterLastNotification(false);
 		ScopedJacocoPlugin plugin = new ScopedJacocoPlugin();
 		params.setCoveragePlugin(plugin);
 		
 		//params.setThreadPoolSize(1);
 		//params.setCoveragePlugin(new TieredJacocoPlugin());
-		Tests4J.run(params, new RunAllTrials());
-		
+		I_Tests4J_Controls controls =  Tests4J.run(params, new RunAllTrials());
+		/*
+		try {
+			Thread.sleep(100);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		*/
+		//controls.cancel();
+		ThreadStateHelper tsh = new ThreadStateHelper(params.getReporter());
+		//tsh.logAllThreadStates();
 	}
 
 	private static Tests4J_Params getTests() {

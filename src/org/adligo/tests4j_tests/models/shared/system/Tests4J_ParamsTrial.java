@@ -21,12 +21,12 @@ public class Tests4J_ParamsTrial extends SourceFileTrial {
 		List<Class<? extends I_AbstractTrial>> trials = params.getTrials();
 		assertNotNull(trials);
 		assertEquals(0, trials.size());
-		assertEquals(0, params.getThreadPoolSize());
+		assertEquals(0, params.getTrialThreadCount());
 		
 		for (int i = 0; i < 32; i++) {
 			params.addTrial(Tests4J_ParamsTrial.class);
 		}
-		assertEquals(32, params.getThreadPoolSize());
+		assertEquals(32, params.getTrialThreadCount());
 	}
 	
 	@Test
@@ -37,7 +37,7 @@ public class Tests4J_ParamsTrial extends SourceFileTrial {
 		assertNotNull(trials);
 		assertEquals(1, trials.size());
 		assertEquals(Tests4J_ParamsTrial.class, trials.get(0));
-		assertEquals(1, params.getThreadPoolSize());
+		assertEquals(1, params.getTrialThreadCount());
 		Long random = System.currentTimeMillis();
 		
 	}

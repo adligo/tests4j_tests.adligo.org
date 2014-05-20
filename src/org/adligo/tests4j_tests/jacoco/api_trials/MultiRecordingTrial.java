@@ -6,8 +6,11 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import org.adligo.tests4j.models.shared.ApiTrial;
+import org.adligo.tests4j.models.shared.BeforeTrial;
 import org.adligo.tests4j.models.shared.IgnoreTest;
 import org.adligo.tests4j.models.shared.PackageScope;
 import org.adligo.tests4j.models.shared.Test;
@@ -21,8 +24,14 @@ import org.adligo.tests4j_tests.jacoco.api_trials.mocks.MockRunnable;
 @PackageScope (packageName="org.adligo.tests4j_4jacoco")
 public class MultiRecordingTrial extends ApiTrial {
 
+	@BeforeTrial
+	public static void beforeTrial() {
+		
+	}
+	
 	@Test
 	public void testSimpleRecording() throws Exception {
+		
 		ScopedJacocoPlugin plugin = new ScopedJacocoPlugin();
 		List<Class<?>> classes = new ArrayList<Class<?>>();
 		classes.add(MockRunnable.class);

@@ -2,6 +2,8 @@ package org.adligo.tests4j_tests.models.shared.system;
 
 import java.io.IOException;
 import java.util.Map;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import org.adligo.tests4j.models.shared.SourceFileScope;
 import org.adligo.tests4j.models.shared.SourceFileTrial;
@@ -12,6 +14,7 @@ import org.adligo.tests4j.models.shared.system.ByteListOutputStream;
 @SourceFileScope(sourceClass=ByteListOutputStream.class)
 public class ByteListOutputStreamTrial extends SourceFileTrial {
 	
+	@SuppressWarnings("unused")
 	@Test(timeout=600000)
 	public void test10BytesTo2ByteChunksize() throws IOException {
 		ByteListOutputStream blos = new ByteListOutputStream(2);

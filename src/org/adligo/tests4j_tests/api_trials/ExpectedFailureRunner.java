@@ -35,7 +35,7 @@ public class ExpectedFailureRunner implements I_TrialRunListener {
 		
 		params.setReporter(silentReporter);
 		//params.setLog(new ConsoleLogger( false));
-		params.setThreadPoolSize(1);
+		params.setTrialThreads(1);
 		params.setExitAfterLastNotification(false);
 		
 		Tests4J.run(params, this);
