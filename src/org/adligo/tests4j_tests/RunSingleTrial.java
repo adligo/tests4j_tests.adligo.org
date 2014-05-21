@@ -12,9 +12,9 @@ import org.adligo.tests4j.run.helpers.TrialInstancesProcessor;
 import org.adligo.tests4j.run.helpers.TrialsProcessor;
 import org.adligo.tests4j_4jacoco.plugin.Recorder;
 import org.adligo.tests4j_4jacoco.plugin.ScopedJacocoPlugin;
-import org.adligo.tests4j_tests.api_trials.Run_UseCaseTrial_ApiTrial;
 import org.adligo.tests4j_tests.models.shared.system.ByteListOutputStreamTrial;
 import org.adligo.tests4j_tests.models.shared.system.Tests4J_ParamsTrial;
+import org.adligo.tests4j_tests.trials_api.Run_UseCaseTrial_ApiTrial;
 
 public class RunSingleTrial {
 
