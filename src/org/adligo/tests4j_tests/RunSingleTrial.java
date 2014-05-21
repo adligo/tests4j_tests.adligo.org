@@ -14,15 +14,18 @@ import org.adligo.tests4j_4jacoco.plugin.Recorder;
 import org.adligo.tests4j_4jacoco.plugin.ScopedJacocoPlugin;
 import org.adligo.tests4j_tests.api_trials.Run_UseCaseTrial_ApiTrial;
 import org.adligo.tests4j_tests.models.shared.system.ByteListOutputStreamTrial;
+import org.adligo.tests4j_tests.models.shared.system.Tests4J_ParamsTrial;
 
 public class RunSingleTrial {
 
 	
 	public static void main(String [] args) {
 		Tests4J_Params params = new Tests4J_Params();
-		params.addTrial(Run_UseCaseTrial_ApiTrial.class);
+		params.addTrial(Tests4J_ParamsTrial.class);
+		/*
 		params.addTest(Run_UseCaseTrial_ApiTrial.class.getName() +
 				".testNoUseCaseAnnotation");
+				*/
 		//params.addTrial(Tests4J_ParamsTrial.class);
 		ConsoleReporter reporter = new ConsoleReporter();
 		
