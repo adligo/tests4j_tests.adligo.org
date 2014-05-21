@@ -20,7 +20,8 @@ public class RunPkgTrials implements I_TrialList {
 		plugin.setWriteOutInstrumentedClassFiles(true);
 		
 		//TieredJacocoPlugin covargePlugin =new TieredJacocoPlugin();
-		params.setCoveragePlugin(plugin);
+		params.setCoveragePluginClass(ScopedJacocoPlugin.class);
+		
 		Tests4J.run(params);
 	}
 

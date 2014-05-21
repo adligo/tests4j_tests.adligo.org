@@ -6,7 +6,6 @@
 	<classpathentry kind="var" path="MVN_REPO/org/jacoco/org.jacoco.core/0.7.0.201403182114/org.jacoco.core-0.7.0.201403182114.jar"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/tests4j"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/tests4j_4jacoco"/>
-	<classpathentry kind="lib" path="/tests4j_4jacoco/bin"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/tests4j_4eclipse"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

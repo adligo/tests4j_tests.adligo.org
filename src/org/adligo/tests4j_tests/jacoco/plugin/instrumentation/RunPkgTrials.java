@@ -16,8 +16,7 @@ public class RunPkgTrials implements I_TrialList {
 		Tests4J_Params params = new Tests4J_Params();
 		params.addTrials(new RunPkgTrials());
 		
-		ScopedJacocoPlugin covargePlugin =new ScopedJacocoPlugin();
-		params.setCoveragePlugin(covargePlugin);
+		params.setCoveragePluginClass(ScopedJacocoPlugin.class);
 		Tests4J.run(params);
 	}
 

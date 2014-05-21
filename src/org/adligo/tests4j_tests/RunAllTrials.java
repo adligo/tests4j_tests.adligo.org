@@ -39,8 +39,7 @@ public class RunAllTrials implements I_TrialRunListener {
 		
 		params.setReporter(reporter);
 		params.setExitAfterLastNotification(false);
-		ScopedJacocoPlugin plugin = new ScopedJacocoPlugin();
-		params.setCoveragePlugin(plugin);
+		params.setCoveragePluginClass(ScopedJacocoPlugin.class);
 		
 		//params.setThreadPoolSize(1);
 		//params.setCoveragePlugin(new TieredJacocoPlugin());

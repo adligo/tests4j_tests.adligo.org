@@ -30,8 +30,7 @@ public class RunPkgTrials implements I_TrialList {
 		
 		params.setReporter(reporter);
 		
-		ScopedJacocoPlugin covargePlugin =new ScopedJacocoPlugin();
-		params.setCoveragePlugin(covargePlugin);
+		params.setCoveragePluginClass(ScopedJacocoPlugin.class);
 		Tests4J.run(params);
 	}
 
