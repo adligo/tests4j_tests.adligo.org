@@ -31,6 +31,7 @@ public class RunPkgTrials implements I_TrialList {
 		
 		trials.add(ByteMutantTrial.class);
 		trials.add(UTF8_CharacterReaderTrial.class);
+		trials.add(BitReaderTrial.class);
 		return trials;
 	}
 }

@@ -1,0 +1,40 @@
+package org.adligo.tests4j_tests.run.remote.nio;
+
+import org.adligo.tests4j.models.shared.SourceFileScope;
+import org.adligo.tests4j.models.shared.SourceFileTrial;
+import org.adligo.tests4j.models.shared.Test;
+import org.adligo.tests4j.models.shared.coverage.I_SourceFileCoverage;
+import org.adligo.tests4j.run.remote.nio.BitReader;
+
+@SourceFileScope (sourceClass=BitReader.class)
+public class BitReaderTrial extends SourceFileTrial {
+
+	@Test
+	public void testToBitsSimple() {
+		BitReader br = new BitReader("001");
+		boolean [] bits = br.toBits();
+		assertEquals(3, bits.length);
+		assertFalse(bits[0]);
+		assertFalse(bits[1]);
+		assertTrue(bits[2]);
+	}
+	
+	@Test
+	public void testToBitsPad() {
+		BitReader br = new BitReader("001");
+		boolean [] bits = br.toBits(3);
+		assertEquals(6, bits.length);
+		assertFalse(bits[0]);
+		assertFalse(bits[1]);
+		assertFalse(bits[2]);
+		
+		assertFalse(bits[3]);
+		assertFalse(bits[4]);
+		assertTrue(bits[5]);
+	}
+	
+	@Override
+	public void afterTrialTests(I_SourceFileCoverage p) {
+		assertGreaterThanOrEquals(100.0, p.getPercentageCoveredDouble());
+	}
+}
