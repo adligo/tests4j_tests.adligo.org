@@ -11,7 +11,7 @@ import org.adligo.tests4j.run.remote.nio.ByteMutant;
 public class ByteMutantTrial extends SourceFileTrial {
 	
 	@Test
-	public void testByteMutantConstructorAndUnsignedValue() {
+	public void testByteMutantConstructor() {
 		int counter = 0;
 		for (byte i = 0; i < Byte.MAX_VALUE; i++) {
 			ByteMutant eb = new ByteMutant(i);
@@ -35,9 +35,8 @@ public class ByteMutantTrial extends SourceFileTrial {
 	}
 	
 	@Test
-	public void testByteMutantStringConstructorAndUnsignedValue() {
-		int counter = 0;
-		for (int i = 0; i < 2; i++) {
+	public void testByteMutantStringConstructor() {
+		for (int i = 0; i < 256; i++) {
 			
 			String binString = Integer.toBinaryString(i);
 			if (i <= 1) {
@@ -48,18 +47,31 @@ public class ByteMutantTrial extends SourceFileTrial {
 				binString = "00000" + binString;
 			} else if (i <= 15) {
 				binString = "0000" + binString;
-			} else if (i <= 15) {
-				binString = "000" + binString;
 			} else if (i <= 31) {
-				binString = "00" + binString;
+				binString = "000" + binString;
 			} else if (i <= 63) {
+				binString = "00" + binString;
+			} else if (i <= 127) {
 				binString = "0" + binString;
 			}
 			assertEquals(8, binString.length());
 			ByteMutant eb = new ByteMutant(binString);
-			assertEquals(counter, eb.unsigned());
+			assertEquals(i, eb.unsigned());
 			assertEquals(binString, eb.toOnesAndZeros());
-			counter++;
+		}
+		
+		//rerun the test without the padding
+		for (int i = 0; i < 256; i++) {
+			
+			String binString = Integer.toBinaryString(i);
+			//System.out.println("sending " + binString);
+			ByteMutant eb = new ByteMutant(binString);
+			assertEquals(i, eb.unsigned());
+			
+			String onesAndZeros = eb.toOnesAndZeros();
+			assertEquals("Should be length " + onesAndZeros, 8, onesAndZeros.length());
+			String result = onesAndZeros.substring(8 - binString.length(), 8);
+			assertEquals( binString, result);
 		}
 	}
 	
@@ -167,6 +179,6 @@ public class ByteMutantTrial extends SourceFileTrial {
 		//not sure what I am missing, I probably need 
 		//to finish the eclipse plug-in coverage source-lighter
 		
-		assertGreaterThanOrEquals(80.0, p.getPercentageCoveredDouble());
+		assertGreaterThanOrEquals(82.0, p.getPercentageCoveredDouble());
 	}
 }
