@@ -128,8 +128,45 @@ public class ByteMutantTrial extends SourceFileTrial {
 		}
 	}
 
+	@Test
+	public void testUtf8() {
+		
+			ByteMutant eb = new ByteMutant();
+			eb.setSlotZero(false);
+			assertEquals(1, eb.getUTF8_BytesInSequence());
+			eb.setSlotZero(true);
+			assertEquals(1, eb.getUTF8_BytesInSequence());
+			
+			eb.setSlotOne(false);
+			assertEquals(1, eb.getUTF8_BytesInSequence());
+			
+			eb.setSlotOne(true);
+			assertEquals(2, eb.getUTF8_BytesInSequence());
+			
+			eb.setSlotTwo(true);
+			assertEquals(3, eb.getUTF8_BytesInSequence());
+			
+			eb.setSlotThree(true);
+			assertEquals(4, eb.getUTF8_BytesInSequence());
+			
+			eb.setSlotFour(true);
+			assertEquals(5, eb.getUTF8_BytesInSequence());
+			
+			eb.setSlotFive(true);
+			assertEquals(6, eb.getUTF8_BytesInSequence());
+			
+			eb.setSlotSix(true);
+			assertEquals(6, eb.getUTF8_BytesInSequence());
+			
+			eb.setSlotSeven(true);
+			assertEquals(6, eb.getUTF8_BytesInSequence());
+	}
+	
 	@Override
 	public void afterTrialTests(I_SourceFileCoverage p) {
-		assertGreaterThanOrEquals(65.0, p.getPercentageCoveredDouble());
+		//not sure what I am missing, I probably need 
+		//to finish the eclipse plug-in coverage source-lighter
+		
+		assertGreaterThanOrEquals(80.0, p.getPercentageCoveredDouble());
 	}
 }
