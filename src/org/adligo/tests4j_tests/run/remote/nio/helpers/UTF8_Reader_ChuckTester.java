@@ -42,7 +42,7 @@ public class UTF8_Reader_ChuckTester implements Runnable {
 					e.printStackTrace();
 					return;
 				}
-				monitor.log("testing chunk starting at " + nextStart + " with " + sc.getCapture() + " characters");
+				monitor.log("testing chunk starting at " + sc.getStart() + " with " + sc.getCapture() + " characters");
 				produce(sc);
 				consume();
 				monitor.completedCharGroup();

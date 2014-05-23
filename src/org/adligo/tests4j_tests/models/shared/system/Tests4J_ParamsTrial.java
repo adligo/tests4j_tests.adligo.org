@@ -9,6 +9,7 @@ import org.adligo.tests4j.models.shared.SourceFileScope;
 import org.adligo.tests4j.models.shared.SourceFileTrial;
 import org.adligo.tests4j.models.shared.Test;
 import org.adligo.tests4j.models.shared.coverage.I_SourceFileCoverage;
+import org.adligo.tests4j.models.shared.metadata.I_SourceFileTrial_TestRunInfo;
 import org.adligo.tests4j.models.shared.system.Tests4J_Params;
 import org.adligo.tests4j_4jacoco.plugin.ScopedJacocoPlugin;
 
@@ -58,8 +59,10 @@ public class Tests4J_ParamsTrial extends SourceFileTrial {
 				"</Tests4J_Params>", xml);
 	}
 	@Override
-	public void afterTrialTests(I_SourceFileCoverage p) {
-		System.out.println("" + this.getClass().getName() + " covered " + p.getPercentageCoveredDouble());
-		assertGreaterThanOrEquals(30.00,p.getPercentageCoveredDouble());
+	public void afterTrialTests(I_SourceFileTrial_TestRunInfo  p) {
+		if (p.hasRecordedCoverage()) {
+			I_SourceFileCoverage coverage = p.getCoverage();
+			assertGreaterThanOrEquals(30.00, coverage.getPercentageCoveredDouble());
+		}
 	}
 }

@@ -13,6 +13,7 @@ import org.adligo.tests4j.models.shared.SourceFileScope;
 import org.adligo.tests4j.models.shared.SourceFileTrial;
 import org.adligo.tests4j.models.shared.Test;
 import org.adligo.tests4j.models.shared.coverage.I_SourceFileCoverage;
+import org.adligo.tests4j.models.shared.metadata.I_SourceFileTrial_TestRunInfo;
 import org.adligo.tests4j.run.remote.nio.UTF8_CharacterBuilder;
 import org.adligo.tests4j_tests.run.remote.nio.helpers.I_UTF8_TestProgressMonitor;
 import org.adligo.tests4j_tests.run.remote.nio.helpers.StartCapture;
@@ -48,8 +49,14 @@ public class UTF8_CharacterReaderWithThreadsTrial extends SourceFileTrial implem
 	 * check for each INCREMENT ie 1000 means
 	 * put the first 1000 utf8  chars in the 
 	 * utf8chars map List<byte []>
+	 * 
+	 * set to 100 for a 30 sec or so runtime on a 
+	 * i7 quad
+	 * 
+	 * set to 10 for a 10 sec or so runtime on a 
+	 * i7 quad 
 	 */
-	private static final long CAPTURE = 100; 
+	private static final long CAPTURE = 10; 
 	private static final int charGroupCount = new Long(UTF8_Generator.SIX_BYTE_MAX_CODE_POINT_LONG/INCREMENT).intValue() + 1;
 	private static ArrayBlockingQueue<StartCapture> charGroups = 
 			new ArrayBlockingQueue<StartCapture>(charGroupCount );
@@ -103,7 +110,12 @@ public class UTF8_CharacterReaderWithThreadsTrial extends SourceFileTrial implem
 	 * @see org.adligo.tests4j.models.shared.SourceFileTrial#afterTrialTests(org.adligo.tests4j.models.shared.coverage.I_SourceFileCoverage)
 	 */
 	@Override
-	public void afterTrialTests(I_SourceFileCoverage p) {
+	public void afterTrialTests(I_SourceFileTrial_TestRunInfo p) {
+		//TODO assertion count is intermittent
+		//probably due to threading in this class
+		//assertEquals(12906L, p.getAssertions());
+		//assertEquals(12906L, p.getUniqueAssertions());
+		
 		//not sure what I am missing, I probably need 
 		//to finish the eclipse plug-in coverage source-lighter
 		
@@ -111,6 +123,7 @@ public class UTF8_CharacterReaderWithThreadsTrial extends SourceFileTrial implem
 		//I think it has to do with covering code on another thread.
 		//
 		//assertGreaterThanOrEquals(22.0, p.getPercentageCoveredDouble());
+		
 	}
 
 	

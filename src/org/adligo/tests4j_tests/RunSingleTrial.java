@@ -39,7 +39,7 @@ public class RunSingleTrial {
 		
 		params.setReporter(reporter);
 		//SimpleJacocoPlugin plugin = new SimpleJacocoPlugin();
-		params.setCoveragePluginClass(ScopedJacocoPlugin.class);
+		//params.setCoveragePluginClass(ScopedJacocoPlugin.class);
 		params.setCoveragePluginConfiguratorClass(RunSingleTrialPluginConfigurator.class);
 		Tests4J.run(params);
 	}

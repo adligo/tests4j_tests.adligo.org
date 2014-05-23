@@ -9,6 +9,7 @@ import org.adligo.tests4j.models.shared.SourceFileScope;
 import org.adligo.tests4j.models.shared.SourceFileTrial;
 import org.adligo.tests4j.models.shared.Test;
 import org.adligo.tests4j.models.shared.coverage.I_SourceFileCoverage;
+import org.adligo.tests4j.models.shared.metadata.I_SourceFileTrial_TestRunInfo;
 import org.adligo.tests4j.models.shared.system.ByteListOutputStream;
 
 @SourceFileScope(sourceClass=ByteListOutputStream.class)
@@ -45,7 +46,12 @@ public class ByteListOutputStreamTrial extends SourceFileTrial {
 	}
 
 	@Override
-	public void afterTrialTests(I_SourceFileCoverage p) {
-		assertGreaterThanOrEquals(100.00,p.getPercentageCoveredDouble());
+	public void afterTrialTests(I_SourceFileTrial_TestRunInfo p) {
+		if (p.hasRecordedCoverage()) {
+			I_SourceFileCoverage coverage = p.getCoverage();
+			assertGreaterThanOrEquals(100.00, coverage.getPercentageCoveredDouble());
+		}
+		assertEquals(4L, p.getAssertions());
+		assertEquals(4L, p.getUniqueAssertions());
 	}
 }
