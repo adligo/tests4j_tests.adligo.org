@@ -4,14 +4,14 @@ import org.adligo.tests4j.models.shared.SourceFileScope;
 import org.adligo.tests4j.models.shared.SourceFileTrial;
 import org.adligo.tests4j.models.shared.Test;
 import org.adligo.tests4j.models.shared.coverage.I_SourceFileCoverage;
-import org.adligo.tests4j.run.remote.nio.BitReader;
+import org.adligo.tests4j.run.remote.nio.Bits;
 
-@SourceFileScope (sourceClass=BitReader.class)
+@SourceFileScope (sourceClass=Bits.class)
 public class BitReaderTrial extends SourceFileTrial {
 
 	@Test
 	public void testToBitsSimple() {
-		BitReader br = new BitReader("001");
+		Bits br = new Bits("001");
 		boolean [] bits = br.toBits();
 		assertEquals(3, bits.length);
 		assertFalse(bits[0]);
@@ -21,7 +21,7 @@ public class BitReaderTrial extends SourceFileTrial {
 	
 	@Test
 	public void testToBitsPad() {
-		BitReader br = new BitReader("001");
+		Bits br = new Bits("001");
 		boolean [] bits = br.toBits(3);
 		assertEquals(6, bits.length);
 		assertFalse(bits[0]);

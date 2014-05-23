@@ -1,12 +1,18 @@
-package org.adligo.tests4j_tests.run.remote.nio;
+package org.adligo.tests4j_tests.run.remote.nio.helpers;
 
-import org.adligo.tests4j.run.remote.nio.BitReader;
+import org.adligo.tests4j.run.remote.nio.Bits;
 import org.adligo.tests4j.run.remote.nio.ByteMutant;
 
 /**
  * this class counts up using the UTF8 
  * code point bytes, converting to the actual utf 8 bytes along the way
  * 
+ * //TODO add multiple thread client support
+ *    this probably should do something like 
+ *    consumer producer
+ *    this class is a producer into a ArrayBlockingQueue
+ *       with a batch of utf8 characters.
+ *       
  * @author scott
  *
  */
@@ -21,6 +27,12 @@ public class UTF8_Generator {
 	
 	private long codePoint = 0;
 	
+	public UTF8_Generator() {}
+	
+	public UTF8_Generator(long start) {
+		codePoint = start;
+	}
+	
 	private static  long nToTheExp (long n, int exp){
 		   long result = n;
 		   for (int i = 1; i < exp; i++) {
@@ -31,13 +43,14 @@ public class UTF8_Generator {
 	
 	public byte[] next() {
 		int slot = 0;
-		String binString = Long.toBinaryString(codePoint);
-		if (codePoint <= ONE_BYTE_MAX_CODE_POINT_LONG) {
+		long thisCodePoint = codePoint++;
+		String binString = Long.toBinaryString(thisCodePoint);
+		if (thisCodePoint <= ONE_BYTE_MAX_CODE_POINT_LONG) {
 			//1 byte
 			ByteMutant bm = new ByteMutant("0" + binString);
 			return new byte[] {bm.toByte()};
-		} else if (codePoint <= TWO_BYTE_MAX_CODE_POINT_LONG) {
-			BitReader br = new BitReader(binString);
+		} else if (thisCodePoint <= TWO_BYTE_MAX_CODE_POINT_LONG) {
+			Bits br = new Bits(binString);
 			boolean [] codePoints = br.toBits(11);
 			ByteMutant bm = new ByteMutant();
 			bm.setSlotZero(true);
@@ -61,9 +74,9 @@ public class UTF8_Generator {
 			bm2.setSlotSix(codePoints[slot++]);
 			bm2.setSlotSeven(codePoints[slot++]);
 			return new byte[] {bm.toByte(), bm2.toByte()};
-		} else if (codePoint <= THREE_BYTE_MAX_CODE_POINT_LONG) {
+		} else if (thisCodePoint <= THREE_BYTE_MAX_CODE_POINT_LONG) {
 			//3 bytes
-			BitReader br = new BitReader(binString);
+			Bits br = new Bits(binString);
 			boolean [] codePoints = br.toBits(16);
 			ByteMutant bm = new ByteMutant();
 			bm.setSlotZero(true);
@@ -98,9 +111,9 @@ public class UTF8_Generator {
 			bm3.setSlotSix(codePoints[slot++]);
 			bm3.setSlotSeven(codePoints[slot++]);
 			return new byte[] {bm.toByte(), bm2.toByte(), bm3.toByte()};
-		} else if (codePoint <= FOUR_BYTE_MAX_CODE_POINT_LONG) {
+		} else if (thisCodePoint <= FOUR_BYTE_MAX_CODE_POINT_LONG) {
 			//4bytes
-			BitReader br = new BitReader(binString);
+			Bits br = new Bits(binString);
 			boolean [] codePoints = br.toBits(16);
 			ByteMutant bm = new ByteMutant();
 			bm.setSlotZero(true);
@@ -146,9 +159,9 @@ public class UTF8_Generator {
 			bm4.setSlotSix(codePoints[slot++]);
 			bm4.setSlotSeven(codePoints[slot++]);
 			return new byte[] {bm.toByte(), bm2.toByte(), bm3.toByte(), bm4.toByte()};
-		} else if (codePoint <= FIVE_BYTE_MAX_CODE_POINT_LONG) {
+		} else if (thisCodePoint <= FIVE_BYTE_MAX_CODE_POINT_LONG) {
 			//5bytes
-			BitReader br = new BitReader(binString);
+			Bits br = new Bits(binString);
 			boolean [] codePoints = br.toBits(16);
 			ByteMutant bm = new ByteMutant();
 			bm.setSlotZero(true);
@@ -205,9 +218,9 @@ public class UTF8_Generator {
 			bm5.setSlotSix(codePoints[slot++]);
 			bm5.setSlotSeven(codePoints[slot++]);
 			return new byte[] {bm.toByte(), bm2.toByte(), bm3.toByte(), bm4.toByte(), bm5.toByte()};
-		} else if (codePoint <= SIX_BYTE_MAX_CODE_POINT_LONG){
+		} else if (thisCodePoint <= SIX_BYTE_MAX_CODE_POINT_LONG){
 			//6 bytes
-			BitReader br = new BitReader(binString);
+			Bits br = new Bits(binString);
 			boolean [] codePoints = br.toBits(16);
 			ByteMutant bm = new ByteMutant();
 			bm.setSlotZero(true);
