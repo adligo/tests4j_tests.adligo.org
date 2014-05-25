@@ -10,6 +10,7 @@ import org.adligo.tests4j.run.helpers.Tests4J_NotificationManager;
 import org.adligo.tests4j.run.helpers.Tests4J_SecurityManager;
 import org.adligo.tests4j.run.helpers.TrialInstancesProcessor;
 import org.adligo.tests4j.run.helpers.TrialsProcessor;
+import org.adligo.tests4j_4jacoco.plugin.AbstractPlugin;
 import org.adligo.tests4j_4jacoco.plugin.Recorder;
 import org.adligo.tests4j_4jacoco.plugin.ScopedJacocoPlugin;
 import org.adligo.tests4j_tests.run.remote.nio.UTF8_CharacterBuilderWithThreadsTrial;
@@ -27,6 +28,7 @@ public class RunSingleTrial {
 		//params.addTrial(Tests4J_ParamsTrial.class);
 		ConsoleReporter reporter = new ConsoleReporter();
 		
+		params.addLoggingClass(AbstractPlugin.class);
 		params.addLoggingClass(Tests4J_NotificationManager.class);
 		params.addLoggingClass(TrialInstancesProcessor.class);
 		params.addLoggingClass(TrialsProcessor.class);
@@ -39,7 +41,7 @@ public class RunSingleTrial {
 		
 		params.setReporter(reporter);
 		//SimpleJacocoPlugin plugin = new SimpleJacocoPlugin();
-		//params.setCoveragePluginClass(ScopedJacocoPlugin.class);
+		params.setCoveragePluginClass(ScopedJacocoPlugin.class);
 		params.setCoveragePluginConfiguratorClass(RunSingleTrialPluginConfigurator.class);
 		Tests4J.run(params);
 	}

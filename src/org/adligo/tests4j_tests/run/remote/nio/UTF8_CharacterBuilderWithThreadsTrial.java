@@ -1,12 +1,11 @@
 package org.adligo.tests4j_tests.run.remote.nio;
 
-import java.util.List;
-import java.util.Map;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import org.adligo.tests4j.models.shared.AdditionalInstrumentation;
 import org.adligo.tests4j.models.shared.AfterTrial;
 import org.adligo.tests4j.models.shared.BeforeTrial;
 import org.adligo.tests4j.models.shared.SourceFileScope;
@@ -32,6 +31,7 @@ import org.adligo.tests4j_tests.run.remote.nio.helpers.UTF8_CharacterBuilder_Chu
  *
  */
 @SourceFileScope (sourceClass=UTF8_CharacterBuilder.class)
+@AdditionalInstrumentation (javaPackages="org.adligo.tests4j_tests.run.remote.nio.helpers")
 public class UTF8_CharacterBuilderWithThreadsTrial extends SourceFileTrial implements I_UTF8_TestProgressMonitor {
 	private static final int threadCount = 32;
 	private static ExecutorService exetutor;
@@ -111,20 +111,14 @@ public class UTF8_CharacterBuilderWithThreadsTrial extends SourceFileTrial imple
 	 */
 	@Override
 	public void afterTrialTests(I_SourceFileTrial_TestsResults p) {
-		I_SourceFileCoverage coverage =  p.getCoverage();
-		assertGreaterThanOrEquals(22.0, coverage.getPercentageCoveredDouble());
-		//TODO assertion count is intermittent
-		//probably due to threading in this class
-		//assertEquals(12906L, p.getAssertions());
-		//assertEquals(12906L, p.getUniqueAssertions());
+		assertEquals(12906L, p.getAssertions());
+		assertEquals(19L, p.getUniqueAssertions());
 		
 		//not sure what I am missing, I probably need 
 		//to finish the eclipse plug-in coverage source-lighter
 		
-		//TODO figure out why this isn't working
-		//I think it has to do with covering code on another thread.
-		//
-		//assertGreaterThanOrEquals(22.0, p.getPercentageCoveredDouble());
+		I_SourceFileCoverage cover =  p.getCoverage();
+		assertGreaterThanOrEquals(22.0, cover.getPercentageCoveredDouble());
 		
 	}
 
