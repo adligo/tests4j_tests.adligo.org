@@ -30,7 +30,7 @@ public class RunPkgTrials implements I_TrialList {
 		List<Class<? extends AbstractTrial>> trials = new ArrayList<Class<? extends AbstractTrial>>();
 		
 		trials.add(ByteMutantTrial.class);
-		trials.add(UTF8_CharacterReaderWithThreadsTrial.class);
+		trials.add(UTF8_CharacterBuilderWithThreadsTrial.class);
 		trials.add(BitReaderTrial.class);
 		return trials;
 	}

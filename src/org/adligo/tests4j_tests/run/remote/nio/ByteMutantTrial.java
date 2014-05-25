@@ -4,7 +4,7 @@ import org.adligo.tests4j.models.shared.SourceFileScope;
 import org.adligo.tests4j.models.shared.SourceFileTrial;
 import org.adligo.tests4j.models.shared.Test;
 import org.adligo.tests4j.models.shared.coverage.I_SourceFileCoverage;
-import org.adligo.tests4j.models.shared.metadata.I_SourceFileTrial_TestRunInfo;
+import org.adligo.tests4j.models.shared.results.feedback.I_SourceFileTrial_TestsResults;
 import org.adligo.tests4j.run.remote.nio.ByteMutant;
 
 
@@ -176,7 +176,7 @@ public class ByteMutantTrial extends SourceFileTrial {
 	}
 	
 	@Override
-	public void afterTrialTests(I_SourceFileTrial_TestRunInfo p) {
+	public void afterTrialTests(I_SourceFileTrial_TestsResults p) {
 		//not sure what I am missing, I probably need 
 		//to finish the eclipse plug-in coverage source-lighter
 		

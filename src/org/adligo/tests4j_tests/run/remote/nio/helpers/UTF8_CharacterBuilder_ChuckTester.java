@@ -14,14 +14,14 @@ import org.adligo.tests4j.models.shared.asserts.I_Asserts;
 import org.adligo.tests4j.run.remote.nio.UTF8_CharacterBuilder;
 
 
-public class UTF8_Reader_ChuckTester implements Runnable {
+public class UTF8_CharacterBuilder_ChuckTester implements Runnable {
 	private ArrayBlockingQueue<StartCapture> nextCharsGroup;
 	private Long nextStart;
 	private List<byte []> nextChars;
 	
 	private I_UTF8_TestProgressMonitor monitor;
 	
-	public UTF8_Reader_ChuckTester(ArrayBlockingQueue<StartCapture> pNextCharsGroup,
+	public UTF8_CharacterBuilder_ChuckTester(ArrayBlockingQueue<StartCapture> pNextCharsGroup,
 			I_UTF8_TestProgressMonitor pMonitor) {
 		nextCharsGroup = pNextCharsGroup;
 		monitor = pMonitor;

@@ -19,20 +19,20 @@ import org.adligo.tests4j.models.shared.TrialTimeout;
 import org.adligo.tests4j.models.shared.TrialType;
 import org.adligo.tests4j.models.shared.UseCaseScope;
 import org.adligo.tests4j.models.shared.UseCaseTrial;
-import org.adligo.tests4j.models.shared.metadata.I_SourceFileTrial_TestRunInfo;
 import org.adligo.tests4j.models.shared.metadata.I_TestMetadata;
-import org.adligo.tests4j.models.shared.metadata.I_TestRunInfo;
 import org.adligo.tests4j.models.shared.metadata.I_TrialMetadata;
 import org.adligo.tests4j.models.shared.metadata.I_TrialRunMetadata;
-import org.adligo.tests4j.models.shared.metadata.SourceFileTrial_TestRunInfoMutant;
 import org.adligo.tests4j.models.shared.metadata.TestMetadata;
 import org.adligo.tests4j.models.shared.metadata.TestMetadataMutant;
-import org.adligo.tests4j.models.shared.metadata.TestRunInfo;
-import org.adligo.tests4j.models.shared.metadata.TestRunInfoMutant;
 import org.adligo.tests4j.models.shared.metadata.TrialMetadata;
 import org.adligo.tests4j.models.shared.metadata.TrialMetadataMutant;
 import org.adligo.tests4j.models.shared.metadata.TrialRunMetadata;
 import org.adligo.tests4j.models.shared.metadata.TrialRunMetadataMutant;
+import org.adligo.tests4j.models.shared.results.feedback.I_SourceFileTrial_TestsResults;
+import org.adligo.tests4j.models.shared.results.feedback.I_TestsResults;
+import org.adligo.tests4j.models.shared.results.feedback.SourceFileTrial_TestsResultsMutant;
+import org.adligo.tests4j.models.shared.results.feedback.TestsResults;
+import org.adligo.tests4j.models.shared.results.feedback.TestsResultsMutant;
 import org.adligo.tests4j_4jacoco.plugin.instrumentation.ClassDiscovery;
 
 @SourceFileScope (sourceClass=ClassDiscovery.class)
@@ -46,29 +46,19 @@ public class ClassDiscoveryTrial extends SourceFileTrial {
 	private ClassDiscovery assertMetadataPackage() throws IOException {
 		ClassDiscovery cd = new ClassDiscovery("org.adligo.tests4j.models.shared.metadata");
 		List<String> classNames = cd.getClassNames();
-		assertContains(classNames, I_SourceFileTrial_TestRunInfo.class.getName());
 		assertContains(classNames, I_TestMetadata.class.getName());
-		assertContains(classNames, I_TestRunInfo.class.getName());
 		assertContains(classNames, I_TrialMetadata.class.getName());
 		assertContains(classNames, I_TrialRunMetadata.class.getName());
 		
-		assertContains(classNames, SourceFileTrial_TestRunInfoMutant.class.getName());
-		assertContains(classNames, SourceFileTrial_TestRunInfoMutant.class.getName());
-		
 		assertContains(classNames, TestMetadata.class.getName());
 		assertContains(classNames, TestMetadataMutant.class.getName());
-		assertContains(classNames, TestRunInfo.class.getName());
-		assertContains(classNames, TestRunInfoMutant.class.getName());
 		
 		assertContains(classNames, TrialMetadata.class.getName());
 		assertContains(classNames, TrialMetadataMutant.class.getName());
 		assertContains(classNames, TrialRunMetadata.class.getName());
 		assertContains(classNames, TrialRunMetadataMutant.class.getName());
 		
-		assertContains(classNames, SourceFileTrial_TestRunInfoMutant.class.getName());
-		assertContains(classNames, SourceFileTrial_TestRunInfoMutant.class.getName());
-		
-		assertEquals(15, classNames.size());
+		assertEquals(9, classNames.size());
 		List<ClassDiscovery> children =  cd.getSubPackages();
 		assertEquals(0, children.size());
 		return cd;

@@ -13,12 +13,12 @@ import org.adligo.tests4j.models.shared.SourceFileScope;
 import org.adligo.tests4j.models.shared.SourceFileTrial;
 import org.adligo.tests4j.models.shared.Test;
 import org.adligo.tests4j.models.shared.coverage.I_SourceFileCoverage;
-import org.adligo.tests4j.models.shared.metadata.I_SourceFileTrial_TestRunInfo;
+import org.adligo.tests4j.models.shared.results.feedback.I_SourceFileTrial_TestsResults;
 import org.adligo.tests4j.run.remote.nio.UTF8_CharacterBuilder;
 import org.adligo.tests4j_tests.run.remote.nio.helpers.I_UTF8_TestProgressMonitor;
 import org.adligo.tests4j_tests.run.remote.nio.helpers.StartCapture;
 import org.adligo.tests4j_tests.run.remote.nio.helpers.UTF8_Generator;
-import org.adligo.tests4j_tests.run.remote.nio.helpers.UTF8_Reader_ChuckTester;
+import org.adligo.tests4j_tests.run.remote.nio.helpers.UTF8_CharacterBuilder_ChuckTester;
 
 /**
  * This class tests the UTF8 charset
@@ -32,7 +32,7 @@ import org.adligo.tests4j_tests.run.remote.nio.helpers.UTF8_Reader_ChuckTester;
  *
  */
 @SourceFileScope (sourceClass=UTF8_CharacterBuilder.class)
-public class UTF8_CharacterReaderWithThreadsTrial extends SourceFileTrial implements I_UTF8_TestProgressMonitor {
+public class UTF8_CharacterBuilderWithThreadsTrial extends SourceFileTrial implements I_UTF8_TestProgressMonitor {
 	private static final int threadCount = 32;
 	private static ExecutorService exetutor;
 	/**
@@ -85,7 +85,7 @@ public class UTF8_CharacterReaderWithThreadsTrial extends SourceFileTrial implem
 	@Test
 	public void testChars() throws Exception {
 		for (int i = 0; i < threadCount; i++) {
-			exetutor.submit(new UTF8_Reader_ChuckTester(charGroups,this));
+			exetutor.submit(new UTF8_CharacterBuilder_ChuckTester(charGroups,this));
 		}
 		while (charGroupCount > finishedCharGroups.get()) {
 			try {
@@ -110,7 +110,9 @@ public class UTF8_CharacterReaderWithThreadsTrial extends SourceFileTrial implem
 	 * @see org.adligo.tests4j.models.shared.SourceFileTrial#afterTrialTests(org.adligo.tests4j.models.shared.coverage.I_SourceFileCoverage)
 	 */
 	@Override
-	public void afterTrialTests(I_SourceFileTrial_TestRunInfo p) {
+	public void afterTrialTests(I_SourceFileTrial_TestsResults p) {
+		I_SourceFileCoverage coverage =  p.getCoverage();
+		assertGreaterThanOrEquals(22.0, coverage.getPercentageCoveredDouble());
 		//TODO assertion count is intermittent
 		//probably due to threading in this class
 		//assertEquals(12906L, p.getAssertions());
