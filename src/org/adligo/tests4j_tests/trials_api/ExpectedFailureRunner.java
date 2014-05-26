@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.concurrent.ArrayBlockingQueue;
 
 import org.adligo.tests4j.models.shared.AbstractTrial;
-import org.adligo.tests4j.models.shared.I_AbstractTrial;
+import org.adligo.tests4j.models.shared.I_Trial;
 import org.adligo.tests4j.models.shared.metadata.I_TrialRunMetadata;
 import org.adligo.tests4j.models.shared.results.I_TrialResult;
 import org.adligo.tests4j.models.shared.results.I_TrialRunResult;
@@ -24,8 +24,8 @@ public class ExpectedFailureRunner implements I_TrialRunListener {
 	
 	public void runExpectedFailure(Class<? extends AbstractTrial> clazz) {
 		Tests4J_Params params = new Tests4J_Params();
-		List<Class<? extends I_AbstractTrial>> tests = 
-				new ArrayList<Class<? extends I_AbstractTrial>>();
+		List<Class<? extends I_Trial>> tests = 
+				new ArrayList<Class<? extends I_Trial>>();
 		tests.add(clazz);
 		params.setTrials(tests);
 		ConsoleReporter silentReporter = new ConsoleReporter();
