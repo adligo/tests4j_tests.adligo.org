@@ -37,7 +37,7 @@ public class Run_ApiTrial_ApiTrial extends ApiTrial {
 		
 		I_TrialRunMetadata metadata = runner.getMetadata();
 		assertNotNull(metadata);
-		List<? extends I_TrialMetadata> trialsMetadata = metadata.getTrials();
+		List<? extends I_TrialMetadata> trialsMetadata = metadata.getAllTrialMetadata();
 		assertNotNull(trialsMetadata);
 		assertEquals("java.util.Collections$UnmodifiableRandomAccessList", 
 				trialsMetadata.getClass().getName());
@@ -79,7 +79,7 @@ public class Run_ApiTrial_ApiTrial extends ApiTrial {
 		
 		I_TrialRunMetadata metadata = runner.getMetadata();
 		assertNotNull(metadata);
-		List<? extends I_TrialMetadata> trialsMetadata = metadata.getTrials();
+		List<? extends I_TrialMetadata> trialsMetadata = metadata.getAllTrialMetadata();
 		assertNotNull(trialsMetadata);
 		assertEquals("java.util.Collections$UnmodifiableRandomAccessList", 
 				trialsMetadata.getClass().getName());
@@ -116,7 +116,7 @@ public class Run_ApiTrial_ApiTrial extends ApiTrial {
 		
 		I_TrialRunMetadata metadata = runner.getMetadata();
 		assertNotNull(metadata);
-		List<? extends I_TrialMetadata> trialsMetadata = metadata.getTrials();
+		List<? extends I_TrialMetadata> trialsMetadata = metadata.getAllTrialMetadata();
 		assertNotNull(trialsMetadata);
 		assertEquals("java.util.Collections$UnmodifiableRandomAccessList", 
 				trialsMetadata.getClass().getName());
@@ -154,7 +154,7 @@ public class Run_ApiTrial_ApiTrial extends ApiTrial {
 
 		I_TrialRunMetadata metadata = runner.getMetadata();
 		assertNotNull(metadata);
-		List<? extends I_TrialMetadata> trialsMetadata = metadata.getTrials();
+		List<? extends I_TrialMetadata> trialsMetadata = metadata.getAllTrialMetadata();
 		assertNotNull(trialsMetadata);
 		assertEquals("java.util.Collections$UnmodifiableRandomAccessList", 
 				trialsMetadata.getClass().getName());
@@ -197,7 +197,7 @@ public class Run_ApiTrial_ApiTrial extends ApiTrial {
 		
 		I_TrialRunMetadata metadata = runner.getMetadata();
 		assertNotNull(metadata);
-		List<? extends I_TrialMetadata> trialsMetadata = metadata.getTrials();
+		List<? extends I_TrialMetadata> trialsMetadata = metadata.getAllTrialMetadata();
 		assertNotNull(trialsMetadata);
 		assertEquals("java.util.Collections$UnmodifiableRandomAccessList", 
 				trialsMetadata.getClass().getName());
@@ -239,7 +239,7 @@ public class Run_ApiTrial_ApiTrial extends ApiTrial {
 		
 		I_TrialRunMetadata metadata = runner.getMetadata();
 		assertNotNull(metadata);
-		List<? extends I_TrialMetadata> trialsMetadata = metadata.getTrials();
+		List<? extends I_TrialMetadata> trialsMetadata = metadata.getAllTrialMetadata();
 		assertNotNull(trialsMetadata);
 		assertEquals("java.util.Collections$UnmodifiableRandomAccessList", 
 				trialsMetadata.getClass().getName());
@@ -281,7 +281,7 @@ public class Run_ApiTrial_ApiTrial extends ApiTrial {
 		
 		I_TrialRunMetadata metadata = runner.getMetadata();
 		assertNotNull(metadata);
-		List<? extends I_TrialMetadata> trialsMetadata = metadata.getTrials();
+		List<? extends I_TrialMetadata> trialsMetadata = metadata.getAllTrialMetadata();
 		assertNotNull(trialsMetadata);
 		assertEquals("java.util.Collections$UnmodifiableRandomAccessList", 
 				trialsMetadata.getClass().getName());
@@ -323,7 +323,7 @@ public class Run_ApiTrial_ApiTrial extends ApiTrial {
 		
 		I_TrialRunMetadata metadata = runner.getMetadata();
 		assertNotNull(metadata);
-		List<? extends I_TrialMetadata> trialsMetadata = metadata.getTrials();
+		List<? extends I_TrialMetadata> trialsMetadata = metadata.getAllTrialMetadata();
 		assertNotNull(trialsMetadata);
 		assertEquals("java.util.Collections$UnmodifiableRandomAccessList", 
 				trialsMetadata.getClass().getName());
@@ -362,7 +362,7 @@ public class Run_ApiTrial_ApiTrial extends ApiTrial {
 		
 		I_TrialRunMetadata metadata = runner.getMetadata();
 		assertNotNull(metadata);
-		List<? extends I_TrialMetadata> trialsMetadata = metadata.getTrials();
+		List<? extends I_TrialMetadata> trialsMetadata = metadata.getAllTrialMetadata();
 		assertNotNull(trialsMetadata);
 		assertEquals("java.util.Collections$UnmodifiableRandomAccessList", 
 				trialsMetadata.getClass().getName());
@@ -407,7 +407,7 @@ public class Run_ApiTrial_ApiTrial extends ApiTrial {
 		
 		I_TrialRunMetadata metadata = runner.getMetadata();
 		assertNotNull(metadata);
-		List<? extends I_TrialMetadata> trialsMetadata = metadata.getTrials();
+		List<? extends I_TrialMetadata> trialsMetadata = metadata.getAllTrialMetadata();
 		assertNotNull(trialsMetadata);
 		assertEquals("java.util.Collections$UnmodifiableRandomAccessList", 
 				trialsMetadata.getClass().getName());
@@ -444,7 +444,7 @@ public class Run_ApiTrial_ApiTrial extends ApiTrial {
 		
 		I_TrialRunMetadata metadata = runner.getMetadata();
 		assertNotNull(metadata);
-		List<? extends I_TrialMetadata> trialsMetadata = metadata.getTrials();
+		List<? extends I_TrialMetadata> trialsMetadata = metadata.getAllTrialMetadata();
 		assertNotNull(trialsMetadata);
 		assertEquals("java.util.Collections$UnmodifiableRandomAccessList", 
 				trialsMetadata.getClass().getName());
@@ -475,7 +475,7 @@ public class Run_ApiTrial_ApiTrial extends ApiTrial {
 		
 		I_TrialRunMetadata metadata = runner.getMetadata();
 		assertNotNull(metadata);
-		List<? extends I_TrialMetadata> trialsMetadata = metadata.getTrials();
+		List<? extends I_TrialMetadata> trialsMetadata = metadata.getAllTrialMetadata();
 		assertNotNull(trialsMetadata);
 		assertEquals("java.util.Collections$UnmodifiableRandomAccessList", 
 				trialsMetadata.getClass().getName());
@@ -509,7 +509,7 @@ public class Run_ApiTrial_ApiTrial extends ApiTrial {
 		
 		I_TrialRunMetadata metadata = runner.getMetadata();
 		assertNotNull(metadata);
-		List<? extends I_TrialMetadata> trialsMetadata = metadata.getTrials();
+		List<? extends I_TrialMetadata> trialsMetadata = metadata.getAllTrialMetadata();
 		assertNotNull(trialsMetadata);
 		assertEquals("java.util.Collections$UnmodifiableRandomAccessList", 
 				trialsMetadata.getClass().getName());
@@ -553,7 +553,7 @@ public class Run_ApiTrial_ApiTrial extends ApiTrial {
 		
 		I_TrialRunMetadata metadata = runner.getMetadata();
 		assertNotNull(metadata);
-		List<? extends I_TrialMetadata> trialsMetadata = metadata.getTrials();
+		List<? extends I_TrialMetadata> trialsMetadata = metadata.getAllTrialMetadata();
 		assertNotNull(trialsMetadata);
 		assertEquals("java.util.Collections$UnmodifiableRandomAccessList", 
 				trialsMetadata.getClass().getName());
@@ -596,7 +596,7 @@ public class Run_ApiTrial_ApiTrial extends ApiTrial {
 		
 		I_TrialRunMetadata metadata = runner.getMetadata();
 		assertNotNull(metadata);
-		List<? extends I_TrialMetadata> trialsMetadata = metadata.getTrials();
+		List<? extends I_TrialMetadata> trialsMetadata = metadata.getAllTrialMetadata();
 		assertNotNull(trialsMetadata);
 		assertEquals("java.util.Collections$UnmodifiableRandomAccessList", 
 				trialsMetadata.getClass().getName());
@@ -640,7 +640,7 @@ public class Run_ApiTrial_ApiTrial extends ApiTrial {
 		
 		I_TrialRunMetadata metadata = runner.getMetadata();
 		assertNotNull(metadata);
-		List<? extends I_TrialMetadata> trialsMetadata = metadata.getTrials();
+		List<? extends I_TrialMetadata> trialsMetadata = metadata.getAllTrialMetadata();
 		assertNotNull(trialsMetadata);
 		assertEquals("java.util.Collections$UnmodifiableRandomAccessList", 
 				trialsMetadata.getClass().getName());

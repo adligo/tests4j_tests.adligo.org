@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.adligo.tests4j.models.shared.AbstractTrial;
+import org.adligo.tests4j.models.shared.AdditionalInstrumentation;
 import org.adligo.tests4j.models.shared.AfterTrial;
 import org.adligo.tests4j.models.shared.ApiTrial;
 import org.adligo.tests4j.models.shared.BeforeTrial;
@@ -68,6 +69,7 @@ public class ClassDiscoveryTrial extends SourceFileTrial {
 	public void testModelsShared() throws Exception {
 		ClassDiscovery cd = new ClassDiscovery("org.adligo.tests4j.models.shared");
 		List<String> classNames = cd.getClassNames();
+		assertContains(classNames, AdditionalInstrumentation.class.getName());
 		assertContains(classNames, AbstractTrial.class.getName());
 		assertContains(classNames, AfterTrial.class.getName());
 		assertContains(classNames, ApiTrial.class.getName());
@@ -84,11 +86,11 @@ public class ClassDiscoveryTrial extends SourceFileTrial {
 		assertContains(classNames, UseCaseScope.class.getName());
 		assertContains(classNames, UseCaseTrial.class.getName());
 		
-		assertEquals(16, classNames.size());
+		assertEquals(17, classNames.size());
 		List<ClassDiscovery> children =  cd.getSubPackages();
 		
 		
-		assertEquals(6, children.size());
+		assertEquals(7, children.size());
 	}
 	
 	
