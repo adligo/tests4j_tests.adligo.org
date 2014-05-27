@@ -29,7 +29,7 @@ public class RunAllTrials implements I_TrialRunListener {
 		
 		reporter.setLogOn(Tests4J_NotificationManager.class);
 		reporter.setLogOn(TrialProcessorControls.class);
-		//reporter.setLogOn(TrialInstancesProcessor.class);
+		reporter.setLogOn(TrialInstancesProcessor.class);
 		//reporter.setLogOn(TestRunable.class);
 		//reporter.setLogOn(Tests4J_Memory.class);
 		
@@ -41,6 +41,7 @@ public class RunAllTrials implements I_TrialRunListener {
 		params.setExitAfterLastNotification(false);
 		params.setCoveragePluginClass(ScopedJacocoPlugin.class);
 		
+		params.setMetaTrialClass(TheMetaTrial.class);
 		//params.setThreadPoolSize(1);
 		//params.setCoveragePlugin(new TieredJacocoPlugin());
 		I_Tests4J_Controls controls =  Tests4J.run(params, new RunAllTrials());
@@ -53,6 +54,7 @@ public class RunAllTrials implements I_TrialRunListener {
 		}
 		*/
 		//controls.cancel();
+		
 		ThreadStateHelper tsh = new ThreadStateHelper(params.getReporter());
 		//tsh.logAllThreadStates();
 	}

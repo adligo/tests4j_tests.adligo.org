@@ -14,6 +14,7 @@ import org.adligo.tests4j.models.shared.I_MetaTrial;
 import org.adligo.tests4j.models.shared.I_Trial;
 import org.adligo.tests4j.models.shared.I_TrialProcessorBindings;
 import org.adligo.tests4j.models.shared.IgnoreTest;
+import org.adligo.tests4j.models.shared.MetaTrial;
 import org.adligo.tests4j.models.shared.PackageScope;
 import org.adligo.tests4j.models.shared.SourceFileScope;
 import org.adligo.tests4j.models.shared.SourceFileTrial;
@@ -76,7 +77,9 @@ public class ClassDiscoveryTrial extends SourceFileTrial {
 		assertContains(classNames, I_Trial.class.getName());
 		assertContains(classNames, I_TrialProcessorBindings.class.getName());
 		assertContains(classNames, I_MetaTrial.class.getName());
+		assertContains(classNames, MetaTrial.class.getName());
 		assertContains(classNames, IgnoreTest.class.getName());
+		
 		assertContains(classNames, PackageScope.class.getName());
 		assertContains(classNames, SourceFileScope.class.getName());
 		assertContains(classNames, SourceFileTrial.class.getName());
@@ -87,7 +90,7 @@ public class ClassDiscoveryTrial extends SourceFileTrial {
 		assertContains(classNames, UseCaseScope.class.getName());
 		assertContains(classNames, UseCaseTrial.class.getName());
 		
-		assertEquals(20, classNames.size());
+		assertEquals(21, classNames.size());
 		List<ClassDiscovery> children =  cd.getSubPackages();
 		
 		
