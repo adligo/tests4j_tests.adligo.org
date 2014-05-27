@@ -769,43 +769,5 @@ public class Run_UseCaseTrial_ApiTrial extends ApiTrial {
 	}
 	
 	
-	@Test
-	@IgnoreTest
-	public void testBeforeTestsThreadCreationFailureAnnotation() {
-		ExpectedFailureRunner runner = new ExpectedFailureRunner();
-		runner.runExpectedFailure(CreateThreadInBeforeTests.class);
-		
-		I_TrialRunMetadata metadata = runner.getMetadata();
-		assertNotNull(metadata);
-		List<? extends I_TrialMetadata> trialsMetadata = metadata.getAllTrialMetadata();
-		assertNotNull(trialsMetadata);
-		assertEquals("java.util.Collections$UnmodifiableRandomAccessList", 
-				trialsMetadata.getClass().getName());
-		assertEquals(1, trialsMetadata.size());
-		I_TrialMetadata trialMeta = trialsMetadata.get(0);
-		assertNotNull(trialMeta);
-		assertEquals("org.adligo.tests4j_tests.trials_api.mock_use_case_trials.NoUseCaseAnnotationTrial", 
-				trialMeta.getTrialName());
-		assertEquals(0L, trialMeta.getTimeout());
-		assertFalse(trialMeta.isSkipped());
-		
-		
-		List<? extends I_TestMetadata> testsMetadata = trialMeta.getTests();
-		assertNotNull(testsMetadata);
-		assertEquals("java.util.Collections$UnmodifiableRandomAccessList", 
-				testsMetadata.getClass().getName());
-		assertEquals(0, testsMetadata.size());
-		
-		
-		I_TrialResult result = runner.getResult();
-		assertNotNull(result);
-		assertFalse(result.isPassed());
-		I_TrialFailure failure = result.getFailure();
-		assertNotNull(failure);
-		assertEquals("UseCaseTrials must be annotated with @UseCaseScope.", failure.getMessage());
-		Throwable exception = failure.getException();
-		assertUniform(new IllegalArgumentException(
-				"org.adligo.tests4j_tests.trials_api.mock_use_case_trials.NoUseCaseAnnotationTrial was not annotated correctly."), 
-				exception);
-	}
+	
 }

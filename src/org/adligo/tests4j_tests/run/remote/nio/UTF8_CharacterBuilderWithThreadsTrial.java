@@ -73,7 +73,6 @@ public class UTF8_CharacterBuilderWithThreadsTrial extends SourceFileTrial imple
 	}
 	
 	@Test 
-	@IgnoreTest
 	public void testSiginifantCodePoints() throws Exception {
 		assertEquals(128L, UTF8_Generator.ONE_BYTE_MAX_CODE_POINT_LONG);
 		assertEquals(2048L, UTF8_Generator.TWO_BYTE_MAX_CODE_POINT_LONG);
