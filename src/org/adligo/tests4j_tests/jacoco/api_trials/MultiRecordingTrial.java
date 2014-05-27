@@ -35,7 +35,7 @@ public class MultiRecordingTrial extends ApiTrial {
 		ScopedJacocoPlugin plugin = new ScopedJacocoPlugin();
 		List<Class<?>> classes = new ArrayList<Class<?>>();
 		classes.add(MockRunnable.class);
-		List<Class<?>> instClass = plugin.instrumentClasses(classes);
+		List<Class<?>> instClass = plugin.instrumentClassesAny(classes);
 		assertNotNull(instClass);
 		assertEquals(1, instClass.size());
 		Class<?> mr = instClass.get(0);
@@ -78,7 +78,7 @@ public class MultiRecordingTrial extends ApiTrial {
 		ScopedJacocoPlugin plugin = new ScopedJacocoPlugin();
 		List<Class<?>> classes = new ArrayList<Class<?>>();
 		classes.add(MockRunnable.class);
-		List<Class<?>> instClass = plugin.instrumentClasses(classes);
+		List<Class<?>> instClass = plugin.instrumentClassesAny(classes);
 		assertNotNull(instClass);
 		assertEquals(1, instClass.size());
 		Class<?> mr = instClass.get(0);
@@ -133,7 +133,7 @@ public class MultiRecordingTrial extends ApiTrial {
 		
 		List<Class<?>> classes = new ArrayList<Class<?>>();
 		classes.add(MockRunnable.class);
-		List<Class<?>> instClass = plugin.instrumentClasses(classes);
+		List<Class<?>> instClass = plugin.instrumentClassesAny(classes);
 		assertNotNull(instClass);
 		assertEquals(1, instClass.size());
 		Class<?> mr = instClass.get(0);
@@ -204,7 +204,7 @@ public class MultiRecordingTrial extends ApiTrial {
 		
 		List<Class<?>> classes = new ArrayList<Class<?>>();
 		classes.add(MockRunnable.class);
-		List<Class<?>> instClass = plugin.instrumentClasses(classes);
+		List<Class<?>> instClass = plugin.instrumentClassesAny(classes);
 		assertNotNull(instClass);
 		assertEquals(1, instClass.size());
 		Class<?> mr = instClass.get(0);
