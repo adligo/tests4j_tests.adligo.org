@@ -1,4 +1,4 @@
-package org.adligo.tests4j_tests.run.remote.nio;
+package org.adligo.tests4j_tests.run.discovery;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,9 +29,7 @@ public class RunPkgTrials implements I_TrialList {
 	public List<Class<? extends AbstractTrial>> getTrials() {
 		List<Class<? extends AbstractTrial>> trials = new ArrayList<Class<? extends AbstractTrial>>();
 		
-		trials.add(ByteMutantTrial.class);
-		trials.add(UTF8_CharacterBuilderWithThreadsTrial.class);
-		trials.add(BitsTrial.class);
+		trials.add(ClassDiscoveryTrial.class);
 		return trials;
 	}
 }

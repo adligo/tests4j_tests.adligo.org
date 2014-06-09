@@ -8,7 +8,7 @@ import org.adligo.tests4j.models.shared.results.feedback.I_SourceFileTrial_Tests
 import org.adligo.tests4j.run.remote.nio.Bits;
 
 @SourceFileScope (sourceClass=Bits.class)
-public class BitReaderTrial extends SourceFileTrial {
+public class BitsTrial extends SourceFileTrial {
 
 	@Test
 	public void testToBitsSimple() {

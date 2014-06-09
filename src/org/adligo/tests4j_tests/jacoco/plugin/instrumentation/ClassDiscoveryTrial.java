@@ -33,7 +33,7 @@ import org.adligo.tests4j.models.shared.metadata.TrialMetadata;
 import org.adligo.tests4j.models.shared.metadata.TrialMetadataMutant;
 import org.adligo.tests4j.models.shared.metadata.TrialRunMetadata;
 import org.adligo.tests4j.models.shared.metadata.TrialRunMetadataMutant;
-import org.adligo.tests4j_4jacoco.plugin.instrumentation.ClassDiscovery;
+import org.adligo.tests4j.run.discovery.ClassDiscovery;
 
 @SourceFileScope (sourceClass=ClassDiscovery.class)
 public class ClassDiscoveryTrial extends SourceFileTrial {
