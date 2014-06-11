@@ -24,9 +24,12 @@ import org.adligo.tests4j.models.shared.TrialTimeout;
 import org.adligo.tests4j.models.shared.TrialType;
 import org.adligo.tests4j.models.shared.UseCaseScope;
 import org.adligo.tests4j.models.shared.UseCaseTrial;
+import org.adligo.tests4j.models.shared.metadata.I_SourceInfo;
 import org.adligo.tests4j.models.shared.metadata.I_TestMetadata;
 import org.adligo.tests4j.models.shared.metadata.I_TrialMetadata;
 import org.adligo.tests4j.models.shared.metadata.I_TrialRunMetadata;
+import org.adligo.tests4j.models.shared.metadata.SourceInfo;
+import org.adligo.tests4j.models.shared.metadata.SourceInfoMutant;
 import org.adligo.tests4j.models.shared.metadata.TestMetadata;
 import org.adligo.tests4j.models.shared.metadata.TestMetadataMutant;
 import org.adligo.tests4j.models.shared.metadata.TrialMetadata;
@@ -46,9 +49,13 @@ public class ClassDiscoveryTrial extends SourceFileTrial {
 	private ClassDiscovery assertMetadataPackage() throws IOException {
 		ClassDiscovery cd = new ClassDiscovery("org.adligo.tests4j.models.shared.metadata");
 		List<String> classNames = cd.getClassNames();
+		assertContains(classNames, I_SourceInfo.class.getName());
 		assertContains(classNames, I_TestMetadata.class.getName());
 		assertContains(classNames, I_TrialMetadata.class.getName());
 		assertContains(classNames, I_TrialRunMetadata.class.getName());
+		
+		assertContains(classNames, SourceInfo.class.getName());
+		assertContains(classNames, SourceInfoMutant.class.getName());
 		
 		assertContains(classNames, TestMetadata.class.getName());
 		assertContains(classNames, TestMetadataMutant.class.getName());
@@ -58,7 +65,7 @@ public class ClassDiscoveryTrial extends SourceFileTrial {
 		assertContains(classNames, TrialRunMetadata.class.getName());
 		assertContains(classNames, TrialRunMetadataMutant.class.getName());
 		
-		assertEquals(9, classNames.size());
+		assertEquals(12, classNames.size());
 		List<ClassDiscovery> children =  cd.getSubPackages();
 		assertEquals(0, children.size());
 		return cd;
@@ -107,7 +114,7 @@ public class ClassDiscoveryTrial extends SourceFileTrial {
 		List<ClassDiscovery> children =  cd.getSubPackages();
 		List<String> childNames = new ArrayList<String>();
 		for(ClassDiscovery i: children) {
-			childNames.add(i.getName());
+			childNames.add(i.getPackageName());
 		}
 		assertContains(childNames, "org.adligo.tests4j.models");
 		assertContains(childNames, "org.adligo.tests4j.run");
