@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-import org.adligo.tests4j.models.shared.AbstractTrial;
 import org.adligo.tests4j.models.shared.I_Trial;
 import org.adligo.tests4j.models.shared.metadata.I_TrialRunMetadata;
 import org.adligo.tests4j.models.shared.results.I_TrialResult;
@@ -15,32 +14,30 @@ import org.adligo.tests4j.models.shared.system.Tests4J_Params;
 import org.adligo.tests4j.models.shared.system.report.ConsoleReporter;
 import org.adligo.tests4j.run.Tests4J;
 
-/**
- * simulates a run of tests4j
- *     
- * @author scott
- *
- */
-public class ExpectedFailureRunner implements I_TrialRunListener {
+public class ExpectedPassRunner implements I_TrialRunListener {
 	private I_TrialRunMetadata metadata;
+	ConsoleReporter silentReporter = new ConsoleReporter();
 	
 	private int size = 0;
 	private ArrayBlockingQueue<List<I_TrialResult>> block = new ArrayBlockingQueue<List<I_TrialResult>>(1);
 	private CopyOnWriteArrayList<I_TrialResult> results = new CopyOnWriteArrayList<I_TrialResult>();
 	private ArrayBlockingQueue<I_TrialRunMetadata> metaBlock = new ArrayBlockingQueue<>(1);
 	
+	public ExpectedPassRunner() {
+		silentReporter.setLogOff();
+	}
+	
 	public void run(Class<? extends I_Trial> trial) {
-		List<Class<? extends I_Trial>> list = new ArrayList<Class<? extends I_Trial>>();
-		list.add(trial);
-		run(list);
+		List<Class<? extends I_Trial>> trials = new ArrayList<>();
+		trials.add(trial);
+		run(trials);
 	}
 	
 	public void run(List<Class<? extends I_Trial>> trials) {
 		Tests4J_Params params = new Tests4J_Params();
 		size = trials.size();
 		params.setTrials(trials);
-		ConsoleReporter silentReporter = new ConsoleReporter();
-		silentReporter.setLogOff();
+		//silentReporter.setLogOff();
 		//silentReporter.setLogOn(TrialDescription.class.getName());
 		silentReporter.setRedirect(false);
 		
@@ -66,10 +63,11 @@ public class ExpectedFailureRunner implements I_TrialRunListener {
 	
 	@Override
 	public synchronized void onTrialCompleted(I_TrialResult pResult) {
+		//silentReporter.log("Finished test " + pResult.getName() );
 		results.add(pResult);
-		if (size == results.size()) {
+		if (results.size() == size) {
 			try {
-				block.put(results);
+				block.put(results);	
 			} catch (InterruptedException x) {
 				throw new RuntimeException(x);
 			}
@@ -97,14 +95,12 @@ public class ExpectedFailureRunner implements I_TrialRunListener {
 
 	@Override
 	public void onStartingTrail(String trialName) {
-		// TODO Auto-generated method stub
-		
+		//silentReporter.log("Starting test " + trialName );
 	}
 
 
 	@Override
 	public void onStartingTest(String trialName, String testName) {
-		// TODO Auto-generated method stub
 		
 	}
 

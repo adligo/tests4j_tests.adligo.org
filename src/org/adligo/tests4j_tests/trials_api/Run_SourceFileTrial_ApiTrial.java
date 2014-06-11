@@ -32,7 +32,7 @@ public class Run_SourceFileTrial_ApiTrial extends ApiTrial {
 	@Test
 	public void testBadConstructor() {
 		ExpectedFailureRunner runner = new ExpectedFailureRunner();
-		runner.runExpectedFailure(BadConstructorTrial.class);
+		runner.run(BadConstructorTrial.class);
 		
 		I_TrialRunMetadata metadata = runner.getMetadata();
 		assertNotNull(metadata);
@@ -59,7 +59,9 @@ public class Run_SourceFileTrial_ApiTrial extends ApiTrial {
 		assertEquals("exhibitA", testMeta.getTestName());
 		assertEquals(0L, testMeta.getTimeout());
 		
-		I_TrialResult result = runner.getResult();
+		List<I_TrialResult> results = runner.getResults();
+		assertEquals(1, results.size());
+		I_TrialResult result = results.get(0);
 		assertNotNull(result);
 		assertFalse(result.isPassed());
 		I_TrialFailure failure = result.getFailure();
@@ -74,7 +76,7 @@ public class Run_SourceFileTrial_ApiTrial extends ApiTrial {
 	@Test
 	public void testNoSourceFileScopeAnnotation() {
 		ExpectedFailureRunner runner = new ExpectedFailureRunner();
-		runner.runExpectedFailure(NoSourceFileScopeAnnotationTrial.class);
+		runner.run(NoSourceFileScopeAnnotationTrial.class);
 		
 		I_TrialRunMetadata metadata = runner.getMetadata();
 		assertNotNull(metadata);
@@ -96,7 +98,9 @@ public class Run_SourceFileTrial_ApiTrial extends ApiTrial {
 				testsMetadata.getClass().getName());
 		assertEquals(0, testsMetadata.size());
 		
-		I_TrialResult result = runner.getResult();
+		List<I_TrialResult> results = runner.getResults();
+		assertEquals(1, results.size());
+		I_TrialResult result = results.get(0);
 		assertNotNull(result);
 		assertFalse(result.isPassed());
 		I_TrialFailure failure = result.getFailure();
@@ -116,7 +120,7 @@ public class Run_SourceFileTrial_ApiTrial extends ApiTrial {
 	@Test
 	public void testBeforeTrialNotStatic() {
 		ExpectedFailureRunner runner = new ExpectedFailureRunner();
-		runner.runExpectedFailure(BeforeTrialNotStaticTrial.class);
+		runner.run(BeforeTrialNotStaticTrial.class);
 		
 
 		I_TrialRunMetadata metadata = runner.getMetadata();
@@ -145,7 +149,9 @@ public class Run_SourceFileTrial_ApiTrial extends ApiTrial {
 		assertEquals(0L, testMeta.getTimeout());
 		
 		
-		I_TrialResult result = runner.getResult();
+		List<I_TrialResult> results = runner.getResults();
+		assertEquals(1, results.size());
+		I_TrialResult result = results.get(0);
 		assertNotNull(result);
 		assertFalse(result.isPassed());
 		I_TrialFailure failure = result.getFailure();
@@ -160,7 +166,7 @@ public class Run_SourceFileTrial_ApiTrial extends ApiTrial {
 	@Test
 	public void testBeforeTrialHasParams() {
 		ExpectedFailureRunner runner = new ExpectedFailureRunner();
-		runner.runExpectedFailure(BeforeTrialHasParamsTrial.class);
+		runner.run(BeforeTrialHasParamsTrial.class);
 		
 		I_TrialRunMetadata metadata = runner.getMetadata();
 		assertNotNull(metadata);
@@ -187,7 +193,9 @@ public class Run_SourceFileTrial_ApiTrial extends ApiTrial {
 		assertEquals("testFoo", testMeta.getTestName());
 		assertEquals(0L, testMeta.getTimeout());
 		
-		I_TrialResult result = runner.getResult();
+		List<I_TrialResult> results = runner.getResults();
+		assertEquals(1, results.size());
+		I_TrialResult result = results.get(0);
 		assertNotNull(result);
 		assertFalse(result.isPassed());
 		I_TrialFailure failure = result.getFailure();
@@ -202,7 +210,7 @@ public class Run_SourceFileTrial_ApiTrial extends ApiTrial {
 	@Test
 	public void testBeforeTrialNotPublic() {
 		ExpectedFailureRunner runner = new ExpectedFailureRunner();
-		runner.runExpectedFailure(BeforeTrialNotPublicTrial.class);
+		runner.run(BeforeTrialNotPublicTrial.class);
 		
 		I_TrialRunMetadata metadata = runner.getMetadata();
 		assertNotNull(metadata);
@@ -229,7 +237,9 @@ public class Run_SourceFileTrial_ApiTrial extends ApiTrial {
 		assertEquals("testNada", testMeta.getTestName());
 		assertEquals(0L, testMeta.getTimeout());
 		
-		I_TrialResult result = runner.getResult();
+		List<I_TrialResult> results = runner.getResults();
+		assertEquals(1, results.size());
+		I_TrialResult result = results.get(0);
 		assertNotNull(result);
 		assertFalse(result.isPassed());
 		I_TrialFailure failure = result.getFailure();
@@ -244,7 +254,7 @@ public class Run_SourceFileTrial_ApiTrial extends ApiTrial {
 	@Test
 	public void testMultipleBeforeTrial() {
 		ExpectedFailureRunner runner = new ExpectedFailureRunner();
-		runner.runExpectedFailure(MultipleBeforeTrialTrial.class);
+		runner.run(MultipleBeforeTrialTrial.class);
 		
 		I_TrialRunMetadata metadata = runner.getMetadata();
 		assertNotNull(metadata);
@@ -271,7 +281,9 @@ public class Run_SourceFileTrial_ApiTrial extends ApiTrial {
 		assertEquals("testFoo", testMeta.getTestName());
 		assertEquals(0L, testMeta.getTimeout());
 		
-		I_TrialResult result = runner.getResult();
+		List<I_TrialResult> results = runner.getResults();
+		assertEquals(1, results.size());
+		I_TrialResult result = results.get(0);
 		assertNotNull(result);
 		assertFalse(result.isPassed());
 		I_TrialFailure failure = result.getFailure();
@@ -286,7 +298,7 @@ public class Run_SourceFileTrial_ApiTrial extends ApiTrial {
 	@Test
 	public void testAbstractTest() {
 		ExpectedFailureRunner runner = new ExpectedFailureRunner();
-		runner.runExpectedFailure(AbstractTestTrial.class);
+		runner.run(AbstractTestTrial.class);
 		
 		I_TrialRunMetadata metadata = runner.getMetadata();
 		assertNotNull(metadata);
@@ -308,7 +320,9 @@ public class Run_SourceFileTrial_ApiTrial extends ApiTrial {
 				testsMetadata.getClass().getName());
 		assertEquals(1, testsMetadata.size());
 		
-		I_TrialResult result = runner.getResult();
+		List<I_TrialResult> results = runner.getResults();
+		assertEquals(1, results.size());
+		I_TrialResult result = results.get(0);
 		assertNotNull(result);
 		assertFalse(result.isPassed());
 		I_TrialFailure failure = result.getFailure();
@@ -325,7 +339,7 @@ public class Run_SourceFileTrial_ApiTrial extends ApiTrial {
 	@Test
 	public void testTestWithParams() {
 		ExpectedFailureRunner runner = new ExpectedFailureRunner();
-		runner.runExpectedFailure(TestWithParamsTrial.class);
+		runner.run(TestWithParamsTrial.class);
 		
 		I_TrialRunMetadata metadata = runner.getMetadata();
 		assertNotNull(metadata);
@@ -352,7 +366,9 @@ public class Run_SourceFileTrial_ApiTrial extends ApiTrial {
 		assertEquals("testFoo", testMeta.getTestName());
 		assertEquals(0L, testMeta.getTimeout());
 		
-		I_TrialResult result = runner.getResult();
+		List<I_TrialResult> results = runner.getResults();
+		assertEquals(1, results.size());
+		I_TrialResult result = results.get(0);
 		assertNotNull(result);
 		assertFalse(result.isPassed());
 		I_TrialFailure failure = result.getFailure();
@@ -369,8 +385,10 @@ public class Run_SourceFileTrial_ApiTrial extends ApiTrial {
 	@Test
 	public void testNoTests() {
 		ExpectedFailureRunner runner = new ExpectedFailureRunner();
-		runner.runExpectedFailure(NoTestsTrial.class);
-		I_TrialResult result = runner.getResult();
+		runner.run(NoTestsTrial.class);
+		List<I_TrialResult> results = runner.getResults();
+		assertEquals(1, results.size());
+		I_TrialResult result = results.get(0);
 		
 		I_TrialRunMetadata metadata = runner.getMetadata();
 		assertNotNull(metadata);
@@ -407,7 +425,7 @@ public class Run_SourceFileTrial_ApiTrial extends ApiTrial {
 	@Test
 	public void testProtectedTest() {
 		ExpectedFailureRunner runner = new ExpectedFailureRunner();
-		runner.runExpectedFailure(ProtectedTestTrial.class);
+		runner.run(ProtectedTestTrial.class);
 		
 		I_TrialRunMetadata metadata = runner.getMetadata();
 		assertNotNull(metadata);
@@ -423,7 +441,9 @@ public class Run_SourceFileTrial_ApiTrial extends ApiTrial {
 		assertEquals(0L, trialMeta.getTimeout());
 		assertFalse(trialMeta.isSkipped());
 		
-		I_TrialResult result = runner.getResult();
+		List<I_TrialResult> results = runner.getResults();
+		assertEquals(1, results.size());
+		I_TrialResult result = results.get(0);
 		assertNotNull(result);
 		assertFalse(result.isPassed());
 		I_TrialFailure failure = result.getFailure();
@@ -438,7 +458,7 @@ public class Run_SourceFileTrial_ApiTrial extends ApiTrial {
 	@Test
 	public void testStaticTest() {
 		ExpectedFailureRunner runner = new ExpectedFailureRunner();
-		runner.runExpectedFailure(StaticTestTrial.class);
+		runner.run(StaticTestTrial.class);
 		
 		I_TrialRunMetadata metadata = runner.getMetadata();
 		assertNotNull(metadata);
@@ -454,7 +474,9 @@ public class Run_SourceFileTrial_ApiTrial extends ApiTrial {
 		assertEquals(0L, trialMeta.getTimeout());
 		assertFalse(trialMeta.isSkipped());
 		
-		I_TrialResult result = runner.getResult();
+		List<I_TrialResult> results = runner.getResults();
+		assertEquals(1, results.size());
+		I_TrialResult result = results.get(0);
 		assertNotNull(result);
 		assertFalse(result.isPassed());
 		I_TrialFailure failure = result.getFailure();
@@ -470,7 +492,7 @@ public class Run_SourceFileTrial_ApiTrial extends ApiTrial {
 	@Test
 	public void testAfterTrialNotStatic() {
 		ExpectedFailureRunner runner = new ExpectedFailureRunner();
-		runner.runExpectedFailure(AfterTrialNotStaticTrial.class);
+		runner.run(AfterTrialNotStaticTrial.class);
 		
 		
 		I_TrialRunMetadata metadata = runner.getMetadata();
@@ -499,7 +521,9 @@ public class Run_SourceFileTrial_ApiTrial extends ApiTrial {
 		assertEquals(0L, testMeta.getTimeout());
 		
 		
-		I_TrialResult result = runner.getResult();
+		List<I_TrialResult> results = runner.getResults();
+		assertEquals(1, results.size());
+		I_TrialResult result = results.get(0);
 		assertNotNull(result);
 		assertFalse(result.isPassed());
 		I_TrialFailure failure = result.getFailure();
@@ -514,7 +538,7 @@ public class Run_SourceFileTrial_ApiTrial extends ApiTrial {
 	@Test
 	public void testAfterTrialNotPublic() {
 		ExpectedFailureRunner runner = new ExpectedFailureRunner();
-		runner.runExpectedFailure(AfterTrialNotPublicTrial.class);
+		runner.run(AfterTrialNotPublicTrial.class);
 		
 		
 		I_TrialRunMetadata metadata = runner.getMetadata();
@@ -543,7 +567,9 @@ public class Run_SourceFileTrial_ApiTrial extends ApiTrial {
 		assertEquals(0L, testMeta.getTimeout());
 		
 		
-		I_TrialResult result = runner.getResult();
+		List<I_TrialResult> results = runner.getResults();
+		assertEquals(1, results.size());
+		I_TrialResult result = results.get(0);
 		assertNotNull(result);
 		assertFalse(result.isPassed());
 		I_TrialFailure failure = result.getFailure();
@@ -557,7 +583,7 @@ public class Run_SourceFileTrial_ApiTrial extends ApiTrial {
 	@Test
 	public void testAfterTrialHasParams() {
 		ExpectedFailureRunner runner = new ExpectedFailureRunner();
-		runner.runExpectedFailure(AfterTrialHasParamsTrial.class);
+		runner.run(AfterTrialHasParamsTrial.class);
 		
 		
 		I_TrialRunMetadata metadata = runner.getMetadata();
@@ -586,7 +612,9 @@ public class Run_SourceFileTrial_ApiTrial extends ApiTrial {
 		assertEquals(0L, testMeta.getTimeout());
 		
 		
-		I_TrialResult result = runner.getResult();
+		List<I_TrialResult> results = runner.getResults();
+		assertEquals(1, results.size());
+		I_TrialResult result = results.get(0);
 		assertNotNull(result);
 		assertFalse(result.isPassed());
 		I_TrialFailure failure = result.getFailure();
@@ -601,7 +629,7 @@ public class Run_SourceFileTrial_ApiTrial extends ApiTrial {
 	@Test
 	public void testMultipleAfterTrial() {
 		ExpectedFailureRunner runner = new ExpectedFailureRunner();
-		runner.runExpectedFailure(MultipleAfterTrialTrial.class);
+		runner.run(MultipleAfterTrialTrial.class);
 		
 		
 		I_TrialRunMetadata metadata = runner.getMetadata();
@@ -630,7 +658,9 @@ public class Run_SourceFileTrial_ApiTrial extends ApiTrial {
 		assertEquals(0L, testMeta.getTimeout());
 		
 		
-		I_TrialResult result = runner.getResult();
+		List<I_TrialResult> results = runner.getResults();
+		assertEquals(1, results.size());
+		I_TrialResult result = results.get(0);
 		assertNotNull(result);
 		assertFalse(result.isPassed());
 		I_TrialFailure failure = result.getFailure();
