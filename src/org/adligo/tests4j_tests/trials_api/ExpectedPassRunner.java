@@ -43,7 +43,6 @@ public class ExpectedPassRunner implements I_TrialRunListener {
 		
 		params.setReporter(silentReporter);
 		//params.setLog(new ConsoleLogger( false));
-		params.setTrialThreads(1);
 		params.setExitAfterLastNotification(false);
 		
 		Tests4J.run(params, this);
@@ -65,20 +64,17 @@ public class ExpectedPassRunner implements I_TrialRunListener {
 	public synchronized void onTrialCompleted(I_TrialResult pResult) {
 		//silentReporter.log("Finished test " + pResult.getName() );
 		results.add(pResult);
-		if (results.size() == size) {
-			try {
-				block.put(results);	
-			} catch (InterruptedException x) {
-				throw new RuntimeException(x);
-			}
-		}
+		
 	}
 
 
 	@Override
 	public void onRunCompleted(I_TrialRunResult result) {
-		// TODO Auto-generated method stub
-		
+		try {
+			block.put(results);	
+		} catch (InterruptedException x) {
+			throw new RuntimeException(x);
+		}
 	}
 
 

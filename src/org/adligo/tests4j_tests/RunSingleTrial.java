@@ -14,13 +14,14 @@ import org.adligo.tests4j_4jacoco.plugin.AbstractPlugin;
 import org.adligo.tests4j_4jacoco.plugin.Recorder;
 import org.adligo.tests4j_4jacoco.plugin.ScopedJacocoPlugin;
 import org.adligo.tests4j_tests.run.remote.nio.UTF8_CharacterBuilderWithThreadsTrial;
+import org.adligo.tests4j_tests.trials_api.Run_ApiTrial_ApiTrial;
 
 public class RunSingleTrial {
 
 	
 	public static void main(String [] args) {
 		Tests4J_Params params = new Tests4J_Params();
-		params.addTrial(UTF8_CharacterBuilderWithThreadsTrial.class);
+		params.addTrial(Run_ApiTrial_ApiTrial.class);
 		/*
 		params.addTest(Run_UseCaseTrial_ApiTrial.class.getName() +
 				".testNoUseCaseAnnotation");
@@ -31,9 +32,9 @@ public class RunSingleTrial {
 		params.addLoggingClass(AbstractPlugin.class);
 		params.addLoggingClass(Tests4J_NotificationManager.class);
 		params.addLoggingClass(TrialInstancesProcessor.class);
-		params.addLoggingClass(TrialsProcessor.class);
-		params.addLoggingClass(Tests4J_Memory.class);
-		params.addLoggingClass(Tests4J_SecurityManager.class);
+		//params.addLoggingClass(TrialsProcessor.class);
+		//params.addLoggingClass(Tests4J_Memory.class);
+		//params.addLoggingClass(Tests4J_SecurityManager.class);
 		
 		//logging from jacoco
 		//params.addLoggingClass(AbstractPlugin.class);

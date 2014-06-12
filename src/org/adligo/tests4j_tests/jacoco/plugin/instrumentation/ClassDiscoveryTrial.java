@@ -28,6 +28,7 @@ import org.adligo.tests4j.models.shared.metadata.I_SourceInfo;
 import org.adligo.tests4j.models.shared.metadata.I_TestMetadata;
 import org.adligo.tests4j.models.shared.metadata.I_TrialMetadata;
 import org.adligo.tests4j.models.shared.metadata.I_TrialRunMetadata;
+import org.adligo.tests4j.models.shared.metadata.I_UseCase;
 import org.adligo.tests4j.models.shared.metadata.SourceInfo;
 import org.adligo.tests4j.models.shared.metadata.SourceInfoMutant;
 import org.adligo.tests4j.models.shared.metadata.TestMetadata;
@@ -36,6 +37,7 @@ import org.adligo.tests4j.models.shared.metadata.TrialMetadata;
 import org.adligo.tests4j.models.shared.metadata.TrialMetadataMutant;
 import org.adligo.tests4j.models.shared.metadata.TrialRunMetadata;
 import org.adligo.tests4j.models.shared.metadata.TrialRunMetadataMutant;
+import org.adligo.tests4j.models.shared.metadata.UseCase;
 import org.adligo.tests4j.run.discovery.ClassDiscovery;
 
 @SourceFileScope (sourceClass=ClassDiscovery.class)
@@ -53,6 +55,7 @@ public class ClassDiscoveryTrial extends SourceFileTrial {
 		assertContains(classNames, I_TestMetadata.class.getName());
 		assertContains(classNames, I_TrialMetadata.class.getName());
 		assertContains(classNames, I_TrialRunMetadata.class.getName());
+		assertContains(classNames, I_UseCase.class.getName());
 		
 		assertContains(classNames, SourceInfo.class.getName());
 		assertContains(classNames, SourceInfoMutant.class.getName());
@@ -64,8 +67,9 @@ public class ClassDiscoveryTrial extends SourceFileTrial {
 		assertContains(classNames, TrialMetadataMutant.class.getName());
 		assertContains(classNames, TrialRunMetadata.class.getName());
 		assertContains(classNames, TrialRunMetadataMutant.class.getName());
+		assertContains(classNames, UseCase.class.getName());
 		
-		assertEquals(12, classNames.size());
+		assertEquals(14, classNames.size());
 		List<ClassDiscovery> children =  cd.getSubPackages();
 		assertEquals(0, children.size());
 		return cd;

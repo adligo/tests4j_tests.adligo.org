@@ -46,7 +46,6 @@ public class ExpectedFailureRunner implements I_TrialRunListener {
 		
 		params.setReporter(silentReporter);
 		//params.setLog(new ConsoleLogger( false));
-		params.setTrialThreads(1);
 		params.setExitAfterLastNotification(false);
 		
 		Tests4J.run(params, this);
@@ -67,20 +66,16 @@ public class ExpectedFailureRunner implements I_TrialRunListener {
 	@Override
 	public synchronized void onTrialCompleted(I_TrialResult pResult) {
 		results.add(pResult);
-		if (size == results.size()) {
-			try {
-				block.put(results);
-			} catch (InterruptedException x) {
-				throw new RuntimeException(x);
-			}
-		}
 	}
 
 
 	@Override
 	public void onRunCompleted(I_TrialRunResult result) {
-		// TODO Auto-generated method stub
-		
+		try {
+			block.put(results);
+		} catch (InterruptedException x) {
+			throw new RuntimeException(x);
+		}
 	}
 
 
