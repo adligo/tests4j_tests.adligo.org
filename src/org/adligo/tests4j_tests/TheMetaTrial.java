@@ -14,16 +14,16 @@ public class TheMetaTrial  extends MetaTrial {
 	public void afterNonMetaTrialsRun(I_TrialRunResult results) {
 		//this does not include the afterNonMetaTrialsRun or 
 		// afterMetadataCalculated and @Test methods in the I_MetaTrial implementation.
-		assertGreaterThanOrEquals(76.0, 0.0 + results.getTestsPassed());
-		assertGreaterThanOrEquals(16236.0 ,0.0 + results.getAsserts());
-		assertGreaterThanOrEquals(2100.0 ,0.0 + results.getUniqueAsserts());
+		assertGreaterThanOrEquals(79.0, 0.0 + results.getTestsPassed());
+		assertGreaterThanOrEquals(16630.0 ,0.0 + results.getAsserts());
+		assertGreaterThanOrEquals(2152.0 ,0.0 + results.getUniqueAsserts());
 		
 		super.afterNonMetaTrialsRun(results);
 	}
 
 	@Override
 	public void afterMetadataCalculated(I_TrialRunMetadata metadata) {
-		assertGreaterThanOrEquals(14.0, 0.0 + metadata.getAllTrialsCount());
+		assertGreaterThanOrEquals(16.0, 0.0 + metadata.getAllTrialsCount());
 		assertGreaterThanOrEquals(79.0, 0.0 + metadata.getAllTestsCount());
 		//TODO assert percentage of source files with trials
 		super.afterMetadataCalculated(metadata);
