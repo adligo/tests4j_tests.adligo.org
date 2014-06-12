@@ -113,14 +113,15 @@ public class UTF8_CharacterBuilderWithThreadsTrial extends SourceFileTrial imple
 	@Override
 	public void afterTrialTests(I_SourceFileTrial_TestsResults p) {
 		assertEquals(12906L, p.getAssertions());
-		assertEquals(3L, p.getUniqueAssertions());
+		assertEquals(19L, p.getUniqueAssertions());
 		
 		//not sure what I am missing, I probably need 
 		//to finish the eclipse plug-in coverage source-lighter
 		
-		I_SourceFileCoverage cover =  p.getCoverage();
-		assertGreaterThanOrEquals(22.0, cover.getPercentageCoveredDouble());
-		
+		if (p.hasRecordedCoverage()) {
+			I_SourceFileCoverage cover =  p.getCoverage();
+			assertGreaterThanOrEquals(22.0, cover.getPercentageCoveredDouble());
+		}
 	}
 
 	

@@ -59,7 +59,7 @@ public class RunAllTrials implements I_TrialRunListener {
 		//tsh.logAllThreadStates();
 	}
 
-	private static Tests4J_Params getTests() {
+	public static Tests4J_Params getTests() {
 		Tests4J_Params toRet = new Tests4J_Params();
 		
 		toRet.addTrials(new org.adligo.tests4j_tests.models.shared.system.RunPkgTrials());

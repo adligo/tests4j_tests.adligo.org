@@ -3,6 +3,8 @@ package org.adligo.tests4j_tests.models.shared.system;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.LogManager;
+import java.util.logging.Logger;
 
 import org.adligo.tests4j.models.shared.I_Trial;
 import org.adligo.tests4j.models.shared.SourceFileScope;
@@ -18,7 +20,10 @@ import org.adligo.tests4j_4jacoco.plugin.ScopedJacocoPlugin;
 
 @SourceFileScope(sourceClass=Tests4J_Params.class)
 public class Tests4J_ParamsTrial extends SourceFileTrial {
-
+	
+	@SuppressWarnings("unused") //this fixes a issue 
+	// in our security manager which blocks thread creation during tests
+	private static final Logger log = LogManager.getLogManager().getLogger(Tests4J_ParamsTrial.class.getName());
 	
 	@Test
 	public void testDefaultParams() {
@@ -52,7 +57,7 @@ public class Tests4J_ParamsTrial extends SourceFileTrial {
 		Tests4J_Params params = new Tests4J_Params();
 		params.addTrial(Tests4J_ParamsTrial.class);
 		params.setCoveragePluginClass(ScopedJacocoPlugin.class);
-		String xml = params.toXmlString();
+		String xml = params.toXml();
 		assertUniform(
 				"<Tests4J_Params threadCount=\"org.adligo.tests4j.models.shared.system.SimpleThreadCount\" coveragePlugin=\"org.adligo.tests4j_4jacoco.plugin.ScopedJacocoPlugin\" >\n" +
 				"\t<SimpleThreadCount count=\"32\"/>\n" +
