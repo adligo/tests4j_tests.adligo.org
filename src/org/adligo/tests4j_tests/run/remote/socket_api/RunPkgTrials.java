@@ -2,11 +2,14 @@ package org.adligo.tests4j_tests.run.remote.socket_api;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.ConsoleHandler;
 
 import org.adligo.tests4j.models.shared.AbstractTrial;
 import org.adligo.tests4j.models.shared.system.I_TrialList;
 import org.adligo.tests4j.models.shared.system.Tests4J_Params;
+import org.adligo.tests4j.models.shared.system.report.ConsoleReporter;
 import org.adligo.tests4j.run.Tests4J;
+import org.adligo.tests4j_4jacoco.plugin.AbstractPlugin;
 import org.adligo.tests4j_4jacoco.plugin.ScopedJacocoPlugin;
 
 public class RunPkgTrials implements I_TrialList {
@@ -18,6 +21,11 @@ public class RunPkgTrials implements I_TrialList {
 		
 		ScopedJacocoPlugin plugin = new ScopedJacocoPlugin();
 		plugin.setWriteOutInstrumentedClassFiles(true);
+		
+		ConsoleReporter reporter = new ConsoleReporter();
+		reporter.setLogOn(AbstractPlugin.class);
+		reporter.setLogOn(ScopedJacocoPlugin.class);
+		params.setReporter(reporter);
 		
 		//TieredJacocoPlugin covargePlugin =new TieredJacocoPlugin();
 		params.setCoveragePluginClass(ScopedJacocoPlugin.class);

@@ -10,11 +10,11 @@ import org.adligo.tests4j.models.shared.system.I_TrialRunListener;
 import org.adligo.tests4j.models.shared.system.Tests4J_Params;
 import org.adligo.tests4j.models.shared.system.report.ConsoleReporter;
 import org.adligo.tests4j.run.Tests4J;
-import org.adligo.tests4j.run.helpers.TestRunable;
 import org.adligo.tests4j.run.helpers.Tests4J_NotificationManager;
 import org.adligo.tests4j.run.helpers.ThreadStateHelper;
 import org.adligo.tests4j.run.helpers.TrialInstancesProcessor;
 import org.adligo.tests4j.run.helpers.TrialProcessorControls;
+import org.adligo.tests4j_4jacoco.plugin.AbstractPlugin;
 import org.adligo.tests4j_4jacoco.plugin.ScopedJacocoPlugin;
 
 public class RunAllTrials implements I_TrialRunListener {

@@ -31,7 +31,6 @@ public class Tests4J_SocketMessageTrial extends SourceFileTrial {
 	@Test
 	public void testXmlErrors() {
 		//TODO working on this
-		/*
 		assertThrown(new ThrownAssertionData(
 				IllegalArgumentException.class, Tests4J_SocketMessage.REQUIRES_ERROR), 
 			new I_Thrower() {
@@ -41,6 +40,5 @@ public class Tests4J_SocketMessageTrial extends SourceFileTrial {
 				new Tests4J_SocketMessage(null);
 			}
 		});
-		*/
 	}
 }
