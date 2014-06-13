@@ -67,6 +67,7 @@ public class RunAllTrials implements I_TrialRunListener {
 		toRet.addTrials(new org.adligo.tests4j_tests.eclipse.RunPkgTrials());
 		
 		toRet.addTrials(new org.adligo.tests4j_tests.models.shared.asserts.RunPkgTrials());
+		toRet.addTrials(new org.adligo.tests4j_tests.models.shared.common.RunPkgTrials());
 		toRet.addTrials(new org.adligo.tests4j_tests.models.shared.system.RunPkgTrials());
 		toRet.addTrials(new org.adligo.tests4j_tests.models.shared.system.i18n.en.trials.asserts.RunPkgTrials());
 		
