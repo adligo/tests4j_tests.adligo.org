@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.adligo.tests4j.models.shared.AbstractTrial;
+import org.adligo.tests4j.models.shared.common.StringMethods;
 import org.adligo.tests4j.models.shared.system.I_TrialList;
 import org.adligo.tests4j.models.shared.system.Tests4J_Params;
 import org.adligo.tests4j.run.Tests4J;
@@ -17,6 +18,7 @@ public class RunPkgTrials implements I_TrialList {
 		params.addTrials(new RunPkgTrials());
 		
 		params.setCoveragePluginClass(ScopedJacocoPlugin.class);
+		params.setMetaTrialClass(CommonPackageMetaTrial.class);
 		Tests4J.run(params);
 	}
 
@@ -26,6 +28,10 @@ public class RunPkgTrials implements I_TrialList {
 		
 		trials.add(ClassUtilsTrial.class);
 		trials.add(MethodBlockerTrial.class);
+		trials.add(StringMethodsTrial.class);
+		trials.add(LineSeperatorTrial.class);
+		trials.add(TrialTypeEnumTrial.class);
+		
 		return trials;
 	}
 }

@@ -1,4 +1,4 @@
-package org.adligo.tests4j_tests;
+package org.adligo.tests4j_tests.models.shared.common;
 
 import java.util.Set;
 
@@ -7,11 +7,20 @@ import org.adligo.tests4j.models.shared.metadata.I_TrialRunMetadata;
 import org.adligo.tests4j.models.shared.metadata.RelevantClassesWithTrialsCalculator;
 import org.adligo.tests4j.models.shared.results.I_TrialRunResult;
 
-public class TheMetaTrial  extends MetaTrial {
+/**
+ * note there is usually only one MetaTrial
+ * per project, however due to the complexity 
+ * of tests4j this class assists in diagnosing
+ * issues in MetaTrials.
+ * 
+ * @author scott
+ *
+ */
+public class CommonPackageMetaTrial  extends MetaTrial {
 	private RelevantClassesWithTrialsCalculator calc;
 	
-	public TheMetaTrial() {
-		super(50.0, 7.2);
+	public CommonPackageMetaTrial() {
+		super(90.0, 100.0);
 	}
 	
 
@@ -25,14 +34,13 @@ public class TheMetaTrial  extends MetaTrial {
 			assertTrue("The passing trials should include " + trialName, 
 					passingTrials.contains(trialName));
 		}
-		
 		//this does not include the 3 tests in this TheMetaTrial 
 		// afterNonMetaTrialsRun, afterMetadataCalculated and 
 		// @Test methods in the MetaTrial implementation.
-		assertGreaterThanOrEquals(89.0, 0.0 + results.getTestsPassed());
+		assertGreaterThanOrEquals(7.0, 0.0 + results.getTestsPassed());
 		
-		assertGreaterThanOrEquals(16600.0 ,0.0 + results.getAsserts());
-		assertGreaterThanOrEquals(2500.0 ,0.0 + results.getUniqueAsserts());
+		assertGreaterThanOrEquals(26.0 ,0.0 + results.getAsserts());
+		assertGreaterThanOrEquals(19.0 ,0.0 + results.getUniqueAsserts());
 		
 		super.afterNonMetaTrialsRun(results);
 	}
@@ -40,13 +48,11 @@ public class TheMetaTrial  extends MetaTrial {
 	@Override
 	public void afterMetadataCalculated(I_TrialRunMetadata metadata) throws Exception {
 		calc = new RelevantClassesWithTrialsCalculator(metadata);
-		//this is also the package dependency tree;
-		assertGreaterThanOrEquals(100.0, calc.getPct("org.adligo.tests4j.models.shared.common"));
 		
 		// includes this
-		assertGreaterThanOrEquals(23.0, 0.0 + metadata.getAllTrialsCount());
+		assertGreaterThanOrEquals(6.0, 0.0 + metadata.getAllTrialsCount());
 		//includes three tests in here
-		assertGreaterThanOrEquals(92.0, 0.0 + metadata.getAllTestsCount());
+		assertGreaterThanOrEquals(10.0, 0.0 + metadata.getAllTestsCount());
 		//TODO assert percentage of source files with trials
 		super.afterMetadataCalculated(metadata);
 		
