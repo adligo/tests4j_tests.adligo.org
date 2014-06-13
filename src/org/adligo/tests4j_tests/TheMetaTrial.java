@@ -7,7 +7,7 @@ import org.adligo.tests4j.models.shared.results.I_TrialRunResult;
 public class TheMetaTrial  extends MetaTrial {
 
 	public TheMetaTrial() {
-		super(50.0, 1.0);
+		super(50.0, 4.0);
 	}
 
 	@Override

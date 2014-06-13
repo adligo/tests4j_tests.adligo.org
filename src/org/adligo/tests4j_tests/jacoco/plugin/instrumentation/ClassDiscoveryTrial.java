@@ -29,6 +29,7 @@ import org.adligo.tests4j.models.shared.metadata.I_TestMetadata;
 import org.adligo.tests4j.models.shared.metadata.I_TrialMetadata;
 import org.adligo.tests4j.models.shared.metadata.I_TrialRunMetadata;
 import org.adligo.tests4j.models.shared.metadata.I_UseCase;
+import org.adligo.tests4j.models.shared.metadata.RelevantClassesWithTrialsCalculator;
 import org.adligo.tests4j.models.shared.metadata.SourceInfo;
 import org.adligo.tests4j.models.shared.metadata.SourceInfoMutant;
 import org.adligo.tests4j.models.shared.metadata.TestMetadata;
@@ -57,6 +58,8 @@ public class ClassDiscoveryTrial extends SourceFileTrial {
 		assertContains(classNames, I_TrialRunMetadata.class.getName());
 		assertContains(classNames, I_UseCase.class.getName());
 		
+		assertContains(classNames, RelevantClassesWithTrialsCalculator.class.getName());
+		
 		assertContains(classNames, SourceInfo.class.getName());
 		assertContains(classNames, SourceInfoMutant.class.getName());
 		
@@ -69,7 +72,7 @@ public class ClassDiscoveryTrial extends SourceFileTrial {
 		assertContains(classNames, TrialRunMetadataMutant.class.getName());
 		assertContains(classNames, UseCase.class.getName());
 		
-		assertEquals(14, classNames.size());
+		assertEquals(15, classNames.size());
 		List<ClassDiscovery> children =  cd.getSubPackages();
 		assertEquals(0, children.size());
 		return cd;
