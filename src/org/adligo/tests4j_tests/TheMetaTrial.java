@@ -7,7 +7,7 @@ import org.adligo.tests4j.models.shared.results.I_TrialRunResult;
 public class TheMetaTrial  extends MetaTrial {
 
 	public TheMetaTrial() {
-		super(38.0, 1.0);
+		super(50.0, 1.0);
 	}
 
 	@Override
@@ -17,7 +17,7 @@ public class TheMetaTrial  extends MetaTrial {
 		// @Test methods in the MetaTrial implementation.
 		assertGreaterThanOrEquals(79.0, 0.0 + results.getTestsPassed());
 		
-		assertGreaterThanOrEquals(16626.0 ,0.0 + results.getAsserts());
+		assertGreaterThanOrEquals(16332.0 ,0.0 + results.getAsserts());
 		assertGreaterThanOrEquals(2139.0 ,0.0 + results.getUniqueAsserts());
 		
 		super.afterNonMetaTrialsRun(results);
