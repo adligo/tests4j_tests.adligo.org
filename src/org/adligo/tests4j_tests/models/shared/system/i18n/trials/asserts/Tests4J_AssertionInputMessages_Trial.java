@@ -8,7 +8,7 @@ import org.adligo.tests4j.models.shared.results.feedback.I_SourceFileTrial_Tests
 import org.adligo.tests4j.models.shared.system.i18n.en.trials.asserts.Tests4J_AssertionInputMessages;
 
 @SourceFileScope (sourceClass=Tests4J_AssertionInputMessages.class)
-public class Tests4J_Tests4J_AssertionInputMessages_Trial extends SourceFileTrial {
+public class Tests4J_AssertionInputMessages_Trial extends SourceFileTrial {
 
 	@Test
 	public void testMessages() {
