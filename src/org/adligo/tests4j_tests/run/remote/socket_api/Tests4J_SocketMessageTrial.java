@@ -3,8 +3,11 @@ package org.adligo.tests4j_tests.run.remote.socket_api;
 import org.adligo.tests4j.models.shared.SourceFileScope;
 import org.adligo.tests4j.models.shared.SourceFileTrial;
 import org.adligo.tests4j.models.shared.Test;
+import org.adligo.tests4j.models.shared.asserts.ExpectedThrownData;
 import org.adligo.tests4j.models.shared.asserts.I_Thrower;
 import org.adligo.tests4j.models.shared.asserts.ThrownAssertionData;
+import org.adligo.tests4j.models.shared.coverage.I_SourceFileCoverage;
+import org.adligo.tests4j.models.shared.results.feedback.I_SourceFileTrial_TestsResults;
 import org.adligo.tests4j.run.remote.socket_api.Tests4J_Commands;
 import org.adligo.tests4j.run.remote.socket_api.Tests4J_SocketMessage;
 
@@ -30,8 +33,7 @@ public class Tests4J_SocketMessageTrial extends SourceFileTrial {
 	
 	@Test
 	public void testXmlErrors() {
-		//TODO working on this
-		assertThrown(new ThrownAssertionData(
+		assertThrown(new ExpectedThrownData(
 				IllegalArgumentException.class, Tests4J_SocketMessage.REQUIRES_ERROR), 
 			new I_Thrower() {
 			
@@ -40,5 +42,36 @@ public class Tests4J_SocketMessageTrial extends SourceFileTrial {
 				new Tests4J_SocketMessage(null);
 			}
 		});
+		
+		assertThrown(new ExpectedThrownData(
+				IllegalArgumentException.class, Tests4J_SocketMessage.REQUIRES_ERROR), 
+			new I_Thrower() {
+			
+			@Override
+			public void run() {
+				new Tests4J_SocketMessage("hey");
+			}
+		});
+		
+		assertThrown(new ExpectedThrownData(
+				IllegalArgumentException.class, "Unknown Version null expecting 1.0."), 
+			new I_Thrower() {
+			
+			@Override
+			public void run() {
+				new Tests4J_SocketMessage(Tests4J_SocketMessage.MESSAGE_START);
+			}
+		});
+	}
+
+	@Override
+	public void afterTrialTests(I_SourceFileTrial_TestsResults p) {
+		assertGreaterThanOrEquals(7.0, p.getAssertions());
+		assertGreaterThanOrEquals(4.0, p.getUniqueAssertions());
+		
+		if (p.hasRecordedCoverage()) {
+			I_SourceFileCoverage coverage = p.getCoverage();
+			assertGreaterThanOrEquals(40.0, coverage.getPercentageCoveredDouble());
+		}
 	}
 }
