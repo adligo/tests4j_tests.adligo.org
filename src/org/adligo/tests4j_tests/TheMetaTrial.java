@@ -7,7 +7,7 @@ import org.adligo.tests4j.models.shared.results.I_TrialRunResult;
 public class TheMetaTrial  extends MetaTrial {
 
 	public TheMetaTrial() {
-		super(50.0, 4.5);
+		super(50.0, 5.0);
 	}
 
 	@Override
@@ -15,7 +15,7 @@ public class TheMetaTrial  extends MetaTrial {
 		//this does not include the 3 tests in this TheMetaTrial 
 		// afterNonMetaTrialsRun, afterMetadataCalculated and 
 		// @Test methods in the MetaTrial implementation.
-		assertGreaterThanOrEquals(81.0, 0.0 + results.getTestsPassed());
+		assertGreaterThanOrEquals(83.0, 0.0 + results.getTestsPassed());
 		
 		assertGreaterThanOrEquals(16332.0 ,0.0 + results.getAsserts());
 		assertGreaterThanOrEquals(2139.0 ,0.0 + results.getUniqueAsserts());
@@ -26,9 +26,9 @@ public class TheMetaTrial  extends MetaTrial {
 	@Override
 	public void afterMetadataCalculated(I_TrialRunMetadata metadata) {
 		// includes this
-		assertGreaterThanOrEquals(18.0, 0.0 + metadata.getAllTrialsCount());
+		assertGreaterThanOrEquals(19.0, 0.0 + metadata.getAllTrialsCount());
 		//includes three tests in here
-		assertGreaterThanOrEquals(84.0, 0.0 + metadata.getAllTestsCount());
+		assertGreaterThanOrEquals(86.0, 0.0 + metadata.getAllTestsCount());
 		//TODO assert percentage of source files with trials
 		super.afterMetadataCalculated(metadata);
 	}

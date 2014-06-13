@@ -1,4 +1,4 @@
-package org.adligo.tests4j_tests.models.shared.system.i18n.trials.asserts;
+package org.adligo.tests4j_tests.models.shared.system.i18n.en.trials.asserts;
 
 import java.util.ArrayList;
 import java.util.List;
