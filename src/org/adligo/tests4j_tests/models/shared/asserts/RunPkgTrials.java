@@ -24,6 +24,7 @@ public class RunPkgTrials implements I_TrialList {
 	public List<Class<? extends AbstractTrial>> getTrials() {
 		List<Class<? extends AbstractTrial>> trials = new ArrayList<Class<? extends AbstractTrial>>();
 		
+		trials.add(AbstractAssertCommandTrial.class);
 		trials.add(ExpectedThrownDataTrial.class);
 		return trials;
 	}

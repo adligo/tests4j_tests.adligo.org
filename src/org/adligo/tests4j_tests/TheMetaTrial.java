@@ -11,7 +11,7 @@ public class TheMetaTrial  extends MetaTrial {
 	private RelevantClassesWithTrialsCalculator calc;
 	
 	public TheMetaTrial() {
-		super(50.0, 7.2);
+		super(50.0, 7.7);
 	}
 	
 
@@ -29,9 +29,9 @@ public class TheMetaTrial  extends MetaTrial {
 		//this does not include the 3 tests in this TheMetaTrial 
 		// afterNonMetaTrialsRun, afterMetadataCalculated and 
 		// @Test methods in the MetaTrial implementation.
-		assertGreaterThanOrEquals(89.0, 0.0 + results.getTestsPassed());
+		assertGreaterThanOrEquals(92.0, 0.0 + results.getTestsPassed());
 		
-		assertGreaterThanOrEquals(16600.0 ,0.0 + results.getAsserts());
+		assertGreaterThanOrEquals(16650.0 ,0.0 + results.getAsserts());
 		assertGreaterThanOrEquals(2500.0 ,0.0 + results.getUniqueAsserts());
 		
 		super.afterNonMetaTrialsRun(results);
@@ -44,9 +44,9 @@ public class TheMetaTrial  extends MetaTrial {
 		assertGreaterThanOrEquals(100.0, calc.getPct("org.adligo.tests4j.models.shared.common"));
 		
 		// includes this
-		assertGreaterThanOrEquals(23.0, 0.0 + metadata.getAllTrialsCount());
+		assertGreaterThanOrEquals(25.0, 0.0 + metadata.getAllTrialsCount());
 		//includes three tests in here
-		assertGreaterThanOrEquals(92.0, 0.0 + metadata.getAllTestsCount());
+		assertGreaterThanOrEquals(95.0, 0.0 + metadata.getAllTestsCount());
 		//TODO assert percentage of source files with trials
 		super.afterMetadataCalculated(metadata);
 		
