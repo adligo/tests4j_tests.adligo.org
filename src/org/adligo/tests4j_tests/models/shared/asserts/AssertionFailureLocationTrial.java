@@ -7,6 +7,8 @@ import org.adligo.tests4j.models.shared.SourceFileTrial;
 import org.adligo.tests4j.models.shared.Test;
 import org.adligo.tests4j.models.shared.asserts.AssertionFailureLocation;
 import org.adligo.tests4j.models.shared.common.PlatformEnum;
+import org.adligo.tests4j.models.shared.coverage.I_SourceFileCoverage;
+import org.adligo.tests4j.models.shared.results.feedback.I_SourceFileTrial_TestsResults;
 import org.adligo.tests4j.run.helpers.TestRunable;
 
 @SourceFileScope (sourceClass=AssertionFailureLocation.class)
@@ -22,20 +24,19 @@ public class AssertionFailureLocationTrial extends SourceFileTrial {
 		StackTraceElement e = elements[0];
 		assertEquals(AssertionFailureLocationTrial.class.getName(),  e.getClassName());
 		assertEquals("testAssertionStack",  e.getMethodName());
-		assertEquals(18,  e.getLineNumber());
+		assertEquals(20,  e.getLineNumber());
 		
-		if (super.getPlatform() == PlatformEnum.JSE) {
-			int index = 1;
-			//skip the sun package
-			while (!Method.class.getName().equals(e.getClassName())) {
-				e = elements[index++];
-			}
-			assertEquals(Method.class.getName(),  e.getClassName());
-			assertEquals("invoke",  e.getMethodName());
-			
-			e = elements[index++];
-			assertEquals(TestRunable.class.getName(),  e.getClassName());
-			assertEquals("run",  e.getMethodName());
+		StackAssertions.assertAssertionFailureLocation_StackWasFromTests4J(this, afl);
+	}
+	
+	@Override
+	public void afterTrialTests(I_SourceFileTrial_TestsResults p) {
+		assertGreaterThanOrEquals(7.0, p.getAssertions());
+		assertGreaterThanOrEquals(7.0, p.getUniqueAssertions());
+		
+		if (p.hasRecordedCoverage()) {
+			I_SourceFileCoverage coverage = p.getCoverage();
+			assertGreaterThanOrEquals(100.0, coverage.getPercentageCoveredDouble());
 		}
 	}
 }

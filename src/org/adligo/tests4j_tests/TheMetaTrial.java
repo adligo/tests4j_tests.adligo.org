@@ -8,7 +8,6 @@ import org.adligo.tests4j.models.shared.metadata.RelevantClassesWithTrialsCalcul
 import org.adligo.tests4j.models.shared.results.I_TrialRunResult;
 
 public class TheMetaTrial  extends MetaTrial {
-	private RelevantClassesWithTrialsCalculator calc;
 	
 	public TheMetaTrial() {
 		super(52.0, 9.0);
@@ -17,14 +16,8 @@ public class TheMetaTrial  extends MetaTrial {
 
 	@Override
 	public void afterNonMetaTrialsRun(I_TrialRunResult results) throws Exception {
-		Set<String> passingTrials = results.getPassingTrials();
-		//this is also the package dependency tree;
-		Set<String> trialNames = calc.getSourceFileTrialNames("org.adligo.tests4j.models.shared.common");
-		assertEquals(6, trialNames.size());
-		for (String trialName: trialNames) {
-			assertTrue("The passing trials should include " + trialName, 
-					passingTrials.contains(trialName));
-		}
+		super.assertPackageTrialsPassed(results, "org.adligo.tests4j.models.shared.common", 6);
+		super.assertPackageTrialsPassed(results, "org.adligo.tests4j.models.shared.asserts", 5);
 		
 		//this does not include the 3 tests in this TheMetaTrial 
 		// afterNonMetaTrialsRun, afterMetadataCalculated and 
@@ -39,16 +32,18 @@ public class TheMetaTrial  extends MetaTrial {
 
 	@Override
 	public void afterMetadataCalculated(I_TrialRunMetadata metadata) throws Exception {
-		calc = new RelevantClassesWithTrialsCalculator(metadata);
-		//this is also the package dependency tree;
+		super.afterMetadataCalculated(metadata);
+		RelevantClassesWithTrialsCalculator calc = super.getCalculator();
+		
+		//this assert is also for the child-packages;
 		assertGreaterThanOrEquals(100.0, calc.getPct("org.adligo.tests4j.models.shared.common"));
+		assertGreaterThanOrEquals(10.0, calc.getPct("org.adligo.tests4j.models.shared.asserts"));
 		
 		// includes this
 		assertGreaterThanOrEquals(28.0, 0.0 + metadata.getAllTrialsCount());
 		//includes three tests in here
 		assertGreaterThanOrEquals(99.0, 0.0 + metadata.getAllTestsCount());
-		//TODO assert percentage of source files with trials
-		super.afterMetadataCalculated(metadata);
+		
 		
 		
 	}
