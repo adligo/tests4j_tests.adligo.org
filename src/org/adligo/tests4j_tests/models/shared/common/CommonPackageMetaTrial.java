@@ -29,7 +29,7 @@ public class CommonPackageMetaTrial  extends MetaTrial {
 		Set<String> passingTrials = results.getPassingTrials();
 		//this is also the package dependency tree;
 		Set<String> trialNames = calc.getSourceFileTrialNames("org.adligo.tests4j.models.shared.common");
-		assertEquals(5, trialNames.size());
+		assertEquals(6, trialNames.size());
 		for (String trialName: trialNames) {
 			assertTrue("The passing trials should include " + trialName, 
 					passingTrials.contains(trialName));

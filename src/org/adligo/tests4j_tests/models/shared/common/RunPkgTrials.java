@@ -28,6 +28,7 @@ public class RunPkgTrials implements I_TrialList {
 		
 		trials.add(ClassUtilsTrial.class);
 		trials.add(MethodBlockerTrial.class);
+		trials.add(PlatformEnumTrial.class);
 		trials.add(StringMethodsTrial.class);
 		trials.add(LineSeperatorTrial.class);
 		trials.add(TrialTypeEnumTrial.class);
