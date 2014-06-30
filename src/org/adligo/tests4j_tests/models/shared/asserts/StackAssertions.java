@@ -2,7 +2,7 @@ package org.adligo.tests4j_tests.models.shared.asserts;
 
 import java.lang.reflect.Method;
 
-import org.adligo.tests4j.models.shared.asserts.I_Asserts;
+import org.adligo.tests4j.models.shared.asserts.common.I_Asserts;
 import org.adligo.tests4j.models.shared.common.PlatformEnum;
 import org.adligo.tests4j.run.helpers.TestRunable;
 

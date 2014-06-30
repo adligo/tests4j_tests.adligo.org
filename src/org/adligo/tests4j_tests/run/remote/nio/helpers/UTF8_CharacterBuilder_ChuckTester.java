@@ -10,7 +10,7 @@ import java.util.Map.Entry;
 import java.util.Set;
 import java.util.concurrent.ArrayBlockingQueue;
 
-import org.adligo.tests4j.models.shared.asserts.I_Asserts;
+import org.adligo.tests4j.models.shared.asserts.common.I_Asserts;
 import org.adligo.tests4j.run.remote.nio.UTF8_CharacterBuilder;
 
 
