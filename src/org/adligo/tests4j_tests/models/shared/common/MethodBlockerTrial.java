@@ -2,14 +2,14 @@ package org.adligo.tests4j_tests.models.shared.common;
 
 import java.util.Collections;
 
-import org.adligo.tests4j.models.shared.SourceFileScope;
-import org.adligo.tests4j.models.shared.SourceFileTrial;
-import org.adligo.tests4j.models.shared.Test;
 import org.adligo.tests4j.models.shared.asserts.ExpectedThrownData;
 import org.adligo.tests4j.models.shared.asserts.common.I_Thrower;
 import org.adligo.tests4j.models.shared.common.MethodBlocker;
 import org.adligo.tests4j.models.shared.coverage.I_SourceFileCoverage;
 import org.adligo.tests4j.models.shared.results.feedback.I_SourceFileTrial_TestsResults;
+import org.adligo.tests4j.models.shared.trials.SourceFileScope;
+import org.adligo.tests4j.models.shared.trials.SourceFileTrial;
+import org.adligo.tests4j.models.shared.trials.Test;
 import org.adligo.tests4j_tests.models.shared.common.mocks.MockWithMethodBlocker;
 
 @SourceFileScope (sourceClass=MethodBlocker.class)

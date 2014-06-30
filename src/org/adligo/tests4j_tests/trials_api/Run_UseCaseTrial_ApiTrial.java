@@ -2,15 +2,15 @@ package org.adligo.tests4j_tests.trials_api;
 
 import java.util.List;
 
-import org.adligo.tests4j.models.shared.ApiTrial;
-import org.adligo.tests4j.models.shared.IgnoreTest;
-import org.adligo.tests4j.models.shared.PackageScope;
-import org.adligo.tests4j.models.shared.Test;
 import org.adligo.tests4j.models.shared.metadata.I_TestMetadata;
 import org.adligo.tests4j.models.shared.metadata.I_TrialMetadata;
 import org.adligo.tests4j.models.shared.metadata.I_TrialRunMetadata;
 import org.adligo.tests4j.models.shared.results.I_TrialFailure;
 import org.adligo.tests4j.models.shared.results.I_TrialResult;
+import org.adligo.tests4j.models.shared.trials.ApiTrial;
+import org.adligo.tests4j.models.shared.trials.IgnoreTest;
+import org.adligo.tests4j.models.shared.trials.PackageScope;
+import org.adligo.tests4j.models.shared.trials.Test;
 import org.adligo.tests4j_tests.trials_api.mock_use_case_trials.AbstractTestTrial;
 import org.adligo.tests4j_tests.trials_api.mock_use_case_trials.AfterTrialHasParamsTrial;
 import org.adligo.tests4j_tests.trials_api.mock_use_case_trials.AfterTrialNotPublicTrial;

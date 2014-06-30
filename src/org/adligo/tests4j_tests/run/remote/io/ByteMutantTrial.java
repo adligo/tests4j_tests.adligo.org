@@ -1,11 +1,11 @@
-package org.adligo.tests4j_tests.run.remote.nio;
+package org.adligo.tests4j_tests.run.remote.io;
 
-import org.adligo.tests4j.models.shared.SourceFileScope;
-import org.adligo.tests4j.models.shared.SourceFileTrial;
-import org.adligo.tests4j.models.shared.Test;
 import org.adligo.tests4j.models.shared.coverage.I_SourceFileCoverage;
 import org.adligo.tests4j.models.shared.results.feedback.I_SourceFileTrial_TestsResults;
-import org.adligo.tests4j.run.remote.nio.ByteMutant;
+import org.adligo.tests4j.models.shared.trials.SourceFileScope;
+import org.adligo.tests4j.models.shared.trials.SourceFileTrial;
+import org.adligo.tests4j.models.shared.trials.Test;
+import org.adligo.tests4j.run.remote.io.ByteMutant;
 
 
 @SourceFileScope (sourceClass=ByteMutant.class)

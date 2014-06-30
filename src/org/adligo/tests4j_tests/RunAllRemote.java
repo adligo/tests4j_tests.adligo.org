@@ -4,9 +4,9 @@ import java.net.InetAddress;
 import java.net.UnknownHostException;
 
 import org.adligo.tests4j.models.shared.system.I_Tests4J_Controls;
+import org.adligo.tests4j.models.shared.system.I_Tests4J_Reporter;
 import org.adligo.tests4j.models.shared.system.Tests4J_Params;
 import org.adligo.tests4j.models.shared.system.Tests4J_RemoteInfo;
-import org.adligo.tests4j.models.shared.system.report.I_Tests4J_Reporter;
 import org.adligo.tests4j.run.Tests4J;
 import org.adligo.tests4j.run.remote.Tests4J_RemoteRunner;
 import org.adligo.tests4j_4jacoco.plugin.ScopedJacocoPlugin;

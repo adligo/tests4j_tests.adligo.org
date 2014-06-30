@@ -1,14 +1,14 @@
 package org.adligo.tests4j_tests;
 
-import org.adligo.tests4j.models.shared.MetaTrial;
 import org.adligo.tests4j.models.shared.metadata.I_TrialRunMetadata;
 import org.adligo.tests4j.models.shared.metadata.RelevantClassesWithTrialsCalculator;
 import org.adligo.tests4j.models.shared.results.I_TrialRunResult;
+import org.adligo.tests4j.models.shared.trials.MetaTrial;
 
 public class TheMetaTrial  extends MetaTrial {
 	
 	public TheMetaTrial() {
-		super(51.0, 9.2);
+		super(27.0, 9.2);
 	}
 	
 

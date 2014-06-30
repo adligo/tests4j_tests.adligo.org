@@ -1,7 +1,7 @@
-package org.adligo.tests4j_tests.run.remote.nio.helpers;
+package org.adligo.tests4j_tests.run.remote.io.helpers;
 
-import org.adligo.tests4j.run.remote.nio.Bits;
-import org.adligo.tests4j.run.remote.nio.ByteMutant;
+import org.adligo.tests4j.run.remote.io.Bits;
+import org.adligo.tests4j.run.remote.io.ByteMutant;
 
 /**
  * this class counts up using the UTF8 

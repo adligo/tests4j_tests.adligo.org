@@ -8,24 +8,24 @@ import org.adligo.tests4j.models.shared.results.I_TrialRunResult;
 import org.adligo.tests4j.models.shared.system.I_Tests4J_Controls;
 import org.adligo.tests4j.models.shared.system.I_TrialRunListener;
 import org.adligo.tests4j.models.shared.system.Tests4J_Params;
-import org.adligo.tests4j.models.shared.system.report.ConsoleReporter;
 import org.adligo.tests4j.run.Tests4J;
 import org.adligo.tests4j.run.helpers.Tests4J_NotificationManager;
 import org.adligo.tests4j.run.helpers.ThreadStateHelper;
 import org.adligo.tests4j.run.helpers.TrialInstancesProcessor;
 import org.adligo.tests4j.run.helpers.TrialProcessorControls;
+import org.adligo.tests4j.shared.report.summary.SummaryReporter;
 import org.adligo.tests4j_4jacoco.plugin.AbstractPlugin;
 import org.adligo.tests4j_4jacoco.plugin.ScopedJacocoPlugin;
 
 public class RunAllTrials implements I_TrialRunListener {
 	static long start = System.currentTimeMillis();
-	static ConsoleReporter reporter;
+	static SummaryReporter reporter;
 	
 	public static void main(String [] args) {
 		
 		
 		Tests4J_Params params = getTests();
-		reporter = new ConsoleReporter();
+		reporter = new SummaryReporter();
 		//reporter.setListRelevantClassesWithoutTrials(true);
 		//reporter.setListRelevantClassesWithoutTrials(true);
 		reporter.setLogOn(Tests4J_NotificationManager.class);
@@ -69,13 +69,13 @@ public class RunAllTrials implements I_TrialRunListener {
 		toRet.addTrials(new org.adligo.tests4j_tests.models.shared.asserts.RunPkgTrials());
 		toRet.addTrials(new org.adligo.tests4j_tests.models.shared.common.RunPkgTrials());
 		toRet.addTrials(new org.adligo.tests4j_tests.models.shared.system.RunPkgTrials());
-		toRet.addTrials(new org.adligo.tests4j_tests.models.shared.system.i18n.en.trials.asserts.RunPkgTrials());
+		toRet.addTrials(new org.adligo.tests4j_tests.models.shared.en.trials.asserts.RunPkgTrials());
 		
 		toRet.addTrials(new org.adligo.tests4j_tests.jacoco.api_trials.RunPkgTrials());
 		toRet.addTrials(new org.adligo.tests4j_tests.jacoco.plugin.instrumentation.RunPkgTrials());
 		
 		toRet.addTrials(new org.adligo.tests4j_tests.run.discovery.RunPkgTrials());
-		toRet.addTrials(new org.adligo.tests4j_tests.run.remote.nio.RunPkgTrials());
+		toRet.addTrials(new org.adligo.tests4j_tests.run.remote.io.RunPkgTrials());
 		toRet.addTrials(new org.adligo.tests4j_tests.run.remote.socket_api.RunPkgTrials());
 		
 		toRet.addTrials(new org.adligo.tests4j_tests.trials_api.RunPkgTrials());

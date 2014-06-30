@@ -1,11 +1,11 @@
-package org.adligo.tests4j_tests.models.shared.system.i18n.en.trials.asserts;
+package org.adligo.tests4j_tests.models.shared.en.trials.asserts;
 
-import org.adligo.tests4j.models.shared.SourceFileScope;
-import org.adligo.tests4j.models.shared.SourceFileTrial;
-import org.adligo.tests4j.models.shared.Test;
 import org.adligo.tests4j.models.shared.coverage.I_SourceFileCoverage;
+import org.adligo.tests4j.models.shared.en.asserts.Tests4J_AssertionInputMessages;
 import org.adligo.tests4j.models.shared.results.feedback.I_SourceFileTrial_TestsResults;
-import org.adligo.tests4j.models.shared.system.i18n.en.trials.asserts.Tests4J_AssertionInputMessages;
+import org.adligo.tests4j.models.shared.trials.SourceFileScope;
+import org.adligo.tests4j.models.shared.trials.SourceFileTrial;
+import org.adligo.tests4j.models.shared.trials.Test;
 
 @SourceFileScope (sourceClass=Tests4J_AssertionInputMessages.class)
 public class Tests4J_AssertionInputMessages_Trial extends SourceFileTrial {

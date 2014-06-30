@@ -1,8 +1,8 @@
 package org.adligo.tests4j_tests.trials_api;
 
-import org.adligo.tests4j.models.shared.ApiTrial;
-import org.adligo.tests4j.models.shared.PackageScope;
-import org.adligo.tests4j.models.shared.Test;
+import org.adligo.tests4j.models.shared.trials.ApiTrial;
+import org.adligo.tests4j.models.shared.trials.PackageScope;
+import org.adligo.tests4j.models.shared.trials.Test;
 
 @PackageScope (packageName = "org.adligo.tests4j")
 public class Assert_FailConditions_Trial extends ApiTrial {

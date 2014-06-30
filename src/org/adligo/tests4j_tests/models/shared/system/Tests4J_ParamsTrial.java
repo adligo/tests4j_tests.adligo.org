@@ -6,15 +6,15 @@ import java.util.Map;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
 
-import org.adligo.tests4j.models.shared.I_Trial;
-import org.adligo.tests4j.models.shared.SourceFileScope;
-import org.adligo.tests4j.models.shared.SourceFileTrial;
-import org.adligo.tests4j.models.shared.Test;
 import org.adligo.tests4j.models.shared.coverage.I_SourceFileCoverage;
 import org.adligo.tests4j.models.shared.results.feedback.I_SourceFileTrial_TestsResults;
 import org.adligo.tests4j.models.shared.system.I_CoveragePlugin;
 import org.adligo.tests4j.models.shared.system.I_ThreadCount;
 import org.adligo.tests4j.models.shared.system.Tests4J_Params;
+import org.adligo.tests4j.models.shared.trials.I_Trial;
+import org.adligo.tests4j.models.shared.trials.SourceFileScope;
+import org.adligo.tests4j.models.shared.trials.SourceFileTrial;
+import org.adligo.tests4j.models.shared.trials.Test;
 import org.adligo.tests4j_4jacoco.plugin.ScopedJacocoPlugin;
 
 

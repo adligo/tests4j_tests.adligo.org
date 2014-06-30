@@ -2,9 +2,6 @@ package org.adligo.tests4j_tests.models.shared.asserts;
 
 import java.lang.reflect.Method;
 
-import org.adligo.tests4j.models.shared.SourceFileScope;
-import org.adligo.tests4j.models.shared.SourceFileTrial;
-import org.adligo.tests4j.models.shared.Test;
 import org.adligo.tests4j.models.shared.asserts.AssertionProcessor;
 import org.adligo.tests4j.models.shared.asserts.BooleanAssertCommand;
 import org.adligo.tests4j.models.shared.asserts.ExpectedThrownData;
@@ -19,6 +16,9 @@ import org.adligo.tests4j.models.shared.coverage.I_SourceFileCoverage;
 import org.adligo.tests4j.models.shared.results.I_TestFailure;
 import org.adligo.tests4j.models.shared.results.feedback.I_SourceFileTrial_TestsResults;
 import org.adligo.tests4j.models.shared.system.I_AssertListener;
+import org.adligo.tests4j.models.shared.trials.SourceFileScope;
+import org.adligo.tests4j.models.shared.trials.SourceFileTrial;
+import org.adligo.tests4j.models.shared.trials.Test;
 import org.adligo.tests4j.run.helpers.TestRunable;
 
 @SourceFileScope (sourceClass=AssertionProcessor.class)

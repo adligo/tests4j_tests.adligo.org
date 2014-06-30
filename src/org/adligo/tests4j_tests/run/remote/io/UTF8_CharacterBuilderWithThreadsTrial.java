@@ -1,24 +1,24 @@
-package org.adligo.tests4j_tests.run.remote.nio;
+package org.adligo.tests4j_tests.run.remote.io;
 
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import org.adligo.tests4j.models.shared.AdditionalInstrumentation;
-import org.adligo.tests4j.models.shared.AfterTrial;
-import org.adligo.tests4j.models.shared.BeforeTrial;
-import org.adligo.tests4j.models.shared.IgnoreTest;
-import org.adligo.tests4j.models.shared.SourceFileScope;
-import org.adligo.tests4j.models.shared.SourceFileTrial;
-import org.adligo.tests4j.models.shared.Test;
 import org.adligo.tests4j.models.shared.coverage.I_SourceFileCoverage;
 import org.adligo.tests4j.models.shared.results.feedback.I_SourceFileTrial_TestsResults;
-import org.adligo.tests4j.run.remote.nio.UTF8_CharacterBuilder;
-import org.adligo.tests4j_tests.run.remote.nio.helpers.I_UTF8_TestProgressMonitor;
-import org.adligo.tests4j_tests.run.remote.nio.helpers.StartCapture;
-import org.adligo.tests4j_tests.run.remote.nio.helpers.UTF8_Generator;
-import org.adligo.tests4j_tests.run.remote.nio.helpers.UTF8_CharacterBuilder_ChuckTester;
+import org.adligo.tests4j.models.shared.trials.AdditionalInstrumentation;
+import org.adligo.tests4j.models.shared.trials.AfterTrial;
+import org.adligo.tests4j.models.shared.trials.BeforeTrial;
+import org.adligo.tests4j.models.shared.trials.IgnoreTest;
+import org.adligo.tests4j.models.shared.trials.SourceFileScope;
+import org.adligo.tests4j.models.shared.trials.SourceFileTrial;
+import org.adligo.tests4j.models.shared.trials.Test;
+import org.adligo.tests4j.run.remote.io.UTF8_CharacterBuilder;
+import org.adligo.tests4j_tests.run.remote.io.helpers.I_UTF8_TestProgressMonitor;
+import org.adligo.tests4j_tests.run.remote.io.helpers.StartCapture;
+import org.adligo.tests4j_tests.run.remote.io.helpers.UTF8_CharacterBuilder_ChuckTester;
+import org.adligo.tests4j_tests.run.remote.io.helpers.UTF8_Generator;
 
 /**
  * This class tests the UTF8 charset
@@ -108,7 +108,7 @@ public class UTF8_CharacterBuilderWithThreadsTrial extends SourceFileTrial imple
 	
 	/**
 	 * (non-Javadoc)
-	 * @see org.adligo.tests4j.models.shared.SourceFileTrial#afterTrialTests(org.adligo.tests4j.models.shared.coverage.I_SourceFileCoverage)
+	 * @see org.adligo.tests4j.models.shared.trials.SourceFileTrial#afterTrialTests(org.adligo.tests4j.models.shared.coverage.I_SourceFileCoverage)
 	 */
 	@Override
 	public void afterTrialTests(I_SourceFileTrial_TestsResults p) {

@@ -3,10 +3,10 @@ package org.adligo.tests4j_tests.models.shared.common;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.adligo.tests4j.models.shared.AbstractTrial;
 import org.adligo.tests4j.models.shared.common.StringMethods;
 import org.adligo.tests4j.models.shared.system.I_TrialList;
 import org.adligo.tests4j.models.shared.system.Tests4J_Params;
+import org.adligo.tests4j.models.shared.trials.AbstractTrial;
 import org.adligo.tests4j.run.Tests4J;
 import org.adligo.tests4j_4jacoco.plugin.ScopedJacocoPlugin;
 

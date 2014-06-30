@@ -5,15 +5,15 @@ import java.util.List;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-import org.adligo.tests4j.models.shared.AbstractTrial;
-import org.adligo.tests4j.models.shared.I_Trial;
 import org.adligo.tests4j.models.shared.metadata.I_TrialRunMetadata;
 import org.adligo.tests4j.models.shared.results.I_TrialResult;
 import org.adligo.tests4j.models.shared.results.I_TrialRunResult;
 import org.adligo.tests4j.models.shared.system.I_TrialRunListener;
 import org.adligo.tests4j.models.shared.system.Tests4J_Params;
-import org.adligo.tests4j.models.shared.system.report.ConsoleReporter;
+import org.adligo.tests4j.models.shared.trials.AbstractTrial;
+import org.adligo.tests4j.models.shared.trials.I_Trial;
 import org.adligo.tests4j.run.Tests4J;
+import org.adligo.tests4j.shared.report.summary.SummaryReporter;
 
 /**
  * simulates a run of tests4j
@@ -39,7 +39,7 @@ public class ExpectedFailureRunner implements I_TrialRunListener {
 		Tests4J_Params params = new Tests4J_Params();
 		size = trials.size();
 		params.setTrials(trials);
-		ConsoleReporter silentReporter = new ConsoleReporter();
+		SummaryReporter silentReporter = new SummaryReporter();
 		silentReporter.setLogOff();
 		//silentReporter.setLogOn(TrialDescription.class.getName());
 		silentReporter.setRedirect(false);

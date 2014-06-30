@@ -3,17 +3,17 @@ package org.adligo.tests4j_tests;
 import org.adligo.tests4j.models.shared.system.I_CoveragePlugin;
 import org.adligo.tests4j.models.shared.system.I_CoveragePluginConfigurator;
 import org.adligo.tests4j.models.shared.system.Tests4J_Params;
-import org.adligo.tests4j.models.shared.system.report.ConsoleReporter;
 import org.adligo.tests4j.run.Tests4J;
 import org.adligo.tests4j.run.helpers.Tests4J_Memory;
 import org.adligo.tests4j.run.helpers.Tests4J_NotificationManager;
 import org.adligo.tests4j.run.helpers.Tests4J_SecurityManager;
 import org.adligo.tests4j.run.helpers.TrialInstancesProcessor;
 import org.adligo.tests4j.run.helpers.TrialsProcessor;
+import org.adligo.tests4j.shared.report.summary.SummaryReporter;
 import org.adligo.tests4j_4jacoco.plugin.AbstractPlugin;
 import org.adligo.tests4j_4jacoco.plugin.Recorder;
 import org.adligo.tests4j_4jacoco.plugin.ScopedJacocoPlugin;
-import org.adligo.tests4j_tests.run.remote.nio.UTF8_CharacterBuilderWithThreadsTrial;
+import org.adligo.tests4j_tests.run.remote.io.UTF8_CharacterBuilderWithThreadsTrial;
 import org.adligo.tests4j_tests.trials_api.Run_ApiTrial_ApiTrial;
 
 public class RunSingleTrial {
@@ -27,7 +27,7 @@ public class RunSingleTrial {
 				".testNoUseCaseAnnotation");
 				*/
 		//params.addTrial(Tests4J_ParamsTrial.class);
-		ConsoleReporter reporter = new ConsoleReporter();
+		SummaryReporter reporter = new SummaryReporter();
 		
 		params.addLoggingClass(AbstractPlugin.class);
 		params.addLoggingClass(Tests4J_NotificationManager.class);

@@ -5,18 +5,18 @@ import java.util.List;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-import org.adligo.tests4j.models.shared.I_Trial;
 import org.adligo.tests4j.models.shared.metadata.I_TrialRunMetadata;
 import org.adligo.tests4j.models.shared.results.I_TrialResult;
 import org.adligo.tests4j.models.shared.results.I_TrialRunResult;
 import org.adligo.tests4j.models.shared.system.I_TrialRunListener;
 import org.adligo.tests4j.models.shared.system.Tests4J_Params;
-import org.adligo.tests4j.models.shared.system.report.ConsoleReporter;
+import org.adligo.tests4j.models.shared.trials.I_Trial;
 import org.adligo.tests4j.run.Tests4J;
+import org.adligo.tests4j.shared.report.summary.SummaryReporter;
 
 public class ExpectedPassRunner implements I_TrialRunListener {
 	private I_TrialRunMetadata metadata;
-	ConsoleReporter silentReporter = new ConsoleReporter();
+	SummaryReporter silentReporter = new SummaryReporter();
 	
 	private int size = 0;
 	private ArrayBlockingQueue<List<I_TrialResult>> block = new ArrayBlockingQueue<List<I_TrialResult>>(1);

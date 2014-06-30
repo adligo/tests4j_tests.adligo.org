@@ -1,10 +1,10 @@
 package org.adligo.tests4j_tests.run.remote.socket_api;
 
-import org.adligo.tests4j.models.shared.SourceFileScope;
-import org.adligo.tests4j.models.shared.SourceFileTrial;
-import org.adligo.tests4j.models.shared.Test;
 import org.adligo.tests4j.models.shared.coverage.I_SourceFileCoverage;
 import org.adligo.tests4j.models.shared.results.feedback.I_SourceFileTrial_TestsResults;
+import org.adligo.tests4j.models.shared.trials.SourceFileScope;
+import org.adligo.tests4j.models.shared.trials.SourceFileTrial;
+import org.adligo.tests4j.models.shared.trials.Test;
 import org.adligo.tests4j.run.remote.socket_api.Tests4J_Commands;
 
 @SourceFileScope (sourceClass=Tests4J_Commands.class)

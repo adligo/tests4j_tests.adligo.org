@@ -3,9 +3,9 @@ package org.adligo.tests4j_tests.trials_api;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 
-import org.adligo.tests4j.models.shared.ApiTrial;
-import org.adligo.tests4j.models.shared.PackageScope;
-import org.adligo.tests4j.models.shared.Test;
+import org.adligo.tests4j.models.shared.trials.ApiTrial;
+import org.adligo.tests4j.models.shared.trials.PackageScope;
+import org.adligo.tests4j.models.shared.trials.Test;
 
 @PackageScope (packageName = "org.adligo.tests4j")
 public class Assert_PassConditions_Trial extends ApiTrial {

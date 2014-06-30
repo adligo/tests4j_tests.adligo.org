@@ -1,4 +1,4 @@
-package org.adligo.tests4j_tests.run.remote.nio.helpers;
+package org.adligo.tests4j_tests.run.remote.io.helpers;
 
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
@@ -11,7 +11,7 @@ import java.util.Set;
 import java.util.concurrent.ArrayBlockingQueue;
 
 import org.adligo.tests4j.models.shared.asserts.common.I_Asserts;
-import org.adligo.tests4j.run.remote.nio.UTF8_CharacterBuilder;
+import org.adligo.tests4j.run.remote.io.UTF8_CharacterBuilder;
 
 
 public class UTF8_CharacterBuilder_ChuckTester implements Runnable {

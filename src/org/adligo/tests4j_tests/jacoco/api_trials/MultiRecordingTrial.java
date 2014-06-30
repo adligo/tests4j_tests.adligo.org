@@ -9,15 +9,15 @@ import java.util.Set;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-import org.adligo.tests4j.models.shared.ApiTrial;
-import org.adligo.tests4j.models.shared.BeforeTrial;
-import org.adligo.tests4j.models.shared.IgnoreTest;
-import org.adligo.tests4j.models.shared.PackageScope;
-import org.adligo.tests4j.models.shared.Test;
 import org.adligo.tests4j.models.shared.coverage.CoverageUnits;
 import org.adligo.tests4j.models.shared.coverage.I_PackageCoverage;
 import org.adligo.tests4j.models.shared.coverage.I_SourceFileCoverage;
 import org.adligo.tests4j.models.shared.system.I_CoverageRecorder;
+import org.adligo.tests4j.models.shared.trials.ApiTrial;
+import org.adligo.tests4j.models.shared.trials.BeforeTrial;
+import org.adligo.tests4j.models.shared.trials.IgnoreTest;
+import org.adligo.tests4j.models.shared.trials.PackageScope;
+import org.adligo.tests4j.models.shared.trials.Test;
 import org.adligo.tests4j_4jacoco.plugin.ScopedJacocoPlugin;
 import org.adligo.tests4j_tests.jacoco.api_trials.mocks.MockRunnable;
 

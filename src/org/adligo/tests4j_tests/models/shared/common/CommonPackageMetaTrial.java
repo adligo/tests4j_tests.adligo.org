@@ -2,10 +2,10 @@ package org.adligo.tests4j_tests.models.shared.common;
 
 import java.util.Set;
 
-import org.adligo.tests4j.models.shared.MetaTrial;
 import org.adligo.tests4j.models.shared.metadata.I_TrialRunMetadata;
 import org.adligo.tests4j.models.shared.metadata.RelevantClassesWithTrialsCalculator;
 import org.adligo.tests4j.models.shared.results.I_TrialRunResult;
+import org.adligo.tests4j.models.shared.trials.MetaTrial;
 
 /**
  * note there is usually only one MetaTrial
