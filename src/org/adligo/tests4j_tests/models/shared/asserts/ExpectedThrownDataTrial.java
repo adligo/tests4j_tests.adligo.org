@@ -13,26 +13,28 @@ public class ExpectedThrownDataTrial extends SourceFileTrial {
 
 	@Test
 	public void testConstructorExceptions() {
-		assertThrown(new ExpectedThrownData(IllegalArgumentException.class,"ExpectedThrownData requires a non null throwable class."), 
+		assertThrown(new ExpectedThrownData(new IllegalArgumentException(
+				"ExpectedThrownData requires a non null throwable class.")), 
 			new I_Thrower() {
 				@Override
 				public void run() {
-					new ExpectedThrownData(null, null);
+					new ExpectedThrownData((Throwable) null);
 				}
 		});
 		
-		assertThrown(new ExpectedThrownData(IllegalArgumentException.class,"ExpectedThrownData requires a non null message."), 
+		assertThrown(new ExpectedThrownData(new IllegalArgumentException(
+				"ExpectedThrownData requires a non null message.")), 
 			new I_Thrower() {
 				@Override
 				public void run() {
-					new ExpectedThrownData(IllegalStateException.class, null);
+					new ExpectedThrownData(new IllegalStateException());
 				}
 		});
 	}
 	
 	@Test
 	public void testConstructorAndGets() {
-		ExpectedThrownData obj = new ExpectedThrownData(IllegalStateException.class, "Some error message.");
+		ExpectedThrownData obj = new ExpectedThrownData(new IllegalStateException("Some error message."));
 		assertEquals(IllegalStateException.class, obj.getThrowableClass());
 		assertEquals("Some error message.", obj.getMessage());
 		

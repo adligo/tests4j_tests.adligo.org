@@ -8,7 +8,7 @@ import org.adligo.tests4j.models.shared.trials.MetaTrial;
 public class TheMetaTrial  extends MetaTrial {
 	
 	public TheMetaTrial() {
-		super(27.0, 9.2);
+		super(30.0, 9.2);
 	}
 	
 
@@ -20,10 +20,10 @@ public class TheMetaTrial  extends MetaTrial {
 		//this does not include the 3 tests in this TheMetaTrial 
 		// afterNonMetaTrialsRun, afterMetadataCalculated and 
 		// @Test methods in the MetaTrial implementation.
-		assertGreaterThanOrEquals(98.0, 0.0 + results.getTestsPassed());
+		assertGreaterThanOrEquals(113.0, 0.0 + results.getTestsPassed());
 		
-		assertGreaterThanOrEquals(16700.0 ,0.0 + results.getAsserts());
-		assertGreaterThanOrEquals(2550.0 ,0.0 + results.getUniqueAsserts());
+		assertGreaterThanOrEquals(16900.0 ,0.0 + results.getAsserts());
+		assertGreaterThanOrEquals(2700.0 ,0.0 + results.getUniqueAsserts());
 		
 		super.afterNonMetaTrialsRun(results);
 	}
@@ -35,12 +35,12 @@ public class TheMetaTrial  extends MetaTrial {
 		
 		//this assert is also for the child-packages;
 		assertGreaterThanOrEquals(100.0, calc.getPct("org.adligo.tests4j.models.shared.common"));
-		assertGreaterThanOrEquals(15.0, calc.getPct("org.adligo.tests4j.models.shared.asserts"));
+		assertGreaterThanOrEquals(25.0, calc.getPct("org.adligo.tests4j.models.shared.asserts"));
 		
 		// includes this
-		assertGreaterThanOrEquals(29.0, 0.0 + metadata.getAllTrialsCount());
+		assertGreaterThanOrEquals(30.0, 0.0 + metadata.getAllTrialsCount());
 		//includes three tests in here
-		assertGreaterThanOrEquals(101.0, 0.0 + metadata.getAllTestsCount());
+		assertGreaterThanOrEquals(116.0, 0.0 + metadata.getAllTestsCount());
 		
 		
 		

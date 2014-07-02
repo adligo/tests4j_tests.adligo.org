@@ -24,10 +24,10 @@ public class LineSeperatorTrial extends SourceFileTrial {
 			}
 		};
 		
-		assertThrown(new ExpectedThrownData(IllegalStateException.class, 
+		assertThrown(new ExpectedThrownData(new IllegalStateException( 
 				"The Method class org.adligo.tests4j.models.shared.common.LineSeperator.setLineSeperator "
 				+ "may only be called by [org.adligo.tests4j.run.Tests4J, "
-				+ "org.adligo.tests4j_tests.models.shared.common.LineSeperatorTrial]"), new I_Thrower() {
+				+ "org.adligo.tests4j_tests.models.shared.common.LineSeperatorTrial]")), new I_Thrower() {
 			
 			@Override
 			public void run() {

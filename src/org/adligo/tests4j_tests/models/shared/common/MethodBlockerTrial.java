@@ -39,7 +39,8 @@ public class MethodBlockerTrial extends SourceFileTrial {
 				mockWithMethodBlocker.doF();
 			}
 		};
-		assertThrown(new ExpectedThrownData(IllegalStateException.class,DO_D_EXCEPTION_MESSAGE), new I_Thrower() {
+		assertThrown(new ExpectedThrownData(new IllegalStateException(DO_D_EXCEPTION_MESSAGE)), 
+			new I_Thrower() {
 			
 			@Override
 			public void run() {
@@ -52,8 +53,9 @@ public class MethodBlockerTrial extends SourceFileTrial {
 	
 	@Test
 	public void testConstructorException() {
-		assertThrown(new ExpectedThrownData(IllegalArgumentException.class, 
-				"MethodBlocker requires at least one Allowed Caller Class Name."), new I_Thrower() {
+		assertThrown(new ExpectedThrownData(new IllegalArgumentException( 
+				"MethodBlocker requires at least one Allowed Caller Class Name.")), 
+			new I_Thrower() {
 			
 			@Override
 			public void run() {
@@ -68,10 +70,10 @@ public class MethodBlockerTrial extends SourceFileTrial {
 	@Test
 	public void testMethodWithBlockThrowsException() {
 		final MockWithMethodBlocker mockWithMethodBlocker = new MockWithMethodBlocker();
-		assertThrown(new ExpectedThrownData(IllegalStateException.class, 
+		assertThrown(new ExpectedThrownData(new IllegalStateException(
 		"The Method class org.adligo.tests4j_tests.models.shared.common.mocks.MockWithMethodBlocker.doA"
-		+ " may only be called by [org.adligo.tests4j_tests.models.shared.common.MethodBlockerTrial]"
-				), new I_Thrower() {
+		+ " may only be called by [org.adligo.tests4j_tests.models.shared.common.MethodBlockerTrial]")), 
+			new I_Thrower() {
 			
 			@Override
 			public void run() {
@@ -86,9 +88,10 @@ public class MethodBlockerTrial extends SourceFileTrial {
 		// this test is a bit confusing
 		mockWithMethodBlocker.doA();
 		
-		assertThrown(new ExpectedThrownData(IllegalStateException.class, 
+		assertThrown(new ExpectedThrownData(new IllegalStateException(
 		"The Method class org.adligo.tests4j_tests.models.shared.common.mocks.MockWithMethodBlocker.doB "
-		+ "may only be called by [org.adligo.tests4j_tests.models.shared.common.mocks.MockWithMethodBlocker]"), new I_Thrower() {
+		+ "may only be called by [org.adligo.tests4j_tests.models.shared.common.mocks.MockWithMethodBlocker]")), 
+		new I_Thrower() {
 			
 			@Override
 			public void run() {
@@ -115,9 +118,9 @@ public class MethodBlockerTrial extends SourceFileTrial {
 		
 		//note it is doB here 
 		// and not doF, because doB is the method with the MethodBlocker
-		assertThrown(new ExpectedThrownData(IllegalStateException.class, 
-				DO_D_EXCEPTION_MESSAGE
-			), new I_Thrower() {
+		assertThrown(new ExpectedThrownData(new IllegalStateException(
+				DO_D_EXCEPTION_MESSAGE)), 
+				new I_Thrower() {
 					
 					@Override
 					public void run() {

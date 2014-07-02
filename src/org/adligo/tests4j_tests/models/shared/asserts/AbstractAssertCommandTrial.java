@@ -17,7 +17,8 @@ public class AbstractAssertCommandTrial extends SourceFileTrial {
 	@Test
 	public void testConstructorsExceptions() {
 		assertEquals("AssertCommands requires a type.",AbstractAssertCommand.ASSERT_COMMANDS_REQUIRES_A_TYPE);
-		assertThrown(new ExpectedThrownData(IllegalArgumentException.class,AbstractAssertCommand.ASSERT_COMMANDS_REQUIRES_A_TYPE), 
+		assertThrown(new ExpectedThrownData(new IllegalArgumentException(
+					AbstractAssertCommand.ASSERT_COMMANDS_REQUIRES_A_TYPE)), 
 				new I_Thrower() {
 					
 					@Override
@@ -27,7 +28,8 @@ public class AbstractAssertCommandTrial extends SourceFileTrial {
 				});
 		
 		assertEquals("AssertCommands requres a non empty failue message.",AbstractAssertCommand.ASSERT_COMMANDS_REQURES_A_NON_EMPTY_FAILUE_MESSAGE);
-		assertThrown(new ExpectedThrownData(IllegalArgumentException.class,AbstractAssertCommand.ASSERT_COMMANDS_REQURES_A_NON_EMPTY_FAILUE_MESSAGE), 
+		assertThrown(new ExpectedThrownData(new IllegalArgumentException(
+					AbstractAssertCommand.ASSERT_COMMANDS_REQURES_A_NON_EMPTY_FAILUE_MESSAGE)), 
 				new I_Thrower() {
 					
 					@Override
@@ -35,7 +37,8 @@ public class AbstractAssertCommandTrial extends SourceFileTrial {
 						new ExtendedAssertCommand(AssertType.AssertFalse, null);
 					}
 				});
-		assertThrown(new ExpectedThrownData(IllegalArgumentException.class,AbstractAssertCommand.ASSERT_COMMANDS_REQURES_A_NON_EMPTY_FAILUE_MESSAGE), 
+		assertThrown(new ExpectedThrownData(new IllegalArgumentException(
+					AbstractAssertCommand.ASSERT_COMMANDS_REQURES_A_NON_EMPTY_FAILUE_MESSAGE)), 
 				new I_Thrower() {
 					
 					@Override

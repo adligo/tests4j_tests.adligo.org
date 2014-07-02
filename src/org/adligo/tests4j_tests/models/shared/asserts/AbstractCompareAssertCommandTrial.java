@@ -19,13 +19,14 @@ public class AbstractCompareAssertCommandTrial extends SourceFileTrial {
 	@Test
 	public void testConstructorExceptions() {
 		assertEquals("AbstractCompareAssertCommand requires non null data.", AbstractCompareAssertCommand.NULL_DATA);
-		assertThrown(new ExpectedThrownData(IllegalArgumentException.class, AbstractCompareAssertCommand.NULL_DATA), new I_Thrower() {
-			
-			@Override
-			public void run() {
-				new ExtendedCompareAssertCommand(AssertType.AssertEquals, "failed", 
-						(I_CompareAssertionData<?>) null);
-			}
+		assertThrown(new ExpectedThrownData(new IllegalArgumentException(
+					AbstractCompareAssertCommand.NULL_DATA)), 
+			new I_Thrower() {
+				@Override
+				public void run() {
+					new ExtendedCompareAssertCommand(AssertType.AssertEquals, "failed", 
+							(I_CompareAssertionData<?>) null);
+				}
 		});
 	}
 	

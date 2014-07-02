@@ -20,7 +20,7 @@ public class StringMethodsTrial extends SourceFileTrial {
 		assertTrue(StringMethods.isEmpty("\n"));
 		assertFalse(StringMethods.isEmpty("hey"));
 		
-		assertThrown(new ExpectedThrownData(IllegalArgumentException.class,"null message."), new I_Thrower() {
+		assertThrown(new ExpectedThrownData(new IllegalArgumentException("null message.")), new I_Thrower() {
 			
 			@Override
 			public void run() {

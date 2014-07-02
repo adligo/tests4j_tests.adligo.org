@@ -27,12 +27,14 @@ public class RunPkgTrials implements I_TrialList {
 	public List<Class<? extends AbstractTrial>> getTrials() {
 		List<Class<? extends AbstractTrial>> trials = new ArrayList<Class<? extends AbstractTrial>>();
 		
-		trials.add(Run_UseCaseTrial_ApiTrial.class);
+		trials.add(AssertionsFail_Trial.class);
+		trials.add(AssertionsPass_Trial.class);
+		trials.add(Bad_UseCaseTrials_Trial.class);
 		
-		trials.add(Run_SourceFileTrial_ApiTrial.class);
-		trials.add(Run_ApiTrial_ApiTrial.class);
+		trials.add(BadSourceFileTrials_Trial.class);
+		trials.add(BadApiTrials_Trial.class);
 	
-		trials.add(Assert_PassConditions_Trial.class);
+		
 		
 		return trials;
 	}

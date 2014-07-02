@@ -34,7 +34,7 @@ public class Tests4J_SocketMessageTrial extends SourceFileTrial {
 	@Test
 	public void testXmlErrors() {
 		assertThrown(new ExpectedThrownData(
-				IllegalArgumentException.class, Tests4J_SocketMessage.REQUIRES_ERROR), 
+				new IllegalArgumentException(Tests4J_SocketMessage.REQUIRES_ERROR)), 
 			new I_Thrower() {
 			
 			@Override
@@ -44,7 +44,7 @@ public class Tests4J_SocketMessageTrial extends SourceFileTrial {
 		});
 		
 		assertThrown(new ExpectedThrownData(
-				IllegalArgumentException.class, Tests4J_SocketMessage.REQUIRES_ERROR), 
+				new IllegalArgumentException(Tests4J_SocketMessage.REQUIRES_ERROR)), 
 			new I_Thrower() {
 			
 			@Override
@@ -54,7 +54,7 @@ public class Tests4J_SocketMessageTrial extends SourceFileTrial {
 		});
 		
 		assertThrown(new ExpectedThrownData(
-				IllegalArgumentException.class, "Unknown Version null expecting 1.0."), 
+				new IllegalArgumentException("Unknown Version null expecting 1.0.")), 
 			new I_Thrower() {
 			
 			@Override

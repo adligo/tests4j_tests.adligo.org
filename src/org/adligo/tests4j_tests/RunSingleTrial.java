@@ -14,14 +14,14 @@ import org.adligo.tests4j_4jacoco.plugin.AbstractPlugin;
 import org.adligo.tests4j_4jacoco.plugin.Recorder;
 import org.adligo.tests4j_4jacoco.plugin.ScopedJacocoPlugin;
 import org.adligo.tests4j_tests.run.remote.io.UTF8_CharacterBuilderWithThreadsTrial;
-import org.adligo.tests4j_tests.trials_api.Run_ApiTrial_ApiTrial;
+import org.adligo.tests4j_tests.trials_api.BadApiTrials_Trial;
 
 public class RunSingleTrial {
 
 	
 	public static void main(String [] args) {
 		Tests4J_Params params = new Tests4J_Params();
-		params.addTrial(Run_ApiTrial_ApiTrial.class);
+		params.addTrial(BadApiTrials_Trial.class);
 		/*
 		params.addTest(Run_UseCaseTrial_ApiTrial.class.getName() +
 				".testNoUseCaseAnnotation");

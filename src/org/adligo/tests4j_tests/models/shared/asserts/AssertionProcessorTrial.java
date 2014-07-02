@@ -79,7 +79,7 @@ public class AssertionProcessorTrial extends SourceFileTrial implements I_Assert
 		assertNull(lastAssertCommand);
 		assertNull(lastTestFailure);
 		ThrownAssertCommand tac = new ThrownAssertCommand(AssertType.AssertThrown, "should be true", 
-				new ExpectedThrownData(RuntimeException.class, "thrown message"));
+				new ExpectedThrownData(new RuntimeException("thrown message")));
 		AssertionProcessor.evaluate(this, tac, this);
 		assertNull(lastAssertCommand);
 		
