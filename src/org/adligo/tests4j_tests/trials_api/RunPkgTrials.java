@@ -31,6 +31,7 @@ public class RunPkgTrials implements I_TrialList {
 		
 		trials.add(AssertionsFail_Trial.class);
 		trials.add(AssertionsPass_Trial.class);
+		trials.add(AssertionsWithNullExpectedFail_Trial.class);
 		trials.add(Bad_UseCaseTrials_Trial.class);
 		
 		trials.add(BadSourceFileTrials_Trial.class);
