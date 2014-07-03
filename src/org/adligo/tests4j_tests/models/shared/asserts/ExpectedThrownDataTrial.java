@@ -34,7 +34,8 @@ public class ExpectedThrownDataTrial extends SourceFileTrial {
 	
 	@Test
 	public void testConstructorAndGets() {
-		ExpectedThrownData obj = new ExpectedThrownData(new IllegalStateException("Some error message."));
+		ExpectedThrownData obj = new ExpectedThrownData(
+				new ExpectedThrownData(new IllegalStateException("Some error message.")));
 		assertEquals(IllegalStateException.class, obj.getThrowableClass());
 		assertEquals("Some error message.", obj.getMessage());
 		
@@ -47,7 +48,7 @@ public class ExpectedThrownDataTrial extends SourceFileTrial {
 		
 		if (p.hasRecordedCoverage()) {
 			I_SourceFileCoverage coverage = p.getCoverage();
-			assertGreaterThanOrEquals(58.0, coverage.getPercentageCoveredDouble());
+			assertGreaterThanOrEquals(70.0, coverage.getPercentageCoveredDouble());
 		}
 	}
 }

@@ -8,7 +8,7 @@ import org.adligo.tests4j.models.shared.trials.MetaTrial;
 public class TheMetaTrial  extends MetaTrial {
 	
 	public TheMetaTrial() {
-		super(33.0, 11.3);
+		super(35.0, 12.8);
 	}
 	
 
@@ -35,13 +35,13 @@ public class TheMetaTrial  extends MetaTrial {
 		RelevantClassesWithTrialsCalculator calc = super.getCalculator();
 		
 		//this assert is also for the child-packages;
-		assertGreaterThanOrEquals(45.0, calc.getPct("org.adligo.tests4j.models.shared.asserts"));
+		assertGreaterThanOrEquals(55.0, calc.getPct("org.adligo.tests4j.models.shared.asserts"));
 		assertGreaterThanOrEquals(100.0, calc.getPct("org.adligo.tests4j.models.shared.common"));
 		
 		// includes this
-		assertGreaterThanOrEquals(32.0, 0.0 + metadata.getAllTrialsCount());
+		assertGreaterThanOrEquals(35.0, 0.0 + metadata.getAllTrialsCount());
 		//includes three tests in here, from this class
-		assertGreaterThanOrEquals(204.0, 0.0 + metadata.getAllTestsCount());
+		assertGreaterThanOrEquals(219.0, 0.0 + metadata.getAllTestsCount());
 		
 		
 		

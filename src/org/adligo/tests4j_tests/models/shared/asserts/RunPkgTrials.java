@@ -24,14 +24,22 @@ public class RunPkgTrials implements I_TrialList {
 	public List<Class<? extends AbstractTrial>> getTrials() {
 		List<Class<? extends AbstractTrial>> trials = new ArrayList<Class<? extends AbstractTrial>>();
 		
-		
 		trials.add(AbstractAssertCommandTrial.class);
 		trials.add(AbstractCompareAssertCommandTrial.class);
 		trials.add(AssertionFailureLocationTrial.class);
 		trials.add(AssertionProcessorTrial.class);
+		
 		trials.add(BooleanAssertCommandTrial.class);
+		
 		trials.add(CompareAssertionDataTrial.class);
+		trials.add(ContainsAssertCommandTrial.class);
+		
+		trials.add(DoubleAssertCommandTrial.class);
+		
 		trials.add(ExpectedThrownDataTrial.class);
+		
+		trials.add(IdenticalAssertCommandTrial.class);
+		
 		return trials;
 	}
 }
