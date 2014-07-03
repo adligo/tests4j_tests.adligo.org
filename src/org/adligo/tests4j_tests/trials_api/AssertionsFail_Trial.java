@@ -24,8 +24,16 @@ import org.adligo.tests4j_tests.trials_api.failing_trials.AssertNotEqualsFailsTr
 import org.adligo.tests4j_tests.trials_api.failing_trials.AssertNotEqualsWithMessageFailsTrial;
 import org.adligo.tests4j_tests.trials_api.failing_trials.AssertNotNullFailsTrial;
 import org.adligo.tests4j_tests.trials_api.failing_trials.AssertNotNullWithMessageFailsTrial;
+import org.adligo.tests4j_tests.trials_api.failing_trials.AssertNotSameFailsTrial;
+import org.adligo.tests4j_tests.trials_api.failing_trials.AssertNotSameWithMessageFailsTrial;
+import org.adligo.tests4j_tests.trials_api.failing_trials.AssertNotUniformFailsTrial;
+import org.adligo.tests4j_tests.trials_api.failing_trials.AssertNotUniformNoEvaluatorFailsTrial;
+import org.adligo.tests4j_tests.trials_api.failing_trials.AssertNotUniformNoEvaluatorWithMessageFailsTrial;
+import org.adligo.tests4j_tests.trials_api.failing_trials.AssertNotUniformWithMessageFailsTrial;
 import org.adligo.tests4j_tests.trials_api.failing_trials.AssertNullFailsTrial;
 import org.adligo.tests4j_tests.trials_api.failing_trials.AssertNullWithMessageFailsTrial;
+import org.adligo.tests4j_tests.trials_api.failing_trials.AssertSameFailsTrial;
+import org.adligo.tests4j_tests.trials_api.failing_trials.AssertSameWithMessageFailsTrial;
 import org.adligo.tests4j_tests.trials_api.failing_trials.AssertTrueFailsMessageTrial;
 import org.adligo.tests4j_tests.trials_api.failing_trials.AssertTrueFailsTrial;
 
@@ -127,6 +135,17 @@ public class AssertionsFail_Trial extends ApiTrial {
 	}
 	
 	@Test
+	public void testAssertNotSameFails() {
+		AssertNotSameFailsTrial.runTestDelegate(this);
+	}
+	
+	
+	@Test
+	public void testAssertNotSameWithMessageFails() {
+		AssertNotSameWithMessageFailsTrial.runTestDelegate(this);
+	}
+	
+	@Test
 	public void testAssertNullFails() {
 		AssertNullFailsTrial.runTestDelegate(this);
 	}
@@ -149,6 +168,28 @@ public class AssertionsFail_Trial extends ApiTrial {
 	}
 	
 	@Test
+	public void testAssertNotUniformFails() {
+		AssertNotUniformFailsTrial.runTestDelegate(this);
+	}
+	
+	
+	@Test
+	public void testAssertNotUniformWithMessageFails() {
+		AssertNotUniformWithMessageFailsTrial.runTestDelegate(this);
+	}
+	
+	@Test
+	public void testAssertNotUniformNoEvaluatorFails() {
+		AssertNotUniformNoEvaluatorFailsTrial.runTestDelegate(this);
+	}
+	
+	
+	@Test
+	public void testAssertNotUniformNoEvaluatorWithMessageFails() {
+		AssertNotUniformNoEvaluatorWithMessageFailsTrial.runTestDelegate(this);
+	}
+	
+	@Test
 	public void testAssertTrueIsFalse() {
 		AssertTrueFailsTrial.runTestDelegate(this);
 	}
@@ -158,7 +199,17 @@ public class AssertionsFail_Trial extends ApiTrial {
 		AssertTrueFailsMessageTrial.runTestDelegate(this);
 	}
 
-
+	@Test
+	public void testAssertSameFails() {
+		AssertSameFailsTrial.runTestDelegate(this);
+	}
+	
+	
+	@Test
+	public void testAssertSameWithMessageFails() {
+		AssertSameWithMessageFailsTrial.runTestDelegate(this);
+	}
+	
 	@Override
 	public void afterTrialTests(I_ApiTrial_TestsResults p) {
 		assertGreaterThanOrEquals(0.0 + 
@@ -182,13 +233,21 @@ public class AssertionsFail_Trial extends ApiTrial {
 				AssertNotEqualsWithMessageFailsTrial.getAsserts() + 
 				AssertNotNullFailsTrial.getAsserts() +
 				AssertNotNullWithMessageFailsTrial.getAsserts() + 
+				AssertNotSameFailsTrial.getAsserts() +
+				AssertNotSameWithMessageFailsTrial.getAsserts() + 
+				AssertNotUniformFailsTrial.getAsserts() +
+				AssertNotUniformWithMessageFailsTrial.getAsserts() + 
+				AssertNotUniformNoEvaluatorFailsTrial.getAsserts() +
+				AssertNotUniformNoEvaluatorWithMessageFailsTrial.getAsserts() +
 				AssertNullFailsTrial.getAsserts() +
 				AssertNullWithMessageFailsTrial.getAsserts() + 
 				AssertTrueFailsTrial.getAsserts() +
-				AssertTrueFailsMessageTrial.getAsserts(), 
+				AssertTrueFailsMessageTrial.getAsserts() +
+				AssertSameFailsTrial.getAsserts() +
+				AssertSameWithMessageFailsTrial.getAsserts(),
 				p.getAssertions());
 		assertGreaterThanOrEquals(0.0 + 
-				300.0, 
+				340.0, 
 				p.getUniqueAssertions());
 		
 	}
