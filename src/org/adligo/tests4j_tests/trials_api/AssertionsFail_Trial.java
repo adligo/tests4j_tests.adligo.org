@@ -34,8 +34,14 @@ import org.adligo.tests4j_tests.trials_api.failing_trials.AssertNullFailsTrial;
 import org.adligo.tests4j_tests.trials_api.failing_trials.AssertNullWithMessageFailsTrial;
 import org.adligo.tests4j_tests.trials_api.failing_trials.AssertSameFailsTrial;
 import org.adligo.tests4j_tests.trials_api.failing_trials.AssertSameWithMessageFailsTrial;
+import org.adligo.tests4j_tests.trials_api.failing_trials.AssertThrownFailsTrial;
+import org.adligo.tests4j_tests.trials_api.failing_trials.AssertThrownUniformFailsTrial;
+import org.adligo.tests4j_tests.trials_api.failing_trials.AssertThrownUniformWithMessageFailsTrial;
+import org.adligo.tests4j_tests.trials_api.failing_trials.AssertThrownWithMessageFailsTrial;
 import org.adligo.tests4j_tests.trials_api.failing_trials.AssertTrueFailsMessageTrial;
 import org.adligo.tests4j_tests.trials_api.failing_trials.AssertTrueFailsTrial;
+import org.adligo.tests4j_tests.trials_api.failing_trials.AssertUniformFailsTrial;
+import org.adligo.tests4j_tests.trials_api.failing_trials.AssertUniformWithMessageFailsTrial;
 
 @PackageScope (packageName = "org.adligo.tests4j")
 public class AssertionsFail_Trial extends ApiTrial {
@@ -210,6 +216,36 @@ public class AssertionsFail_Trial extends ApiTrial {
 		AssertSameWithMessageFailsTrial.runTestDelegate(this);
 	}
 	
+	@Test
+	public void testAssertThrownFails() {
+		AssertThrownFailsTrial.runTestDelegate(this);
+	}
+	
+	@Test
+	public void testAssertThrownWithMessageFails() {
+		AssertThrownWithMessageFailsTrial.runTestDelegate(this);
+	}
+	
+	@Test
+	public void testAssertThrownUniformFails() {
+		AssertThrownUniformFailsTrial.runTestDelegate(this);
+	}
+	
+	@Test
+	public void testAssertThrownUniformWithMessageFails() {
+		AssertThrownUniformWithMessageFailsTrial.runTestDelegate(this);
+	}
+	
+	@Test
+	public void testAssertUniformFails() {
+		AssertUniformFailsTrial.runTestDelegate(this);
+	}
+	
+	@Test
+	public void testAssertUniformWithMessageFails() {
+		AssertUniformWithMessageFailsTrial.runTestDelegate(this);
+	}
+	
 	@Override
 	public void afterTrialTests(I_ApiTrial_TestsResults p) {
 		assertGreaterThanOrEquals(0.0 + 
@@ -245,9 +281,15 @@ public class AssertionsFail_Trial extends ApiTrial {
 				AssertTrueFailsMessageTrial.getAsserts() +
 				AssertSameFailsTrial.getAsserts() +
 				AssertSameWithMessageFailsTrial.getAsserts(),
+				AssertThrownFailsTrial.getAsserts() +
+				AssertThrownWithMessageFailsTrial.getAsserts() +
+				AssertThrownUniformFailsTrial.getAsserts() + 
+				AssertThrownUniformWithMessageFailsTrial.getAsserts() +
+				AssertUniformFailsTrial.getAsserts() + 
+				AssertUniformWithMessageFailsTrial.getAsserts() +
 				p.getAssertions());
 		assertGreaterThanOrEquals(0.0 + 
-				340.0, 
+				400.0, 
 				p.getUniqueAssertions());
 		
 	}
