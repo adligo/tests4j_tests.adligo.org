@@ -29,6 +29,8 @@ public class RunPkgTrials implements I_TrialList {
 		trials.add(AbstractCompareAssertCommandTrial.class);
 		trials.add(AssertionFailureLocationTrial.class);
 		trials.add(AssertionProcessorTrial.class);
+		trials.add(BooleanAssertCommandTrial.class);
+		trials.add(CompareAssertionDataTrial.class);
 		trials.add(ExpectedThrownDataTrial.class);
 		return trials;
 	}

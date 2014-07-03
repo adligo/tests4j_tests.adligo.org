@@ -1,15 +1,11 @@
 package org.adligo.tests4j_tests.models.shared.asserts;
 
-import java.lang.reflect.Method;
-
 import org.adligo.tests4j.models.shared.asserts.AssertionFailureLocation;
-import org.adligo.tests4j.models.shared.common.PlatformEnum;
 import org.adligo.tests4j.models.shared.coverage.I_SourceFileCoverage;
 import org.adligo.tests4j.models.shared.results.feedback.I_SourceFileTrial_TestsResults;
 import org.adligo.tests4j.models.shared.trials.SourceFileScope;
 import org.adligo.tests4j.models.shared.trials.SourceFileTrial;
 import org.adligo.tests4j.models.shared.trials.Test;
-import org.adligo.tests4j.run.helpers.TestRunable;
 
 @SourceFileScope (sourceClass=AssertionFailureLocation.class)
 public class AssertionFailureLocationTrial extends SourceFileTrial {
@@ -24,7 +20,7 @@ public class AssertionFailureLocationTrial extends SourceFileTrial {
 		StackTraceElement e = elements[0];
 		assertEquals(AssertionFailureLocationTrial.class.getName(),  e.getClassName());
 		assertEquals("testAssertionStack",  e.getMethodName());
-		assertEquals(20,  e.getLineNumber());
+		assertEquals(16,  e.getLineNumber());
 		
 		StackAssertions.assertAssertionFailureLocation_StackWasFromTests4J(this, afl);
 	}
