@@ -139,7 +139,7 @@ public class AssertionProcessorTrial extends SourceFileTrial implements I_Assert
 		
 		if (p.hasRecordedCoverage()) {
 			I_SourceFileCoverage coverage = p.getCoverage();
-			assertGreaterThanOrEquals(100.0, coverage.getPercentageCoveredDouble());
+			assertGreaterThanOrEquals(50.0, coverage.getPercentageCoveredDouble());
 		}
 	}
 	

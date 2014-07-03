@@ -25,7 +25,9 @@ import org.adligo.tests4j.models.shared.trials.AfterTrial;
 import org.adligo.tests4j.models.shared.trials.ApiTrial;
 import org.adligo.tests4j.models.shared.trials.BeforeTrial;
 import org.adligo.tests4j.models.shared.trials.I_AbstractTrial;
+import org.adligo.tests4j.models.shared.trials.I_ApiTrial;
 import org.adligo.tests4j.models.shared.trials.I_MetaTrial;
+import org.adligo.tests4j.models.shared.trials.I_SourceFileTrial;
 import org.adligo.tests4j.models.shared.trials.I_Trial;
 import org.adligo.tests4j.models.shared.trials.I_TrialProcessorBindings;
 import org.adligo.tests4j.models.shared.trials.IgnoreTest;
@@ -88,9 +90,11 @@ public class ClassDiscoveryTrial extends SourceFileTrial {
 		assertContains(classNames, ApiTrial.class.getName());
 		assertContains(classNames, BeforeTrial.class.getName());
 		assertContains(classNames, I_AbstractTrial.class.getName());
+		assertContains(classNames, I_ApiTrial.class.getName());
 		assertContains(classNames, I_Trial.class.getName());
 		assertContains(classNames, I_TrialProcessorBindings.class.getName());
 		assertContains(classNames, I_MetaTrial.class.getName());
+		assertContains(classNames, I_SourceFileTrial.class.getName());
 		assertContains(classNames, MetaTrial.class.getName());
 		assertContains(classNames, IgnoreTest.class.getName());
 		
@@ -104,7 +108,7 @@ public class ClassDiscoveryTrial extends SourceFileTrial {
 		assertContains(classNames, UseCaseScope.class.getName());
 		assertContains(classNames, UseCaseTrial.class.getName());
 		
-		assertEquals(21, classNames.size());
+		assertEquals(23, classNames.size());
 		List<ClassDiscovery> children =  cd.getSubPackages();
 		
 		

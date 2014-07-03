@@ -66,7 +66,7 @@ public class AbstractCompareAssertCommandTrial extends SourceFileTrial {
 		
 		if (p.hasRecordedCoverage()) {
 			I_SourceFileCoverage coverage = p.getCoverage();
-			assertGreaterThanOrEquals(100.0, coverage.getPercentageCoveredDouble());
+			assertGreaterThanOrEquals(50.0, coverage.getPercentageCoveredDouble());
 		}
 	}
 }

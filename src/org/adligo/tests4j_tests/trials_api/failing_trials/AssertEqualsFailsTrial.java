@@ -20,16 +20,16 @@ import org.adligo.tests4j_tests.trials_api.common.ExpectedFailureRunner;
 
 @TrialRecursion
 @PackageScope (packageName="org.adligo.tests4j")
-public class AssertFalseFailsTrial extends ApiTrial {
+public class AssertEqualsFailsTrial extends ApiTrial {
 
 	@Test
-	public void testAssertFalseIsTrue() {
-		assertFalse(true);
+	public void testAssertEqualsFails() {
+		assertEquals("se", "set");
 	}
 	
 	public static void runTestDelegate(I_Asserts asserts) {
 		ExpectedFailureRunner runner = new ExpectedFailureRunner();
-		runner.run(AssertFalseFailsTrial.class);
+		runner.run(AssertEqualsFailsTrial.class);
 		
 		I_TrialRunMetadata metadata = runner.getMetadata();
 		asserts.assertNotNull(metadata);
@@ -40,7 +40,7 @@ public class AssertFalseFailsTrial extends ApiTrial {
 		asserts.assertEquals(1, trialsMetadata.size());
 		I_TrialMetadata trialMeta = trialsMetadata.get(0);
 		asserts.assertNotNull(trialMeta);
-		asserts.assertEquals(AssertFalseFailsTrial.class.getName(), 
+		asserts.assertEquals(AssertEqualsFailsTrial.class.getName(), 
 				trialMeta.getTrialName());
 		asserts.assertEquals(0L, trialMeta.getTimeout());
 		asserts.assertFalse(trialMeta.isSkipped());
@@ -53,7 +53,7 @@ public class AssertFalseFailsTrial extends ApiTrial {
 		
 		I_TestMetadata testMeta = testsMetadata.get(0);
 		asserts.assertNotNull(testMeta);
-		asserts.assertEquals("testAssertFalseIsTrue", testMeta.getTestName());
+		asserts.assertEquals("testAssertEqualsFails", testMeta.getTestName());
 		asserts.assertEquals(0L, testMeta.getTimeout());
 		
 		List<I_TrialResult> results = runner.getResults();
@@ -74,20 +74,20 @@ public class AssertFalseFailsTrial extends ApiTrial {
 		asserts.assertEquals(TestResult.class.getName(),testResult.getClass().getName());
 		asserts.assertFalse(testResult.isPassed());
 		asserts.assertFalse(testResult.isIgnored());
-		asserts.assertEquals("testAssertFalseIsTrue", testResult.getName());
+		asserts.assertEquals("testAssertEqualsFails", testResult.getName());
 		asserts.assertEquals(0, testResult.getAssertionCount());
 		asserts.assertEquals(0, testResult.getUniqueAssertionCount());
 		
 		I_TestFailure testFailure = testResult.getFailure();
 		asserts.assertNotNull(testFailure);
-		asserts.assertEquals(new Tests4J_AssertionResultMessages().getTheValueShouldBeFalse(), testFailure.getMessage());
+		asserts.assertEquals(new Tests4J_AssertionResultMessages().getTheObjectsShouldBeEqual(), testFailure.getMessage());
 		
 		Throwable locationFailed = testFailure.getLocationFailed();
 		StackTraceElement [] elements = locationFailed.getStackTrace();
 		asserts.assertGreaterThanOrEquals(1.0, elements.length);
 		StackTraceElement topElement = elements[0];
-		asserts.assertEquals(AssertFalseFailsTrial.class.getName(), topElement.getClassName());
-		asserts.assertEquals("testAssertFalseIsTrue", topElement.getMethodName());
+		asserts.assertEquals(AssertEqualsFailsTrial.class.getName(), topElement.getClassName());
+		asserts.assertEquals("testAssertEqualsFails", topElement.getMethodName());
 		asserts.assertEquals(27, topElement.getLineNumber());
 	}
 	

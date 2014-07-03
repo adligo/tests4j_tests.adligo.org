@@ -20,10 +20,11 @@ public class TheMetaTrial  extends MetaTrial {
 		//this does not include the 3 tests in this TheMetaTrial 
 		// afterNonMetaTrialsRun, afterMetadataCalculated and 
 		// @Test methods in the MetaTrial implementation.
-		assertGreaterThanOrEquals(113.0, 0.0 + results.getTestsPassed());
+		assertGreaterThanOrEquals(140.0, 0.0 + results.getTestsPassed());
 		
-		assertGreaterThanOrEquals(16900.0 ,0.0 + results.getAsserts());
-		assertGreaterThanOrEquals(2700.0 ,0.0 + results.getUniqueAsserts());
+		//does not include assertions from this class yet
+		assertGreaterThanOrEquals(1700.0 ,0.0 + results.getAsserts());
+		assertGreaterThanOrEquals(2800.0 ,0.0 + results.getUniqueAsserts());
 		
 		super.afterNonMetaTrialsRun(results);
 	}
@@ -39,8 +40,8 @@ public class TheMetaTrial  extends MetaTrial {
 		
 		// includes this
 		assertGreaterThanOrEquals(30.0, 0.0 + metadata.getAllTrialsCount());
-		//includes three tests in here
-		assertGreaterThanOrEquals(116.0, 0.0 + metadata.getAllTestsCount());
+		//includes three tests in here, from this class
+		assertGreaterThanOrEquals(143.0, 0.0 + metadata.getAllTestsCount());
 		
 		
 		

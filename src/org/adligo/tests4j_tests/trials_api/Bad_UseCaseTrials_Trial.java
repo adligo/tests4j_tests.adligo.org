@@ -30,6 +30,7 @@ import org.adligo.tests4j_tests.trials_api.bad_mock_use_case_trials.TestWithPara
 import org.adligo.tests4j_tests.trials_api.bad_mock_use_case_trials.UseCaseAnnotationNoNownTrial;
 import org.adligo.tests4j_tests.trials_api.bad_mock_use_case_trials.UseCaseAnnotationNoSystemTrial;
 import org.adligo.tests4j_tests.trials_api.bad_mock_use_case_trials.UseCaseAnnotationNoVerbTrial;
+import org.adligo.tests4j_tests.trials_api.common.ExpectedFailureRunner;
 
 @PackageScope (packageName = "org.adligo.tests4j")
 public class Bad_UseCaseTrials_Trial extends ApiTrial {

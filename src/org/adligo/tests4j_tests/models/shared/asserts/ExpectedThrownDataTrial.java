@@ -47,7 +47,7 @@ public class ExpectedThrownDataTrial extends SourceFileTrial {
 		
 		if (p.hasRecordedCoverage()) {
 			I_SourceFileCoverage coverage = p.getCoverage();
-			assertGreaterThanOrEquals(100.0, coverage.getPercentageCoveredDouble());
+			assertGreaterThanOrEquals(58.0, coverage.getPercentageCoveredDouble());
 		}
 	}
 }

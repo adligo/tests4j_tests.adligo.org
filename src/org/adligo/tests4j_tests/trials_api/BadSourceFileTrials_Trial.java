@@ -25,6 +25,7 @@ import org.adligo.tests4j_tests.trials_api.bad_mock_source_file_trials.NoTestsTr
 import org.adligo.tests4j_tests.trials_api.bad_mock_source_file_trials.ProtectedTestTrial;
 import org.adligo.tests4j_tests.trials_api.bad_mock_source_file_trials.StaticTestTrial;
 import org.adligo.tests4j_tests.trials_api.bad_mock_source_file_trials.TestWithParamsTrial;
+import org.adligo.tests4j_tests.trials_api.common.ExpectedFailureRunner;
 
 @PackageScope (packageName = "org.adligo.tests4j")
 public class BadSourceFileTrials_Trial extends ApiTrial {

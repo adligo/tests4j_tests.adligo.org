@@ -81,7 +81,7 @@ public class Tests4J_ParamsTrial extends SourceFileTrial {
 	public void afterTrialTests(I_SourceFileTrial_TestsResults  p) {
 		if (p.hasRecordedCoverage()) {
 			I_SourceFileCoverage coverage = p.getCoverage();
-			assertGreaterThanOrEquals(100.00, coverage.getPercentageCoveredDouble());
+			assertGreaterThanOrEquals(46.00, coverage.getPercentageCoveredDouble());
 		}
 	}
 }

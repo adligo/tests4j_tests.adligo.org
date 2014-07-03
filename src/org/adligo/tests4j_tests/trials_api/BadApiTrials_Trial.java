@@ -29,6 +29,8 @@ import org.adligo.tests4j_tests.trials_api.bad_mock_api_trials.ProtectedTestTria
 import org.adligo.tests4j_tests.trials_api.bad_mock_api_trials.SimpleRerunTrial;
 import org.adligo.tests4j_tests.trials_api.bad_mock_api_trials.StaticTestTrial;
 import org.adligo.tests4j_tests.trials_api.bad_mock_api_trials.TestWithParamsTrial;
+import org.adligo.tests4j_tests.trials_api.common.ExpectedFailureRunner;
+import org.adligo.tests4j_tests.trials_api.common.ExpectedPassRunner;
 
 @PackageScope (packageName = "org.adligo.tests4j")
 public class BadApiTrials_Trial extends ApiTrial {

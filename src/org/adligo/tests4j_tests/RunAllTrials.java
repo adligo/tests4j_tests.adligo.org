@@ -14,7 +14,6 @@ import org.adligo.tests4j.run.helpers.ThreadStateHelper;
 import org.adligo.tests4j.run.helpers.TrialInstancesProcessor;
 import org.adligo.tests4j.run.helpers.TrialProcessorControls;
 import org.adligo.tests4j.shared.report.summary.SummaryReporter;
-import org.adligo.tests4j_4jacoco.plugin.AbstractPlugin;
 import org.adligo.tests4j_4jacoco.plugin.ScopedJacocoPlugin;
 
 public class RunAllTrials implements I_TrialRunListener {

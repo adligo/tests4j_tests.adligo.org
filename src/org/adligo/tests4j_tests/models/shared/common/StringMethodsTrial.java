@@ -38,7 +38,7 @@ public class StringMethodsTrial extends SourceFileTrial {
 		
 		if (p.hasRecordedCoverage()) {
 			I_SourceFileCoverage coverage = p.getCoverage();
-			assertGreaterThanOrEquals(100.0, coverage.getPercentageCoveredDouble());
+			assertGreaterThanOrEquals(79.0, coverage.getPercentageCoveredDouble());
 		}
 	}
 }
