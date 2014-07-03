@@ -27,9 +27,9 @@ public class RunAllTrials implements I_TrialRunListener {
 		reporter = new SummaryReporter();
 		//reporter.setListRelevantClassesWithoutTrials(true);
 		//reporter.setListRelevantClassesWithoutTrials(true);
-		reporter.setLogOn(Tests4J_NotificationManager.class);
-		reporter.setLogOn(TrialProcessorControls.class);
-		reporter.setLogOn(TrialInstancesProcessor.class);
+		//reporter.setLogOn(Tests4J_NotificationManager.class);
+		//reporter.setLogOn(TrialProcessorControls.class);
+		//reporter.setLogOn(TrialInstancesProcessor.class);
 		
 		//reporter.setLogOn(TestRunable.class);
 		//reporter.setLogOn(Tests4J_Memory.class);

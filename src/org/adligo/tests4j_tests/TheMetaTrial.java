@@ -8,23 +8,24 @@ import org.adligo.tests4j.models.shared.trials.MetaTrial;
 public class TheMetaTrial  extends MetaTrial {
 	
 	public TheMetaTrial() {
-		super(35.0, 12.8);
+		super(35.0, 13.3);
 	}
 	
 
 	@Override
 	public void afterNonMetaTrialsRun(I_TrialRunResult results) throws Exception {
 		super.assertPackageTrialsPassed(results, "org.adligo.tests4j.models.shared.common", 6);
-		super.assertPackageTrialsPassed(results, "org.adligo.tests4j.models.shared.asserts", 7);
+		super.assertPackageTrialsPassed(results, "org.adligo.tests4j.models.shared.asserts", 10);
+		super.assertPackageTrialsPassed(results, "org.adligo.tests4j.models.shared.asserts.common", 1);
 		
 		//this does not include the 3 tests in this TheMetaTrial 
 		// afterNonMetaTrialsRun, afterMetadataCalculated and 
 		// @Test methods in the MetaTrial implementation.
-		assertGreaterThanOrEquals(201.0, 0.0 + results.getTestsPassed());
+		assertGreaterThanOrEquals(220.0, 0.0 + results.getTestsPassed());
 		
 		//does not include assertions from this class yet
-		assertGreaterThanOrEquals(18900.0 ,0.0 + results.getAsserts());
-		assertGreaterThanOrEquals(3900.0 ,0.0 + results.getUniqueAsserts());
+		assertGreaterThanOrEquals(19100.0 ,0.0 + results.getAsserts());
+		assertGreaterThanOrEquals(4000.0 ,0.0 + results.getUniqueAsserts());
 		
 		super.afterNonMetaTrialsRun(results);
 	}
@@ -35,13 +36,13 @@ public class TheMetaTrial  extends MetaTrial {
 		RelevantClassesWithTrialsCalculator calc = super.getCalculator();
 		
 		//this assert is also for the child-packages;
-		assertGreaterThanOrEquals(55.0, calc.getPct("org.adligo.tests4j.models.shared.asserts"));
+		assertGreaterThanOrEquals(60.0, calc.getPct("org.adligo.tests4j.models.shared.asserts"));
 		assertGreaterThanOrEquals(100.0, calc.getPct("org.adligo.tests4j.models.shared.common"));
 		
 		// includes this
-		assertGreaterThanOrEquals(35.0, 0.0 + metadata.getAllTrialsCount());
+		assertGreaterThanOrEquals(36.0, 0.0 + metadata.getAllTrialsCount());
 		//includes three tests in here, from this class
-		assertGreaterThanOrEquals(219.0, 0.0 + metadata.getAllTestsCount());
+		assertGreaterThanOrEquals(223.0, 0.0 + metadata.getAllTestsCount());
 		
 		
 		

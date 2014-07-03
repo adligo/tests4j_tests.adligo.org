@@ -1,4 +1,4 @@
-package org.adligo.tests4j_tests.models.shared.asserts;
+package org.adligo.tests4j_tests.models.shared.asserts.common;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,23 +24,8 @@ public class RunPkgTrials implements I_TrialList {
 	public List<Class<? extends AbstractTrial>> getTrials() {
 		List<Class<? extends AbstractTrial>> trials = new ArrayList<Class<? extends AbstractTrial>>();
 		
-		trials.add(AbstractAssertCommandTrial.class);
-		trials.add(AbstractCompareAssertCommandTrial.class);
-		trials.add(AssertionFailureLocationTrial.class);
-		trials.add(AssertionProcessorTrial.class);
+		trials.add(AssertTypeTrial.class);
 		
-		trials.add(BooleanAssertCommandTrial.class);
-		
-		trials.add(CompareAssertionDataTrial.class);
-		trials.add(ContainsAssertCommandTrial.class);
-		
-		trials.add(DoubleAssertCommandTrial.class);
-		
-		trials.add(ExpectedThrownDataTrial.class);
-		
-		trials.add(IdenticalAssertCommandTrial.class);
-		
-		trials.addAll(new org.adligo.tests4j_tests.models.shared.asserts.common.RunPkgTrials().getTrials());
 		return trials;
 	}
 }

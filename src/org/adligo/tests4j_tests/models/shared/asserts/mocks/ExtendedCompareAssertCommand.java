@@ -2,13 +2,13 @@ package org.adligo.tests4j_tests.models.shared.asserts.mocks;
 
 import org.adligo.tests4j.models.shared.asserts.AbstractCompareAssertCommand;
 import org.adligo.tests4j.models.shared.asserts.CompareAssertionData;
-import org.adligo.tests4j.models.shared.asserts.common.AssertType;
+import org.adligo.tests4j.models.shared.asserts.common.I_AssertType;
 import org.adligo.tests4j.models.shared.asserts.common.I_AssertionData;
 import org.adligo.tests4j.models.shared.asserts.common.I_CompareAssertionData;
 
 public class ExtendedCompareAssertCommand extends AbstractCompareAssertCommand {
 
-	public ExtendedCompareAssertCommand(AssertType pType,
+	public ExtendedCompareAssertCommand(I_AssertType pType,
 			String failureMessage, I_CompareAssertionData<?> pData) {
 		super(pType, failureMessage, pData);
 	}

@@ -38,7 +38,7 @@ import org.adligo.tests4j.models.shared.trials.SourceFileTrial;
 import org.adligo.tests4j.models.shared.trials.Test;
 import org.adligo.tests4j.models.shared.trials.TrialRecursion;
 import org.adligo.tests4j.models.shared.trials.TrialTimeout;
-import org.adligo.tests4j.models.shared.trials.TrialType;
+import org.adligo.tests4j.models.shared.trials.TrialTypeAnnotation;
 import org.adligo.tests4j.models.shared.trials.UseCaseScope;
 import org.adligo.tests4j.models.shared.trials.UseCaseTrial;
 import org.adligo.tests4j.run.discovery.ClassDiscovery;
@@ -103,7 +103,7 @@ public class ClassDiscoveryTrial extends SourceFileTrial {
 		assertContains(classNames, SourceFileTrial.class.getName());
 		assertContains(classNames, Test.class.getName());
 		assertContains(classNames, TrialTimeout.class.getName());
-		assertContains(classNames, TrialType.class.getName());
+		assertContains(classNames, TrialTypeAnnotation.class.getName());
 		assertContains(classNames, TrialRecursion.class.getName());
 		assertContains(classNames, UseCaseScope.class.getName());
 		assertContains(classNames, UseCaseTrial.class.getName());

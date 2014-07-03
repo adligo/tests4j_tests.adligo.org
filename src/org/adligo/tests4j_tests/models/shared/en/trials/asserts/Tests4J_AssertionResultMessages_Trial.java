@@ -88,7 +88,7 @@ public class Tests4J_AssertionResultMessages_Trial extends SourceFileTrial {
 		
 		if (p.hasRecordedCoverage()) {
 			I_SourceFileCoverage coverage = p.getCoverage();
-			assertGreaterThanOrEquals(62.0, coverage.getPercentageCoveredDouble());
+			assertGreaterThanOrEquals(60.0, coverage.getPercentageCoveredDouble());
 		}
 		super.afterTrialTests(p);
 	}
