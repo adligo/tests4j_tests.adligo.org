@@ -65,7 +65,7 @@ public class AbstractAssertCommandTrial extends SourceFileTrial {
 			I_SourceFileCoverage coverage = p.getCoverage();
 			//note I think this should be about 70%-100% but it is hard to see with out 
 			// a visual tool, this seems to have something to do with abstract classes...
-			assertGreaterThanOrEquals(0.0, coverage.getPercentageCoveredDouble());
+			assertGreaterThanOrEquals(30.0, coverage.getPercentageCoveredDouble());
 		}
 	}
 }

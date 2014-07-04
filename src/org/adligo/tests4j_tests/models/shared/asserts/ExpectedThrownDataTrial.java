@@ -41,6 +41,31 @@ public class ExpectedThrownDataTrial extends SourceFileTrial {
 		
 	}
 	
+	@Test
+	public void testEqualsHashCode() {
+		ExpectedThrownData a = new ExpectedThrownData(
+				new ExpectedThrownData(new IllegalStateException("Some error message.")));
+		ExpectedThrownData b = new ExpectedThrownData(new IllegalStateException("Some error message2."));
+		ExpectedThrownData c = new ExpectedThrownData(new IllegalStateException("Some error message."));
+		ExpectedThrownData d = new ExpectedThrownData(new IllegalArgumentException("Some error message."));
+		ExpectedThrownData e = new ExpectedThrownData(new IllegalArgumentException("Some error message2."));
+		
+		assertEquals(a, a);
+		assertEquals(a.hashCode(), a.hashCode());
+		
+		assertNotEquals(a, b);
+		assertNotEquals(a.hashCode(), b.hashCode());
+		
+		assertEquals(a,  c);
+		assertEquals(a.hashCode(), c.hashCode());
+		
+		assertNotEquals(a, d);
+		assertNotEquals(a.hashCode(), d.hashCode());
+		
+		assertNotEquals(a, e);
+		assertNotEquals(a.hashCode(), e.hashCode());
+	}
+	
 	@Override
 	public void afterTrialTests(I_SourceFileTrial_TestsResults p) {
 		assertGreaterThanOrEquals(4.0, p.getAssertions());
@@ -48,6 +73,7 @@ public class ExpectedThrownDataTrial extends SourceFileTrial {
 		
 		if (p.hasRecordedCoverage()) {
 			I_SourceFileCoverage coverage = p.getCoverage();
+			//hmm this should be 70ish
 			assertGreaterThanOrEquals(70.0, coverage.getPercentageCoveredDouble());
 		}
 	}

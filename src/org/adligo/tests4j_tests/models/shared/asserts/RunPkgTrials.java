@@ -40,6 +40,8 @@ public class RunPkgTrials implements I_TrialList {
 		
 		trials.add(IdenticalAssertCommandTrial.class);
 		
+		trials.add(ThrownAssertCommandTrial.class);
+		
 		trials.addAll(new org.adligo.tests4j_tests.models.shared.asserts.common.RunPkgTrials().getTrials());
 		return trials;
 	}

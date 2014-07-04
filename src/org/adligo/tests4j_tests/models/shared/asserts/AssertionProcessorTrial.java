@@ -79,7 +79,7 @@ public class AssertionProcessorTrial extends SourceFileTrial implements I_Assert
 	public void testThrown() {
 		assertNull(lastAssertCommand);
 		assertNull(lastTestFailure);
-		ThrownAssertCommand tac = new ThrownAssertCommand(AssertType.AssertThrown, "should be true", 
+		ThrownAssertCommand tac = new ThrownAssertCommand("should be true", 
 				new ExpectedThrownData(new RuntimeException("thrown message")));
 		AssertionProcessor.evaluate(this, tac, this);
 		assertNull(lastAssertCommand);
@@ -158,7 +158,7 @@ public class AssertionProcessorTrial extends SourceFileTrial implements I_Assert
 	public void testThrownUniform() {
 		assertNull(lastAssertCommand);
 		assertNull(lastTestFailure);
-		UniformThrownAssertCommand tac = new UniformThrownAssertCommand(AssertType.AssertThrownUniform, 
+		UniformThrownAssertCommand tac = new UniformThrownAssertCommand(
 				"should be thrown uniform", 
 				new ExpectedThrownData(new RuntimeException("thrown message")));
 		
