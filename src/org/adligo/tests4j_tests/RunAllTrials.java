@@ -96,27 +96,16 @@ public class RunAllTrials implements I_TrialRunListener {
 
 	@Override
 	public void onStartingTest(String trialName, String testName) {
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
 	public void onTestCompleted(String trialName, String testName,
 			boolean passed) {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public void onTrialCompleted(I_TrialResult result) {
-		// TODO Auto-generated method stub
-		if (!result.isPassed()) {
-			if (result instanceof I_SourceFileTrialResult) {
-				I_SourceFileTrialResult sftResult = (I_SourceFileTrialResult) result;
-				String sourceFileName = sftResult.getSourceFileName();
-				MultiProbesMap.flushLocations(sourceFileName);
-			}
-		}
 	}
 
 	@Override
