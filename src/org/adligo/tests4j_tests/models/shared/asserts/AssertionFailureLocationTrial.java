@@ -32,7 +32,11 @@ public class AssertionFailureLocationTrial extends SourceFileTrial {
 		
 		if (p.hasRecordedCoverage()) {
 			I_SourceFileCoverage coverage = p.getCoverage();
-			assertGreaterThanOrEquals(100.0, coverage.getPercentageCoveredDouble());
+			double pct = coverage.getPercentageCoveredDouble();
+			if (pct < 90.0) {
+				System.out.println("wtf");
+			}
+			assertGreaterThanOrEquals(100.0, pct);
 		}
 	}
 }

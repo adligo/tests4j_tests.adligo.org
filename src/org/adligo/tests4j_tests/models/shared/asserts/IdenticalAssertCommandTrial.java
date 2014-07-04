@@ -115,7 +115,8 @@ public class IdenticalAssertCommandTrial extends SourceFileTrial {
 		
 		if (p.hasRecordedCoverage()) {
 			I_SourceFileCoverage coverage = p.getCoverage();
-			assertGreaterThanOrEquals(70.0, coverage.getPercentageCoveredDouble());
+			double pct = coverage.getPercentageCoveredDouble();
+			assertGreaterThanOrEquals(70.0, pct);
 		}
 	}
 }

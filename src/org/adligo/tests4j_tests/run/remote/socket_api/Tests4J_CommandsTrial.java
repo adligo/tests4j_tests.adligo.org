@@ -23,10 +23,12 @@ public class Tests4J_CommandsTrial extends SourceFileTrial {
 		
 		if (p.hasRecordedCoverage()) {
 			I_SourceFileCoverage coverage =  p.getCoverage();
-			assertGreaterThanOrEquals(96.0, coverage.getPercentageCoveredDouble());
+			double pct = coverage.getPercentageCoveredDouble();
+			if (pct <= 90.0) {
+				System.out.println("wtf");
+			}
+			assertGreaterThanOrEquals(96.0, pct);
 		}
-		// TODO Auto-generated method stub
-		super.afterTrialTests(p);
 	}
 	
 }

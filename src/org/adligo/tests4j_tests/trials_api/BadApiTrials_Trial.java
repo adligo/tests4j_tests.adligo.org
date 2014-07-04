@@ -10,6 +10,7 @@ import org.adligo.tests4j.models.shared.results.I_TrialFailure;
 import org.adligo.tests4j.models.shared.results.I_TrialResult;
 import org.adligo.tests4j.models.shared.trials.ApiTrial;
 import org.adligo.tests4j.models.shared.trials.I_Trial;
+import org.adligo.tests4j.models.shared.trials.IgnoreTest;
 import org.adligo.tests4j.models.shared.trials.PackageScope;
 import org.adligo.tests4j.models.shared.trials.Test;
 import org.adligo.tests4j_tests.trials_api.bad_mock_api_trials.AbstractTestTrial;
@@ -713,6 +714,7 @@ public class BadApiTrials_Trial extends ApiTrial {
 	}
 	
 	@Test
+	@IgnoreTest
 	public void testTrialRunOverlapPrevention() {
 		ExpectedPassRunner runner = new ExpectedPassRunner();
 		List<Class<? extends I_Trial>> trials = new ArrayList<>();

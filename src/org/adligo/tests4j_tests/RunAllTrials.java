@@ -3,6 +3,7 @@ package org.adligo.tests4j_tests;
 import java.math.BigDecimal;
 
 import org.adligo.tests4j.models.shared.metadata.I_TrialRunMetadata;
+import org.adligo.tests4j.models.shared.results.I_SourceFileTrialResult;
 import org.adligo.tests4j.models.shared.results.I_TrialResult;
 import org.adligo.tests4j.models.shared.results.I_TrialRunResult;
 import org.adligo.tests4j.models.shared.system.I_Tests4J_Controls;
@@ -15,6 +16,7 @@ import org.adligo.tests4j.run.helpers.TrialInstancesProcessor;
 import org.adligo.tests4j.run.helpers.TrialProcessorControls;
 import org.adligo.tests4j.shared.report.summary.SummaryReporter;
 import org.adligo.tests4j_4jacoco.plugin.ScopedJacocoPlugin;
+import org.adligo.tests4j_4jacoco.plugin.data.multi.MultiProbesMap;
 
 public class RunAllTrials implements I_TrialRunListener {
 	static long start = System.currentTimeMillis();
@@ -32,7 +34,7 @@ public class RunAllTrials implements I_TrialRunListener {
 		//reporter.setLogOn(TrialInstancesProcessor.class);
 		
 		//reporter.setLogOn(TestRunable.class);
-		//reporter.setLogOn(Tests4J_Memory.class);
+		reporter.setLogOn(MultiProbesMap.class);
 		
 		//logging from jacoco
 		//reporter.setLogOn(AbstractPlugin.class);
@@ -108,11 +110,18 @@ public class RunAllTrials implements I_TrialRunListener {
 	@Override
 	public void onTrialCompleted(I_TrialResult result) {
 		// TODO Auto-generated method stub
-		
+		if (!result.isPassed()) {
+			if (result instanceof I_SourceFileTrialResult) {
+				I_SourceFileTrialResult sftResult = (I_SourceFileTrialResult) result;
+				String sourceFileName = sftResult.getSourceFileName();
+				MultiProbesMap.flushLocations(sourceFileName);
+			}
+		}
 	}
 
 	@Override
 	public void onRunCompleted(I_TrialRunResult result) {
+		
 		long end = System.currentTimeMillis();
 		long dur = end - start;
 		BigDecimal durD = new BigDecimal(dur).divide(new BigDecimal(1000));

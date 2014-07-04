@@ -83,7 +83,11 @@ public class AssertTypeTrial extends SourceFileTrial {
 		if (p.hasRecordedCoverage()) {
 			I_SourceFileCoverage coverage = p.getCoverage();
 			//hmm this should be 95, looks like multithreading
-			assertGreaterThanOrEquals(95.0, coverage.getPercentageCoveredDouble());
+			double pct = coverage.getPercentageCoveredDouble();
+			if (pct < 90.0) {
+				System.out.println("wtf");
+			}
+			assertGreaterThanOrEquals(95.0, pct);
 		}
 	}
 }
