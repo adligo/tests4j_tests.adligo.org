@@ -55,7 +55,6 @@ public class MultiRecordingTrial extends ApiTrial {
 		Method getJ = mr.getMethod("getJ", null);
 		assertEquals(4, getJ.invoke(obj, null));
 		
-		recorder.pauseRecording();
 		List<I_PackageCoverage> coverage =  recorder.endRecording();
 		assertNotNull(coverage);
 		assertEquals(1, coverage.size());
@@ -156,18 +155,17 @@ public class MultiRecordingTrial extends ApiTrial {
 		I_CoverageRecorder innerRecorder = plugin.createRecorder("innerFoo");
 		assertNotNull(innerRecorder);
 		innerRecorder.startRecording();
-		recorder.pauseRecording();
+		List<I_PackageCoverage> coverage =  recorder.endRecording();
 		
 		Object inObj = mrc.newInstance(true, true);
 		run.invoke(inObj, null);
 		assertEquals(4, getI.invoke(inObj,null));
 		assertEquals(4, getJ.invoke(inObj, null));
 		
-		innerRecorder.pauseRecording();
 		List<I_PackageCoverage> inCoverage =  innerRecorder.endRecording();
 		
 		
-		List<I_PackageCoverage> coverage =  recorder.endRecording();
+		
 		assertNotNull(coverage);
 		assertEquals(1, coverage.size());
 		

@@ -714,7 +714,6 @@ public class BadApiTrials_Trial extends ApiTrial {
 	}
 	
 	@Test
-	@IgnoreTest
 	public void testTrialRunOverlapPrevention() {
 		ExpectedPassRunner runner = new ExpectedPassRunner();
 		List<Class<? extends I_Trial>> trials = new ArrayList<>();

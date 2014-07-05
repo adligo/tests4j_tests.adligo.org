@@ -4,13 +4,5 @@ metadata package source file tests
 results package source file tests
 
 test jacoco4_tests4j
-  known bug, the source file trial is having issues with random
-     code coverage, I spent a few hours on 7/3/2014 trying to 
-     find it by first switching from a ConcurrentHashMap<String scope, boolean[] probes>
-     to a ThreadLocal<boolean> probes which doesn't work because the TrialDescription may be calculated on 
-     a different thread from the processing of a trial.   That may work eventually 
-       but will need to copy the data between thread locals which seems hard.
-     Then I tried synchronizing all over the place Tests4J_Memory getSetRecorder(String scope)
-     MultiProbesMap, MultiProbesDataStore, anywhere anything to do with probes is created, 
-       this also didn't work.
+
        

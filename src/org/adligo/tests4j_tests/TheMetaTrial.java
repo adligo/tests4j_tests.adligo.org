@@ -8,7 +8,7 @@ import org.adligo.tests4j.models.shared.trials.MetaTrial;
 public class TheMetaTrial  extends MetaTrial {
 	
 	public TheMetaTrial() {
-		super(35.0, 13.3);
+		super(37.0, 13.9);
 	}
 	
 
@@ -21,7 +21,7 @@ public class TheMetaTrial  extends MetaTrial {
 		//this does not include the 3 tests in this TheMetaTrial 
 		// afterNonMetaTrialsRun, afterMetadataCalculated and 
 		// @Test methods in the MetaTrial implementation.
-		assertGreaterThanOrEquals(226.0, 0.0 + results.getTestsPassed());
+		assertGreaterThanOrEquals(241.0, 0.0 + results.getTestsPassed());
 		
 		//does not include assertions from this class yet
 		assertGreaterThanOrEquals(18800.0 ,0.0 + results.getAsserts());
@@ -42,7 +42,7 @@ public class TheMetaTrial  extends MetaTrial {
 		// includes this
 		assertGreaterThanOrEquals(37.0, 0.0 + metadata.getAllTrialsCount());
 		//includes three tests in here, from this class
-		assertGreaterThanOrEquals(230.0, 0.0 + metadata.getAllTestsCount());
+		assertGreaterThanOrEquals(244.0, 0.0 + metadata.getAllTestsCount());
 		
 		
 		
