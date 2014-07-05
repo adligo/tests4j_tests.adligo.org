@@ -8,12 +8,14 @@ import org.adligo.tests4j.models.shared.asserts.common.I_CompareAssertionData;
 import org.adligo.tests4j.models.shared.asserts.common.I_Thrower;
 import org.adligo.tests4j.models.shared.coverage.I_SourceFileCoverage;
 import org.adligo.tests4j.models.shared.results.feedback.I_SourceFileTrial_TestsResults;
+import org.adligo.tests4j.models.shared.trials.AdditionalInstrumentation;
 import org.adligo.tests4j.models.shared.trials.SourceFileScope;
 import org.adligo.tests4j.models.shared.trials.SourceFileTrial;
 import org.adligo.tests4j.models.shared.trials.Test;
 import org.adligo.tests4j_tests.models.shared.asserts.mocks.ExtendedCompareAssertCommand;
 
 @SourceFileScope (sourceClass=AbstractCompareAssertCommand.class)
+@AdditionalInstrumentation (javaPackages="org.adligo.tests4j_tests.models.shared.asserts.mocks")
 public class AbstractCompareAssertCommandTrial extends SourceFileTrial {
 
 	@Test
@@ -66,9 +68,7 @@ public class AbstractCompareAssertCommandTrial extends SourceFileTrial {
 		
 		if (p.hasRecordedCoverage()) {
 			I_SourceFileCoverage coverage = p.getCoverage();
-			//there is some bug in the percentage coverage code currently
-			// this should be 75% or so, this seems to have something to do with abstract classes...
-			assertGreaterThanOrEquals(40.0, coverage.getPercentageCoveredDouble());
+			assertGreaterThanOrEquals(68.0, coverage.getPercentageCoveredDouble());
 		}
 	}
 }
