@@ -1,9 +1,12 @@
 package org.adligo.tests4j_tests;
 
 import java.math.BigDecimal;
+import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import org.adligo.tests4j.models.shared.metadata.I_TrialRunMetadata;
-import org.adligo.tests4j.models.shared.results.I_SourceFileTrialResult;
 import org.adligo.tests4j.models.shared.results.I_TrialResult;
 import org.adligo.tests4j.models.shared.results.I_TrialRunResult;
 import org.adligo.tests4j.models.shared.system.I_Tests4J_Controls;
@@ -12,24 +15,22 @@ import org.adligo.tests4j.models.shared.system.Tests4J_Params;
 import org.adligo.tests4j.run.Tests4J;
 import org.adligo.tests4j.run.helpers.Tests4J_NotificationManager;
 import org.adligo.tests4j.run.helpers.ThreadStateHelper;
-import org.adligo.tests4j.run.helpers.TrialInstancesProcessor;
-import org.adligo.tests4j.run.helpers.TrialProcessorControls;
 import org.adligo.tests4j.shared.report.summary.SummaryReporter;
 import org.adligo.tests4j_4jacoco.plugin.ScopedJacocoPlugin;
-import org.adligo.tests4j_4jacoco.plugin.data.multi.MultiProbesMap;
 
 public class RunAllTrials implements I_TrialRunListener {
 	static long start = System.currentTimeMillis();
 	static SummaryReporter reporter;
+	private static List<String> trialsNotCompleted = new CopyOnWriteArrayList<String>();
+	private static ExecutorService trialsNotCompletedService = Executors.newSingleThreadExecutor();
 	
 	public static void main(String [] args) {
-		
 		
 		Tests4J_Params params = getTests();
 		reporter = new SummaryReporter();
 		//reporter.setListRelevantClassesWithoutTrials(true);
 		//reporter.setListRelevantClassesWithoutTrials(true);
-		//reporter.setLogOn(Tests4J_NotificationManager.class);
+		reporter.setLogOn(Tests4J_NotificationManager.class);
 		//reporter.setLogOn(TrialProcessorControls.class);
 		//reporter.setLogOn(TrialInstancesProcessor.class);
 		
@@ -60,6 +61,23 @@ public class RunAllTrials implements I_TrialRunListener {
 		
 		ThreadStateHelper tsh = new ThreadStateHelper(params.getReporter());
 		//tsh.logAllThreadStates();
+		trialsNotCompletedService.submit(new Runnable() {
+			
+			@Override
+			public void run() {
+				while (true) {
+					if (trialsNotCompleted.size() != 0) {
+						reporter.log("The following trials have started but not completed");
+						reporter.log(trialsNotCompleted.toString());
+					}
+					try {
+						Thread.sleep(1000);
+					} catch (InterruptedException x) {
+						
+					}
+				}
+			}
+		});
 	}
 
 	public static Tests4J_Params getTests() {
@@ -90,8 +108,7 @@ public class RunAllTrials implements I_TrialRunListener {
 
 	@Override
 	public void onStartingTrail(String trialName) {
-		// TODO Auto-generated method stub
-		
+		trialsNotCompleted.add(trialName);
 	}
 
 	@Override
@@ -106,6 +123,7 @@ public class RunAllTrials implements I_TrialRunListener {
 
 	@Override
 	public void onTrialCompleted(I_TrialResult result) {
+		trialsNotCompleted.remove(result.getName());
 	}
 
 	@Override
