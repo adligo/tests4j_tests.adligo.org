@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.adligo.tests4j.models.shared.coverage.I_SourceFileCoverage;
 import org.adligo.tests4j.models.shared.metadata.I_SourceInfo;
 import org.adligo.tests4j.models.shared.metadata.I_TestMetadata;
 import org.adligo.tests4j.models.shared.metadata.I_TrialMetadata;
@@ -19,6 +20,7 @@ import org.adligo.tests4j.models.shared.metadata.TrialMetadataMutant;
 import org.adligo.tests4j.models.shared.metadata.TrialRunMetadata;
 import org.adligo.tests4j.models.shared.metadata.TrialRunMetadataMutant;
 import org.adligo.tests4j.models.shared.metadata.UseCase;
+import org.adligo.tests4j.models.shared.results.I_SourceFileTrialResult;
 import org.adligo.tests4j.models.shared.trials.AbstractTrial;
 import org.adligo.tests4j.models.shared.trials.AdditionalInstrumentation;
 import org.adligo.tests4j.models.shared.trials.AfterTrial;
@@ -88,14 +90,18 @@ public class ClassDiscoveryTrial extends SourceFileTrial {
 		assertContains(classNames, AbstractTrial.class.getName());
 		assertContains(classNames, AfterTrial.class.getName());
 		assertContains(classNames, ApiTrial.class.getName());
+		
 		assertContains(classNames, BeforeTrial.class.getName());
+		
 		assertContains(classNames, I_AbstractTrial.class.getName());
 		assertContains(classNames, I_ApiTrial.class.getName());
 		assertContains(classNames, I_Trial.class.getName());
 		assertContains(classNames, I_TrialProcessorBindings.class.getName());
 		assertContains(classNames, I_MetaTrial.class.getName());
 		assertContains(classNames, I_SourceFileTrial.class.getName());
+		
 		assertContains(classNames, MetaTrial.class.getName());
+		
 		assertContains(classNames, IgnoreTest.class.getName());
 		
 		assertContains(classNames, PackageScope.class.getName());
@@ -132,5 +138,17 @@ public class ClassDiscoveryTrial extends SourceFileTrial {
 		assertContains(childNames, "org.adligo.tests4j.shared");
 		
 		assertEquals(3, children.size());
+	}
+	
+	@Override
+	public void afterTrialTests(I_SourceFileTrialResult p) {
+		assertEquals(3, p.getTestCount());
+		assertGreaterThanOrEquals(45.0, p.getAssertionCount());
+		assertGreaterThanOrEquals(30.0, p.getUniqueAssertionCount());
+		
+		if (p.hasRecordedCoverage()) {
+			I_SourceFileCoverage coverage = p.getSourceFileCoverage();
+			assertGreaterThanOrEquals(50.0, coverage.getPercentageCoveredDouble());
+		}
 	}
 }

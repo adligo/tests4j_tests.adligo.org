@@ -1,12 +1,9 @@
 package org.adligo.tests4j_tests.models.shared.system;
 
 import java.io.IOException;
-import java.util.Map;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 import org.adligo.tests4j.models.shared.coverage.I_SourceFileCoverage;
-import org.adligo.tests4j.models.shared.results.feedback.I_SourceFileTrial_TestsResults;
+import org.adligo.tests4j.models.shared.results.I_SourceFileTrialResult;
 import org.adligo.tests4j.models.shared.system.ByteListOutputStream;
 import org.adligo.tests4j.models.shared.trials.SourceFileScope;
 import org.adligo.tests4j.models.shared.trials.SourceFileTrial;
@@ -46,12 +43,13 @@ public class ByteListOutputStreamTrial extends SourceFileTrial {
 	}
 
 	@Override
-	public void afterTrialTests(I_SourceFileTrial_TestsResults p) {
+	public void afterTrialTests(I_SourceFileTrialResult p) {
+		assertEquals(2, p.getTestCount());
 		if (p.hasRecordedCoverage()) {
-			I_SourceFileCoverage coverage = p.getCoverage();
+			I_SourceFileCoverage coverage = p.getSourceFileCoverage();
 			assertGreaterThanOrEquals(100.00, coverage.getPercentageCoveredDouble());
 		}
-		assertEquals(4L, p.getAssertions());
-		assertEquals(4L, p.getUniqueAssertions());
+		assertEquals(4, p.getAssertionCount());
+		assertEquals(4, p.getUniqueAssertionCount());
 	}
 }

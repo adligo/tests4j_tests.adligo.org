@@ -2,7 +2,7 @@ package org.adligo.tests4j_tests.models.shared.asserts;
 
 import org.adligo.tests4j.models.shared.asserts.CompareAssertionData;
 import org.adligo.tests4j.models.shared.coverage.I_SourceFileCoverage;
-import org.adligo.tests4j.models.shared.results.feedback.I_SourceFileTrial_TestsResults;
+import org.adligo.tests4j.models.shared.results.I_SourceFileTrialResult;
 import org.adligo.tests4j.models.shared.trials.SourceFileScope;
 import org.adligo.tests4j.models.shared.trials.SourceFileTrial;
 import org.adligo.tests4j.models.shared.trials.Test;
@@ -57,12 +57,13 @@ public class CompareAssertionDataTrial extends SourceFileTrial {
 	}
 	
 	@Override
-	public void afterTrialTests(I_SourceFileTrial_TestsResults p) {
-		assertGreaterThanOrEquals(19.0, p.getAssertions());
-		assertGreaterThanOrEquals(9.0, p.getUniqueAssertions());
+	public void afterTrialTests(I_SourceFileTrialResult p) {
+		assertEquals(3, p.getTestCount());
+		assertGreaterThanOrEquals(19.0, p.getAssertionCount());
+		assertGreaterThanOrEquals(9.0, p.getUniqueAssertionCount());
 		
 		if (p.hasRecordedCoverage()) {
-			I_SourceFileCoverage coverage = p.getCoverage();
+			I_SourceFileCoverage coverage = p.getSourceFileCoverage();
 			assertGreaterThanOrEquals(70.0, coverage.getPercentageCoveredDouble());
 		}
 	}

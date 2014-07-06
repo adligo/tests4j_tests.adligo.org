@@ -15,8 +15,8 @@ import org.adligo.tests4j.models.shared.asserts.common.I_Thrower;
 import org.adligo.tests4j.models.shared.asserts.uniform.StringUniformEvaluator;
 import org.adligo.tests4j.models.shared.asserts.uniform.ThrowableUniformEvaluator;
 import org.adligo.tests4j.models.shared.coverage.I_SourceFileCoverage;
+import org.adligo.tests4j.models.shared.results.I_SourceFileTrialResult;
 import org.adligo.tests4j.models.shared.results.I_TestFailure;
-import org.adligo.tests4j.models.shared.results.feedback.I_SourceFileTrial_TestsResults;
 import org.adligo.tests4j.models.shared.system.I_AssertListener;
 import org.adligo.tests4j.models.shared.trials.SourceFileScope;
 import org.adligo.tests4j.models.shared.trials.SourceFileTrial;
@@ -216,12 +216,13 @@ public class AssertionProcessorTrial extends SourceFileTrial implements I_Assert
 	}
 
 	@Override
-	public void afterTrialTests(I_SourceFileTrial_TestsResults p) {
-		assertGreaterThanOrEquals(25.0, p.getAssertions());
-		assertGreaterThanOrEquals(13.0, p.getUniqueAssertions());
+	public void afterTrialTests(I_SourceFileTrialResult p) {
+		assertEquals(4, p.getTestCount());
+		assertGreaterThanOrEquals(25.0, p.getAssertionCount());
+		assertGreaterThanOrEquals(13.0, p.getUniqueAssertionCount());
 		
 		if (p.hasRecordedCoverage()) {
-			I_SourceFileCoverage coverage = p.getCoverage();
+			I_SourceFileCoverage coverage = p.getSourceFileCoverage();
 			assertGreaterThanOrEquals(80.0, coverage.getPercentageCoveredDouble());
 		}
 	}

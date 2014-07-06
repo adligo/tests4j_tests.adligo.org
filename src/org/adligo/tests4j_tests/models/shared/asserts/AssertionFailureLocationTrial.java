@@ -2,7 +2,7 @@ package org.adligo.tests4j_tests.models.shared.asserts;
 
 import org.adligo.tests4j.models.shared.asserts.AssertionFailureLocation;
 import org.adligo.tests4j.models.shared.coverage.I_SourceFileCoverage;
-import org.adligo.tests4j.models.shared.results.feedback.I_SourceFileTrial_TestsResults;
+import org.adligo.tests4j.models.shared.results.I_SourceFileTrialResult;
 import org.adligo.tests4j.models.shared.trials.SourceFileScope;
 import org.adligo.tests4j.models.shared.trials.SourceFileTrial;
 import org.adligo.tests4j.models.shared.trials.Test;
@@ -26,12 +26,13 @@ public class AssertionFailureLocationTrial extends SourceFileTrial {
 	}
 	
 	@Override
-	public void afterTrialTests(I_SourceFileTrial_TestsResults p) {
-		assertGreaterThanOrEquals(7.0, p.getAssertions());
-		assertGreaterThanOrEquals(7.0, p.getUniqueAssertions());
+	public void afterTrialTests(I_SourceFileTrialResult p) {
+		assertEquals(1, p.getTestCount());
+		assertGreaterThanOrEquals(7.0, p.getAssertionCount());
+		assertGreaterThanOrEquals(7.0, p.getUniqueAssertionCount());
 		
 		if (p.hasRecordedCoverage()) {
-			I_SourceFileCoverage coverage = p.getCoverage();
+			I_SourceFileCoverage coverage = p.getSourceFileCoverage();
 			double pct = coverage.getPercentageCoveredDouble();
 			if (pct < 90.0) {
 				System.out.println("wtf");

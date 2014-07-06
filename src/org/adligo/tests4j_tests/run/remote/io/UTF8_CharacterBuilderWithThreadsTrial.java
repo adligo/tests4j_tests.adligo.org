@@ -6,11 +6,10 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import org.adligo.tests4j.models.shared.coverage.I_SourceFileCoverage;
-import org.adligo.tests4j.models.shared.results.feedback.I_SourceFileTrial_TestsResults;
+import org.adligo.tests4j.models.shared.results.I_SourceFileTrialResult;
 import org.adligo.tests4j.models.shared.trials.AdditionalInstrumentation;
 import org.adligo.tests4j.models.shared.trials.AfterTrial;
 import org.adligo.tests4j.models.shared.trials.BeforeTrial;
-import org.adligo.tests4j.models.shared.trials.IgnoreTest;
 import org.adligo.tests4j.models.shared.trials.SourceFileScope;
 import org.adligo.tests4j.models.shared.trials.SourceFileTrial;
 import org.adligo.tests4j.models.shared.trials.Test;
@@ -111,15 +110,16 @@ public class UTF8_CharacterBuilderWithThreadsTrial extends SourceFileTrial imple
 	 * @see org.adligo.tests4j.models.shared.trials.SourceFileTrial#afterTrialTests(org.adligo.tests4j.models.shared.coverage.I_SourceFileCoverage)
 	 */
 	@Override
-	public void afterTrialTests(I_SourceFileTrial_TestsResults p) {
-		assertEquals(12906L, p.getAssertions());
-		assertEquals(19L, p.getUniqueAssertions());
+	public void afterTrialTests(I_SourceFileTrialResult p) {
+		assertEquals(2, p.getTestCount());
+		assertEquals(12906, p.getAssertionCount());
+		assertEquals(19, p.getUniqueAssertionCount());
 		
 		//not sure what I am missing, I probably need 
 		//to finish the eclipse plug-in coverage source-lighter
 		
 		if (p.hasRecordedCoverage()) {
-			I_SourceFileCoverage cover =  p.getCoverage();
+			I_SourceFileCoverage cover =  p.getSourceFileCoverage();
 			//hmm I think I am getting 22.0% here but perhaps the threads/class loaders are 
 			//causing this to be wrong
 			assertGreaterThanOrEquals(0.0,cover.getPercentageCoveredDouble());

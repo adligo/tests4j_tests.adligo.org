@@ -1,6 +1,6 @@
 package org.adligo.tests4j_tests.trials_api;
 
-import org.adligo.tests4j.models.shared.results.feedback.I_ApiTrial_TestsResults;
+import org.adligo.tests4j.models.shared.results.I_ApiTrialResult;
 import org.adligo.tests4j.models.shared.trials.ApiTrial;
 import org.adligo.tests4j.models.shared.trials.PackageScope;
 import org.adligo.tests4j.models.shared.trials.Test;
@@ -141,7 +141,8 @@ public class AssertionsWithNullExpectedFail_Trial extends ApiTrial {
 	}
 	
 	@Override
-	public void afterTrialTests(I_ApiTrial_TestsResults p) {
+	public void afterTrialTests(I_ApiTrialResult p) {
+		assertEquals(22, p.getTestCount());
 		assertGreaterThanOrEquals(0.0 + 
 				AssertContainsNullFailsTrial.getAsserts() +
 				AssertContainsNullWithMessageFailsTrial.getAsserts() +
@@ -167,10 +168,10 @@ public class AssertionsWithNullExpectedFail_Trial extends ApiTrial {
 				AssertThrownUniformNullThrowerWithMessageFailsTrial.getAsserts() 
 				,
 				
-				p.getAssertions());
+				p.getAssertionCount());
 		assertGreaterThanOrEquals(0.0 + 
 				60.0, 
-				p.getUniqueAssertions());
+				p.getUniqueAssertionCount());
 		
 	}
 }

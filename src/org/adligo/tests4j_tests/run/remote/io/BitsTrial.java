@@ -1,7 +1,7 @@
 package org.adligo.tests4j_tests.run.remote.io;
 
 import org.adligo.tests4j.models.shared.coverage.I_SourceFileCoverage;
-import org.adligo.tests4j.models.shared.results.feedback.I_SourceFileTrial_TestsResults;
+import org.adligo.tests4j.models.shared.results.I_SourceFileTrialResult;
 import org.adligo.tests4j.models.shared.trials.SourceFileScope;
 import org.adligo.tests4j.models.shared.trials.SourceFileTrial;
 import org.adligo.tests4j.models.shared.trials.Test;
@@ -35,9 +35,9 @@ public class BitsTrial extends SourceFileTrial {
 	}
 	
 	@Override
-	public void afterTrialTests(I_SourceFileTrial_TestsResults p) {
+	public void afterTrialTests(I_SourceFileTrialResult p) {
 		if (p.hasRecordedCoverage()) {
-			I_SourceFileCoverage coverage = p.getCoverage();
+			I_SourceFileCoverage coverage = p.getSourceFileCoverage();
 			assertGreaterThanOrEquals(100.00, coverage.getPercentageCoveredDouble());
 		}
 	}

@@ -1,13 +1,11 @@
 package org.adligo.tests4j_tests.models.shared.system;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
 
 import org.adligo.tests4j.models.shared.coverage.I_SourceFileCoverage;
-import org.adligo.tests4j.models.shared.results.feedback.I_SourceFileTrial_TestsResults;
+import org.adligo.tests4j.models.shared.results.I_SourceFileTrialResult;
 import org.adligo.tests4j.models.shared.system.I_CoveragePlugin;
 import org.adligo.tests4j.models.shared.system.I_ThreadCount;
 import org.adligo.tests4j.models.shared.system.Tests4J_Params;
@@ -78,9 +76,9 @@ public class Tests4J_ParamsTrial extends SourceFileTrial {
 		 
 	}
 	@Override
-	public void afterTrialTests(I_SourceFileTrial_TestsResults  p) {
+	public void afterTrialTests(I_SourceFileTrialResult p) {
 		if (p.hasRecordedCoverage()) {
-			I_SourceFileCoverage coverage = p.getCoverage();
+			I_SourceFileCoverage coverage = p.getSourceFileCoverage();
 			assertGreaterThanOrEquals(46.00, coverage.getPercentageCoveredDouble());
 		}
 	}
