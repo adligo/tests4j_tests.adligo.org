@@ -31,13 +31,14 @@ import org.adligo.tests4j.models.shared.trials.I_ApiTrial;
 import org.adligo.tests4j.models.shared.trials.I_MetaTrial;
 import org.adligo.tests4j.models.shared.trials.I_SourceFileTrial;
 import org.adligo.tests4j.models.shared.trials.I_Trial;
-import org.adligo.tests4j.models.shared.trials.I_TrialProcessorBindings;
+import org.adligo.tests4j.models.shared.trials.I_TrialBindings;
 import org.adligo.tests4j.models.shared.trials.IgnoreTest;
 import org.adligo.tests4j.models.shared.trials.MetaTrial;
 import org.adligo.tests4j.models.shared.trials.PackageScope;
 import org.adligo.tests4j.models.shared.trials.SourceFileScope;
 import org.adligo.tests4j.models.shared.trials.SourceFileTrial;
 import org.adligo.tests4j.models.shared.trials.Test;
+import org.adligo.tests4j.models.shared.trials.TrialBindings;
 import org.adligo.tests4j.models.shared.trials.TrialRecursion;
 import org.adligo.tests4j.models.shared.trials.TrialTimeout;
 import org.adligo.tests4j.models.shared.trials.TrialTypeAnnotation;
@@ -96,7 +97,7 @@ public class ClassDiscoveryTrial extends SourceFileTrial {
 		assertContains(classNames, I_AbstractTrial.class.getName());
 		assertContains(classNames, I_ApiTrial.class.getName());
 		assertContains(classNames, I_Trial.class.getName());
-		assertContains(classNames, I_TrialProcessorBindings.class.getName());
+		assertContains(classNames, I_TrialBindings.class.getName());
 		assertContains(classNames, I_MetaTrial.class.getName());
 		assertContains(classNames, I_SourceFileTrial.class.getName());
 		
@@ -108,13 +109,16 @@ public class ClassDiscoveryTrial extends SourceFileTrial {
 		assertContains(classNames, SourceFileScope.class.getName());
 		assertContains(classNames, SourceFileTrial.class.getName());
 		assertContains(classNames, Test.class.getName());
+		
+		assertContains(classNames, TrialBindings.class.getName());
 		assertContains(classNames, TrialTimeout.class.getName());
 		assertContains(classNames, TrialTypeAnnotation.class.getName());
 		assertContains(classNames, TrialRecursion.class.getName());
+		
 		assertContains(classNames, UseCaseScope.class.getName());
 		assertContains(classNames, UseCaseTrial.class.getName());
 		
-		assertEquals(23, classNames.size());
+		assertEquals(24, classNames.size());
 		List<ClassDiscovery> children =  cd.getSubPackages();
 		
 		

@@ -34,14 +34,14 @@ public class RunAllTrials implements I_TrialRunListener {
 		//reporter.setLogOn(TrialInstancesProcessor.class);
 		
 		//reporter.setLogOn(TestRunable.class);
-		reporter.setLogOn(MultiProbesMap.class);
+		//reporter.setLogOn(MultiProbesMap.class);
 		
 		//logging from jacoco
 		//reporter.setLogOn(AbstractPlugin.class);
 		//reporter.setLogOn(Recorder.class);
 		
 		params.setReporter(reporter);
-		params.setExitAfterLastNotification(false);
+		//params.setExitAfterLastNotification(false);
 		params.setCoveragePluginClass(ScopedJacocoPlugin.class);
 		
 		params.setMetaTrialClass(TheMetaTrial.class);
