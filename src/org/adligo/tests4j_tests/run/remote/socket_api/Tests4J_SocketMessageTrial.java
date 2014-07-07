@@ -9,9 +9,10 @@ import org.adligo.tests4j.models.shared.trials.SourceFileTrial;
 import org.adligo.tests4j.models.shared.trials.Test;
 import org.adligo.tests4j.run.remote.socket_api.Tests4J_Commands;
 import org.adligo.tests4j.run.remote.socket_api.Tests4J_SocketMessage;
+import org.adligo.tests4j_tests.base_abstract_trials.SourceFileCountingTrial;
 
 @SourceFileScope (sourceClass=Tests4J_SocketMessage.class)
-public class Tests4J_SocketMessageTrial extends SourceFileTrial {
+public class Tests4J_SocketMessageTrial extends SourceFileCountingTrial {
 	
 	@Test
 	public void testConnectionIO() {
@@ -65,13 +66,27 @@ public class Tests4J_SocketMessageTrial extends SourceFileTrial {
 
 	@Override
 	public void afterTrialTests(I_SourceFileTrialResult p) {
-		assertEquals(2, p.getTestCount());
-		assertGreaterThanOrEquals(7.0, p.getAssertionCount());
-		assertGreaterThanOrEquals(4.0, p.getUniqueAssertionCount());
+		assertCounts(p);
 		
 		if (p.hasRecordedCoverage()) {
 			I_SourceFileCoverage coverage = p.getSourceFileCoverage();
 			assertGreaterThanOrEquals(40.0, coverage.getPercentageCoveredDouble());
 		}
+	}
+	
+
+	@Override
+	public int getTests() {
+		return 2;
+	}
+
+	@Override
+	public int getAsserts() {
+		return 8;
+	}
+
+	@Override
+	public int getUniqueAsserts() {
+		return 6;
 	}
 }

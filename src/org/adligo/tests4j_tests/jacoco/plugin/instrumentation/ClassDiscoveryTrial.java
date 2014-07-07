@@ -46,9 +46,10 @@ import org.adligo.tests4j.models.shared.trials.TrialTypeAnnotation;
 import org.adligo.tests4j.models.shared.trials.UseCaseScope;
 import org.adligo.tests4j.models.shared.trials.UseCaseTrial;
 import org.adligo.tests4j.run.discovery.ClassDiscovery;
+import org.adligo.tests4j_tests.base_abstract_trials.SourceFileCountingTrial;
 
 @SourceFileScope (sourceClass=ClassDiscovery.class)
-public class ClassDiscoveryTrial extends SourceFileTrial {
+public class ClassDiscoveryTrial extends SourceFileCountingTrial {
 
 	@Test
 	public void testMetadataPackage() throws Exception {
@@ -148,13 +149,27 @@ public class ClassDiscoveryTrial extends SourceFileTrial {
 	
 	@Override
 	public void afterTrialTests(I_SourceFileTrialResult p) {
-		assertEquals(3, p.getTestCount());
-		assertGreaterThanOrEquals(45.0, p.getAssertionCount());
-		assertGreaterThanOrEquals(30.0, p.getUniqueAssertionCount());
+		assertCounts(p);
 		
 		if (p.hasRecordedCoverage()) {
 			I_SourceFileCoverage coverage = p.getSourceFileCoverage();
 			assertGreaterThanOrEquals(50.0, coverage.getPercentageCoveredDouble());
 		}
+	}
+	
+
+	@Override
+	public int getTests() {
+		return 3;
+	}
+
+	@Override
+	public int getAsserts() {
+		return 48;
+	}
+
+	@Override
+	public int getUniqueAsserts() {
+		return 48;
 	}
 }

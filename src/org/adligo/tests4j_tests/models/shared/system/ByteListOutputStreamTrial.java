@@ -8,9 +8,10 @@ import org.adligo.tests4j.models.shared.system.ByteListOutputStream;
 import org.adligo.tests4j.models.shared.trials.SourceFileScope;
 import org.adligo.tests4j.models.shared.trials.SourceFileTrial;
 import org.adligo.tests4j.models.shared.trials.Test;
+import org.adligo.tests4j_tests.base_abstract_trials.SourceFileCountingTrial;
 
 @SourceFileScope(sourceClass=ByteListOutputStream.class)
-public class ByteListOutputStreamTrial extends SourceFileTrial {
+public class ByteListOutputStreamTrial extends SourceFileCountingTrial {
 	
 	@SuppressWarnings("unused")
 	@Test(timeout=600000)
@@ -44,12 +45,25 @@ public class ByteListOutputStreamTrial extends SourceFileTrial {
 
 	@Override
 	public void afterTrialTests(I_SourceFileTrialResult p) {
-		assertEquals(2, p.getTestCount());
+		assertCounts(p);
 		if (p.hasRecordedCoverage()) {
 			I_SourceFileCoverage coverage = p.getSourceFileCoverage();
 			assertGreaterThanOrEquals(100.00, coverage.getPercentageCoveredDouble());
 		}
-		assertEquals(4, p.getAssertionCount());
-		assertEquals(4, p.getUniqueAssertionCount());
+	}
+	
+	@Override
+	public int getTests() {
+		return 2;
+	}
+
+	@Override
+	public int getAsserts() {
+		return 4;
+	}
+
+	@Override
+	public int getUniqueAsserts() {
+		return 4;
 	}
 }

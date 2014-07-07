@@ -14,6 +14,7 @@ import org.adligo.tests4j.models.shared.trials.SourceFileScope;
 import org.adligo.tests4j.models.shared.trials.SourceFileTrial;
 import org.adligo.tests4j.models.shared.trials.Test;
 import org.adligo.tests4j.run.remote.io.UTF8_CharacterBuilder;
+import org.adligo.tests4j_tests.base_abstract_trials.SourceFileCountingTrial;
 import org.adligo.tests4j_tests.run.remote.io.helpers.I_UTF8_TestProgressMonitor;
 import org.adligo.tests4j_tests.run.remote.io.helpers.StartCapture;
 import org.adligo.tests4j_tests.run.remote.io.helpers.UTF8_CharacterBuilder_ChuckTester;
@@ -32,7 +33,7 @@ import org.adligo.tests4j_tests.run.remote.io.helpers.UTF8_Generator;
  */
 @SourceFileScope (sourceClass=UTF8_CharacterBuilder.class)
 @AdditionalInstrumentation (javaPackages="org.adligo.tests4j_tests.run.remote.nio.helpers")
-public class UTF8_CharacterBuilderWithThreadsTrial extends SourceFileTrial implements I_UTF8_TestProgressMonitor {
+public class UTF8_CharacterBuilderWithThreadsTrial extends SourceFileCountingTrial implements I_UTF8_TestProgressMonitor {
 	private static final int threadCount = 32;
 	private static ExecutorService exetutor;
 	/**
@@ -111,9 +112,7 @@ public class UTF8_CharacterBuilderWithThreadsTrial extends SourceFileTrial imple
 	 */
 	@Override
 	public void afterTrialTests(I_SourceFileTrialResult p) {
-		assertEquals(2, p.getTestCount());
-		assertEquals(12906, p.getAssertionCount());
-		assertEquals(19, p.getUniqueAssertionCount());
+		assertCounts(p);
 		
 		//not sure what I am missing, I probably need 
 		//to finish the eclipse plug-in coverage source-lighter
@@ -127,6 +126,21 @@ public class UTF8_CharacterBuilderWithThreadsTrial extends SourceFileTrial imple
 	}
 
 	
+
+	@Override
+	public int getTests() {
+		return 2;
+	}
+
+	@Override
+	public int getAsserts() {
+		return 12906;
+	}
+
+	@Override
+	public int getUniqueAsserts() {
+		return 19;
+	}
 	
 	@AfterTrial
 	public static void afterTrial() {

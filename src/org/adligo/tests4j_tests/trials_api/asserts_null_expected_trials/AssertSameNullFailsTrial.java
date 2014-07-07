@@ -103,6 +103,6 @@ public class AssertSameNullFailsTrial extends ApiTrial {
 	}
 	
 	public static int getAsserts() {
-		return 33;
+		return 34;
 	}
 }

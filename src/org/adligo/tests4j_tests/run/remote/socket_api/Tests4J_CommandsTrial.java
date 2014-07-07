@@ -6,9 +6,10 @@ import org.adligo.tests4j.models.shared.trials.SourceFileScope;
 import org.adligo.tests4j.models.shared.trials.SourceFileTrial;
 import org.adligo.tests4j.models.shared.trials.Test;
 import org.adligo.tests4j.run.remote.socket_api.Tests4J_Commands;
+import org.adligo.tests4j_tests.base_abstract_trials.SourceFileCountingTrial;
 
 @SourceFileScope (sourceClass=Tests4J_Commands.class)
-public class Tests4J_CommandsTrial extends SourceFileTrial {
+public class Tests4J_CommandsTrial extends SourceFileCountingTrial {
 
 	@Test
 	public void testGetMinLength() {
@@ -18,9 +19,7 @@ public class Tests4J_CommandsTrial extends SourceFileTrial {
 
 	@Override
 	public void afterTrialTests(I_SourceFileTrialResult p) {
-		assertEquals(1, p.getTestCount());
-		assertEquals(1, p.getAssertionCount());
-		assertEquals(1, p.getUniqueAssertionCount());
+		assertCounts(p);
 		
 		if (p.hasRecordedCoverage()) {
 			I_SourceFileCoverage coverage =  p.getSourceFileCoverage();
@@ -32,4 +31,19 @@ public class Tests4J_CommandsTrial extends SourceFileTrial {
 		}
 	}
 	
+
+	@Override
+	public int getTests() {
+		return 1;
+	}
+
+	@Override
+	public int getAsserts() {
+		return 1;
+	}
+
+	@Override
+	public int getUniqueAsserts() {
+		return 1;
+	}
 }

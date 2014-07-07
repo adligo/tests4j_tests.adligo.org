@@ -10,13 +10,13 @@ import org.adligo.tests4j.models.shared.coverage.I_SourceFileCoverage;
 import org.adligo.tests4j.models.shared.results.I_SourceFileTrialResult;
 import org.adligo.tests4j.models.shared.trials.AdditionalInstrumentation;
 import org.adligo.tests4j.models.shared.trials.SourceFileScope;
-import org.adligo.tests4j.models.shared.trials.SourceFileTrial;
 import org.adligo.tests4j.models.shared.trials.Test;
+import org.adligo.tests4j_tests.base_abstract_trials.SourceFileCountingTrial;
 import org.adligo.tests4j_tests.models.shared.asserts.mocks.ExtendedCompareAssertCommand;
 
 @SourceFileScope (sourceClass=AbstractCompareAssertCommand.class)
 @AdditionalInstrumentation (javaPackages="org.adligo.tests4j_tests.models.shared.asserts.mocks")
-public class AbstractCompareAssertCommandTrial extends SourceFileTrial {
+public class AbstractCompareAssertCommandTrial extends SourceFileCountingTrial {
 
 	@Test
 	public void testConstructorExceptions() {
@@ -63,13 +63,26 @@ public class AbstractCompareAssertCommandTrial extends SourceFileTrial {
 
 	@Override
 	public void afterTrialTests(I_SourceFileTrialResult p) {
-		assertEquals(2, p.getTestCount());
-		assertGreaterThanOrEquals(14.0, p.getAssertionCount());
-		assertGreaterThanOrEquals(7.0, p.getUniqueAssertionCount());
+		assertCounts(p);
 		
 		if (p.hasRecordedCoverage()) {
 			I_SourceFileCoverage coverage = p.getSourceFileCoverage();
 			assertGreaterThanOrEquals(68.0, coverage.getPercentageCoveredDouble());
 		}
+	}
+
+	@Override
+	public int getTests() {
+		return 2;
+	}
+
+	@Override
+	public int getAsserts() {
+		return 14;
+	}
+
+	@Override
+	public int getUniqueAsserts() {
+		return 7;
 	}
 }

@@ -6,9 +6,10 @@ import org.adligo.tests4j.models.shared.trials.SourceFileScope;
 import org.adligo.tests4j.models.shared.trials.SourceFileTrial;
 import org.adligo.tests4j.models.shared.trials.Test;
 import org.adligo.tests4j.run.remote.io.Bits;
+import org.adligo.tests4j_tests.base_abstract_trials.SourceFileCountingTrial;
 
 @SourceFileScope (sourceClass=Bits.class)
-public class BitsTrial extends SourceFileTrial {
+public class BitsTrial extends SourceFileCountingTrial {
 
 	@Test
 	public void testToBitsSimple() {
@@ -40,5 +41,21 @@ public class BitsTrial extends SourceFileTrial {
 			I_SourceFileCoverage coverage = p.getSourceFileCoverage();
 			assertGreaterThanOrEquals(100.00, coverage.getPercentageCoveredDouble());
 		}
+	}
+	
+
+	@Override
+	public int getTests() {
+		return 2;
+	}
+
+	@Override
+	public int getAsserts() {
+		return 11;
+	}
+
+	@Override
+	public int getUniqueAsserts() {
+		return 4;
 	}
 }

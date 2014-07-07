@@ -1,5 +1,6 @@
 package org.adligo.tests4j_tests.trials_api.bad_mock_api_trials;
 
+import org.adligo.tests4j.models.shared.asserts.common.I_Asserts;
 import org.adligo.tests4j.models.shared.trials.ApiTrial;
 import org.adligo.tests4j.models.shared.trials.BeforeTrial;
 import org.adligo.tests4j.models.shared.trials.PackageScope;
@@ -36,4 +37,5 @@ public class SimpleRerunTrial extends ApiTrial {
 		success = true;
 		assertTrue(success);
 	}
+	
 }

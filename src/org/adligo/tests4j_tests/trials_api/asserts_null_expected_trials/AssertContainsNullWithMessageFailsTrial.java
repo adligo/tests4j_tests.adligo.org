@@ -106,6 +106,6 @@ public class AssertContainsNullWithMessageFailsTrial extends ApiTrial {
 	}
 	
 	public static int getAsserts() {
-		return 35;
+		return 36;
 	}
 }

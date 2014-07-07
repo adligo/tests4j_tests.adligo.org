@@ -93,6 +93,6 @@ public class AssertGreaterThanOrEqualsDoubleFloatWithMessageFailsTrial extends A
 	}
 	
 	public static int getAsserts() {
-		return 33;
+		return 34;
 	}
 }

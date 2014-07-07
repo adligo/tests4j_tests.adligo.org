@@ -2,6 +2,9 @@
 working on assert package source file tests
 metadata package source file tests
 results package source file tests
+coverage package source file tests  (package coverage has issues in ApiTrials)
+antests
+general minimum code coverage for source file trials, and api trials
 
 test jacoco4_tests4j
 		

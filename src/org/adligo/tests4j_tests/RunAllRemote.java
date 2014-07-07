@@ -14,8 +14,7 @@ import org.adligo.tests4j_4jacoco.plugin.ScopedJacocoPlugin;
 public class RunAllRemote {
 
 	public static void main(String [] args) {
-		Tests4J_Params remoteParams = RunAllTrials.getTests();
-		remoteParams.setCoveragePluginClass(ScopedJacocoPlugin.class);
+		Tests4J_Params remoteParams = RunAllTrials.getTests(ScopedJacocoPlugin.class);
 		
 		Tests4J_Params params = new Tests4J_Params();
 		I_Tests4J_Reporter reporter =  params.getReporter();

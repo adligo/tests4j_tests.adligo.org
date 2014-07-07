@@ -108,6 +108,6 @@ public class AssertNotSameNullWithMessageFailsTrial extends ApiTrial {
 	}
 	
 	public static int getAsserts() {
-		return 33;
+		return 36;
 	}
 }

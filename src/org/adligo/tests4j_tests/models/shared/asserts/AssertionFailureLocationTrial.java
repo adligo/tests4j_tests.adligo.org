@@ -4,11 +4,11 @@ import org.adligo.tests4j.models.shared.asserts.AssertionFailureLocation;
 import org.adligo.tests4j.models.shared.coverage.I_SourceFileCoverage;
 import org.adligo.tests4j.models.shared.results.I_SourceFileTrialResult;
 import org.adligo.tests4j.models.shared.trials.SourceFileScope;
-import org.adligo.tests4j.models.shared.trials.SourceFileTrial;
 import org.adligo.tests4j.models.shared.trials.Test;
+import org.adligo.tests4j_tests.base_abstract_trials.SourceFileCountingTrial;
 
 @SourceFileScope (sourceClass=AssertionFailureLocation.class)
-public class AssertionFailureLocationTrial extends SourceFileTrial {
+public class AssertionFailureLocationTrial extends SourceFileCountingTrial {
 
 	
 	@Test
@@ -27,9 +27,7 @@ public class AssertionFailureLocationTrial extends SourceFileTrial {
 	
 	@Override
 	public void afterTrialTests(I_SourceFileTrialResult p) {
-		assertEquals(1, p.getTestCount());
-		assertGreaterThanOrEquals(7.0, p.getAssertionCount());
-		assertGreaterThanOrEquals(7.0, p.getUniqueAssertionCount());
+		assertCounts(p);
 		
 		if (p.hasRecordedCoverage()) {
 			I_SourceFileCoverage coverage = p.getSourceFileCoverage();
@@ -39,5 +37,20 @@ public class AssertionFailureLocationTrial extends SourceFileTrial {
 			}
 			assertGreaterThanOrEquals(100.0, pct);
 		}
+	}
+
+	@Override
+	public int getTests() {
+		return 1;
+	}
+
+	@Override
+	public int getAsserts() {
+		return 8;
+	}
+
+	@Override
+	public int getUniqueAsserts() {
+		return 8;
 	}
 }

@@ -14,10 +14,11 @@ import org.adligo.tests4j.models.shared.trials.SourceFileScope;
 import org.adligo.tests4j.models.shared.trials.SourceFileTrial;
 import org.adligo.tests4j.models.shared.trials.Test;
 import org.adligo.tests4j_4jacoco.plugin.ScopedJacocoPlugin;
+import org.adligo.tests4j_tests.base_abstract_trials.SourceFileCountingTrial;
 
 
 @SourceFileScope(sourceClass=Tests4J_Params.class)
-public class Tests4J_ParamsTrial extends SourceFileTrial {
+public class Tests4J_ParamsTrial extends SourceFileCountingTrial {
 	
 	@SuppressWarnings("unused") //this fixes a issue 
 	// in our security manager which blocks thread creation during tests
@@ -77,9 +78,25 @@ public class Tests4J_ParamsTrial extends SourceFileTrial {
 	}
 	@Override
 	public void afterTrialTests(I_SourceFileTrialResult p) {
+		assertCounts(p);
 		if (p.hasRecordedCoverage()) {
 			I_SourceFileCoverage coverage = p.getSourceFileCoverage();
 			assertGreaterThanOrEquals(46.00, coverage.getPercentageCoveredDouble());
 		}
+	}
+	
+	@Override
+	public int getTests() {
+		return 3;
+	}
+
+	@Override
+	public int getAsserts() {
+		return 15;
+	}
+
+	@Override
+	public int getUniqueAsserts() {
+		return 13;
 	}
 }

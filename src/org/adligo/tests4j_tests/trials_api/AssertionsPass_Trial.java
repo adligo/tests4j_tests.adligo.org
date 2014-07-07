@@ -7,12 +7,53 @@ import java.util.Set;
 
 import org.adligo.tests4j.models.shared.asserts.ExpectedThrownData;
 import org.adligo.tests4j.models.shared.asserts.common.I_Thrower;
+import org.adligo.tests4j.models.shared.coverage.I_PackageCoverage;
+import org.adligo.tests4j.models.shared.results.I_ApiTrialResult;
 import org.adligo.tests4j.models.shared.trials.ApiTrial;
 import org.adligo.tests4j.models.shared.trials.PackageScope;
 import org.adligo.tests4j.models.shared.trials.Test;
+import org.adligo.tests4j_tests.base_abstract_trials.ApiCountingTrial;
+import org.adligo.tests4j_tests.trials_api.assert_fails_trials.AssertContainsFailsTrial;
+import org.adligo.tests4j_tests.trials_api.assert_fails_trials.AssertContainsWithMessageFailsTrial;
+import org.adligo.tests4j_tests.trials_api.assert_fails_trials.AssertEqualsFailsTrial;
+import org.adligo.tests4j_tests.trials_api.assert_fails_trials.AssertEqualsWithMessageFailsTrial;
+import org.adligo.tests4j_tests.trials_api.assert_fails_trials.AssertFalseFailsTrial;
+import org.adligo.tests4j_tests.trials_api.assert_fails_trials.AssertFalseWithMessageFailsTrial;
+import org.adligo.tests4j_tests.trials_api.assert_fails_trials.AssertGreaterThanOrEqualsDoubleDoubleFailsTrial;
+import org.adligo.tests4j_tests.trials_api.assert_fails_trials.AssertGreaterThanOrEqualsDoubleDoubleWithMessageFailsTrial;
+import org.adligo.tests4j_tests.trials_api.assert_fails_trials.AssertGreaterThanOrEqualsDoubleFloatFailsTrial;
+import org.adligo.tests4j_tests.trials_api.assert_fails_trials.AssertGreaterThanOrEqualsDoubleFloatWithMessageFailsTrial;
+import org.adligo.tests4j_tests.trials_api.assert_fails_trials.AssertGreaterThanOrEqualsDoubleIntFailsTrial;
+import org.adligo.tests4j_tests.trials_api.assert_fails_trials.AssertGreaterThanOrEqualsDoubleIntWithMessageFailsTrial;
+import org.adligo.tests4j_tests.trials_api.assert_fails_trials.AssertGreaterThanOrEqualsDoubleLongFailsTrial;
+import org.adligo.tests4j_tests.trials_api.assert_fails_trials.AssertGreaterThanOrEqualsDoubleLongWithMessageFailsTrial;
+import org.adligo.tests4j_tests.trials_api.assert_fails_trials.AssertGreaterThanOrEqualsDoubleShortFailsTrial;
+import org.adligo.tests4j_tests.trials_api.assert_fails_trials.AssertGreaterThanOrEqualsDoubleShortWithMessageFailsTrial;
+import org.adligo.tests4j_tests.trials_api.assert_fails_trials.AssertNotEqualsFailsTrial;
+import org.adligo.tests4j_tests.trials_api.assert_fails_trials.AssertNotEqualsWithMessageFailsTrial;
+import org.adligo.tests4j_tests.trials_api.assert_fails_trials.AssertNotNullFailsTrial;
+import org.adligo.tests4j_tests.trials_api.assert_fails_trials.AssertNotNullWithMessageFailsTrial;
+import org.adligo.tests4j_tests.trials_api.assert_fails_trials.AssertNotSameFailsTrial;
+import org.adligo.tests4j_tests.trials_api.assert_fails_trials.AssertNotSameWithMessageFailsTrial;
+import org.adligo.tests4j_tests.trials_api.assert_fails_trials.AssertNotUniformFailsTrial;
+import org.adligo.tests4j_tests.trials_api.assert_fails_trials.AssertNotUniformNoEvaluatorFailsTrial;
+import org.adligo.tests4j_tests.trials_api.assert_fails_trials.AssertNotUniformNoEvaluatorWithMessageFailsTrial;
+import org.adligo.tests4j_tests.trials_api.assert_fails_trials.AssertNotUniformWithMessageFailsTrial;
+import org.adligo.tests4j_tests.trials_api.assert_fails_trials.AssertNullFailsTrial;
+import org.adligo.tests4j_tests.trials_api.assert_fails_trials.AssertNullWithMessageFailsTrial;
+import org.adligo.tests4j_tests.trials_api.assert_fails_trials.AssertSameFailsTrial;
+import org.adligo.tests4j_tests.trials_api.assert_fails_trials.AssertSameWithMessageFailsTrial;
+import org.adligo.tests4j_tests.trials_api.assert_fails_trials.AssertThrownFailsTrial;
+import org.adligo.tests4j_tests.trials_api.assert_fails_trials.AssertThrownUniformFailsTrial;
+import org.adligo.tests4j_tests.trials_api.assert_fails_trials.AssertThrownUniformWithMessageFailsTrial;
+import org.adligo.tests4j_tests.trials_api.assert_fails_trials.AssertThrownWithMessageFailsTrial;
+import org.adligo.tests4j_tests.trials_api.assert_fails_trials.AssertTrueFailsMessageTrial;
+import org.adligo.tests4j_tests.trials_api.assert_fails_trials.AssertTrueFailsTrial;
+import org.adligo.tests4j_tests.trials_api.assert_fails_trials.AssertUniformFailsTrial;
+import org.adligo.tests4j_tests.trials_api.assert_fails_trials.AssertUniformWithMessageFailsTrial;
 
 @PackageScope (packageName = "org.adligo.tests4j")
-public class AssertionsPass_Trial extends ApiTrial {
+public class AssertionsPass_Trial extends ApiCountingTrial {
 
 	@Test
 	public void testContains() {
@@ -198,5 +239,32 @@ public class AssertionsPass_Trial extends ApiTrial {
 		
 		assertUniform("a\rb","a\nb");
 		assertUniform("testing assertUniform","a\rb","a\nb");
+	}
+	
+	
+	@Override
+	public void afterTrialTests(I_ApiTrialResult p) {
+		assertCounts(p);
+		if (p.hasRecordedCoverage()) {
+			I_PackageCoverage coverage = p.getPackageCoverage();
+			//TODO this should be something not zero
+			assertGreaterThanOrEquals(0.0, coverage.getPercentageCoveredDouble());
+		}
+	}
+	
+
+	@Override
+	public int getTests() {
+		return 13;
+	}
+
+	@Override
+	public int getAsserts() {
+		return 88;
+	}
+
+	@Override
+	public int getUniqueAsserts() {
+		return 56;
 	}
 }

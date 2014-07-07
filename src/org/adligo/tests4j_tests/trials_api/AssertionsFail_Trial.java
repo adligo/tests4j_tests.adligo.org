@@ -1,9 +1,12 @@
 package org.adligo.tests4j_tests.trials_api;
 
+import org.adligo.tests4j.models.shared.coverage.I_PackageCoverage;
 import org.adligo.tests4j.models.shared.results.I_ApiTrialResult;
 import org.adligo.tests4j.models.shared.trials.ApiTrial;
+import org.adligo.tests4j.models.shared.trials.IgnoreTest;
 import org.adligo.tests4j.models.shared.trials.PackageScope;
 import org.adligo.tests4j.models.shared.trials.Test;
+import org.adligo.tests4j_tests.base_abstract_trials.ApiCountingTrial;
 import org.adligo.tests4j_tests.trials_api.assert_fails_trials.AssertContainsFailsTrial;
 import org.adligo.tests4j_tests.trials_api.assert_fails_trials.AssertContainsWithMessageFailsTrial;
 import org.adligo.tests4j_tests.trials_api.assert_fails_trials.AssertEqualsFailsTrial;
@@ -43,8 +46,8 @@ import org.adligo.tests4j_tests.trials_api.assert_fails_trials.AssertTrueFailsTr
 import org.adligo.tests4j_tests.trials_api.assert_fails_trials.AssertUniformFailsTrial;
 import org.adligo.tests4j_tests.trials_api.assert_fails_trials.AssertUniformWithMessageFailsTrial;
 
-@PackageScope (packageName = "org.adligo.tests4j")
-public class AssertionsFail_Trial extends ApiTrial {
+@PackageScope (packageName = "org.adligo.tests4j.run")
+public class AssertionsFail_Trial extends ApiCountingTrial {
 
 	@Test
 	public void testAssertContainsFails() {
@@ -67,6 +70,17 @@ public class AssertionsFail_Trial extends ApiTrial {
 	}
 	
 	@Test
+	public void testAssertFalseIsTrue() {
+		AssertFalseFailsTrial.runTestDelegate(this);
+	}
+	
+	
+	@Test
+	public void testAssertFalseIsTrueWithMessage() {
+		AssertFalseWithMessageFailsTrial.runTestDelegate(this);
+	}
+	
+	@Test
 	public void testAssertGreaterThanOrEqualsDoubleDoubleFails() {
 		AssertGreaterThanOrEqualsDoubleDoubleFailsTrial.runTestDelegate(this);
 	}
@@ -85,8 +99,6 @@ public class AssertionsFail_Trial extends ApiTrial {
 	public void testAssertGreaterThanOrEqualsDoubleFloatWithMessageFails() {
 		AssertGreaterThanOrEqualsDoubleFloatWithMessageFailsTrial.runTestDelegate(this);
 	}
-	
-	
 	
 	@Test
 	public void testAssertGreaterThanOrEqualsDoubleIntFails() {
@@ -123,7 +135,6 @@ public class AssertionsFail_Trial extends ApiTrial {
 		AssertNotEqualsFailsTrial.runTestDelegate(this);
 	}
 	
-	
 	@Test
 	public void testAssertNotEqualsWithMessageFails() {
 		AssertNotEqualsWithMessageFailsTrial.runTestDelegate(this);
@@ -152,32 +163,9 @@ public class AssertionsFail_Trial extends ApiTrial {
 	}
 	
 	@Test
-	public void testAssertNullFails() {
-		AssertNullFailsTrial.runTestDelegate(this);
-	}
-	
-	
-	@Test
-	public void testAssertNullWithMessageFails() {
-		AssertNullWithMessageFailsTrial.runTestDelegate(this);
-	}
-	
-	@Test
-	public void testAssertFalseIsTrue() {
-		AssertFalseFailsTrial.runTestDelegate(this);
-	}
-	
-	
-	@Test
-	public void testAssertFalseIsTrueWithMessage() {
-		AssertFalseWithMessageFailsTrial.runTestDelegate(this);
-	}
-	
-	@Test
 	public void testAssertNotUniformFails() {
 		AssertNotUniformFailsTrial.runTestDelegate(this);
 	}
-	
 	
 	@Test
 	public void testAssertNotUniformWithMessageFails() {
@@ -189,27 +177,26 @@ public class AssertionsFail_Trial extends ApiTrial {
 		AssertNotUniformNoEvaluatorFailsTrial.runTestDelegate(this);
 	}
 	
-	
 	@Test
 	public void testAssertNotUniformNoEvaluatorWithMessageFails() {
 		AssertNotUniformNoEvaluatorWithMessageFailsTrial.runTestDelegate(this);
 	}
 	
 	@Test
-	public void testAssertTrueIsFalse() {
-		AssertTrueFailsTrial.runTestDelegate(this);
+	public void testAssertNullFails() {
+		AssertNullFailsTrial.runTestDelegate(this);
 	}
 	
+	
 	@Test
-	public void testAssertTrueIsFalseWithMessage() {
-		AssertTrueFailsMessageTrial.runTestDelegate(this);
+	public void testAssertNullWithMessageFails() {
+		AssertNullWithMessageFailsTrial.runTestDelegate(this);
 	}
-
+	
 	@Test
 	public void testAssertSameFails() {
 		AssertSameFailsTrial.runTestDelegate(this);
 	}
-	
 	
 	@Test
 	public void testAssertSameWithMessageFails() {
@@ -226,6 +213,15 @@ public class AssertionsFail_Trial extends ApiTrial {
 		AssertThrownWithMessageFailsTrial.runTestDelegate(this);
 	}
 	
+	@Test
+	public void testAssertTrueIsFalse() {
+		AssertTrueFailsTrial.runTestDelegate(this);
+	}
+	
+	@Test
+	public void testAssertTrueIsFalseWithMessage() {
+		AssertTrueFailsMessageTrial.runTestDelegate(this);
+	}
 	@Test
 	public void testAssertThrownUniformFails() {
 		AssertThrownUniformFailsTrial.runTestDelegate(this);
@@ -248,16 +244,29 @@ public class AssertionsFail_Trial extends ApiTrial {
 	
 	@Override
 	public void afterTrialTests(I_ApiTrialResult p) {
-		assertEquals(38, p.getTestCount());
-		
-		assertGreaterThanOrEquals(0.0 + 
-				AssertContainsFailsTrial.getAsserts() +
+		assertCounts(p);
+		if (p.hasRecordedCoverage()) {
+			I_PackageCoverage coverage = p.getPackageCoverage();
+			//TODO this is not feeding correclty yet
+			assertGreaterThanOrEquals(0.0, coverage.getPercentageCoveredDouble());
+		}
+	}
+	
+
+	@Override
+	public int getTests() {
+		return 38;
+	}
+
+	@Override
+	public int getAsserts() {
+		return AssertContainsFailsTrial.getAsserts() +
 				AssertContainsWithMessageFailsTrial.getAsserts() + 
 				AssertEqualsFailsTrial.getAsserts() +
 				AssertEqualsWithMessageFailsTrial.getAsserts() +
 				AssertFalseFailsTrial.getAsserts() +
-				AssertFalseWithMessageFailsTrial.getAsserts() +
-				AssertGreaterThanOrEqualsDoubleDoubleFailsTrial.getAsserts() +
+				AssertFalseWithMessageFailsTrial.getAsserts()  +
+				AssertGreaterThanOrEqualsDoubleDoubleFailsTrial.getAsserts()  +
 				AssertGreaterThanOrEqualsDoubleDoubleWithMessageFailsTrial.getAsserts() +
 				AssertGreaterThanOrEqualsDoubleFloatFailsTrial.getAsserts() +
 				AssertGreaterThanOrEqualsDoubleFloatWithMessageFailsTrial.getAsserts() +
@@ -278,21 +287,21 @@ public class AssertionsFail_Trial extends ApiTrial {
 				AssertNotUniformNoEvaluatorFailsTrial.getAsserts() +
 				AssertNotUniformNoEvaluatorWithMessageFailsTrial.getAsserts() +
 				AssertNullFailsTrial.getAsserts() +
-				AssertNullWithMessageFailsTrial.getAsserts() + 
-				AssertTrueFailsTrial.getAsserts() +
-				AssertTrueFailsMessageTrial.getAsserts() +
+				AssertNullWithMessageFailsTrial.getAsserts()+ 
 				AssertSameFailsTrial.getAsserts() +
-				AssertSameWithMessageFailsTrial.getAsserts(),
+				AssertSameWithMessageFailsTrial.getAsserts()  +
 				AssertThrownFailsTrial.getAsserts() +
 				AssertThrownWithMessageFailsTrial.getAsserts() +
 				AssertThrownUniformFailsTrial.getAsserts() + 
 				AssertThrownUniformWithMessageFailsTrial.getAsserts() +
+				AssertTrueFailsTrial.getAsserts() +
+				AssertTrueFailsMessageTrial.getAsserts() +
 				AssertUniformFailsTrial.getAsserts() + 
-				AssertUniformWithMessageFailsTrial.getAsserts() +
-				p.getAssertionCount());
-		assertGreaterThanOrEquals(0.0 + 
-				400.0, 
-				p.getUniqueAssertionCount());
-		
+				AssertUniformWithMessageFailsTrial.getAsserts();
+	}
+
+	@Override
+	public int getUniqueAsserts() {
+		return 768;
 	}
 }

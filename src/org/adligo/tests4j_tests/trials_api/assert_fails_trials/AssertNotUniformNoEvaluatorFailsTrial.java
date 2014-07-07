@@ -104,6 +104,6 @@ public class AssertNotUniformNoEvaluatorFailsTrial extends ApiTrial {
 	}
 	
 	public static int getAsserts() {
-		return 36;
+		return 37;
 	}
 }

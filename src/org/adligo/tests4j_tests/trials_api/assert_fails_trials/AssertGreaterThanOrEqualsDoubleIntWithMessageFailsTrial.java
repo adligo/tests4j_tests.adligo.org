@@ -93,6 +93,6 @@ public class AssertGreaterThanOrEqualsDoubleIntWithMessageFailsTrial extends Api
 	}
 	
 	public static int getAsserts() {
-		return 33;
+		return 34;
 	}
 }

@@ -19,11 +19,11 @@ import org.adligo.tests4j.models.shared.results.I_SourceFileTrialResult;
 import org.adligo.tests4j.models.shared.results.I_TestFailure;
 import org.adligo.tests4j.models.shared.system.I_AssertListener;
 import org.adligo.tests4j.models.shared.trials.SourceFileScope;
-import org.adligo.tests4j.models.shared.trials.SourceFileTrial;
 import org.adligo.tests4j.models.shared.trials.Test;
+import org.adligo.tests4j_tests.base_abstract_trials.SourceFileCountingTrial;
 
 @SourceFileScope (sourceClass=AssertionProcessor.class)
-public class AssertionProcessorTrial extends SourceFileTrial implements I_AssertListener, I_Thrower {
+public class AssertionProcessorTrial extends SourceFileCountingTrial implements I_AssertListener, I_Thrower {
 	private I_AssertCommand lastAssertCommand;
 	private I_TestFailure lastTestFailure;
 	private RuntimeException throwable;
@@ -217,14 +217,28 @@ public class AssertionProcessorTrial extends SourceFileTrial implements I_Assert
 
 	@Override
 	public void afterTrialTests(I_SourceFileTrialResult p) {
-		assertEquals(4, p.getTestCount());
-		assertGreaterThanOrEquals(25.0, p.getAssertionCount());
-		assertGreaterThanOrEquals(13.0, p.getUniqueAssertionCount());
+		assertCounts(p);
 		
 		if (p.hasRecordedCoverage()) {
 			I_SourceFileCoverage coverage = p.getSourceFileCoverage();
 			assertGreaterThanOrEquals(80.0, coverage.getPercentageCoveredDouble());
 		}
+	}
+
+
+	@Override
+	public int getTests() {
+		return 4;
+	}
+
+	@Override
+	public int getAsserts() {
+		return 80;
+	}
+
+	@Override
+	public int getUniqueAsserts() {
+		return 62;
 	}
 	
 }

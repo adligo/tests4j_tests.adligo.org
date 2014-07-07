@@ -93,6 +93,6 @@ public class AssertGreaterThanOrEqualsDoubleLongWithMessageFailsTrial extends Ap
 	}
 	
 	public static int getAsserts() {
-		return 33;
+		return 34;
 	}
 }

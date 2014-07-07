@@ -10,10 +10,11 @@ import org.adligo.tests4j.models.shared.results.I_SourceFileTrialResult;
 import org.adligo.tests4j.models.shared.trials.SourceFileScope;
 import org.adligo.tests4j.models.shared.trials.SourceFileTrial;
 import org.adligo.tests4j.models.shared.trials.Test;
+import org.adligo.tests4j_tests.base_abstract_trials.SourceFileCountingTrial;
 import org.adligo.tests4j_tests.models.shared.common.mocks.MockWithMethodBlocker;
 
 @SourceFileScope (sourceClass=MethodBlocker.class)
-public class MethodBlockerTrial extends SourceFileTrial {
+public class MethodBlockerTrial extends SourceFileCountingTrial {
 	
 	
 	private static final String DO_D_EXCEPTION_MESSAGE = "The Method class org.adligo.tests4j_tests.models.shared.common.mocks.MockWithMethodBlocker.doD "
@@ -137,13 +138,27 @@ public class MethodBlockerTrial extends SourceFileTrial {
 	
 	@Override
 	public void afterTrialTests(I_SourceFileTrialResult p) {
-		assertEquals(3, p.getTestCount());
-		assertGreaterThanOrEquals(4.0, p.getAssertionCount());
-		assertGreaterThanOrEquals(4.0, p.getUniqueAssertionCount());
+		assertCounts(p);
 		
 		if (p.hasRecordedCoverage()) {
 			I_SourceFileCoverage coverage = p.getSourceFileCoverage();
 			assertGreaterThanOrEquals(17.0, coverage.getPercentageCoveredDouble());
 		}
+	}
+	
+
+	@Override
+	public int getTests() {
+		return 3;
+	}
+
+	@Override
+	public int getAsserts() {
+		return 5;
+	}
+
+	@Override
+	public int getUniqueAsserts() {
+		return 5;
 	}
 }

@@ -10,17 +10,22 @@ import java.util.Set;
 import org.adligo.tests4j.models.shared.coverage.CoverageUnits;
 import org.adligo.tests4j.models.shared.coverage.I_PackageCoverage;
 import org.adligo.tests4j.models.shared.coverage.I_SourceFileCoverage;
+import org.adligo.tests4j.models.shared.results.I_ApiTrialResult;
+import org.adligo.tests4j.models.shared.results.I_SourceFileTrialResult;
 import org.adligo.tests4j.models.shared.system.I_CoverageRecorder;
 import org.adligo.tests4j.models.shared.trials.ApiTrial;
 import org.adligo.tests4j.models.shared.trials.BeforeTrial;
 import org.adligo.tests4j.models.shared.trials.IgnoreTest;
+import org.adligo.tests4j.models.shared.trials.IgnoreTrial;
 import org.adligo.tests4j.models.shared.trials.PackageScope;
 import org.adligo.tests4j.models.shared.trials.Test;
 import org.adligo.tests4j_4jacoco.plugin.ScopedJacocoPlugin;
+import org.adligo.tests4j_tests.base_abstract_trials.ApiCountingTrial;
 import org.adligo.tests4j_tests.jacoco.api_trials.mocks.MockRunnable;
 
 @PackageScope (packageName="org.adligo.tests4j_4jacoco")
-public class MultiRecordingTrial extends ApiTrial {
+@IgnoreTrial
+public class MultiRecordingTrial extends ApiCountingTrial {
 
 	@BeforeTrial
 	public static void beforeTrial() {
@@ -265,5 +270,32 @@ public class MultiRecordingTrial extends ApiTrial {
 		assertEquals(new CoverageUnits(88), sfCover.getCoveredCoverageUnits());
 		assertEquals(new BigDecimal("99"), sfCover.getPercentageCovered());
 		
+	}
+	
+	@Override
+	public void afterTrialTests(I_ApiTrialResult p) {
+		assertCounts(p);
+		
+		if (p.hasRecordedCoverage()) {
+			I_PackageCoverage coverage = p.getPackageCoverage();
+			
+			assertGreaterThanOrEquals(0.0, coverage.getPercentageCoveredDouble());
+		}
+	}
+	
+
+	@Override
+	public int getTests() {
+		return 4;
+	}
+
+	@Override
+	public int getAsserts() {
+		return 0;
+	}
+
+	@Override
+	public int getUniqueAsserts() {
+		return 0;
 	}
 }

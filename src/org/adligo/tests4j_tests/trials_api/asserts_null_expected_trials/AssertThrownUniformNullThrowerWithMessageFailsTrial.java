@@ -110,6 +110,6 @@ public class AssertThrownUniformNullThrowerWithMessageFailsTrial extends ApiTria
 	}
 	
 	public static int getAsserts() {
-		return 36;
+		return 34;
 	}
 }

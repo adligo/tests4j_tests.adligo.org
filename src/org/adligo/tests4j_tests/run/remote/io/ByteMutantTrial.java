@@ -6,10 +6,11 @@ import org.adligo.tests4j.models.shared.trials.SourceFileScope;
 import org.adligo.tests4j.models.shared.trials.SourceFileTrial;
 import org.adligo.tests4j.models.shared.trials.Test;
 import org.adligo.tests4j.run.remote.io.ByteMutant;
+import org.adligo.tests4j_tests.base_abstract_trials.SourceFileCountingTrial;
 
 
 @SourceFileScope (sourceClass=ByteMutant.class)
-public class ByteMutantTrial extends SourceFileTrial {
+public class ByteMutantTrial extends SourceFileCountingTrial {
 	
 	@Test
 	public void testByteMutantConstructor() {
@@ -177,6 +178,7 @@ public class ByteMutantTrial extends SourceFileTrial {
 	
 	@Override
 	public void afterTrialTests(I_SourceFileTrialResult p) {
+		assertCounts(p);
 		//not sure what I am missing, I probably need 
 		//to finish the eclipse plug-in coverage source-lighter
 		
@@ -184,5 +186,21 @@ public class ByteMutantTrial extends SourceFileTrial {
 			I_SourceFileCoverage coverage = p.getSourceFileCoverage();
 			assertGreaterThanOrEquals(82.00, coverage.getPercentageCoveredDouble());
 		}
+	}
+	
+
+	@Override
+	public int getTests() {
+		return 5;
+	}
+
+	@Override
+	public int getAsserts() {
+		return 2324;
+	}
+
+	@Override
+	public int getUniqueAsserts() {
+		return 1539;
 	}
 }

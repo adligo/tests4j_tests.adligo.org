@@ -8,9 +8,10 @@ import org.adligo.tests4j.models.shared.results.I_SourceFileTrialResult;
 import org.adligo.tests4j.models.shared.trials.SourceFileScope;
 import org.adligo.tests4j.models.shared.trials.SourceFileTrial;
 import org.adligo.tests4j.models.shared.trials.Test;
+import org.adligo.tests4j_tests.base_abstract_trials.SourceFileCountingTrial;
 
 @SourceFileScope (sourceClass=AssertType.class)
-public class AssertTypeTrial extends SourceFileTrial {
+public class AssertTypeTrial extends SourceFileCountingTrial {
 
 	@Test
 	public void testSingleTypes() {
@@ -77,9 +78,7 @@ public class AssertTypeTrial extends SourceFileTrial {
 	
 	@Override
 	public void afterTrialTests(I_SourceFileTrialResult p) {
-		assertEquals(5, p.getTestCount());
-		assertGreaterThanOrEquals(30.0, p.getAssertionCount());
-		assertGreaterThanOrEquals(20.0, p.getUniqueAssertionCount());
+		assertCounts(p);
 		
 		if (p.hasRecordedCoverage()) {
 			I_SourceFileCoverage coverage = p.getSourceFileCoverage();
@@ -91,4 +90,21 @@ public class AssertTypeTrial extends SourceFileTrial {
 			assertGreaterThanOrEquals(95.0, pct);
 		}
 	}
+
+
+	@Override
+	public int getTests() {
+		return 5;
+	}
+
+	@Override
+	public int getAsserts() {
+		return 31;
+	}
+
+	@Override
+	public int getUniqueAsserts() {
+		return 31;
+	}
+	
 }

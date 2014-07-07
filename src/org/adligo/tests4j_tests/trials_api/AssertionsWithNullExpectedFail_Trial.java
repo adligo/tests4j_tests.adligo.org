@@ -1,9 +1,12 @@
 package org.adligo.tests4j_tests.trials_api;
 
+import org.adligo.tests4j.models.shared.coverage.I_PackageCoverage;
 import org.adligo.tests4j.models.shared.results.I_ApiTrialResult;
 import org.adligo.tests4j.models.shared.trials.ApiTrial;
+import org.adligo.tests4j.models.shared.trials.IgnoreTest;
 import org.adligo.tests4j.models.shared.trials.PackageScope;
 import org.adligo.tests4j.models.shared.trials.Test;
+import org.adligo.tests4j_tests.base_abstract_trials.ApiCountingTrial;
 import org.adligo.tests4j_tests.trials_api.asserts_null_expected_trials.AssertContainsNullFailsTrial;
 import org.adligo.tests4j_tests.trials_api.asserts_null_expected_trials.AssertContainsNullWithMessageFailsTrial;
 import org.adligo.tests4j_tests.trials_api.asserts_null_expected_trials.AssertEqualsNullFailsTrial;
@@ -28,7 +31,7 @@ import org.adligo.tests4j_tests.trials_api.asserts_null_expected_trials.AssertUn
 import org.adligo.tests4j_tests.trials_api.asserts_null_expected_trials.AssertUniformNullWithMessageFailsTrial;
 
 @PackageScope (packageName = "org.adligo.tests4j")
-public class AssertionsWithNullExpectedFail_Trial extends ApiTrial {
+public class AssertionsWithNullExpectedFail_Trial extends ApiCountingTrial {
 	
 	@Test
 	public void testAssertContainsNullFails() {
@@ -44,7 +47,7 @@ public class AssertionsWithNullExpectedFail_Trial extends ApiTrial {
 	public void testAssertEqualsNullFails() {
 		AssertEqualsNullFailsTrial.runTestDelegate(this);
 	}
-	
+
 	@Test
 	public void testAssertEqualsNullWithMessageFails() {
 		AssertEqualsNullWithMessageFailsTrial.runTestDelegate(this);
@@ -66,7 +69,7 @@ public class AssertionsWithNullExpectedFail_Trial extends ApiTrial {
 	}
 	
 	@Test
-	public void testAssertNotSameNullNullWithMessageFails() {
+	public void testAssertNotSameNullWithMessageFails() {
 		AssertNotSameNullWithMessageFailsTrial.runTestDelegate(this);
 	}
 	
@@ -121,40 +124,55 @@ public class AssertionsWithNullExpectedFail_Trial extends ApiTrial {
 	}
 	
 	@Test
-	public void testAssertThrownUniformNullThrowerFails() {
+	public void testAssertThrownUniformNullThrowerFailsTrialFails() {
 		AssertThrownUniformNullThrowerFailsTrial.runTestDelegate(this);
 	}
 	
 	@Test
-	public void testAssertThrownUniformNullThrowerWithMessageFails() {
+	public void testAssertUniformNullWithMessageFailsTrialFails() {
+		AssertUniformNullWithMessageFailsTrial.runTestDelegate(this);
+	}
+	
+	@Test
+	public void testAssertThrownUniformNullThrowerWithMessageFailsTrialFails() {
 		AssertThrownUniformNullThrowerWithMessageFailsTrial.runTestDelegate(this);
 	}
 	
 	@Test
-	public void testAssertUniformNullFails() {
+	public void testAssertUniformNullFailsTrialFails() {
 		AssertUniformNullFailsTrial.runTestDelegate(this);
 	}
 	
-	@Test
-	public void testThrownUniformNullWithMessageFails() {
-		AssertUniformNullWithMessageFailsTrial.runTestDelegate(this);
-	}
+	
 	
 	@Override
 	public void afterTrialTests(I_ApiTrialResult p) {
-		assertEquals(22, p.getTestCount());
-		assertGreaterThanOrEquals(0.0 + 
-				AssertContainsNullFailsTrial.getAsserts() +
+		assertCounts(p);
+		if (p.hasRecordedCoverage()) {
+			I_PackageCoverage coverage = p.getPackageCoverage();
+			//TODO this should be something not zero
+			assertGreaterThanOrEquals(0.0, coverage.getPercentageCoveredDouble());
+		}
+	}
+
+	@Override
+	public int getTests() {
+		return 22;
+	}
+
+	@Override
+	public int getAsserts() {
+		return AssertContainsNullFailsTrial.getAsserts() +
 				AssertContainsNullWithMessageFailsTrial.getAsserts() +
 				AssertEqualsNullFailsTrial.getAsserts() +
 				AssertEqualsNullWithMessageFailsTrial.getAsserts() +
-				AssertNotEqualsNullFailsTrial.getAsserts() +
+				AssertNotEqualsNullFailsTrial.getAsserts()+
 				AssertNotEqualsNullWithMessageFailsTrial.getAsserts() +
-				AssertNotSameNullFailsTrial.getAsserts() +
-				AssertNotSameNullWithMessageFailsTrial.getAsserts() +
+				AssertNotSameNullFailsTrial.getAsserts()+
+				AssertNotSameNullWithMessageFailsTrial.getAsserts()   +
 				AssertNotUniformNullFailsTrial.getAsserts() +
-				AssertNotUniformNullWithMessageFailsTrial.getAsserts() +
-				AssertSameNullFailsTrial.getAsserts() +
+				AssertNotUniformNullWithMessageFailsTrial.getAsserts()+
+				AssertSameNullFailsTrial.getAsserts()  +
 				AssertSameNullWithMessageFailsTrial.getAsserts() +
 				AssertThrownNullFailsTrial.getAsserts() + 
 				AssertThrownNullThrowerFailsTrial.getAsserts() + 
@@ -164,14 +182,12 @@ public class AssertionsWithNullExpectedFail_Trial extends ApiTrial {
 				AssertThrownUniformNullWithMessageFailsTrial.getAsserts() +
 				AssertUniformNullFailsTrial.getAsserts() + 
 				AssertUniformNullWithMessageFailsTrial.getAsserts() +
-				AssertThrownUniformNullThrowerFailsTrial.getAsserts() + 
-				AssertThrownUniformNullThrowerWithMessageFailsTrial.getAsserts() 
-				,
-				
-				p.getAssertionCount());
-		assertGreaterThanOrEquals(0.0 + 
-				60.0, 
-				p.getUniqueAssertionCount());
-		
+				AssertThrownUniformNullThrowerFailsTrial.getAsserts() +
+				AssertThrownUniformNullThrowerWithMessageFailsTrial.getAsserts();
+	}
+
+	@Override
+	public int getUniqueAsserts() {
+		return 474;
 	}
 }
