@@ -45,7 +45,7 @@ public class RunPkgTrials implements I_TrialList {
 		trials.add(ThrownAssertionDataTrial.class);
 		
 		trials.add(UniformAssertCommandTrial.class);
-		
+		trials.add(UniformThrownAssertCommandTrial.class);
 		
 		trials.addAll(new org.adligo.tests4j_tests.models.shared.asserts.common.RunPkgTrials().getTrials());
 		return trials;

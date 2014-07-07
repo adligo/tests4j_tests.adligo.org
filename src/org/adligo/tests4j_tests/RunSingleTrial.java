@@ -10,16 +10,14 @@ import org.adligo.tests4j.shared.report.summary.SummaryReporter;
 import org.adligo.tests4j_4jacoco.plugin.AbstractPlugin;
 import org.adligo.tests4j_4jacoco.plugin.Recorder;
 import org.adligo.tests4j_4jacoco.plugin.ScopedJacocoPlugin;
-import org.adligo.tests4j_tests.trials_api.AssertionsWithNullExpectedFail_Trial;
-import org.adligo.tests4j_tests.trials_api.BadSourceFileTrials_Trial;
-import org.adligo.tests4j_tests.trials_api.BadUseCaseTrials_Trial;
+import org.adligo.tests4j_tests.models.shared.asserts.UniformThrownAssertCommandTrial;
 
 public class RunSingleTrial {
 
 	
 	public static void main(String [] args) {
 		Tests4J_Params params = new Tests4J_Params();
-		params.addTrial(BadUseCaseTrials_Trial.class);
+		params.addTrial(UniformThrownAssertCommandTrial.class);
 		/*
 		params.addTest(Run_UseCaseTrial_ApiTrial.class.getName() +
 				".testNoUseCaseAnnotation");

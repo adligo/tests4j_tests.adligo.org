@@ -15,14 +15,19 @@ public class TheMetaTrial  extends MetaTrial {
 		//Note when I ignored
 		// MultiRecordingTrial I lost 15% main coverage
 		//TODO reimpl it vs the ThreadLocals
-		super(27.0, 14.8);
+		super(28.0, 15.8);
+		//hmm package comparison data to include;
+		// passing tests
+		// relevant classes with trials %
+		// minimum source file coverage %
+		// minimum package coverage %
 	}
 	
 
 	@Override
 	public void afterNonMetaTrialsRun(I_TrialRunResult results) throws Exception {
 		super.assertPackageTrialsPassed(results, "org.adligo.tests4j.models.shared.common", 6);
-		super.assertPackageTrialsPassed(results, "org.adligo.tests4j.models.shared.asserts", 10);
+		super.assertPackageTrialsPassed(results, "org.adligo.tests4j.models.shared.asserts", 15);
 		super.assertPackageTrialsPassed(results, "org.adligo.tests4j.models.shared.asserts.common", 1);
 		//TODO
 		//assertEquals(1,results.getTrialsIgnored());
@@ -49,7 +54,7 @@ public class TheMetaTrial  extends MetaTrial {
 		RelevantClassesWithTrialsCalculator calc = super.getCalculator();
 		
 		//this assert is also for the child-packages;
-		assertGreaterThanOrEquals(70.0, calc.getPct("org.adligo.tests4j.models.shared.asserts"));
+		assertGreaterThanOrEquals(100.0, calc.getPct("org.adligo.tests4j.models.shared.asserts"));
 		assertGreaterThanOrEquals(100.0, calc.getPct("org.adligo.tests4j.models.shared.common"));
 		
 		// includes this
@@ -69,12 +74,12 @@ public class TheMetaTrial  extends MetaTrial {
 			sb.append("'");
 			sb.append(System.lineSeparator());
 		}
-		assertEquals(sb.toString(), 40, metadata.getAllTrialsCount());
+		assertEquals(sb.toString(), 41, metadata.getAllTrialsCount());
 		
 		//includes two tests in here, from this class
 		//assertGreaterThanOrEquals(199, metadata.getAllTestsCount());
 		//should be .... 243
-		assertEquals(238,  metadata.getAllTestsCount());
+		assertEquals(245,  metadata.getAllTestsCount());
 		
 	}
 

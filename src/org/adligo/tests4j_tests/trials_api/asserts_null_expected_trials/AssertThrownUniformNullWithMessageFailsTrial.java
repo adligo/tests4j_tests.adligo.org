@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.adligo.tests4j.models.shared.asserts.common.I_Asserts;
 import org.adligo.tests4j.models.shared.asserts.common.I_Thrower;
+import org.adligo.tests4j.models.shared.en.asserts.Tests4J_AssertionInputMessages;
 import org.adligo.tests4j.models.shared.en.asserts.Tests4J_AssertionResultMessages;
 import org.adligo.tests4j.models.shared.metadata.I_TestMetadata;
 import org.adligo.tests4j.models.shared.metadata.I_TrialMetadata;
@@ -107,12 +108,12 @@ public class AssertThrownUniformNullWithMessageFailsTrial extends ApiTrial {
 		
 		asserts.assertEquals(AssertThrownUniformNullWithMessageFailsTrial.class.getName(), topElement.getClassName());
 		asserts.assertEquals("testAssertThrownUniformNull", topElement.getMethodName());
-		asserts.assertEquals(30, topElement.getLineNumber());
+		asserts.assertEquals(31, topElement.getLineNumber());
 		
 		Throwable exception = testFailure.getException();
 		asserts.assertNotNull(exception);
 		asserts.assertUniform(new IllegalArgumentException(
-				new Tests4J_AssertionResultMessages().getTheExpectedValueShouldNeverBeNull()),
+				new Tests4J_AssertionInputMessages().getExpectedThrownDataRequiresThrowable()),
 				exception);
 	}
 	
