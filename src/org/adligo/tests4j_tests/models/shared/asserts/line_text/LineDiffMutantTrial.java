@@ -223,7 +223,7 @@ public class LineDiffMutantTrial extends SourceFileCountingTrial {
 		
 		if (p.hasRecordedCoverage()) {
 			I_SourceFileCoverage coverage = p.getSourceFileCoverage();
-			assertGreaterThanOrEquals(100.0, coverage.getPercentageCoveredDouble());
+			assertGreaterThanOrEquals(84.0, coverage.getPercentageCoveredDouble());
 		}
 	}
 

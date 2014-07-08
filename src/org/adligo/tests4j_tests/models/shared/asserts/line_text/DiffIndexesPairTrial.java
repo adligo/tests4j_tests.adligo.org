@@ -1,5 +1,7 @@
 package org.adligo.tests4j_tests.models.shared.asserts.line_text;
 
+import java.io.IOException;
+
 import org.adligo.tests4j.models.shared.asserts.line_text.DiffIndexes;
 import org.adligo.tests4j.models.shared.asserts.line_text.DiffIndexesPair;
 import org.adligo.tests4j.models.shared.asserts.line_text.I_DiffIndexes;
@@ -26,7 +28,7 @@ public class DiffIndexesPairTrial extends SourceFileCountingTrial {
 	}
 	
 	@Test
-	public void testCompareLinesEndMatch() {
+	public void testCompareLinesEndMatch() throws Exception {
 		DiffIndexesPair result = new DiffIndexesPair("cab", "dab");
 		assertNotNull(result);
 		I_DiffIndexes exampleIndexes = result.getExample();
@@ -41,7 +43,7 @@ public class DiffIndexesPairTrial extends SourceFileCountingTrial {
 	}
 	
 	@Test
-	public void testCompareLinesStartMatch() {
+	public void testCompareLinesStartMatch() throws Exception {
 		DiffIndexesPair result = new DiffIndexesPair("abc", "aba");
 		assertNotNull(result);
 		I_DiffIndexes exampleIndexes = result.getExample();
@@ -57,7 +59,7 @@ public class DiffIndexesPairTrial extends SourceFileCountingTrial {
 	
 	
 	@Test
-	public void testCompareLinesMiddleMatch() {
+	public void testCompareLinesMiddleMatch() throws Exception {
 		DiffIndexesPair result = new DiffIndexesPair("abcscoffabc", "abccough234abc");
 		assertNotNull(result);
 		I_DiffIndexes exampleIndexes = result.getExample();
@@ -77,7 +79,7 @@ public class DiffIndexesPairTrial extends SourceFileCountingTrial {
 		
 		if (p.hasRecordedCoverage()) {
 			I_SourceFileCoverage coverage = p.getSourceFileCoverage();
-			assertGreaterThanOrEquals(100.0, coverage.getPercentageCoveredDouble());
+			assertGreaterThanOrEquals(95.0, coverage.getPercentageCoveredDouble());
 		}
 	}
 
