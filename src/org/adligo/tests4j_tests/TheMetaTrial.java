@@ -83,7 +83,7 @@ public class TheMetaTrial  extends MetaTrial {
 		//includes two tests in here, from this class
 		//assertGreaterThanOrEquals(199, metadata.getAllTestsCount());
 		//should be .... 243
-		assertEquals(283,  metadata.getAllTestsCount());
+		assertEquals(288,  metadata.getAllTestsCount());
 		
 	}
 
