@@ -7,7 +7,7 @@ import org.adligo.tests4j.models.shared.asserts.ExpectedThrownData;
 import org.adligo.tests4j.models.shared.asserts.UniformAssertCommand;
 import org.adligo.tests4j.models.shared.asserts.common.AssertType;
 import org.adligo.tests4j.models.shared.asserts.common.I_Thrower;
-import org.adligo.tests4j.models.shared.asserts.line_text.I_LineTextCompareResult;
+import org.adligo.tests4j.models.shared.asserts.line_text.I_TextLinesCompareResult;
 import org.adligo.tests4j.models.shared.asserts.uniform.I_Evaluation;
 import org.adligo.tests4j.models.shared.asserts.uniform.StringUniformEvaluator;
 import org.adligo.tests4j.models.shared.coverage.I_SourceFileCoverage;
@@ -71,11 +71,8 @@ public class UniformAssertCommandTrial extends SourceFileCountingTrial {
 		Map<String,Object> data = eval.getData();
 		assertNotNull(data);
 		
-		I_LineTextCompareResult lt = (I_LineTextCompareResult) data.get(I_LineTextCompareResult.DATA_KEY);
-		assertEquals("a", lt.getExpected());
-		assertEquals("b", lt.getActual());
-		assertEquals(1, lt.getExpectedLines());
-		assertEquals(1, lt.getActualLines());
+		I_TextLinesCompareResult lt = (I_TextLinesCompareResult) data.get(I_TextLinesCompareResult.DATA_KEY);
+		assertFalse(lt.isMatched());
 		
 	}
 	
@@ -97,11 +94,11 @@ public class UniformAssertCommandTrial extends SourceFileCountingTrial {
 
 	@Override
 	public int getAsserts() {
-		return 16;
+		return 13;
 	}
 
 	@Override
 	public int getUniqueAsserts() {
-		return 13;
+		return 12;
 	}
 }

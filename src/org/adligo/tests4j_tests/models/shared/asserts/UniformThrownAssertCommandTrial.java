@@ -9,7 +9,7 @@ import org.adligo.tests4j.models.shared.asserts.ThrownAssertionData;
 import org.adligo.tests4j.models.shared.asserts.UniformThrownAssertCommand;
 import org.adligo.tests4j.models.shared.asserts.common.I_AssertionData;
 import org.adligo.tests4j.models.shared.asserts.common.I_Thrower;
-import org.adligo.tests4j.models.shared.asserts.line_text.I_LineTextCompareResult;
+import org.adligo.tests4j.models.shared.asserts.line_text.I_TextLinesCompareResult;
 import org.adligo.tests4j.models.shared.asserts.uniform.Evaluation;
 import org.adligo.tests4j.models.shared.asserts.uniform.I_Evaluation;
 import org.adligo.tests4j.models.shared.asserts.uniform.ThrowableUniformEvaluator;
@@ -214,7 +214,7 @@ public class UniformThrownAssertCommandTrial extends SourceFileCountingTrial {
 		Map<String, Object> evalData = eval.getData();
 		assertNotNull(evalData);
 		assertEquals(1, evalData.size());
-		I_LineTextCompareResult txt = (I_LineTextCompareResult) evalData.get(I_LineTextCompareResult.DATA_KEY);
+		I_TextLinesCompareResult txt = (I_TextLinesCompareResult) evalData.get(I_TextLinesCompareResult.DATA_KEY);
 		assertNotNull(txt);
 	}
 	
