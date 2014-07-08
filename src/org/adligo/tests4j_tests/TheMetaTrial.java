@@ -43,9 +43,9 @@ public class TheMetaTrial  extends MetaTrial {
 		
 		//does not include assertions from this class yet
 		//I think the single threaded count is off somewhere
-		assertGreaterThanOrEquals(19600,results.getAsserts());
+		assertGreaterThanOrEquals(19700,results.getAsserts());
 		//should be assertEquals(19227L,results.getAsserts());
-		assertGreaterThanOrEquals(4200,results.getUniqueAsserts());
+		assertGreaterThanOrEquals(4400,results.getUniqueAsserts());
 		// should be something like assertEquals(4122L,results.getUniqueAsserts());
 		super.afterNonMetaTrialsRun(results);
 	}
@@ -83,7 +83,7 @@ public class TheMetaTrial  extends MetaTrial {
 		//includes two tests in here, from this class
 		//assertGreaterThanOrEquals(199, metadata.getAllTestsCount());
 		//should be .... 243
-		assertEquals(288,  metadata.getAllTestsCount());
+		assertEquals(291,  metadata.getAllTestsCount());
 		
 	}
 

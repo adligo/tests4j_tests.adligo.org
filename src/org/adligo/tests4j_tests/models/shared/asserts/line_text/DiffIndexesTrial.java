@@ -43,15 +43,6 @@ public class DiffIndexesTrial extends SourceFileCountingTrial {
 						new DiffIndexes(2, 1);
 					}
 				});
-		assertThrown(new ExpectedThrownData(new IllegalArgumentException(
-				DiffIndexes.START_END_DIFF_REQUIRES_THE_START_TO_BE_BEFORE_THE_END)),
-				new I_Thrower() {
-					
-					@Override
-					public void run() {
-						new DiffIndexes(0, 0);
-					}
-				});
 	}
 	
 	@Test
@@ -83,11 +74,11 @@ public class DiffIndexesTrial extends SourceFileCountingTrial {
 
 	@Override
 	public int getAsserts() {
-		return 8;
+		return 7;
 	}
 
 	@Override
 	public int getUniqueAsserts() {
-		return 8;
+		return 7;
 	}
 }

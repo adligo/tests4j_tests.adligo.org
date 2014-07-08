@@ -25,6 +25,52 @@ public class DiffIndexesPairTrial extends SourceFileCountingTrial {
 		assertSame(sed2, pair.getActual());
 	}
 	
+	@Test
+	public void testCompareLinesEndMatch() {
+		DiffIndexesPair result = new DiffIndexesPair("cab", "dab");
+		assertNotNull(result);
+		I_DiffIndexes exampleIndexes = result.getExample();
+		assertNotNull(exampleIndexes);
+		I_DiffIndexes actualIndexes = result.getActual();
+		assertNotNull(actualIndexes);
+		assertEquals(0, exampleIndexes.getStart());
+		assertEquals(0, exampleIndexes.getEnd());
+		
+		assertEquals(0, actualIndexes.getStart());
+		assertEquals(0, actualIndexes.getEnd());
+	}
+	
+	@Test
+	public void testCompareLinesStartMatch() {
+		DiffIndexesPair result = new DiffIndexesPair("abc", "aba");
+		assertNotNull(result);
+		I_DiffIndexes exampleIndexes = result.getExample();
+		assertNotNull(exampleIndexes);
+		I_DiffIndexes actualIndexes = result.getActual();
+		assertNotNull(actualIndexes);
+		assertEquals(2, exampleIndexes.getStart());
+		assertEquals(2, exampleIndexes.getEnd());
+		
+		assertEquals(2, actualIndexes.getStart());
+		assertEquals(2, actualIndexes.getEnd());
+	}
+	
+	
+	@Test
+	public void testCompareLinesMiddleMatch() {
+		DiffIndexesPair result = new DiffIndexesPair("abcscoffabc", "abccough234abc");
+		assertNotNull(result);
+		I_DiffIndexes exampleIndexes = result.getExample();
+		assertNotNull(exampleIndexes);
+		I_DiffIndexes actualIndexes = result.getActual();
+		assertNotNull(actualIndexes);
+		assertEquals(3, exampleIndexes.getStart());
+		assertEquals(7, exampleIndexes.getEnd());
+		
+		assertEquals(3, actualIndexes.getStart());
+		assertEquals(10, actualIndexes.getEnd());
+	}
+	
 	@Override
 	public void afterTrialTests(I_SourceFileTrialResult p) {
 		assertCounts(p);
@@ -38,16 +84,16 @@ public class DiffIndexesPairTrial extends SourceFileCountingTrial {
 	
 	@Override
 	public int getTests() {
-		return 1;
+		return 4;
 	}
 
 	@Override
 	public int getAsserts() {
-		return 2;
+		return 23;
 	}
 
 	@Override
 	public int getUniqueAsserts() {
-		return 2;
+		return 16;
 	}
 }
