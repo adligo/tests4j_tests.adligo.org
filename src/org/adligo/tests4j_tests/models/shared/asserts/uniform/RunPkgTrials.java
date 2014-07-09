@@ -24,8 +24,11 @@ public class RunPkgTrials implements I_TrialList {
 	public List<Class<? extends AbstractTrial>> getTrials() {
 		List<Class<? extends AbstractTrial>> trials = new ArrayList<Class<? extends AbstractTrial>>();
 		
-		trials.add(EvaluationMutantTrial.class);
 		
+		trials.add(EvaluationMutantTrial.class);
+		trials.add(EvaluationTrial.class);
+		trials.add(EvaluatorLookupMutantTrial.class);
+		trials.add(EvaluatorLookupTrial.class);
 		return trials;
 	}
 }

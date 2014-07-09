@@ -8,36 +8,43 @@ import org.adligo.tests4j.models.shared.trials.SourceFileScope;
 import org.adligo.tests4j.models.shared.trials.Test;
 import org.adligo.tests4j_tests.base_abstract_trials.SourceFileCountingTrial;
 
-@SourceFileScope (sourceClass=EvaluationMutant.class)
-public class EvaluationMutantTrial extends SourceFileCountingTrial {
+@SourceFileScope (sourceClass=Evaluation.class)
+public class EvaluationTrial extends SourceFileCountingTrial {
+
 
 	@Test
 	public void testsGetsAndSets() {
 		EvaluationMutant<String> em = new EvaluationMutant<>();
+		Evaluation<String> copy = new Evaluation<>(em);
+		assertFalse(copy.isSuccess());
+		assertNull(copy.getFailureReason());
+		assertNull(copy.getData());
+		
+		em.setSuccess(true);
+		em.setFailureReason("failure reason");
+		em.setData("hey data");
+		
+		copy = new Evaluation<>(em);
+		assertTrue(copy.isSuccess());
+		assertEquals("failure reason", copy.getFailureReason());
+		assertEquals("hey data", copy.getData());
+	}
+	
+	@Test
+	public void testsConstructors() {
+		Evaluation<String> em = new Evaluation<String>();
 		assertFalse(em.isSuccess());
 		assertNull(em.getFailureReason());
 		assertNull(em.getData());
 		
-		em.setFailureReason("failure reason");
-		assertEquals("failure reason", em.getFailureReason());
-		em.setData("hey data");
-		assertEquals("hey data", em.getData());
-	}
-	
-	@Test
-	public void testsCopyConstructor() {
-		EvaluationMutant<String> em = new EvaluationMutant<>();
-		em.setSuccess(true);
-		assertTrue(em.isSuccess());
-		em.setFailureReason("failure reason");
-		assertEquals("failure reason", em.getFailureReason());
-		em.setData("hey data");
-		assertEquals("hey data", em.getData());
-		
 		EvaluationMutant<String> em2 = new EvaluationMutant<String>(em);
-		assertTrue(em2.isSuccess());
-		assertEquals("failure reason", em2.getFailureReason());
-		assertEquals("hey data", em2.getData());
+		em2.setSuccess(true);
+		em2.setFailureReason("failure reason");
+		em2.setData("hey data");
+		Evaluation<String> e = new Evaluation<String>(em2);
+		assertTrue(e.isSuccess());
+		assertEquals("failure reason", e.getFailureReason());
+		assertEquals("hey data", e.getData());
 	}
 	
 	@Override
@@ -60,11 +67,11 @@ public class EvaluationMutantTrial extends SourceFileCountingTrial {
 
 	@Override
 	public int getAsserts() {
-		return 11;
+		return 12;
 	}
 
 	@Override
 	public int getUniqueAsserts() {
-		return 7;
+		return 10;
 	}
 }
