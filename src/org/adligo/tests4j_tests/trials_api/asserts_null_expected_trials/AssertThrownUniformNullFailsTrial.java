@@ -112,8 +112,8 @@ public class AssertThrownUniformNullFailsTrial extends ApiTrial {
 		
 		Throwable exception = testFailure.getException();
 		asserts.assertNotNull(exception);
-		asserts.assertUniform(new IllegalArgumentException(
-				new Tests4J_AssertionInputMessages().getExpectedThrownDataRequiresThrowable()),
+		asserts.assertUniform(new IllegalStateException(
+				new Tests4J_AssertionResultMessages().getNoEvaluatorFoundForClass() + "null"),
 				exception);
 	}
 	

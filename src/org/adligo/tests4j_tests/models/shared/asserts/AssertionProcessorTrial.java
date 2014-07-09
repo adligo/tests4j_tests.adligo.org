@@ -115,87 +115,6 @@ public class AssertionProcessorTrial extends SourceFileCountingTrial implements 
 		assertNull(lastTestFailure);
 	}
 
-	@Test
-	public void testUniform() {
-		assertNull(lastAssertCommand);
-		assertNull(lastTestFailure);
-		UniformAssertCommand uac = new UniformAssertCommand(AssertType.AssertUniform, "should be uniform", 
-				new CompareAssertionData<String>("hey", "hey"));
-		StringUniformEvaluator sue = new StringUniformEvaluator();
-		AssertionProcessor.evaluate(this, uac, sue);
-		assertSame(uac, lastAssertCommand);
-		
-		lastAssertCommand = null;
-		
-		uac = new UniformAssertCommand(AssertType.AssertUniform, "should be uniform", 
-				new CompareAssertionData<String>("hey1", "hey"));
-		AssertionProcessor.evaluate(this, uac, sue);
-		assertNull(lastAssertCommand);
-		assertNotNull(lastTestFailure);
-		assertEquals("should be uniform", lastTestFailure.getMessage());
-		assertNull(lastTestFailure.getException());
-		
-		Throwable locationFailed = lastTestFailure.getLocationFailed();
-		assertNotNull(locationFailed);
-		I_AssertionData data =  lastTestFailure.getData();
-		assertNotNull(data);
-		
-		StackTraceElement [] elements = locationFailed.getStackTrace();
-		
-		StackTraceElement e = elements[0];
-		assertEquals(AssertionProcessorTrial.class.getName(),  e.getClassName());
-		assertEquals("testUniform",  e.getMethodName());
-		assertEquals(132,  e.getLineNumber());
-		
-		StackAssertions.assertAssertionFailureLocation_StackWasFromTests4J(this, locationFailed);
-		
-		
-		assertEquals("hey1", data.getData(CompareAssertionData.EXPECTED));
-		assertEquals("hey",data.getData(CompareAssertionData.ACTUAL));
-	}
-	
-	@Test
-	public void testThrownUniform() {
-		assertNull(lastAssertCommand);
-		assertNull(lastTestFailure);
-		UniformThrownAssertCommand tac = new UniformThrownAssertCommand(
-				"should be thrown uniform", 
-				new ExpectedThrownData(new RuntimeException("thrown message")));
-		
-		ThrowableUniformEvaluator tue = new ThrowableUniformEvaluator();
-		AssertionProcessor.evaluate(this, tac, tue, this);
-		assertNull(lastAssertCommand);
-		
-		assertNotNull(lastTestFailure);
-		assertEquals("should be thrown uniform", lastTestFailure.getMessage());
-		assertNull(lastTestFailure.getException());
-		
-		Throwable locationFailed = lastTestFailure.getLocationFailed();
-		assertNotNull(locationFailed);
-		StackTraceElement [] elements = locationFailed.getStackTrace();
-		
-		StackTraceElement e = elements[0];
-		assertEquals(AssertionProcessorTrial.class.getName(),  e.getClassName());
-		assertEquals("testThrownUniform",  e.getMethodName());
-		assertEquals(166,  e.getLineNumber());
-		
-		StackAssertions.assertAssertionFailureLocation_StackWasFromTests4J(this, locationFailed);
-		
-		I_AssertionData data =  lastTestFailure.getData();
-		assertNotNull(data);
-		assertNull(data.getData(ThrownAssertionData.ACTUAL_MESSAGE));
-		assertNull( data.getData(ThrownAssertionData.ACTUAL_THROWABLE_CLASS));
-		assertEquals("thrown message", data.getData(ThrownAssertionData.EXPECTED_MESSAGE));
-		assertEquals(RuntimeException.class, data.getData(ThrownAssertionData.EXPECTED_THROWABLE_CLASS));
-		
-		lastTestFailure = null;
-		throwable = new RuntimeException("thrown message");
-		
-		AssertionProcessor.evaluate(this, tac, tue, this);
-		assertNotNull(lastAssertCommand);
-		assertSame(tac, lastAssertCommand);
-		assertNull(lastTestFailure);
-	}
 	
 	@Override
 	public void assertCompleted(I_AssertCommand cmd) {
@@ -228,17 +147,17 @@ public class AssertionProcessorTrial extends SourceFileCountingTrial implements 
 
 	@Override
 	public int getTests() {
-		return 4;
+		return 2;
 	}
 
 	@Override
 	public int getAsserts() {
-		return 80;
+		return 40;
 	}
 
 	@Override
 	public int getUniqueAsserts() {
-		return 62;
+		return 31;
 	}
 	
 }

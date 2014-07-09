@@ -3,14 +3,12 @@ package org.adligo.tests4j_tests.models.shared.asserts;
 import java.util.Map;
 import java.util.Set;
 
-import org.adligo.tests4j.models.shared.asserts.CompareAssertionData;
 import org.adligo.tests4j.models.shared.asserts.ExpectedThrownData;
 import org.adligo.tests4j.models.shared.asserts.ThrownAssertionData;
 import org.adligo.tests4j.models.shared.asserts.UniformThrownAssertCommand;
 import org.adligo.tests4j.models.shared.asserts.common.I_AssertionData;
 import org.adligo.tests4j.models.shared.asserts.common.I_Thrower;
 import org.adligo.tests4j.models.shared.asserts.line_text.I_TextLinesCompareResult;
-import org.adligo.tests4j.models.shared.asserts.uniform.Evaluation;
 import org.adligo.tests4j.models.shared.asserts.uniform.I_Evaluation;
 import org.adligo.tests4j.models.shared.asserts.uniform.ThrowableUniformEvaluator;
 import org.adligo.tests4j.models.shared.coverage.I_SourceFileCoverage;
@@ -25,6 +23,7 @@ import org.adligo.tests4j_tests.base_abstract_trials.SourceFileCountingTrial;
 public class UniformThrownAssertCommandTrial extends SourceFileCountingTrial {
 
 	@Test
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public void testConstructorExceptions() {
 		assertThrown(new ExpectedThrownData(new IllegalArgumentException(
 				new Tests4J_AssertionInputMessages().getExpectedThrownDataRequiresThrowable())),
@@ -32,17 +31,29 @@ public class UniformThrownAssertCommandTrial extends SourceFileCountingTrial {
 					
 					@Override
 					public void run() {
-						new UniformThrownAssertCommand("failure message", null);
+						new UniformThrownAssertCommand("failure message", null, null);
 					}
 				});
 		assertThrown(new ExpectedThrownData(new IllegalArgumentException(
 				new Tests4J_AssertionInputMessages().getExpectedThrownDataRequiresMessage())),
 				new I_Thrower() {
 					
+					
 					@Override
 					public void run() {
 						new UniformThrownAssertCommand("failure message", 
-								new ExpectedThrownData(new IllegalArgumentException("")));
+								new ExpectedThrownData(new IllegalArgumentException("")), null);
+					}
+				});
+		assertThrown(new ExpectedThrownData(new IllegalArgumentException(
+				UniformThrownAssertCommand.UNIFORM_THROWN_ASSERT_COMMAND_REQUIRES_A_EVALUATOR)),
+				new I_Thrower() {
+					
+					
+					@Override
+					public void run() {
+						new UniformThrownAssertCommand("failure message", 
+								new ExpectedThrownData(new IllegalArgumentException("failure message")), null);
 					}
 				});
 	}
@@ -51,13 +62,11 @@ public class UniformThrownAssertCommandTrial extends SourceFileCountingTrial {
 	public void testGettersBeforeEvaluate() {
 		IllegalArgumentException iae = new IllegalArgumentException("expected exception messsage");
 		ExpectedThrownData etd = new ExpectedThrownData(iae);
-		UniformThrownAssertCommand utac = new UniformThrownAssertCommand("failure message", 
-				etd);
+		UniformThrownAssertCommand<I_TextLinesCompareResult> utac = new UniformThrownAssertCommand<I_TextLinesCompareResult>
+				("failure message", etd, new ThrowableUniformEvaluator());
 		assertEquals("failure message", utac.getFailureMessage());
-		assertEquals(iae, utac.getExpected());
-		assertNull(utac.getActual());
+		I_AssertionData data =  utac.getData();
 		
-		I_AssertionData data = utac.getData();
 		assertNotNull(data);
 		assertTrue(data instanceof ThrownAssertionData);
 		ThrownAssertionData tad = (ThrownAssertionData) data;
@@ -85,24 +94,39 @@ public class UniformThrownAssertCommandTrial extends SourceFileCountingTrial {
 	public void testGettersAfterEvaluate() {
 		final IllegalArgumentException iae = new IllegalArgumentException("expected exception messsage");
 		ExpectedThrownData etd = new ExpectedThrownData(iae);
-		UniformThrownAssertCommand utac = new UniformThrownAssertCommand("failure message", 
-				etd);
+		UniformThrownAssertCommand<I_TextLinesCompareResult> utac = new UniformThrownAssertCommand<I_TextLinesCompareResult>
+				("failure message",  etd, new ThrowableUniformEvaluator());
 		assertEquals("failure message", utac.getFailureMessage());
-		assertEquals(iae, utac.getExpected());
-		
-		utac.evaluate(new I_Thrower() {
-			
-			@Override
-			public void run() {
-				throw iae;
-			}
-		}, new ThrowableUniformEvaluator());
-		
 		I_AssertionData data = utac.getData();
 		assertNotNull(data);
 		assertTrue(data instanceof ThrownAssertionData);
 		ThrownAssertionData tad = (ThrownAssertionData) data;
 		Set<String> keys = tad.getKeys();
+		assertEquals("java.util.Collections$UnmodifiableSet", keys.getClass().getName());
+		assertEquals(4, keys.size());
+		assertContains(keys, ThrownAssertionData.ACTUAL_THROWABLE_CLASS);
+		assertContains(keys, ThrownAssertionData.ACTUAL_MESSAGE);
+		assertContains(keys, ThrownAssertionData.EXPECTED_THROWABLE_CLASS);
+		assertContains(keys, ThrownAssertionData.EXPECTED_MESSAGE);
+		
+		assertNull(data.getData(ThrownAssertionData.ACTUAL_THROWABLE_CLASS));
+		assertNull(data.getData(ThrownAssertionData.ACTUAL_MESSAGE));
+		assertEquals(IllegalArgumentException.class, data.getData(ThrownAssertionData.EXPECTED_THROWABLE_CLASS));
+		assertEquals("expected exception messsage", data.getData(ThrownAssertionData.EXPECTED_MESSAGE));
+		
+		assertTrue(utac.evaluate(new I_Thrower() {
+			
+			@Override
+			public void run() {
+				throw iae;
+			}
+		}));
+		
+		data = utac.getData();
+		assertNotNull(data);
+		assertTrue(data instanceof ThrownAssertionData);
+		tad = (ThrownAssertionData) data;
+		keys = tad.getKeys();
 		assertEquals("java.util.Collections$UnmodifiableSet", keys.getClass().getName());
 		assertEquals(4, keys.size());
 		assertContains(keys, ThrownAssertionData.ACTUAL_THROWABLE_CLASS);
@@ -127,10 +151,27 @@ public class UniformThrownAssertCommandTrial extends SourceFileCountingTrial {
 	public void testEvaluatePass() {
 		final IllegalArgumentException iae = new IllegalArgumentException("expected exception messsage");
 		ExpectedThrownData etd = new ExpectedThrownData(iae);
-		UniformThrownAssertCommand utac = new UniformThrownAssertCommand("failure message", 
-				etd);
+		UniformThrownAssertCommand<I_TextLinesCompareResult> utac = new UniformThrownAssertCommand<I_TextLinesCompareResult>
+				("failure message", etd, new ThrowableUniformEvaluator());
 		assertEquals("failure message", utac.getFailureMessage());
-		assertEquals(iae, utac.getExpected());
+	
+		I_AssertionData data = utac.getData();
+		assertNotNull(data);
+		assertTrue(data instanceof ThrownAssertionData);
+		ThrownAssertionData tad = (ThrownAssertionData) data;
+		Set<String> keys = tad.getKeys();
+		assertEquals("java.util.Collections$UnmodifiableSet", keys.getClass().getName());
+		assertEquals(4, keys.size());
+		assertContains(keys, ThrownAssertionData.ACTUAL_THROWABLE_CLASS);
+		assertContains(keys, ThrownAssertionData.ACTUAL_MESSAGE);
+		assertContains(keys, ThrownAssertionData.EXPECTED_THROWABLE_CLASS);
+		assertContains(keys, ThrownAssertionData.EXPECTED_MESSAGE);
+		
+		assertNull(data.getData(ThrownAssertionData.ACTUAL_THROWABLE_CLASS));
+		assertNull(data.getData(ThrownAssertionData.ACTUAL_MESSAGE));
+		assertEquals(IllegalArgumentException.class, data.getData(ThrownAssertionData.EXPECTED_THROWABLE_CLASS));
+		assertEquals("expected exception messsage", data.getData(ThrownAssertionData.EXPECTED_MESSAGE));
+		
 		
 		assertTrue(utac.evaluate(new I_Thrower() {
 			
@@ -138,13 +179,13 @@ public class UniformThrownAssertCommandTrial extends SourceFileCountingTrial {
 			public void run() {
 				throw iae;
 			}
-		}, new ThrowableUniformEvaluator()));
+		}));
 		
-		I_AssertionData data = utac.getData();
+		data = utac.getData();
 		assertNotNull(data);
 		assertTrue(data instanceof ThrownAssertionData);
-		ThrownAssertionData tad = (ThrownAssertionData) data;
-		Set<String> keys = tad.getKeys();
+		tad = (ThrownAssertionData) data;
+		keys = tad.getKeys();
 		assertEquals("java.util.Collections$UnmodifiableSet", keys.getClass().getName());
 		assertEquals(4, keys.size());
 		assertContains(keys, ThrownAssertionData.ACTUAL_THROWABLE_CLASS);
@@ -162,21 +203,36 @@ public class UniformThrownAssertCommandTrial extends SourceFileCountingTrial {
 		assertEquals(IllegalArgumentException.class, tad.getExpectedThrowable());
 		assertEquals("expected exception messsage", tad.getExpectedMessage());
 		
-		I_Evaluation eval =  utac.getResult();
+		I_Evaluation<I_TextLinesCompareResult> eval =  utac.getEvaluation();
 		assertTrue(eval.isSuccess());
-		Map<String, Object> evalData = eval.getData();
-		assertNotNull(evalData);
-		assertEquals(0, evalData.size());
+		assertNull(eval.getData());
 	}
 	
 	@Test
 	public void testEvaluateFail() {
 		final IllegalArgumentException iae = new IllegalArgumentException("expected exception messsage");
 		ExpectedThrownData etd = new ExpectedThrownData(iae);
-		UniformThrownAssertCommand utac = new UniformThrownAssertCommand("failure message", 
-				etd);
+		UniformThrownAssertCommand<I_TextLinesCompareResult> utac = new UniformThrownAssertCommand<I_TextLinesCompareResult>("failure message", 
+				etd, new ThrowableUniformEvaluator());
 		assertEquals("failure message", utac.getFailureMessage());
-		assertEquals(iae, utac.getExpected());
+		
+		I_AssertionData data = utac.getData();
+		assertNotNull(data);
+		assertTrue(data instanceof ThrownAssertionData);
+		ThrownAssertionData tad = (ThrownAssertionData) data;
+		Set<String> keys = tad.getKeys();
+		assertEquals("java.util.Collections$UnmodifiableSet", keys.getClass().getName());
+		assertEquals(4, keys.size());
+		assertContains(keys, ThrownAssertionData.ACTUAL_THROWABLE_CLASS);
+		assertContains(keys, ThrownAssertionData.ACTUAL_MESSAGE);
+		assertContains(keys, ThrownAssertionData.EXPECTED_THROWABLE_CLASS);
+		assertContains(keys, ThrownAssertionData.EXPECTED_MESSAGE);
+		
+		assertNull(data.getData(ThrownAssertionData.ACTUAL_THROWABLE_CLASS));
+		assertNull(data.getData(ThrownAssertionData.ACTUAL_MESSAGE));
+		assertEquals(IllegalArgumentException.class, data.getData(ThrownAssertionData.EXPECTED_THROWABLE_CLASS));
+		assertEquals("expected exception messsage", data.getData(ThrownAssertionData.EXPECTED_MESSAGE));
+		
 		
 		assertFalse(utac.evaluate(new I_Thrower() {
 			
@@ -184,13 +240,13 @@ public class UniformThrownAssertCommandTrial extends SourceFileCountingTrial {
 			public void run() {
 				throw new IllegalArgumentException("expected exception messsage 2");
 			}
-		}, new ThrowableUniformEvaluator()));
+		}));
 		
-		I_AssertionData data = utac.getData();
+		data = utac.getData();
 		assertNotNull(data);
 		assertTrue(data instanceof ThrownAssertionData);
-		ThrownAssertionData tad = (ThrownAssertionData) data;
-		Set<String> keys = tad.getKeys();
+		tad = (ThrownAssertionData) data;
+		keys = tad.getKeys();
 		assertEquals("java.util.Collections$UnmodifiableSet", keys.getClass().getName());
 		assertEquals(4, keys.size());
 		assertContains(keys, ThrownAssertionData.ACTUAL_THROWABLE_CLASS);
@@ -208,29 +264,33 @@ public class UniformThrownAssertCommandTrial extends SourceFileCountingTrial {
 		assertEquals(IllegalArgumentException.class, tad.getExpectedThrowable());
 		assertEquals("expected exception messsage", tad.getExpectedMessage());
 		
-		I_Evaluation eval =  utac.getResult();
+		I_Evaluation<I_TextLinesCompareResult> eval =  utac.getEvaluation();
 		assertFalse(eval.isSuccess());
-		assertEquals(new Tests4J_AssertionResultMessages().getTheTextWasNOT_Uniform(), eval.getFailureSubMessage());
-		Map<String, Object> evalData = eval.getData();
-		assertNotNull(evalData);
-		assertEquals(1, evalData.size());
-		I_TextLinesCompareResult txt = (I_TextLinesCompareResult) evalData.get(I_TextLinesCompareResult.DATA_KEY);
+		assertEquals(new Tests4J_AssertionResultMessages().getTheTextWasNOT_Uniform(), eval.getFailureReason());
+		
+		I_TextLinesCompareResult txt = (I_TextLinesCompareResult) eval.getData();
 		assertNotNull(txt);
 	}
 	
 	
 	@Test
 	public void testEqualsHashCode() {
-		UniformThrownAssertCommand a = new UniformThrownAssertCommand("failure message", 
-				new ExpectedThrownData(new IllegalArgumentException("expected exception messsage")));
-		UniformThrownAssertCommand b = new UniformThrownAssertCommand("failure message 2", 
-				new ExpectedThrownData(new IllegalArgumentException("expected exception messsage")));
-		UniformThrownAssertCommand c = new UniformThrownAssertCommand("failure message", 
-				new ExpectedThrownData(new IllegalArgumentException("expected exception messsage")));
-		UniformThrownAssertCommand d = new UniformThrownAssertCommand("failure message", 
-				new ExpectedThrownData(new IllegalStateException("expected exception messsage")));
-		UniformThrownAssertCommand e = new UniformThrownAssertCommand("failure message", 
-				new ExpectedThrownData(new IllegalStateException("expected exception messsage")));
+		ThrowableUniformEvaluator tue = new ThrowableUniformEvaluator();
+		UniformThrownAssertCommand<I_TextLinesCompareResult> a = 
+				new UniformThrownAssertCommand<I_TextLinesCompareResult>("failure message", 
+				new ExpectedThrownData(new IllegalArgumentException("expected exception messsage")), tue);
+		UniformThrownAssertCommand<I_TextLinesCompareResult> b = 
+				new UniformThrownAssertCommand<I_TextLinesCompareResult>("failure message 2", 
+				new ExpectedThrownData(new IllegalArgumentException("expected exception messsage")), tue);
+		UniformThrownAssertCommand<I_TextLinesCompareResult> c = 
+				new UniformThrownAssertCommand<I_TextLinesCompareResult>("failure message", 
+				new ExpectedThrownData(new IllegalArgumentException("expected exception messsage")), tue);
+		UniformThrownAssertCommand<I_TextLinesCompareResult> d = 
+				new UniformThrownAssertCommand<I_TextLinesCompareResult>("failure message", 
+				new ExpectedThrownData(new IllegalStateException("expected exception messsage")), tue);
+		UniformThrownAssertCommand<I_TextLinesCompareResult> e = 
+				new UniformThrownAssertCommand<I_TextLinesCompareResult>("failure message", 
+				new ExpectedThrownData(new IllegalStateException("expected exception messsage")), tue);
 		
 		assertEquals(a, a);
 		assertEquals(a.hashCode(), a.hashCode());
@@ -247,7 +307,7 @@ public class UniformThrownAssertCommandTrial extends SourceFileCountingTrial {
 			public void run() {
 				throw new IllegalArgumentException("expected exception messsage");
 			}
-		}, new ThrowableUniformEvaluator()));
+		}));
 		assertNotEquals(a, c);
 		assertNotEquals(a.hashCode(), c.hashCode());
 		
@@ -275,11 +335,11 @@ public class UniformThrownAssertCommandTrial extends SourceFileCountingTrial {
 
 	@Override
 	public int getAsserts() {
-		return 98;
+		return 128;
 	}
 
 	@Override
 	public int getUniqueAsserts() {
-		return 64;
+		return 63;
 	}
 }

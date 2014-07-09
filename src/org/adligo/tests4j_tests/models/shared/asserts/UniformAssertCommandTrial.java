@@ -22,13 +22,15 @@ import org.adligo.tests4j_tests.base_abstract_trials.SourceFileCountingTrial;
 public class UniformAssertCommandTrial extends SourceFileCountingTrial {
 
 	@Test
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public void testConstructorExceptions() {
 		assertThrown(new ExpectedThrownData(new IllegalArgumentException(UniformAssertCommand.BAD_TYPE)), 
 				new I_Thrower(){
 
+					
 					@Override
 					public void run() {
-						new UniformAssertCommand(AssertType.AssertFalse, "failureMessage", null);
+						new UniformAssertCommand(AssertType.AssertFalse, "failureMessage", null, null);
 					}
 		});
 			
@@ -37,7 +39,7 @@ public class UniformAssertCommandTrial extends SourceFileCountingTrial {
 
 					@Override
 					public void run() {
-						new UniformAssertCommand(AssertType.AssertUniform, "failureMessage", null);
+						new UniformAssertCommand(AssertType.AssertUniform, "failureMessage", null, null);
 					}
 		});
 		
@@ -48,31 +50,42 @@ public class UniformAssertCommandTrial extends SourceFileCountingTrial {
 					@Override
 					public void run() {
 						new UniformAssertCommand(AssertType.AssertUniform, "failureMessage", 
-								new CompareAssertionData<String>(null, null));
+								new CompareAssertionData<String>(null, null), null);
+					}
+		});
+		
+		assertThrown(new ExpectedThrownData(new IllegalArgumentException(
+				UniformAssertCommand.UNIFORM_ASSERT_COMMAND_REQUIRES_EVAULATOR)), 
+				new I_Thrower(){
+
+					@Override
+					public void run() {
+						new UniformAssertCommand(AssertType.AssertUniform, "failureMessage", 
+								new CompareAssertionData<String>("1", "2"), null);
 					}
 		});
 	}
 	
+	@SuppressWarnings({"unchecked" })
 	@Test
 	public void testGettersAndEvaluate() {
-		UniformAssertCommand uac = new UniformAssertCommand(AssertType.AssertUniform, "failureMessage", 
-				new CompareAssertionData<String>("a", "b"));
+		UniformAssertCommand<I_TextLinesCompareResult> uac = new UniformAssertCommand<I_TextLinesCompareResult>(AssertType.AssertUniform, "failureMessage", 
+				new CompareAssertionData<String>("a", "b"), new StringUniformEvaluator());
 		assertEquals(AssertType.AssertUniform, uac.getType());
 		assertEquals("failureMessage", uac.getFailureMessage());
 		assertEquals("a", uac.getExpected());
 		assertEquals("b", uac.getActual());
-		assertNull(uac.getResult());
+		assertNull(uac.getEvaluation());
 		
-		assertFalse(uac.evaluate(new StringUniformEvaluator()));
-		I_Evaluation eval = uac.getResult();
+		assertFalse(uac.evaluate());
+		I_Evaluation<I_TextLinesCompareResult> eval = uac.getEvaluation();
 		assertNotNull(eval);
 		assertEquals(new Tests4J_AssertionResultMessages().getTheTextWasNOT_Uniform(), 
-				eval.getFailureSubMessage());
-		Map<String,Object> data = eval.getData();
+				eval.getFailureReason());
+		I_TextLinesCompareResult data = eval.getData();
 		assertNotNull(data);
 		
-		I_TextLinesCompareResult lt = (I_TextLinesCompareResult) data.get(I_TextLinesCompareResult.DATA_KEY);
-		assertFalse(lt.isMatched());
+		assertFalse(data.isMatched());
 		
 	}
 	
@@ -94,11 +107,11 @@ public class UniformAssertCommandTrial extends SourceFileCountingTrial {
 
 	@Override
 	public int getAsserts() {
-		return 13;
+		return 14;
 	}
 
 	@Override
 	public int getUniqueAsserts() {
-		return 12;
+		return 13;
 	}
 }

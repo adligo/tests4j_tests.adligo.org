@@ -15,7 +15,7 @@ public class TheMetaTrial  extends MetaTrial {
 		//Note when I ignored
 		// MultiRecordingTrial I lost 15% main coverage
 		//TODO reimpl it vs the ThreadLocals
-		super(29.0, 20.0);
+		super(29.0, 20.5);
 		//hmm package comparison data to include;
 		// passing tests
 		// relevant classes with trials %
@@ -78,12 +78,12 @@ public class TheMetaTrial  extends MetaTrial {
 			sb.append("'");
 			sb.append(System.lineSeparator());
 		}
-		assertEquals(sb.toString(), 51, metadata.getAllTrialsCount());
+		assertEquals(sb.toString(), 52, metadata.getAllTrialsCount());
 		
 		//includes two tests in here, from this class
 		//assertGreaterThanOrEquals(199, metadata.getAllTestsCount());
-		//should be .... 243
-		assertEquals(294,  metadata.getAllTestsCount());
+		//should be .... 297
+		assertEquals(295,  metadata.getAllTestsCount());
 		
 	}
 
