@@ -49,7 +49,7 @@ public class AfterTrialNotStaticTrial extends UseCaseTrial {
 		asserts.assertEquals("org.adligo.tests4j_tests.trials_api.bad_mock_use_case_trials.AfterTrialNotStaticTrial", 
 				trialMeta.getTrialName());
 		asserts.assertEquals(0L, trialMeta.getTimeout());
-		asserts.assertFalse(trialMeta.isSkipped());
+		asserts.assertFalse(trialMeta.isIgnored());
 		
 		
 		List<? extends I_TestMetadata> testsMetadata = trialMeta.getTests();

@@ -44,7 +44,7 @@ public abstract class AbstractTestTrial extends SourceFileTrial {
 		asserts.assertEquals("org.adligo.tests4j_tests.trials_api.bad_mock_source_file_trials.AbstractTestTrial", 
 				trialMeta.getTrialName());
 		asserts.assertEquals(0L, trialMeta.getTimeout());
-		asserts.assertFalse(trialMeta.isSkipped());
+		asserts.assertFalse(trialMeta.isIgnored());
 		
 		List<? extends I_TestMetadata> testsMetadata = trialMeta.getTests();
 		asserts.assertNotNull(testsMetadata);

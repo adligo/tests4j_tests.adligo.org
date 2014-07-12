@@ -62,7 +62,8 @@ public class UniformThrownAssertCommandTrial extends SourceFileCountingTrial {
 	public void testGettersBeforeEvaluate() {
 		IllegalArgumentException iae = new IllegalArgumentException("expected exception messsage");
 		ExpectedThrownData etd = new ExpectedThrownData(iae);
-		UniformThrownAssertCommand<I_TextLinesCompareResult> utac = new UniformThrownAssertCommand<I_TextLinesCompareResult>
+		UniformThrownAssertCommand<Throwable, I_TextLinesCompareResult> utac = new UniformThrownAssertCommand
+				<Throwable, I_TextLinesCompareResult>
 				("failure message", etd, new ThrowableUniformEvaluator());
 		assertEquals("failure message", utac.getFailureMessage());
 		I_AssertionData data =  utac.getData();
@@ -94,7 +95,8 @@ public class UniformThrownAssertCommandTrial extends SourceFileCountingTrial {
 	public void testGettersAfterEvaluate() {
 		final IllegalArgumentException iae = new IllegalArgumentException("expected exception messsage");
 		ExpectedThrownData etd = new ExpectedThrownData(iae);
-		UniformThrownAssertCommand<I_TextLinesCompareResult> utac = new UniformThrownAssertCommand<I_TextLinesCompareResult>
+		UniformThrownAssertCommand<Throwable, I_TextLinesCompareResult> utac = new UniformThrownAssertCommand
+				<Throwable, I_TextLinesCompareResult>
 				("failure message",  etd, new ThrowableUniformEvaluator());
 		assertEquals("failure message", utac.getFailureMessage());
 		I_AssertionData data = utac.getData();
@@ -151,7 +153,8 @@ public class UniformThrownAssertCommandTrial extends SourceFileCountingTrial {
 	public void testEvaluatePass() {
 		final IllegalArgumentException iae = new IllegalArgumentException("expected exception messsage");
 		ExpectedThrownData etd = new ExpectedThrownData(iae);
-		UniformThrownAssertCommand<I_TextLinesCompareResult> utac = new UniformThrownAssertCommand<I_TextLinesCompareResult>
+		UniformThrownAssertCommand<Throwable, I_TextLinesCompareResult> utac = new UniformThrownAssertCommand
+				<Throwable, I_TextLinesCompareResult>
 				("failure message", etd, new ThrowableUniformEvaluator());
 		assertEquals("failure message", utac.getFailureMessage());
 	
@@ -212,7 +215,8 @@ public class UniformThrownAssertCommandTrial extends SourceFileCountingTrial {
 	public void testEvaluateFail() {
 		final IllegalArgumentException iae = new IllegalArgumentException("expected exception messsage");
 		ExpectedThrownData etd = new ExpectedThrownData(iae);
-		UniformThrownAssertCommand<I_TextLinesCompareResult> utac = new UniformThrownAssertCommand<I_TextLinesCompareResult>("failure message", 
+		UniformThrownAssertCommand<Throwable, I_TextLinesCompareResult> utac = new UniformThrownAssertCommand
+				<Throwable, I_TextLinesCompareResult>("failure message", 
 				etd, new ThrowableUniformEvaluator());
 		assertEquals("failure message", utac.getFailureMessage());
 		
@@ -276,20 +280,20 @@ public class UniformThrownAssertCommandTrial extends SourceFileCountingTrial {
 	@Test
 	public void testEqualsHashCode() {
 		ThrowableUniformEvaluator tue = new ThrowableUniformEvaluator();
-		UniformThrownAssertCommand<I_TextLinesCompareResult> a = 
-				new UniformThrownAssertCommand<I_TextLinesCompareResult>("failure message", 
+		UniformThrownAssertCommand<Throwable, I_TextLinesCompareResult> a = 
+				new UniformThrownAssertCommand<Throwable, I_TextLinesCompareResult>("failure message", 
 				new ExpectedThrownData(new IllegalArgumentException("expected exception messsage")), tue);
-		UniformThrownAssertCommand<I_TextLinesCompareResult> b = 
-				new UniformThrownAssertCommand<I_TextLinesCompareResult>("failure message 2", 
+		UniformThrownAssertCommand<Throwable, I_TextLinesCompareResult> b = 
+				new UniformThrownAssertCommand<Throwable, I_TextLinesCompareResult>("failure message 2", 
 				new ExpectedThrownData(new IllegalArgumentException("expected exception messsage")), tue);
-		UniformThrownAssertCommand<I_TextLinesCompareResult> c = 
-				new UniformThrownAssertCommand<I_TextLinesCompareResult>("failure message", 
+		UniformThrownAssertCommand<Throwable, I_TextLinesCompareResult> c = 
+				new UniformThrownAssertCommand<Throwable, I_TextLinesCompareResult>("failure message", 
 				new ExpectedThrownData(new IllegalArgumentException("expected exception messsage")), tue);
-		UniformThrownAssertCommand<I_TextLinesCompareResult> d = 
-				new UniformThrownAssertCommand<I_TextLinesCompareResult>("failure message", 
+		UniformThrownAssertCommand<Throwable, I_TextLinesCompareResult> d = 
+				new UniformThrownAssertCommand<Throwable, I_TextLinesCompareResult>("failure message", 
 				new ExpectedThrownData(new IllegalStateException("expected exception messsage")), tue);
-		UniformThrownAssertCommand<I_TextLinesCompareResult> e = 
-				new UniformThrownAssertCommand<I_TextLinesCompareResult>("failure message", 
+		UniformThrownAssertCommand<Throwable, I_TextLinesCompareResult> e = 
+				new UniformThrownAssertCommand<Throwable, I_TextLinesCompareResult>("failure message", 
 				new ExpectedThrownData(new IllegalStateException("expected exception messsage")), tue);
 		
 		assertEquals(a, a);

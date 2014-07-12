@@ -29,6 +29,8 @@ public class RunPkgTrials implements I_TrialList {
 		trials.add(EvaluationTrial.class);
 		trials.add(EvaluatorLookupMutantTrial.class);
 		trials.add(EvaluatorLookupTrial.class);
+		trials.add(StringUniformEvaluatorTrial.class);
+		trials.add(ThrowableUniformEvaluatorTrial.class);
 		return trials;
 	}
 }

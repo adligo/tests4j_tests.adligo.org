@@ -51,6 +51,7 @@ public class Tests4J_ParamsTrial extends SourceFileCountingTrial {
 	}
 	
 	
+	/*
 	@Test
 	public void testBasicToFromXml() {
 		Tests4J_Params params = new Tests4J_Params();
@@ -84,19 +85,29 @@ public class Tests4J_ParamsTrial extends SourceFileCountingTrial {
 			assertGreaterThanOrEquals(46.00, coverage.getPercentageCoveredDouble());
 		}
 	}
+	*/
+	
+	@Override
+	public void afterTrialTests(I_SourceFileTrialResult p) {
+		assertCounts(p);
+		if (p.hasRecordedCoverage()) {
+			I_SourceFileCoverage coverage = p.getSourceFileCoverage();
+			assertGreaterThanOrEquals(6.00, coverage.getPercentageCoveredDouble());
+		}
+	}
 	
 	@Override
 	public int getTests() {
-		return 3;
+		return 2;
 	}
 
 	@Override
 	public int getAsserts() {
-		return 15;
+		return 8;
 	}
 
 	@Override
 	public int getUniqueAsserts() {
-		return 13;
+		return 6;
 	}
 }

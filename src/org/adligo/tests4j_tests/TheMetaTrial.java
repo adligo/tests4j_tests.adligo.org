@@ -15,7 +15,7 @@ public class TheMetaTrial  extends MetaTrial {
 		//Note when I ignored
 		// MultiRecordingTrial I lost 15% main coverage
 		//TODO reimpl it vs the ThreadLocals
-		super(29.0, 21.09);
+		super(33.0, 26.0);
 		//hmm package comparison data to include;
 		// passing tests
 		// relevant classes with trials %
@@ -30,6 +30,7 @@ public class TheMetaTrial  extends MetaTrial {
 		super.assertPackageTrialsPassed(results, "org.adligo.tests4j.models.shared.asserts", 15);
 		super.assertPackageTrialsPassed(results, "org.adligo.tests4j.models.shared.asserts.common", 1);
 		super.assertPackageTrialsPassed(results, "org.adligo.tests4j.models.shared.asserts.line_text", 9);
+		super.assertPackageTrialsPassed(results, "org.adligo.tests4j.models.shared.xml", 2);
 		
 		//TODO
 		//assertEquals(1,results.getTrialsIgnored());
@@ -43,9 +44,9 @@ public class TheMetaTrial  extends MetaTrial {
 		
 		//does not include assertions from this class yet
 		//I think the single threaded count is off somewhere
-		assertGreaterThanOrEquals(19700,results.getAsserts());
+		assertGreaterThanOrEquals(20200,results.getAsserts());
 		//should be assertEquals(19227L,results.getAsserts());
-		assertGreaterThanOrEquals(4400,results.getUniqueAsserts());
+		assertGreaterThanOrEquals(4700,results.getUniqueAsserts());
 		// should be something like assertEquals(4122L,results.getUniqueAsserts());
 		super.afterNonMetaTrialsRun(results);
 	}
@@ -60,6 +61,7 @@ public class TheMetaTrial  extends MetaTrial {
 		assertGreaterThanOrEquals(100.0, calc.getPct("org.adligo.tests4j.models.shared.asserts.common"));
 		assertGreaterThanOrEquals(100.0, calc.getPct("org.adligo.tests4j.models.shared.asserts.line_text"));
 		assertGreaterThanOrEquals(100.0, calc.getPct("org.adligo.tests4j.models.shared.common"));
+		assertGreaterThanOrEquals(100.0, calc.getPct("org.adligo.tests4j.models.shared.xml"));
 		
 		// includes this
 		List<? extends I_TrialMetadata> trialMetadata = metadata.getAllTrialMetadata();
@@ -78,12 +80,12 @@ public class TheMetaTrial  extends MetaTrial {
 			sb.append("'");
 			sb.append(System.lineSeparator());
 		}
-		assertEquals(sb.toString(), 55, metadata.getAllTrialsCount());
+		assertEquals(sb.toString(), 63, metadata.getAllTrialsCount());
 		
 		//includes two tests in here, from this class
 		//assertGreaterThanOrEquals(199, metadata.getAllTestsCount());
 		//should be .... 297
-		assertEquals(303,  metadata.getAllTestsCount());
+		assertEquals(343,  metadata.getAllTestsCount());
 		
 	}
 

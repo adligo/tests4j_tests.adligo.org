@@ -43,7 +43,7 @@ public class ProtectedTestTrial extends ApiTrial {
 		asserts.assertEquals("org.adligo.tests4j_tests.trials_api.bad_mock_api_trials.ProtectedTestTrial", 
 				trialMeta.getTrialName());
 		asserts.assertEquals(0L, trialMeta.getTimeout());
-		asserts.assertFalse(trialMeta.isSkipped());
+		asserts.assertFalse(trialMeta.isIgnored());
 		
 		List<I_TrialResult> results = runner.getResults();
 		asserts.assertEquals(1, results.size());

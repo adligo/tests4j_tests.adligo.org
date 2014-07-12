@@ -43,7 +43,7 @@ public class AssertNotUniformFailsTrial extends ApiTrial {
 		asserts.assertEquals(AssertNotUniformFailsTrial.class.getName(), 
 				trialMeta.getTrialName());
 		asserts.assertEquals(0L, trialMeta.getTimeout());
-		asserts.assertFalse(trialMeta.isSkipped());
+		asserts.assertFalse(trialMeta.isIgnored());
 		
 		List<? extends I_TestMetadata> testsMetadata = trialMeta.getTests();
 		asserts.assertNotNull(testsMetadata);

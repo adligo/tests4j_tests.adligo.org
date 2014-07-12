@@ -1,8 +1,9 @@
-package org.adligo.tests4j_tests.jacoco.plugin.instrumentation;
+package org.adligo.tests4j_tests.models.shared.metadata;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import org.adligo.tests4j.models.shared.metadata.TestMetadataMutant;
 import org.adligo.tests4j.models.shared.system.I_TrialList;
 import org.adligo.tests4j.models.shared.system.Tests4J_Params;
 import org.adligo.tests4j.models.shared.trials.AbstractTrial;
@@ -16,7 +17,12 @@ public class RunPkgTrials implements I_TrialList {
 		Tests4J_Params params = new Tests4J_Params();
 		params.addTrials(new RunPkgTrials());
 		
+		ScopedJacocoPlugin plugin = new ScopedJacocoPlugin();
+		plugin.setWriteOutInstrumentedClassFiles(true);
+		
+		//TieredJacocoPlugin covargePlugin =new TieredJacocoPlugin();
 		params.setCoveragePluginClass(ScopedJacocoPlugin.class);
+		
 		Tests4J.run(params);
 	}
 
@@ -24,7 +30,12 @@ public class RunPkgTrials implements I_TrialList {
 	public List<Class<? extends AbstractTrial>> getTrials() {
 		List<Class<? extends AbstractTrial>> trials = new ArrayList<Class<? extends AbstractTrial>>();
 		
-		trials.add(ClassDiscoveryTrial.class);
+		trials.add(TestMetadataMutantTrial.class);
+		trials.add(TestMetadataTrial.class);
+		
+		trials.add(TrialMetadataMutantTrial.class);
+		
+		trials.add(UseCaseMetadataTrial.class);
 		return trials;
 	}
 }

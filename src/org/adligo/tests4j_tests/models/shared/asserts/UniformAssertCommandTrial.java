@@ -69,7 +69,9 @@ public class UniformAssertCommandTrial extends SourceFileCountingTrial {
 	@SuppressWarnings({"unchecked" })
 	@Test
 	public void testGettersAndEvaluate() {
-		UniformAssertCommand<I_TextLinesCompareResult> uac = new UniformAssertCommand<I_TextLinesCompareResult>(AssertType.AssertUniform, "failureMessage", 
+		UniformAssertCommand<String, I_TextLinesCompareResult> uac = new UniformAssertCommand
+					<String, I_TextLinesCompareResult>(
+							AssertType.AssertUniform, "failureMessage", 
 				new CompareAssertionData<String>("a", "b"), new StringUniformEvaluator());
 		assertEquals(AssertType.AssertUniform, uac.getType());
 		assertEquals("failureMessage", uac.getFailureMessage());

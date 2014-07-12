@@ -43,7 +43,7 @@ public class AssertGreaterThanOrEqualsDoubleDoubleFailsTrial extends ApiTrial {
 		asserts.assertEquals(AssertGreaterThanOrEqualsDoubleDoubleFailsTrial.class.getName(), 
 				trialMeta.getTrialName());
 		asserts.assertEquals(0L, trialMeta.getTimeout());
-		asserts.assertFalse(trialMeta.isSkipped());
+		asserts.assertFalse(trialMeta.isIgnored());
 		
 		List<? extends I_TestMetadata> testsMetadata = trialMeta.getTests();
 		asserts.assertNotNull(testsMetadata);

@@ -143,7 +143,7 @@ public class BadApiTrials_Trial extends ApiCountingTrial {
 			assertEquals("org.adligo.tests4j_tests.trials_api.bad_mock_api_trials.SimpleRerunTrial", 
 					trialMeta.getTrialName());
 			assertEquals(0L, trialMeta.getTimeout());
-			assertFalse(trialMeta.isSkipped());
+			assertFalse(trialMeta.isIgnored());
 		}
 		
 		List<I_TrialResult> results = runner.getResults();

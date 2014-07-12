@@ -54,7 +54,7 @@ public class BeforeTrialNotStaticTrial extends ApiTrial {
 		asserts.assertEquals("org.adligo.tests4j_tests.trials_api.bad_mock_api_trials.BeforeTrialNotStaticTrial", 
 				trialMeta.getTrialName());
 		asserts.assertEquals(0L, trialMeta.getTimeout());
-		asserts.assertFalse(trialMeta.isSkipped());
+		asserts.assertFalse(trialMeta.isIgnored());
 		
 		
 		List<? extends I_TestMetadata> testsMetadata = trialMeta.getTests();
