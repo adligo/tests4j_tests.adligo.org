@@ -14,7 +14,7 @@ public class XML_ParserTrial extends SourceFileCountingTrial {
 	public void testGetIndexesSimple() throws Exception {
 		int [] indexes = XML_Parser.getIndexes("<hey/>", "hey");
 		assertEquals(0, indexes[0]);
-		assertEquals(5, indexes[1]);
+		assertEquals(6, indexes[1]);
 		
 		indexes = XML_Parser.getIndexes("<hey/>", "hey2");
 		assertNull(indexes);
@@ -23,31 +23,28 @@ public class XML_ParserTrial extends SourceFileCountingTrial {
 	@Test
 	public void testGetIndexesSimpleSpaceInStartTag() throws Exception {
 		int [] indexes = XML_Parser.getIndexes("< hey/>", "hey");
-		assertEquals(0, indexes[0]);
-		assertEquals(6, indexes[1]);
+		assertNull(indexes);
 		
 	}
 	
 	@Test
 	public void testGetIndexesSimpleTabInStartTag() throws Exception {
 		int [] indexes = XML_Parser.getIndexes("<\they/>", "hey");
-		assertEquals(0, indexes[0]);
-		assertEquals(6, indexes[1]);
+		assertNull(indexes);
 		
 	}
 	
 	@Test
 	public void testGetIndexesSimpleTabAndReturnStartTag() throws Exception {
 		int [] indexes = XML_Parser.getIndexes("<\they\n/>", "hey");
-		assertEquals(0, indexes[0]);
-		assertEquals(7, indexes[1]);
+		assertNull(indexes);
 	}
 	
 	@Test
 	public void testGetIndexesSimpleWithAttributes() throws Exception {
 		int [] indexes = XML_Parser.getIndexes("<hey you=\"guys\" />", "hey");
 		assertEquals(0, indexes[0]);
-		assertEquals(17, indexes[1]);
+		assertEquals(18, indexes[1]);
 		
 	}
 	
@@ -55,7 +52,7 @@ public class XML_ParserTrial extends SourceFileCountingTrial {
 	public void testGetIndexesSimpleWithNestedTags() throws Exception {
 		int [] indexes = XML_Parser.getIndexes("<hey you=\"guys\" ><he/></hey>", "hey");
 		assertEquals(0, indexes[0]);
-		assertEquals(27, indexes[1]);
+		assertEquals(28, indexes[1]);
 		
 	}
 	
@@ -63,7 +60,7 @@ public class XML_ParserTrial extends SourceFileCountingTrial {
 	public void testGetIndexesSimpleWithNestedTagsSpaceInEndTag() throws Exception {
 		int [] indexes = XML_Parser.getIndexes("<hey you=\"guys\" ><he/></ hey>", "hey");
 		assertEquals(0, indexes[0]);
-		assertEquals(28, indexes[1]);
+		assertEquals(29, indexes[1]);
 		
 	}
 	
@@ -71,7 +68,7 @@ public class XML_ParserTrial extends SourceFileCountingTrial {
 	public void testGetIndexesSimpleWithNestedTagsTagInEndTag() throws Exception {
 		int [] indexes = XML_Parser.getIndexes("<hey you=\"guys\" ><he/></\they>", "hey");
 		assertEquals(0, indexes[0]);
-		assertEquals(28, indexes[1]);
+		assertEquals(29, indexes[1]);
 		
 	}
 	
@@ -79,7 +76,7 @@ public class XML_ParserTrial extends SourceFileCountingTrial {
 	public void testGetIndexesSimpleWithNestedTagsReturnInEndTag() throws Exception {
 		int [] indexes = XML_Parser.getIndexes("<hey you=\"guys\" ><he/></hey\r>", "hey");
 		assertEquals(0, indexes[0]);
-		assertEquals(28, indexes[1]);
+		assertEquals(29, indexes[1]);
 		
 	}
 	@Test
@@ -109,11 +106,11 @@ public class XML_ParserTrial extends SourceFileCountingTrial {
 
 	@Override
 	public int getAsserts() {
-		return 22;
+		return 19;
 	}
 
 	@Override
 	public int getUniqueAsserts() {
-		return 20;
+		return 17;
 	}
 }

@@ -228,14 +228,14 @@ public class AssertionsPass_Trial extends ApiCountingTrial {
 		assertUniform("a","a");
 		assertUniform("testing assertUniform","a","a");
 		
-		assertUniform("a\nb","a\n\rb");
-		assertUniform("testing assertUniform","a\nb","a\n\rb");
+		assertUniform("a\nb","a\r\nb");
+		assertUniform("testing assertUniform","a\nb","a\r\nb");
 		
-		assertUniform("a\n\rb","a\n\rb");
-		assertUniform("testing assertUniform","a\n\rb","a\n\rb");
+		assertUniform("a\r\nb","a\r\nb");
+		assertUniform("testing assertUniform","a\r\nb","a\r\nb");
 		
-		assertUniform("a\n\rb","a\rb");
-		assertUniform("testing assertUniform","a\n\rb","a\rb");
+		assertUniform("a\r\nb","a\rb");
+		assertUniform("testing assertUniform","a\r\nb","a\rb");
 		
 		assertUniform("a\rb","a\nb");
 		assertUniform("testing assertUniform","a\rb","a\nb");

@@ -1,8 +1,6 @@
 package org.adligo.tests4j_tests.models.shared.asserts.line_text;
 
-import java.io.IOException;
-
-import org.adligo.tests4j.models.shared.asserts.line_text.DiffIndexes;
+import org.adligo.tests4j.models.shared.asserts.line_text.Diffndexes;
 import org.adligo.tests4j.models.shared.asserts.line_text.DiffIndexesPair;
 import org.adligo.tests4j.models.shared.asserts.line_text.I_DiffIndexes;
 import org.adligo.tests4j.models.shared.asserts.line_text.I_DiffIndexesPair;
@@ -18,9 +16,9 @@ public class DiffIndexesPairTrial extends SourceFileCountingTrial {
 	
 	@Test
 	public void testConstructorAndGetters() {
-		I_DiffIndexes sed = new DiffIndexes(0, 1);
+		I_DiffIndexes sed = new Diffndexes(0, 1);
 		
-		I_DiffIndexes sed2 = new DiffIndexes(2, 3);
+		I_DiffIndexes sed2 = new Diffndexes(2, 3);
 		
 		I_DiffIndexesPair pair = new DiffIndexesPair(sed, sed2);
 		assertSame(sed, pair.getExample());
@@ -60,7 +58,7 @@ public class DiffIndexesPairTrial extends SourceFileCountingTrial {
 	
 	@Test
 	public void testCompareLinesMiddleMatch() throws Exception {
-		DiffIndexesPair result = new DiffIndexesPair("abcscoffabc", "abccough234abc");
+		DiffIndexesPair result = new DiffIndexesPair("abcbloffabc", "abcscoff234abc");
 		assertNotNull(result);
 		I_DiffIndexes exampleIndexes = result.getExample();
 		assertNotNull(exampleIndexes);

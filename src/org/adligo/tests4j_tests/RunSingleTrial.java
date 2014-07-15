@@ -11,13 +11,14 @@ import org.adligo.tests4j_4jacoco.plugin.AbstractPlugin;
 import org.adligo.tests4j_4jacoco.plugin.Recorder;
 import org.adligo.tests4j_4jacoco.plugin.ScopedJacocoPlugin;
 import org.adligo.tests4j_tests.models.shared.asserts.UniformThrownAssertCommandTrial;
+import org.adligo.tests4j_tests.models.shared.asserts.line_text.TextLinesTrial;
 
 public class RunSingleTrial {
 
 	
 	public static void main(String [] args) {
 		Tests4J_Params params = new Tests4J_Params();
-		params.addTrial(UniformThrownAssertCommandTrial.class);
+		params.addTrial(TextLinesTrial.class);
 		/*
 		params.addTest(Run_UseCaseTrial_ApiTrial.class.getName() +
 				".testNoUseCaseAnnotation");

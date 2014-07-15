@@ -67,7 +67,7 @@ public class TestMetadataMutantTrial extends SourceFileCountingTrial {
 		tm.toXml(builder);
 		
 		String result = builder.toXmlString();
-		assertEquals("\t<testMetadata name=\"testName\" />", result);
+		assertEquals("\t<testMetadata name=\"testName\" />\n", result);
 		tmm = new TestMetadataMutant(result);
 		assertEquals("testName", tmm.getTestName());
 		assertNull(tmm.getTimeout());
@@ -78,7 +78,7 @@ public class TestMetadataMutantTrial extends SourceFileCountingTrial {
 		tm = new TestMetadata(tmm);
 		tm.toXml(builder);
 		result = builder.toXmlString();
-		assertEquals("<testMetadata name=\"testName\" timeout=\"10\" />", result);
+		assertEquals("<testMetadata name=\"testName\" timeout=\"10\" />\n", result);
 		tmm = new TestMetadataMutant(result);
 		assertEquals("testName", tmm.getTestName());
 		assertEquals(10L, tmm.getTimeout());
@@ -89,7 +89,7 @@ public class TestMetadataMutantTrial extends SourceFileCountingTrial {
 		tm = new TestMetadata(tmm);
 		tmm.toXml(builder);
 		result = builder.toXmlString();
-		assertEquals("<testMetadata name=\"testName\" ignored=\"true\" timeout=\"10\" />", result);
+		assertEquals("<testMetadata name=\"testName\" ignored=\"true\" timeout=\"10\" />\n", result);
 		tmm = new TestMetadataMutant(result);
 		assertEquals("testName", tmm.getTestName());
 		assertEquals(10L, tmm.getTimeout());

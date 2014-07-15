@@ -24,7 +24,7 @@ public class TextLinesCompareTrial extends SourceFileCountingTrial {
 	@Test
 	public void test1LineMatchAchievement() {
 		TextLinesCompare tlc = new TextLinesCompare();
-		I_TextLinesCompareResult result = tlc.compare("a", "a");
+		I_TextLinesCompareResult result = tlc.compare("a", "a", true);
 		assertTrue(result.isMatched());
 		I_TextLines expectedLines = result.getExpectedLines();
 		assertNotNull(expectedLines);
@@ -48,9 +48,35 @@ public class TextLinesCompareTrial extends SourceFileCountingTrial {
 	}
 	
 	@Test
+	public void test1LineEmptyMatchAchievement() {
+		TextLinesCompare tlc = new TextLinesCompare();
+		I_TextLinesCompareResult result = tlc.compare("\n", "\n", true);
+		assertTrue(result.isMatched());
+		I_TextLines expectedLines = result.getExpectedLines();
+		assertNotNull(expectedLines);
+		assertEquals(1,expectedLines.getLines());
+		assertEquals("", expectedLines.getLine(0));
+		
+		I_TextLines actualLines = result.getActualLines();
+		assertNotNull(actualLines);
+		assertEquals(1,actualLines.getLines());
+		assertEquals("", actualLines.getLine(0));
+		
+		List<I_LineDiff> diffs = result.getLineDiffs();
+		assertNotNull(diffs);
+		assertEquals(1, diffs.size());
+		I_LineDiff diff = diffs.get(0);
+		assertEquals(LineDiffType.MATCH, diff.getType());
+		assertEquals(0, diff.getExampleLineNbr());
+		assertEquals(0, diff.getActualLineNbr());
+		assertNull(diff.getIndexes());
+		
+	}
+	
+	@Test
 	public void test1LineMatchFail() {
 		TextLinesCompare tlc = new TextLinesCompare();
-		I_TextLinesCompareResult result = tlc.compare("a", "b");
+		I_TextLinesCompareResult result = tlc.compare("a", "b", true);
 		assertFalse(result.isMatched());
 		I_TextLines expectedLines = result.getExpectedLines();
 		assertNotNull(expectedLines);
@@ -82,7 +108,7 @@ public class TextLinesCompareTrial extends SourceFileCountingTrial {
 	@Test
 	public void test2LineMatchAchievement() {
 		TextLinesCompare tlc = new TextLinesCompare();
-		I_TextLinesCompareResult result = tlc.compare("a\nb", "a\rb");
+		I_TextLinesCompareResult result = tlc.compare("a\nb", "a\rb", true);
 		assertTrue(result.isMatched());
 		I_TextLines expectedLines = result.getExpectedLines();
 		assertNotNull(expectedLines);
@@ -123,7 +149,7 @@ public class TextLinesCompareTrial extends SourceFileCountingTrial {
 	@Test
 	public void test2LineMatchFail_AB_BB() {
 		TextLinesCompare tlc = new TextLinesCompare();
-		I_TextLinesCompareResult result = tlc.compare("a\nb", "b\rb");
+		I_TextLinesCompareResult result = tlc.compare("a\nb", "b\rb", true);
 		assertFalse(result.isMatched());
 		I_TextLines expectedLines = result.getExpectedLines();
 		assertNotNull(expectedLines);
@@ -172,7 +198,7 @@ public class TextLinesCompareTrial extends SourceFileCountingTrial {
 	@Test
 	public void test2LineMatchFail_AB_DC() {
 		TextLinesCompare tlc = new TextLinesCompare();
-		I_TextLinesCompareResult result = tlc.compare("a\nb", "d\rc");
+		I_TextLinesCompareResult result = tlc.compare("a\nb", "d\rc", true);
 		assertFalse(result.isMatched());
 		I_TextLines expectedLines = result.getExpectedLines();
 		assertNotNull(expectedLines);
@@ -226,7 +252,7 @@ public class TextLinesCompareTrial extends SourceFileCountingTrial {
 	@Test
 	public void test2LineMatchFail_AB_AC() {
 		TextLinesCompare tlc = new TextLinesCompare();
-		I_TextLinesCompareResult result = tlc.compare("a\rb", "a\rc");
+		I_TextLinesCompareResult result = tlc.compare("a\rb", "a\rc", true);
 		assertFalse(result.isMatched());
 		I_TextLines expectedLines = result.getExpectedLines();
 		assertNotNull(expectedLines);
@@ -267,7 +293,7 @@ public class TextLinesCompareTrial extends SourceFileCountingTrial {
 	@Test
 	public void test3LineMatchAchievement() {
 		TextLinesCompare tlc = new TextLinesCompare();
-		I_TextLinesCompareResult result = tlc.compare("a\nb\n\rc", "a\rb\rc");
+		I_TextLinesCompareResult result = tlc.compare("a\nb\r\nc", "a\rb\rc", true);
 		assertTrue(result.isMatched());
 		I_TextLines expectedLines = result.getExpectedLines();
 		assertNotNull(expectedLines);
@@ -317,7 +343,7 @@ public class TextLinesCompareTrial extends SourceFileCountingTrial {
 	@Test
 	public void test3LineMatchFail_ABC_BBC() {
 		TextLinesCompare tlc = new TextLinesCompare();
-		I_TextLinesCompareResult result = tlc.compare("a\nb\n\rc", "b\rb\rc");
+		I_TextLinesCompareResult result = tlc.compare("a\nb\r\nc", "b\rb\rc", true);
 		assertFalse(result.isMatched());
 		I_TextLines expectedLines = result.getExpectedLines();
 		assertNotNull(expectedLines);
@@ -375,7 +401,7 @@ public class TextLinesCompareTrial extends SourceFileCountingTrial {
 	@Test
 	public void test3LineMatchFail_ABC_CBA() {
 		TextLinesCompare tlc = new TextLinesCompare();
-		I_TextLinesCompareResult result = tlc.compare("a\nb\n\rc", "c\rb\ra");
+		I_TextLinesCompareResult result = tlc.compare("a\nb\r\nc", "c\rb\ra", true);
 		assertFalse(result.isMatched());
 		I_TextLines expectedLines = result.getExpectedLines();
 		assertNotNull(expectedLines);
@@ -441,7 +467,7 @@ public class TextLinesCompareTrial extends SourceFileCountingTrial {
 	@Test
 	public void test3LineMatchFail_ABC_CBD() {
 		TextLinesCompare tlc = new TextLinesCompare();
-		I_TextLinesCompareResult result = tlc.compare("a\nb\n\rc", "c\rb\rd");
+		I_TextLinesCompareResult result = tlc.compare("a\nb\r\nc", "c\rb\rd", true);
 		assertFalse(result.isMatched());
 		I_TextLines expectedLines = result.getExpectedLines();
 		assertNotNull(expectedLines);
@@ -508,7 +534,7 @@ public class TextLinesCompareTrial extends SourceFileCountingTrial {
 	@Test
 	public void test3LineMatchFail_ABC_DEF() {
 		TextLinesCompare tlc = new TextLinesCompare();
-		I_TextLinesCompareResult result = tlc.compare("a\nb\n\rc", "d\ne\nf");
+		I_TextLinesCompareResult result = tlc.compare("a\nb\r\nc", "d\ne\nf", true);
 		assertFalse(result.isMatched());
 		I_TextLines expectedLines = result.getExpectedLines();
 		assertNotNull(expectedLines);
@@ -580,7 +606,7 @@ public class TextLinesCompareTrial extends SourceFileCountingTrial {
 	@Test
 	public void test3LineMatchFail_ABC_AEC() {
 		TextLinesCompare tlc = new TextLinesCompare();
-		I_TextLinesCompareResult result = tlc.compare("a\nb\n\rc", "a\ne\nc");
+		I_TextLinesCompareResult result = tlc.compare("a\nb\r\nc", "a\ne\nc", true);
 		assertFalse(result.isMatched());
 		I_TextLines expectedLines = result.getExpectedLines();
 		assertNotNull(expectedLines);
@@ -632,7 +658,7 @@ public class TextLinesCompareTrial extends SourceFileCountingTrial {
 	@Test
 	public void testMultiLine2x2CharPartialMatchEndOfFirstLine() {
 		TextLinesCompare tlc = new TextLinesCompare();
-		I_TextLinesCompareResult result = tlc.compare("a1\na2", "b1\na2");
+		I_TextLinesCompareResult result = tlc.compare("a1\na2", "b1\na2", true);
 		assertFalse(result.isMatched());
 		I_TextLines expectedLines = result.getExpectedLines();
 		assertNotNull(expectedLines);
@@ -674,7 +700,7 @@ public class TextLinesCompareTrial extends SourceFileCountingTrial {
 	@Test
 	public void testMultiLine2x2CharPartialMatchEndOfLastLine() {
 		TextLinesCompare tlc = new TextLinesCompare();
-		I_TextLinesCompareResult result = tlc.compare("a1\na2", "a1\nb2");
+		I_TextLinesCompareResult result = tlc.compare("a1\na2", "a1\nb2", true);
 		assertFalse(result.isMatched());
 		I_TextLines expectedLines = result.getExpectedLines();
 		assertNotNull(expectedLines);
@@ -717,7 +743,7 @@ public class TextLinesCompareTrial extends SourceFileCountingTrial {
 	@Test
 	public void testMultiLine3x3CharPartialMatchMiddleOfMiddleLine() {
 		TextLinesCompare tlc = new TextLinesCompare();
-		I_TextLinesCompareResult result = tlc.compare("a1\n123a2456\nc4", "b2\n1279a20456\nc4");
+		I_TextLinesCompareResult result = tlc.compare("a1\n123a2456\nc4", "b2\n1279a20456\nc4", true);
 		assertFalse(result.isMatched());
 		I_TextLines expectedLines = result.getExpectedLines();
 		assertNotNull(expectedLines);
@@ -775,23 +801,23 @@ public class TextLinesCompareTrial extends SourceFileCountingTrial {
 		
 		if (p.hasRecordedCoverage()) {
 			I_SourceFileCoverage coverage = p.getSourceFileCoverage();
-			assertGreaterThanOrEquals(95.0, coverage.getPercentageCoveredDouble());
+			assertGreaterThanOrEquals(90.0, coverage.getPercentageCoveredDouble());
 		}
 	}
 
 	
 	@Override
 	public int getTests() {
-		return 15;
+		return 16;
 	}
 
 	@Override
 	public int getAsserts() {
-		return 387;
+		return 400;
 	}
 
 	@Override
 	public int getUniqueAsserts() {
-		return 230;
+		return 238;
 	}
 }

@@ -1,6 +1,5 @@
 package org.adligo.tests4j_tests.models.shared.asserts.line_text;
 
-import org.adligo.tests4j.models.shared.asserts.line_text.LineDiffType;
 import org.adligo.tests4j.models.shared.asserts.line_text.LineSplitter;
 import org.adligo.tests4j.models.shared.coverage.I_SourceFileCoverage;
 import org.adligo.tests4j.models.shared.results.I_SourceFileTrialResult;
@@ -13,31 +12,36 @@ public class LineSplitterTrial extends SourceFileCountingTrial {
 
 	
 	@Test
-	public void testTypes() {
+	public void testMethods() {
 		LineSplitter split = new LineSplitter();
-		assertFalse(split.isLastCharLineFeedChar());
-		assertFalse(split.isLineFeedChar('c'));
-		assertFalse(split.isLastCharLineFeedChar());
+		assertFalse(split.isNewLineChar('c'));
 		
-		assertTrue(split.isLineFeedChar('\n'));
-		assertTrue(split.isLastCharLineFeedChar());
+		assertTrue(split.isNewLineChar('\n'));
 		
-		assertTrue(split.isLineFeedChar('\r'));
-		assertTrue(split.isLastCharLineFeedChar());
+		assertTrue(split.isNewLineChar('\r'));
 		
-		assertFalse(split.isLineFeedChar('a'));
-		assertFalse(split.isLastCharLineFeedChar());
+		assertFalse(split.isNewLineChar('a'));
 		
-		assertTrue(split.isLineFeedChar('\r'));
-		assertTrue(split.isLastCharLineFeedChar());
+		assertTrue(split.isNewLineChar('\r'));
 		
-		assertFalse(split.isLineFeedChar('b'));
-		assertFalse(split.isLastCharLineFeedChar());
+		assertFalse(split.isNewLineChar('b'));
 		
-		assertTrue(split.isLineFeedChar('\n'));
-		assertTrue(split.isLastCharLineFeedChar());
-		split.setLastCharLineFeedChar(false);
-		assertFalse(split.isLastCharLineFeedChar());
+		assertTrue(split.isNewLineChar('\n'));
+		
+		split.setLastNewLineChar('\n');
+		assertTrue(split.isLastCharNewLine());
+		assertFalse(split.isMultiCharNewLine('\r'));
+		assertFalse(split.isMultiCharNewLine('\n'));
+		
+		split.setLastNewLineChar('\r');
+		assertTrue(split.isLastCharNewLine());
+		assertTrue(split.isMultiCharNewLine('\n'));
+		assertFalse(split.isMultiCharNewLine('\r'));
+		
+		split.setLastNewLineChar(null);
+		assertFalse(split.isLastCharNewLine());
+		assertFalse(split.isMultiCharNewLine('\n'));
+		assertFalse(split.isMultiCharNewLine('\n'));
 	}
 	
 	@Override

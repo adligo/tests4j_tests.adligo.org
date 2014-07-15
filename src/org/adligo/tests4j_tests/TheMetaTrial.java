@@ -15,7 +15,7 @@ public class TheMetaTrial  extends MetaTrial {
 		//Note when I ignored
 		// MultiRecordingTrial I lost 15% main coverage
 		//TODO reimpl it vs the ThreadLocals
-		super(33.0, 26.0);
+		super(35.0, 26.7);
 		//hmm package comparison data to include;
 		// passing tests
 		// relevant classes with trials %
@@ -26,10 +26,12 @@ public class TheMetaTrial  extends MetaTrial {
 
 	@Override
 	public void afterNonMetaTrialsRun(I_TrialRunResult results) throws Exception {
-		super.assertPackageTrialsPassed(results, "org.adligo.tests4j.models.shared.common", 6);
-		super.assertPackageTrialsPassed(results, "org.adligo.tests4j.models.shared.asserts", 15);
+		
+		super.assertPackageTrialsPassed(results, "org.adligo.tests4j.models.shared.asserts", 17);
 		super.assertPackageTrialsPassed(results, "org.adligo.tests4j.models.shared.asserts.common", 1);
 		super.assertPackageTrialsPassed(results, "org.adligo.tests4j.models.shared.asserts.line_text", 9);
+		super.assertPackageTrialsPassed(results, "org.adligo.tests4j.models.shared.common", 6);
+		super.assertPackageTrialsPassed(results, "org.adligo.tests4j.models.shared.metadata", 4);
 		super.assertPackageTrialsPassed(results, "org.adligo.tests4j.models.shared.xml", 2);
 		
 		//TODO
@@ -46,7 +48,7 @@ public class TheMetaTrial  extends MetaTrial {
 		//I think the single threaded count is off somewhere
 		assertGreaterThanOrEquals(20200,results.getAsserts());
 		//should be assertEquals(19227L,results.getAsserts());
-		assertGreaterThanOrEquals(4700,results.getUniqueAsserts());
+		assertGreaterThanOrEquals(4800,results.getUniqueAsserts());
 		// should be something like assertEquals(4122L,results.getUniqueAsserts());
 		super.afterNonMetaTrialsRun(results);
 	}
@@ -61,6 +63,7 @@ public class TheMetaTrial  extends MetaTrial {
 		assertGreaterThanOrEquals(100.0, calc.getPct("org.adligo.tests4j.models.shared.asserts.common"));
 		assertGreaterThanOrEquals(100.0, calc.getPct("org.adligo.tests4j.models.shared.asserts.line_text"));
 		assertGreaterThanOrEquals(100.0, calc.getPct("org.adligo.tests4j.models.shared.common"));
+		assertGreaterThanOrEquals(100.0, calc.getPct("org.adligo.tests4j.models.shared.metadata"));
 		assertGreaterThanOrEquals(100.0, calc.getPct("org.adligo.tests4j.models.shared.xml"));
 		
 		// includes this
@@ -80,12 +83,12 @@ public class TheMetaTrial  extends MetaTrial {
 			sb.append("'");
 			sb.append(System.lineSeparator());
 		}
-		assertEquals(sb.toString(), 63, metadata.getAllTrialsCount());
+		assertEquals(sb.toString(), 65, metadata.getAllTrialsCount());
 		
 		//includes two tests in here, from this class
 		//assertGreaterThanOrEquals(199, metadata.getAllTestsCount());
 		//should be .... 297
-		assertEquals(343,  metadata.getAllTestsCount());
+		assertEquals(360,  metadata.getAllTestsCount());
 		
 	}
 

@@ -6,7 +6,6 @@ import java.util.List;
 import org.adligo.tests4j.models.shared.common.TrialType;
 import org.adligo.tests4j.models.shared.coverage.I_SourceFileCoverage;
 import org.adligo.tests4j.models.shared.metadata.I_TestMetadata;
-import org.adligo.tests4j.models.shared.metadata.TestMetadata;
 import org.adligo.tests4j.models.shared.metadata.TestMetadataMutant;
 import org.adligo.tests4j.models.shared.metadata.TrialMetadataMutant;
 import org.adligo.tests4j.models.shared.metadata.UseCaseMetadata;
@@ -147,9 +146,48 @@ public class TrialMetadataMutantTrial extends SourceFileCountingTrial {
 		builder.addIndent();
 		tmm.toXml(builder);
 		String result = builder.toXmlString();
-		assertEquals("\t<trialMetadata name=\"null\"/>\n", result);
+		assertEquals("\t<trialMetadata/>\n", result);
+		
+		TrialMetadataMutant other = new TrialMetadataMutant(result);
+		assertNull(other.getTrialName());
+		
+		tmm.setAfterTrialMethodName("afterTrialMethodName");
+		tmm.setBeforeTrialMethodName("beforeTrialMethodName");
+		tmm.setTestedPackage("testedPackageName");
+		tmm.setTestedSourceFile("testedSourceFile");
+		tmm.setTimeout(13L);
+		tmm.setTrialName("someTrialName");
+		tmm.setType(TrialType.SourceFileTrial);
+		
+		UseCaseMetadata ucm = new UseCaseMetadata("nown", "verb");
+		tmm.setUseCase(ucm);
+		tmm.setSystem("systemName");
+		tmm.setIgnored(true);
 		
 		
+		TestMetadataMutant testMm = new TestMetadataMutant();
+		testMm.setTestName("aTest");
+		tmm.addTest(testMm);
+		testMm = new TestMetadataMutant();
+		testMm.setTestName("bTest");
+		testMm.setIgnored(true);
+		tmm.addTest(testMm);
+		
+		
+		builder = new XML_Builder();
+		builder.addIndent();
+		tmm.toXml(builder);
+		result = builder.toXmlString();
+		assertEquals("\n\t<trialMetadata name=\"someTrialName\" type=\"SourceFileTrial\" timeout=\"13\"\n" +
+				"\t\t beforeTrial=\"beforeTrialMethodName\" ignored=\"true\" afterTrial=\"afterTrialMethodName\"\n" +
+				"\t\t testedSourceFile=\"testedSourceFile\" testedPackage=\"testedPackageName\" testedSystem=\"systemName\"\n" +
+				"\t\t >\n" +
+				"\t\t<useCase nown=\"nown\" verb=\"verb\" />\n" +
+				"\t\t<tests>\n" +
+				"\t\t\t<testMetadata name=\"aTest\" />\n" +
+				"\t\t\t<testMetadata name=\"bTest\" ignored=\"true\" />\n" +
+				"\t\t</tests>\n" +
+				"\t</trialMetadata>\n", "\n" + result);
 	}
 	
 	@Override
@@ -168,11 +206,11 @@ public class TrialMetadataMutantTrial extends SourceFileCountingTrial {
 
 	@Override
 	public int getAsserts() {
-		return 44;
+		return 46;
 	}
 
 	@Override
 	public int getUniqueAsserts() {
-		return 28;
+		return 30;
 	}
 }

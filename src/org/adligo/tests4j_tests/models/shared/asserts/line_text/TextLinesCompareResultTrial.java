@@ -28,8 +28,8 @@ public class TextLinesCompareResultTrial extends SourceFileCountingTrial {
 		
 		List<I_LineDiff> lineDiffs = new ArrayList<I_LineDiff>();
 		lineDiffs.add(ldm);
-		TextLinesCompareResult result = new TextLinesCompareResult(new TextLines("a"), 
-				new TextLines("b"), false, lineDiffs);
+		TextLinesCompareResult result = new TextLinesCompareResult(new TextLines("a", true), 
+				new TextLines("b", true), false, lineDiffs);
 		assertFalse(result.isMatched());
 		I_TextLines example = result.getExpectedLines();
 		assertNotNull(example);
@@ -48,29 +48,45 @@ public class TextLinesCompareResultTrial extends SourceFileCountingTrial {
 		assertEquals(ldm, diffs.get(0));
 	}
 	
+	@Test
+	public void testToString() {
+		LineDiffMutant ldm = new LineDiffMutant();
+		ldm.setType(LineDiffType.MISSING_EXAMPLE_LINE);
+		ldm.setExampleLineNbr(0);
+		
+		List<I_LineDiff> lineDiffs = new ArrayList<I_LineDiff>();
+		lineDiffs.add(ldm);
+		TextLinesCompareResult result = new TextLinesCompareResult(new TextLines("a", true), 
+				new TextLines("b", true), false, lineDiffs);
+		assertEquals("TextLinesCompareResult [example=TextLines [lines=[a]], "
+				+ "actual=TextLines [lines=[b]], matched=false, "
+				+ "lineDiffs=[LineDiffMutant [type=MISSING_EXAMPLE_LINE, "
+				+ "exampleLineNbr=0, actualLineNbr=null]]]",result.toString());
+	}
+	
 	@Override
 	public void afterTrialTests(I_SourceFileTrialResult p) {
 		assertCounts(p);
 		
 		if (p.hasRecordedCoverage()) {
 			I_SourceFileCoverage coverage = p.getSourceFileCoverage();
-			assertGreaterThanOrEquals(94.0, coverage.getPercentageCoveredDouble());
+			assertGreaterThanOrEquals(96.0, coverage.getPercentageCoveredDouble());
 		}
 	}
 
 	
 	@Override
 	public int getTests() {
-		return 1;
+		return 2;
 	}
 
 	@Override
 	public int getAsserts() {
-		return 11;
+		return 12;
 	}
 
 	@Override
 	public int getUniqueAsserts() {
-		return 9;
+		return 10;
 	}
 }
