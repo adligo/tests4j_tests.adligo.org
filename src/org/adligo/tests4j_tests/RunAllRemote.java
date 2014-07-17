@@ -9,12 +9,12 @@ import org.adligo.tests4j.models.shared.system.Tests4J_Params;
 import org.adligo.tests4j.models.shared.system.Tests4J_RemoteInfo;
 import org.adligo.tests4j.run.Tests4J;
 import org.adligo.tests4j.run.remote.Tests4J_RemoteRunner;
-import org.adligo.tests4j_4jacoco.plugin.ScopedJacocoPlugin;
+import org.adligo.tests4j_4jacoco.plugin.SimpleJacocoPluginFactory;
 
 public class RunAllRemote {
 
 	public static void main(String [] args) {
-		Tests4J_Params remoteParams = RunAllTrials.getTests(ScopedJacocoPlugin.class);
+		Tests4J_Params remoteParams = RunAllTrials.getTests(SimpleJacocoPluginFactory.class);
 		
 		Tests4J_Params params = new Tests4J_Params();
 		I_Tests4J_Reporter reporter =  params.getReporter();

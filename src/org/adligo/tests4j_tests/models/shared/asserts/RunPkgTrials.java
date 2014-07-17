@@ -10,7 +10,7 @@ import org.adligo.tests4j.run.Tests4J;
 import org.adligo.tests4j.run.helpers.Tests4J_ThreadFactory;
 import org.adligo.tests4j.run.helpers.TrialInstancesProcessor;
 import org.adligo.tests4j.run.helpers.TrialsProcessor;
-import org.adligo.tests4j_4jacoco.plugin.ScopedJacocoPlugin;
+import org.adligo.tests4j_4jacoco.plugin.ScopedJacocoPluginFactory;
 import org.adligo.tests4j_4jacoco.plugin.data.multi.MultiProbeDataStore;
 import org.adligo.tests4j_4jacoco.plugin.data.multi.MultiProbesMap;
 
@@ -27,7 +27,7 @@ public class RunPkgTrials implements I_TrialList {
 		loggingClasses.add(TrialInstancesProcessor.class);
 		loggingClasses.add(TrialsProcessor.class);
 		params.setLoggingClasses(loggingClasses);
-		params.setCoveragePluginClass(ScopedJacocoPlugin.class);
+		params.setCoveragePluginFactoryClass(ScopedJacocoPluginFactory.class);
 		Tests4J.run(params);
 	}
 

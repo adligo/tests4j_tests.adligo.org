@@ -10,6 +10,7 @@ import org.adligo.tests4j.run.Tests4J;
 import org.adligo.tests4j.shared.report.summary.SummaryReporter;
 import org.adligo.tests4j_4jacoco.plugin.AbstractPlugin;
 import org.adligo.tests4j_4jacoco.plugin.ScopedJacocoPlugin;
+import org.adligo.tests4j_4jacoco.plugin.ScopedJacocoPluginFactory;
 
 public class RunPkgTrials implements I_TrialList {
 
@@ -24,7 +25,7 @@ public class RunPkgTrials implements I_TrialList {
 		params.setReporter(reporter);
 		
 		//TieredJacocoPlugin covargePlugin =new TieredJacocoPlugin();
-		params.setCoveragePluginClass(ScopedJacocoPlugin.class);
+		params.setCoveragePluginFactoryClass(ScopedJacocoPluginFactory.class);
 		
 		Tests4J.run(params);
 	}

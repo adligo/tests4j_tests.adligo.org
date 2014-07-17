@@ -1,7 +1,5 @@
 package org.adligo.tests4j_tests;
 
-import org.adligo.tests4j.models.shared.system.I_CoveragePlugin;
-import org.adligo.tests4j.models.shared.system.I_CoveragePluginConfigurator;
 import org.adligo.tests4j.models.shared.system.Tests4J_Params;
 import org.adligo.tests4j.run.Tests4J;
 import org.adligo.tests4j.run.helpers.Tests4J_NotificationManager;
@@ -9,9 +7,8 @@ import org.adligo.tests4j.run.helpers.TrialInstancesProcessor;
 import org.adligo.tests4j.shared.report.summary.SummaryReporter;
 import org.adligo.tests4j_4jacoco.plugin.AbstractPlugin;
 import org.adligo.tests4j_4jacoco.plugin.Recorder;
-import org.adligo.tests4j_4jacoco.plugin.ScopedJacocoPlugin;
+import org.adligo.tests4j_4jacoco.plugin.ScopedJacocoPluginFactory;
 import org.adligo.tests4j_tests.trials_api.AssertionsFail_Trial;
-import org.adligo.tests4j_tests.trials_api.asserts_null_expected_trials.AssertEqualsNullFailsTrial;
 
 public class RunSingleTrial {
 
@@ -39,20 +36,10 @@ public class RunSingleTrial {
 		
 		params.setReporter(reporter);
 		//SimpleJacocoPlugin plugin = new SimpleJacocoPlugin();
-		params.setCoveragePluginClass(ScopedJacocoPlugin.class);
+		params.setCoveragePluginFactoryClass(ScopedJacocoPluginFactory.class);
 		//params.setCoveragePluginConfiguratorClass(RunSingleTrialPluginConfigurator.class);
 		Tests4J.run(params);
 	}
 
 }
 
-class RunSingleTrialPluginConfigurator implements I_CoveragePluginConfigurator {
-
-	@Override
-	public void configure(I_CoveragePlugin p) {
-		ScopedJacocoPlugin plugin = (ScopedJacocoPlugin) p;
-		plugin.setWriteOutInstrumentedClassFiles(true);
-		
-	}
-	
-}

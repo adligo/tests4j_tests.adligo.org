@@ -1,7 +1,6 @@
 package org.adligo.tests4j_tests;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.ExecutorService;
@@ -11,22 +10,15 @@ import org.adligo.tests4j.models.shared.metadata.I_TrialRunMetadata;
 import org.adligo.tests4j.models.shared.results.I_TrialResult;
 import org.adligo.tests4j.models.shared.results.I_TrialRunResult;
 import org.adligo.tests4j.models.shared.system.I_CoveragePlugin;
+import org.adligo.tests4j.models.shared.system.I_CoveragePluginFactory;
 import org.adligo.tests4j.models.shared.system.I_Tests4J_Controls;
 import org.adligo.tests4j.models.shared.system.I_Tests4J_Reporter;
 import org.adligo.tests4j.models.shared.system.I_TrialRunListener;
 import org.adligo.tests4j.models.shared.system.Tests4J_Params;
 import org.adligo.tests4j.models.shared.trials.I_Trial;
 import org.adligo.tests4j.run.Tests4J;
-import org.adligo.tests4j.run.helpers.Tests4J_NotificationManager;
-import org.adligo.tests4j.run.helpers.Tests4J_ThreadFactory;
 import org.adligo.tests4j.run.helpers.ThreadStateHelper;
-import org.adligo.tests4j.run.helpers.TrialInstancesProcessor;
-import org.adligo.tests4j.run.helpers.TrialsProcessor;
-import org.adligo.tests4j.shared.report.summary.SummaryReporter;
-import org.adligo.tests4j_4jacoco.plugin.ScopedJacocoPlugin;
-import org.adligo.tests4j_4jacoco.plugin.SimpleJacocoPlugin;
-import org.adligo.tests4j_4jacoco.plugin.data.multi.MultiProbeDataStore;
-import org.adligo.tests4j_4jacoco.plugin.data.multi.MultiProbesMap;
+import org.adligo.tests4j_4jacoco.plugin.SimpleJacocoPluginFactory;
 import org.adligo.tests4j_tests.base_abstract_trials.Counts;
 import org.adligo.tests4j_tests.base_abstract_trials.I_CountingTrial;
 
@@ -39,9 +31,9 @@ public class RunAllTrials implements I_TrialRunListener {
 	
 	public static void main(String [] args) {
 		
-		Tests4J_Params params = getTests(SimpleJacocoPlugin.class);
-		reporter = params.getReporter();
+		Tests4J_Params params = getTests(SimpleJacocoPluginFactory.class);
 		//Tests4J_Params params = getTests(ScopedJacocoPlugin.class);
+		reporter = params.getReporter();
 		/*
 		List<Class<?>> loggingClasses = new ArrayList<Class<?>>(params.getLoggingClasses());
 		loggingClasses.add(Tests4J_ThreadFactory.class);
@@ -88,9 +80,9 @@ public class RunAllTrials implements I_TrialRunListener {
 		});
 	}
 
-	public static synchronized Tests4J_Params getTests(Class<? extends I_CoveragePlugin> pluginClass) {
+	public static synchronized Tests4J_Params getTests(Class<? extends I_CoveragePluginFactory> factoryClass) {
 		Tests4J_Params toRet = new Tests4J_Params();
-		toRet.setCoveragePluginClass(pluginClass);
+		toRet.setCoveragePluginFactoryClass(factoryClass);
 		
 		toRet.addTrials(new org.adligo.tests4j_tests.models.shared.asserts.RunPkgTrials());
 		toRet.addTrials(new org.adligo.tests4j_tests.models.shared.common.RunPkgTrials());
@@ -100,7 +92,7 @@ public class RunAllTrials implements I_TrialRunListener {
 		toRet.addTrials(new org.adligo.tests4j_tests.models.shared.xml.RunPkgTrials());
 		
 		toRet.addTrials(new org.adligo.tests4j_tests.jacoco.api_trials.RunPkgTrials());
-		toRet.addTrials(new org.adligo.tests4j_tests.jacoco.plugin.data.common.RunPkgTrials());
+		toRet.addTrials(new org.adligo.tests4j_tests.jacoco.plugin.RunPkgTrials());
 		
 		toRet.addTrials(new org.adligo.tests4j_tests.run.discovery.RunPkgTrials());
 		toRet.addTrials(new org.adligo.tests4j_tests.run.helpers.RunPkgTrials());

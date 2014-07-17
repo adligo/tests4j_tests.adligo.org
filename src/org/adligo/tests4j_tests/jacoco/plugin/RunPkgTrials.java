@@ -1,4 +1,4 @@
-package org.adligo.tests4j_tests.models.shared.asserts.uniform;
+package org.adligo.tests4j_tests.jacoco.plugin;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,6 +12,7 @@ import org.adligo.tests4j.run.helpers.TrialInstancesProcessor;
 import org.adligo.tests4j_4jacoco.plugin.ScopedJacocoPluginFactory;
 import org.adligo.tests4j_4jacoco.plugin.data.multi.MultiProbeDataStore;
 import org.adligo.tests4j_4jacoco.plugin.data.multi.MultiProbesMap;
+import org.adligo.tests4j_4jacoco.plugin.data.multi.ThreadGroupLocal;
 
 public class RunPkgTrials implements I_TrialList {
 
@@ -25,7 +26,9 @@ public class RunPkgTrials implements I_TrialList {
 		loggingClasses.add(MultiProbeDataStore.class);
 		loggingClasses.add(MultiProbesMap.class);
 		loggingClasses.add(TrialInstancesProcessor.class);
+		loggingClasses.add(ThreadGroupLocal.class);
 		params.setLoggingClasses(loggingClasses);
+		
 		
 		params.setCoveragePluginFactoryClass(ScopedJacocoPluginFactory.class);
 		Tests4J.run(params);
@@ -35,13 +38,11 @@ public class RunPkgTrials implements I_TrialList {
 	public List<Class<? extends AbstractTrial>> getTrials() {
 		List<Class<? extends AbstractTrial>> trials = new ArrayList<Class<? extends AbstractTrial>>();
 		
+		trials.add(ScopedJacocoPluginFactoryTrial.class);
+		trials.add(SimpleJacocoPluginFactoryTrial.class);
 		
-		trials.add(EvaluationMutantTrial.class);
-		trials.add(EvaluationTrial.class);
-		trials.add(EvaluatorLookupMutantTrial.class);
-		trials.add(EvaluatorLookupTrial.class);
-		trials.add(StringUniformEvaluatorTrial.class);
-		trials.add(ThrowableUniformEvaluatorTrial.class);
+		trials.addAll(new org.adligo.tests4j_tests.jacoco.plugin.data.common.RunPkgTrials().getTrials());
+		
 		return trials;
 	}
 }
