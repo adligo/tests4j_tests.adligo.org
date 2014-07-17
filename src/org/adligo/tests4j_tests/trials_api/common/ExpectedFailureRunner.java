@@ -91,7 +91,7 @@ public class ExpectedFailureRunner implements I_TrialRunListener {
 
 
 	@Override
-	public void onStartingTrail(String trialName) {
+	public void onStartingTrial(String trialName) {
 		// TODO Auto-generated method stub
 		
 	}

@@ -90,7 +90,7 @@ public class ExpectedPassRunner implements I_TrialRunListener {
 
 
 	@Override
-	public void onStartingTrail(String trialName) {
+	public void onStartingTrial(String trialName) {
 		//silentReporter.log("Starting test " + trialName );
 	}
 

@@ -148,7 +148,7 @@ public class RunAllTrials implements I_TrialRunListener {
 	}
 
 	@Override
-	public void onStartingTrail(String trialName) {
+	public void onStartingTrial(String trialName) {
 		trialsNotCompleted.add(trialName);
 	}
 
