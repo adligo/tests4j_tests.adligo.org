@@ -13,6 +13,7 @@ import org.adligo.tests4j.models.shared.trials.Test;
 import org.adligo.tests4j.models.shared.trials.TrialRecursion;
 import org.adligo.tests4j.models.shared.trials.UseCaseScope;
 import org.adligo.tests4j.models.shared.trials.UseCaseTrial;
+import org.adligo.tests4j.run.helpers.SystemExitTracker;
 import org.adligo.tests4j_tests.trials_api.common.ExpectedFailureRunner;
 
 /**
@@ -32,7 +33,7 @@ public class BeforeTrialNotPublicTrial extends UseCaseTrial {
 	@Test
 	public void testNada() {}
 
-	public static void runTestDelegate(I_Asserts asserts) {
+	public static void runTestDelegate(I_Asserts asserts)  throws Exception {
 		ExpectedFailureRunner runner = new ExpectedFailureRunner();
 		runner.run(BeforeTrialNotPublicTrial.class);
 		
@@ -73,9 +74,12 @@ public class BeforeTrialNotPublicTrial extends UseCaseTrial {
 		asserts.assertUniform(new IllegalArgumentException(
 				"org.adligo.tests4j_tests.trials_api.bad_mock_use_case_trials.BeforeTrialNotPublicTrial was not annotated correctly."), 
 				exception);
+		
+		SystemExitTracker tracker =  runner.getSystemExitTracker();
+		asserts.assertEquals(0, tracker.getLastStatus());
 	}
 	
 	public static int getAsserts() {
-		return 20;
+		return 21;
 	}
 }

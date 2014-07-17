@@ -10,15 +10,15 @@ import org.adligo.tests4j.shared.report.summary.SummaryReporter;
 import org.adligo.tests4j_4jacoco.plugin.AbstractPlugin;
 import org.adligo.tests4j_4jacoco.plugin.Recorder;
 import org.adligo.tests4j_4jacoco.plugin.ScopedJacocoPlugin;
-import org.adligo.tests4j_tests.models.shared.asserts.UniformThrownAssertCommandTrial;
-import org.adligo.tests4j_tests.models.shared.asserts.line_text.TextLinesTrial;
+import org.adligo.tests4j_tests.trials_api.AssertionsFail_Trial;
+import org.adligo.tests4j_tests.trials_api.asserts_null_expected_trials.AssertEqualsNullFailsTrial;
 
 public class RunSingleTrial {
 
 	
 	public static void main(String [] args) {
 		Tests4J_Params params = new Tests4J_Params();
-		params.addTrial(TextLinesTrial.class);
+		params.addTrial(AssertionsFail_Trial.class);
 		/*
 		params.addTest(Run_UseCaseTrial_ApiTrial.class.getName() +
 				".testNoUseCaseAnnotation");
@@ -40,7 +40,7 @@ public class RunSingleTrial {
 		params.setReporter(reporter);
 		//SimpleJacocoPlugin plugin = new SimpleJacocoPlugin();
 		params.setCoveragePluginClass(ScopedJacocoPlugin.class);
-		params.setCoveragePluginConfiguratorClass(RunSingleTrialPluginConfigurator.class);
+		//params.setCoveragePluginConfiguratorClass(RunSingleTrialPluginConfigurator.class);
 		Tests4J.run(params);
 	}
 

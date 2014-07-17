@@ -50,195 +50,195 @@ import org.adligo.tests4j_tests.trials_api.assert_fails_trials.AssertUniformWith
 public class AssertionsFail_Trial extends ApiCountingTrial {
 
 	@Test
-	public void testAssertContainsFails() {
+	public void testAssertContainsFails() throws Exception {
 		AssertContainsFailsTrial.runTestDelegate(this);
 	}
 	
 	@Test
-	public void testAssertContainsFailsWithMessage() {
+	public void testAssertContainsFailsWithMessage() throws Exception {
 		AssertContainsWithMessageFailsTrial.runTestDelegate(this);
 	}
 	
 	@Test
-	public void testAssertEqualsFails() {
+	public void testAssertEqualsFails() throws Exception {
 		AssertEqualsFailsTrial.runTestDelegate(this);
 	}
 	
 	@Test
-	public void testAssertEqualsFailsWithMessage() {
+	public void testAssertEqualsFailsWithMessage() throws Exception {
 		AssertEqualsWithMessageFailsTrial.runTestDelegate(this);
 	}
 	
 	@Test
-	public void testAssertFalseIsTrue() {
+	public void testAssertFalseIsTrue() throws Exception {
 		AssertFalseFailsTrial.runTestDelegate(this);
 	}
 	
 	
 	@Test
-	public void testAssertFalseIsTrueWithMessage() {
+	public void testAssertFalseIsTrueWithMessage() throws Exception {
 		AssertFalseWithMessageFailsTrial.runTestDelegate(this);
 	}
 	
 	@Test
-	public void testAssertGreaterThanOrEqualsDoubleDoubleFails() {
+	public void testAssertGreaterThanOrEqualsDoubleDoubleFails() throws Exception {
 		AssertGreaterThanOrEqualsDoubleDoubleFailsTrial.runTestDelegate(this);
 	}
 	
 	@Test
-	public void testAssertGreaterThanOrEqualsDoubleDoubleWithMessageFails() {
+	public void testAssertGreaterThanOrEqualsDoubleDoubleWithMessageFails() throws Exception {
 		AssertGreaterThanOrEqualsDoubleDoubleWithMessageFailsTrial.runTestDelegate(this);
 	}
 	
 	@Test
-	public void testAssertGreaterThanOrEqualsDoubleFloatFails() {
+	public void testAssertGreaterThanOrEqualsDoubleFloatFails() throws Exception {
 		AssertGreaterThanOrEqualsDoubleFloatFailsTrial.runTestDelegate(this);
 	}
 	
 	@Test
-	public void testAssertGreaterThanOrEqualsDoubleFloatWithMessageFails() {
+	public void testAssertGreaterThanOrEqualsDoubleFloatWithMessageFails() throws Exception {
 		AssertGreaterThanOrEqualsDoubleFloatWithMessageFailsTrial.runTestDelegate(this);
 	}
 	
 	@Test
-	public void testAssertGreaterThanOrEqualsDoubleIntFails() {
+	public void testAssertGreaterThanOrEqualsDoubleIntFails() throws Exception {
 		AssertGreaterThanOrEqualsDoubleIntFailsTrial.runTestDelegate(this);
 	}
 	
 	@Test
-	public void testAssertGreaterThanOrEqualsDoubleIntWithMessageFails() {
+	public void testAssertGreaterThanOrEqualsDoubleIntWithMessageFails() throws Exception {
 		AssertGreaterThanOrEqualsDoubleIntWithMessageFailsTrial.runTestDelegate(this);
 	}
 	
 	@Test
-	public void testAssertGreaterThanOrEqualsDoubleLongFails() {
+	public void testAssertGreaterThanOrEqualsDoubleLongFails() throws Exception {
 		AssertGreaterThanOrEqualsDoubleLongFailsTrial.runTestDelegate(this);
 	}
 	
 	@Test
-	public void testAssertGreaterThanOrEqualsDoubleLongWithMessageFails() {
+	public void testAssertGreaterThanOrEqualsDoubleLongWithMessageFails() throws Exception {
 		AssertGreaterThanOrEqualsDoubleLongWithMessageFailsTrial.runTestDelegate(this);
 	}
 	
 	@Test
-	public void testAssertGreaterThanOrEqualsShortFloatFails() {
+	public void testAssertGreaterThanOrEqualsShortFloatFails() throws Exception {
 		AssertGreaterThanOrEqualsDoubleShortFailsTrial.runTestDelegate(this);
 	}
 	
 	@Test
-	public void testAssertGreaterThanOrEqualsDoubleShortWithMessageFails() {
+	public void testAssertGreaterThanOrEqualsDoubleShortWithMessageFails() throws Exception {
 		AssertGreaterThanOrEqualsDoubleShortWithMessageFailsTrial.runTestDelegate(this);
 	}
-
+	
 	@Test
-	public void testAssertNotEqualsFails() {
+	public void testAssertNotEqualsFails() throws Exception {
 		AssertNotEqualsFailsTrial.runTestDelegate(this);
 	}
 	
 	@Test
-	public void testAssertNotEqualsWithMessageFails() {
+	public void testAssertNotEqualsWithMessageFails() throws Exception {
 		AssertNotEqualsWithMessageFailsTrial.runTestDelegate(this);
 	}
 	
 	@Test
-	public void testAssertNotNullFails() {
+	public void testAssertNotNullFails() throws Exception {
 		AssertNotNullFailsTrial.runTestDelegate(this);
 	}
 	
 	
 	@Test
-	public void testAssertNotNullWithMessageFails() {
+	public void testAssertNotNullWithMessageFails() throws Exception {
 		AssertNotNullWithMessageFailsTrial.runTestDelegate(this);
 	}
 	
 	@Test
-	public void testAssertNotSameFails() {
+	public void testAssertNotSameFails() throws Exception {
 		AssertNotSameFailsTrial.runTestDelegate(this);
 	}
 	
 	
 	@Test
-	public void testAssertNotSameWithMessageFails() {
+	public void testAssertNotSameWithMessageFails() throws Exception {
 		AssertNotSameWithMessageFailsTrial.runTestDelegate(this);
 	}
 	
 	@Test
-	public void testAssertNotUniformFails() {
+	public void testAssertNotUniformFails() throws Exception {
 		AssertNotUniformFailsTrial.runTestDelegate(this);
 	}
 	
 	@Test
-	public void testAssertNotUniformWithMessageFails() {
+	public void testAssertNotUniformWithMessageFails() throws Exception {
 		AssertNotUniformWithMessageFailsTrial.runTestDelegate(this);
 	}
 	
 	@Test
-	public void testAssertNotUniformNoEvaluatorFails() {
+	public void testAssertNotUniformNoEvaluatorFails() throws Exception {
 		AssertNotUniformNoEvaluatorFailsTrial.runTestDelegate(this);
 	}
 	
 	@Test
-	public void testAssertNotUniformNoEvaluatorWithMessageFails() {
+	public void testAssertNotUniformNoEvaluatorWithMessageFails() throws Exception {
 		AssertNotUniformNoEvaluatorWithMessageFailsTrial.runTestDelegate(this);
 	}
 	
 	@Test
-	public void testAssertNullFails() {
+	public void testAssertNullFails() throws Exception {
 		AssertNullFailsTrial.runTestDelegate(this);
 	}
 	
 	
 	@Test
-	public void testAssertNullWithMessageFails() {
+	public void testAssertNullWithMessageFails() throws Exception {
 		AssertNullWithMessageFailsTrial.runTestDelegate(this);
 	}
 	
 	@Test
-	public void testAssertSameFails() {
+	public void testAssertSameFails() throws Exception {
 		AssertSameFailsTrial.runTestDelegate(this);
 	}
 	
 	@Test
-	public void testAssertSameWithMessageFails() {
+	public void testAssertSameWithMessageFails() throws Exception {
 		AssertSameWithMessageFailsTrial.runTestDelegate(this);
 	}
 	
 	@Test
-	public void testAssertThrownFails() {
+	public void testAssertThrownFails() throws Exception {
 		AssertThrownFailsTrial.runTestDelegate(this);
 	}
 	
 	@Test
-	public void testAssertThrownWithMessageFails() {
+	public void testAssertThrownWithMessageFails() throws Exception {
 		AssertThrownWithMessageFailsTrial.runTestDelegate(this);
 	}
 	
 	@Test
-	public void testAssertTrueIsFalse() {
+	public void testAssertTrueIsFalse() throws Exception {
 		AssertTrueFailsTrial.runTestDelegate(this);
 	}
 	
 	@Test
-	public void testAssertTrueIsFalseWithMessage() {
+	public void testAssertTrueIsFalseWithMessage() throws Exception {
 		AssertTrueFailsMessageTrial.runTestDelegate(this);
 	}
 	@Test
-	public void testAssertThrownUniformFails() {
+	public void testAssertThrownUniformFails() throws Exception {
 		AssertThrownUniformFailsTrial.runTestDelegate(this);
 	}
 	
 	@Test
-	public void testAssertThrownUniformWithMessageFails() {
+	public void testAssertThrownUniformWithMessageFails() throws Exception {
 		AssertThrownUniformWithMessageFailsTrial.runTestDelegate(this);
 	}
 	
 	@Test
-	public void testAssertUniformFails() {
+	public void testAssertUniformFails() throws Exception {
 		AssertUniformFailsTrial.runTestDelegate(this);
 	}
 	
 	@Test
-	public void testAssertUniformWithMessageFails() {
+	public void testAssertUniformWithMessageFails() throws Exception {
 		AssertUniformWithMessageFailsTrial.runTestDelegate(this);
 	}
 	
@@ -287,7 +287,7 @@ public class AssertionsFail_Trial extends ApiCountingTrial {
 				AssertNotUniformNoEvaluatorFailsTrial.getAsserts() +
 				AssertNotUniformNoEvaluatorWithMessageFailsTrial.getAsserts() +
 				AssertNullFailsTrial.getAsserts() +
-				AssertNullWithMessageFailsTrial.getAsserts()+ 
+				AssertNullWithMessageFailsTrial.getAsserts() + 
 				AssertSameFailsTrial.getAsserts() +
 				AssertSameWithMessageFailsTrial.getAsserts()  +
 				AssertThrownFailsTrial.getAsserts() +

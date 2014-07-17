@@ -13,6 +13,7 @@ import org.adligo.tests4j.models.shared.system.Tests4J_Params;
 import org.adligo.tests4j.models.shared.trials.AbstractTrial;
 import org.adligo.tests4j.models.shared.trials.I_Trial;
 import org.adligo.tests4j.run.Tests4J;
+import org.adligo.tests4j.run.helpers.SystemExitTracker;
 import org.adligo.tests4j.shared.report.summary.SummaryReporter;
 
 /**
@@ -25,9 +26,10 @@ public class ExpectedFailureRunner implements I_TrialRunListener {
 	private I_TrialRunMetadata metadata;
 	
 	private int size = 0;
-	private ArrayBlockingQueue<List<I_TrialResult>> block = new ArrayBlockingQueue<List<I_TrialResult>>(1);
-	private CopyOnWriteArrayList<I_TrialResult> results = new CopyOnWriteArrayList<I_TrialResult>();
-	private ArrayBlockingQueue<I_TrialRunMetadata> metaBlock = new ArrayBlockingQueue<>(1);
+	private final ArrayBlockingQueue<List<I_TrialResult>> block = new ArrayBlockingQueue<List<I_TrialResult>>(1);
+	private final CopyOnWriteArrayList<I_TrialResult> results = new CopyOnWriteArrayList<I_TrialResult>();
+	private final ArrayBlockingQueue<I_TrialRunMetadata> metaBlock = new ArrayBlockingQueue<>(1);
+	private final SystemExitTracker tracker = new SystemExitTracker();
 	
 	public void run(Class<? extends I_Trial> trial) {
 		List<Class<? extends I_Trial>> list = new ArrayList<Class<? extends I_Trial>>();
@@ -46,7 +48,7 @@ public class ExpectedFailureRunner implements I_TrialRunListener {
 		
 		params.setReporter(silentReporter);
 		//params.setLog(new ConsoleLogger( false));
-		params.setExitAfterLastNotification(false);
+		params.setSystemExit(tracker);
 		
 		Tests4J.run(params, this);
 		try {
@@ -109,6 +111,10 @@ public class ExpectedFailureRunner implements I_TrialRunListener {
 			boolean passed) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	public SystemExitTracker getSystemExitTracker() {
+		return tracker;
 	}
 
 }

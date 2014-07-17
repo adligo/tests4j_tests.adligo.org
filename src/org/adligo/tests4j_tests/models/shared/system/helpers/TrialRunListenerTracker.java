@@ -5,7 +5,7 @@ import org.adligo.tests4j.models.shared.results.I_TrialResult;
 import org.adligo.tests4j.models.shared.results.I_TrialRunResult;
 import org.adligo.tests4j.models.shared.system.I_TrialRunListener;
 
-public class TrialRunListenerMock implements I_TrialRunListener {
+public class TrialRunListenerTracker implements I_TrialRunListener {
 	private I_TrialRunMetadata lastMetadata;
 	private String lastTrialName;
 	private String lastTestName;

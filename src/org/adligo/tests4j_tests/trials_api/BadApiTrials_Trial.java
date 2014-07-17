@@ -40,89 +40,89 @@ import org.adligo.tests4j_tests.trials_api.common.ExpectedPassRunner;
 public class BadApiTrials_Trial extends ApiCountingTrial {
 
 	@Test
-	public void testAbstractTest() {
+	public void testAbstractTest() throws Exception {
 		AbstractTestTrial.runTestDelegate(this);
 	}
 	
 	@Test
-	public void testAfterTrialHasParams() {
+	public void testAfterTrialHasParams() throws Exception {
 		AfterTrialHasParamsTrial.runTestDelegate(this);
 	}
 	
 	@Test
-	public void testAfterTrialNotPublic() {
+	public void testAfterTrialNotPublic() throws Exception {
 		AfterTrialNotPublicTrial.runTestDelegate(this);
 	}
 	
 	@Test
-	public void testAfterTrialNotStatic() {
+	public void testAfterTrialNotStatic() throws Exception {
 		AfterTrialNotStaticTrial.runTestDelegate(this);
 	}
 	
 	@Test
-	public void testBadPackageConstructorTrail() {
+	public void testBadPackageConstructorTrail() throws Exception {
 		BadPackageConstructorTrial.runTestDelegate(this);
 	}
 	
 	@Test
-	public void testBeforeTrialHasParams() {
+	public void testBeforeTrialHasParams() throws Exception {
 		BeforeTrialHasParamsTrial.runTestDelegate(this);
 	}
 	
 
 	@Test
-	public void testBeforeTrialNotPublic() {
+	public void testBeforeTrialNotPublic() throws Exception {
 		BeforeTrialNotPublicTrial.runTestDelegate(this);
 	}
 	
 
 	@Test
-	public void testBeforeTrialNotStatic() {
+	public void testBeforeTrialNotStatic() throws Exception {
 		BeforeTrialNotStaticTrial.runTestDelegate(this);
 	}
 	
 	@Test
-	public void testMultipleAfterTrial() {
+	public void testMultipleAfterTrial() throws Exception {
 		MultipleAfterTrialTrial.runTestDelegate(this);
 	}
 	
 	@Test
-	public void testMultipleBeforeTrial() {
+	public void testMultipleBeforeTrial() throws Exception {
 		MultipleBeforeTrialTrial.runTestDelegate(this);
 	}
 	
 	@Test
-	public void testNoTests() {
+	public void testNoTests() throws Exception {
 		NoTestsTrial.runTestDelegate(this);
 	}
 	
 	@Test
-	public void testPackageScopeAnnotationNoNameTrial() {
+	public void testPackageScopeAnnotationNoNameTrial() throws Exception {
 		PackageScopeAnnotationNoNameTrial.runTestDelegate(this);
 	}
 	
 	@Test
-	public void testNoPackageScopeAnnotationTrial() {
+	public void testNoPackageScopeAnnotationTrial() throws Exception {
 		NoPackageScopeAnnotationTrial.runTestDelegate(this);
 	}
 	
 	@Test
-	public void testProtectedTestTrial() {
+	public void testProtectedTestTrial() throws Exception {
 		ProtectedTestTrial.runTestDelegate(this);
 	}
 	
 	@Test
-	public void testStaticTestTrial() {
+	public void testStaticTestTrial() throws Exception {
 		StaticTestTrial.runTestDelegate(this);
 	}
 	
 	@Test
-	public void testTestWithParams() {
+	public void testTestWithParams() throws Exception {
 		TestWithParamsTrial.runTestDelegate(this);
 	}
 	
 	@Test
-	public void testTrialRunOverlapPrevention() {
+	public void testTrialRunOverlapPrevention() throws Exception {
 		ExpectedPassRunner runner = new ExpectedPassRunner();
 		List<Class<? extends I_Trial>> trials = new ArrayList<>();
 		for (int i = 0; i < 50; i++) {

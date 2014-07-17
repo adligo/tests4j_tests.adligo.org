@@ -40,92 +40,92 @@ import org.adligo.tests4j_tests.trials_api.common.ExpectedFailureRunner;
 public class BadUseCaseTrials_Trial extends ApiCountingTrial {
 
 	@Test
-	public void testAbstractTestTrialFails() {
+	public void testAbstractTestTrialFails()  throws Exception {
 		AbstractTestTrial.runTestDelegate(this);
 	}
 	
 	@Test
-	public void testAfterTrialHasParamsTrialFails() {
+	public void testAfterTrialHasParamsTrialFails()  throws Exception {
 		AfterTrialHasParamsTrial.runTestDelegate(this);
 	}
 	
 	@Test
-	public void testAfterTrialNotPublicTrialFails() {
+	public void testAfterTrialNotPublicTrialFails()  throws Exception {
 		AfterTrialNotPublicTrial.runTestDelegate(this);
 	}
 	
 	@Test
-	public void testAfterTrialNotStaticTrialFails() {
+	public void testAfterTrialNotStaticTrialFails()  throws Exception {
 		AfterTrialNotStaticTrial.runTestDelegate(this);
 	}
 	
 	@Test
-	public void testBadConstructorTrialFails() {
+	public void testBadConstructorTrialFails()  throws Exception {
 		BadConstructorTrial.runTestDelegate(this);
 	}
 	
 	@Test
-	public void testBeforeTrialHasParamsTrialFails() {
+	public void testBeforeTrialHasParamsTrialFails()  throws Exception {
 		BeforeTrialHasParamsTrial.runTestDelegate(this);
 	}
 	
 	@Test
-	public void testBeforeTrialNotPublicTrialFails() {
+	public void testBeforeTrialNotPublicTrialFails()  throws Exception {
 		BeforeTrialNotPublicTrial.runTestDelegate(this);
 	}
 	
 	@Test
-	public void testBeforeTrialNotStaticTrialFails() {
+	public void testBeforeTrialNotStaticTrialFails()  throws Exception {
 		BeforeTrialNotStaticTrial.runTestDelegate(this);
 	}
 	
 	@Test
-	public void testMultipleAfterTrialTrialFails() {
+	public void testMultipleAfterTrialTrialFails()  throws Exception  {
 		MultipleAfterTrialTrial.runTestDelegate(this);
 	}
 	
 	@Test
-	public void testMultipleBeforeTrialTrialFails() {
+	public void testMultipleBeforeTrialTrialFails()  throws Exception {
 		MultipleBeforeTrialTrial.runTestDelegate(this);
 	}
 	
 	@Test
-	public void testNoTestsTrialFails() {
+	public void testNoTestsTrialFails()  throws Exception {
 		NoTestsTrial.runTestDelegate(this);
 	}
 	
 	@Test
-	public void testNoUseCaseAnnotationTrialFails() {
+	public void testNoUseCaseAnnotationTrialFails()  throws Exception {
 		NoUseCaseAnnotationTrial.runTestDelegate(this);
 	}
 	
 	@Test
-	public void testProtectedTestTrialFails() {
+	public void testProtectedTestTrialFails()  throws Exception {
 		ProtectedTestTrial.runTestDelegate(this);
 	}
 	
 	@Test
-	public void testStaticTestTrialFails() {
+	public void testStaticTestTrialFails()  throws Exception {
 		StaticTestTrial.runTestDelegate(this);
 	}
 	
 	@Test
-	public void testTestWithParamsTrialFails() {
+	public void testTestWithParamsTrialFails()  throws Exception  {
 		TestWithParamsTrial.runTestDelegate(this);
 	}
 	
 	@Test
-	public void testUseCaseAnnotationNoNownTrialFails() {
+	public void testUseCaseAnnotationNoNownTrialFails()  throws Exception {
 		UseCaseAnnotationNoNownTrial.runTestDelegate(this);
 	}
 	
 	@Test
-	public void testUseCaseAnnotationNoSystemTrialFails() {
+	public void testUseCaseAnnotationNoSystemTrialFails()  throws Exception {
 		UseCaseAnnotationNoSystemTrial.runTestDelegate(this);
 	}
 	
 	@Test
-	public void testUseCaseAnnotationNoVerb() {
+	public void testUseCaseAnnotationNoVerb()  throws Exception {
 		UseCaseAnnotationNoVerbTrial.runTestDelegate(this);
 	}
 

@@ -14,7 +14,7 @@ import org.adligo.tests4j.models.shared.trials.SourceFileScope;
 import org.adligo.tests4j.models.shared.trials.Test;
 import org.adligo.tests4j_tests.base_abstract_trials.SourceFileCountingTrial;
 import org.adligo.tests4j_tests.models.shared.system.helpers.ClumseyTrialRunListener;
-import org.adligo.tests4j_tests.models.shared.system.helpers.TrialRunListenerMock;
+import org.adligo.tests4j_tests.models.shared.system.helpers.TrialRunListenerTracker;
 
 @SourceFileScope (sourceClass=TrialRunListenerDelegate.class, minCoverage=90.0)
 public class TrialRunListenerDelegateTrial extends SourceFileCountingTrial implements I_Tests4J_Reporter {
@@ -83,7 +83,7 @@ public class TrialRunListenerDelegateTrial extends SourceFileCountingTrial imple
 	
 	@Test
 	public void testPassThroughs() {
-		TrialRunListenerMock mock = new TrialRunListenerMock();
+		TrialRunListenerTracker mock = new TrialRunListenerTracker();
 		TrialRunListenerDelegate delegate = new TrialRunListenerDelegate(mock, this);
 		
 		thrown = null;

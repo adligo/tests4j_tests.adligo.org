@@ -16,6 +16,7 @@ import org.adligo.tests4j.models.shared.trials.ApiTrial;
 import org.adligo.tests4j.models.shared.trials.PackageScope;
 import org.adligo.tests4j.models.shared.trials.Test;
 import org.adligo.tests4j.models.shared.trials.TrialRecursion;
+import org.adligo.tests4j.run.helpers.SystemExitTracker;
 import org.adligo.tests4j_tests.trials_api.common.ExpectedFailureRunner;
 
 @TrialRecursion
@@ -27,7 +28,7 @@ public class AssertUniformFailsTrial extends ApiTrial {
 		assertUniform("this", "thi");
 	}
 	
-	public static void runTestDelegate(I_Asserts asserts) {
+	public static void runTestDelegate(I_Asserts asserts)  throws Exception {
 		ExpectedFailureRunner runner = new ExpectedFailureRunner();
 		runner.run(AssertUniformFailsTrial.class);
 		
@@ -88,10 +89,13 @@ public class AssertUniformFailsTrial extends ApiTrial {
 		StackTraceElement topElement = elements[0];
 		asserts.assertEquals(AssertUniformFailsTrial.class.getName(), topElement.getClassName());
 		asserts.assertEquals("testAssertUniform", topElement.getMethodName());
-		asserts.assertEquals(27, topElement.getLineNumber());
+		asserts.assertEquals(28, topElement.getLineNumber());
+		
+		SystemExitTracker tracker =  runner.getSystemExitTracker();
+		asserts.assertEquals(0, tracker.getLastStatus());
 	}
 	
 	public static int getAsserts() {
-		return 34;
+		return 35;
 	}
 }

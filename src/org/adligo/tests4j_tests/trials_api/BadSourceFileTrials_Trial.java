@@ -37,77 +37,77 @@ import org.adligo.tests4j_tests.trials_api.common.ExpectedFailureRunner;
 public class BadSourceFileTrials_Trial extends ApiCountingTrial {
 
 	@Test
-	public void testAbstractTestTrialFails() {
+	public void testAbstractTestTrialFails() throws Exception {
 		AbstractTestTrial.runTestDelegate(this);
 	}
 	
 	@Test
-	public void testAfterTrialHasParams() {
+	public void testAfterTrialHasParams() throws Exception {
 		AfterTrialHasParamsTrial.runTestDelegate(this);
 	}
 	
 	@Test
-	public void testAfterTrialNotPublic() {
+	public void testAfterTrialNotPublic() throws Exception {
 		AfterTrialNotPublicTrial.runTestDelegate(this);
 	}
 	
 	@Test
-	public void testAfterTrialNotStatic() {
+	public void testAfterTrialNotStatic() throws Exception {
 		AfterTrialNotStaticTrial.runTestDelegate(this);
 	}
 	
 	@Test
-	public void testBadConstructorTrialFails() {
+	public void testBadConstructorTrialFails() throws Exception {
 		BadConstructorTrial.runTestDelegate(this);
 	}
 	
 	@Test
-	public void testBeforeTrialHasParams() {
+	public void testBeforeTrialHasParams() throws Exception {
 		BeforeTrialHasParamsTrial.runTestDelegate(this);
 	}
 	
 	@Test
-	public void testBeforeTrialNotPublic() {
+	public void testBeforeTrialNotPublic() throws Exception {
 		BeforeTrialNotPublicTrial.runTestDelegate(this);
 	}
 	
 	@Test
-	public void testBeforeTrialNotStaticFails() {
+	public void testBeforeTrialNotStaticFails() throws Exception {
 		BeforeTrialNotStaticTrial.runTestDelegate(this);
 	}
 	
 	@Test
-	public void testMultipleAfterTrial() {
+	public void testMultipleAfterTrial() throws Exception {
 		MultipleAfterTrialTrial.runTestDelegate(this);
 	}
 	
 	@Test
-	public void testMultipleBeforeTrial() {
+	public void testMultipleBeforeTrial() throws Exception {
 		MultipleBeforeTrialTrial.runTestDelegate(this);
 	}
 	
 	@Test
-	public void testNoSourceFileScopeAnnotation() {
+	public void testNoSourceFileScopeAnnotation() throws Exception {
 		NoSourceFileScopeAnnotationTrial.runTestDelegate(this);
 	}
 
 	@Test
-	public void testNoTestsTrialFails() {
+	public void testNoTestsTrialFails() throws Exception {
 		NoTestsTrial.runTestDelegate(this);
 	}
 	
 	@Test
-	public void testProtectedTestTrialFails() {
+	public void testProtectedTestTrialFails() throws Exception {
 		ProtectedTestTrial.runTestDelegate(this);
 	}
 	
 	@Test
-	public void testStaticTestTrialFails() {
+	public void testStaticTestTrialFails() throws Exception {
 		StaticTestTrial.runTestDelegate(this);
 	}
 	
 	@Test
-	public void testTestWithParams() {
+	public void testTestWithParams() throws Exception {
 		TestWithParamsTrial.runTestDelegate(this);
 	}
 	
@@ -128,7 +128,7 @@ public class BadSourceFileTrials_Trial extends ApiCountingTrial {
 	}
 
 	@Override
-	public int getAsserts() {
+	public int getAsserts(){
 		// TODO Auto-generated method stub
 		return AbstractTestTrial.getAsserts() +
 		AfterTrialHasParamsTrial.getAsserts() +
@@ -148,7 +148,7 @@ public class BadSourceFileTrials_Trial extends ApiCountingTrial {
 	}
 
 	@Override
-	public int getUniqueAsserts() {
+	public int getUniqueAsserts(){
 		// TODO Auto-generated method stub
 		return 213;
 	}

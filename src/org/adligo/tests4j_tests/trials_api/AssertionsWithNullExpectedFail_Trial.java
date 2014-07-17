@@ -34,112 +34,112 @@ import org.adligo.tests4j_tests.trials_api.asserts_null_expected_trials.AssertUn
 public class AssertionsWithNullExpectedFail_Trial extends ApiCountingTrial {
 	
 	@Test
-	public void testAssertContainsNullFails() {
+	public void testAssertContainsNullFails() throws Exception {
 		AssertContainsNullFailsTrial.runTestDelegate(this);
 	}
 	
 	@Test
-	public void testAssertContainsNullWithMessageFails() {
+	public void testAssertContainsNullWithMessageFails() throws Exception {
 		AssertContainsNullWithMessageFailsTrial.runTestDelegate(this);
 	}
 	
 	@Test
-	public void testAssertEqualsNullFails() {
+	public void testAssertEqualsNullFails() throws Exception {
 		AssertEqualsNullFailsTrial.runTestDelegate(this);
 	}
 
 	@Test
-	public void testAssertEqualsNullWithMessageFails() {
+	public void testAssertEqualsNullWithMessageFails() throws Exception {
 		AssertEqualsNullWithMessageFailsTrial.runTestDelegate(this);
 	}
 	
 	@Test
-	public void testAssertNotEqualsNullFails() {
+	public void testAssertNotEqualsNullFails() throws Exception {
 		AssertNotEqualsNullFailsTrial.runTestDelegate(this);
 	}
 	
 	@Test
-	public void testAssertNotEqualsNullNullWithMessageFails() {
+	public void testAssertNotEqualsNullNullWithMessageFails() throws Exception {
 		AssertNotEqualsNullWithMessageFailsTrial.runTestDelegate(this);
 	}
 	
 	@Test
-	public void testAssertNotSameNullFails() {
+	public void testAssertNotSameNullFails() throws Exception {
 		AssertNotSameNullFailsTrial.runTestDelegate(this);
 	}
 	
 	@Test
-	public void testAssertNotSameNullWithMessageFails() {
+	public void testAssertNotSameNullWithMessageFails() throws Exception {
 		AssertNotSameNullWithMessageFailsTrial.runTestDelegate(this);
 	}
 	
 	@Test
-	public void testAssertNotUniformNullFails() {
+	public void testAssertNotUniformNullFails() throws Exception {
 		AssertNotUniformNullFailsTrial.runTestDelegate(this);
 	}
 	
 	@Test
-	public void testAssertNotUniformNullNullWithMessageFails() {
+	public void testAssertNotUniformNullNullWithMessageFails() throws Exception {
 		AssertNotUniformNullWithMessageFailsTrial.runTestDelegate(this);
 	}
 	
 	@Test
-	public void testAssertSameNullFails() {
+	public void testAssertSameNullFails() throws Exception {
 		AssertSameNullFailsTrial.runTestDelegate(this);
 	}
 	
 	@Test
-	public void testAssertSameNullNullWithMessageFails() {
+	public void testAssertSameNullNullWithMessageFails() throws Exception {
 		AssertSameNullWithMessageFailsTrial.runTestDelegate(this);
 	}
 	
 	@Test
-	public void testAssertThrownNullFails() {
+	public void testAssertThrownNullFails() throws Exception {
 		AssertThrownNullFailsTrial.runTestDelegate(this);
 	}
 	
 	@Test
-	public void testAssertThrownNullThrowerFails() {
+	public void testAssertThrownNullThrowerFails() throws Exception {
 		AssertThrownNullThrowerFailsTrial.runTestDelegate(this);
 	}
 	
 	@Test
-	public void testAssertThrownNullThrowerWithMessageFails() {
+	public void testAssertThrownNullThrowerWithMessageFails() throws Exception {
 		AssertThrownNullThrowerWithMessageFailsTrial.runTestDelegate(this);
 	}
 	
 	@Test
-	public void testAssertThrownNullWithMessageFails() {
+	public void testAssertThrownNullWithMessageFails() throws Exception {
 		AssertThrownNullWithMessageFailsTrial.runTestDelegate(this);
 	}
 	
 	@Test
-	public void testAssertThrownUniformNullFails() {
+	public void testAssertThrownUniformNullFails() throws Exception {
 		AssertThrownUniformNullFailsTrial.runTestDelegate(this);
 	}
 	
 	@Test
-	public void testAssertThrownUniformNullWithMessageFails() {
+	public void testAssertThrownUniformNullWithMessageFails() throws Exception {
 		AssertThrownUniformNullWithMessageFailsTrial.runTestDelegate(this);
 	}
 	
 	@Test
-	public void testAssertThrownUniformNullThrowerFailsTrialFails() {
+	public void testAssertThrownUniformNullThrowerFailsTrialFails() throws Exception {
 		AssertThrownUniformNullThrowerFailsTrial.runTestDelegate(this);
 	}
 	
 	@Test
-	public void testAssertUniformNullWithMessageFailsTrialFails() {
+	public void testAssertUniformNullWithMessageFailsTrialFails() throws Exception {
 		AssertUniformNullWithMessageFailsTrial.runTestDelegate(this);
 	}
 	
 	@Test
-	public void testAssertThrownUniformNullThrowerWithMessageFailsTrialFails() {
+	public void testAssertThrownUniformNullThrowerWithMessageFailsTrialFails() throws Exception {
 		AssertThrownUniformNullThrowerWithMessageFailsTrial.runTestDelegate(this);
 	}
 	
 	@Test
-	public void testAssertUniformNullFailsTrialFails() {
+	public void testAssertUniformNullFailsTrialFails() throws Exception {
 		AssertUniformNullFailsTrial.runTestDelegate(this);
 	}
 	

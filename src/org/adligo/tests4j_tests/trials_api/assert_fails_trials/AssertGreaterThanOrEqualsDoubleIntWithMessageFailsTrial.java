@@ -15,6 +15,7 @@ import org.adligo.tests4j.models.shared.trials.ApiTrial;
 import org.adligo.tests4j.models.shared.trials.PackageScope;
 import org.adligo.tests4j.models.shared.trials.Test;
 import org.adligo.tests4j.models.shared.trials.TrialRecursion;
+import org.adligo.tests4j.run.helpers.SystemExitTracker;
 import org.adligo.tests4j_tests.trials_api.common.ExpectedFailureRunner;
 
 @TrialRecursion
@@ -28,7 +29,7 @@ public class AssertGreaterThanOrEqualsDoubleIntWithMessageFailsTrial extends Api
 		assertGreaterThanOrEquals(TEST_ASSERT_FAILS_MESSAGE,1.0, 0);
 	}
 	
-	public static void runTestDelegate(I_Asserts asserts) {
+	public static void runTestDelegate(I_Asserts asserts)  throws Exception {
 		ExpectedFailureRunner runner = new ExpectedFailureRunner();
 		runner.run(AssertGreaterThanOrEqualsDoubleIntWithMessageFailsTrial.class);
 		
@@ -89,10 +90,13 @@ public class AssertGreaterThanOrEqualsDoubleIntWithMessageFailsTrial extends Api
 		StackTraceElement topElement = elements[0];
 		asserts.assertEquals(AssertGreaterThanOrEqualsDoubleIntWithMessageFailsTrial.class.getName(), topElement.getClassName());
 		asserts.assertEquals("testAsserGreaterThanEqualsDoubleIntFailsWithMessage", topElement.getMethodName());
-		asserts.assertEquals(28, topElement.getLineNumber());
+		asserts.assertEquals(29, topElement.getLineNumber());
+		
+		SystemExitTracker tracker =  runner.getSystemExitTracker();
+		asserts.assertEquals(0, tracker.getLastStatus());
 	}
 	
 	public static int getAsserts() {
-		return 34;
+		return 35;
 	}
 }

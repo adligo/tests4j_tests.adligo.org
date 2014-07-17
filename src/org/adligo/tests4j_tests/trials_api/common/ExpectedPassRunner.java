@@ -12,6 +12,7 @@ import org.adligo.tests4j.models.shared.system.I_TrialRunListener;
 import org.adligo.tests4j.models.shared.system.Tests4J_Params;
 import org.adligo.tests4j.models.shared.trials.I_Trial;
 import org.adligo.tests4j.run.Tests4J;
+import org.adligo.tests4j.run.helpers.SystemExitTracker;
 import org.adligo.tests4j.shared.report.summary.SummaryReporter;
 
 public class ExpectedPassRunner implements I_TrialRunListener {
@@ -19,9 +20,10 @@ public class ExpectedPassRunner implements I_TrialRunListener {
 	SummaryReporter silentReporter = new SummaryReporter();
 	
 	private int size = 0;
-	private ArrayBlockingQueue<List<I_TrialResult>> block = new ArrayBlockingQueue<List<I_TrialResult>>(1);
-	private CopyOnWriteArrayList<I_TrialResult> results = new CopyOnWriteArrayList<I_TrialResult>();
-	private ArrayBlockingQueue<I_TrialRunMetadata> metaBlock = new ArrayBlockingQueue<>(1);
+	private final ArrayBlockingQueue<List<I_TrialResult>> block = new ArrayBlockingQueue<List<I_TrialResult>>(1);
+	private final CopyOnWriteArrayList<I_TrialResult> results = new CopyOnWriteArrayList<I_TrialResult>();
+	private final ArrayBlockingQueue<I_TrialRunMetadata> metaBlock = new ArrayBlockingQueue<>(1);
+	private final SystemExitTracker tracker = new SystemExitTracker();
 	
 	public ExpectedPassRunner() {
 		silentReporter.setLogOff();
@@ -42,8 +44,7 @@ public class ExpectedPassRunner implements I_TrialRunListener {
 		silentReporter.setRedirect(false);
 		
 		params.setReporter(silentReporter);
-		//params.setLog(new ConsoleLogger( false));
-		params.setExitAfterLastNotification(false);
+		params.setSystemExit(tracker);
 		
 		Tests4J.run(params, this);
 		try {
@@ -106,6 +107,10 @@ public class ExpectedPassRunner implements I_TrialRunListener {
 			boolean passed) {
 		// TODO Auto-generated method stub
 		
+	}
+	
+	public SystemExitTracker getSystemExitTracker() {
+		return tracker;
 	}
 
 }

@@ -103,6 +103,7 @@ public class RunAllTrials implements I_TrialRunListener {
 		toRet.addTrials(new org.adligo.tests4j_tests.jacoco.plugin.data.common.RunPkgTrials());
 		
 		toRet.addTrials(new org.adligo.tests4j_tests.run.discovery.RunPkgTrials());
+		toRet.addTrials(new org.adligo.tests4j_tests.run.helpers.RunPkgTrials());
 		toRet.addTrials(new org.adligo.tests4j_tests.run.remote.io.RunPkgTrials());
 		toRet.addTrials(new org.adligo.tests4j_tests.run.remote.socket_api.RunPkgTrials());
 		
