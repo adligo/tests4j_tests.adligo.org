@@ -1,14 +1,11 @@
 package org.adligo.tests4j_tests.models.shared.en.trials.asserts;
 
-import org.adligo.tests4j.models.shared.coverage.I_SourceFileCoverage;
 import org.adligo.tests4j.models.shared.en.asserts.Tests4J_AssertionResultMessages;
-import org.adligo.tests4j.models.shared.results.I_SourceFileTrialResult;
 import org.adligo.tests4j.models.shared.trials.SourceFileScope;
-import org.adligo.tests4j.models.shared.trials.SourceFileTrial;
 import org.adligo.tests4j.models.shared.trials.Test;
 import org.adligo.tests4j_tests.base_abstract_trials.SourceFileCountingTrial;
 
-@SourceFileScope (sourceClass=Tests4J_AssertionResultMessages.class)
+@SourceFileScope (sourceClass=Tests4J_AssertionResultMessages.class, minCoverage=69.0)
 public class Tests4J_AssertionResultMessages_Trial extends SourceFileCountingTrial {
 
 	@Test
@@ -81,18 +78,6 @@ public class Tests4J_AssertionResultMessages_Trial extends SourceFileCountingTri
 		assertEquals(Tests4J_AssertionResultMessages.THE_OBJECTS_SHOULD_BE_EQUAL,
 				messages.getTheObjectsShouldBeEqual());
 	}
-
-	@Override
-	public void afterTrialTests(I_SourceFileTrialResult p) {
-		assertCounts(p);
-		
-		if (p.hasRecordedCoverage()) {
-			I_SourceFileCoverage coverage = p.getSourceFileCoverage();
-			assertGreaterThanOrEquals(60.0, coverage.getPercentageCoveredDouble());
-		}
-		super.afterTrialTests(p);
-	}
-	
 
 	@Override
 	public int getTests() {

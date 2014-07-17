@@ -4,7 +4,9 @@ import org.adligo.tests4j.models.shared.results.I_SourceFileTrialResult;
 import org.adligo.tests4j.models.shared.trials.SourceFileTrial;
 
 public abstract class SourceFileCountingTrial extends SourceFileTrial implements I_CountingTrial {
-	public void assertCounts(I_SourceFileTrialResult p) {
+	
+	@Override
+	public void afterTrialTests(I_SourceFileTrialResult p) {
 		assertEquals("The number of Tests is off.", getTests(), p.getTestCount());
 		assertEquals("The number of Asserts is off.",getAsserts(), p.getAssertionCount());
 		assertEquals("The number of Unique Asserts is off.", getUniqueAsserts(), p.getUniqueAssertionCount());

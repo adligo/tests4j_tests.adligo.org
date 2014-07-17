@@ -24,20 +24,6 @@ public class AssertionFailureLocationTrial extends SourceFileCountingTrial {
 		
 		StackAssertions.assertAssertionFailureLocation_StackWasFromTests4J(this, afl);
 	}
-	
-	@Override
-	public void afterTrialTests(I_SourceFileTrialResult p) {
-		assertCounts(p);
-		
-		if (p.hasRecordedCoverage()) {
-			I_SourceFileCoverage coverage = p.getSourceFileCoverage();
-			double pct = coverage.getPercentageCoveredDouble();
-			if (pct < 90.0) {
-				System.out.println("wtf");
-			}
-			assertGreaterThanOrEquals(100.0, pct);
-		}
-	}
 
 	@Override
 	public int getTests() {

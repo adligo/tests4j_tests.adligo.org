@@ -2,14 +2,11 @@ package org.adligo.tests4j_tests.models.shared.asserts;
 
 import org.adligo.tests4j.models.shared.asserts.ExpectedThrownData;
 import org.adligo.tests4j.models.shared.asserts.common.I_Thrower;
-import org.adligo.tests4j.models.shared.coverage.I_SourceFileCoverage;
-import org.adligo.tests4j.models.shared.results.I_SourceFileTrialResult;
 import org.adligo.tests4j.models.shared.trials.SourceFileScope;
-import org.adligo.tests4j.models.shared.trials.SourceFileTrial;
 import org.adligo.tests4j.models.shared.trials.Test;
 import org.adligo.tests4j_tests.base_abstract_trials.SourceFileCountingTrial;
 
-@SourceFileScope (sourceClass=ExpectedThrownData.class)
+@SourceFileScope (sourceClass=ExpectedThrownData.class, minCoverage=70.0)
 public class ExpectedThrownDataTrial extends SourceFileCountingTrial {
 
 	@Test
@@ -23,14 +20,6 @@ public class ExpectedThrownDataTrial extends SourceFileCountingTrial {
 				}
 		});
 		
-		assertThrown(new ExpectedThrownData(new IllegalArgumentException(
-				"ExpectedThrownData requires a non null message.")), 
-			new I_Thrower() {
-				@Override
-				public void run() {
-					new ExpectedThrownData(new IllegalStateException());
-				}
-		});
 	}
 	
 	@Test
@@ -68,28 +57,17 @@ public class ExpectedThrownDataTrial extends SourceFileCountingTrial {
 	}
 	
 	@Override
-	public void afterTrialTests(I_SourceFileTrialResult p) {
-		assertCounts(p);
-		
-		if (p.hasRecordedCoverage()) {
-			I_SourceFileCoverage coverage = p.getSourceFileCoverage();
-			//hmm this should be 70ish
-			assertGreaterThanOrEquals(70.0, coverage.getPercentageCoveredDouble());
-		}
-	}
-	
-	@Override
 	public int getTests() {
 		return 3;
 	}
 
 	@Override
 	public int getAsserts() {
-		return 14;
+		return 13;
 	}
 
 	@Override
 	public int getUniqueAsserts() {
-		return 8;
+		return 7;
 	}
 }

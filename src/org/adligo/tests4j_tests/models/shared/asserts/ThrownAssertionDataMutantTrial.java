@@ -3,14 +3,11 @@ package org.adligo.tests4j_tests.models.shared.asserts;
 import java.util.Set;
 
 import org.adligo.tests4j.models.shared.asserts.ThrownAssertionDataMutant;
-import org.adligo.tests4j.models.shared.coverage.I_SourceFileCoverage;
-import org.adligo.tests4j.models.shared.results.I_SourceFileTrialResult;
 import org.adligo.tests4j.models.shared.trials.SourceFileScope;
-import org.adligo.tests4j.models.shared.trials.SourceFileTrial;
 import org.adligo.tests4j.models.shared.trials.Test;
 import org.adligo.tests4j_tests.base_abstract_trials.SourceFileCountingTrial;
 
-@SourceFileScope (sourceClass=ThrownAssertionDataMutant.class)
+@SourceFileScope (sourceClass=ThrownAssertionDataMutant.class, minCoverage=70.0)
 public class ThrownAssertionDataMutantTrial extends SourceFileCountingTrial {
 	
 	@Test
@@ -88,17 +85,6 @@ public class ThrownAssertionDataMutantTrial extends SourceFileCountingTrial {
 		assertEquals(IllegalArgumentException.class, 
 				a.getData(ThrownAssertionDataMutant.EXPECTED_THROWABLE_CLASS));
 	}
-	
-	@Override
-	public void afterTrialTests(I_SourceFileTrialResult p) {
-		assertCounts(p);
-		
-		if (p.hasRecordedCoverage()) {
-			I_SourceFileCoverage coverage = p.getSourceFileCoverage();
-			assertGreaterThanOrEquals(70.0, coverage.getPercentageCoveredDouble());
-		}
-	}
-	
 
 	@Override
 	public int getTests() {

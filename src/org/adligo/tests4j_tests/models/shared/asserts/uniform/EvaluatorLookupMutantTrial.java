@@ -5,13 +5,11 @@ import java.util.Map;
 import org.adligo.tests4j.models.shared.asserts.uniform.EvaluatorLookupMutant;
 import org.adligo.tests4j.models.shared.asserts.uniform.I_UniformAssertionEvaluator;
 import org.adligo.tests4j.models.shared.asserts.uniform.StringUniformEvaluator;
-import org.adligo.tests4j.models.shared.coverage.I_SourceFileCoverage;
-import org.adligo.tests4j.models.shared.results.I_SourceFileTrialResult;
 import org.adligo.tests4j.models.shared.trials.SourceFileScope;
 import org.adligo.tests4j.models.shared.trials.Test;
 import org.adligo.tests4j_tests.base_abstract_trials.SourceFileCountingTrial;
 
-@SourceFileScope (sourceClass=EvaluatorLookupMutant.class)
+@SourceFileScope (sourceClass=EvaluatorLookupMutant.class, minCoverage=88.0)
 public class EvaluatorLookupMutantTrial extends SourceFileCountingTrial {
 
 	@Test
@@ -50,18 +48,6 @@ public class EvaluatorLookupMutantTrial extends SourceFileCountingTrial {
 		data = elm.getLookupData();
 		assertNotNull(data);
 		assertEquals(0, data.size());
-	}
-	
-	@Override
-	public void afterTrialTests(I_SourceFileTrialResult p) {
-		assertCounts(p);
-		
-		if (p.hasRecordedCoverage()) {
-			I_SourceFileCoverage coverage = p.getSourceFileCoverage();
-			//hmm this should be 95, looks like multithreading
-			double pct = coverage.getPercentageCoveredDouble();
-			assertGreaterThanOrEquals(88.0, pct);
-		}
 	}
 
 

@@ -2,13 +2,11 @@ package org.adligo.tests4j_tests.models.shared.asserts.uniform;
 
 import org.adligo.tests4j.models.shared.asserts.uniform.Evaluation;
 import org.adligo.tests4j.models.shared.asserts.uniform.EvaluationMutant;
-import org.adligo.tests4j.models.shared.coverage.I_SourceFileCoverage;
-import org.adligo.tests4j.models.shared.results.I_SourceFileTrialResult;
 import org.adligo.tests4j.models.shared.trials.SourceFileScope;
 import org.adligo.tests4j.models.shared.trials.Test;
 import org.adligo.tests4j_tests.base_abstract_trials.SourceFileCountingTrial;
 
-@SourceFileScope (sourceClass=Evaluation.class)
+@SourceFileScope (sourceClass=Evaluation.class, minCoverage=95.0)
 public class EvaluationTrial extends SourceFileCountingTrial {
 
 
@@ -46,19 +44,6 @@ public class EvaluationTrial extends SourceFileCountingTrial {
 		assertEquals("failure reason", e.getFailureReason());
 		assertEquals("hey data", e.getData());
 	}
-	
-	@Override
-	public void afterTrialTests(I_SourceFileTrialResult p) {
-		assertCounts(p);
-		
-		if (p.hasRecordedCoverage()) {
-			I_SourceFileCoverage coverage = p.getSourceFileCoverage();
-			//hmm this should be 95, looks like multithreading
-			double pct = coverage.getPercentageCoveredDouble();
-			assertGreaterThanOrEquals(95.0, pct);
-		}
-	}
-
 
 	@Override
 	public int getTests() {

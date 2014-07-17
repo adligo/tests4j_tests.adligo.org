@@ -4,18 +4,16 @@ package org.adligo.tests4j_tests.models.shared.metadata;
 import java.util.List;
 
 import org.adligo.tests4j.models.shared.common.TrialType;
-import org.adligo.tests4j.models.shared.coverage.I_SourceFileCoverage;
 import org.adligo.tests4j.models.shared.metadata.I_TestMetadata;
 import org.adligo.tests4j.models.shared.metadata.TestMetadataMutant;
 import org.adligo.tests4j.models.shared.metadata.TrialMetadataMutant;
 import org.adligo.tests4j.models.shared.metadata.UseCaseMetadata;
-import org.adligo.tests4j.models.shared.results.I_SourceFileTrialResult;
 import org.adligo.tests4j.models.shared.trials.SourceFileScope;
 import org.adligo.tests4j.models.shared.trials.Test;
 import org.adligo.tests4j.models.shared.xml.XML_Builder;
 import org.adligo.tests4j_tests.base_abstract_trials.SourceFileCountingTrial;
 
-@SourceFileScope (sourceClass=TrialMetadataMutant.class)
+@SourceFileScope (sourceClass=TrialMetadataMutant.class, minCoverage=60.0)
 public class TrialMetadataMutantTrial extends SourceFileCountingTrial {
 
 	@Test
@@ -188,15 +186,6 @@ public class TrialMetadataMutantTrial extends SourceFileCountingTrial {
 				"\t\t\t<testMetadata name=\"bTest\" ignored=\"true\" />\n" +
 				"\t\t</tests>\n" +
 				"\t</trialMetadata>\n", "\n" + result);
-	}
-	
-	@Override
-	public void afterTrialTests(I_SourceFileTrialResult p) {
-		assertCounts(p);
-		if (p.hasRecordedCoverage()) {
-			I_SourceFileCoverage coverage = p.getSourceFileCoverage();
-			assertGreaterThanOrEquals(60.00, coverage.getPercentageCoveredDouble());
-		}
 	}
 	
 	@Override

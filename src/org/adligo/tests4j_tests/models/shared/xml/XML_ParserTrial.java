@@ -1,13 +1,11 @@
 package org.adligo.tests4j_tests.models.shared.xml;
 
-import org.adligo.tests4j.models.shared.coverage.I_SourceFileCoverage;
-import org.adligo.tests4j.models.shared.results.I_SourceFileTrialResult;
 import org.adligo.tests4j.models.shared.trials.SourceFileScope;
 import org.adligo.tests4j.models.shared.trials.Test;
 import org.adligo.tests4j.models.shared.xml.XML_Parser;
 import org.adligo.tests4j_tests.base_abstract_trials.SourceFileCountingTrial;
 
-@SourceFileScope (sourceClass=XML_Parser.class)
+@SourceFileScope (sourceClass=XML_Parser.class, minCoverage=89.0)
 public class XML_ParserTrial extends SourceFileCountingTrial {
 
 	@Test
@@ -89,14 +87,6 @@ public class XML_ParserTrial extends SourceFileCountingTrial {
 		
 		value = XML_Parser.getAttributeValue("<hey you\r=\n \"guys\" ><he/></hey>", "you");
 		assertEquals("guys", value);
-	}
-	@Override
-	public void afterTrialTests(I_SourceFileTrialResult p) {
-		assertCounts(p);
-		if (p.hasRecordedCoverage()) {
-			I_SourceFileCoverage coverage = p.getSourceFileCoverage();
-			assertGreaterThanOrEquals(88.00, coverage.getPercentageCoveredDouble());
-		}
 	}
 	
 	@Override

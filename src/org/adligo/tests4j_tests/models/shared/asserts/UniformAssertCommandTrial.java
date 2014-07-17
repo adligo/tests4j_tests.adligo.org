@@ -1,7 +1,5 @@
 package org.adligo.tests4j_tests.models.shared.asserts;
 
-import java.util.Map;
-
 import org.adligo.tests4j.models.shared.asserts.CompareAssertionData;
 import org.adligo.tests4j.models.shared.asserts.ExpectedThrownData;
 import org.adligo.tests4j.models.shared.asserts.UniformAssertCommand;
@@ -10,15 +8,12 @@ import org.adligo.tests4j.models.shared.asserts.common.I_Thrower;
 import org.adligo.tests4j.models.shared.asserts.line_text.I_TextLinesCompareResult;
 import org.adligo.tests4j.models.shared.asserts.uniform.I_Evaluation;
 import org.adligo.tests4j.models.shared.asserts.uniform.StringUniformEvaluator;
-import org.adligo.tests4j.models.shared.coverage.I_SourceFileCoverage;
 import org.adligo.tests4j.models.shared.en.asserts.Tests4J_AssertionResultMessages;
-import org.adligo.tests4j.models.shared.results.I_SourceFileTrialResult;
 import org.adligo.tests4j.models.shared.trials.SourceFileScope;
-import org.adligo.tests4j.models.shared.trials.SourceFileTrial;
 import org.adligo.tests4j.models.shared.trials.Test;
 import org.adligo.tests4j_tests.base_abstract_trials.SourceFileCountingTrial;
 
-@SourceFileScope (sourceClass=UniformAssertCommand.class)
+@SourceFileScope (sourceClass=UniformAssertCommand.class, minCoverage=70.0)
 public class UniformAssertCommandTrial extends SourceFileCountingTrial {
 
 	@Test
@@ -90,17 +85,6 @@ public class UniformAssertCommandTrial extends SourceFileCountingTrial {
 		assertFalse(data.isMatched());
 		
 	}
-	
-	@Override
-	public void afterTrialTests(I_SourceFileTrialResult p) {
-		assertCounts(p);
-		
-		if (p.hasRecordedCoverage()) {
-			I_SourceFileCoverage coverage = p.getSourceFileCoverage();
-			assertGreaterThanOrEquals(70.0, coverage.getPercentageCoveredDouble());
-		}
-	}
-
 
 	@Override
 	public int getTests() {

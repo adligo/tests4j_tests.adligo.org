@@ -10,23 +10,13 @@ import org.adligo.tests4j_tests.base_abstract_trials.SourceFileCountingTrial;
 import org.adligo.tests4j_tests.models.shared.common.mocks.BaseMockClass;
 import org.adligo.tests4j_tests.models.shared.common.mocks.ChildMockClass;
 
-@SourceFileScope (sourceClass=ClassUtils.class)
+@SourceFileScope (sourceClass=ClassUtils.class, minCoverage=89.0)
 public class ClassUtilsTrial extends SourceFileCountingTrial {
 
 	@Test
 	public void testMethods() {
 		assertTrue(ClassUtils.isSubType(ChildMockClass.class, BaseMockClass.class));
 		assertFalse(ClassUtils.isSubType(BaseMockClass.class, ChildMockClass.class));
-	}
-
-	@Override
-	public void afterTrialTests(I_SourceFileTrialResult p) {
-		assertCounts(p);
-		
-		if (p.hasRecordedCoverage()) {
-			I_SourceFileCoverage coverage = p.getSourceFileCoverage();
-			assertGreaterThanOrEquals(89.0, coverage.getPercentageCoveredDouble());
-		}
 	}
 
 	@Override

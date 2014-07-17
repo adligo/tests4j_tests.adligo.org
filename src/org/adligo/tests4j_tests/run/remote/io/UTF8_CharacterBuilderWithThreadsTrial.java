@@ -3,16 +3,15 @@ package org.adligo.tests4j_tests.run.remote.io;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import org.adligo.tests4j.models.shared.coverage.I_SourceFileCoverage;
-import org.adligo.tests4j.models.shared.results.I_SourceFileTrialResult;
 import org.adligo.tests4j.models.shared.trials.AdditionalInstrumentation;
 import org.adligo.tests4j.models.shared.trials.AfterTrial;
 import org.adligo.tests4j.models.shared.trials.BeforeTrial;
 import org.adligo.tests4j.models.shared.trials.SourceFileScope;
-import org.adligo.tests4j.models.shared.trials.SourceFileTrial;
 import org.adligo.tests4j.models.shared.trials.Test;
+import org.adligo.tests4j.run.helpers.Tests4J_ThreadFactory;
 import org.adligo.tests4j.run.remote.io.UTF8_CharacterBuilder;
 import org.adligo.tests4j_tests.base_abstract_trials.SourceFileCountingTrial;
 import org.adligo.tests4j_tests.run.remote.io.helpers.I_UTF8_TestProgressMonitor;
@@ -31,7 +30,7 @@ import org.adligo.tests4j_tests.run.remote.io.helpers.UTF8_Generator;
  * @author scott
  *
  */
-@SourceFileScope (sourceClass=UTF8_CharacterBuilder.class)
+@SourceFileScope (sourceClass=UTF8_CharacterBuilder.class, minCoverage=0.0)
 @AdditionalInstrumentation (javaPackages="org.adligo.tests4j_tests.run.remote.nio.helpers")
 public class UTF8_CharacterBuilderWithThreadsTrial extends SourceFileCountingTrial implements I_UTF8_TestProgressMonitor {
 	private static final int threadCount = 32;
@@ -66,7 +65,29 @@ public class UTF8_CharacterBuilderWithThreadsTrial extends SourceFileCountingTri
 	@BeforeTrial
 	public static void beforeTrial() {
 		System.out.println("charGroupCount is " + charGroupCount);
-		exetutor = Executors.newFixedThreadPool(8);
+		Thread ct = Thread.currentThread();
+		ThreadGroup group = ct.getThreadGroup();
+		String groupName = group.getName();
+		if (groupName.indexOf(Tests4J_ThreadFactory.TRIAL_THREAD_NAME) == -1) {
+			while (group != null) {
+				group = group.getParent();
+				if (group != null) {
+					String nextName = group.getName();
+					if (nextName.indexOf(Tests4J_ThreadFactory.TRIAL_THREAD_NAME) != -1) {
+						break;
+					}
+				}
+			}
+		}
+		final ThreadGroup fixedGroup = group;
+		final AtomicInteger id = new AtomicInteger();
+		exetutor = Executors.newFixedThreadPool(8, new ThreadFactory() {
+			
+			@Override
+			public Thread newThread(Runnable r) {
+				return new Thread(fixedGroup, r, "UGF8_CharacterBuilderWithThreadsTrialThread-" + id.addAndGet(1));
+			}
+		});
 		for (long i = 0; i < UTF8_Generator.SIX_BYTE_MAX_CODE_POINT_LONG; i = i + INCREMENT) {
 			charGroups.add(new StartCapture(i, CAPTURE));
 		}
@@ -96,6 +117,7 @@ public class UTF8_CharacterBuilderWithThreadsTrial extends SourceFileCountingTri
 				return;
 			}
 		}
+		System.out.print("hey");
 	}
 
 	@Override
@@ -105,27 +127,6 @@ public class UTF8_CharacterBuilderWithThreadsTrial extends SourceFileCountingTri
 		double pct = dc/max * 100;
 		log(this.getClass().getName() +  " at " + ((int) pct) + "% " +charGroupCount);
 	}
-	
-	/**
-	 * (non-Javadoc)
-	 * @see org.adligo.tests4j.models.shared.trials.SourceFileTrial#afterTrialTests(org.adligo.tests4j.models.shared.coverage.I_SourceFileCoverage)
-	 */
-	@Override
-	public void afterTrialTests(I_SourceFileTrialResult p) {
-		assertCounts(p);
-		
-		//not sure what I am missing, I probably need 
-		//to finish the eclipse plug-in coverage source-lighter
-		
-		if (p.hasRecordedCoverage()) {
-			I_SourceFileCoverage cover =  p.getSourceFileCoverage();
-			//hmm I think I am getting 22.0% here but perhaps the threads/class loaders are 
-			//causing this to be wrong
-			assertGreaterThanOrEquals(0.0,cover.getPercentageCoveredDouble());
-		}
-	}
-
-	
 
 	@Override
 	public int getTests() {

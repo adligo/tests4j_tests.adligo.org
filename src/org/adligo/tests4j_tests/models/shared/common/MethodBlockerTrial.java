@@ -5,15 +5,14 @@ import java.util.Collections;
 import org.adligo.tests4j.models.shared.asserts.ExpectedThrownData;
 import org.adligo.tests4j.models.shared.asserts.common.I_Thrower;
 import org.adligo.tests4j.models.shared.common.MethodBlocker;
-import org.adligo.tests4j.models.shared.coverage.I_SourceFileCoverage;
-import org.adligo.tests4j.models.shared.results.I_SourceFileTrialResult;
+import org.adligo.tests4j.models.shared.trials.AdditionalInstrumentation;
 import org.adligo.tests4j.models.shared.trials.SourceFileScope;
-import org.adligo.tests4j.models.shared.trials.SourceFileTrial;
 import org.adligo.tests4j.models.shared.trials.Test;
 import org.adligo.tests4j_tests.base_abstract_trials.SourceFileCountingTrial;
 import org.adligo.tests4j_tests.models.shared.common.mocks.MockWithMethodBlocker;
 
-@SourceFileScope (sourceClass=MethodBlocker.class)
+@SourceFileScope (sourceClass=MethodBlocker.class, minCoverage=71.0)
+@AdditionalInstrumentation (javaPackages="org.adligo.tests4j_tests.models.shared.common.mocks")
 public class MethodBlockerTrial extends SourceFileCountingTrial {
 	
 	
@@ -134,19 +133,6 @@ public class MethodBlockerTrial extends SourceFileCountingTrial {
 		
 	}
 	
-	
-	
-	@Override
-	public void afterTrialTests(I_SourceFileTrialResult p) {
-		assertCounts(p);
-		
-		if (p.hasRecordedCoverage()) {
-			I_SourceFileCoverage coverage = p.getSourceFileCoverage();
-			assertGreaterThanOrEquals(17.0, coverage.getPercentageCoveredDouble());
-		}
-	}
-	
-
 	@Override
 	public int getTests() {
 		return 3;

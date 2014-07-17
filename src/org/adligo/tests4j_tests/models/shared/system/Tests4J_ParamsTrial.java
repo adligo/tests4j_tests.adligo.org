@@ -4,20 +4,14 @@ import java.util.List;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
 
-import org.adligo.tests4j.models.shared.coverage.I_SourceFileCoverage;
-import org.adligo.tests4j.models.shared.results.I_SourceFileTrialResult;
-import org.adligo.tests4j.models.shared.system.I_CoveragePlugin;
-import org.adligo.tests4j.models.shared.system.I_ThreadCount;
 import org.adligo.tests4j.models.shared.system.Tests4J_Params;
 import org.adligo.tests4j.models.shared.trials.I_Trial;
 import org.adligo.tests4j.models.shared.trials.SourceFileScope;
-import org.adligo.tests4j.models.shared.trials.SourceFileTrial;
 import org.adligo.tests4j.models.shared.trials.Test;
-import org.adligo.tests4j_4jacoco.plugin.ScopedJacocoPlugin;
 import org.adligo.tests4j_tests.base_abstract_trials.SourceFileCountingTrial;
 
 
-@SourceFileScope(sourceClass=Tests4J_Params.class)
+@SourceFileScope(sourceClass=Tests4J_Params.class,minCoverage=6.0)
 public class Tests4J_ParamsTrial extends SourceFileCountingTrial {
 	
 	@SuppressWarnings("unused") //this fixes a issue 
@@ -86,15 +80,6 @@ public class Tests4J_ParamsTrial extends SourceFileCountingTrial {
 		}
 	}
 	*/
-	
-	@Override
-	public void afterTrialTests(I_SourceFileTrialResult p) {
-		assertCounts(p);
-		if (p.hasRecordedCoverage()) {
-			I_SourceFileCoverage coverage = p.getSourceFileCoverage();
-			assertGreaterThanOrEquals(6.00, coverage.getPercentageCoveredDouble());
-		}
-	}
 	
 	@Override
 	public int getTests() {

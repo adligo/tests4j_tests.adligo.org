@@ -20,7 +20,7 @@ public class CommonPackageMetaTrial  extends MetaTrial {
 	private RelevantClassesWithTrialsCalculator calc;
 	
 	public CommonPackageMetaTrial() {
-		super(75.0, 100.0);
+		super(90.0, 100.0);
 	}
 	
 
@@ -39,7 +39,7 @@ public class CommonPackageMetaTrial  extends MetaTrial {
 		// @Test methods in the MetaTrial implementation.
 		assertGreaterThanOrEquals(7.0, 0.0 + results.getTestsPassed());
 		
-		assertGreaterThanOrEquals(26.0 ,0.0 + results.getAsserts());
+		assertGreaterThanOrEquals(24.0 ,0.0 + results.getAsserts());
 		assertGreaterThanOrEquals(19.0 ,0.0 + results.getUniqueAsserts());
 		
 		super.afterNonMetaTrialsRun(results);
@@ -52,7 +52,7 @@ public class CommonPackageMetaTrial  extends MetaTrial {
 		// includes this
 		assertGreaterThanOrEquals(6.0, 0.0 + metadata.getAllTrialsCount());
 		//includes three tests in here
-		assertGreaterThanOrEquals(10.0, 0.0 + metadata.getAllTestsCount());
+		assertGreaterThanOrEquals(8.0, 0.0 + metadata.getAllTestsCount());
 		//TODO assert percentage of source files with trials
 		super.afterMetadataCalculated(metadata);
 		

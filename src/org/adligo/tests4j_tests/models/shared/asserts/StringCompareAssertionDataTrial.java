@@ -8,7 +8,7 @@ import org.adligo.tests4j.models.shared.asserts.CompareAssertionData;
 import org.adligo.tests4j.models.shared.asserts.ExpectedThrownData;
 import org.adligo.tests4j.models.shared.asserts.StringCompareAssertionData;
 import org.adligo.tests4j.models.shared.asserts.common.I_Thrower;
-import org.adligo.tests4j.models.shared.asserts.line_text.Diffndexes;
+import org.adligo.tests4j.models.shared.asserts.line_text.DiffIndexes;
 import org.adligo.tests4j.models.shared.asserts.line_text.DiffIndexesPair;
 import org.adligo.tests4j.models.shared.asserts.line_text.I_LineDiff;
 import org.adligo.tests4j.models.shared.asserts.line_text.I_TextLinesCompareResult;
@@ -21,7 +21,7 @@ import org.adligo.tests4j.models.shared.trials.SourceFileScope;
 import org.adligo.tests4j.models.shared.trials.Test;
 import org.adligo.tests4j_tests.base_abstract_trials.SourceFileCountingTrial;
 
-@SourceFileScope (sourceClass=StringCompareAssertionData.class)
+@SourceFileScope (sourceClass=StringCompareAssertionData.class, minCoverage=84.0)
 public class StringCompareAssertionDataTrial extends SourceFileCountingTrial {
 
 	@Test
@@ -42,7 +42,7 @@ public class StringCompareAssertionDataTrial extends SourceFileCountingTrial {
 	public void testConstructorAndGetters() {
 		List<I_LineDiff> diffs = new ArrayList<I_LineDiff>();
 		LineDiffMutant ldm = new LineDiffMutant();
-		ldm.setIndexes(new DiffIndexesPair(new Diffndexes(3, 3), new Diffndexes(3, 3)));
+		ldm.setIndexes(new DiffIndexesPair(new DiffIndexes(3, 3), new DiffIndexes(3, 3)));
 		diffs.add(ldm);
 		I_TextLinesCompareResult result =  
 				new TextLinesCompareResult(new TextLines("hey", true), 
@@ -71,7 +71,7 @@ public class StringCompareAssertionDataTrial extends SourceFileCountingTrial {
 	public void testEqualsAndHashCode() {
 		List<I_LineDiff> diffs = new ArrayList<I_LineDiff>();
 		LineDiffMutant ldm = new LineDiffMutant();
-		ldm.setIndexes(new DiffIndexesPair(new Diffndexes(3, 3), new Diffndexes(3, 3)));
+		ldm.setIndexes(new DiffIndexesPair(new DiffIndexes(3, 3), new DiffIndexes(3, 3)));
 		diffs.add(ldm);
 		I_TextLinesCompareResult result =  
 				new TextLinesCompareResult(new TextLines("hey", true), 
@@ -114,7 +114,7 @@ public class StringCompareAssertionDataTrial extends SourceFileCountingTrial {
 	public void testToString() {
 		List<I_LineDiff> diffs = new ArrayList<I_LineDiff>();
 		LineDiffMutant ldm = new LineDiffMutant();
-		ldm.setIndexes(new DiffIndexesPair(new Diffndexes(3, 3), new Diffndexes(3, 3)));
+		ldm.setIndexes(new DiffIndexesPair(new DiffIndexes(3, 3), new DiffIndexes(3, 3)));
 		diffs.add(ldm);
 		I_TextLinesCompareResult result =  
 				new TextLinesCompareResult(new TextLines("hey", true), 
@@ -125,15 +125,6 @@ public class StringCompareAssertionDataTrial extends SourceFileCountingTrial {
 				+ "[example=TextLines [lines=[hey]], actual=TextLines [lines=[hey2]], "
 				+ "matched=false, lineDiffs=[LineDiffMutant [type=null, exampleLineNbr=0, "
 				+ "actualLineNbr=null]]], expected=hey, actual=hey2]", a.toString());
-	}
-	@Override
-	public void afterTrialTests(I_SourceFileTrialResult p) {
-		assertCounts(p);
-		
-		if (p.hasRecordedCoverage()) {
-			I_SourceFileCoverage coverage = p.getSourceFileCoverage();
-			assertGreaterThanOrEquals(84.0, coverage.getPercentageCoveredDouble());
-		}
 	}
 	
 	@Override

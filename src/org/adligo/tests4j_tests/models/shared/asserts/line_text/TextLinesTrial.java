@@ -1,13 +1,11 @@
 package org.adligo.tests4j_tests.models.shared.asserts.line_text;
 
 import org.adligo.tests4j.models.shared.asserts.line_text.TextLines;
-import org.adligo.tests4j.models.shared.coverage.I_SourceFileCoverage;
-import org.adligo.tests4j.models.shared.results.I_SourceFileTrialResult;
 import org.adligo.tests4j.models.shared.trials.SourceFileScope;
 import org.adligo.tests4j.models.shared.trials.Test;
 import org.adligo.tests4j_tests.base_abstract_trials.SourceFileCountingTrial;
 
-@SourceFileScope (sourceClass=TextLines.class)
+@SourceFileScope (sourceClass=TextLines.class,minCoverage=97.0)
 public class TextLinesTrial extends SourceFileCountingTrial {
 
 	
@@ -83,16 +81,6 @@ public class TextLinesTrial extends SourceFileCountingTrial {
 		assertEquals("TextLines [lines=[a\n, b]]", actual);
 	}
 	
-	@Override
-	public void afterTrialTests(I_SourceFileTrialResult p) {
-		assertCounts(p);
-		
-		if (p.hasRecordedCoverage()) {
-			I_SourceFileCoverage coverage = p.getSourceFileCoverage();
-			assertGreaterThanOrEquals(97.0, coverage.getPercentageCoveredDouble());
-		}
-	}
-
 	
 	@Override
 	public int getTests() {

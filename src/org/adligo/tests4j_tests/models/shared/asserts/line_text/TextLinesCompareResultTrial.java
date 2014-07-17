@@ -16,7 +16,7 @@ import org.adligo.tests4j.models.shared.trials.SourceFileScope;
 import org.adligo.tests4j.models.shared.trials.Test;
 import org.adligo.tests4j_tests.base_abstract_trials.SourceFileCountingTrial;
 
-@SourceFileScope (sourceClass=TextLinesCompareResult.class)
+@SourceFileScope (sourceClass=TextLinesCompareResult.class, minCoverage=60.0)
 public class TextLinesCompareResultTrial extends SourceFileCountingTrial {
 
 	
@@ -63,17 +63,6 @@ public class TextLinesCompareResultTrial extends SourceFileCountingTrial {
 				+ "lineDiffs=[LineDiffMutant [type=MISSING_EXAMPLE_LINE, "
 				+ "exampleLineNbr=0, actualLineNbr=null]]]",result.toString());
 	}
-	
-	@Override
-	public void afterTrialTests(I_SourceFileTrialResult p) {
-		assertCounts(p);
-		
-		if (p.hasRecordedCoverage()) {
-			I_SourceFileCoverage coverage = p.getSourceFileCoverage();
-			assertGreaterThanOrEquals(96.0, coverage.getPercentageCoveredDouble());
-		}
-	}
-
 	
 	@Override
 	public int getTests() {

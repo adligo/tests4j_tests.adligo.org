@@ -3,17 +3,13 @@ package org.adligo.tests4j_tests.models.shared.metadata;
 
 import org.adligo.tests4j.models.shared.asserts.ExpectedThrownData;
 import org.adligo.tests4j.models.shared.asserts.common.I_Thrower;
-import org.adligo.tests4j.models.shared.coverage.I_SourceFileCoverage;
-import org.adligo.tests4j.models.shared.metadata.TestMetadata;
-import org.adligo.tests4j.models.shared.metadata.TestMetadataMutant;
 import org.adligo.tests4j.models.shared.metadata.UseCaseMetadata;
-import org.adligo.tests4j.models.shared.results.I_SourceFileTrialResult;
 import org.adligo.tests4j.models.shared.trials.SourceFileScope;
 import org.adligo.tests4j.models.shared.trials.Test;
 import org.adligo.tests4j.models.shared.xml.XML_Builder;
 import org.adligo.tests4j_tests.base_abstract_trials.SourceFileCountingTrial;
 
-@SourceFileScope (sourceClass=UseCaseMetadata.class)
+@SourceFileScope (sourceClass=UseCaseMetadata.class, minCoverage=86.0)
 public class UseCaseMetadataTrial extends SourceFileCountingTrial {
 
 	
@@ -111,15 +107,6 @@ public class UseCaseMetadataTrial extends SourceFileCountingTrial {
 	public void testToString() throws Exception {
 		UseCaseMetadata uc = new UseCaseMetadata("exception", "throw");
 		assertEquals("UseCase [nown=exception, verb=throw]", uc.toString());
-	}
-	
-	@Override
-	public void afterTrialTests(I_SourceFileTrialResult p) {
-		assertCounts(p);
-		if (p.hasRecordedCoverage()) {
-			I_SourceFileCoverage coverage = p.getSourceFileCoverage();
-			assertGreaterThanOrEquals(86.00, coverage.getPercentageCoveredDouble());
-		}
 	}
 	
 	@Override

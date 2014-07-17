@@ -2,27 +2,20 @@ package org.adligo.tests4j_tests.models.shared.asserts;
 
 import org.adligo.tests4j.models.shared.asserts.AssertionProcessor;
 import org.adligo.tests4j.models.shared.asserts.BooleanAssertCommand;
-import org.adligo.tests4j.models.shared.asserts.CompareAssertionData;
 import org.adligo.tests4j.models.shared.asserts.ExpectedThrownData;
 import org.adligo.tests4j.models.shared.asserts.ThrownAssertCommand;
 import org.adligo.tests4j.models.shared.asserts.ThrownAssertionData;
-import org.adligo.tests4j.models.shared.asserts.UniformAssertCommand;
-import org.adligo.tests4j.models.shared.asserts.UniformThrownAssertCommand;
 import org.adligo.tests4j.models.shared.asserts.common.AssertType;
 import org.adligo.tests4j.models.shared.asserts.common.I_AssertCommand;
 import org.adligo.tests4j.models.shared.asserts.common.I_AssertionData;
 import org.adligo.tests4j.models.shared.asserts.common.I_Thrower;
-import org.adligo.tests4j.models.shared.asserts.uniform.StringUniformEvaluator;
-import org.adligo.tests4j.models.shared.asserts.uniform.ThrowableUniformEvaluator;
-import org.adligo.tests4j.models.shared.coverage.I_SourceFileCoverage;
-import org.adligo.tests4j.models.shared.results.I_SourceFileTrialResult;
 import org.adligo.tests4j.models.shared.results.I_TestFailure;
 import org.adligo.tests4j.models.shared.system.I_AssertListener;
 import org.adligo.tests4j.models.shared.trials.SourceFileScope;
 import org.adligo.tests4j.models.shared.trials.Test;
 import org.adligo.tests4j_tests.base_abstract_trials.SourceFileCountingTrial;
 
-@SourceFileScope (sourceClass=AssertionProcessor.class)
+@SourceFileScope (sourceClass=AssertionProcessor.class, minCoverage=80.0)
 public class AssertionProcessorTrial extends SourceFileCountingTrial implements I_AssertListener, I_Thrower {
 	private I_AssertCommand lastAssertCommand;
 	private I_TestFailure lastTestFailure;
@@ -65,7 +58,7 @@ public class AssertionProcessorTrial extends SourceFileCountingTrial implements 
 		StackTraceElement e = elements[0];
 		assertEquals(AssertionProcessorTrial.class.getName(),  e.getClassName());
 		assertEquals("testSimple",  e.getMethodName());
-		assertEquals(52,  e.getLineNumber());
+		assertEquals(45,  e.getLineNumber());
 		
 		StackAssertions.assertAssertionFailureLocation_StackWasFromTests4J(this, locationFailed);
 		
@@ -95,7 +88,7 @@ public class AssertionProcessorTrial extends SourceFileCountingTrial implements 
 		StackTraceElement e = elements[0];
 		assertEquals(AssertionProcessorTrial.class.getName(),  e.getClassName());
 		assertEquals("testThrown",  e.getMethodName());
-		assertEquals(84,  e.getLineNumber());
+		assertEquals(77,  e.getLineNumber());
 		
 		StackAssertions.assertAssertionFailureLocation_StackWasFromTests4J(this, locationFailed);
 		
@@ -131,16 +124,6 @@ public class AssertionProcessorTrial extends SourceFileCountingTrial implements 
 	public void run() {
 		if (throwable != null) {
 			throw throwable;
-		}
-	}
-
-	@Override
-	public void afterTrialTests(I_SourceFileTrialResult p) {
-		assertCounts(p);
-		
-		if (p.hasRecordedCoverage()) {
-			I_SourceFileCoverage coverage = p.getSourceFileCoverage();
-			assertGreaterThanOrEquals(80.0, coverage.getPercentageCoveredDouble());
 		}
 	}
 

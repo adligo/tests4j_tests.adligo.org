@@ -98,16 +98,6 @@ public class TestMetadataTrial extends SourceFileCountingTrial {
 	}
 	
 	@Override
-	public void afterTrialTests(I_SourceFileTrialResult p) {
-		assertCounts(p);
-		if (p.hasRecordedCoverage()) {
-			I_SourceFileCoverage coverage = p.getSourceFileCoverage();
-			//hmm this should be 90ish, I think theres another bug in coverage
-			assertGreaterThanOrEquals(20.00, coverage.getPercentageCoveredDouble());
-		}
-	}
-	
-	@Override
 	public int getTests() {
 		return 3;
 	}

@@ -9,13 +9,11 @@ import org.adligo.tests4j.models.shared.asserts.line_text.I_TextLines;
 import org.adligo.tests4j.models.shared.asserts.line_text.I_TextLinesCompareResult;
 import org.adligo.tests4j.models.shared.asserts.line_text.LineDiffType;
 import org.adligo.tests4j.models.shared.asserts.line_text.TextLinesCompare;
-import org.adligo.tests4j.models.shared.coverage.I_SourceFileCoverage;
-import org.adligo.tests4j.models.shared.results.I_SourceFileTrialResult;
 import org.adligo.tests4j.models.shared.trials.SourceFileScope;
 import org.adligo.tests4j.models.shared.trials.Test;
 import org.adligo.tests4j_tests.base_abstract_trials.SourceFileCountingTrial;
 
-@SourceFileScope (sourceClass=TextLinesCompare.class)
+@SourceFileScope (sourceClass=TextLinesCompare.class, minCoverage=90.0)
 public class TextLinesCompareTrial extends SourceFileCountingTrial {
 
 	
@@ -794,15 +792,6 @@ public class TextLinesCompareTrial extends SourceFileCountingTrial {
 		assertEquals(2, diff.getExampleLineNbr());
 		assertEquals(2, diff.getActualLineNbr());
 		assertNull(diff.getIndexes());
-	}
-	@Override
-	public void afterTrialTests(I_SourceFileTrialResult p) {
-		assertCounts(p);
-		
-		if (p.hasRecordedCoverage()) {
-			I_SourceFileCoverage coverage = p.getSourceFileCoverage();
-			assertGreaterThanOrEquals(90.0, coverage.getPercentageCoveredDouble());
-		}
 	}
 
 	

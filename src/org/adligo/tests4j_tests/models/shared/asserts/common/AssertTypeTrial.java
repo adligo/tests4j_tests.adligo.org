@@ -1,16 +1,16 @@
 package org.adligo.tests4j_tests.models.shared.asserts.common;
 
+import java.lang.reflect.Field;
 import java.util.Set;
 
 import org.adligo.tests4j.models.shared.asserts.common.AssertType;
 import org.adligo.tests4j.models.shared.coverage.I_SourceFileCoverage;
 import org.adligo.tests4j.models.shared.results.I_SourceFileTrialResult;
 import org.adligo.tests4j.models.shared.trials.SourceFileScope;
-import org.adligo.tests4j.models.shared.trials.SourceFileTrial;
 import org.adligo.tests4j.models.shared.trials.Test;
 import org.adligo.tests4j_tests.base_abstract_trials.SourceFileCountingTrial;
 
-@SourceFileScope (sourceClass=AssertType.class)
+@SourceFileScope (sourceClass=AssertType.class, minCoverage=95.0)
 public class AssertTypeTrial extends SourceFileCountingTrial {
 
 	@Test
@@ -33,6 +33,15 @@ public class AssertTypeTrial extends SourceFileCountingTrial {
 		assertEquals(11, AssertType.AssertNotUniform.getId());
 		assertEquals(12, AssertType.AssertContains.getId());
 		assertEquals(13, AssertType.AssertGreaterThanOrEquals.getId());
+		
+		try {
+			Field field = AssertType.class.getField("$jacocoData");
+			Object localJacoco = field.get(null);
+			super.log("localJacoco is " + localJacoco);
+		} catch (NoSuchFieldException | SecurityException | IllegalArgumentException | IllegalAccessException e) {
+			// TODO Auto-generated catch block
+			super.log(e);
+		}
 	}
 	
 
@@ -74,23 +83,9 @@ public class AssertTypeTrial extends SourceFileCountingTrial {
 		assertContains(booleanTypes, AssertType.AssertUniform);
 		assertContains(booleanTypes, AssertType.AssertNotUniform);
 		
+		
 	}
 	
-	@Override
-	public void afterTrialTests(I_SourceFileTrialResult p) {
-		assertCounts(p);
-		
-		if (p.hasRecordedCoverage()) {
-			I_SourceFileCoverage coverage = p.getSourceFileCoverage();
-			//hmm this should be 95, looks like multithreading
-			double pct = coverage.getPercentageCoveredDouble();
-			if (pct < 90.0) {
-				System.out.println("wtf");
-			}
-			assertGreaterThanOrEquals(95.0, pct);
-		}
-	}
-
 
 	@Override
 	public int getTests() {
@@ -105,6 +100,18 @@ public class AssertTypeTrial extends SourceFileCountingTrial {
 	@Override
 	public int getUniqueAsserts() {
 		return 31;
+	}
+
+
+	@Override
+	public void afterTrialTests(I_SourceFileTrialResult p) {
+		super.afterTrialTests(p);
+		if (p.hasRecordedCoverage()) {
+			I_SourceFileCoverage sfc =  p.getSourceFileCoverage();
+			//assertEquals("org.adligo.tests4j.models.shared.asserts.common.AssertType",sfc.getClassName());
+			assertEquals(230, sfc.getCoverageUnits().get());
+			assertEquals(226, sfc.getCoveredCoverageUnits().get());
+		}
 	}
 	
 }

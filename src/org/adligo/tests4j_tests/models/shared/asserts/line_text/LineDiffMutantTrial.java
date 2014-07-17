@@ -5,19 +5,17 @@ import java.util.TreeSet;
 
 import org.adligo.tests4j.models.shared.asserts.ExpectedThrownData;
 import org.adligo.tests4j.models.shared.asserts.common.I_Thrower;
-import org.adligo.tests4j.models.shared.asserts.line_text.Diffndexes;
 import org.adligo.tests4j.models.shared.asserts.line_text.DiffIndexesPair;
+import org.adligo.tests4j.models.shared.asserts.line_text.DiffIndexes;
 import org.adligo.tests4j.models.shared.asserts.line_text.I_DiffIndexesPair;
 import org.adligo.tests4j.models.shared.asserts.line_text.I_LineDiff;
 import org.adligo.tests4j.models.shared.asserts.line_text.LineDiffMutant;
 import org.adligo.tests4j.models.shared.asserts.line_text.LineDiffType;
-import org.adligo.tests4j.models.shared.coverage.I_SourceFileCoverage;
-import org.adligo.tests4j.models.shared.results.I_SourceFileTrialResult;
 import org.adligo.tests4j.models.shared.trials.SourceFileScope;
 import org.adligo.tests4j.models.shared.trials.Test;
 import org.adligo.tests4j_tests.base_abstract_trials.SourceFileCountingTrial;
 
-@SourceFileScope (sourceClass=LineDiffMutant.class)
+@SourceFileScope (sourceClass=LineDiffMutant.class, minCoverage=84.0)
 public class LineDiffMutantTrial extends SourceFileCountingTrial {
 
 	
@@ -134,7 +132,7 @@ public class LineDiffMutantTrial extends SourceFileCountingTrial {
 		ldm.setType(LineDiffType.PARTIAL_MATCH);
 		ldm.setActualLineNbr(1);
 		ldm.setExampleLineNbr(0);
-		DiffIndexesPair pair = new DiffIndexesPair(new Diffndexes(0, 1) , new Diffndexes(1, 2));
+		DiffIndexesPair pair = new DiffIndexesPair(new DiffIndexes(0, 1) , new DiffIndexes(1, 2));
 		ldm.setIndexes(pair);
 		
 		assertEquals(LineDiffType.PARTIAL_MATCH, ldm.getType());
@@ -217,16 +215,6 @@ public class LineDiffMutantTrial extends SourceFileCountingTrial {
 		assertNotEquals(a.hashCode(), e.hashCode());
 	}
 	
-	@Override
-	public void afterTrialTests(I_SourceFileTrialResult p) {
-		assertCounts(p);
-		
-		if (p.hasRecordedCoverage()) {
-			I_SourceFileCoverage coverage = p.getSourceFileCoverage();
-			assertGreaterThanOrEquals(84.0, coverage.getPercentageCoveredDouble());
-		}
-	}
-
 	
 	@Override
 	public int getTests() {

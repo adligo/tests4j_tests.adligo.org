@@ -1,6 +1,7 @@
 package org.adligo.tests4j_tests;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.ExecutorService;
@@ -11,43 +12,45 @@ import org.adligo.tests4j.models.shared.results.I_TrialResult;
 import org.adligo.tests4j.models.shared.results.I_TrialRunResult;
 import org.adligo.tests4j.models.shared.system.I_CoveragePlugin;
 import org.adligo.tests4j.models.shared.system.I_Tests4J_Controls;
+import org.adligo.tests4j.models.shared.system.I_Tests4J_Reporter;
 import org.adligo.tests4j.models.shared.system.I_TrialRunListener;
 import org.adligo.tests4j.models.shared.system.Tests4J_Params;
 import org.adligo.tests4j.models.shared.trials.I_Trial;
 import org.adligo.tests4j.run.Tests4J;
 import org.adligo.tests4j.run.helpers.Tests4J_NotificationManager;
+import org.adligo.tests4j.run.helpers.Tests4J_ThreadFactory;
 import org.adligo.tests4j.run.helpers.ThreadStateHelper;
+import org.adligo.tests4j.run.helpers.TrialInstancesProcessor;
+import org.adligo.tests4j.run.helpers.TrialsProcessor;
 import org.adligo.tests4j.shared.report.summary.SummaryReporter;
 import org.adligo.tests4j_4jacoco.plugin.ScopedJacocoPlugin;
+import org.adligo.tests4j_4jacoco.plugin.SimpleJacocoPlugin;
+import org.adligo.tests4j_4jacoco.plugin.data.multi.MultiProbeDataStore;
+import org.adligo.tests4j_4jacoco.plugin.data.multi.MultiProbesMap;
 import org.adligo.tests4j_tests.base_abstract_trials.Counts;
 import org.adligo.tests4j_tests.base_abstract_trials.I_CountingTrial;
 
 public class RunAllTrials implements I_TrialRunListener {
 	static long start = System.currentTimeMillis();
-	static SummaryReporter reporter;
+	static I_Tests4J_Reporter reporter;
 	private static volatile List<String> trialsNotCompleted = new CopyOnWriteArrayList<String>();
 	private static ExecutorService trialsNotCompletedService = Executors.newSingleThreadExecutor();
 	
 	
 	public static void main(String [] args) {
 		
-		Tests4J_Params params = getTests(ScopedJacocoPlugin.class);
-		
-		reporter = new SummaryReporter();
-		//reporter.setListRelevantClassesWithoutTrials(true);
-		//reporter.setListRelevantClassesWithoutTrials(true);
-		reporter.setLogOn(Tests4J_NotificationManager.class);
-		//reporter.setLogOn(TrialProcessorControls.class);
-		//reporter.setLogOn(TrialInstancesProcessor.class);
-		
-		//reporter.setLogOn(TestRunable.class);
-		//reporter.setLogOn(MultiProbesMap.class);
-		
-		//logging from jacoco
-		//reporter.setLogOn(AbstractPlugin.class);
-		//reporter.setLogOn(Recorder.class);
-		
-		params.setReporter(reporter);
+		Tests4J_Params params = getTests(SimpleJacocoPlugin.class);
+		reporter = params.getReporter();
+		//Tests4J_Params params = getTests(ScopedJacocoPlugin.class);
+		/*
+		List<Class<?>> loggingClasses = new ArrayList<Class<?>>(params.getLoggingClasses());
+		loggingClasses.add(Tests4J_ThreadFactory.class);
+		loggingClasses.add(MultiProbeDataStore.class);
+		loggingClasses.add(MultiProbesMap.class);
+		loggingClasses.add(TrialInstancesProcessor.class);
+		loggingClasses.add(TrialsProcessor.class);
+		params.setLoggingClasses(loggingClasses);
+		*/
 		//params.setExitAfterLastNotification(false);
 		
 		params.setMetaTrialClass(TheMetaTrial.class);
@@ -97,6 +100,7 @@ public class RunAllTrials implements I_TrialRunListener {
 		toRet.addTrials(new org.adligo.tests4j_tests.models.shared.xml.RunPkgTrials());
 		
 		toRet.addTrials(new org.adligo.tests4j_tests.jacoco.api_trials.RunPkgTrials());
+		toRet.addTrials(new org.adligo.tests4j_tests.jacoco.plugin.data.common.RunPkgTrials());
 		
 		toRet.addTrials(new org.adligo.tests4j_tests.run.discovery.RunPkgTrials());
 		toRet.addTrials(new org.adligo.tests4j_tests.run.remote.io.RunPkgTrials());
@@ -116,9 +120,9 @@ public class RunAllTrials implements I_TrialRunListener {
 				
 				counts.setAfterTests(counts.getAfterTests() + ct.getATests());
 				counts.setAfterAsserts(counts.getAfterAsserts()  + 
-						ct.getAAsserts(plugin.canThreadLocalRecord()));
+						ct.getAAsserts(plugin.canThreadGroupLocalRecord()));
 				counts.setAfterUniqueAsserts(counts.getAfterUniqueAsserts()  + 
-						ct.getAUniqueAsserts(plugin.canThreadLocalRecord()));
+						ct.getAUniqueAsserts(plugin.canThreadGroupLocalRecord()));
 			} catch (InstantiationException | IllegalAccessException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

@@ -10,7 +10,7 @@ import org.adligo.tests4j.models.shared.trials.SourceFileTrial;
 import org.adligo.tests4j.models.shared.trials.Test;
 import org.adligo.tests4j_tests.base_abstract_trials.SourceFileCountingTrial;
 
-@SourceFileScope (sourceClass=LineSeperator.class)
+@SourceFileScope (sourceClass=LineSeperator.class, minCoverage=92.0)
 public class LineSeperatorTrial extends SourceFileCountingTrial {
 
 	@Test
@@ -37,15 +37,7 @@ public class LineSeperatorTrial extends SourceFileCountingTrial {
 		});
 	}
 	
-	@Override
-	public void afterTrialTests(I_SourceFileTrialResult p) {
-		assertCounts(p);
-		
-		if (p.hasRecordedCoverage()) {
-			I_SourceFileCoverage coverage = p.getSourceFileCoverage();
-			assertGreaterThanOrEquals(91.0, coverage.getPercentageCoveredDouble());
-		}
-	}
+
 	
 
 	@Override

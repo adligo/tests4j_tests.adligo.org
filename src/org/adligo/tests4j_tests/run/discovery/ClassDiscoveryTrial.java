@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.adligo.tests4j.models.shared.coverage.I_SourceFileCoverage;
 import org.adligo.tests4j.models.shared.metadata.I_SourceInfoMetadata;
 import org.adligo.tests4j.models.shared.metadata.I_TestMetadata;
 import org.adligo.tests4j.models.shared.metadata.I_TrialMetadata;
@@ -20,7 +19,6 @@ import org.adligo.tests4j.models.shared.metadata.TrialMetadataMutant;
 import org.adligo.tests4j.models.shared.metadata.TrialRunMetadata;
 import org.adligo.tests4j.models.shared.metadata.TrialRunMetadataMutant;
 import org.adligo.tests4j.models.shared.metadata.UseCaseMetadata;
-import org.adligo.tests4j.models.shared.results.I_SourceFileTrialResult;
 import org.adligo.tests4j.models.shared.trials.AbstractTrial;
 import org.adligo.tests4j.models.shared.trials.AdditionalInstrumentation;
 import org.adligo.tests4j.models.shared.trials.AfterTrial;
@@ -48,7 +46,7 @@ import org.adligo.tests4j.models.shared.trials.UseCaseTrial;
 import org.adligo.tests4j.run.discovery.ClassDiscovery;
 import org.adligo.tests4j_tests.base_abstract_trials.SourceFileCountingTrial;
 
-@SourceFileScope (sourceClass=ClassDiscovery.class)
+@SourceFileScope (sourceClass=ClassDiscovery.class, minCoverage=51.0)
 public class ClassDiscoveryTrial extends SourceFileCountingTrial {
 
 	@Test
@@ -160,14 +158,6 @@ public class ClassDiscoveryTrial extends SourceFileCountingTrial {
 		assertContains(childNames, "org.adligo.tests4j.shared");
 		
 		assertEquals(3, children.size());
-	}
-	@Override
-	public void afterTrialTests(I_SourceFileTrialResult p) {
-		assertCounts(p);
-		if (p.hasRecordedCoverage()) {
-			I_SourceFileCoverage coverage = p.getSourceFileCoverage();
-			assertGreaterThanOrEquals(22.00, coverage.getPercentageCoveredDouble());
-		}
 	}
 	
 	@Override

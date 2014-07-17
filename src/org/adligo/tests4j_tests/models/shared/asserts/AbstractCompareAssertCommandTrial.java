@@ -14,7 +14,7 @@ import org.adligo.tests4j.models.shared.trials.Test;
 import org.adligo.tests4j_tests.base_abstract_trials.SourceFileCountingTrial;
 import org.adligo.tests4j_tests.models.shared.asserts.mocks.ExtendedCompareAssertCommand;
 
-@SourceFileScope (sourceClass=AbstractCompareAssertCommand.class)
+@SourceFileScope (sourceClass=AbstractCompareAssertCommand.class, minCoverage=69.0)
 @AdditionalInstrumentation (javaPackages="org.adligo.tests4j_tests.models.shared.asserts.mocks")
 public class AbstractCompareAssertCommandTrial extends SourceFileCountingTrial {
 
@@ -60,16 +60,6 @@ public class AbstractCompareAssertCommandTrial extends SourceFileCountingTrial {
 		assertTrue(cac.evaluate());
 	}
 	
-
-	@Override
-	public void afterTrialTests(I_SourceFileTrialResult p) {
-		assertCounts(p);
-		
-		if (p.hasRecordedCoverage()) {
-			I_SourceFileCoverage coverage = p.getSourceFileCoverage();
-			assertGreaterThanOrEquals(68.0, coverage.getPercentageCoveredDouble());
-		}
-	}
 
 	@Override
 	public int getTests() {

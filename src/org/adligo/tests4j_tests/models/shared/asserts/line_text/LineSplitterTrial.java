@@ -45,17 +45,6 @@ public class LineSplitterTrial extends SourceFileCountingTrial {
 	}
 	
 	@Override
-	public void afterTrialTests(I_SourceFileTrialResult p) {
-		assertCounts(p);
-		
-		if (p.hasRecordedCoverage()) {
-			I_SourceFileCoverage coverage = p.getSourceFileCoverage();
-			assertGreaterThanOrEquals(100.0, coverage.getPercentageCoveredDouble());
-		}
-	}
-
-	
-	@Override
 	public int getTests() {
 		return 1;
 	}

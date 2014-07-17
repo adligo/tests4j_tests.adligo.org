@@ -5,17 +5,14 @@ import org.adligo.tests4j.models.shared.asserts.ExpectedThrownData;
 import org.adligo.tests4j.models.shared.asserts.IdenticalStringAssertCommand;
 import org.adligo.tests4j.models.shared.asserts.StringCompareAssertionData;
 import org.adligo.tests4j.models.shared.asserts.common.AssertType;
-import org.adligo.tests4j.models.shared.asserts.common.I_AssertCommand;
 import org.adligo.tests4j.models.shared.asserts.common.I_AssertionData;
 import org.adligo.tests4j.models.shared.asserts.common.I_Thrower;
-import org.adligo.tests4j.models.shared.coverage.I_SourceFileCoverage;
 import org.adligo.tests4j.models.shared.en.asserts.Tests4J_AssertionResultMessages;
-import org.adligo.tests4j.models.shared.results.I_SourceFileTrialResult;
 import org.adligo.tests4j.models.shared.trials.SourceFileScope;
 import org.adligo.tests4j.models.shared.trials.Test;
 import org.adligo.tests4j_tests.base_abstract_trials.SourceFileCountingTrial;
 
-@SourceFileScope (sourceClass=IdenticalStringAssertCommand.class)
+@SourceFileScope (sourceClass=IdenticalStringAssertCommand.class, minCoverage=80.0)
 public class IdenticalStringAssertCommandTrial extends SourceFileCountingTrial {
 	@Test
 	public void testConstructorExceptions() {
@@ -146,16 +143,6 @@ public class IdenticalStringAssertCommandTrial extends SourceFileCountingTrial {
 	public void testToString() {
 		
 	}
-	@Override
-	public void afterTrialTests(I_SourceFileTrialResult p) {
-		assertCounts(p);
-		
-		if (p.hasRecordedCoverage()) {
-			I_SourceFileCoverage coverage = p.getSourceFileCoverage();
-			assertGreaterThanOrEquals(80.0, coverage.getPercentageCoveredDouble());
-		}
-	}
-	
 	@Override
 	public int getTests() {
 		return 6;

@@ -6,15 +6,12 @@ import org.adligo.tests4j.models.shared.asserts.ThrownAssertionData;
 import org.adligo.tests4j.models.shared.asserts.common.AssertType;
 import org.adligo.tests4j.models.shared.asserts.common.I_AssertionData;
 import org.adligo.tests4j.models.shared.asserts.common.I_Thrower;
-import org.adligo.tests4j.models.shared.coverage.I_SourceFileCoverage;
 import org.adligo.tests4j.models.shared.en.asserts.Tests4J_AssertionResultMessages;
-import org.adligo.tests4j.models.shared.results.I_SourceFileTrialResult;
 import org.adligo.tests4j.models.shared.trials.SourceFileScope;
-import org.adligo.tests4j.models.shared.trials.SourceFileTrial;
 import org.adligo.tests4j.models.shared.trials.Test;
 import org.adligo.tests4j_tests.base_abstract_trials.SourceFileCountingTrial;
 
-@SourceFileScope (sourceClass=ThrownAssertCommand.class)
+@SourceFileScope (sourceClass=ThrownAssertCommand.class, minCoverage=65.0)
 public class ThrownAssertCommandTrial extends SourceFileCountingTrial {
 
 	@Test
@@ -98,16 +95,6 @@ public class ThrownAssertCommandTrial extends SourceFileCountingTrial {
 		assertEquals(IllegalArgumentException.class, tad_AfterEvaluate.getExpectedThrowable());
 		assertEquals("hey", tad_AfterEvaluate.getExpectedMessage());
 		
-	}
-	
-	@Override
-	public void afterTrialTests(I_SourceFileTrialResult p) {
-		assertCounts(p);
-		
-		if (p.hasRecordedCoverage()) {
-			I_SourceFileCoverage coverage = p.getSourceFileCoverage();
-			assertGreaterThanOrEquals(69.0, coverage.getPercentageCoveredDouble());
-		}
 	}
 	
 	@Override

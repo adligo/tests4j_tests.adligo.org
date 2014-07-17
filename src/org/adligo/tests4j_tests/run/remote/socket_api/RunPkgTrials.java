@@ -2,7 +2,6 @@ package org.adligo.tests4j_tests.run.remote.socket_api;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.ConsoleHandler;
 
 import org.adligo.tests4j.models.shared.system.I_TrialList;
 import org.adligo.tests4j.models.shared.system.Tests4J_Params;
@@ -18,9 +17,6 @@ public class RunPkgTrials implements I_TrialList {
 	public static void main(String [] args) {
 		Tests4J_Params params = new Tests4J_Params();
 		params.addTrials(new RunPkgTrials());
-		
-		ScopedJacocoPlugin plugin = new ScopedJacocoPlugin();
-		plugin.setWriteOutInstrumentedClassFiles(true);
 		
 		SummaryReporter reporter = new SummaryReporter();
 		reporter.setLogOn(AbstractPlugin.class);

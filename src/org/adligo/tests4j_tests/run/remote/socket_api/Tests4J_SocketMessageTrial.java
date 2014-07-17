@@ -2,16 +2,12 @@ package org.adligo.tests4j_tests.run.remote.socket_api;
 
 import org.adligo.tests4j.models.shared.asserts.ExpectedThrownData;
 import org.adligo.tests4j.models.shared.asserts.common.I_Thrower;
-import org.adligo.tests4j.models.shared.coverage.I_SourceFileCoverage;
-import org.adligo.tests4j.models.shared.results.I_SourceFileTrialResult;
 import org.adligo.tests4j.models.shared.trials.SourceFileScope;
-import org.adligo.tests4j.models.shared.trials.SourceFileTrial;
 import org.adligo.tests4j.models.shared.trials.Test;
-import org.adligo.tests4j.run.remote.socket_api.Tests4J_Commands;
 import org.adligo.tests4j.run.remote.socket_api.Tests4J_SocketMessage;
 import org.adligo.tests4j_tests.base_abstract_trials.SourceFileCountingTrial;
 
-@SourceFileScope (sourceClass=Tests4J_SocketMessage.class)
+@SourceFileScope (sourceClass=Tests4J_SocketMessage.class, minCoverage=14.0)
 public class Tests4J_SocketMessageTrial extends SourceFileCountingTrial {
 	
 	/*
@@ -63,17 +59,6 @@ public class Tests4J_SocketMessageTrial extends SourceFileCountingTrial {
 				new Tests4J_SocketMessage(Tests4J_SocketMessage.MESSAGE_START);
 			}
 		});
-	}
-
-	@Override
-	public void afterTrialTests(I_SourceFileTrialResult p) {
-		assertCounts(p);
-		
-		if (p.hasRecordedCoverage()) {
-			I_SourceFileCoverage coverage = p.getSourceFileCoverage();
-			//assertGreaterThanOrEquals(40.0, coverage.getPercentageCoveredDouble());
-			assertGreaterThanOrEquals(14.0, coverage.getPercentageCoveredDouble());
-		}
 	}
 	
 
