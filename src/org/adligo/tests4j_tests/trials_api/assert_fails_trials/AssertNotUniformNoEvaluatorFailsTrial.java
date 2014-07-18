@@ -82,22 +82,14 @@ public class AssertNotUniformNoEvaluatorFailsTrial extends ApiTrial {
 		
 		I_TestFailure testFailure = testResult.getFailure();
 		asserts.assertNotNull(testFailure);
-		asserts.assertEquals(new Tests4J_AssertionResultMessages().getAnUnexpectedExceptionWasThrown(), testFailure.getMessage());
+		asserts.assertEquals(new Tests4J_AssertionResultMessages().getNoEvaluatorFoundForClass(), testFailure.getMessage());
 		
 		Throwable locationFailed = testFailure.getLocationFailed();
+		
 		StackTraceElement [] elements = locationFailed.getStackTrace();
 		asserts.assertGreaterThanOrEquals(2.0, elements.length);
 		StackTraceElement topElement = elements[0];
-		asserts.assertEquals(AbstractTrial.class.getName(), topElement.getClassName());
-		asserts.assertEquals("getEvaluator", topElement.getMethodName());
 		
-		for (int i = 0; i < elements.length; i++) {
-			topElement = elements[i];
-			String className = topElement.getClassName();
-			if (AssertNotUniformNoEvaluatorFailsTrial.class.getName().equals(className)) {
-				break;
-			}
-		}
 		asserts.assertNotNull(topElement);
 		asserts.assertEquals(AssertNotUniformNoEvaluatorFailsTrial.class.getName(), topElement.getClassName());
 		asserts.assertEquals("testAssertNotUniform", topElement.getMethodName());
@@ -108,6 +100,6 @@ public class AssertNotUniformNoEvaluatorFailsTrial extends ApiTrial {
 	}
 	
 	public static int getAsserts() {
-		return 37;
+		return 35;
 	}
 }

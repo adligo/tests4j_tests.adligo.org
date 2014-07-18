@@ -111,7 +111,7 @@ public class LineDiffTrial extends SourceFileCountingTrial {
 		ldm.setType(LineDiffType.PARTIAL_MATCH);
 		ldm.setActualLineNbr(1);
 		ldm.setExampleLineNbr(0);
-		DiffIndexesPair pair = new DiffIndexesPair(new DiffIndexes(0, 1) , new DiffIndexes(1, 2));
+		DiffIndexesPair pair = new DiffIndexesPair(new DiffIndexes(0, 1, null, null) , new DiffIndexes(1, 2, null, null));
 		ldm.setIndexes(pair);
 		ld = new LineDiff(ldm);
 		

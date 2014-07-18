@@ -13,7 +13,7 @@ import org.adligo.tests4j.models.shared.trials.Test;
 import org.adligo.tests4j.models.shared.xml.XML_Builder;
 import org.adligo.tests4j_tests.base_abstract_trials.SourceFileCountingTrial;
 
-@SourceFileScope (sourceClass=TrialMetadataMutant.class, minCoverage=60.0)
+@SourceFileScope (sourceClass=TrialMetadataMutant.class, minCoverage=95.0)
 public class TrialMetadataMutantTrial extends SourceFileCountingTrial {
 
 	@Test
@@ -26,6 +26,7 @@ public class TrialMetadataMutantTrial extends SourceFileCountingTrial {
 		assertEquals(0, tmm.getTestCount());
 		assertNull(tmm.getTestedPackage());
 		assertNull(tmm.getTestedSourceFile());
+		assertNull(tmm.getMinimumCodeCoverage());
 		
 		List<I_TestMetadata> tests =  tmm.getTests();
 		assertEquals(0, tests.size());
@@ -43,7 +44,8 @@ public class TrialMetadataMutantTrial extends SourceFileCountingTrial {
 		assertEquals("beforeTrialMethodName", 
 				tmm.getBeforeTrialMethodName());
 	
-		
+		tmm.setMinimumCodeCoverage(100.0);
+		assertEquals(100.0, tmm.getMinimumCodeCoverage());
 		
 		tmm.setTestedPackage("testedPackageName");
 		assertEquals("testedPackageName", 
@@ -100,6 +102,7 @@ public class TrialMetadataMutantTrial extends SourceFileCountingTrial {
 		tmm.setTimeout(13L);
 		tmm.setTrialName("someTrialName");
 		tmm.setType(TrialType.SourceFileTrial);
+		tmm.setMinimumCodeCoverage(11.1);
 		
 		UseCaseMetadata ucm = new UseCaseMetadata("nown", "verb");
 		tmm.setUseCase(ucm);
@@ -125,6 +128,7 @@ public class TrialMetadataMutantTrial extends SourceFileCountingTrial {
 		assertTrue(tmm.isIgnored());
 		assertEquals("systemName", 
 				tmm.getSystem());
+		assertEquals(11.1, tmm.getMinimumCodeCoverage());
 		
 		assertEquals(2, tmm.getTestCount());
 		List<I_TestMetadata>tests =  tmm.getTests();
@@ -156,6 +160,7 @@ public class TrialMetadataMutantTrial extends SourceFileCountingTrial {
 		tmm.setTimeout(13L);
 		tmm.setTrialName("someTrialName");
 		tmm.setType(TrialType.SourceFileTrial);
+		tmm.setMinimumCodeCoverage(13.5);
 		
 		UseCaseMetadata ucm = new UseCaseMetadata("nown", "verb");
 		tmm.setUseCase(ucm);
@@ -177,9 +182,9 @@ public class TrialMetadataMutantTrial extends SourceFileCountingTrial {
 		tmm.toXml(builder);
 		result = builder.toXmlString();
 		assertEquals("\n\t<trialMetadata name=\"someTrialName\" type=\"SourceFileTrial\" timeout=\"13\"\n" +
-				"\t\t beforeTrial=\"beforeTrialMethodName\" ignored=\"true\" afterTrial=\"afterTrialMethodName\"\n" +
-				"\t\t testedSourceFile=\"testedSourceFile\" testedPackage=\"testedPackageName\" testedSystem=\"systemName\"\n" +
-				"\t\t >\n" +
+				"\t\t beforeTrial=\"beforeTrialMethodName\" ignored=\"true\" minCodeCoverage=\"13.5\"\n" +
+				"\t\t afterTrial=\"afterTrialMethodName\" testedSourceFile=\"testedSourceFile\" testedPackage=\"testedPackageName\"\n" +
+				"\t\t testedSystem=\"systemName\" >\n" +
 				"\t\t<useCase nown=\"nown\" verb=\"verb\" />\n" +
 				"\t\t<tests>\n" +
 				"\t\t\t<testMetadata name=\"aTest\" />\n" +
@@ -195,11 +200,11 @@ public class TrialMetadataMutantTrial extends SourceFileCountingTrial {
 
 	@Override
 	public int getAsserts() {
-		return 46;
+		return 49;
 	}
 
 	@Override
 	public int getUniqueAsserts() {
-		return 30;
+		return 32;
 	}
 }

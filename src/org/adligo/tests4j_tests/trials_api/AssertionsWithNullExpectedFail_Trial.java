@@ -188,6 +188,6 @@ public class AssertionsWithNullExpectedFail_Trial extends ApiCountingTrial {
 
 	@Override
 	public int getUniqueAsserts() {
-		return 474;
+		return 440;
 	}
 }

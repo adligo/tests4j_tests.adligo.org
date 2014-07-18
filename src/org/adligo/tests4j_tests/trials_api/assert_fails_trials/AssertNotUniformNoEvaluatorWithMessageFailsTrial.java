@@ -84,37 +84,26 @@ public class AssertNotUniformNoEvaluatorWithMessageFailsTrial extends ApiTrial {
 		
 		I_TestFailure testFailure = testResult.getFailure();
 		asserts.assertNotNull(testFailure);
-		asserts.assertEquals(new Tests4J_AssertionResultMessages().getAnUnexpectedExceptionWasThrown(), testFailure.getMessage());
+		asserts.assertEquals(new Tests4J_AssertionResultMessages().getNoEvaluatorFoundForClass(), testFailure.getMessage());
 		
 		Throwable locationFailed = testFailure.getLocationFailed();
 		StackTraceElement [] elements = locationFailed.getStackTrace();
 		asserts.assertGreaterThanOrEquals(1.0, elements.length);
 		StackTraceElement topElement = elements[0];
-		asserts.assertEquals(AbstractTrial.class.getName(), topElement.getClassName());
-		asserts.assertEquals("getEvaluator", topElement.getMethodName());
 		
-		for (int i = 0; i < elements.length; i++) {
-			topElement = elements[i];
-			String className = topElement.getClassName();
-			if (AssertNotUniformNoEvaluatorWithMessageFailsTrial.class.getName().equals(className)) {
-				break;
-			}
-		}
 		asserts.assertNotNull(topElement);
 		asserts.assertEquals(AssertNotUniformNoEvaluatorWithMessageFailsTrial.class.getName(), topElement.getClassName());
 		asserts.assertEquals("testAssertNotUniformNoEvaluatorWithMessage", topElement.getMethodName());
 		asserts.assertEquals(31, topElement.getLineNumber());
 		
 		Throwable execption = testFailure.getException();
-		asserts.assertNotNull(execption);
-		asserts.assertUniform(new IllegalStateException(new Tests4J_AssertionResultMessages().getNoEvaluatorFoundForClass() +
-				AssertNotUniformNoEvaluatorWithMessageFailsTrial.class.getName()), execption);
+		asserts.assertNull(execption);
 		
 		SystemExitTracker tracker =  runner.getSystemExitTracker();
 		asserts.assertEquals(0, tracker.getLastStatus());
 	}
 	
 	public static int getAsserts() {
-		return 39;
+		return 36;
 	}
 }

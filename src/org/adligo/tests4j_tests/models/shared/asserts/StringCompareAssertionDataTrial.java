@@ -42,7 +42,7 @@ public class StringCompareAssertionDataTrial extends SourceFileCountingTrial {
 	public void testConstructorAndGetters() {
 		List<I_LineDiff> diffs = new ArrayList<I_LineDiff>();
 		LineDiffMutant ldm = new LineDiffMutant();
-		ldm.setIndexes(new DiffIndexesPair(new DiffIndexes(3, 3), new DiffIndexes(3, 3)));
+		ldm.setIndexes(new DiffIndexesPair(new DiffIndexes(3, 3, null, null), new DiffIndexes(3, 3, null, null)));
 		diffs.add(ldm);
 		I_TextLinesCompareResult result =  
 				new TextLinesCompareResult(new TextLines("hey", true), 
@@ -71,7 +71,7 @@ public class StringCompareAssertionDataTrial extends SourceFileCountingTrial {
 	public void testEqualsAndHashCode() {
 		List<I_LineDiff> diffs = new ArrayList<I_LineDiff>();
 		LineDiffMutant ldm = new LineDiffMutant();
-		ldm.setIndexes(new DiffIndexesPair(new DiffIndexes(3, 3), new DiffIndexes(3, 3)));
+		ldm.setIndexes(new DiffIndexesPair(new DiffIndexes(3, 3, null, null), new DiffIndexes(3, 3, null, null)));
 		diffs.add(ldm);
 		I_TextLinesCompareResult result =  
 				new TextLinesCompareResult(new TextLines("hey", true), 
@@ -114,7 +114,7 @@ public class StringCompareAssertionDataTrial extends SourceFileCountingTrial {
 	public void testToString() {
 		List<I_LineDiff> diffs = new ArrayList<I_LineDiff>();
 		LineDiffMutant ldm = new LineDiffMutant();
-		ldm.setIndexes(new DiffIndexesPair(new DiffIndexes(3, 3), new DiffIndexes(3, 3)));
+		ldm.setIndexes(new DiffIndexesPair(new DiffIndexes(3, 3, null, null), new DiffIndexes(3, 3, null, null)));
 		diffs.add(ldm);
 		I_TextLinesCompareResult result =  
 				new TextLinesCompareResult(new TextLines("hey", true), 

@@ -80,6 +80,10 @@ public class AssertSameNullFailsTrial extends ApiTrial {
 		asserts.assertEquals(0, testResult.getUniqueAssertionCount());
 		
 		I_TestFailure testFailure = testResult.getFailure();
+		asserts.assertNotNull(testFailure);
+		asserts.assertEquals(new Tests4J_AssertionResultMessages().getTheExpectedValueShouldNeverBeNull(), testFailure.getMessage());
+		
+		
 		Throwable locationFailed = testFailure.getLocationFailed();
 		StackTraceElement [] elements = locationFailed.getStackTrace();
 		asserts.assertGreaterThanOrEquals(1.0, elements.length);
@@ -97,16 +101,13 @@ public class AssertSameNullFailsTrial extends ApiTrial {
 		asserts.assertEquals(28, topElement.getLineNumber());
 		
 		Throwable exception = testFailure.getException();
-		asserts.assertNotNull(exception);
-		asserts.assertUniform(new IllegalArgumentException(
-				new Tests4J_AssertionResultMessages().getTheExpectedValueShouldNeverBeNull()),
-				exception);
+		asserts.assertNull(exception);
 		
 		SystemExitTracker tracker =  runner.getSystemExitTracker();
 		asserts.assertEquals(0, tracker.getLastStatus());
 	}
 	
 	public static int getAsserts() {
-		return 35;
+		return 36;
 	}
 }

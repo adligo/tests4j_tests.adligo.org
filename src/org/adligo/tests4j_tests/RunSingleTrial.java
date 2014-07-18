@@ -8,14 +8,17 @@ import org.adligo.tests4j.shared.report.summary.SummaryReporter;
 import org.adligo.tests4j_4jacoco.plugin.AbstractPlugin;
 import org.adligo.tests4j_4jacoco.plugin.Recorder;
 import org.adligo.tests4j_4jacoco.plugin.ScopedJacocoPluginFactory;
-import org.adligo.tests4j_tests.trials_api.AssertionsFail_Trial;
+import org.adligo.tests4j_tests.models.shared.asserts.line_text.DiffIndexesMutantTrial;
+import org.adligo.tests4j_tests.trials_api.assert_fails_trials.AssertNotUniformNoEvaluatorWithMessageFailsTrial;
 
 public class RunSingleTrial {
 
 	
 	public static void main(String [] args) {
 		Tests4J_Params params = new Tests4J_Params();
-		params.addTrial(AssertionsFail_Trial.class);
+		//params.addTrial(DiffIndexesTrial.class);
+		params.addTrial(DiffIndexesMutantTrial.class);
+		params.addTrial(AssertNotUniformNoEvaluatorWithMessageFailsTrial.class);
 		/*
 		params.addTest(Run_UseCaseTrial_ApiTrial.class.getName() +
 				".testNoUseCaseAnnotation");

@@ -92,7 +92,7 @@ public class AssertThrownUniformNullWithMessageFailsTrial extends ApiTrial {
 		
 		I_TestFailure testFailure = testResult.getFailure();
 		asserts.assertNotNull(testFailure);
-		asserts.assertEquals(new Tests4J_AssertionResultMessages().getAnUnexpectedExceptionWasThrown(), testFailure.getMessage());
+		asserts.assertEquals(new Tests4J_AssertionResultMessages().getTheExpectedValueShouldNeverBeNull(), testFailure.getMessage());
 		
 		Throwable locationFailed = testFailure.getLocationFailed();
 		StackTraceElement [] elements = locationFailed.getStackTrace();
@@ -111,16 +111,13 @@ public class AssertThrownUniformNullWithMessageFailsTrial extends ApiTrial {
 		asserts.assertEquals(31, topElement.getLineNumber());
 		
 		Throwable exception = testFailure.getException();
-		asserts.assertNotNull(exception);
-		asserts.assertUniform(new IllegalStateException(
-				new Tests4J_AssertionResultMessages().getNoEvaluatorFoundForClass() + "null"),
-				exception);
+		asserts.assertNull(exception);
 		
 		SystemExitTracker tracker =  runner.getSystemExitTracker();
 		asserts.assertEquals(0, tracker.getLastStatus());
 	}
 	
 	public static int getAsserts() {
-		return 37;
+		return 36;
 	}
 }

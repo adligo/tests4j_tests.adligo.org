@@ -7,7 +7,7 @@ import org.adligo.tests4j.models.shared.trials.Test;
 import org.adligo.tests4j.models.shared.xml.XML_Chars;
 import org.adligo.tests4j_tests.base_abstract_trials.SourceFileCountingTrial;
 
-@SourceFileScope (sourceClass=XML_Chars.class, minCoverage=98.0)
+@SourceFileScope (sourceClass=XML_Chars.class, minCoverage=55.0)
 public class XML_CharsTrial extends SourceFileCountingTrial {
 
 	@Test

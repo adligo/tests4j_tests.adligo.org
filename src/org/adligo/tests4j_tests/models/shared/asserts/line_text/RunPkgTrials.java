@@ -38,6 +38,7 @@ public class RunPkgTrials implements I_TrialList {
 		List<Class<? extends AbstractTrial>> trials = new ArrayList<Class<? extends AbstractTrial>>();
 		
 		trials.add(DiffIndexesTrial.class);
+		trials.add(DiffIndexesMutantTrial.class);
 		trials.add(DiffIndexesPairTrial.class);
 		
 		trials.add(LineDiffMutantTrial.class);

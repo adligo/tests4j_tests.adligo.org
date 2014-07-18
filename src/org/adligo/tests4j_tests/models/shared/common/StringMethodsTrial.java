@@ -26,6 +26,12 @@ public class StringMethodsTrial extends SourceFileCountingTrial {
 			}
 		});
 		
+		assertEquals(0, StringMethods.indexBoundsFix("hey", -1));
+		assertEquals(0, StringMethods.indexBoundsFix("hey", 0));
+		assertEquals(3, StringMethods.indexBoundsFix("hey", 4));
+		assertEquals(3, StringMethods.indexBoundsFix("hey", 3));
+		assertEquals(1, StringMethods.indexBoundsFix("hey", 1));
+		assertEquals(2, StringMethods.indexBoundsFix("hey", 2));
 	}
 	
 	@Override
@@ -35,11 +41,11 @@ public class StringMethodsTrial extends SourceFileCountingTrial {
 
 	@Override
 	public int getAsserts() {
-		return 6;
+		return 12;
 	}
 
 	@Override
 	public int getUniqueAsserts() {
-		return 3;
+		return 7;
 	}
 }

@@ -32,7 +32,7 @@ public class RunAllTrials implements I_TrialRunListener {
 	public static void main(String [] args) {
 		
 		Tests4J_Params params = getTests(SimpleJacocoPluginFactory.class);
-		//Tests4J_Params params = getTests(ScopedJacocoPlugin.class);
+		//Tests4J_Params params = getTests(ScopedJacocoPluginFactory.class);
 		reporter = params.getReporter();
 		/*
 		List<Class<?>> loggingClasses = new ArrayList<Class<?>>(params.getLoggingClasses());
