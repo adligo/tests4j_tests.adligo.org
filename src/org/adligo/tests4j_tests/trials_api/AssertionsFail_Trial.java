@@ -2,14 +2,14 @@ package org.adligo.tests4j_tests.trials_api;
 
 import org.adligo.tests4j.models.shared.coverage.I_PackageCoverage;
 import org.adligo.tests4j.models.shared.results.I_ApiTrialResult;
-import org.adligo.tests4j.models.shared.trials.ApiTrial;
-import org.adligo.tests4j.models.shared.trials.IgnoreTest;
 import org.adligo.tests4j.models.shared.trials.PackageScope;
 import org.adligo.tests4j.models.shared.trials.Test;
 import org.adligo.tests4j_tests.base_abstract_trials.ApiCountingTrial;
 import org.adligo.tests4j_tests.trials_api.assert_fails_trials.AssertContainsFailsTrial;
 import org.adligo.tests4j_tests.trials_api.assert_fails_trials.AssertContainsWithMessageFailsTrial;
 import org.adligo.tests4j_tests.trials_api.assert_fails_trials.AssertEqualsFailsTrial;
+import org.adligo.tests4j_tests.trials_api.assert_fails_trials.AssertEqualsStringFailsTrial;
+import org.adligo.tests4j_tests.trials_api.assert_fails_trials.AssertEqualsStringWithMessageFailsTrial;
 import org.adligo.tests4j_tests.trials_api.assert_fails_trials.AssertEqualsWithMessageFailsTrial;
 import org.adligo.tests4j_tests.trials_api.assert_fails_trials.AssertFalseFailsTrial;
 import org.adligo.tests4j_tests.trials_api.assert_fails_trials.AssertFalseWithMessageFailsTrial;
@@ -24,6 +24,8 @@ import org.adligo.tests4j_tests.trials_api.assert_fails_trials.AssertGreaterThan
 import org.adligo.tests4j_tests.trials_api.assert_fails_trials.AssertGreaterThanOrEqualsDoubleShortFailsTrial;
 import org.adligo.tests4j_tests.trials_api.assert_fails_trials.AssertGreaterThanOrEqualsDoubleShortWithMessageFailsTrial;
 import org.adligo.tests4j_tests.trials_api.assert_fails_trials.AssertNotEqualsFailsTrial;
+import org.adligo.tests4j_tests.trials_api.assert_fails_trials.AssertNotEqualsStringFailsTrial;
+import org.adligo.tests4j_tests.trials_api.assert_fails_trials.AssertNotEqualsStringWithMessageFailsTrial;
 import org.adligo.tests4j_tests.trials_api.assert_fails_trials.AssertNotEqualsWithMessageFailsTrial;
 import org.adligo.tests4j_tests.trials_api.assert_fails_trials.AssertNotNullFailsTrial;
 import org.adligo.tests4j_tests.trials_api.assert_fails_trials.AssertNotNullWithMessageFailsTrial;
@@ -67,6 +69,16 @@ public class AssertionsFail_Trial extends ApiCountingTrial {
 	@Test
 	public void testAssertEqualsFailsWithMessage() throws Exception {
 		AssertEqualsWithMessageFailsTrial.runTestDelegate(this);
+	}
+	
+	@Test
+	public void testAssertEqualsStringFails() throws Exception {
+		AssertEqualsStringFailsTrial.runTestDelegate(this);
+	}
+	
+	@Test
+	public void testAssertEqualsStringFailsWithMessage() throws Exception {
+		AssertEqualsStringWithMessageFailsTrial.runTestDelegate(this);
 	}
 	
 	@Test
@@ -138,6 +150,16 @@ public class AssertionsFail_Trial extends ApiCountingTrial {
 	@Test
 	public void testAssertNotEqualsWithMessageFails() throws Exception {
 		AssertNotEqualsWithMessageFailsTrial.runTestDelegate(this);
+	}
+	
+	@Test
+	public void testAssertNotEqualsStringFails() throws Exception {
+		AssertNotEqualsStringFailsTrial.runTestDelegate(this);
+	}
+	
+	@Test
+	public void testAssertNotEqualsStringWithMessageFails() throws Exception {
+		AssertNotEqualsStringWithMessageFailsTrial.runTestDelegate(this);
 	}
 	
 	@Test
@@ -255,7 +277,7 @@ public class AssertionsFail_Trial extends ApiCountingTrial {
 
 	@Override
 	public int getTests() {
-		return 38;
+		return 42;
 	}
 
 	@Override
@@ -264,6 +286,8 @@ public class AssertionsFail_Trial extends ApiCountingTrial {
 				AssertContainsWithMessageFailsTrial.getAsserts() + 
 				AssertEqualsFailsTrial.getAsserts() +
 				AssertEqualsWithMessageFailsTrial.getAsserts() +
+				AssertEqualsStringFailsTrial.getAsserts() +
+				AssertEqualsStringWithMessageFailsTrial.getAsserts() +
 				AssertFalseFailsTrial.getAsserts() +
 				AssertFalseWithMessageFailsTrial.getAsserts()  +
 				AssertGreaterThanOrEqualsDoubleDoubleFailsTrial.getAsserts()  +
@@ -278,6 +302,8 @@ public class AssertionsFail_Trial extends ApiCountingTrial {
 				AssertGreaterThanOrEqualsDoubleShortWithMessageFailsTrial.getAsserts() + 
 				AssertNotEqualsFailsTrial.getAsserts() +
 				AssertNotEqualsWithMessageFailsTrial.getAsserts() + 
+				AssertNotEqualsStringFailsTrial.getAsserts() +
+				AssertNotEqualsStringWithMessageFailsTrial.getAsserts() + 
 				AssertNotNullFailsTrial.getAsserts() +
 				AssertNotNullWithMessageFailsTrial.getAsserts() + 
 				AssertNotSameFailsTrial.getAsserts() +
@@ -302,6 +328,6 @@ public class AssertionsFail_Trial extends ApiCountingTrial {
 
 	@Override
 	public int getUniqueAsserts() {
-		return 762;
+		return 842;
 	}
 }

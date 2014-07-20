@@ -15,7 +15,7 @@ import org.adligo.tests4j.models.shared.trials.Test;
 import org.adligo.tests4j_tests.base_abstract_trials.ApiCountingTrial;
 import org.adligo.tests4j_tests.trials_api.assert_fails_trials.AssertContainsFailsTrial;
 import org.adligo.tests4j_tests.trials_api.assert_fails_trials.AssertContainsWithMessageFailsTrial;
-import org.adligo.tests4j_tests.trials_api.assert_fails_trials.AssertEqualsFailsTrial;
+import org.adligo.tests4j_tests.trials_api.assert_fails_trials.AssertEqualsStringFailsTrial;
 import org.adligo.tests4j_tests.trials_api.assert_fails_trials.AssertEqualsWithMessageFailsTrial;
 import org.adligo.tests4j_tests.trials_api.assert_fails_trials.AssertFalseFailsTrial;
 import org.adligo.tests4j_tests.trials_api.assert_fails_trials.AssertFalseWithMessageFailsTrial;
@@ -130,6 +130,7 @@ public class AssertionsPass_Trial extends ApiCountingTrial {
 		assertEquals((float) 0.1,(float) 0.1);
 		assertEquals("testing equals",(float) 0.1,(float) 0.1);
 		
+		//String
 		assertEquals("a", "a");
 		assertEquals("testing equals","a","a");
 		assertEquals((byte) 1, (byte) 1);
@@ -155,11 +156,13 @@ public class AssertionsPass_Trial extends ApiCountingTrial {
 		assertNotEquals((float) 0.1,(float) 0.2);
 		assertNotEquals("testing not equals",(float) 0.1,(float) 0.2);
 		
+		//String
 		assertNotEquals("a", "b");
 		assertNotEquals("testing not equals","a","b");
 		assertNotEquals((byte) 1, (byte)2);
 		assertNotEquals("testing not equals", (byte) 1, (byte) 2);
 	}
+	
 	
 	@Test
 	public void testSame() {

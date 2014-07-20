@@ -1,6 +1,10 @@
+Write Machine Info metadata (information about how many threads, perhaps processor info exc)
+Add run duration to main metadata
+Try to find bug in code coverage on a single thread.
 
+LineDiffTextDisplayTrial
 working on metadata package source file tests
-6 or so assert(Not)Equals(String expected, String actual ) api trials
+
 CoveragePluginDelegator trial
 Tests4j_Params trial (up to 100%), as the class looks good
 coverage package source file tests  (package coverage has issues in ApiTrials)

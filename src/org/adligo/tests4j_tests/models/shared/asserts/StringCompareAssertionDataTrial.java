@@ -123,7 +123,7 @@ public class StringCompareAssertionDataTrial extends SourceFileCountingTrial {
 				new CompareAssertionData<String>("hey", "hey2"), result);
 		assertEquals("StringCompareAssertionData [comparison=TextLinesCompareResult "
 				+ "[example=TextLines [lines=[hey]], actual=TextLines [lines=[hey2]], "
-				+ "matched=false, lineDiffs=[LineDiffMutant [type=null, exampleLineNbr=0, "
+				+ "matched=false, lineDiffs=[LineDiff [type=null, exampleLineNbr=0, "
 				+ "actualLineNbr=null]]], expected=hey, actual=hey2]", a.toString());
 	}
 	

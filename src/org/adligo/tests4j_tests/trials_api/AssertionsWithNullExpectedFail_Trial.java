@@ -2,16 +2,18 @@ package org.adligo.tests4j_tests.trials_api;
 
 import org.adligo.tests4j.models.shared.coverage.I_PackageCoverage;
 import org.adligo.tests4j.models.shared.results.I_ApiTrialResult;
-import org.adligo.tests4j.models.shared.trials.ApiTrial;
-import org.adligo.tests4j.models.shared.trials.IgnoreTest;
 import org.adligo.tests4j.models.shared.trials.PackageScope;
 import org.adligo.tests4j.models.shared.trials.Test;
 import org.adligo.tests4j_tests.base_abstract_trials.ApiCountingTrial;
 import org.adligo.tests4j_tests.trials_api.asserts_null_expected_trials.AssertContainsNullFailsTrial;
 import org.adligo.tests4j_tests.trials_api.asserts_null_expected_trials.AssertContainsNullWithMessageFailsTrial;
 import org.adligo.tests4j_tests.trials_api.asserts_null_expected_trials.AssertEqualsNullFailsTrial;
+import org.adligo.tests4j_tests.trials_api.asserts_null_expected_trials.AssertEqualsNullStringFailsTrial;
+import org.adligo.tests4j_tests.trials_api.asserts_null_expected_trials.AssertEqualsNullStringWithMessageFailsTrial;
 import org.adligo.tests4j_tests.trials_api.asserts_null_expected_trials.AssertEqualsNullWithMessageFailsTrial;
 import org.adligo.tests4j_tests.trials_api.asserts_null_expected_trials.AssertNotEqualsNullFailsTrial;
+import org.adligo.tests4j_tests.trials_api.asserts_null_expected_trials.AssertNotEqualsNullStringFailsTrial;
+import org.adligo.tests4j_tests.trials_api.asserts_null_expected_trials.AssertNotEqualsNullStringWithMessageFailsTrial;
 import org.adligo.tests4j_tests.trials_api.asserts_null_expected_trials.AssertNotEqualsNullWithMessageFailsTrial;
 import org.adligo.tests4j_tests.trials_api.asserts_null_expected_trials.AssertNotSameNullFailsTrial;
 import org.adligo.tests4j_tests.trials_api.asserts_null_expected_trials.AssertNotSameNullWithMessageFailsTrial;
@@ -54,6 +56,16 @@ public class AssertionsWithNullExpectedFail_Trial extends ApiCountingTrial {
 	}
 	
 	@Test
+	public void testAssertEqualsNullStringFails() throws Exception {
+		AssertEqualsNullStringFailsTrial.runTestDelegate(this);
+	}
+
+	@Test
+	public void testAssertEqualsNullStringWithMessageFails() throws Exception {
+		AssertEqualsNullStringWithMessageFailsTrial.runTestDelegate(this);
+	}
+	
+	@Test
 	public void testAssertNotEqualsNullFails() throws Exception {
 		AssertNotEqualsNullFailsTrial.runTestDelegate(this);
 	}
@@ -61,6 +73,16 @@ public class AssertionsWithNullExpectedFail_Trial extends ApiCountingTrial {
 	@Test
 	public void testAssertNotEqualsNullNullWithMessageFails() throws Exception {
 		AssertNotEqualsNullWithMessageFailsTrial.runTestDelegate(this);
+	}
+	
+	@Test
+	public void testAssertNotEqualsNullStringFails() throws Exception {
+		AssertNotEqualsNullStringFailsTrial.runTestDelegate(this);
+	}
+	
+	@Test
+	public void testAssertNotEqualsNullNullStringWithMessageFails() throws Exception {
+		AssertNotEqualsNullStringWithMessageFailsTrial.runTestDelegate(this);
 	}
 	
 	@Test
@@ -157,7 +179,7 @@ public class AssertionsWithNullExpectedFail_Trial extends ApiCountingTrial {
 
 	@Override
 	public int getTests() {
-		return 22;
+		return 26;
 	}
 
 	@Override
@@ -166,8 +188,12 @@ public class AssertionsWithNullExpectedFail_Trial extends ApiCountingTrial {
 				AssertContainsNullWithMessageFailsTrial.getAsserts() +
 				AssertEqualsNullFailsTrial.getAsserts() +
 				AssertEqualsNullWithMessageFailsTrial.getAsserts() +
+				AssertEqualsNullStringFailsTrial.getAsserts() +
+				AssertEqualsNullStringWithMessageFailsTrial.getAsserts() +
 				AssertNotEqualsNullFailsTrial.getAsserts()+
 				AssertNotEqualsNullWithMessageFailsTrial.getAsserts() +
+				AssertNotEqualsNullStringFailsTrial.getAsserts()+
+				AssertNotEqualsNullStringWithMessageFailsTrial.getAsserts() +
 				AssertNotSameNullFailsTrial.getAsserts()+
 				AssertNotSameNullWithMessageFailsTrial.getAsserts()   +
 				AssertNotUniformNullFailsTrial.getAsserts() +
@@ -188,6 +214,6 @@ public class AssertionsWithNullExpectedFail_Trial extends ApiCountingTrial {
 
 	@Override
 	public int getUniqueAsserts() {
-		return 440;
+		return 520;
 	}
 }

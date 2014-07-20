@@ -15,7 +15,7 @@ public class TheMetaTrial  extends MetaTrial {
 		//Note when I ignored
 		// MultiRecordingTrial I lost 15% main coverage
 		//TODO reimpl it vs the ThreadLocals
-		super(37.0, 28.7);
+		super(37.0, 28.6);
 		//hmm package comparison data to include;
 		// passing tests
 		// relevant classes with trials %
@@ -46,7 +46,7 @@ public class TheMetaTrial  extends MetaTrial {
 		
 		//does not include assertions from this class yet
 		//I think the single threaded count is off somewhere
-		assertGreaterThanOrEquals(20900,results.getAsserts());
+		assertGreaterThanOrEquals(21100,results.getAsserts());
 		//should be assertEquals(19227L,results.getAsserts());
 		assertGreaterThanOrEquals(5100,results.getUniqueAsserts());
 		// should be something like assertEquals(4122L,results.getUniqueAsserts());
@@ -83,10 +83,10 @@ public class TheMetaTrial  extends MetaTrial {
 			sb.append("'");
 			sb.append(System.lineSeparator());
 		}
-		assertEquals(sb.toString(), 71, metadata.getAllTrialsCount());
+		assertEquals(sb.toString(), 72, metadata.getAllTrialsCount());
 		//should be pretty close to this, the count got off when I 
 		//added the testMinCoverage, method to sourceFileTrials
-		assertEquals(334,  metadata.getAllTestsCount());
+		assertEquals(361,  metadata.getAllTestsCount());
 		
 	}
 

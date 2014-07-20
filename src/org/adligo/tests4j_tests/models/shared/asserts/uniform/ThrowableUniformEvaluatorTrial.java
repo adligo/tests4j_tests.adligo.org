@@ -4,7 +4,7 @@ import org.adligo.tests4j.models.shared.asserts.CompareAssertionData;
 import org.adligo.tests4j.models.shared.asserts.line_text.I_TextLinesCompareResult;
 import org.adligo.tests4j.models.shared.asserts.uniform.I_Evaluation;
 import org.adligo.tests4j.models.shared.asserts.uniform.ThrowableUniformEvaluator;
-import org.adligo.tests4j.models.shared.en.asserts.Tests4J_AssertionResultMessages;
+import org.adligo.tests4j.models.shared.en.Tests4J_AssertionResultMessages;
 import org.adligo.tests4j.models.shared.trials.SourceFileScope;
 import org.adligo.tests4j.models.shared.trials.Test;
 import org.adligo.tests4j_tests.base_abstract_trials.SourceFileCountingTrial;

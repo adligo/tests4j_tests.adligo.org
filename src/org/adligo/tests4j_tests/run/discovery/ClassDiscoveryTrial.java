@@ -4,11 +4,14 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.adligo.tests4j.models.shared.metadata.I_MachineMetadata;
 import org.adligo.tests4j.models.shared.metadata.I_SourceInfoMetadata;
 import org.adligo.tests4j.models.shared.metadata.I_TestMetadata;
 import org.adligo.tests4j.models.shared.metadata.I_TrialMetadata;
 import org.adligo.tests4j.models.shared.metadata.I_TrialRunMetadata;
 import org.adligo.tests4j.models.shared.metadata.I_UseCaseMetadata;
+import org.adligo.tests4j.models.shared.metadata.MachineMetadata;
+import org.adligo.tests4j.models.shared.metadata.MachineMetadataMutant;
 import org.adligo.tests4j.models.shared.metadata.RelevantClassesWithTrialsCalculator;
 import org.adligo.tests4j.models.shared.metadata.SourceInfoMetadata;
 import org.adligo.tests4j.models.shared.metadata.SourceInfoMetadataMutant;
@@ -72,11 +75,15 @@ public class ClassDiscoveryTrial extends SourceFileCountingTrial {
 	private ClassDiscovery assertMetadataPackage() throws IOException {
 		ClassDiscovery cd = new ClassDiscovery("org.adligo.tests4j.models.shared.metadata");
 		List<String> classNames = cd.getClassNames();
+		assertContains(classNames, I_MachineMetadata.class.getName());
 		assertContains(classNames, I_SourceInfoMetadata.class.getName());
 		assertContains(classNames, I_TestMetadata.class.getName());
 		assertContains(classNames, I_TrialMetadata.class.getName());
 		assertContains(classNames, I_TrialRunMetadata.class.getName());
 		assertContains(classNames, I_UseCaseMetadata.class.getName());
+		
+		assertContains(classNames, MachineMetadata.class.getName());
+		assertContains(classNames, MachineMetadataMutant.class.getName());
 		
 		assertContains(classNames, RelevantClassesWithTrialsCalculator.class.getName());
 		
@@ -92,7 +99,7 @@ public class ClassDiscoveryTrial extends SourceFileCountingTrial {
 		assertContains(classNames, TrialRunMetadataMutant.class.getName());
 		assertContains(classNames, UseCaseMetadata.class.getName());
 		
-		assertEquals(15, classNames.size());
+		assertEquals(18, classNames.size());
 		List<ClassDiscovery> children =  cd.getSubPackages();
 		assertEquals(0, children.size());
 		return cd;
@@ -167,11 +174,11 @@ public class ClassDiscoveryTrial extends SourceFileCountingTrial {
 
 	@Override
 	public int getAsserts() {
-		return 54;
+		return 57;
 	}
 
 	@Override
 	public int getUniqueAsserts() {
-		return 53;
+		return 56;
 	}
 }

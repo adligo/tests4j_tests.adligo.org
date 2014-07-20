@@ -4,6 +4,8 @@ import org.adligo.tests4j.models.shared.asserts.line_text.DiffIndexesPair;
 import org.adligo.tests4j.models.shared.asserts.line_text.DiffIndexes;
 import org.adligo.tests4j.models.shared.asserts.line_text.I_DiffIndexes;
 import org.adligo.tests4j.models.shared.asserts.line_text.I_DiffIndexesPair;
+import org.adligo.tests4j.models.shared.asserts.line_text.I_TextLinesCompareResult;
+import org.adligo.tests4j.models.shared.en.Tests4J_LineDiffTextDisplayConstants;
 import org.adligo.tests4j.models.shared.trials.SourceFileScope;
 import org.adligo.tests4j.models.shared.trials.Test;
 import org.adligo.tests4j_tests.base_abstract_trials.SourceFileCountingTrial;
@@ -43,7 +45,7 @@ public class DiffIndexesPairTrial extends SourceFileCountingTrial {
 	}
 	
 	@Test
-	public void testCompareLinesEndMatchActualLonger() throws Exception {
+	public void testCompareLinesEndMatchActualLongerOnLeft() throws Exception {
 		DiffIndexesPair result = new DiffIndexesPair("cab", "fcab");
 		assertNotNull(result);
 		I_DiffIndexes exampleIndexes = result.getExpected();
@@ -62,7 +64,7 @@ public class DiffIndexesPairTrial extends SourceFileCountingTrial {
 	}
 	
 	@Test
-	public void testCompareLinesEndMatchExpectedLonger() throws Exception {
+	public void testCompareLinesEndMatchExpectedLongerOnLeft() throws Exception {
 		DiffIndexesPair result = new DiffIndexesPair("fcab", "cab");
 		assertNotNull(result);
 		I_DiffIndexes exampleIndexes = result.getExpected();
@@ -446,20 +448,141 @@ public class DiffIndexesPairTrial extends SourceFileCountingTrial {
 		
 	}
 	
+	@Test
+	public void testLongTextVsA() {
+		String example = "The following actual line of text is missing in the expected lines of text;";
+		String actual = "a";
+		DiffIndexesPair result = new DiffIndexesPair(example, "a");
+
+		I_DiffIndexes exampleIndexes = result.getExpected();
+		assertNotNull(exampleIndexes);
+		I_DiffIndexes actualIndexes = result.getActual();
+		assertNotNull(actualIndexes);
+		
+		String [] parts = exampleIndexes.getMatches(example);
+		assertEquals(1, parts.length);
+		//middle part
+		assertEquals("a", parts[0]);
+		
+		parts = exampleIndexes.getDifferences(example);
+		assertEquals(2, parts.length);
+		assertEquals("The following ", parts[0]);
+		assertEquals("ctual line of text is missing in the expected lines of text;", parts[1]);
+		
+		assertEquals(0, exampleIndexes.getDiffLeftToRight());
+		assertEquals(example.length() -1, exampleIndexes.getDiffRightToLeft());
+		assertEquals(14, exampleIndexes.getMatchLeftToRight());
+		assertEquals(14, exampleIndexes.getMatchRightToLeft());
+		
+		parts = actualIndexes.getMatches(actual);
+		assertEquals(1, parts.length);
+		assertEquals("a", parts[0]);
+		
+		
+		//middle part
+		parts = actualIndexes.getDifferences(actual);
+		assertEquals(0, parts.length);
+				
+		assertNull(actualIndexes.getDiffLeftToRight());
+		assertNull(actualIndexes.getDiffRightToLeft());
+		assertEquals(0, actualIndexes.getMatchLeftToRight());
+		assertEquals(0, actualIndexes.getMatchRightToLeft());
+	}
 	
+	@Test
+	public void testActualEndCharDiff() {
+		String example = "The";
+		String actual = "The2";
+		DiffIndexesPair result = new DiffIndexesPair(example, actual);
+
+		I_DiffIndexes exampleIndexes = result.getExpected();
+		assertNotNull(exampleIndexes);
+		I_DiffIndexes actualIndexes = result.getActual();
+		assertNotNull(actualIndexes);
+		
+		String [] parts = exampleIndexes.getMatches(example);
+		assertEquals(1, parts.length);
+		//middle part
+		assertEquals("The", parts[0]);
+		
+		parts = exampleIndexes.getDifferences(example);
+		assertEquals(0, parts.length);
+		
+		assertNull(exampleIndexes.getDiffLeftToRight());
+		assertNull(exampleIndexes.getDiffRightToLeft());
+		assertEquals(0, exampleIndexes.getMatchLeftToRight());
+		assertEquals(2, exampleIndexes.getMatchRightToLeft());
+		
+		parts = actualIndexes.getMatches(actual);
+		assertEquals(1, parts.length);
+		assertEquals("The", parts[0]);
+		
+		
+		//right
+		parts = actualIndexes.getDifferences(actual);
+		assertEquals(1, parts.length);
+		assertEquals("2", parts[0]);
+		
+		assertEquals(3, actualIndexes.getDiffLeftToRight());
+		assertEquals(3, actualIndexes.getDiffRightToLeft());
+		assertEquals(0, actualIndexes.getMatchLeftToRight());
+		assertEquals(2, actualIndexes.getMatchRightToLeft());
+	}
+	
+	
+	@Test
+	public void testExpectedEndCharDiff() {
+		String example = "The2";
+		String actual = "The";
+		DiffIndexesPair result = new DiffIndexesPair(example, actual);
+
+		I_DiffIndexes exampleIndexes = result.getExpected();
+		assertNotNull(exampleIndexes);
+		I_DiffIndexes actualIndexes = result.getActual();
+		assertNotNull(actualIndexes);
+		
+		String [] parts = exampleIndexes.getMatches(example);
+		assertEquals(1, parts.length);
+		//left part
+		assertEquals("The", parts[0]);
+		
+		parts = exampleIndexes.getDifferences(example);
+		assertEquals(1, parts.length);
+		//right part
+		assertEquals("2", parts[0]);
+				
+		assertEquals(3, exampleIndexes.getDiffLeftToRight());
+		assertEquals(3, exampleIndexes.getDiffRightToLeft());
+		assertEquals(0, exampleIndexes.getMatchLeftToRight());
+		assertEquals(2, exampleIndexes.getMatchRightToLeft());
+		
+		parts = actualIndexes.getMatches(actual);
+		assertEquals(1, parts.length);
+		assertEquals("The", parts[0]);
+		
+		
+		//right
+		parts = actualIndexes.getDifferences(actual);
+		assertEquals(0, parts.length);
+		
+		assertNull(actualIndexes.getDiffLeftToRight());
+		assertNull(actualIndexes.getDiffRightToLeft());
+		assertEquals(0, actualIndexes.getMatchLeftToRight());
+		assertEquals(2, actualIndexes.getMatchRightToLeft());
+	}
 	
 	@Override
 	public int getTests() {
-		return 12;
+		return 15;
 	}
 
 	@Override
 	public int getAsserts() {
-		return 187;
+		return 239;
 	}
 
 	@Override
 	public int getUniqueAsserts() {
-		return 118;
+		return 147;
 	}
 }

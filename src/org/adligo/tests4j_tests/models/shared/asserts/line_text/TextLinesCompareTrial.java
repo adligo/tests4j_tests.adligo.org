@@ -9,6 +9,7 @@ import org.adligo.tests4j.models.shared.asserts.line_text.I_TextLines;
 import org.adligo.tests4j.models.shared.asserts.line_text.I_TextLinesCompareResult;
 import org.adligo.tests4j.models.shared.asserts.line_text.LineDiffType;
 import org.adligo.tests4j.models.shared.asserts.line_text.TextLinesCompare;
+import org.adligo.tests4j.models.shared.en.Tests4J_LineDiffTextDisplayConstants;
 import org.adligo.tests4j.models.shared.trials.SourceFileScope;
 import org.adligo.tests4j.models.shared.trials.Test;
 import org.adligo.tests4j_tests.base_abstract_trials.SourceFileCountingTrial;
@@ -39,7 +40,7 @@ public class TextLinesCompareTrial extends SourceFileCountingTrial {
 		assertEquals(1, diffs.size());
 		I_LineDiff diff = diffs.get(0);
 		assertEquals(LineDiffType.MATCH, diff.getType());
-		assertEquals(0, diff.getExampleLineNbr());
+		assertEquals(0, diff.getExpectedLineNbr());
 		assertEquals(0, diff.getActualLineNbr());
 		assertNull(diff.getIndexes());
 		
@@ -65,7 +66,7 @@ public class TextLinesCompareTrial extends SourceFileCountingTrial {
 		assertEquals(1, diffs.size());
 		I_LineDiff diff = diffs.get(0);
 		assertEquals(LineDiffType.MATCH, diff.getType());
-		assertEquals(0, diff.getExampleLineNbr());
+		assertEquals(0, diff.getExpectedLineNbr());
 		assertEquals(0, diff.getActualLineNbr());
 		assertNull(diff.getIndexes());
 		
@@ -91,14 +92,14 @@ public class TextLinesCompareTrial extends SourceFileCountingTrial {
 		assertEquals(2, diffs.size());
 		I_LineDiff diff = diffs.get(0);
 		assertEquals(LineDiffType.MISSING_ACTUAL_LINE, diff.getType());
-		assertEquals(-1, diff.getExampleLineNbr());
+		assertEquals(-1, diff.getExpectedLineNbr());
 		assertEquals(0, diff.getActualLineNbr());
 		assertNull(diff.getIndexes());
 		
 	
 		diff = diffs.get(1);
-		assertEquals(LineDiffType.MISSING_EXAMPLE_LINE, diff.getType());
-		assertEquals(0, diff.getExampleLineNbr());
+		assertEquals(LineDiffType.MISSING_EXPECTED_LINE, diff.getType());
+		assertEquals(0, diff.getExpectedLineNbr());
 		assertEquals(0, diff.getActualLineNbr());
 		assertNull(diff.getIndexes());
 	}
@@ -125,14 +126,14 @@ public class TextLinesCompareTrial extends SourceFileCountingTrial {
 		assertEquals(2, diffs.size());
 		I_LineDiff diff = diffs.get(0);
 		assertEquals(LineDiffType.MATCH, diff.getType());
-		assertEquals(0, diff.getExampleLineNbr());
+		assertEquals(0, diff.getExpectedLineNbr());
 		assertEquals(0, diff.getActualLineNbr());
 		assertNull(diff.getIndexes());
 		
 		//test line 1
 		diff = diffs.get(1);
 		assertEquals(LineDiffType.MATCH, diff.getType());
-		assertEquals(1, diff.getExampleLineNbr());
+		assertEquals(1, diff.getExpectedLineNbr());
 		assertEquals(1, diff.getActualLineNbr());
 		assertNull(diff.getIndexes());
 		
@@ -165,22 +166,22 @@ public class TextLinesCompareTrial extends SourceFileCountingTrial {
 		assertNotNull(diffs);
 		assertEquals(3, diffs.size());
 		I_LineDiff diff = diffs.get(0);
-		assertEquals(LineDiffType.MISSING_EXAMPLE_LINE, diff.getType());
-		assertEquals(0, diff.getExampleLineNbr());
+		assertEquals(LineDiffType.MISSING_EXPECTED_LINE, diff.getType());
+		assertEquals(0, diff.getExpectedLineNbr());
 		assertEquals(-1, diff.getActualLineNbr());
 		assertNull(diff.getIndexes());
 		
 		//diff # 1
 		diff = diffs.get(1);
 		assertEquals(LineDiffType.MATCH, diff.getType());
-		assertEquals(1, diff.getExampleLineNbr());
+		assertEquals(1, diff.getExpectedLineNbr());
 		assertEquals(0, diff.getActualLineNbr());
 		assertNull(diff.getIndexes());
 		
 		//diff # 2
 		diff = diffs.get(2);
 		assertEquals(LineDiffType.MISSING_ACTUAL_LINE, diff.getType());
-		assertEquals(1, diff.getExampleLineNbr());
+		assertEquals(1, diff.getExpectedLineNbr());
 		assertEquals(1, diff.getActualLineNbr());
 		assertNull(diff.getIndexes());
 	}
@@ -215,28 +216,28 @@ public class TextLinesCompareTrial extends SourceFileCountingTrial {
 		assertEquals(4, diffs.size());
 		I_LineDiff diff = diffs.get(0);
 		assertEquals(LineDiffType.MISSING_ACTUAL_LINE, diff.getType());
-		assertEquals(-1, diff.getExampleLineNbr());
+		assertEquals(-1, diff.getExpectedLineNbr());
 		assertEquals(0, diff.getActualLineNbr());
 		assertNull(diff.getIndexes());
 		
 		//diff # 1
 		diff = diffs.get(1);
 		assertEquals(LineDiffType.MISSING_ACTUAL_LINE, diff.getType());
-		assertEquals(-1, diff.getExampleLineNbr());
+		assertEquals(-1, diff.getExpectedLineNbr());
 		assertEquals(1, diff.getActualLineNbr());
 		assertNull(diff.getIndexes());
 		
 		//diff # 2
 		diff = diffs.get(2);
-		assertEquals(LineDiffType.MISSING_EXAMPLE_LINE, diff.getType());
-		assertEquals(0, diff.getExampleLineNbr());
+		assertEquals(LineDiffType.MISSING_EXPECTED_LINE, diff.getType());
+		assertEquals(0, diff.getExpectedLineNbr());
 		assertEquals(0, diff.getActualLineNbr());
 		assertNull(diff.getIndexes());
 		
 		//diff # 3
 		diff = diffs.get(3);
-		assertEquals(LineDiffType.MISSING_EXAMPLE_LINE, diff.getType());
-		assertEquals(1, diff.getExampleLineNbr());
+		assertEquals(LineDiffType.MISSING_EXPECTED_LINE, diff.getType());
+		assertEquals(1, diff.getExpectedLineNbr());
 		assertEquals(0, diff.getActualLineNbr());
 		assertNull(diff.getIndexes());
 	}
@@ -269,21 +270,21 @@ public class TextLinesCompareTrial extends SourceFileCountingTrial {
 		assertEquals(3, diffs.size());
 		I_LineDiff diff = diffs.get(0);
 		assertEquals(LineDiffType.MATCH, diff.getType());
-		assertEquals(0, diff.getExampleLineNbr());
+		assertEquals(0, diff.getExpectedLineNbr());
 		assertEquals(0, diff.getActualLineNbr());
 		assertNull(diff.getIndexes());
 		
 		//diff # 1
 		diff = diffs.get(1);
 		assertEquals(LineDiffType.MISSING_ACTUAL_LINE, diff.getType());
-		assertEquals(0, diff.getExampleLineNbr());
+		assertEquals(0, diff.getExpectedLineNbr());
 		assertEquals(1, diff.getActualLineNbr());
 		assertNull(diff.getIndexes());
 		
 		//diff # 2
 		diff = diffs.get(2);
-		assertEquals(LineDiffType.MISSING_EXAMPLE_LINE, diff.getType());
-		assertEquals(1, diff.getExampleLineNbr());
+		assertEquals(LineDiffType.MISSING_EXPECTED_LINE, diff.getType());
+		assertEquals(1, diff.getExpectedLineNbr());
 		assertEquals(1, diff.getActualLineNbr());
 		assertNull(diff.getIndexes());
 	}
@@ -312,21 +313,21 @@ public class TextLinesCompareTrial extends SourceFileCountingTrial {
 		assertEquals(3, diffs.size());
 		I_LineDiff diff = diffs.get(0);
 		assertEquals(LineDiffType.MATCH, diff.getType());
-		assertEquals(0, diff.getExampleLineNbr());
+		assertEquals(0, diff.getExpectedLineNbr());
 		assertEquals(0, diff.getActualLineNbr());
 		assertNull(diff.getIndexes());
 		
 		//test line 1
 		diff = diffs.get(1);
 		assertEquals(LineDiffType.MATCH, diff.getType());
-		assertEquals(1, diff.getExampleLineNbr());
+		assertEquals(1, diff.getExpectedLineNbr());
 		assertEquals(1, diff.getActualLineNbr());
 		assertNull(diff.getIndexes());
 		
 		//test line 2
 		diff = diffs.get(2);
 		assertEquals(LineDiffType.MATCH, diff.getType());
-		assertEquals(2, diff.getExampleLineNbr());
+		assertEquals(2, diff.getExpectedLineNbr());
 		assertEquals(2, diff.getActualLineNbr());
 		assertNull(diff.getIndexes());
 	}
@@ -361,29 +362,29 @@ public class TextLinesCompareTrial extends SourceFileCountingTrial {
 		assertNotNull(diffs);
 		assertEquals(4, diffs.size());
 		I_LineDiff diff = diffs.get(0);
-		assertEquals(LineDiffType.MISSING_EXAMPLE_LINE, diff.getType());
-		assertEquals(0, diff.getExampleLineNbr());
+		assertEquals(LineDiffType.MISSING_EXPECTED_LINE, diff.getType());
+		assertEquals(0, diff.getExpectedLineNbr());
 		assertEquals(-1, diff.getActualLineNbr());
 		assertNull(diff.getIndexes());
 		
 		//test line 1
 		diff = diffs.get(1);
 		assertEquals(LineDiffType.MATCH, diff.getType());
-		assertEquals(1, diff.getExampleLineNbr());
+		assertEquals(1, diff.getExpectedLineNbr());
 		assertEquals(0, diff.getActualLineNbr());
 		assertNull(diff.getIndexes());
 		
 		//test line 2
 		diff = diffs.get(2);
 		assertEquals(LineDiffType.MISSING_ACTUAL_LINE, diff.getType());
-		assertEquals(1, diff.getExampleLineNbr());
+		assertEquals(1, diff.getExpectedLineNbr());
 		assertEquals(1, diff.getActualLineNbr());
 		assertNull(diff.getIndexes());
 		
 		//test line 3
 		diff = diffs.get(3);
 		assertEquals(LineDiffType.MATCH, diff.getType());
-		assertEquals(2, diff.getExampleLineNbr());
+		assertEquals(2, diff.getExpectedLineNbr());
 		assertEquals(2, diff.getActualLineNbr());
 		assertNull(diff.getIndexes());
 	}
@@ -420,14 +421,14 @@ public class TextLinesCompareTrial extends SourceFileCountingTrial {
 		assertEquals(5, diffs.size());
 		I_LineDiff diff = diffs.get(0);
 		assertEquals(LineDiffType.MISSING_ACTUAL_LINE, diff.getType());
-		assertEquals(-1, diff.getExampleLineNbr());
+		assertEquals(-1, diff.getExpectedLineNbr());
 		assertEquals(0, diff.getActualLineNbr());
 		assertNull(diff.getIndexes());
 		
 		//test line 1
 		diff = diffs.get(1);
 		assertEquals(LineDiffType.MISSING_ACTUAL_LINE, diff.getType());
-		assertEquals(-1, diff.getExampleLineNbr());
+		assertEquals(-1, diff.getExpectedLineNbr());
 		assertEquals(1, diff.getActualLineNbr());
 		assertNull(diff.getIndexes());
 				
@@ -435,21 +436,21 @@ public class TextLinesCompareTrial extends SourceFileCountingTrial {
 		//test line 2
 		diff = diffs.get(2);
 		assertEquals(LineDiffType.MATCH, diff.getType());
-		assertEquals(0, diff.getExampleLineNbr());
+		assertEquals(0, diff.getExpectedLineNbr());
 		assertEquals(2, diff.getActualLineNbr());
 		assertNull(diff.getIndexes());
 		
 		//test line 3
 		diff = diffs.get(3);
-		assertEquals(LineDiffType.MISSING_EXAMPLE_LINE, diff.getType());
-		assertEquals(1, diff.getExampleLineNbr());
+		assertEquals(LineDiffType.MISSING_EXPECTED_LINE, diff.getType());
+		assertEquals(1, diff.getExpectedLineNbr());
 		assertEquals(2, diff.getActualLineNbr());
 		assertNull(diff.getIndexes());
 		
 		//test line 4
 		diff = diffs.get(4);
-		assertEquals(LineDiffType.MISSING_EXAMPLE_LINE, diff.getType());
-		assertEquals(2, diff.getExampleLineNbr());
+		assertEquals(LineDiffType.MISSING_EXPECTED_LINE, diff.getType());
+		assertEquals(2, diff.getExpectedLineNbr());
 		assertEquals(2, diff.getActualLineNbr());
 		assertNull(diff.getIndexes());
 	}
@@ -486,14 +487,14 @@ public class TextLinesCompareTrial extends SourceFileCountingTrial {
 		assertEquals(5, diffs.size());
 		I_LineDiff diff = diffs.get(0);
 		assertEquals(LineDiffType.MISSING_ACTUAL_LINE, diff.getType());
-		assertEquals(-1, diff.getExampleLineNbr());
+		assertEquals(-1, diff.getExpectedLineNbr());
 		assertEquals(0, diff.getActualLineNbr());
 		assertNull(diff.getIndexes());
 		
 		//test line 1
 		diff = diffs.get(1);
-		assertEquals(LineDiffType.MISSING_EXAMPLE_LINE, diff.getType());
-		assertEquals(0, diff.getExampleLineNbr());
+		assertEquals(LineDiffType.MISSING_EXPECTED_LINE, diff.getType());
+		assertEquals(0, diff.getExpectedLineNbr());
 		assertEquals(0, diff.getActualLineNbr());
 		assertNull(diff.getIndexes());
 				
@@ -501,21 +502,21 @@ public class TextLinesCompareTrial extends SourceFileCountingTrial {
 		//test line 2
 		diff = diffs.get(2);
 		assertEquals(LineDiffType.MATCH, diff.getType());
-		assertEquals(1, diff.getExampleLineNbr());
+		assertEquals(1, diff.getExpectedLineNbr());
 		assertEquals(1, diff.getActualLineNbr());
 		assertNull(diff.getIndexes());
 		
 		//test line 3
 		diff = diffs.get(3);
 		assertEquals(LineDiffType.MISSING_ACTUAL_LINE, diff.getType());
-		assertEquals(1, diff.getExampleLineNbr());
+		assertEquals(1, diff.getExpectedLineNbr());
 		assertEquals(2, diff.getActualLineNbr());
 		assertNull(diff.getIndexes());
 		
 		//test line 4
 		diff = diffs.get(4);
-		assertEquals(LineDiffType.MISSING_EXAMPLE_LINE, diff.getType());
-		assertEquals(2, diff.getExampleLineNbr());
+		assertEquals(LineDiffType.MISSING_EXPECTED_LINE, diff.getType());
+		assertEquals(2, diff.getExpectedLineNbr());
 		assertEquals(2, diff.getActualLineNbr());
 		assertNull(diff.getIndexes());
 	}
@@ -553,14 +554,14 @@ public class TextLinesCompareTrial extends SourceFileCountingTrial {
 		assertEquals(6, diffs.size());
 		I_LineDiff diff = diffs.get(0);
 		assertEquals(LineDiffType.MISSING_ACTUAL_LINE, diff.getType());
-		assertEquals(-1, diff.getExampleLineNbr());
+		assertEquals(-1, diff.getExpectedLineNbr());
 		assertEquals(0, diff.getActualLineNbr());
 		assertNull(diff.getIndexes());
 		
 		//test line 1
 		diff = diffs.get(1);
 		assertEquals(LineDiffType.MISSING_ACTUAL_LINE, diff.getType());
-		assertEquals(-1, diff.getExampleLineNbr());
+		assertEquals(-1, diff.getExpectedLineNbr());
 		assertEquals(1, diff.getActualLineNbr());
 		assertNull(diff.getIndexes());
 				
@@ -568,28 +569,28 @@ public class TextLinesCompareTrial extends SourceFileCountingTrial {
 		//test line 2
 		diff = diffs.get(2);
 		assertEquals(LineDiffType.MISSING_ACTUAL_LINE, diff.getType());
-		assertEquals(-1, diff.getExampleLineNbr());
+		assertEquals(-1, diff.getExpectedLineNbr());
 		assertEquals(2, diff.getActualLineNbr());
 		assertNull(diff.getIndexes());
 		
 		//test line 3
 		diff = diffs.get(3);
-		assertEquals(LineDiffType.MISSING_EXAMPLE_LINE, diff.getType());
-		assertEquals(0, diff.getExampleLineNbr());
+		assertEquals(LineDiffType.MISSING_EXPECTED_LINE, diff.getType());
+		assertEquals(0, diff.getExpectedLineNbr());
 		assertEquals(0, diff.getActualLineNbr());
 		assertNull(diff.getIndexes());
 		
 		//test line 4
 		diff = diffs.get(4);
-		assertEquals(LineDiffType.MISSING_EXAMPLE_LINE, diff.getType());
-		assertEquals(1, diff.getExampleLineNbr());
+		assertEquals(LineDiffType.MISSING_EXPECTED_LINE, diff.getType());
+		assertEquals(1, diff.getExpectedLineNbr());
 		assertEquals(0, diff.getActualLineNbr());
 		assertNull(diff.getIndexes());
 		
 		//test line 5
 		diff = diffs.get(5);
-		assertEquals(LineDiffType.MISSING_EXAMPLE_LINE, diff.getType());
-		assertEquals(2, diff.getExampleLineNbr());
+		assertEquals(LineDiffType.MISSING_EXPECTED_LINE, diff.getType());
+		assertEquals(2, diff.getExpectedLineNbr());
 		assertEquals(0, diff.getActualLineNbr());
 		assertNull(diff.getIndexes());
 	}
@@ -625,29 +626,29 @@ public class TextLinesCompareTrial extends SourceFileCountingTrial {
 		assertEquals(4, diffs.size());
 		I_LineDiff diff = diffs.get(0);
 		assertEquals(LineDiffType.MATCH, diff.getType());
-		assertEquals(0, diff.getExampleLineNbr());
+		assertEquals(0, diff.getExpectedLineNbr());
 		assertEquals(0, diff.getActualLineNbr());
 		assertNull(diff.getIndexes());
 		
 		//test line 1
 		diff = diffs.get(1);
 		assertEquals(LineDiffType.MISSING_ACTUAL_LINE, diff.getType());
-		assertEquals(0, diff.getExampleLineNbr());
+		assertEquals(0, diff.getExpectedLineNbr());
 		assertEquals(1, diff.getActualLineNbr());
 		assertNull(diff.getIndexes());
 				
 		
 		//test line 2
 		diff = diffs.get(2);
-		assertEquals(LineDiffType.MISSING_EXAMPLE_LINE, diff.getType());
-		assertEquals(1, diff.getExampleLineNbr());
+		assertEquals(LineDiffType.MISSING_EXPECTED_LINE, diff.getType());
+		assertEquals(1, diff.getExpectedLineNbr());
 		assertEquals(1, diff.getActualLineNbr());
 		assertNull(diff.getIndexes());
 		
 		//test line 3
 		diff = diffs.get(3);
 		assertEquals(LineDiffType.MATCH, diff.getType());
-		assertEquals(2, diff.getExampleLineNbr());
+		assertEquals(2, diff.getExpectedLineNbr());
 		assertEquals(2, diff.getActualLineNbr());
 		assertNull(diff.getIndexes());
 		
@@ -675,7 +676,7 @@ public class TextLinesCompareTrial extends SourceFileCountingTrial {
 		assertEquals(2, diffs.size());
 		I_LineDiff diff = diffs.get(0);
 		assertEquals(LineDiffType.PARTIAL_MATCH, diff.getType());
-		assertEquals(0, diff.getExampleLineNbr());
+		assertEquals(0, diff.getExpectedLineNbr());
 		assertEquals(0, diff.getActualLineNbr());
 		I_DiffIndexesPair indexes = diff.getIndexes();
 		assertNotNull(indexes);
@@ -689,7 +690,7 @@ public class TextLinesCompareTrial extends SourceFileCountingTrial {
 	
 		diff = diffs.get(1);
 		assertEquals(LineDiffType.MATCH, diff.getType());
-		assertEquals(1, diff.getExampleLineNbr());
+		assertEquals(1, diff.getExpectedLineNbr());
 		assertEquals(1, diff.getActualLineNbr());
 		assertNull(diff.getIndexes());
 	}
@@ -717,7 +718,7 @@ public class TextLinesCompareTrial extends SourceFileCountingTrial {
 		assertEquals(2, diffs.size());
 		I_LineDiff diff = diffs.get(0);
 		assertEquals(LineDiffType.MATCH, diff.getType());
-		assertEquals(0, diff.getExampleLineNbr());
+		assertEquals(0, diff.getExpectedLineNbr());
 		assertEquals(0, diff.getActualLineNbr());
 		assertNull(diff.getIndexes());
 		
@@ -725,7 +726,7 @@ public class TextLinesCompareTrial extends SourceFileCountingTrial {
 	
 		diff = diffs.get(1);
 		assertEquals(LineDiffType.PARTIAL_MATCH, diff.getType());
-		assertEquals(1, diff.getExampleLineNbr());
+		assertEquals(1, diff.getExpectedLineNbr());
 		assertEquals(1, diff.getActualLineNbr());
 		I_DiffIndexesPair indexes = diff.getIndexes();
 		assertNotNull(indexes);
@@ -763,13 +764,13 @@ public class TextLinesCompareTrial extends SourceFileCountingTrial {
 		assertEquals(4, diffs.size());
 		I_LineDiff diff = diffs.get(0);
 		assertEquals(LineDiffType.MISSING_ACTUAL_LINE, diff.getType());
-		assertEquals(-1, diff.getExampleLineNbr());
+		assertEquals(-1, diff.getExpectedLineNbr());
 		assertEquals(0, diff.getActualLineNbr());
 		assertNull(diff.getIndexes());
 		
 		diff = diffs.get(1);
 		assertEquals(LineDiffType.PARTIAL_MATCH, diff.getType());
-		assertEquals(0, diff.getExampleLineNbr());
+		assertEquals(0, diff.getExpectedLineNbr());
 		assertEquals(1, diff.getActualLineNbr());
 		I_DiffIndexesPair indexes = diff.getIndexes();
 		assertNotNull(indexes);
@@ -786,19 +787,20 @@ public class TextLinesCompareTrial extends SourceFileCountingTrial {
 		assertEquals(4, actual.getMatchRightToLeft());
 		
 		diff = diffs.get(2);
-		assertEquals(LineDiffType.MISSING_EXAMPLE_LINE, diff.getType());
-		assertEquals(1, diff.getExampleLineNbr());
+		assertEquals(LineDiffType.MISSING_EXPECTED_LINE, diff.getType());
+		assertEquals(1, diff.getExpectedLineNbr());
 		assertEquals(1, diff.getActualLineNbr());
 		indexes = diff.getIndexes();
 		assertNull(indexes);
 		
 		diff = diffs.get(3);
 		assertEquals(LineDiffType.MATCH, diff.getType());
-		assertEquals(2, diff.getExampleLineNbr());
+		assertEquals(2, diff.getExpectedLineNbr());
 		assertEquals(2, diff.getActualLineNbr());
 		assertNull(diff.getIndexes());
 	}
 
+	
 	
 	@Override
 	public int getTests() {

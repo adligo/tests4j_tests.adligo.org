@@ -1,6 +1,6 @@
 package org.adligo.tests4j_tests.models.shared.en.trials.asserts;
 
-import org.adligo.tests4j.models.shared.en.asserts.Tests4J_AssertionInputMessages;
+import org.adligo.tests4j.models.shared.en.Tests4J_AssertionInputMessages;
 import org.adligo.tests4j.models.shared.trials.SourceFileScope;
 import org.adligo.tests4j.models.shared.trials.Test;
 import org.adligo.tests4j_tests.base_abstract_trials.SourceFileCountingTrial;

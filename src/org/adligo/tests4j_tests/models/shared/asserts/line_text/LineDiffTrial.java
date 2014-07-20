@@ -48,7 +48,7 @@ public class LineDiffTrial extends SourceFileCountingTrial {
 							}
 							
 							@Override
-							public int getExampleLineNbr() {
+							public int getExpectedLineNbr() {
 								return -2;
 							}
 							
@@ -85,7 +85,7 @@ public class LineDiffTrial extends SourceFileCountingTrial {
 							}
 							
 							@Override
-							public int getExampleLineNbr() {
+							public int getExpectedLineNbr() {
 								return -1;
 							}
 							
@@ -104,20 +104,20 @@ public class LineDiffTrial extends SourceFileCountingTrial {
 		LineDiff ld = new LineDiff();
 		assertNull(ld.getType());
 		assertNull(ld.getActualLineNbr());
-		assertEquals(0, ld.getExampleLineNbr());
+		assertEquals(0, ld.getExpectedLineNbr());
 		assertNull(ld.getIndexes());
 		
 		LineDiffMutant ldm = new LineDiffMutant();
 		ldm.setType(LineDiffType.PARTIAL_MATCH);
 		ldm.setActualLineNbr(1);
-		ldm.setExampleLineNbr(0);
+		ldm.setExpectedLineNbr(0);
 		DiffIndexesPair pair = new DiffIndexesPair(new DiffIndexes(0, 1, null, null) , new DiffIndexes(1, 2, null, null));
 		ldm.setIndexes(pair);
 		ld = new LineDiff(ldm);
 		
 		assertEquals(LineDiffType.PARTIAL_MATCH, ld.getType());
 		assertEquals(1, ld.getActualLineNbr());
-		assertEquals(0, ld.getExampleLineNbr());
+		assertEquals(0, ld.getExpectedLineNbr());
 		assertSame(pair, ld.getIndexes());
 		
 	}
@@ -126,17 +126,17 @@ public class LineDiffTrial extends SourceFileCountingTrial {
 	public void testComparable() {
 		TreeSet<I_LineDiff> ordered = new TreeSet<I_LineDiff>();
 		LineDiffMutant ldm0 = new LineDiffMutant();
-		ldm0.setExampleLineNbr(0);
+		ldm0.setExpectedLineNbr(0);
 		LineDiff ld0 = new LineDiff(ldm0);
 		ordered.add(ld0);
 		
 		LineDiffMutant ldm1 = new LineDiffMutant();
-		ldm1.setExampleLineNbr(1);
+		ldm1.setExpectedLineNbr(1);
 		LineDiff ld1 = new LineDiff(ldm1);
 		ordered.add(ld1);
 		
 		LineDiffMutant ldm2 = new LineDiffMutant();
-		ldm2.setExampleLineNbr(2);
+		ldm2.setExpectedLineNbr(2);
 		LineDiff ld2 = new LineDiff(ldm2);
 		ordered.add(ld2);
 		
@@ -151,7 +151,7 @@ public class LineDiffTrial extends SourceFileCountingTrial {
 	public void testEqualsHashCodeAndToString() {
 		LineDiffMutant a = new LineDiffMutant();
 		LineDiffMutant b = new LineDiffMutant();
-		b.setExampleLineNbr(1);
+		b.setExpectedLineNbr(1);
 		
 		
 		assertEquals(new LineDiff(a),new LineDiff(a));

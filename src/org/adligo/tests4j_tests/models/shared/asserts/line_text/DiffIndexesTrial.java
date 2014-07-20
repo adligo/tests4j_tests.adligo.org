@@ -206,6 +206,18 @@ public class DiffIndexesTrial extends SourceFileCountingTrial {
 	}
 	
 	@Test
+	public void testGetLeftMatchesAndDifferencesNullLine() {
+		//text to the right of this is different;
+		I_DiffIndexes sed = new DiffIndexes(null, null, 0, 0);
+		String[] diffs = sed.getDifferences(null);
+		assertEquals(0, diffs.length);
+		
+		String[] matches = sed.getMatches(null);
+		assertEquals(0, matches.length);
+	}
+	
+	
+	@Test
 	public void testGetLeftMatchesRightDifferent() {
 		//text to the right of this is different;
 		I_DiffIndexes sed = new DiffIndexes(null, null, 0, 0);
@@ -274,16 +286,16 @@ public class DiffIndexesTrial extends SourceFileCountingTrial {
 	
 	@Override
 	public int getTests() {
-		return 7;
+		return 8;
 	}
 
 	@Override
 	public int getAsserts() {
-		return 68;
+		return 70;
 	}
 
 	@Override
 	public int getUniqueAsserts() {
-		return 46;
+		return 47;
 	}
 }

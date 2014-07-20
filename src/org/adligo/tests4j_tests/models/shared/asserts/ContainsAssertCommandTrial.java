@@ -8,7 +8,7 @@ import org.adligo.tests4j.models.shared.asserts.ContainsAssertCommand;
 import org.adligo.tests4j.models.shared.asserts.ExpectedThrownData;
 import org.adligo.tests4j.models.shared.asserts.common.AssertType;
 import org.adligo.tests4j.models.shared.asserts.common.I_Thrower;
-import org.adligo.tests4j.models.shared.en.asserts.Tests4J_AssertionResultMessages;
+import org.adligo.tests4j.models.shared.en.Tests4J_AssertionResultMessages;
 import org.adligo.tests4j.models.shared.trials.SourceFileScope;
 import org.adligo.tests4j.models.shared.trials.Test;
 import org.adligo.tests4j_tests.base_abstract_trials.SourceFileCountingTrial;

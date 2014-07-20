@@ -26,7 +26,7 @@ public class AssertEqualsWithMessageFailsTrial extends ApiTrial {
 
 	@Test
 	public void testAssertEqualsFailsWithMessage() {
-		assertEquals(TEST_ASSERT_FAILS_MESSAGE,"se", "set");
+		assertEquals(TEST_ASSERT_FAILS_MESSAGE,1, 2);
 	}
 	
 	public static void runTestDelegate(I_Asserts asserts)  throws Exception  {

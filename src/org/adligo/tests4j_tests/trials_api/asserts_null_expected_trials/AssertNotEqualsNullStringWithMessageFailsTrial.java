@@ -1,4 +1,4 @@
-package org.adligo.tests4j_tests.trials_api.assert_fails_trials;
+package org.adligo.tests4j_tests.trials_api.asserts_null_expected_trials;
 
 import java.util.List;
 
@@ -12,7 +12,6 @@ import org.adligo.tests4j.models.shared.results.I_TestResult;
 import org.adligo.tests4j.models.shared.results.I_TrialFailure;
 import org.adligo.tests4j.models.shared.results.I_TrialResult;
 import org.adligo.tests4j.models.shared.results.TestResult;
-import org.adligo.tests4j.models.shared.trials.AbstractTrial;
 import org.adligo.tests4j.models.shared.trials.ApiTrial;
 import org.adligo.tests4j.models.shared.trials.PackageScope;
 import org.adligo.tests4j.models.shared.trials.Test;
@@ -22,18 +21,18 @@ import org.adligo.tests4j_tests.trials_api.common.ExpectedFailureRunner;
 
 @TrialRecursion
 @PackageScope (packageName="org.adligo.tests4j")
-public class AssertNotUniformNoEvaluatorWithMessageFailsTrial extends ApiTrial {
+public class AssertNotEqualsNullStringWithMessageFailsTrial extends ApiTrial {
 
-	public static final String TEST_ASSERT_FAILS_MESSAGE = "testAssertNotUniformNoEvaluatorWithMessage message";
+	public static final String TEST_ASSERT_FAILS_MESSAGE = "testAssertNotEqualsWithMessage message";
 
 	@Test
-	public void testAssertNotUniformNoEvaluatorWithMessage() {
-		assertNotUniform(TEST_ASSERT_FAILS_MESSAGE, this, this);
+	public void testAssertNotEqualsWithMessage() {
+		assertNotEquals(TEST_ASSERT_FAILS_MESSAGE, (String) null, (String) null);
 	}
 	
 	public static void runTestDelegate(I_Asserts asserts)  throws Exception {
 		ExpectedFailureRunner runner = new ExpectedFailureRunner();
-		runner.run(AssertNotUniformNoEvaluatorWithMessageFailsTrial.class);
+		runner.run(AssertNotEqualsNullStringWithMessageFailsTrial.class);
 		
 		I_TrialRunMetadata metadata = runner.getMetadata();
 		asserts.assertNotNull(metadata);
@@ -44,7 +43,7 @@ public class AssertNotUniformNoEvaluatorWithMessageFailsTrial extends ApiTrial {
 		asserts.assertEquals(1, trialsMetadata.size());
 		I_TrialMetadata trialMeta = trialsMetadata.get(0);
 		asserts.assertNotNull(trialMeta);
-		asserts.assertEquals(AssertNotUniformNoEvaluatorWithMessageFailsTrial.class.getName(), 
+		asserts.assertEquals(AssertNotEqualsNullStringWithMessageFailsTrial.class.getName(), 
 				trialMeta.getTrialName());
 		asserts.assertEquals(0L, trialMeta.getTimeout());
 		asserts.assertFalse(trialMeta.isIgnored());
@@ -57,7 +56,7 @@ public class AssertNotUniformNoEvaluatorWithMessageFailsTrial extends ApiTrial {
 		
 		I_TestMetadata testMeta = testsMetadata.get(0);
 		asserts.assertNotNull(testMeta);
-		asserts.assertEquals("testAssertNotUniformNoEvaluatorWithMessage", testMeta.getTestName());
+		asserts.assertEquals("testAssertNotEqualsWithMessage", testMeta.getTestName());
 		asserts.assertEquals(0L, testMeta.getTimeout());
 		
 		List<I_TrialResult> results = runner.getResults();
@@ -78,26 +77,32 @@ public class AssertNotUniformNoEvaluatorWithMessageFailsTrial extends ApiTrial {
 		asserts.assertEquals(TestResult.class.getName(),testResult.getClass().getName());
 		asserts.assertFalse(testResult.isPassed());
 		asserts.assertFalse(testResult.isIgnored());
-		asserts.assertEquals("testAssertNotUniformNoEvaluatorWithMessage", testResult.getName());
+		asserts.assertEquals("testAssertNotEqualsWithMessage", testResult.getName());
 		asserts.assertEquals(0, testResult.getAssertionCount());
 		asserts.assertEquals(0, testResult.getUniqueAssertionCount());
 		
 		I_TestFailure testFailure = testResult.getFailure();
 		asserts.assertNotNull(testFailure);
-		asserts.assertEquals(new Tests4J_AssertionResultMessages().getNoEvaluatorFoundForClass(), testFailure.getMessage());
+		asserts.assertEquals(new Tests4J_AssertionResultMessages().getTheExpectedValueShouldNeverBeNull(), testFailure.getMessage());
 		
 		Throwable locationFailed = testFailure.getLocationFailed();
 		StackTraceElement [] elements = locationFailed.getStackTrace();
 		asserts.assertGreaterThanOrEquals(1.0, elements.length);
 		StackTraceElement topElement = elements[0];
+		for (int i = 0; i < elements.length; i++) {
+			topElement = elements[i];
+			String className = topElement.getClassName();
+			if (AssertNotEqualsNullStringWithMessageFailsTrial.class.getName().equals(className)) {
+				break;
+			}
+		}
 		
-		asserts.assertNotNull(topElement);
-		asserts.assertEquals(AssertNotUniformNoEvaluatorWithMessageFailsTrial.class.getName(), topElement.getClassName());
-		asserts.assertEquals("testAssertNotUniformNoEvaluatorWithMessage", topElement.getMethodName());
-		asserts.assertEquals(31, topElement.getLineNumber());
+		asserts.assertEquals(AssertNotEqualsNullStringWithMessageFailsTrial.class.getName(), topElement.getClassName());
+		asserts.assertEquals("testAssertNotEqualsWithMessage", topElement.getMethodName());
+		asserts.assertEquals(30, topElement.getLineNumber());
 		
-		Throwable execption = testFailure.getException();
-		asserts.assertNull(execption);
+		Throwable exception = testFailure.getException();
+		asserts.assertNull(exception);
 		
 		SystemExitTracker tracker =  runner.getSystemExitTracker();
 		asserts.assertEquals(0, tracker.getLastStatus());

@@ -14,7 +14,7 @@ public class LineDiffTypeTrial extends SourceFileCountingTrial {
 		assertEquals(4, LineDiffType.values().length);
 		assertEquals("MATCH", LineDiffType.MATCH.toString());
 		assertEquals("PARTIAL_MATCH", LineDiffType.PARTIAL_MATCH.toString());
-		assertEquals("MISSING_EXAMPLE_LINE", LineDiffType.MISSING_EXAMPLE_LINE.toString());
+		assertEquals("MISSING_EXPECTED_LINE", LineDiffType.MISSING_EXPECTED_LINE.toString());
 		assertEquals("MISSING_ACTUAL_LINE", LineDiffType.MISSING_ACTUAL_LINE.toString());
 		
 	}

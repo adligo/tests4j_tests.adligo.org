@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.adligo.tests4j.models.shared.asserts.common.I_Asserts;
 import org.adligo.tests4j.models.shared.asserts.common.I_Thrower;
-import org.adligo.tests4j.models.shared.en.asserts.Tests4J_AssertionResultMessages;
+import org.adligo.tests4j.models.shared.en.Tests4J_AssertionResultMessages;
 import org.adligo.tests4j.models.shared.metadata.I_TestMetadata;
 import org.adligo.tests4j.models.shared.metadata.I_TrialMetadata;
 import org.adligo.tests4j.models.shared.metadata.I_TrialRunMetadata;

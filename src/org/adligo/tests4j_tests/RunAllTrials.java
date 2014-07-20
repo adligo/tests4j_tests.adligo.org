@@ -32,7 +32,10 @@ public class RunAllTrials implements I_TrialRunListener {
 	public static void main(String [] args) {
 		
 		Tests4J_Params params = getTests(SimpleJacocoPluginFactory.class);
-		//Tests4J_Params params = getTests(ScopedJacocoPluginFactory.class);
+		/*
+		Tests4J_Params params = getTests(ScopedJacocoPluginFactory.class);
+		params.setThreadCount(new SimpleThreadCount(1));
+		*/
 		reporter = params.getReporter();
 		/*
 		List<Class<?>> loggingClasses = new ArrayList<Class<?>>(params.getLoggingClasses());
@@ -90,6 +93,7 @@ public class RunAllTrials implements I_TrialRunListener {
 		toRet.addTrials(new org.adligo.tests4j_tests.models.shared.en.trials.asserts.RunPkgTrials());
 		toRet.addTrials(new org.adligo.tests4j_tests.models.shared.metadata.RunPkgTrials());
 		toRet.addTrials(new org.adligo.tests4j_tests.models.shared.xml.RunPkgTrials());
+		toRet.addTrials(new org.adligo.tests4j_tests.shared.report.summary.RunPkgTrials());
 		
 		toRet.addTrials(new org.adligo.tests4j_tests.jacoco.api_trials.RunPkgTrials());
 		toRet.addTrials(new org.adligo.tests4j_tests.jacoco.plugin.RunPkgTrials());

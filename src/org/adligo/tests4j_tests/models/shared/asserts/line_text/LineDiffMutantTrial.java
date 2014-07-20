@@ -46,7 +46,7 @@ public class LineDiffMutantTrial extends SourceFileCountingTrial {
 							}
 							
 							@Override
-							public int getExampleLineNbr() {
+							public int getExpectedLineNbr() {
 								return -2;
 							}
 							
@@ -83,7 +83,7 @@ public class LineDiffMutantTrial extends SourceFileCountingTrial {
 							}
 							
 							@Override
-							public int getExampleLineNbr() {
+							public int getExpectedLineNbr() {
 								return -1;
 							}
 							
@@ -106,7 +106,7 @@ public class LineDiffMutantTrial extends SourceFileCountingTrial {
 					@Override
 					public void run() {
 						LineDiffMutant ldm = new LineDiffMutant();
-						ldm.setExampleLineNbr(-2);
+						ldm.setExpectedLineNbr(-2);
 					}
 				});
 		assertThrown(new ExpectedThrownData(new IllegalArgumentException(
@@ -126,24 +126,24 @@ public class LineDiffMutantTrial extends SourceFileCountingTrial {
 		LineDiffMutant ldm = new LineDiffMutant();
 		assertNull(ldm.getType());
 		assertNull(ldm.getActualLineNbr());
-		assertEquals(0, ldm.getExampleLineNbr());
+		assertEquals(0, ldm.getExpectedLineNbr());
 		assertNull(ldm.getIndexes());
 		
 		ldm.setType(LineDiffType.PARTIAL_MATCH);
 		ldm.setActualLineNbr(1);
-		ldm.setExampleLineNbr(0);
+		ldm.setExpectedLineNbr(0);
 		DiffIndexesPair pair = new DiffIndexesPair(new DiffIndexes(0, 1, null, null) , new DiffIndexes(1, 2, null, null));
 		ldm.setIndexes(pair);
 		
 		assertEquals(LineDiffType.PARTIAL_MATCH, ldm.getType());
 		assertEquals(1, ldm.getActualLineNbr());
-		assertEquals(0, ldm.getExampleLineNbr());
+		assertEquals(0, ldm.getExpectedLineNbr());
 		assertSame(pair, ldm.getIndexes());
 		
 		LineDiffMutant ldm2 = new LineDiffMutant(ldm);
 		assertEquals(LineDiffType.PARTIAL_MATCH, ldm2.getType());
 		assertEquals(1, ldm2.getActualLineNbr());
-		assertEquals(0, ldm2.getExampleLineNbr());
+		assertEquals(0, ldm2.getExpectedLineNbr());
 		assertSame(pair, ldm2.getIndexes());
 	}
 	
@@ -151,15 +151,15 @@ public class LineDiffMutantTrial extends SourceFileCountingTrial {
 	public void testComparable() {
 		TreeSet<I_LineDiff> ordered = new TreeSet<I_LineDiff>();
 		LineDiffMutant ldm0 = new LineDiffMutant();
-		ldm0.setExampleLineNbr(0);
+		ldm0.setExpectedLineNbr(0);
 		ordered.add(ldm0);
 		
 		LineDiffMutant ldm1 = new LineDiffMutant();
-		ldm1.setExampleLineNbr(1);
+		ldm1.setExpectedLineNbr(1);
 		ordered.add(ldm1);
 		
 		LineDiffMutant ldm2 = new LineDiffMutant();
-		ldm2.setExampleLineNbr(2);
+		ldm2.setExpectedLineNbr(2);
 		ordered.add(ldm2);
 		
 		assertEquals(3, ordered.size());
@@ -169,12 +169,12 @@ public class LineDiffMutantTrial extends SourceFileCountingTrial {
 		assertSame(ldm2, it.next());
 		
 		LineDiffMutant ldm1_5 = new LineDiffMutant();
-		ldm1_5.setExampleLineNbr(1);
+		ldm1_5.setExpectedLineNbr(1);
 		ldm1_5.setActualLineNbr(5);
 		ordered.add(ldm1_5);
 		
 		LineDiffMutant ldm1_6 = new LineDiffMutant();
-		ldm1_6.setExampleLineNbr(1);
+		ldm1_6.setExpectedLineNbr(1);
 		ldm1_6.setActualLineNbr(6);
 		ordered.add(ldm1_6);
 		
@@ -191,7 +191,7 @@ public class LineDiffMutantTrial extends SourceFileCountingTrial {
 	public void testEqualsHashCode() {
 		LineDiffMutant a = new LineDiffMutant();
 		LineDiffMutant b = new LineDiffMutant();
-		b.setExampleLineNbr(1);
+		b.setExpectedLineNbr(1);
 		
 		LineDiffMutant c = new LineDiffMutant();
 		LineDiffMutant d = new LineDiffMutant();
