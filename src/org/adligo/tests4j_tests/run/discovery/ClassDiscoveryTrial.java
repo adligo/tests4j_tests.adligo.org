@@ -57,9 +57,21 @@ public class ClassDiscoveryTrial extends SourceFileCountingTrial {
 		ClassDiscovery cd = new ClassDiscovery("org.adligo.tests4j.run.discovery");
 		List<String> clazzNames = cd.getClassNames();
 		assertNotNull(clazzNames);
-		assertEquals(2, clazzNames.size());
+		assertEquals(11, clazzNames.size());
+		assertTrue(clazzNames.contains("org.adligo.tests4j.run.discovery.AfterTrialAuditor"));
+		assertTrue(clazzNames.contains("org.adligo.tests4j.run.discovery.BeforeTrialAuditor"));
 		assertTrue(clazzNames.contains("org.adligo.tests4j.run.discovery.ClassDiscovery"));
+		
+		assertTrue(clazzNames.contains("org.adligo.tests4j.run.discovery.I_TrialDescription"));
+		assertTrue(clazzNames.contains("org.adligo.tests4j.run.discovery.TestAuditor"));
+		assertTrue(clazzNames.contains("org.adligo.tests4j.run.discovery.Tests4J_ParamsReader"));
+		assertTrue(clazzNames.contains("org.adligo.tests4j.run.discovery.TestDescription"));
 		assertTrue(clazzNames.contains("org.adligo.tests4j.run.discovery.TopPackageSet"));
+		
+		assertTrue(clazzNames.contains("org.adligo.tests4j.run.discovery.TrialDescription"));
+		assertTrue(clazzNames.contains("org.adligo.tests4j.run.discovery.TrialTypeFinder"));
+		assertTrue(clazzNames.contains("org.adligo.tests4j.run.discovery.TrialVerificationFailure"));
+		
 		List<ClassDiscovery>  subs = cd.getSubPackages();
 		assertNotNull(subs);
 		assertEquals(0, subs.size());
@@ -174,7 +186,7 @@ public class ClassDiscoveryTrial extends SourceFileCountingTrial {
 
 	@Override
 	public int getAsserts() {
-		return 57;
+		return 66;
 	}
 
 	@Override

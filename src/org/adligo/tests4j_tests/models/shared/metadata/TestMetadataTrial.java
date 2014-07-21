@@ -1,16 +1,14 @@
 package org.adligo.tests4j_tests.models.shared.metadata;
 
 
-import org.adligo.tests4j.models.shared.coverage.I_SourceFileCoverage;
 import org.adligo.tests4j.models.shared.metadata.TestMetadata;
 import org.adligo.tests4j.models.shared.metadata.TestMetadataMutant;
-import org.adligo.tests4j.models.shared.results.I_SourceFileTrialResult;
 import org.adligo.tests4j.models.shared.trials.SourceFileScope;
 import org.adligo.tests4j.models.shared.trials.Test;
 import org.adligo.tests4j.models.shared.xml.XML_Builder;
 import org.adligo.tests4j_tests.base_abstract_trials.SourceFileCountingTrial;
 
-@SourceFileScope (sourceClass=TestMetadata.class)
+@SourceFileScope (sourceClass=TestMetadata.class, minCoverage=21.0)
 public class TestMetadataTrial extends SourceFileCountingTrial {
 
 	

@@ -13,14 +13,14 @@ import org.adligo.tests4j.models.shared.asserts.line_text.TextLines;
 import org.adligo.tests4j.models.shared.asserts.line_text.TextLinesCompare;
 import org.adligo.tests4j.models.shared.asserts.line_text.TextLinesCompareResult;
 import org.adligo.tests4j.models.shared.en.Tests4J_LineDiffTextDisplayConstants;
+import org.adligo.tests4j.models.shared.system.I_Tests4J_Logger;
 import org.adligo.tests4j.models.shared.trials.SourceFileScope;
 import org.adligo.tests4j.models.shared.trials.Test;
-import org.adligo.tests4j.shared.report.summary.I_LineOut;
 import org.adligo.tests4j.shared.report.summary.LineDiffTextDisplay;
 import org.adligo.tests4j_tests.base_abstract_trials.SourceFileCountingTrial;
 
 @SourceFileScope (sourceClass=LineDiffTextDisplay.class, minCoverage=90.0)
-public class LineDiffTextDisplayTrial extends SourceFileCountingTrial implements  I_LineOut {
+public class LineDiffTextDisplayTrial extends SourceFileCountingTrial implements  I_Tests4J_Logger {
 	private List<String> output = new ArrayList<String>();
 	private LineDiffTextDisplay dislay = new LineDiffTextDisplay();
 	@Override
@@ -265,12 +265,6 @@ public class LineDiffTextDisplayTrial extends SourceFileCountingTrial implements
 	}
 
 	@Override
-	public void println(String p) {
-		output.add(p);
-	}
-
-
-	@Override
 	public int getTests() {
 		return 15;
 	}
@@ -283,5 +277,22 @@ public class LineDiffTextDisplayTrial extends SourceFileCountingTrial implements
 	@Override
 	public int getUniqueAsserts() {
 		return 55;
+	}
+
+	@Override
+	public void onError(Throwable p) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public boolean isMainReporter() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+	
+	@Override
+	public void log(String p) {
+		output.add(p);
 	}
 }

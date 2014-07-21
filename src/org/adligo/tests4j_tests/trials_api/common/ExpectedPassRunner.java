@@ -8,6 +8,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 import org.adligo.tests4j.models.shared.metadata.I_TrialRunMetadata;
 import org.adligo.tests4j.models.shared.results.I_TrialResult;
 import org.adligo.tests4j.models.shared.results.I_TrialRunResult;
+import org.adligo.tests4j.models.shared.system.I_Tests4J_Controls;
 import org.adligo.tests4j.models.shared.system.I_TrialRunListener;
 import org.adligo.tests4j.models.shared.system.Tests4J_Params;
 import org.adligo.tests4j.models.shared.trials.I_Trial;
@@ -23,11 +24,8 @@ public class ExpectedPassRunner implements I_TrialRunListener {
 	private final ArrayBlockingQueue<List<I_TrialResult>> block = new ArrayBlockingQueue<List<I_TrialResult>>(1);
 	private final CopyOnWriteArrayList<I_TrialResult> results = new CopyOnWriteArrayList<I_TrialResult>();
 	private final ArrayBlockingQueue<I_TrialRunMetadata> metaBlock = new ArrayBlockingQueue<>(1);
-	private final SystemExitTracker tracker = new SystemExitTracker();
+	private MockSystem mockSystem = new MockSystem();
 	
-	public ExpectedPassRunner() {
-		silentReporter.setLogOff();
-	}
 	
 	public void run(Class<? extends I_Trial> trial) {
 		List<Class<? extends I_Trial>> trials = new ArrayList<>();
@@ -41,12 +39,16 @@ public class ExpectedPassRunner implements I_TrialRunListener {
 		params.setTrials(trials);
 		//silentReporter.setLogOff();
 		//silentReporter.setLogOn(TrialDescription.class.getName());
-		silentReporter.setRedirect(false);
+
 		
-		params.setReporter(silentReporter);
-		params.setSystemExit(tracker);
+		MockTests4J mock = new MockTests4J();
+		mock.setSystem(mockSystem);
+		mock.setLogger(new SilentLogger());
 		
-		Tests4J.run(params, this);
+		I_Tests4J_Controls controlls = mock.instanceRun(params, this);
+		if (!controlls.isRunning()) {
+			throw new RuntimeException("The trial run didn't start.");
+		}
 		try {
 			metadata = metaBlock.take();
 			block.take();
@@ -108,9 +110,9 @@ public class ExpectedPassRunner implements I_TrialRunListener {
 		// TODO Auto-generated method stub
 		
 	}
-	
-	public SystemExitTracker getSystemExitTracker() {
-		return tracker;
-	}
 
+	public MockSystem getMockSystem() {
+		return mockSystem;
+	}
+	
 }

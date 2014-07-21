@@ -13,8 +13,8 @@ import org.adligo.tests4j.models.shared.trials.SourceFileScope;
 import org.adligo.tests4j.models.shared.trials.SourceFileTrial;
 import org.adligo.tests4j.models.shared.trials.Test;
 import org.adligo.tests4j.models.shared.trials.TrialRecursion;
-import org.adligo.tests4j.run.helpers.SystemExitTracker;
 import org.adligo.tests4j_tests.trials_api.common.ExpectedFailureRunner;
+import org.adligo.tests4j_tests.trials_api.common.MockSystem;
 
 /**
  * note this trial is run by the Run_UseCaseTrial_Trial,
@@ -77,7 +77,7 @@ public class AfterTrialNotPublicTrial extends SourceFileTrial {
 				"org.adligo.tests4j_tests.trials_api.bad_mock_source_file_trials.AfterTrialNotPublicTrial was not annotated correctly."), 
 				exception);
 		
-		SystemExitTracker tracker =  runner.getSystemExitTracker();
+		MockSystem tracker =  runner.getMockSystem();
 		asserts.assertEquals(0, tracker.getLastStatus());
 	}
 	

@@ -1,11 +1,9 @@
 package org.adligo.tests4j_tests.jacoco.plugin;
 
+import org.adligo.tests4j.models.shared.system.DefaultLogger;
 import org.adligo.tests4j.models.shared.system.I_CoveragePlugin;
 import org.adligo.tests4j.models.shared.trials.SourceFileScope;
 import org.adligo.tests4j.models.shared.trials.Test;
-import org.adligo.tests4j.shared.report.summary.SummaryReporter;
-import org.adligo.tests4j_4jacoco.plugin.ScopedJacocoPlugin;
-import org.adligo.tests4j_4jacoco.plugin.ScopedJacocoPluginFactory;
 import org.adligo.tests4j_4jacoco.plugin.SimpleJacocoPlugin;
 import org.adligo.tests4j_4jacoco.plugin.SimpleJacocoPluginFactory;
 import org.adligo.tests4j_tests.base_abstract_trials.SourceFileCountingTrial;
@@ -16,10 +14,11 @@ public class SimpleJacocoPluginFactoryTrial extends SourceFileCountingTrial {
 	@Test 
 	public void testMethod() {
 		SimpleJacocoPluginFactory factory = new SimpleJacocoPluginFactory();
-		SummaryReporter reporter = new SummaryReporter();
-		I_CoveragePlugin cp =  factory.create(reporter);
+	
+		DefaultLogger logger = new DefaultLogger();
+		I_CoveragePlugin cp =  factory.create(logger);
 		assertTrue(cp instanceof SimpleJacocoPlugin);
-		assertSame(reporter, ((SimpleJacocoPlugin) cp).getReporter());
+		assertSame(logger, ((SimpleJacocoPlugin) cp).getTests4jLogger());
 		
 	}
 

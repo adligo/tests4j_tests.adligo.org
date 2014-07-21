@@ -13,7 +13,7 @@ import org.adligo.tests4j.models.shared.trials.Test;
 import org.adligo.tests4j.models.shared.xml.XML_Builder;
 import org.adligo.tests4j_tests.base_abstract_trials.SourceFileCountingTrial;
 
-@SourceFileScope (sourceClass=TrialMetadataMutant.class, minCoverage=95.0)
+@SourceFileScope (sourceClass=TrialMetadataMutant.class, minCoverage=82.0)
 public class TrialMetadataMutantTrial extends SourceFileCountingTrial {
 
 	@Test

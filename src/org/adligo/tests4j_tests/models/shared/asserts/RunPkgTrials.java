@@ -21,13 +21,16 @@ public class RunPkgTrials implements I_TrialList {
 		Tests4J_Params params = new Tests4J_Params();
 		params.addTrials(new RunPkgTrials());
 		List<Class<?>> loggingClasses = new ArrayList<Class<?>>(params.getLoggingClasses());
+		/*
 		loggingClasses.add(Tests4J_ThreadFactory.class);
 		loggingClasses.add(MultiProbeDataStore.class);
 		loggingClasses.add(MultiProbesMap.class);
 		loggingClasses.add(TrialInstancesProcessor.class);
 		loggingClasses.add(TrialsProcessor.class);
 		params.setLoggingClasses(loggingClasses);
+		*/
 		params.setCoveragePluginFactoryClass(ScopedJacocoPluginFactory.class);
+		
 		Tests4J.run(params);
 	}
 
@@ -65,7 +68,6 @@ public class RunPkgTrials implements I_TrialList {
 		trials.addAll(new org.adligo.tests4j_tests.models.shared.asserts.line_text.RunPkgTrials().getTrials());
 		trials.addAll(new org.adligo.tests4j_tests.models.shared.asserts.uniform.RunPkgTrials().getTrials());
 		
-		System.out.println("returning " + trials.size() + "trials.");
 		return trials;
 	}
 }

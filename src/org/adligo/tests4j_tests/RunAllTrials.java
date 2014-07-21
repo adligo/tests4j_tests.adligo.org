@@ -1,6 +1,7 @@
 package org.adligo.tests4j_tests;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.ExecutorService;
@@ -9,43 +10,45 @@ import java.util.concurrent.Executors;
 import org.adligo.tests4j.models.shared.metadata.I_TrialRunMetadata;
 import org.adligo.tests4j.models.shared.results.I_TrialResult;
 import org.adligo.tests4j.models.shared.results.I_TrialRunResult;
+import org.adligo.tests4j.models.shared.system.DefaultLogger;
 import org.adligo.tests4j.models.shared.system.I_CoveragePlugin;
 import org.adligo.tests4j.models.shared.system.I_CoveragePluginFactory;
 import org.adligo.tests4j.models.shared.system.I_Tests4J_Controls;
-import org.adligo.tests4j.models.shared.system.I_Tests4J_Reporter;
+import org.adligo.tests4j.models.shared.system.I_Tests4J_Logger;
 import org.adligo.tests4j.models.shared.system.I_TrialRunListener;
 import org.adligo.tests4j.models.shared.system.Tests4J_Params;
 import org.adligo.tests4j.models.shared.trials.I_Trial;
 import org.adligo.tests4j.run.Tests4J;
-import org.adligo.tests4j.run.helpers.ThreadStateHelper;
-import org.adligo.tests4j_4jacoco.plugin.SimpleJacocoPluginFactory;
+import org.adligo.tests4j.run.discovery.Tests4J_ParamsReader;
+import org.adligo.tests4j.run.helpers.TrialsProcessor;
+import org.adligo.tests4j_4jacoco.plugin.ScopedJacocoPluginFactory;
 import org.adligo.tests4j_tests.base_abstract_trials.Counts;
 import org.adligo.tests4j_tests.base_abstract_trials.I_CountingTrial;
 
 public class RunAllTrials implements I_TrialRunListener {
 	static long start = System.currentTimeMillis();
-	static I_Tests4J_Reporter reporter;
+	static I_Tests4J_Logger logger = new DefaultLogger();
 	private static volatile List<String> trialsNotCompleted = new CopyOnWriteArrayList<String>();
 	private static ExecutorService trialsNotCompletedService = Executors.newSingleThreadExecutor();
 	
 	
 	public static void main(String [] args) {
 		
-		Tests4J_Params params = getTests(SimpleJacocoPluginFactory.class);
-		/*
+		//Tests4J_Params params = getTests(SimpleJacocoPluginFactory.class);
+		
 		Tests4J_Params params = getTests(ScopedJacocoPluginFactory.class);
-		params.setThreadCount(new SimpleThreadCount(1));
-		*/
-		reporter = params.getReporter();
-		/*
+		//params.setThreadCount(new SimpleThreadCount(1));
+		
+		
 		List<Class<?>> loggingClasses = new ArrayList<Class<?>>(params.getLoggingClasses());
+		/*
 		loggingClasses.add(Tests4J_ThreadFactory.class);
 		loggingClasses.add(MultiProbeDataStore.class);
 		loggingClasses.add(MultiProbesMap.class);
 		loggingClasses.add(TrialInstancesProcessor.class);
+		*/
 		loggingClasses.add(TrialsProcessor.class);
 		params.setLoggingClasses(loggingClasses);
-		*/
 		//params.setExitAfterLastNotification(false);
 		
 		params.setMetaTrialClass(TheMetaTrial.class);
@@ -62,7 +65,6 @@ public class RunAllTrials implements I_TrialRunListener {
 		*/
 		//controls.cancel();
 		
-		ThreadStateHelper tsh = new ThreadStateHelper(params.getReporter());
 		//tsh.logAllThreadStates();
 		trialsNotCompletedService.submit(new Runnable() {
 			
@@ -70,8 +72,8 @@ public class RunAllTrials implements I_TrialRunListener {
 			public void run() {
 				while (true) {
 					if (trialsNotCompleted.size() >= 1) {
-						reporter.log("The following trials have started but not completed");
-						reporter.log(trialsNotCompleted.toString());
+						logger.log("The following trials have started but not completed");
+						logger.log(trialsNotCompleted.toString());
 					}
 					try {
 						Thread.sleep(1000);
@@ -105,7 +107,9 @@ public class RunAllTrials implements I_TrialRunListener {
 		
 		toRet.addTrials(new org.adligo.tests4j_tests.trials_api.RunPkgTrials());
 		
-		I_CoveragePlugin plugin = toRet.getCoveragePlugin();
+		Tests4J_ParamsReader reader = new Tests4J_ParamsReader(toRet, new DefaultLogger());
+		I_CoveragePlugin plugin = reader.getCoveragePlugin();
+		
 		List<Class<? extends I_Trial>> trials = toRet.getTrials();
 		Counts counts = new Counts();
 		for (Class<? extends I_Trial> trialClass: trials) {
@@ -171,7 +175,7 @@ public class RunAllTrials implements I_TrialRunListener {
 		long dur = end - start;
 		BigDecimal durD = new BigDecimal(dur).divide(new BigDecimal(1000));
 		//use the reporter to log to the original System.out
-		reporter.log("Total run time " +durD + " seconds.");
+		logger.log("Total run time " +durD + " seconds.");
 	}
 
 

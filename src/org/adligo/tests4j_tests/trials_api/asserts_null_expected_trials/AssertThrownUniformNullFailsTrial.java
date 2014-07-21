@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.adligo.tests4j.models.shared.asserts.common.I_Asserts;
 import org.adligo.tests4j.models.shared.asserts.common.I_Thrower;
-import org.adligo.tests4j.models.shared.en.Tests4J_AssertionInputMessages;
 import org.adligo.tests4j.models.shared.en.Tests4J_AssertionResultMessages;
 import org.adligo.tests4j.models.shared.metadata.I_TestMetadata;
 import org.adligo.tests4j.models.shared.metadata.I_TrialMetadata;
@@ -18,8 +17,8 @@ import org.adligo.tests4j.models.shared.trials.ApiTrial;
 import org.adligo.tests4j.models.shared.trials.PackageScope;
 import org.adligo.tests4j.models.shared.trials.Test;
 import org.adligo.tests4j.models.shared.trials.TrialRecursion;
-import org.adligo.tests4j.run.helpers.SystemExitTracker;
 import org.adligo.tests4j_tests.trials_api.common.ExpectedFailureRunner;
+import org.adligo.tests4j_tests.trials_api.common.MockSystem;
 
 @TrialRecursion
 @PackageScope (packageName="org.adligo.tests4j")
@@ -109,12 +108,12 @@ public class AssertThrownUniformNullFailsTrial extends ApiTrial {
 		
 		asserts.assertEquals(AssertThrownUniformNullFailsTrial.class.getName(), topElement.getClassName());
 		asserts.assertEquals("testAssertThrownUniformNull", topElement.getMethodName());
-		asserts.assertEquals(32, topElement.getLineNumber());
+		asserts.assertEquals(31, topElement.getLineNumber());
 		
 		Throwable exception = testFailure.getException();
 		asserts.assertNull(exception);
 		
-		SystemExitTracker tracker =  runner.getSystemExitTracker();
+		MockSystem tracker =  runner.getMockSystem();
 		asserts.assertEquals(0, tracker.getLastStatus());
 	}
 	

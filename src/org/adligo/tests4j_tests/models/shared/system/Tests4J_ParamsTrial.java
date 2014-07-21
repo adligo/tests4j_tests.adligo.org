@@ -24,12 +24,8 @@ public class Tests4J_ParamsTrial extends SourceFileCountingTrial {
 		List<Class<? extends I_Trial>> trials = params.getTrials();
 		assertNotNull(trials);
 		assertEquals(0, trials.size());
-		assertEquals(0, params.getTrialThreadCount());
+		assertNull( params.getRecommendedTrialThreadCount());
 		
-		for (int i = 0; i < 32; i++) {
-			params.addTrial(Tests4J_ParamsTrial.class);
-		}
-		assertEquals(32, params.getTrialThreadCount());
 	}
 	
 	@Test
@@ -40,7 +36,6 @@ public class Tests4J_ParamsTrial extends SourceFileCountingTrial {
 		assertNotNull(trials);
 		assertEquals(1, trials.size());
 		assertEquals(Tests4J_ParamsTrial.class, trials.get(0));
-		assertEquals(1, params.getTrialThreadCount());
 		
 	}
 	
@@ -88,7 +83,7 @@ public class Tests4J_ParamsTrial extends SourceFileCountingTrial {
 
 	@Override
 	public int getAsserts() {
-		return 8;
+		return 6;
 	}
 
 	@Override

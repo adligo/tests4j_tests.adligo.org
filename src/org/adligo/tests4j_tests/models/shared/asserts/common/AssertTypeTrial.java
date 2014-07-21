@@ -1,6 +1,5 @@
 package org.adligo.tests4j_tests.models.shared.asserts.common;
 
-import java.lang.reflect.Field;
 import java.util.Set;
 
 import org.adligo.tests4j.models.shared.asserts.common.AssertType;
@@ -34,14 +33,6 @@ public class AssertTypeTrial extends SourceFileCountingTrial {
 		assertEquals(12, AssertType.AssertContains.getId());
 		assertEquals(13, AssertType.AssertGreaterThanOrEquals.getId());
 		
-		try {
-			Field field = AssertType.class.getField("$jacocoData");
-			Object localJacoco = field.get(null);
-			super.log("localJacoco is " + localJacoco);
-		} catch (NoSuchFieldException | SecurityException | IllegalArgumentException | IllegalAccessException e) {
-			// TODO Auto-generated catch block
-			super.log(e);
-		}
 	}
 	
 

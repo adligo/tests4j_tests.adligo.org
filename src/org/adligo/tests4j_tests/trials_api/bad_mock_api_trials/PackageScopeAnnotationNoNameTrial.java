@@ -11,8 +11,8 @@ import org.adligo.tests4j.models.shared.results.I_TrialResult;
 import org.adligo.tests4j.models.shared.trials.ApiTrial;
 import org.adligo.tests4j.models.shared.trials.PackageScope;
 import org.adligo.tests4j.models.shared.trials.TrialRecursion;
-import org.adligo.tests4j.run.helpers.SystemExitTracker;
 import org.adligo.tests4j_tests.trials_api.common.ExpectedFailureRunner;
+import org.adligo.tests4j_tests.trials_api.common.MockSystem;
 
 /**
  * note this test NOT RUN DIRECTLY 
@@ -65,7 +65,7 @@ public class PackageScopeAnnotationNoNameTrial extends ApiTrial {
 				"org.adligo.tests4j_tests.trials_api.bad_mock_api_trials.PackageScopeAnnotationNoNameTrial was not annotated correctly."), 
 				exception);
 		
-		SystemExitTracker tracker =  runner.getSystemExitTracker();
+		MockSystem tracker =  runner.getMockSystem();
 		asserts.assertEquals(0, tracker.getLastStatus());
 	}
 	

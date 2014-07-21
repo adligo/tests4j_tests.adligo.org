@@ -2,13 +2,10 @@ package org.adligo.tests4j_tests.models.shared.system;
 
 import org.adligo.tests4j.models.shared.asserts.ExpectedThrownData;
 import org.adligo.tests4j.models.shared.asserts.common.I_Thrower;
-import org.adligo.tests4j.models.shared.metadata.I_TrialRunMetadata;
 import org.adligo.tests4j.models.shared.metadata.TrialRunMetadataMutant;
 import org.adligo.tests4j.models.shared.results.ApiTrialResultMutant;
-import org.adligo.tests4j.models.shared.results.I_TrialResult;
-import org.adligo.tests4j.models.shared.results.I_TrialRunResult;
 import org.adligo.tests4j.models.shared.results.TrialRunResultMutant;
-import org.adligo.tests4j.models.shared.system.I_Tests4J_Reporter;
+import org.adligo.tests4j.models.shared.system.I_Tests4J_Logger;
 import org.adligo.tests4j.models.shared.system.TrialRunListenerDelegator;
 import org.adligo.tests4j.models.shared.trials.SourceFileScope;
 import org.adligo.tests4j.models.shared.trials.Test;
@@ -17,20 +14,12 @@ import org.adligo.tests4j_tests.models.shared.system.helpers.ClumseyTrialRunList
 import org.adligo.tests4j_tests.models.shared.system.helpers.TrialRunListenerTracker;
 
 @SourceFileScope (sourceClass=TrialRunListenerDelegator.class, minCoverage=90.0)
-public class TrialRunListenerDelegateTrial extends SourceFileCountingTrial implements I_Tests4J_Reporter {
+public class TrialRunListenerDelegateTrial extends SourceFileCountingTrial implements I_Tests4J_Logger {
 	private Throwable thrown;
 	
 	@Test
 	public void testConstructorExceptions() {
-		assertThrown(new ExpectedThrownData(new IllegalArgumentException(TrialRunListenerDelegator.TRIAL_RUN_LISTENER_DELEGATE_REQUIRES_A_I_TRIAL_RUN_LISTENER)), 
-				new I_Thrower() {
-					
-					@Override
-					public void run() {
-						new TrialRunListenerDelegator(null, null);
-					}
-				});
-		assertThrown(new ExpectedThrownData(new IllegalArgumentException(TrialRunListenerDelegator.TRIAL_RUN_LISTENER_DELEGATE_REQUIRES_A_I_TESTS4J_REPORTER)), 
+		assertThrown(new ExpectedThrownData(new IllegalArgumentException(TrialRunListenerDelegator.TRIAL_RUN_LISTENER_DELEGATE_REQUIRES_A_I_TESTS4J_LOGGER)), 
 				new I_Thrower() {
 					
 					@Override
@@ -78,6 +67,35 @@ public class TrialRunListenerDelegateTrial extends SourceFileCountingTrial imple
 		assertNotNull(thrown);
 		assertEquals(RuntimeException.class, thrown.getClass());
 		assertEquals("mock from onTrialCompleted", thrown.getMessage());
+		
+	}
+	
+	@Test
+	public void testNullDelegate() {
+		TrialRunListenerDelegator delegate = new TrialRunListenerDelegator(null, this);
+		thrown = null;
+		delegate.onMetadataCalculated(null);
+		assertNull(thrown);
+		
+		thrown = null;
+		delegate.onRunCompleted(null);
+		assertNull(thrown);
+		
+		thrown = null;
+		delegate.onStartingTest(null, null);
+		assertNull(thrown);
+		
+		thrown = null;
+		delegate.onStartingTrial(null);
+		assertNull(thrown);
+		
+		thrown = null;
+		delegate.onTestCompleted(null, null, true);
+		assertNull(thrown);
+		
+		thrown = null;
+		delegate.onTrialCompleted(null);
+		assertNull(thrown);
 		
 	}
 	
@@ -141,12 +159,12 @@ public class TrialRunListenerDelegateTrial extends SourceFileCountingTrial imple
 	
 	@Override
 	public int getTests() {
-		return 3;
+		return 4;
 	}
 
 	@Override
 	public int getAsserts() {
-		return 44;
+		return 49;
 	}
 
 	@Override
@@ -154,42 +172,7 @@ public class TrialRunListenerDelegateTrial extends SourceFileCountingTrial imple
 		return 22;
 	}
 
-	@Override
-	public void onMetadataCalculated(I_TrialRunMetadata metadata) {
-		//mock this for I_Tests4j_Reporter
-		
-	}
 
-	@Override
-	public void onStartingTrial(String trialName) {
-		//mock this for I_Tests4j_Reporter
-		
-	}
-
-	@Override
-	public void onStartingTest(String trialName, String testName) {
-		//mock this for I_Tests4j_Reporter
-		
-	}
-
-	@Override
-	public void onTestCompleted(String trialName, String testName,
-			boolean passed) {
-		//mock this for I_Tests4j_Reporter
-		
-	}
-
-	@Override
-	public void onTrialCompleted(I_TrialResult result) {
-		//mock this for I_Tests4j_Reporter
-		
-	}
-
-	@Override
-	public void onRunCompleted(I_TrialRunResult result) {
-		//mock this for I_Tests4j_Reporter
-		
-	}
 
 	@Override
 	public void onError(Throwable p) {
@@ -197,32 +180,7 @@ public class TrialRunListenerDelegateTrial extends SourceFileCountingTrial imple
 	}
 
 	@Override
-	public void setLogOn(Class<?> clazz) {
-		//mock this for I_Tests4j_Reporter
-		
-	}
-
-	@Override
-	public void setLogOff(Class<?> clazz) {
-		//mock this for I_Tests4j_Reporter
-		
-	}
-
-	@Override
-	public boolean isSnare() {
-		//mock this for I_Tests4j_Reporter
+	public boolean isMainReporter() {
 		return false;
-	}
-
-	@Override
-	public boolean isRedirect() {
-		//mock this for I_Tests4j_Reporter
-		return false;
-	}
-
-	@Override
-	public void setListRelevantClassesWithoutTrials(boolean p) {
-		//mock this for I_Tests4j_Reporter
-		
 	}
 }

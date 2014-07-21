@@ -3,7 +3,6 @@ package org.adligo.tests4j_tests.run.helpers;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.adligo.tests4j.models.shared.system.I_Tests4J_Reporter;
 import org.adligo.tests4j.models.shared.system.I_TrialList;
 import org.adligo.tests4j.models.shared.system.Tests4J_Params;
 import org.adligo.tests4j.models.shared.trials.AbstractTrial;
@@ -20,7 +19,6 @@ public class RunPkgTrials implements I_TrialList {
 		
 		//TieredJacocoPlugin covargePlugin =new TieredJacocoPlugin();
 		params.setCoveragePluginFactoryClass(ScopedJacocoPluginFactory.class);
-		I_Tests4J_Reporter reporter =  params.getReporter();
 		
 		Tests4J.run(params);
 	}
@@ -28,8 +26,6 @@ public class RunPkgTrials implements I_TrialList {
 	@Override
 	public List<Class<? extends AbstractTrial>> getTrials() {
 		List<Class<? extends AbstractTrial>> trials = new ArrayList<Class<? extends AbstractTrial>>();
-		
-		trials.add(SystemExitTrackerTrial.class);
 		
 		return trials;
 	}

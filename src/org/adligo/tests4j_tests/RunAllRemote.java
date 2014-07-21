@@ -4,7 +4,7 @@ import java.net.InetAddress;
 import java.net.UnknownHostException;
 
 import org.adligo.tests4j.models.shared.system.I_Tests4J_Controls;
-import org.adligo.tests4j.models.shared.system.I_Tests4J_Reporter;
+import org.adligo.tests4j.models.shared.system.I_Tests4J_Logger;
 import org.adligo.tests4j.models.shared.system.Tests4J_Params;
 import org.adligo.tests4j.models.shared.system.Tests4J_RemoteInfo;
 import org.adligo.tests4j.run.Tests4J;
@@ -17,8 +17,6 @@ public class RunAllRemote {
 		Tests4J_Params remoteParams = RunAllTrials.getTests(SimpleJacocoPluginFactory.class);
 		
 		Tests4J_Params params = new Tests4J_Params();
-		I_Tests4J_Reporter reporter =  params.getReporter();
-		reporter.setLogOn(Tests4J_RemoteRunner.class);
 		
 		
 		try {

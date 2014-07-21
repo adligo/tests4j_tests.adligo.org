@@ -18,8 +18,8 @@ import org.adligo.tests4j.models.shared.trials.ApiTrial;
 import org.adligo.tests4j.models.shared.trials.PackageScope;
 import org.adligo.tests4j.models.shared.trials.Test;
 import org.adligo.tests4j.models.shared.trials.TrialRecursion;
-import org.adligo.tests4j.run.helpers.SystemExitTracker;
 import org.adligo.tests4j_tests.trials_api.common.ExpectedFailureRunner;
+import org.adligo.tests4j_tests.trials_api.common.MockSystem;
 
 @TrialRecursion
 @PackageScope (packageName="org.adligo.tests4j")
@@ -94,7 +94,7 @@ public class AssertContainsFailsTrial extends ApiTrial {
 		asserts.assertEquals("testAssertContainsFails", topElement.getMethodName());
 		asserts.assertEquals(31, topElement.getLineNumber());
 		
-		SystemExitTracker tracker =  runner.getSystemExitTracker();
+		MockSystem tracker =  runner.getMockSystem();
 		asserts.assertEquals(0, tracker.getLastStatus());
 	}
 	

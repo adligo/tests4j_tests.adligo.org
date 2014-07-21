@@ -19,10 +19,6 @@ public class RunPkgTrials implements I_TrialList {
 		Tests4J_Params params = new Tests4J_Params();
 		params.addTrials(new RunPkgTrials());
 		
-		SummaryReporter reporter = new SummaryReporter();
-		reporter.setLogOn(AbstractPlugin.class);
-		reporter.setLogOn(ScopedJacocoPlugin.class);
-		params.setReporter(reporter);
 		
 		//TieredJacocoPlugin covargePlugin =new TieredJacocoPlugin();
 		params.setCoveragePluginFactoryClass(ScopedJacocoPluginFactory.class);

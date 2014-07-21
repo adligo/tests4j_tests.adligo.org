@@ -7,12 +7,8 @@ import org.adligo.tests4j.models.shared.system.I_TrialList;
 import org.adligo.tests4j.models.shared.system.Tests4J_Params;
 import org.adligo.tests4j.models.shared.trials.AbstractTrial;
 import org.adligo.tests4j.run.Tests4J;
-import org.adligo.tests4j.run.helpers.Tests4J_ThreadFactory;
-import org.adligo.tests4j.run.helpers.TrialInstancesProcessor;
-import org.adligo.tests4j_4jacoco.plugin.SimpleJacocoPluginFactory;
-import org.adligo.tests4j_4jacoco.plugin.data.multi.MultiProbeDataStore;
+import org.adligo.tests4j_4jacoco.plugin.ScopedJacocoPluginFactory;
 import org.adligo.tests4j_4jacoco.plugin.data.multi.MultiProbesMap;
-import org.adligo.tests4j_4jacoco.plugin.data.multi.ThreadGroupLocal;
 
 public class RunPkgTrials implements I_TrialList {
 
@@ -22,16 +18,19 @@ public class RunPkgTrials implements I_TrialList {
 		params.addTrials(new RunPkgTrials());
 		
 		List<Class<?>> loggingClasses = new ArrayList<Class<?>>(params.getLoggingClasses());
-		loggingClasses.add(Tests4J_ThreadFactory.class);
-		loggingClasses.add(MultiProbeDataStore.class);
+		//loggingClasses.add(Tests4J_ThreadFactory.class);
+		//loggingClasses.add(MultiProbeDataStore.class);
 		loggingClasses.add(MultiProbesMap.class);
-		loggingClasses.add(TrialInstancesProcessor.class);
-		loggingClasses.add(ThreadGroupLocal.class);
+		//loggingClasses.add(TrialInstancesProcessor.class);
+		//loggingClasses.add(ThreadGroupLocal.class);
+		//loggingClasses.add(AbstractPlugin.class);
+		//loggingClasses.add(MultiProbeDataStoreAdaptor.class);
 		params.setLoggingClasses(loggingClasses);
 		
+		//BytecodeInjectionDebuger.setEnabled(true);
 		
-		params.setCoveragePluginFactoryClass(SimpleJacocoPluginFactory.class);
-		//params.setCoveragePluginClass(ScopedJacocoPlugin.class);
+		//params.setCoveragePluginFactoryClass(SimpleJacocoPluginFactory.class);
+		params.setCoveragePluginFactoryClass(ScopedJacocoPluginFactory.class);
 		//params.setCoveragePluginConfiguratorClass(ScopedJacocoPluginConfigurator.class);
 		Tests4J.run(params);
 	}

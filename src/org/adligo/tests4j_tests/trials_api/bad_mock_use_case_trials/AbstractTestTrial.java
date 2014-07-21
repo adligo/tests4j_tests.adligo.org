@@ -12,8 +12,8 @@ import org.adligo.tests4j.models.shared.trials.Test;
 import org.adligo.tests4j.models.shared.trials.TrialRecursion;
 import org.adligo.tests4j.models.shared.trials.UseCaseScope;
 import org.adligo.tests4j.models.shared.trials.UseCaseTrial;
-import org.adligo.tests4j.run.helpers.SystemExitTracker;
 import org.adligo.tests4j_tests.trials_api.common.ExpectedFailureRunner;
+import org.adligo.tests4j_tests.trials_api.common.MockSystem;
 
 /**
  * note this trial is run by the Run_UseCaseTrial_Trial,
@@ -66,7 +66,7 @@ public abstract class AbstractTestTrial extends UseCaseTrial {
 				"org.adligo.tests4j_tests.trials_api.bad_mock_use_case_trials.AbstractTestTrial.testFoo was not annotated correctly."), 
 				exception);
 		
-		SystemExitTracker tracker =  runner.getSystemExitTracker();
+		MockSystem tracker =  runner.getMockSystem();
 		asserts.assertEquals(0, tracker.getLastStatus());
 	}
 	

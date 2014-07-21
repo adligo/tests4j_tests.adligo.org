@@ -12,6 +12,7 @@ import org.adligo.tests4j.models.shared.coverage.I_PackageCoverage;
 import org.adligo.tests4j.models.shared.coverage.I_SourceFileCoverage;
 import org.adligo.tests4j.models.shared.results.I_ApiTrialResult;
 import org.adligo.tests4j.models.shared.results.I_SourceFileTrialResult;
+import org.adligo.tests4j.models.shared.system.DefaultLogger;
 import org.adligo.tests4j.models.shared.system.I_CoverageRecorder;
 import org.adligo.tests4j.models.shared.trials.ApiTrial;
 import org.adligo.tests4j.models.shared.trials.BeforeTrial;
@@ -37,7 +38,7 @@ public class MultiRecordingTrial extends ApiCountingTrial {
 	@IgnoreTest
 	public void testSimpleRecording() throws Exception {
 		
-		ScopedJacocoPlugin plugin = new ScopedJacocoPlugin(new SummaryReporter());
+		ScopedJacocoPlugin plugin = new ScopedJacocoPlugin(new DefaultLogger());
 		List<Class<?>> classes = new ArrayList<Class<?>>();
 		classes.add(MockRunnable.class);
 		List<Class<?>> instClass = plugin.instrumentClassesAny(classes);
@@ -80,7 +81,7 @@ public class MultiRecordingTrial extends ApiCountingTrial {
 	@Test
 	@IgnoreTest
 	public void testSimpleRecording100Pct() throws Exception {
-		ScopedJacocoPlugin plugin = new ScopedJacocoPlugin(new SummaryReporter());
+		ScopedJacocoPlugin plugin = new ScopedJacocoPlugin(new DefaultLogger());
 		List<Class<?>> classes = new ArrayList<Class<?>>();
 		classes.add(MockRunnable.class);
 		List<Class<?>> instClass = plugin.instrumentClassesAny(classes);
@@ -134,7 +135,7 @@ public class MultiRecordingTrial extends ApiCountingTrial {
 	@Test
 	@IgnoreTest
 	public void testDualRecordingWithPause() throws Exception {
-		ScopedJacocoPlugin plugin = new ScopedJacocoPlugin(new SummaryReporter());
+		ScopedJacocoPlugin plugin = new ScopedJacocoPlugin(new DefaultLogger());
 		plugin.setWriteOutInstrumentedClassFiles(true);
 		
 		List<Class<?>> classes = new ArrayList<Class<?>>();
@@ -205,7 +206,7 @@ public class MultiRecordingTrial extends ApiCountingTrial {
 	@Test
 	@IgnoreTest
 	public void testDualRecording() throws Exception {
-		ScopedJacocoPlugin plugin = new ScopedJacocoPlugin(new SummaryReporter());
+		ScopedJacocoPlugin plugin = new ScopedJacocoPlugin(new DefaultLogger());
 		plugin.setWriteOutInstrumentedClassFiles(true);
 		
 		List<Class<?>> classes = new ArrayList<Class<?>>();

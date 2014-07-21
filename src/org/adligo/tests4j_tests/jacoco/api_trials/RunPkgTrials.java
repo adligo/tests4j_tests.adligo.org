@@ -24,11 +24,6 @@ public class RunPkgTrials implements I_TrialList {
 		//reporter.setLogOn(TrialInstancesProcessor.class);
 		//reporter.setLogOn(Tests4J_Memory.class);
 		
-		//logging from jacoco
-		reporter.setLogOn(AbstractPlugin.class);
-		reporter.setLogOn(Recorder.class);
-		
-		params.setReporter(reporter);
 		
 		params.setCoveragePluginFactoryClass(ScopedJacocoPluginFactory.class);
 		Tests4J.run(params);
