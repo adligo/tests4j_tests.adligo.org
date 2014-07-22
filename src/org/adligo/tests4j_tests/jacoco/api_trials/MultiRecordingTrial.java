@@ -13,7 +13,7 @@ import org.adligo.tests4j.models.shared.coverage.I_SourceFileCoverage;
 import org.adligo.tests4j.models.shared.results.I_ApiTrialResult;
 import org.adligo.tests4j.models.shared.results.I_SourceFileTrialResult;
 import org.adligo.tests4j.models.shared.system.DefaultLogger;
-import org.adligo.tests4j.models.shared.system.I_CoverageRecorder;
+import org.adligo.tests4j.models.shared.system.I_Tests4J_CoverageRecorder;
 import org.adligo.tests4j.models.shared.trials.ApiTrial;
 import org.adligo.tests4j.models.shared.trials.BeforeTrial;
 import org.adligo.tests4j.models.shared.trials.IgnoreTest;
@@ -47,7 +47,7 @@ public class MultiRecordingTrial extends ApiCountingTrial {
 		Class<?> mr = instClass.get(0);
 		assertEquals("org.adligo.tests4j_tests.jacoco.api_trials.mocks.MockRunnable", mr.getName());
 		
-		I_CoverageRecorder recorder = plugin.createRecorder();
+		I_Tests4J_CoverageRecorder recorder = plugin.createRecorder();
 		assertNotNull(recorder);
 		recorder.startRecording();
 		
@@ -90,7 +90,7 @@ public class MultiRecordingTrial extends ApiCountingTrial {
 		Class<?> mr = instClass.get(0);
 		assertEquals("org.adligo.tests4j_tests.jacoco.api_trials.mocks.MockRunnable", mr.getName());
 		
-		I_CoverageRecorder recorder = plugin.createRecorder();
+		I_Tests4J_CoverageRecorder recorder = plugin.createRecorder();
 		assertNotNull(recorder);
 		recorder.startRecording();
 		
@@ -146,7 +146,7 @@ public class MultiRecordingTrial extends ApiCountingTrial {
 		Class<?> mr = instClass.get(0);
 		assertEquals("org.adligo.tests4j_tests.jacoco.api_trials.mocks.MockRunnable", mr.getName());
 		
-		I_CoverageRecorder recorder = plugin.createRecorder();
+		I_Tests4J_CoverageRecorder recorder = plugin.createRecorder();
 		assertNotNull(recorder);
 		recorder.startRecording();
 		
@@ -160,7 +160,7 @@ public class MultiRecordingTrial extends ApiCountingTrial {
 		Method getJ = mr.getMethod("getJ", null);
 		assertEquals(0, getJ.invoke(obj, null));
 		
-		I_CoverageRecorder innerRecorder = plugin.createRecorder();
+		I_Tests4J_CoverageRecorder innerRecorder = plugin.createRecorder();
 		assertNotNull(innerRecorder);
 		innerRecorder.startRecording();
 		List<I_PackageCoverage> coverage =  recorder.endRecording();
@@ -217,7 +217,7 @@ public class MultiRecordingTrial extends ApiCountingTrial {
 		Class<?> mr = instClass.get(0);
 		assertEquals("org.adligo.tests4j_tests.jacoco.api_trials.mocks.MockRunnable", mr.getName());
 		
-		I_CoverageRecorder recorder = plugin.createRecorder();
+		I_Tests4J_CoverageRecorder recorder = plugin.createRecorder();
 		assertNotNull(recorder);
 		recorder.startRecording();
 		
@@ -231,7 +231,7 @@ public class MultiRecordingTrial extends ApiCountingTrial {
 		Method getJ = mr.getMethod("getJ", null);
 		assertEquals(0, getJ.invoke(obj, null));
 		
-		I_CoverageRecorder innerRecorder = plugin.createRecorder();
+		I_Tests4J_CoverageRecorder innerRecorder = plugin.createRecorder();
 		assertNotNull(innerRecorder);
 		innerRecorder.startRecording();
 

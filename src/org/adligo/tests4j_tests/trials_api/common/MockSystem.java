@@ -3,7 +3,7 @@ package org.adligo.tests4j_tests.trials_api.common;
 import java.util.List;
 import java.util.concurrent.ArrayBlockingQueue;
 
-import org.adligo.tests4j.models.shared.system.I_System;
+import org.adligo.tests4j.models.shared.system.I_Tests4J_System;
 
 
 /**
@@ -13,7 +13,7 @@ import org.adligo.tests4j.models.shared.system.I_System;
  * @author scott
  *
  */
-public class MockSystem implements I_System {
+public class MockSystem implements I_Tests4J_System {
 	private final ArrayBlockingQueue<Integer> lastStatus = new ArrayBlockingQueue<>(10);
 	private final ArrayBlockingQueue<Long> times;
 	

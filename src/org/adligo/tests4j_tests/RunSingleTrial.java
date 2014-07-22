@@ -3,7 +3,7 @@ package org.adligo.tests4j_tests;
 import org.adligo.tests4j.models.shared.system.Tests4J_Params;
 import org.adligo.tests4j.run.Tests4J;
 import org.adligo.tests4j.run.helpers.Tests4J_NotificationManager;
-import org.adligo.tests4j.run.helpers.TrialInstancesProcessor;
+import org.adligo.tests4j.run.helpers.Tests4J_TrialsRunable;
 import org.adligo.tests4j.shared.report.summary.SummaryReporter;
 import org.adligo.tests4j_4jacoco.plugin.AbstractPlugin;
 import org.adligo.tests4j_4jacoco.plugin.Recorder;
@@ -26,7 +26,7 @@ public class RunSingleTrial {
 		
 		params.addLoggingClass(AbstractPlugin.class);
 		params.addLoggingClass(Tests4J_NotificationManager.class);
-		params.addLoggingClass(TrialInstancesProcessor.class);
+		params.addLoggingClass(Tests4J_TrialsRunable.class);
 		//params.addLoggingClass(TrialsProcessor.class);
 		//params.addLoggingClass(Tests4J_Memory.class);
 		//params.addLoggingClass(Tests4J_SecurityManager.class);

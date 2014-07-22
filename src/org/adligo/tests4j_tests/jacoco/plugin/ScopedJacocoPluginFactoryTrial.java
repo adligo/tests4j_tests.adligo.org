@@ -1,7 +1,7 @@
 package org.adligo.tests4j_tests.jacoco.plugin;
 
 import org.adligo.tests4j.models.shared.system.DefaultLogger;
-import org.adligo.tests4j.models.shared.system.I_CoveragePlugin;
+import org.adligo.tests4j.models.shared.system.I_Tests4J_CoveragePlugin;
 import org.adligo.tests4j.models.shared.trials.SourceFileScope;
 import org.adligo.tests4j.models.shared.trials.Test;
 import org.adligo.tests4j.shared.report.summary.SummaryReporter;
@@ -17,7 +17,7 @@ public class ScopedJacocoPluginFactoryTrial extends SourceFileCountingTrial {
 		ScopedJacocoPluginFactory factory = new ScopedJacocoPluginFactory();
 		
 		DefaultLogger logger = new DefaultLogger();
-		I_CoveragePlugin cp =  factory.create(logger);
+		I_Tests4J_CoveragePlugin cp =  factory.create(logger);
 		assertTrue(cp instanceof ScopedJacocoPlugin);
 		assertSame(logger, ((ScopedJacocoPlugin) cp).getTests4jLogger());
 		

@@ -1,41 +1,47 @@
-package org.adligo.tests4j_tests.models.shared.system.helpers;
+package org.adligo.tests4j_tests.run.mocks;
 
 import org.adligo.tests4j.models.shared.metadata.I_TrialRunMetadata;
 import org.adligo.tests4j.models.shared.results.I_TrialResult;
 import org.adligo.tests4j.models.shared.results.I_TrialRunResult;
 import org.adligo.tests4j.models.shared.system.I_Tests4J_Listener;
 
-public class ClumseyTrialRunListener implements I_Tests4J_Listener {
+public class MockTests4J_Listener implements I_Tests4J_Listener {
 
 	@Override
 	public void onMetadataCalculated(I_TrialRunMetadata metadata) {
-		throw new RuntimeException("mock from onMetadataCalculated");
+		// TODO Auto-generated method stub
+		
 	}
 
 	@Override
 	public void onStartingTrial(String trialName) {
-		throw new RuntimeException("mock from onStartingTrial");
+		// TODO Auto-generated method stub
+		
 	}
 
 	@Override
 	public void onStartingTest(String trialName, String testName) {
-		throw new RuntimeException("mock from onStartingTest");
+		// TODO Auto-generated method stub
+		
 	}
 
 	@Override
 	public void onTestCompleted(String trialName, String testName,
 			boolean passed) {
-		throw new RuntimeException("mock from onTestCompleted");
+		// TODO Auto-generated method stub
+		
 	}
 
 	@Override
 	public void onTrialCompleted(I_TrialResult result) {
-		throw new RuntimeException("mock from onTrialCompleted");
+		// TODO Auto-generated method stub
+		
 	}
 
 	@Override
 	public void onRunCompleted(I_TrialRunResult result) {
-		throw new RuntimeException("mock from onRunCompleted");
+		// TODO Auto-generated method stub
+		
 	}
 
 }

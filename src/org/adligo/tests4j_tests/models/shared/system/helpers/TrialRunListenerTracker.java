@@ -3,9 +3,9 @@ package org.adligo.tests4j_tests.models.shared.system.helpers;
 import org.adligo.tests4j.models.shared.metadata.I_TrialRunMetadata;
 import org.adligo.tests4j.models.shared.results.I_TrialResult;
 import org.adligo.tests4j.models.shared.results.I_TrialRunResult;
-import org.adligo.tests4j.models.shared.system.I_TrialRunListener;
+import org.adligo.tests4j.models.shared.system.I_Tests4J_Listener;
 
-public class TrialRunListenerTracker implements I_TrialRunListener {
+public class TrialRunListenerTracker implements I_Tests4J_Listener {
 	private I_TrialRunMetadata lastMetadata;
 	private String lastTrialName;
 	private String lastTestName;

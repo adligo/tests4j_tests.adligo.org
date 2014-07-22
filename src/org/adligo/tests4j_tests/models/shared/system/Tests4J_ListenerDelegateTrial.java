@@ -6,32 +6,32 @@ import org.adligo.tests4j.models.shared.metadata.TrialRunMetadataMutant;
 import org.adligo.tests4j.models.shared.results.ApiTrialResultMutant;
 import org.adligo.tests4j.models.shared.results.TrialRunResultMutant;
 import org.adligo.tests4j.models.shared.system.I_Tests4J_Logger;
-import org.adligo.tests4j.models.shared.system.TrialRunListenerDelegator;
+import org.adligo.tests4j.models.shared.system.Tests4J_ListenerDelegator;
 import org.adligo.tests4j.models.shared.trials.SourceFileScope;
 import org.adligo.tests4j.models.shared.trials.Test;
 import org.adligo.tests4j_tests.base_abstract_trials.SourceFileCountingTrial;
 import org.adligo.tests4j_tests.models.shared.system.helpers.ClumseyTrialRunListener;
 import org.adligo.tests4j_tests.models.shared.system.helpers.TrialRunListenerTracker;
 
-@SourceFileScope (sourceClass=TrialRunListenerDelegator.class, minCoverage=90.0)
-public class TrialRunListenerDelegateTrial extends SourceFileCountingTrial implements I_Tests4J_Logger {
+@SourceFileScope (sourceClass=Tests4J_ListenerDelegator.class, minCoverage=90.0)
+public class Tests4J_ListenerDelegateTrial extends SourceFileCountingTrial implements I_Tests4J_Logger {
 	private Throwable thrown;
 	
 	@Test
 	public void testConstructorExceptions() {
-		assertThrown(new ExpectedThrownData(new IllegalArgumentException(TrialRunListenerDelegator.TRIAL_RUN_LISTENER_DELEGATE_REQUIRES_A_I_TESTS4J_LOGGER)), 
+		assertThrown(new ExpectedThrownData(new IllegalArgumentException(Tests4J_ListenerDelegator.TRIAL_RUN_LISTENER_DELEGATE_REQUIRES_A_I_TESTS4J_LOGGER)), 
 				new I_Thrower() {
 					
 					@Override
 					public void run() {
-						new TrialRunListenerDelegator(new ClumseyTrialRunListener(), null);
+						new Tests4J_ListenerDelegator(new ClumseyTrialRunListener(), null);
 					}
 				});
 	}
 	
 	@Test
 	public void testThrowableCatches() {
-		TrialRunListenerDelegator delegate = new TrialRunListenerDelegator(new ClumseyTrialRunListener(), this);
+		Tests4J_ListenerDelegator delegate = new Tests4J_ListenerDelegator(new ClumseyTrialRunListener(), this);
 		thrown = null;
 		delegate.onMetadataCalculated(null);
 		assertNotNull(thrown);
@@ -72,7 +72,7 @@ public class TrialRunListenerDelegateTrial extends SourceFileCountingTrial imple
 	
 	@Test
 	public void testNullDelegate() {
-		TrialRunListenerDelegator delegate = new TrialRunListenerDelegator(null, this);
+		Tests4J_ListenerDelegator delegate = new Tests4J_ListenerDelegator(null, this);
 		thrown = null;
 		delegate.onMetadataCalculated(null);
 		assertNull(thrown);
@@ -102,7 +102,7 @@ public class TrialRunListenerDelegateTrial extends SourceFileCountingTrial imple
 	@Test
 	public void testPassThroughs() {
 		TrialRunListenerTracker mock = new TrialRunListenerTracker();
-		TrialRunListenerDelegator delegate = new TrialRunListenerDelegator(mock, this);
+		Tests4J_ListenerDelegator delegate = new Tests4J_ListenerDelegator(mock, this);
 		
 		thrown = null;
 		mock.clear();
