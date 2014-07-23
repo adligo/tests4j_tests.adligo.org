@@ -5,7 +5,7 @@ import org.adligo.tests4j.models.shared.trials.Test;
 import org.adligo.tests4j.models.shared.xml.XML_Parser;
 import org.adligo.tests4j_tests.base_abstract_trials.SourceFileCountingTrial;
 
-@SourceFileScope (sourceClass=XML_Parser.class, minCoverage=89.0)
+@SourceFileScope (sourceClass=XML_Parser.class, minCoverage=92.0)
 public class XML_ParserTrial extends SourceFileCountingTrial {
 
 	@Test
@@ -23,6 +23,13 @@ public class XML_ParserTrial extends SourceFileCountingTrial {
 		int [] indexes = XML_Parser.getIndexes("< hey/>", "hey");
 		assertNull(indexes);
 		
+	}
+	
+	@Test
+	public void testGetXmlReadError() throws Exception {
+		IllegalArgumentException x = XML_Parser.getReadError("foo");
+		assertNotNull(x);
+		assertEquals("Tag foo not found in xml!", x.getMessage());
 	}
 	
 	@Test
@@ -71,6 +78,14 @@ public class XML_ParserTrial extends SourceFileCountingTrial {
 	}
 	
 	@Test
+	public void testGetIndexesSimpleFastEndingTag() throws Exception {
+		int [] indexes = XML_Parser.getIndexes("<hey you=\"guys\" />", "hey");
+		assertEquals(0, indexes[0]);
+		assertEquals(18, indexes[1]);
+		
+	}
+	
+	@Test
 	public void testGetIndexesSimpleWithNestedTagsReturnInEndTag() throws Exception {
 		int [] indexes = XML_Parser.getIndexes("<hey you=\"guys\" ><he/></hey\r>", "hey");
 		assertEquals(0, indexes[0]);
@@ -89,18 +104,51 @@ public class XML_ParserTrial extends SourceFileCountingTrial {
 		assertEquals("guys", value);
 	}
 	
+	@Test
+	public void testGetTagIntegerAttributeSimple() throws Exception {
+		Integer you = XML_Parser.getAttributeIntegerValue("<hey you=\"11\" />", "you");
+		assertEquals(11, you);
+		
+		you = XML_Parser.getAttributeIntegerValue("<hey you=\"12\"  ><he/></hey>", "you");
+		assertEquals(12, you);
+		
+		
+		you = XML_Parser.getAttributeIntegerValue("<hey />", "you");
+		assertNull(you);
+		
+		you = XML_Parser.getAttributeIntegerValue("<he ><he/></hey>", "you");
+		assertNull(you);
+	}
+	
+	@Test
+	public void testGetTagDoubleAttributeSimple() throws Exception {
+		Double you = XML_Parser.getAttributeDoubleValue("<hey you=\"11.1\" />", "you");
+		assertEquals(11.1, you);
+		
+		you = XML_Parser.getAttributeDoubleValue("<hey you=\"12.2\"  ><he/></hey>", "you");
+		assertEquals(12.2, you);
+		
+		
+		you = XML_Parser.getAttributeDoubleValue("<hey />", "you");
+		assertNull(you);
+		
+		you = XML_Parser.getAttributeDoubleValue("<he ><he/></hey>", "you");
+		assertNull(you);
+	}
+	
+	
 	@Override
 	public int getTests() {
-		return 10;
+		return 14;
 	}
 
 	@Override
 	public int getAsserts() {
-		return 19;
+		return 31;
 	}
 
 	@Override
 	public int getUniqueAsserts() {
-		return 17;
+		return 27;
 	}
 }

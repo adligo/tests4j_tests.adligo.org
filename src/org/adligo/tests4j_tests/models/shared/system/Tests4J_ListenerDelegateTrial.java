@@ -10,8 +10,8 @@ import org.adligo.tests4j.models.shared.system.Tests4J_ListenerDelegator;
 import org.adligo.tests4j.models.shared.trials.SourceFileScope;
 import org.adligo.tests4j.models.shared.trials.Test;
 import org.adligo.tests4j_tests.base_abstract_trials.SourceFileCountingTrial;
-import org.adligo.tests4j_tests.models.shared.system.helpers.ClumseyTrialRunListener;
-import org.adligo.tests4j_tests.models.shared.system.helpers.TrialRunListenerTracker;
+import org.adligo.tests4j_tests.models.shared.system.mocks.Clumsey_Tests4J_Listener;
+import org.adligo.tests4j_tests.models.shared.system.mocks.Tracking_Tests4J_Listener;
 
 @SourceFileScope (sourceClass=Tests4J_ListenerDelegator.class, minCoverage=90.0)
 public class Tests4J_ListenerDelegateTrial extends SourceFileCountingTrial implements I_Tests4J_Logger {
@@ -24,14 +24,14 @@ public class Tests4J_ListenerDelegateTrial extends SourceFileCountingTrial imple
 					
 					@Override
 					public void run() {
-						new Tests4J_ListenerDelegator(new ClumseyTrialRunListener(), null);
+						new Tests4J_ListenerDelegator(new Clumsey_Tests4J_Listener(), null);
 					}
 				});
 	}
 	
 	@Test
 	public void testThrowableCatches() {
-		Tests4J_ListenerDelegator delegate = new Tests4J_ListenerDelegator(new ClumseyTrialRunListener(), this);
+		Tests4J_ListenerDelegator delegate = new Tests4J_ListenerDelegator(new Clumsey_Tests4J_Listener(), this);
 		thrown = null;
 		delegate.onMetadataCalculated(null);
 		assertNotNull(thrown);
@@ -101,7 +101,7 @@ public class Tests4J_ListenerDelegateTrial extends SourceFileCountingTrial imple
 	
 	@Test
 	public void testPassThroughs() {
-		TrialRunListenerTracker mock = new TrialRunListenerTracker();
+		Tracking_Tests4J_Listener mock = new Tracking_Tests4J_Listener();
 		Tests4J_ListenerDelegator delegate = new Tests4J_ListenerDelegator(mock, this);
 		
 		thrown = null;

@@ -30,6 +30,7 @@ public class RunPkgTrials implements I_Tests4J_TrialList {
 		trials.add(ByteListOutputStreamTrial.class);
 		trials.add(Tests4J_ParamsTrial.class);
 		trials.add(Tests4J_ListenerDelegateTrial.class);
+		trials.add(Tests4J_RemoteInfoTrial.class);
 		
 		return trials;
 	}
