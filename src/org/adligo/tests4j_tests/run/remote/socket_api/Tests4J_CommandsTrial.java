@@ -5,7 +5,7 @@ import org.adligo.tests4j.models.shared.trials.Test;
 import org.adligo.tests4j.run.remote.socket_api.Tests4J_Commands;
 import org.adligo.tests4j_tests.base_abstract_trials.SourceFileCountingTrial;
 
-@SourceFileScope (sourceClass=Tests4J_Commands.class, minCoverage=97.0)
+@SourceFileScope (sourceClass=Tests4J_Commands.class, minCoverage=30.0)
 public class Tests4J_CommandsTrial extends SourceFileCountingTrial {
 
 	@Test

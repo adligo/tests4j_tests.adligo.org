@@ -1,29 +1,13 @@
 package org.adligo.tests4j_tests.jacoco.api_trials;
 
-import java.lang.reflect.Constructor;
-import java.lang.reflect.Method;
-import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
-
-import org.adligo.tests4j.models.shared.coverage.CoverageUnits;
 import org.adligo.tests4j.models.shared.coverage.I_PackageCoverage;
-import org.adligo.tests4j.models.shared.coverage.I_SourceFileCoverage;
 import org.adligo.tests4j.models.shared.results.I_ApiTrialResult;
-import org.adligo.tests4j.models.shared.results.I_SourceFileTrialResult;
-import org.adligo.tests4j.models.shared.system.DefaultLogger;
-import org.adligo.tests4j.models.shared.system.I_Tests4J_CoverageRecorder;
-import org.adligo.tests4j.models.shared.trials.ApiTrial;
 import org.adligo.tests4j.models.shared.trials.BeforeTrial;
 import org.adligo.tests4j.models.shared.trials.IgnoreTest;
 import org.adligo.tests4j.models.shared.trials.IgnoreTrial;
 import org.adligo.tests4j.models.shared.trials.PackageScope;
 import org.adligo.tests4j.models.shared.trials.Test;
-import org.adligo.tests4j.shared.report.summary.SummaryReporter;
-import org.adligo.tests4j_4jacoco.plugin.ScopedJacocoPlugin;
 import org.adligo.tests4j_tests.base_abstract_trials.ApiCountingTrial;
-import org.adligo.tests4j_tests.jacoco.api_trials.mocks.MockRunnable;
 
 @PackageScope (packageName="org.adligo.tests4j_4jacoco")
 @IgnoreTrial
@@ -37,7 +21,7 @@ public class MultiRecordingTrial extends ApiCountingTrial {
 	@Test
 	@IgnoreTest
 	public void testSimpleRecording() throws Exception {
-		
+		/*
 		ScopedJacocoPlugin plugin = new ScopedJacocoPlugin(new DefaultLogger());
 		List<Class<?>> classes = new ArrayList<Class<?>>();
 		classes.add(MockRunnable.class);
@@ -75,12 +59,13 @@ public class MultiRecordingTrial extends ApiCountingTrial {
 		assertEquals(new CoverageUnits(89), sfCover.getCoverageUnits());
 		assertEquals(new CoverageUnits(85), sfCover.getCoveredCoverageUnits());
 		assertEquals(new BigDecimal("96"), sfCover.getPercentageCovered());
-		
+		*/
 	}
 	
 	@Test
 	@IgnoreTest
 	public void testSimpleRecording100Pct() throws Exception {
+		/*
 		ScopedJacocoPlugin plugin = new ScopedJacocoPlugin(new DefaultLogger());
 		List<Class<?>> classes = new ArrayList<Class<?>>();
 		classes.add(MockRunnable.class);
@@ -129,12 +114,13 @@ public class MultiRecordingTrial extends ApiCountingTrial {
 		assertEquals(new CoverageUnits(89), sfCover.getCoveredCoverageUnits());
 		BigDecimal pctCovered = sfCover.getPercentageCovered();
 		assertEquals(new BigDecimal("100.00"), pctCovered);
-		
+		*/
 	}
 	
 	@Test
 	@IgnoreTest
 	public void testDualRecordingWithPause() throws Exception {
+		/*
 		ScopedJacocoPlugin plugin = new ScopedJacocoPlugin(new DefaultLogger());
 		plugin.setWriteOutInstrumentedClassFiles(true);
 		
@@ -200,12 +186,13 @@ public class MultiRecordingTrial extends ApiCountingTrial {
 		assertEquals(new CoverageUnits(89), sfCover.getCoverageUnits());
 		assertEquals(new CoverageUnits(33), sfCover.getCoveredCoverageUnits());
 		assertEquals(new BigDecimal("37"), sfCover.getPercentageCovered());
-		
+	*/	
 	}
 	
 	@Test
 	@IgnoreTest
 	public void testDualRecording() throws Exception {
+		/*
 		ScopedJacocoPlugin plugin = new ScopedJacocoPlugin(new DefaultLogger());
 		plugin.setWriteOutInstrumentedClassFiles(true);
 		
@@ -271,7 +258,7 @@ public class MultiRecordingTrial extends ApiCountingTrial {
 		assertEquals(new CoverageUnits(89), sfCover.getCoverageUnits());
 		assertEquals(new CoverageUnits(88), sfCover.getCoveredCoverageUnits());
 		assertEquals(new BigDecimal("99"), sfCover.getPercentageCovered());
-		
+		*/
 	}
 	
 	@Override

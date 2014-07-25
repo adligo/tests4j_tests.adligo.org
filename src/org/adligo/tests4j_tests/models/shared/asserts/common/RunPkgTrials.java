@@ -10,6 +10,7 @@ import org.adligo.tests4j.models.shared.trials.I_AbstractTrial;
 import org.adligo.tests4j.models.shared.trials.I_Trial;
 import org.adligo.tests4j.run.Tests4J;
 import org.adligo.tests4j_4jacoco.plugin.ScopedJacocoPluginFactory;
+import org.adligo.tests4j_4jacoco.plugin.TrialInstrumenter;
 import org.adligo.tests4j_4jacoco.plugin.data.multi.MultiProbesMap;
 
 public class RunPkgTrials implements I_Tests4J_TrialList {
@@ -22,11 +23,11 @@ public class RunPkgTrials implements I_Tests4J_TrialList {
 		List<Class<?>> loggingClasses = new ArrayList<Class<?>>(params.getLoggingClasses());
 		//loggingClasses.add(Tests4J_ThreadFactory.class);
 		//loggingClasses.add(MultiProbeDataStore.class);
-		loggingClasses.add(MultiProbesMap.class);
+		//loggingClasses.add(MultiProbesMap.class);
 		//loggingClasses.add(TrialInstancesProcessor.class);
 		//loggingClasses.add(ThreadGroupLocal.class);
 		//loggingClasses.add(AbstractPlugin.class);
-		//loggingClasses.add(MultiProbeDataStoreAdaptor.class);
+		loggingClasses.add(TrialInstrumenter.class);
 		params.setLoggingClasses(loggingClasses);
 		
 		//BytecodeInjectionDebuger.setEnabled(true);

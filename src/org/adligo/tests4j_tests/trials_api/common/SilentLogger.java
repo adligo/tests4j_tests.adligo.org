@@ -9,7 +9,7 @@ public class SilentLogger implements I_Tests4J_Logger{
 	}
 
 	@Override
-	public void onError(Throwable p) {
+	public void onException(Throwable p) {
 	}
 
 	@Override

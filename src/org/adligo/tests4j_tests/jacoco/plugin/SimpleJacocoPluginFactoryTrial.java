@@ -8,7 +8,7 @@ import org.adligo.tests4j_4jacoco.plugin.SimpleJacocoPlugin;
 import org.adligo.tests4j_4jacoco.plugin.SimpleJacocoPluginFactory;
 import org.adligo.tests4j_tests.base_abstract_trials.SourceFileCountingTrial;
 
-@SourceFileScope (sourceClass=SimpleJacocoPlugin.class, minCoverage=94.0)
+@SourceFileScope (sourceClass=SimpleJacocoPlugin.class, minCoverage=92.0)
 public class SimpleJacocoPluginFactoryTrial extends SourceFileCountingTrial {
 
 	@Test 

@@ -175,7 +175,7 @@ public class Tests4J_ListenerDelegateTrial extends SourceFileCountingTrial imple
 
 
 	@Override
-	public void onError(Throwable p) {
+	public void onException(Throwable p) {
 		thrown = p;
 	}
 

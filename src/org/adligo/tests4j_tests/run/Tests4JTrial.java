@@ -23,7 +23,7 @@ import org.adligo.tests4j_tests.run.helpers.MockTests4J_DelegateFactory;
 import org.adligo.tests4j_tests.run.mocks.MockTests4J;
 import org.adligo.tests4j_tests.run.mocks.MockTests4J_Listener;
 
-@SourceFileScope (sourceClass=Tests4J.class, minCoverage= 80.0)
+@SourceFileScope (sourceClass=Tests4J.class, minCoverage= 75.0)
 public class Tests4JTrial extends SourceFileCountingTrial implements I_Tests4J_Delegate {
 	private I_Tests4J_DelegateFactory originalFactory;
 	private I_Tests4J_DelegateFactory factory = new MockTests4J_DelegateFactory(this);

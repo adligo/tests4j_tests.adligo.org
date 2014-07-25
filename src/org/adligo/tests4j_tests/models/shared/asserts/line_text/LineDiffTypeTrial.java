@@ -19,19 +19,33 @@ public class LineDiffTypeTrial extends SourceFileCountingTrial {
 		
 	}
 
+	@Test
+	public void testLookup() {
+		MockLineDiffType mock  = new MockLineDiffType();
+		mock.setId(LineDiffType.MATCH.getId());
+		assertSame(LineDiffType.MATCH, LineDiffType.get(mock));
+		mock.setId(LineDiffType.PARTIAL_MATCH.getId());
+		assertSame(LineDiffType.PARTIAL_MATCH, LineDiffType.get(mock));
+		mock.setId(LineDiffType.MISSING_ACTUAL_LINE.getId());
+		assertSame(LineDiffType.MISSING_ACTUAL_LINE, LineDiffType.get(mock));
+		mock.setId(LineDiffType.MISSING_EXPECTED_LINE.getId());
+		assertSame(LineDiffType.MISSING_EXPECTED_LINE, LineDiffType.get(mock));
+		
+	}
+	
 	
 	@Override
 	public int getTests() {
-		return 1;
+		return 2;
 	}
 
 	@Override
 	public int getAsserts() {
-		return 5;
+		return 9;
 	}
 
 	@Override
 	public int getUniqueAsserts() {
-		return 5;
+		return 9;
 	}
 }

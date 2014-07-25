@@ -77,20 +77,49 @@ public class AssertTypeTrial extends SourceFileCountingTrial {
 		
 	}
 	
+	@Test
+	public void testGetByIAssertType() {
+		AssertTypeMock mock = new AssertTypeMock();
+		assertAType(mock, AssertType.AssertContains);
+		
+		assertAType(mock, AssertType.AssertEquals);
+		assertAType(mock, AssertType.AssertFalse);
+		assertAType(mock, AssertType.AssertGreaterThanOrEquals);
+		
+		assertAType(mock, AssertType.AssertNotEquals);
+		assertAType(mock, AssertType.AssertNotNull);
+		assertAType(mock, AssertType.AssertNotSame);
+		assertAType(mock, AssertType.AssertNotUniform);
+		
+		
+		assertAType(mock, AssertType.AssertNull);
+		assertAType(mock, AssertType.AssertSame);
+		assertAType(mock, AssertType.AssertThrown);
+		assertAType(mock, AssertType.AssertThrownUniform);
+		assertAType(mock, AssertType.AssertTrue);
+		assertAType(mock, AssertType.AssertUniform);
+		
+	}
+
+
+	private void assertAType(AssertTypeMock mock, AssertType type) {
+		mock.setId(type.getId());
+		assertSame(type, AssertType.getType(mock));
+	}
 
 	@Override
 	public int getTests() {
-		return 5;
+		return 6;
 	}
 
 	@Override
 	public int getAsserts() {
-		return 31;
+		return 45;
 	}
 
 	@Override
 	public int getUniqueAsserts() {
-		return 31;
+		return 45;
 	}
 
 
@@ -100,8 +129,8 @@ public class AssertTypeTrial extends SourceFileCountingTrial {
 		if (p.hasRecordedCoverage()) {
 			I_SourceFileCoverage sfc =  p.getSourceFileCoverage();
 			//assertEquals("org.adligo.tests4j.models.shared.asserts.common.AssertType",sfc.getClassName());
-			assertEquals(230, sfc.getCoverageUnits().get());
-			assertEquals(226, sfc.getCoveredCoverageUnits().get());
+			assertEquals(273, sfc.getCoverageUnits().get());
+			assertEquals(269, sfc.getCoveredCoverageUnits().get());
 		}
 	}
 	

@@ -1,6 +1,9 @@
 package org.adligo.tests4j_tests.models.shared.xml;
 
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.adligo.tests4j.models.shared.trials.SourceFileScope;
 import org.adligo.tests4j.models.shared.trials.Test;
 import org.adligo.tests4j.models.shared.xml.XML_Builder;
@@ -102,18 +105,76 @@ public class XML_BuilderTrial extends SourceFileCountingTrial {
 		assertEquals("<hey 1=\"1\" 2=\"2\" 3=\"3\" 4=\"4\" 5=\"5\"></hey>", result);
 	}
 	
+	
+	@Test
+	public void testAddStartTagWithoutAttributes() throws Exception {
+		XML_Builder builder = new XML_Builder();
+		builder.addStartTagWithoutAttributes("hey", true);
+		
+		String result = builder.toXmlString();
+		assertEquals("<hey>\n", result);
+		
+		builder = new XML_Builder();
+		builder.addStartTagWithoutAttributes("hey", false);
+		
+		result = builder.toXmlString();
+		assertEquals("<hey>", result);
+		
+		builder = new XML_Builder("","");
+		builder.addStartTagWithoutAttributes("hey", true);
+		result = builder.toXmlString();
+		assertEquals("<hey>", result);
+	
+		
+	}
+	
+	@Test
+	public void testAddList() throws Exception {
+		XML_Builder builder = new XML_Builder();
+		List<String> names = new ArrayList<String>();
+		names.add(null);
+		names.add("Joh>n");
+		names.add("Do<e");
+		builder.addList(names, "names", "name");
+		
+		String result = builder.toXmlString();
+		assertEquals("\t<names>\n" +
+				"\t\t<name>Joh&gt;n</name>\n" +
+				"\t\t<name>Do&lt;e</name>\n" +
+				"\t</names>\n", result);
+		
+	
+		builder = new XML_Builder("", "");
+		builder.addList(names, "names", "name");
+		
+		result = builder.toXmlString();
+		assertEquals("<names>" +
+				"<name>Joh&gt;n</name>" +
+				"<name>Do&lt;e</name>" +
+				"</names>", result);
+		
+		builder = new XML_Builder("", "\r");
+		builder.addList(names, "names", "name");
+		
+		result = builder.toXmlString();
+		assertEquals("<names>\r" +
+				"<name>Joh&gt;n</name>\r" +
+				"<name>Do&lt;e</name>\r" +
+				"</names>\r", result);
+	}
+	
 	@Override
 	public int getTests() {
-		return 4;
+		return 6;
 	}
 
 	@Override
 	public int getAsserts() {
-		return 4;
+		return 10;
 	}
 
 	@Override
 	public int getUniqueAsserts() {
-		return 4;
+		return 9;
 	}
 }

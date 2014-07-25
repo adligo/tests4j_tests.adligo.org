@@ -20,8 +20,9 @@ import org.adligo.tests4j.models.shared.system.Tests4J_Params;
 import org.adligo.tests4j.models.shared.trials.I_Trial;
 import org.adligo.tests4j.run.Tests4J;
 import org.adligo.tests4j.run.discovery.Tests4J_ParamsReader;
-import org.adligo.tests4j.run.helpers.Tests4J_TrialRunProcessor;
+import org.adligo.tests4j.run.helpers.Tests4J_Processor;
 import org.adligo.tests4j_4jacoco.plugin.ScopedJacocoPluginFactory;
+import org.adligo.tests4j_4jacoco.plugin.TrialInstrumenter;
 import org.adligo.tests4j_tests.base_abstract_trials.Counts;
 import org.adligo.tests4j_tests.base_abstract_trials.I_CountingTrial;
 
@@ -47,7 +48,8 @@ public class RunAllTrials implements I_Tests4J_Listener {
 		loggingClasses.add(MultiProbesMap.class);
 		loggingClasses.add(TrialInstancesProcessor.class);
 		*/
-		loggingClasses.add(Tests4J_TrialRunProcessor.class);
+		//loggingClasses.add(TrialInstrumenter.class);
+		//loggingClasses.add(Tests4J_Processor.class);
 		params.setLoggingClasses(loggingClasses);
 		//params.setExitAfterLastNotification(false);
 		

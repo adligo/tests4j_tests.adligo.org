@@ -280,7 +280,7 @@ public class LineDiffTextDisplayTrial extends SourceFileCountingTrial implements
 	}
 
 	@Override
-	public void onError(Throwable p) {
+	public void onException(Throwable p) {
 		// TODO Auto-generated method stub
 		
 	}
