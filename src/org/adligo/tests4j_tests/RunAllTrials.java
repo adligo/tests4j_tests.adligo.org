@@ -1,7 +1,6 @@
 package org.adligo.tests4j_tests;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.ExecutorService;
@@ -11,17 +10,17 @@ import org.adligo.tests4j.models.shared.metadata.I_TrialRunMetadata;
 import org.adligo.tests4j.models.shared.results.I_TrialResult;
 import org.adligo.tests4j.models.shared.results.I_TrialRunResult;
 import org.adligo.tests4j.models.shared.system.DefaultLogger;
+import org.adligo.tests4j.models.shared.system.DefaultSystem;
 import org.adligo.tests4j.models.shared.system.I_Tests4J_Controls;
 import org.adligo.tests4j.models.shared.system.I_Tests4J_CoveragePlugin;
 import org.adligo.tests4j.models.shared.system.I_Tests4J_CoveragePluginFactory;
 import org.adligo.tests4j.models.shared.system.I_Tests4J_Listener;
-import org.adligo.tests4j.models.shared.system.I_Tests4J_Logger;
+import org.adligo.tests4j.models.shared.system.I_Tests4J_Log;
 import org.adligo.tests4j.models.shared.system.Tests4J_Params;
 import org.adligo.tests4j.models.shared.trials.I_Trial;
 import org.adligo.tests4j.run.Tests4J;
 import org.adligo.tests4j.run.discovery.Tests4J_ParamsReader;
-import org.adligo.tests4j.shared.report.summary.SetupProgressReporter;
-import org.adligo.tests4j.shared.report.summary.TestsProgressReporter;
+import org.adligo.tests4j.shared.report.summary.TestsReporter;
 import org.adligo.tests4j.shared.report.summary.TrialsProgressReporter;
 import org.adligo.tests4j.shared.report.summary.TrialsReporter;
 import org.adligo.tests4j_4jacoco.plugin.ScopedJacocoPluginFactory;
@@ -30,7 +29,7 @@ import org.adligo.tests4j_tests.base_abstract_trials.I_CountingTrial;
 
 public class RunAllTrials implements I_Tests4J_Listener {
 	static long start = System.currentTimeMillis();
-	static I_Tests4J_Logger logger = new DefaultLogger();
+	static I_Tests4J_Log logger = new DefaultLogger();
 	private static volatile List<String> trialsNotCompleted = new CopyOnWriteArrayList<String>();
 	private static ExecutorService trialsNotCompletedService = Executors.newSingleThreadExecutor();
 	
@@ -40,24 +39,12 @@ public class RunAllTrials implements I_Tests4J_Listener {
 		//Tests4J_Params params = getTests(SimpleJacocoPluginFactory.class);
 		
 		Tests4J_Params params = getTests(ScopedJacocoPluginFactory.class);
-		//params.setThreadCount(new SimpleThreadCount(1));
 		
 		
-		List<Class<?>> loggingClasses = new ArrayList<Class<?>>(params.getLoggingClasses());
-		loggingClasses.add(SetupProgressReporter.class);
-		loggingClasses.add(TestsProgressReporter.class);
-		//loggingClasses.add(TrialsProgressReporter.class);
-		//loggingClasses.add(TrialsReporter.class);
-		/*
-		loggingClasses.add(Tests4J_ThreadFactory.class);
-		loggingClasses.add(MultiProbeDataStore.class);
-		loggingClasses.add(MultiProbesMap.class);
-		loggingClasses.add(TrialInstancesProcessor.class);
-		*/
-		//loggingClasses.add(TrialInstrumenter.class);
-		//loggingClasses.add(Tests4J_Processor.class);
-		params.setLoggingClasses(loggingClasses);
-		//params.setExitAfterLastNotification(false);
+		params.setLogState(TrialsReporter.class, false);
+		params.setLogState(TestsReporter.class, false);
+		//params.setLogState(TrialsProgressReporter.class, false);
+		
 		
 		params.setMetaTrialClass(TheMetaTrial.class);
 		//params.setThreadPoolSize(1);
@@ -113,7 +100,7 @@ public class RunAllTrials implements I_Tests4J_Listener {
 		
 		toRet.addTrials(new org.adligo.tests4j_tests.trials_api.RunPkgTrials());
 		
-		Tests4J_ParamsReader reader = new Tests4J_ParamsReader(toRet, new DefaultLogger());
+		Tests4J_ParamsReader reader = new Tests4J_ParamsReader(new DefaultSystem(),toRet);
 		I_Tests4J_CoveragePlugin plugin = reader.getCoveragePlugin();
 		
 		List<Class<? extends I_Trial>> trials = toRet.getTrials();

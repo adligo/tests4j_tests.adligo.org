@@ -18,24 +18,18 @@ public class RunSingleTrial {
 		Tests4J_Params params = new Tests4J_Params();
 		//params.addTrial(DiffIndexesTrial.class);
 		params.addTrial(LineDiffTypeTrial.class);
-		/*
-		params.addTest(Run_UseCaseTrial_ApiTrial.class.getName() +
-				".testNoUseCaseAnnotation");
-				*/
-		//params.addTrial(Tests4J_ParamsTrial.class);
-		SummaryReporter reporter = new SummaryReporter();
-		
-		params.addLoggingClass(AbstractPlugin.class);
-		params.addLoggingClass(Tests4J_NotificationManager.class);
-		params.addLoggingClass(Tests4J_TrialsRunable.class);
-		params.addLoggingClass(TrialInstrumenter.class);
+	
+		params.setLogState(AbstractPlugin.class, true);
+		params.setLogState(Tests4J_NotificationManager.class, true);
+		params.setLogState(Tests4J_TrialsRunable.class, true);
+		params.setLogState(TrialInstrumenter.class, true);
 		//params.addLoggingClass(TrialsProcessor.class);
 		//params.addLoggingClass(Tests4J_Memory.class);
 		//params.addLoggingClass(Tests4J_SecurityManager.class);
 		
 		//logging from jacoco
 		//params.addLoggingClass(AbstractPlugin.class);
-		params.addLoggingClass(Recorder.class);
+		params.setLogState(Recorder.class, true);
 		
 		//SimpleJacocoPlugin plugin = new SimpleJacocoPlugin();
 		params.setCoveragePluginFactoryClass(ScopedJacocoPluginFactory.class);

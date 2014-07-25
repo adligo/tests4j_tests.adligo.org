@@ -15,7 +15,7 @@ public class TheMetaTrial  extends MetaTrial {
 		//Note when I ignored
 		// MultiRecordingTrial I lost 15% main coverage
 		//TODO reimpl it vs the ThreadLocals
-		super(46.0, 26.4);
+		super(46.0, 26.0);
 		//hmm package comparison data to include;
 		// passing tests
 		// relevant classes with trials %

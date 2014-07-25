@@ -17,18 +17,8 @@ public class RunPkgTrials implements I_Tests4J_TrialList {
 	public static void main(String [] args) {
 		Tests4J_Params params = new Tests4J_Params();
 		params.addTrials(new RunPkgTrials());
-		List<Class<?>> loggingClasses = new ArrayList<Class<?>>(params.getLoggingClasses());
-		/*
-		loggingClasses.add(Tests4J_ThreadFactory.class);
-		loggingClasses.add(MultiProbeDataStore.class);
-		
-		loggingClasses.add(TrialInstancesProcessor.class);
-		loggingClasses.add(TrialsProcessor.class);
-		
-		*/
-		loggingClasses.add(Tests4J_TrialsRunable.class);
-		loggingClasses.add(MultiProbesMap.class);
-		params.setLoggingClasses(loggingClasses);
+		params.setLogState(Tests4J_TrialsRunable.class, true);
+		params.setLogState(MultiProbesMap.class, true);
 		
 		params.setCoveragePluginFactoryClass(ScopedJacocoPluginFactory.class);
 		

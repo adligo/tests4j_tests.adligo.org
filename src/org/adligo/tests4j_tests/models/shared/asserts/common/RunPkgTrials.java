@@ -20,15 +20,7 @@ public class RunPkgTrials implements I_Tests4J_TrialList {
 		Tests4J_Params params = new Tests4J_Params();
 		params.addTrials(new RunPkgTrials());
 		
-		List<Class<?>> loggingClasses = new ArrayList<Class<?>>(params.getLoggingClasses());
-		//loggingClasses.add(Tests4J_ThreadFactory.class);
-		//loggingClasses.add(MultiProbeDataStore.class);
-		//loggingClasses.add(MultiProbesMap.class);
-		//loggingClasses.add(TrialInstancesProcessor.class);
-		//loggingClasses.add(ThreadGroupLocal.class);
-		//loggingClasses.add(AbstractPlugin.class);
-		loggingClasses.add(TrialInstrumenter.class);
-		params.setLoggingClasses(loggingClasses);
+		params.setLogState(TrialInstrumenter.class, true);
 		
 		//BytecodeInjectionDebuger.setEnabled(true);
 		

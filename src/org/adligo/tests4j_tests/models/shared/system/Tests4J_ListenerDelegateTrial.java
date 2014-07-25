@@ -5,7 +5,7 @@ import org.adligo.tests4j.models.shared.asserts.common.I_Thrower;
 import org.adligo.tests4j.models.shared.metadata.TrialRunMetadataMutant;
 import org.adligo.tests4j.models.shared.results.ApiTrialResultMutant;
 import org.adligo.tests4j.models.shared.results.TrialRunResultMutant;
-import org.adligo.tests4j.models.shared.system.I_Tests4J_Logger;
+import org.adligo.tests4j.models.shared.system.I_Tests4J_Log;
 import org.adligo.tests4j.models.shared.system.Tests4J_ListenerDelegator;
 import org.adligo.tests4j.models.shared.trials.SourceFileScope;
 import org.adligo.tests4j.models.shared.trials.Test;
@@ -14,7 +14,7 @@ import org.adligo.tests4j_tests.models.shared.system.mocks.Clumsey_Tests4J_Liste
 import org.adligo.tests4j_tests.models.shared.system.mocks.Tracking_Tests4J_Listener;
 
 @SourceFileScope (sourceClass=Tests4J_ListenerDelegator.class, minCoverage=86.0)
-public class Tests4J_ListenerDelegateTrial extends SourceFileCountingTrial implements I_Tests4J_Logger {
+public class Tests4J_ListenerDelegateTrial extends SourceFileCountingTrial implements I_Tests4J_Log {
 	private Throwable thrown;
 	
 	@Test
@@ -180,7 +180,7 @@ public class Tests4J_ListenerDelegateTrial extends SourceFileCountingTrial imple
 	}
 
 	@Override
-	public boolean isMainReporter() {
+	public boolean isMainLog() {
 		return false;
 	}
 }

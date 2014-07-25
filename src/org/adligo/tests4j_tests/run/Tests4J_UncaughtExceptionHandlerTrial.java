@@ -3,7 +3,7 @@ package org.adligo.tests4j_tests.run;
 import org.adligo.tests4j.models.shared.asserts.ExpectedThrownData;
 import org.adligo.tests4j.models.shared.asserts.common.I_Thrower;
 import org.adligo.tests4j.models.shared.system.DefaultLogger;
-import org.adligo.tests4j.models.shared.system.I_Tests4J_Logger;
+import org.adligo.tests4j.models.shared.system.I_Tests4J_Log;
 import org.adligo.tests4j.models.shared.trials.AdditionalInstrumentation;
 import org.adligo.tests4j.models.shared.trials.AfterTrial;
 import org.adligo.tests4j.models.shared.trials.SourceFileScope;
@@ -14,7 +14,7 @@ import org.adligo.tests4j_tests.run.mocks.MockTests4J_UncaughtExceptionHandler;
 
 @SourceFileScope (sourceClass=Tests4J_UncaughtExceptionHandlerTrial.class, minCoverage=76.0)
 @AdditionalInstrumentation (javaPackages="org.adligo.tests4j_tests.run.mocks")
-public class Tests4J_UncaughtExceptionHandlerTrial extends SourceFileCountingTrial implements I_Tests4J_Logger {
+public class Tests4J_UncaughtExceptionHandlerTrial extends SourceFileCountingTrial implements I_Tests4J_Log {
 	private String lastLog;
 	private Throwable lastThrowable;
 	
@@ -78,7 +78,7 @@ public class Tests4J_UncaughtExceptionHandlerTrial extends SourceFileCountingTri
 		lastThrowable = p;
 	}
 	@Override
-	public boolean isMainReporter() {
+	public boolean isMainLog() {
 		// TODO Auto-generated method stub
 		return false;
 	}

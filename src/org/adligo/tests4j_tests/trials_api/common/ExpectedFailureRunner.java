@@ -45,7 +45,6 @@ public class ExpectedFailureRunner implements I_Tests4J_Listener {
 		
 		MockTests4J mock = new MockTests4J();
 		mock.setSystem(mockSystem);
-		mock.setLogger(new SilentLogger());
 		
 		I_Tests4J_Controls controlls = mock.instanceRun(params, this);
 		if (!controlls.isRunning()) {

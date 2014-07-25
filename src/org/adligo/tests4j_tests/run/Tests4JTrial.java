@@ -8,7 +8,7 @@ import org.adligo.tests4j.models.shared.system.I_Tests4J_System;
 import org.adligo.tests4j.models.shared.system.I_Tests4J_Controls;
 import org.adligo.tests4j.models.shared.system.I_Tests4J_Delegate;
 import org.adligo.tests4j.models.shared.system.I_Tests4J_DelegateFactory;
-import org.adligo.tests4j.models.shared.system.I_Tests4J_Logger;
+import org.adligo.tests4j.models.shared.system.I_Tests4J_Log;
 import org.adligo.tests4j.models.shared.system.I_Tests4J_Params;
 import org.adligo.tests4j.models.shared.system.I_Tests4J_Listener;
 import org.adligo.tests4j.models.shared.system.Tests4J_Params;
@@ -29,7 +29,6 @@ public class Tests4JTrial extends SourceFileCountingTrial implements I_Tests4J_D
 	private I_Tests4J_DelegateFactory factory = new MockTests4J_DelegateFactory(this);
 	private I_Tests4J_Listener lastSetupListener;
 	private I_Tests4J_Params lastSetupParams;
-	private I_Tests4J_Logger lastLogger;
 	private I_Tests4J_System lastSystem;
 	private final AtomicBoolean ran = new AtomicBoolean();
 	private final AtomicBoolean setupResultToSend = new AtomicBoolean();
@@ -50,7 +49,6 @@ public class Tests4JTrial extends SourceFileCountingTrial implements I_Tests4J_D
 		MockTests4J.setFactory(factory);
 		lastSetupListener = null;
 		lastSetupParams  = null;
-		lastLogger  = null;
 		lastSystem  = null;
 		ran.set(false);
 		setupResultToSend.set(true);
@@ -71,7 +69,6 @@ public class Tests4JTrial extends SourceFileCountingTrial implements I_Tests4J_D
 		assertTrue(ran.get());
 		
 		assertEquals(DefaultSystem.class.getName(), lastSystem.getClass().getName());
-		assertEquals(DefaultLogger.class.getName(), lastLogger.getClass().getName());
 		assertEquals(params, lastSetupParams);
 		assertNull(lastSetupListener);
 		
@@ -91,7 +88,6 @@ public class Tests4JTrial extends SourceFileCountingTrial implements I_Tests4J_D
 		
 		assertFalse(ran.get());
 		assertEquals(DefaultSystem.class.getName(), lastSystem.getClass().getName());
-		assertEquals(DefaultLogger.class.getName(), lastLogger.getClass().getName());
 		assertSame(params, lastSetupParams);
 		assertNull(lastSetupListener);
 		assertFalse(ran.get());
@@ -112,7 +108,6 @@ public class Tests4JTrial extends SourceFileCountingTrial implements I_Tests4J_D
 		assertTrue(ran.get());
 		
 		assertEquals(DefaultSystem.class.getName(), lastSystem.getClass().getName());
-		assertEquals(DefaultLogger.class.getName(), lastLogger.getClass().getName());
 		assertSame(params, lastSetupParams);
 		assertSame(listener, lastSetupListener);
 	}
@@ -133,7 +128,6 @@ public class Tests4JTrial extends SourceFileCountingTrial implements I_Tests4J_D
 		assertFalse(ran.get());
 		
 		assertEquals(DefaultSystem.class.getName(), lastSystem.getClass().getName());
-		assertEquals(DefaultLogger.class.getName(), lastLogger.getClass().getName());
 		assertSame(params, lastSetupParams);
 		assertSame(listener, lastSetupListener);
 	}
@@ -147,10 +141,8 @@ public class Tests4JTrial extends SourceFileCountingTrial implements I_Tests4J_D
 		controllsToSend = new Tests4J_Controls();
 		
 		MockTests4J mock = new MockTests4J();
-		I_Tests4J_Logger logger = new DefaultLogger();
+		I_Tests4J_Log logger = new DefaultLogger();
 		I_Tests4J_System system = new DefaultSystem();
-		mock.setLoggerDelegate(logger);
-		assertSame(logger, mock.getLoggerDelegate());
 		
 		mock.setSystemDelegate(system);
 		assertSame(system, mock.getSystemDelegate());
@@ -173,10 +165,8 @@ public class Tests4JTrial extends SourceFileCountingTrial implements I_Tests4J_D
 		
 		
 		MockTests4J mock = new MockTests4J();
-		I_Tests4J_Logger logger = new DefaultLogger();
+		I_Tests4J_Log logger = new DefaultLogger();
 		I_Tests4J_System system = new DefaultSystem();
-		mock.setLoggerDelegate(logger);
-		assertSame(logger, mock.getLoggerDelegate());
 		
 		mock.setSystemDelegate(system);
 		assertSame(system, mock.getSystemDelegate());
@@ -200,10 +190,8 @@ public class Tests4JTrial extends SourceFileCountingTrial implements I_Tests4J_D
 		I_Tests4J_Listener listener = new MockTests4J_Listener();
 		
 		MockTests4J mock = new MockTests4J();
-		I_Tests4J_Logger logger = new DefaultLogger();
+		I_Tests4J_Log logger = new DefaultLogger();
 		I_Tests4J_System system = new DefaultSystem();
-		mock.setLoggerDelegate(logger);
-		assertSame(logger, mock.getLoggerDelegate());
 		
 		mock.setSystemDelegate(system);
 		assertSame(system, mock.getSystemDelegate());
@@ -239,11 +227,6 @@ public class Tests4JTrial extends SourceFileCountingTrial implements I_Tests4J_D
 	}
 
 
-	@Override
-	public  void setLogger(I_Tests4J_Logger logger) {
-		lastLogger = logger;
-	}
-
 
 	@Override
 	public  void setSystem(I_Tests4J_System system) {
@@ -258,12 +241,12 @@ public class Tests4JTrial extends SourceFileCountingTrial implements I_Tests4J_D
 
 	@Override
 	public int getAsserts() {
-		return 51;
+		return 44;
 	}
 
 	@Override
 	public int getUniqueAsserts() {
-		return 48;
+		return 41;
 	}
 
 }
