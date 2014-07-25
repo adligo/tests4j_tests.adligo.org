@@ -38,4 +38,10 @@ public class Clumsey_Tests4J_Listener implements I_Tests4J_Listener {
 		throw new RuntimeException("mock from onRunCompleted");
 	}
 
+	@Override
+	public void onProgress(String process, double pctComplete) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

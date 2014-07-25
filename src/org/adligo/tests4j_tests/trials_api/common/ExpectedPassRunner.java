@@ -114,5 +114,11 @@ public class ExpectedPassRunner implements I_Tests4J_Listener {
 	public MockSystem getMockSystem() {
 		return mockSystem;
 	}
+
+	@Override
+	public void onProgress(String process, double pctComplete) {
+		// TODO Auto-generated method stub
+		
+	}
 	
 }

@@ -91,4 +91,10 @@ public class Tracking_Tests4J_Listener implements I_Tests4J_Listener {
 		return lastPassed;
 	}
 
+	@Override
+	public void onProgress(String process, double pctComplete) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

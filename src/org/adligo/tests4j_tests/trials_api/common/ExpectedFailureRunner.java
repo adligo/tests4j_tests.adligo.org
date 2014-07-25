@@ -117,4 +117,10 @@ public class ExpectedFailureRunner implements I_Tests4J_Listener {
 		return mockSystem;
 	}
 
+	@Override
+	public void onProgress(String process, double pctComplete) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

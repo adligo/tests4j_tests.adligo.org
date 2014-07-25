@@ -13,7 +13,7 @@ import org.adligo.tests4j_tests.base_abstract_trials.SourceFileCountingTrial;
 import org.adligo.tests4j_tests.models.shared.system.mocks.Clumsey_Tests4J_Listener;
 import org.adligo.tests4j_tests.models.shared.system.mocks.Tracking_Tests4J_Listener;
 
-@SourceFileScope (sourceClass=Tests4J_ListenerDelegator.class, minCoverage=90.0)
+@SourceFileScope (sourceClass=Tests4J_ListenerDelegator.class, minCoverage=86.0)
 public class Tests4J_ListenerDelegateTrial extends SourceFileCountingTrial implements I_Tests4J_Logger {
 	private Throwable thrown;
 	

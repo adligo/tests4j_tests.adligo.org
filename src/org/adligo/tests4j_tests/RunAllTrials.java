@@ -11,18 +11,20 @@ import org.adligo.tests4j.models.shared.metadata.I_TrialRunMetadata;
 import org.adligo.tests4j.models.shared.results.I_TrialResult;
 import org.adligo.tests4j.models.shared.results.I_TrialRunResult;
 import org.adligo.tests4j.models.shared.system.DefaultLogger;
+import org.adligo.tests4j.models.shared.system.I_Tests4J_Controls;
 import org.adligo.tests4j.models.shared.system.I_Tests4J_CoveragePlugin;
 import org.adligo.tests4j.models.shared.system.I_Tests4J_CoveragePluginFactory;
-import org.adligo.tests4j.models.shared.system.I_Tests4J_Controls;
-import org.adligo.tests4j.models.shared.system.I_Tests4J_Logger;
 import org.adligo.tests4j.models.shared.system.I_Tests4J_Listener;
+import org.adligo.tests4j.models.shared.system.I_Tests4J_Logger;
 import org.adligo.tests4j.models.shared.system.Tests4J_Params;
 import org.adligo.tests4j.models.shared.trials.I_Trial;
 import org.adligo.tests4j.run.Tests4J;
 import org.adligo.tests4j.run.discovery.Tests4J_ParamsReader;
-import org.adligo.tests4j.run.helpers.Tests4J_Processor;
+import org.adligo.tests4j.shared.report.summary.SetupProgressReporter;
+import org.adligo.tests4j.shared.report.summary.TestsProgressReporter;
+import org.adligo.tests4j.shared.report.summary.TrialsProgressReporter;
+import org.adligo.tests4j.shared.report.summary.TrialsReporter;
 import org.adligo.tests4j_4jacoco.plugin.ScopedJacocoPluginFactory;
-import org.adligo.tests4j_4jacoco.plugin.TrialInstrumenter;
 import org.adligo.tests4j_tests.base_abstract_trials.Counts;
 import org.adligo.tests4j_tests.base_abstract_trials.I_CountingTrial;
 
@@ -42,6 +44,10 @@ public class RunAllTrials implements I_Tests4J_Listener {
 		
 		
 		List<Class<?>> loggingClasses = new ArrayList<Class<?>>(params.getLoggingClasses());
+		loggingClasses.add(SetupProgressReporter.class);
+		loggingClasses.add(TestsProgressReporter.class);
+		//loggingClasses.add(TrialsProgressReporter.class);
+		//loggingClasses.add(TrialsReporter.class);
 		/*
 		loggingClasses.add(Tests4J_ThreadFactory.class);
 		loggingClasses.add(MultiProbeDataStore.class);
@@ -176,6 +182,12 @@ public class RunAllTrials implements I_Tests4J_Listener {
 		BigDecimal durD = new BigDecimal(dur).divide(new BigDecimal(1000));
 		//use the reporter to log to the original System.out
 		logger.log("Total run time " +durD + " seconds.");
+	}
+
+	@Override
+	public void onProgress(String process, double pctComplete) {
+		// TODO Auto-generated method stub
+		
 	}
 
 

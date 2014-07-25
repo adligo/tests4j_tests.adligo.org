@@ -2,6 +2,7 @@ package org.adligo.tests4j_tests.trials_api.common;
 
 import java.util.List;
 import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.atomic.AtomicLong;
 
 import org.adligo.tests4j.models.shared.system.I_Tests4J_System;
 
@@ -15,20 +16,14 @@ import org.adligo.tests4j.models.shared.system.I_Tests4J_System;
  */
 public class MockSystem implements I_Tests4J_System {
 	private final ArrayBlockingQueue<Integer> lastStatus = new ArrayBlockingQueue<>(10);
-	private final ArrayBlockingQueue<Long> times;
+	private final AtomicLong time = new AtomicLong();
 	
 	
 	public MockSystem() {
-		times = new ArrayBlockingQueue<Long>(4);
-		times.add(1L);
-		times.add(2L);
-		times.add(3L);
-		times.add(4L);
+
 	}
 	
 	public MockSystem(List<Long> pTimes) {
-		times = new ArrayBlockingQueue<Long>(pTimes.size());
-		times.addAll(pTimes);
 	}
 	
 	@Override
@@ -50,7 +45,7 @@ public class MockSystem implements I_Tests4J_System {
 
 	@Override
 	public long getTime() {
-		return times.poll();
+		return System.currentTimeMillis();
 	}
 
 }

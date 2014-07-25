@@ -135,7 +135,7 @@ public class XML_BuilderTrial extends SourceFileCountingTrial {
 		names.add(null);
 		names.add("Joh>n");
 		names.add("Do<e");
-		builder.addList(names, "names", "name");
+		builder.addCollection(names, "names", "name");
 		
 		String result = builder.toXmlString();
 		assertEquals("\t<names>\n" +
@@ -145,7 +145,7 @@ public class XML_BuilderTrial extends SourceFileCountingTrial {
 		
 	
 		builder = new XML_Builder("", "");
-		builder.addList(names, "names", "name");
+		builder.addCollection(names, "names", "name");
 		
 		result = builder.toXmlString();
 		assertEquals("<names>" +
@@ -154,7 +154,7 @@ public class XML_BuilderTrial extends SourceFileCountingTrial {
 				"</names>", result);
 		
 		builder = new XML_Builder("", "\r");
-		builder.addList(names, "names", "name");
+		builder.addCollection(names, "names", "name");
 		
 		result = builder.toXmlString();
 		assertEquals("<names>\r" +

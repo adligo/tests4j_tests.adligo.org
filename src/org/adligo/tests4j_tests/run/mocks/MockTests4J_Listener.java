@@ -44,4 +44,10 @@ public class MockTests4J_Listener implements I_Tests4J_Listener {
 		
 	}
 
+	@Override
+	public void onProgress(String process, double pctComplete) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }
