@@ -3,6 +3,8 @@ package org.adligo.tests4j_tests.trials_api.bad_mock_api_trials;
 import java.util.List;
 
 import org.adligo.tests4j.models.shared.asserts.common.I_Asserts;
+import org.adligo.tests4j.models.shared.en.Tests4J_EnglishConstants;
+import org.adligo.tests4j.models.shared.i18n.I_Tests4J_AnnotationErrors;
 import org.adligo.tests4j.models.shared.metadata.I_TrialMetadata;
 import org.adligo.tests4j.models.shared.metadata.I_TrialRunMetadata;
 import org.adligo.tests4j.models.shared.results.I_TrialFailure;
@@ -53,7 +55,10 @@ public class StaticTestTrial extends ApiTrial {
 		asserts.assertFalse(result.isPassed());
 		I_TrialFailure failure = result.getFailure();
 		asserts.assertNotNull(failure);
-		asserts.assertEquals("Methods Annotated with @Test must NOT be static.", failure.getMessage());
+		
+		I_Tests4J_AnnotationErrors messages =  Tests4J_EnglishConstants.ENGLISH.getAnnotationErrors();
+		
+		asserts.assertEquals(messages.getIsStatic(), failure.getMessage());
 		Throwable exception = failure.getException();
 		asserts.assertUniform(new IllegalArgumentException(
 				"org.adligo.tests4j_tests.trials_api.bad_mock_api_trials.StaticTestTrial.testFoo was not annotated correctly."), 

@@ -32,7 +32,7 @@ public class AssertEqualsNullStringWithMessageFailsTrialRunner  {
 		asserts.assertEquals(1, trialsMetadata.size());
 		I_TrialMetadata trialMeta = trialsMetadata.get(0);
 		asserts.assertNotNull(trialMeta);
-		asserts.assertEquals(AssertEqualsNullStringWithMessageFailsTrialRunner.class.getName(), 
+		asserts.assertEquals(AssertEqualsNullStringWithMessageFailsTrial.class.getName(), 
 				trialMeta.getTrialName());
 		asserts.assertEquals(0L, trialMeta.getTimeout());
 		asserts.assertFalse(trialMeta.isIgnored());
@@ -79,15 +79,9 @@ public class AssertEqualsNullStringWithMessageFailsTrialRunner  {
 		StackTraceElement [] elements = locationFailed.getStackTrace();
 		asserts.assertGreaterThanOrEquals(1.0, elements.length);
 		StackTraceElement topElement = elements[0];
-		for (int i = 0; i < elements.length; i++) {
-			topElement = elements[i];
-			String className = topElement.getClassName();
-			if (AssertEqualsNullStringWithMessageFailsTrialRunner.class.getName().equals(className)) {
-				break;
-			}
-		}
 		
-		asserts.assertEquals(AssertEqualsNullStringWithMessageFailsTrialRunner.class.getName(), topElement.getClassName());
+		
+		asserts.assertEquals(AssertEqualsNullStringWithMessageFailsTrial.class.getName(), topElement.getClassName());
 		asserts.assertEquals("testAssertEqualsNullFails", topElement.getMethodName());
 		asserts.assertEquals(14, topElement.getLineNumber());
 		

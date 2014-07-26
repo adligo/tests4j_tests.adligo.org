@@ -3,6 +3,8 @@ package org.adligo.tests4j_tests.trials_api.bad_mock_api_trials;
 import java.util.List;
 
 import org.adligo.tests4j.models.shared.asserts.common.I_Asserts;
+import org.adligo.tests4j.models.shared.en.Tests4J_EnglishConstants;
+import org.adligo.tests4j.models.shared.i18n.I_Tests4J_AnnotationErrors;
 import org.adligo.tests4j.models.shared.metadata.I_TestMetadata;
 import org.adligo.tests4j.models.shared.metadata.I_TrialMetadata;
 import org.adligo.tests4j.models.shared.metadata.I_TrialRunMetadata;
@@ -71,7 +73,9 @@ public class AfterTrialHasParamsTrial extends ApiTrial {
 		asserts.assertFalse(result.isPassed());
 		I_TrialFailure failure = result.getFailure();
 		asserts.assertNotNull(failure);
-		asserts.assertEquals("Methods Annotated with @AfterTrial must NOT take any parameters.", failure.getMessage());
+		
+		I_Tests4J_AnnotationErrors messages =  Tests4J_EnglishConstants.ENGLISH.getAnnotationErrors();
+		asserts.assertEquals(messages.getAfterTrialHasParams(), failure.getMessage());
 		Throwable exception = failure.getException();
 		asserts.assertUniform(new IllegalArgumentException(
 				"org.adligo.tests4j_tests.trials_api.bad_mock_api_trials.AfterTrialHasParamsTrial was not annotated correctly."), 

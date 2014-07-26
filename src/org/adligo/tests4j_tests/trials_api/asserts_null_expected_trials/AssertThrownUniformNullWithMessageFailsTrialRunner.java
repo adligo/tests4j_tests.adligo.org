@@ -24,26 +24,11 @@ import org.adligo.tests4j_tests.trials_api.common.MockSystem;
 
 @TrialRecursion
 @PackageScope (packageName="org.adligo.tests4j")
-public class AssertThrownUniformNullWithMessageFailsTrialRunner extends ApiTrial {
-	private boolean called = false;
-	@Test
-	public void testAssertThrownUniformNull() {
-		called = false;
-		assertFalse(called);
-		assertThrownUniform("custom message",null, 
-			new I_Thrower() {
-			
-			@Override
-			public void run() {
-				called = true;
-			}
-		});
-		assertTrue(called);
-	}
+public class AssertThrownUniformNullWithMessageFailsTrialRunner {
 	
 	public static void runTestDelegate(I_Asserts asserts) throws Exception  {
 		ExpectedFailureRunner runner = new ExpectedFailureRunner();
-		runner.run(AssertThrownUniformNullWithMessageFailsTrialRunner.class);
+		runner.run(AssertThrownUniformNullWithMessageFailsTrial.class);
 		
 		I_TrialRunMetadata metadata = runner.getMetadata();
 		asserts.assertNotNull(metadata);
@@ -54,7 +39,7 @@ public class AssertThrownUniformNullWithMessageFailsTrialRunner extends ApiTrial
 		asserts.assertEquals(1, trialsMetadata.size());
 		I_TrialMetadata trialMeta = trialsMetadata.get(0);
 		asserts.assertNotNull(trialMeta);
-		asserts.assertEquals(AssertThrownUniformNullWithMessageFailsTrialRunner.class.getName(), 
+		asserts.assertEquals(AssertThrownUniformNullWithMessageFailsTrial.class.getName(), 
 				trialMeta.getTrialName());
 		asserts.assertEquals(0L, trialMeta.getTimeout());
 		asserts.assertFalse(trialMeta.isIgnored());
@@ -101,17 +86,11 @@ public class AssertThrownUniformNullWithMessageFailsTrialRunner extends ApiTrial
 		StackTraceElement [] elements = locationFailed.getStackTrace();
 		asserts.assertGreaterThanOrEquals(1.0, elements.length);
 		StackTraceElement topElement = elements[0];
-		for (int i = 0; i < elements.length; i++) {
-			topElement = elements[i];
-			String className = topElement.getClassName();
-			if (AssertThrownUniformNullWithMessageFailsTrialRunner.class.getName().equals(className)) {
-				break;
-			}
-		}
 		
-		asserts.assertEquals(AssertThrownUniformNullWithMessageFailsTrialRunner.class.getName(), topElement.getClassName());
+		
+		asserts.assertEquals(AssertThrownUniformNullWithMessageFailsTrial.class.getName(), topElement.getClassName());
 		asserts.assertEquals("testAssertThrownUniformNull", topElement.getMethodName());
-		asserts.assertEquals(31, topElement.getLineNumber());
+		asserts.assertEquals(17, topElement.getLineNumber());
 		
 		Throwable exception = testFailure.getException();
 		asserts.assertNull(exception);

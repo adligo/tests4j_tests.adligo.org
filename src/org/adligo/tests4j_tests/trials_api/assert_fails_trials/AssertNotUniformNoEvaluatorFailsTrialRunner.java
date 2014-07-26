@@ -13,25 +13,15 @@ import org.adligo.tests4j.models.shared.results.I_TestResult;
 import org.adligo.tests4j.models.shared.results.I_TrialFailure;
 import org.adligo.tests4j.models.shared.results.I_TrialResult;
 import org.adligo.tests4j.models.shared.results.TestResult;
-import org.adligo.tests4j.models.shared.trials.ApiTrial;
-import org.adligo.tests4j.models.shared.trials.PackageScope;
-import org.adligo.tests4j.models.shared.trials.Test;
-import org.adligo.tests4j.models.shared.trials.TrialRecursion;
 import org.adligo.tests4j_tests.trials_api.common.ExpectedFailureRunner;
 import org.adligo.tests4j_tests.trials_api.common.MockSystem;
 
-@TrialRecursion
-@PackageScope (packageName="org.adligo.tests4j")
-public class AssertNotUniformNoEvaluatorFailsTrialRunner extends ApiTrial {
-
-	@Test
-	public void testAssertNotUniform() {
-		assertNotUniform(this, this);
-	}
+public class AssertNotUniformNoEvaluatorFailsTrialRunner {
+	
 	
 	public static void runTestDelegate(I_Asserts asserts)  throws Exception {
 		ExpectedFailureRunner runner = new ExpectedFailureRunner();
-		runner.run(AssertNotUniformNoEvaluatorFailsTrialRunner.class);
+		runner.run(AssertNotUniformNoEvaluatorFailsTrial.class);
 		
 		I_TrialRunMetadata metadata = runner.getMetadata();
 		asserts.assertNotNull(metadata);
@@ -42,7 +32,7 @@ public class AssertNotUniformNoEvaluatorFailsTrialRunner extends ApiTrial {
 		asserts.assertEquals(1, trialsMetadata.size());
 		I_TrialMetadata trialMeta = trialsMetadata.get(0);
 		asserts.assertNotNull(trialMeta);
-		asserts.assertEquals(AssertNotUniformNoEvaluatorFailsTrialRunner.class.getName(), 
+		asserts.assertEquals(AssertNotUniformNoEvaluatorFailsTrial.class.getName(), 
 				trialMeta.getTrialName());
 		asserts.assertEquals(0L, trialMeta.getTimeout());
 		asserts.assertFalse(trialMeta.isIgnored());
@@ -92,9 +82,9 @@ public class AssertNotUniformNoEvaluatorFailsTrialRunner extends ApiTrial {
 		StackTraceElement topElement = elements[0];
 		
 		asserts.assertNotNull(topElement);
-		asserts.assertEquals(AssertNotUniformNoEvaluatorFailsTrialRunner.class.getName(), topElement.getClassName());
+		asserts.assertEquals(AssertNotUniformNoEvaluatorFailsTrial.class.getName(), topElement.getClassName());
 		asserts.assertEquals("testAssertNotUniform", topElement.getMethodName());
-		asserts.assertEquals(29, topElement.getLineNumber());
+		asserts.assertEquals(14, topElement.getLineNumber());
 		
 		MockSystem tracker =  runner.getMockSystem();
 		asserts.assertEquals(0, tracker.getLastStatus());

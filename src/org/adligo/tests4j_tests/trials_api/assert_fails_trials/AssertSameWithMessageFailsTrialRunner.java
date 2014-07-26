@@ -11,27 +11,14 @@ import org.adligo.tests4j.models.shared.results.I_TestResult;
 import org.adligo.tests4j.models.shared.results.I_TrialFailure;
 import org.adligo.tests4j.models.shared.results.I_TrialResult;
 import org.adligo.tests4j.models.shared.results.TestResult;
-import org.adligo.tests4j.models.shared.trials.ApiTrial;
-import org.adligo.tests4j.models.shared.trials.PackageScope;
-import org.adligo.tests4j.models.shared.trials.Test;
-import org.adligo.tests4j.models.shared.trials.TrialRecursion;
 import org.adligo.tests4j_tests.trials_api.common.ExpectedFailureRunner;
 import org.adligo.tests4j_tests.trials_api.common.MockSystem;
 
-@TrialRecursion
-@PackageScope (packageName="org.adligo.tests4j")
-public class AssertSameWithMessageFailsTrialRunner extends ApiTrial {
-
-	public static final String TEST_ASSERT_FAILS_MESSAGE = "testAssertSameWithMessage message";
-
-	@Test
-	public void testAssertSameWithMessage() {
-		assertSame(TEST_ASSERT_FAILS_MESSAGE, this, new Object());
-	}
+public class AssertSameWithMessageFailsTrialRunner {
 	
 	public static void runTestDelegate(I_Asserts asserts)  throws Exception {
 		ExpectedFailureRunner runner = new ExpectedFailureRunner();
-		runner.run(AssertSameWithMessageFailsTrialRunner.class);
+		runner.run(AssertSameWithMessageFailsTrial.class);
 		
 		I_TrialRunMetadata metadata = runner.getMetadata();
 		asserts.assertNotNull(metadata);
@@ -42,7 +29,7 @@ public class AssertSameWithMessageFailsTrialRunner extends ApiTrial {
 		asserts.assertEquals(1, trialsMetadata.size());
 		I_TrialMetadata trialMeta = trialsMetadata.get(0);
 		asserts.assertNotNull(trialMeta);
-		asserts.assertEquals(AssertSameWithMessageFailsTrialRunner.class.getName(), 
+		asserts.assertEquals(AssertSameWithMessageFailsTrial.class.getName(), 
 				trialMeta.getTrialName());
 		asserts.assertEquals(0L, trialMeta.getTimeout());
 		asserts.assertFalse(trialMeta.isIgnored());
@@ -82,15 +69,15 @@ public class AssertSameWithMessageFailsTrialRunner extends ApiTrial {
 		
 		I_TestFailure testFailure = testResult.getFailure();
 		asserts.assertNotNull(testFailure);
-		asserts.assertEquals(TEST_ASSERT_FAILS_MESSAGE, testFailure.getMessage());
+		asserts.assertEquals(AssertSameWithMessageFailsTrial.TEST_ASSERT_FAILS_MESSAGE, testFailure.getMessage());
 		
 		Throwable locationFailed = testFailure.getLocationFailed();
 		StackTraceElement [] elements = locationFailed.getStackTrace();
 		asserts.assertGreaterThanOrEquals(1.0, elements.length);
 		StackTraceElement topElement = elements[0];
-		asserts.assertEquals(AssertSameWithMessageFailsTrialRunner.class.getName(), topElement.getClassName());
+		asserts.assertEquals(AssertSameWithMessageFailsTrial.class.getName(), topElement.getClassName());
 		asserts.assertEquals("testAssertSameWithMessage", topElement.getMethodName());
-		asserts.assertEquals(29, topElement.getLineNumber());
+		asserts.assertEquals(16, topElement.getLineNumber());
 		
 		MockSystem tracker =  runner.getMockSystem();
 		asserts.assertEquals(0, tracker.getLastStatus());

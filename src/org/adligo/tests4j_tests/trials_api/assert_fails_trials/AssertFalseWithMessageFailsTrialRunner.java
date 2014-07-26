@@ -75,7 +75,7 @@ public class AssertFalseWithMessageFailsTrialRunner {
 		StackTraceElement [] elements = locationFailed.getStackTrace();
 		asserts.assertGreaterThanOrEquals(1.0, elements.length);
 		StackTraceElement topElement = elements[0];
-		asserts.assertEquals(AssertFalseWithMessageFailsTrialRunner.class.getName(), topElement.getClassName());
+		asserts.assertEquals(AssertFalseWithMessageFailsTrial.class.getName(), topElement.getClassName());
 		asserts.assertEquals("testAssertFalseIsTrueWithMessage", topElement.getMethodName());
 		asserts.assertEquals(16, topElement.getLineNumber());
 		

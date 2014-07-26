@@ -29,7 +29,7 @@ public class RunPkgTrials implements I_Tests4J_TrialList {
 		
 		trials.add(Tests4J_AssertionResultMessages_Trial.class);
 		trials.add(Tests4J_AssertionInputMessages_Trial.class);
-		trials.add(Tests4J_MethodErrorsTrial.class);
+		trials.add(Tests4J_AnnotationErrorsTrial.class);
 		
 		return trials;
 	}

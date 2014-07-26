@@ -16,45 +16,57 @@ public class Tests4J_AssertionResultMessages_Trial extends SourceFileCountingTri
 		I_Tests4J_AssertionResultMessages messages = Tests4J_EnglishConstants.ENGLISH.getAssertionResultMessages();
 		I18N_Asserter asserter = new I18N_Asserter(this);
 		
-		asserter.assertConstant("The actual Value should be greater than OR equal to the expected Value.",
+		asserter.assertConstant("An unexpected exception was thrown.",
+				messages.getAnUnexpectedExceptionWasThrown());
+		asserter.assertConstant("No throwables were thrown from the I_Thrower.",
+				messages.getNothingWasThrown());
+		asserter.assertConstant("The actual value should be greater than OR equal to the expected value.",
 				messages.getTheActualShouldBeGreaterThanOrEqualToTheExpected());
 		
-		asserter.assertConstant("The Collection should contain the Value.",
+		asserter.assertConstant("The collection should contain the value.",
 				messages.getTheCollectionShouldContainTheValue());
 		
-		asserter.assertConstant("Either no Throwable was thrown or the expected Throwable was NOT uniform with the actual Throwable.",
+		asserter.assertConstant("Either no throwable was thrown or the expected throwable was NOT uniform with the actual throwable.",
 				messages.getTheExpectedThrowableDataDidNotMatchTheActual());
+	
 		
-		asserter.assertConstant("The Objects should be the same.",
-				messages.getTheObjectsShouldBeTheSame());
-		
-		asserter.assertConstant("The Objects should be uniform.",
-				messages.getTheObjectsShouldBeUniform());
-		
-		asserter.assertConstant("The Objects should NOT be equal.",
+		asserter.assertConstant("The objects should NOT be equal.",
 				messages.getTheObjectsShould_NOT_BeEqual());
 		
-		asserter.assertConstant("The Objects should NOT be the same.",
+		asserter.assertConstant("The objects should NOT be the same.",
 				messages.getTheObjectsShould_NOT_BeTheSame());
 		
-		asserter.assertConstant("The Objects should NOT be uniform.",
+		asserter.assertConstant("The objects should NOT be uniform.",
 				messages.getTheObjectsShould_NOT_BeUniform());
 		
-		asserter.assertConstant("The Value should be false.",
+		asserter.assertConstant("The objects should be equal.",
+				messages.getTheObjectsShouldBeEqual());
+		asserter.assertConstant("The objects should be the same.",
+				messages.getTheObjectsShouldBeTheSame());
+		
+		asserter.assertConstant("The objects should be uniform.",
+				messages.getTheObjectsShouldBeUniform());
+		
+	
+		asserter.assertConstant("The text was NOT uniform.",
+				messages.getTheTextWasNOT_Uniform());
+		asserter.assertConstant("The text was uniform.",
+				messages.getTheTextWasUniform());
+		
+		asserter.assertConstant("The value should be false.",
 				messages.getTheValueShouldBeFalse());
 		
-		asserter.assertConstant("The Value should be true.",
+		asserter.assertConstant("The value should be true.",
 				messages.getTheValueShouldBeTrue());
 		
 		
-		asserter.assertConstant("The Value should be null.",
+		asserter.assertConstant("The value should be null.",
 				messages.getTheValueShouldBeNull());
 		
-		asserter.assertConstant("The Value should NOT be null.",
+		asserter.assertConstant("The value should NOT be null.",
 				messages.getTheValueShould_NOT_BeNull());
 		
-		asserter.assertConstant("The Objects should be equal.",
-				messages.getTheObjectsShouldBeEqual());
+
 		
 		asserter.assertConstantsMatchMethods(Tests4J_AssertionResultMessages.class);
 	}
@@ -66,11 +78,11 @@ public class Tests4J_AssertionResultMessages_Trial extends SourceFileCountingTri
 
 	@Override
 	public int getAsserts() {
-		return 26;
+		return 35;
 	}
 
 	@Override
 	public int getUniqueAsserts() {
-		return 13;
+		return 35;
 	}
 }

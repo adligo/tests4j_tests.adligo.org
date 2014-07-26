@@ -2,9 +2,7 @@ package org.adligo.tests4j_tests.trials_api.asserts_null_expected_trials;
 
 import java.util.List;
 
-import org.adligo.tests4j.models.shared.asserts.ExpectedThrownData;
 import org.adligo.tests4j.models.shared.asserts.common.I_Asserts;
-import org.adligo.tests4j.models.shared.en.Tests4J_AssertionResultMessages;
 import org.adligo.tests4j.models.shared.en.Tests4J_EnglishConstants;
 import org.adligo.tests4j.models.shared.i18n.I_Tests4J_AssertionInputMessages;
 import org.adligo.tests4j.models.shared.metadata.I_TestMetadata;
@@ -15,28 +13,14 @@ import org.adligo.tests4j.models.shared.results.I_TestResult;
 import org.adligo.tests4j.models.shared.results.I_TrialFailure;
 import org.adligo.tests4j.models.shared.results.I_TrialResult;
 import org.adligo.tests4j.models.shared.results.TestResult;
-import org.adligo.tests4j.models.shared.trials.ApiTrial;
-import org.adligo.tests4j.models.shared.trials.PackageScope;
-import org.adligo.tests4j.models.shared.trials.Test;
-import org.adligo.tests4j.models.shared.trials.TrialRecursion;
 import org.adligo.tests4j_tests.trials_api.common.ExpectedFailureRunner;
 import org.adligo.tests4j_tests.trials_api.common.MockSystem;
 
-@TrialRecursion
-@PackageScope (packageName="org.adligo.tests4j")
-public class AssertThrownNullThrowerFailsTrialRunner extends ApiTrial {
-	private boolean called = false;
-	@Test
-	public void testAssertThrownNull() {
-		called = false;
-		assertFalse(called);
-		assertThrown(new ExpectedThrownData(new RuntimeException("hey")), null);
-		assertTrue(called);
-	}
+public class AssertThrownNullThrowerFailsTrialRunner {
 	
 	public static void runTestDelegate(I_Asserts asserts) throws Exception  {
 		ExpectedFailureRunner runner = new ExpectedFailureRunner();
-		runner.run(AssertThrownNullThrowerFailsTrialRunner.class);
+		runner.run(AssertThrownNullThrowerFailsTrial.class);
 		
 		I_TrialRunMetadata metadata = runner.getMetadata();
 		asserts.assertNotNull(metadata);
@@ -47,7 +31,7 @@ public class AssertThrownNullThrowerFailsTrialRunner extends ApiTrial {
 		asserts.assertEquals(1, trialsMetadata.size());
 		I_TrialMetadata trialMeta = trialsMetadata.get(0);
 		asserts.assertNotNull(trialMeta);
-		asserts.assertEquals(AssertThrownNullThrowerFailsTrialRunner.class.getName(), 
+		asserts.assertEquals(AssertThrownNullThrowerFailsTrial.class.getName(), 
 				trialMeta.getTrialName());
 		asserts.assertEquals(0L, trialMeta.getTimeout());
 		asserts.assertFalse(trialMeta.isIgnored());
@@ -88,23 +72,16 @@ public class AssertThrownNullThrowerFailsTrialRunner extends ApiTrial {
 		I_TestFailure testFailure = testResult.getFailure();
 		asserts.assertNotNull(testFailure);
 		I_Tests4J_AssertionInputMessages messages = Tests4J_EnglishConstants.ENGLISH.getAssertionInputMessages();
-		asserts.assertEquals(messages.getTheExpectedValueShouldNeverBeNull(), testFailure.getMessage());
+		asserts.assertEquals(messages.getIThrowerIsRequired(), testFailure.getMessage());
 		
 		Throwable locationFailed = testFailure.getLocationFailed();
 		StackTraceElement [] elements = locationFailed.getStackTrace();
 		asserts.assertGreaterThanOrEquals(1.0, elements.length);
 		StackTraceElement topElement = elements[0];
-		for (int i = 0; i < elements.length; i++) {
-			topElement = elements[i];
-			String className = topElement.getClassName();
-			if (AssertThrownNullThrowerFailsTrialRunner.class.getName().equals(className)) {
-				break;
-			}
-		}
 		
-		asserts.assertEquals(AssertThrownNullThrowerFailsTrialRunner.class.getName(), topElement.getClassName());
+		asserts.assertEquals(AssertThrownNullThrowerFailsTrial.class.getName(), topElement.getClassName());
 		asserts.assertEquals("testAssertThrownNull", topElement.getMethodName());
-		asserts.assertEquals(31, topElement.getLineNumber());
+		asserts.assertEquals(17, topElement.getLineNumber());
 		
 		Throwable exception = testFailure.getException();
 		asserts.assertNull(exception);

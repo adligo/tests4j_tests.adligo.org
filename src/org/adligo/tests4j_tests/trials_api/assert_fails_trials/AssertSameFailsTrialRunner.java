@@ -20,18 +20,11 @@ import org.adligo.tests4j.models.shared.trials.TrialRecursion;
 import org.adligo.tests4j_tests.trials_api.common.ExpectedFailureRunner;
 import org.adligo.tests4j_tests.trials_api.common.MockSystem;
 
-@TrialRecursion
-@PackageScope (packageName="org.adligo.tests4j")
-public class AssertSameFailsTrialRunner extends ApiTrial {
-
-	@Test
-	public void testAssertSame() {
-		assertSame(this, new Object());
-	}
+public class AssertSameFailsTrialRunner {
 	
 	public static void runTestDelegate(I_Asserts asserts)  throws Exception {
 		ExpectedFailureRunner runner = new ExpectedFailureRunner();
-		runner.run(AssertSameFailsTrialRunner.class);
+		runner.run(AssertSameFailsTrial.class);
 		
 		I_TrialRunMetadata metadata = runner.getMetadata();
 		asserts.assertNotNull(metadata);
@@ -42,7 +35,7 @@ public class AssertSameFailsTrialRunner extends ApiTrial {
 		asserts.assertEquals(1, trialsMetadata.size());
 		I_TrialMetadata trialMeta = trialsMetadata.get(0);
 		asserts.assertNotNull(trialMeta);
-		asserts.assertEquals(AssertSameFailsTrialRunner.class.getName(), 
+		asserts.assertEquals(AssertSameFailsTrial.class.getName(), 
 				trialMeta.getTrialName());
 		asserts.assertEquals(0L, trialMeta.getTimeout());
 		asserts.assertFalse(trialMeta.isIgnored());
@@ -89,9 +82,9 @@ public class AssertSameFailsTrialRunner extends ApiTrial {
 		StackTraceElement [] elements = locationFailed.getStackTrace();
 		asserts.assertGreaterThanOrEquals(1.0, elements.length);
 		StackTraceElement topElement = elements[0];
-		asserts.assertEquals(AssertSameFailsTrialRunner.class.getName(), topElement.getClassName());
+		asserts.assertEquals(AssertSameFailsTrial.class.getName(), topElement.getClassName());
 		asserts.assertEquals("testAssertSame", topElement.getMethodName());
-		asserts.assertEquals(29, topElement.getLineNumber());
+		asserts.assertEquals(14, topElement.getLineNumber());
 		
 		MockSystem tracker =  runner.getMockSystem();
 		asserts.assertEquals(0, tracker.getLastStatus());

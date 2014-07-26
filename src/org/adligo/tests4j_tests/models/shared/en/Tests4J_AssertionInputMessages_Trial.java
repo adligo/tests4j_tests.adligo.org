@@ -18,16 +18,19 @@ public class Tests4J_AssertionInputMessages_Trial extends SourceFileCountingTria
 		
 		asserter.assertConstant("ExpectedThrownData requires a non null throwable class.",
 				messages.getExpectedThrownDataRequiresThrowable());
-		asserter.assertConstant("No Evaluator could be found for the following class; ",
+		asserter.assertConstant("I_Thrower is required.",
+				messages.getIThrowerIsRequired());
+		asserter.assertConstant("No evaluator could be found for the following class; ",
 				messages.getNoEvaluatorFoundForClass());
 		
 		asserter.assertConstant("The class of the actual value is not assignable from the class of the expected value.",
 				messages.getTheActualClassIsNotAssignableFromTheExpectedClass());
-		asserter.assertConstant("The Actual Value is null and should NOT be.",
+		asserter.assertConstant("The actual value is null and should NOT be.",
 				messages.getTheActualValueIsNull());
 		
-		asserter.assertConstant("The Expected Value should never be null, try assertNull().",
+		asserter.assertConstant("The expected value should never be null, try assertNull().",
 				messages.getTheExpectedValueShouldNeverBeNull());
+		
 		
 		asserter.assertConstantsMatchMethods(Tests4J_AssertionInputMessages.class);
 	}
@@ -39,11 +42,11 @@ public class Tests4J_AssertionInputMessages_Trial extends SourceFileCountingTria
 
 	@Override
 	public int getAsserts() {
-		return 11;
+		return 13;
 	}
 
 	@Override
 	public int getUniqueAsserts() {
-		return 11;
+		return 13;
 	}
 }

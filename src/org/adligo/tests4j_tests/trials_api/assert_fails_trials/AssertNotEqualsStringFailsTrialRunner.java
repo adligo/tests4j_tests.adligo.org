@@ -13,25 +13,14 @@ import org.adligo.tests4j.models.shared.results.I_TestResult;
 import org.adligo.tests4j.models.shared.results.I_TrialFailure;
 import org.adligo.tests4j.models.shared.results.I_TrialResult;
 import org.adligo.tests4j.models.shared.results.TestResult;
-import org.adligo.tests4j.models.shared.trials.ApiTrial;
-import org.adligo.tests4j.models.shared.trials.PackageScope;
-import org.adligo.tests4j.models.shared.trials.Test;
-import org.adligo.tests4j.models.shared.trials.TrialRecursion;
 import org.adligo.tests4j_tests.trials_api.common.ExpectedFailureRunner;
 import org.adligo.tests4j_tests.trials_api.common.MockSystem;
 
-@TrialRecursion
-@PackageScope (packageName="org.adligo.tests4j")
-public class AssertNotEqualsStringFailsTrialRunner extends ApiTrial {
-
-	@Test
-	public void testAssertNotEquals() {
-		assertNotEquals("a","a");
-	}
+public class AssertNotEqualsStringFailsTrialRunner {
 	
 	public static void runTestDelegate(I_Asserts asserts)  throws Exception {
 		ExpectedFailureRunner runner = new ExpectedFailureRunner();
-		runner.run(AssertNotEqualsStringFailsTrialRunner.class);
+		runner.run(AssertNotEqualsStringFailsTrial.class);
 		
 		I_TrialRunMetadata metadata = runner.getMetadata();
 		asserts.assertNotNull(metadata);
@@ -42,7 +31,7 @@ public class AssertNotEqualsStringFailsTrialRunner extends ApiTrial {
 		asserts.assertEquals(1, trialsMetadata.size());
 		I_TrialMetadata trialMeta = trialsMetadata.get(0);
 		asserts.assertNotNull(trialMeta);
-		asserts.assertEquals(AssertNotEqualsStringFailsTrialRunner.class.getName(), 
+		asserts.assertEquals(AssertNotEqualsStringFailsTrial.class.getName(), 
 				trialMeta.getTrialName());
 		asserts.assertEquals(0L, trialMeta.getTimeout());
 		asserts.assertFalse(trialMeta.isIgnored());
@@ -89,9 +78,9 @@ public class AssertNotEqualsStringFailsTrialRunner extends ApiTrial {
 		StackTraceElement [] elements = locationFailed.getStackTrace();
 		asserts.assertGreaterThanOrEquals(1.0, elements.length);
 		StackTraceElement topElement = elements[0];
-		asserts.assertEquals(AssertNotEqualsStringFailsTrialRunner.class.getName(), topElement.getClassName());
+		asserts.assertEquals(AssertNotEqualsStringFailsTrial.class.getName(), topElement.getClassName());
 		asserts.assertEquals("testAssertNotEquals", topElement.getMethodName());
-		asserts.assertEquals(29, topElement.getLineNumber());
+		asserts.assertEquals(14, topElement.getLineNumber());
 		
 		MockSystem tracker =  runner.getMockSystem();
 		asserts.assertEquals(0, tracker.getLastStatus());

@@ -20,18 +20,11 @@ import org.adligo.tests4j.models.shared.trials.TrialRecursion;
 import org.adligo.tests4j_tests.trials_api.common.ExpectedFailureRunner;
 import org.adligo.tests4j_tests.trials_api.common.MockSystem;
 
-@TrialRecursion
-@PackageScope (packageName="org.adligo.tests4j")
-public class AssertNotUniformFailsTrialRunner extends ApiTrial {
-
-	@Test
-	public void testAssertNotUniform() {
-		assertNotUniform("this", "this");
-	}
+public class AssertNotUniformFailsTrialRunner {
 	
 	public static void runTestDelegate(I_Asserts asserts)  throws Exception {
 		ExpectedFailureRunner runner = new ExpectedFailureRunner();
-		runner.run(AssertNotUniformFailsTrialRunner.class);
+		runner.run(AssertNotUniformFailsTrial.class);
 		
 		I_TrialRunMetadata metadata = runner.getMetadata();
 		asserts.assertNotNull(metadata);
@@ -42,7 +35,7 @@ public class AssertNotUniformFailsTrialRunner extends ApiTrial {
 		asserts.assertEquals(1, trialsMetadata.size());
 		I_TrialMetadata trialMeta = trialsMetadata.get(0);
 		asserts.assertNotNull(trialMeta);
-		asserts.assertEquals(AssertNotUniformFailsTrialRunner.class.getName(), 
+		asserts.assertEquals(AssertNotUniformFailsTrial.class.getName(), 
 				trialMeta.getTrialName());
 		asserts.assertEquals(0L, trialMeta.getTimeout());
 		asserts.assertFalse(trialMeta.isIgnored());
@@ -90,9 +83,9 @@ public class AssertNotUniformFailsTrialRunner extends ApiTrial {
 		StackTraceElement [] elements = locationFailed.getStackTrace();
 		asserts.assertGreaterThanOrEquals(1.0, elements.length);
 		StackTraceElement topElement = elements[0];
-		asserts.assertEquals(AssertNotUniformFailsTrialRunner.class.getName(), topElement.getClassName());
+		asserts.assertEquals(AssertNotUniformFailsTrial.class.getName(), topElement.getClassName());
 		asserts.assertEquals("testAssertNotUniform", topElement.getMethodName());
-		asserts.assertEquals(28, topElement.getLineNumber());
+		asserts.assertEquals(14, topElement.getLineNumber());
 		
 		MockSystem tracker =  runner.getMockSystem();
 		asserts.assertEquals(0, tracker.getLastStatus());

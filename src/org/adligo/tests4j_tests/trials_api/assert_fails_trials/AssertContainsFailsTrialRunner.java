@@ -39,7 +39,7 @@ public class AssertContainsFailsTrialRunner  {
 		asserts.assertEquals(1, trialsMetadata.size());
 		I_TrialMetadata trialMeta = trialsMetadata.get(0);
 		asserts.assertNotNull(trialMeta);
-		asserts.assertEquals(AssertContainsFailsTrialRunner.class.getName(), 
+		asserts.assertEquals(AssertContainsFailsTrial.class.getName(), 
 				trialMeta.getTrialName());
 		asserts.assertEquals(0L, trialMeta.getTimeout());
 		asserts.assertFalse(trialMeta.isIgnored());
@@ -86,7 +86,7 @@ public class AssertContainsFailsTrialRunner  {
 		StackTraceElement [] elements = locationFailed.getStackTrace();
 		asserts.assertGreaterThanOrEquals(1.0, elements.length);
 		StackTraceElement topElement = elements[0];
-		asserts.assertEquals(AssertContainsFailsTrialRunner.class.getName(), topElement.getClassName());
+		asserts.assertEquals(AssertContainsFailsTrial.class.getName(), topElement.getClassName());
 		asserts.assertEquals("testAssertContainsFails", topElement.getMethodName());
 		asserts.assertEquals(18, topElement.getLineNumber());
 		

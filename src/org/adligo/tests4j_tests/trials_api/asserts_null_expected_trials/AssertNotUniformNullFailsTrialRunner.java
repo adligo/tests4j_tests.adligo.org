@@ -3,7 +3,6 @@ package org.adligo.tests4j_tests.trials_api.asserts_null_expected_trials;
 import java.util.List;
 
 import org.adligo.tests4j.models.shared.asserts.common.I_Asserts;
-import org.adligo.tests4j.models.shared.en.Tests4J_AssertionResultMessages;
 import org.adligo.tests4j.models.shared.en.Tests4J_EnglishConstants;
 import org.adligo.tests4j.models.shared.i18n.I_Tests4J_AssertionInputMessages;
 import org.adligo.tests4j.models.shared.metadata.I_TestMetadata;
@@ -14,25 +13,14 @@ import org.adligo.tests4j.models.shared.results.I_TestResult;
 import org.adligo.tests4j.models.shared.results.I_TrialFailure;
 import org.adligo.tests4j.models.shared.results.I_TrialResult;
 import org.adligo.tests4j.models.shared.results.TestResult;
-import org.adligo.tests4j.models.shared.trials.ApiTrial;
-import org.adligo.tests4j.models.shared.trials.PackageScope;
-import org.adligo.tests4j.models.shared.trials.Test;
-import org.adligo.tests4j.models.shared.trials.TrialRecursion;
 import org.adligo.tests4j_tests.trials_api.common.ExpectedFailureRunner;
 import org.adligo.tests4j_tests.trials_api.common.MockSystem;
 
-@TrialRecursion
-@PackageScope (packageName="org.adligo.tests4j")
-public class AssertNotUniformNullFailsTrialRunner extends ApiTrial {
-
-	@Test
-	public void testAssertNotUniform() {
-		assertNotUniform(null,"a");
-	}
+public class AssertNotUniformNullFailsTrialRunner {
 	
 	public static void runTestDelegate(I_Asserts asserts) throws Exception  {
 		ExpectedFailureRunner runner = new ExpectedFailureRunner();
-		runner.run(AssertNotUniformNullFailsTrialRunner.class);
+		runner.run(AssertNotUniformNullFailsTrial.class);
 		
 		I_TrialRunMetadata metadata = runner.getMetadata();
 		asserts.assertNotNull(metadata);
@@ -43,7 +31,7 @@ public class AssertNotUniformNullFailsTrialRunner extends ApiTrial {
 		asserts.assertEquals(1, trialsMetadata.size());
 		I_TrialMetadata trialMeta = trialsMetadata.get(0);
 		asserts.assertNotNull(trialMeta);
-		asserts.assertEquals(AssertNotUniformNullFailsTrialRunner.class.getName(), 
+		asserts.assertEquals(AssertNotUniformNullFailsTrial.class.getName(), 
 				trialMeta.getTrialName());
 		asserts.assertEquals(0L, trialMeta.getTimeout());
 		asserts.assertFalse(trialMeta.isIgnored());
@@ -83,7 +71,7 @@ public class AssertNotUniformNullFailsTrialRunner extends ApiTrial {
 		
 		I_TestFailure testFailure = testResult.getFailure();
 		asserts.assertNotNull(testFailure);
-		I_Tests4J_AssertionInputMessages messages = Tests4J_EnglishConstants.ENGLISH.getAssertionInputMessages();
+		I_Tests4J_AssertionInputMessages messages =  Tests4J_EnglishConstants.ENGLISH.getAssertionInputMessages();
 		asserts.assertEquals(messages.getTheExpectedValueShouldNeverBeNull(), testFailure.getMessage());
 		
 		Throwable locationFailed = testFailure.getLocationFailed();
@@ -95,14 +83,14 @@ public class AssertNotUniformNullFailsTrialRunner extends ApiTrial {
 		for (int i = 0; i < elements.length; i++) {
 			topElement = elements[i];
 			String className = topElement.getClassName();
-			if (AssertNotUniformNullFailsTrialRunner.class.getName().equals(className)) {
+			if (AssertNotUniformNullFailsTrial.class.getName().equals(className)) {
 				break;
 			}
 		}
 		
-		asserts.assertEquals(AssertNotUniformNullFailsTrialRunner.class.getName(), topElement.getClassName());
+		asserts.assertEquals(AssertNotUniformNullFailsTrial.class.getName(), topElement.getClassName());
 		asserts.assertEquals("testAssertNotUniform", topElement.getMethodName());
-		asserts.assertEquals(28, topElement.getLineNumber());
+		asserts.assertEquals(14, topElement.getLineNumber());
 		
 		Throwable exception = testFailure.getException();
 		asserts.assertNull(exception);

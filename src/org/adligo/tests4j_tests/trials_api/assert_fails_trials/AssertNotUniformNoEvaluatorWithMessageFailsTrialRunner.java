@@ -13,27 +13,15 @@ import org.adligo.tests4j.models.shared.results.I_TestResult;
 import org.adligo.tests4j.models.shared.results.I_TrialFailure;
 import org.adligo.tests4j.models.shared.results.I_TrialResult;
 import org.adligo.tests4j.models.shared.results.TestResult;
-import org.adligo.tests4j.models.shared.trials.ApiTrial;
-import org.adligo.tests4j.models.shared.trials.PackageScope;
-import org.adligo.tests4j.models.shared.trials.Test;
-import org.adligo.tests4j.models.shared.trials.TrialRecursion;
 import org.adligo.tests4j_tests.trials_api.common.ExpectedFailureRunner;
 import org.adligo.tests4j_tests.trials_api.common.MockSystem;
 
-@TrialRecursion
-@PackageScope (packageName="org.adligo.tests4j")
-public class AssertNotUniformNoEvaluatorWithMessageFailsTrialRunner extends ApiTrial {
 
-	public static final String TEST_ASSERT_FAILS_MESSAGE = "testAssertNotUniformNoEvaluatorWithMessage message";
-
-	@Test
-	public void testAssertNotUniformNoEvaluatorWithMessage() {
-		assertNotUniform(TEST_ASSERT_FAILS_MESSAGE, this, this);
-	}
+public class AssertNotUniformNoEvaluatorWithMessageFailsTrialRunner {
 	
 	public static void runTestDelegate(I_Asserts asserts)  throws Exception {
 		ExpectedFailureRunner runner = new ExpectedFailureRunner();
-		runner.run(AssertNotUniformNoEvaluatorWithMessageFailsTrialRunner.class);
+		runner.run(AssertNotUniformNoEvaluatorWithMessageFailsTrial.class);
 		
 		I_TrialRunMetadata metadata = runner.getMetadata();
 		asserts.assertNotNull(metadata);
@@ -44,7 +32,7 @@ public class AssertNotUniformNoEvaluatorWithMessageFailsTrialRunner extends ApiT
 		asserts.assertEquals(1, trialsMetadata.size());
 		I_TrialMetadata trialMeta = trialsMetadata.get(0);
 		asserts.assertNotNull(trialMeta);
-		asserts.assertEquals(AssertNotUniformNoEvaluatorWithMessageFailsTrialRunner.class.getName(), 
+		asserts.assertEquals(AssertNotUniformNoEvaluatorWithMessageFailsTrial.class.getName(), 
 				trialMeta.getTrialName());
 		asserts.assertEquals(0L, trialMeta.getTimeout());
 		asserts.assertFalse(trialMeta.isIgnored());
@@ -93,9 +81,9 @@ public class AssertNotUniformNoEvaluatorWithMessageFailsTrialRunner extends ApiT
 		StackTraceElement topElement = elements[0];
 		
 		asserts.assertNotNull(topElement);
-		asserts.assertEquals(AssertNotUniformNoEvaluatorWithMessageFailsTrialRunner.class.getName(), topElement.getClassName());
+		asserts.assertEquals(AssertNotUniformNoEvaluatorWithMessageFailsTrial.class.getName(), topElement.getClassName());
 		asserts.assertEquals("testAssertNotUniformNoEvaluatorWithMessage", topElement.getMethodName());
-		asserts.assertEquals(30, topElement.getLineNumber());
+		asserts.assertEquals(16, topElement.getLineNumber());
 		
 		Throwable execption = testFailure.getException();
 		asserts.assertNull(execption);

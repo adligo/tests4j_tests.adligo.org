@@ -4,12 +4,12 @@ import org.adligo.tests4j.models.shared.system.Tests4J_Params;
 import org.adligo.tests4j.run.Tests4J;
 import org.adligo.tests4j.run.helpers.Tests4J_NotificationManager;
 import org.adligo.tests4j.run.helpers.Tests4J_TrialsRunable;
-import org.adligo.tests4j.shared.report.summary.SummaryReporter;
 import org.adligo.tests4j_4jacoco.plugin.AbstractPlugin;
 import org.adligo.tests4j_4jacoco.plugin.Recorder;
 import org.adligo.tests4j_4jacoco.plugin.ScopedJacocoPluginFactory;
 import org.adligo.tests4j_4jacoco.plugin.TrialInstrumenter;
-import org.adligo.tests4j_tests.models.shared.asserts.line_text.LineDiffTypeTrial;
+import org.adligo.tests4j_tests.trials_api.AssertionsFail_Trial;
+import org.adligo.tests4j_tests.trials_api.asserts_null_expected_trials.AssertEqualsNullStringFailsTrial;
 
 public class RunSingleTrial {
 
@@ -17,7 +17,7 @@ public class RunSingleTrial {
 	public static void main(String [] args) {
 		Tests4J_Params params = new Tests4J_Params();
 		//params.addTrial(DiffIndexesTrial.class);
-		params.addTrial(LineDiffTypeTrial.class);
+		params.addTrial(AssertionsFail_Trial.class);
 	
 		params.setLogState(AbstractPlugin.class, true);
 		params.setLogState(Tests4J_NotificationManager.class, true);

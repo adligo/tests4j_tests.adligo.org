@@ -78,7 +78,7 @@ public class AssertGreaterThanOrEqualsDoubleIntFailsTrialRunner {
 		StackTraceElement [] elements = locationFailed.getStackTrace();
 		asserts.assertGreaterThanOrEquals(1.0, elements.length);
 		StackTraceElement topElement = elements[0];
-		asserts.assertEquals(AssertGreaterThanOrEqualsDoubleIntFailsTrialRunner.class.getName(), topElement.getClassName());
+		asserts.assertEquals(AssertGreaterThanOrEqualsDoubleIntFailsTrial.class.getName(), topElement.getClassName());
 		asserts.assertEquals("testAssertGreaterThanEqualsFailsIntFloat", topElement.getMethodName());
 		asserts.assertEquals(14, topElement.getLineNumber());
 		
