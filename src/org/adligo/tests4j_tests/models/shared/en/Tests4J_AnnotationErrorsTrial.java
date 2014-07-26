@@ -44,7 +44,42 @@ public class Tests4J_AnnotationErrorsTrial extends SourceFileCountingTrial {
 		asserter.assertConstant(" was not annotated correctly.",
 			messages.getWasAnnotatedIncorrectly());
 		
+		asserter.assertConstant("The minCoverage must be between 0.0 and 100.0 percent.",
+			messages.getMinCoverageMustBeBetweenZeroAndOneHundred());
+		asserter.assertConstant(" is missing a @TrialType annotation.",
+			messages.getMissingTypeAnnotationPost());
+		asserter.assertConstant("The trail ",
+			messages.getMissingTypeAnnotationPre());
+		
+		asserter.assertConstant("Trials may only have one method annotated with @AfterTrial.",
+			messages.getMultipleAfterTrial());
+		asserter.assertConstant("Trials may only have one method annotated with @BeforeTrial.",
+			messages.getMultipleBeforeTrial());
+		
+		asserter.assertConstant("ApiTrials must be annotated with a @PackageScope annotation.",
+			messages.getNoPackageScope());
+		asserter.assertConstant("SourceFileTrials must be annotated with @SourceFileScope.",
+			messages.getNoSourceFileScope());
+		asserter.assertConstant("Trial classes must have at least one method annotated with @Test.",
+				messages.getNoTests());
+		asserter.assertConstant("UseCaseTrials must be annotated with @UseCaseScope.",
+				messages.getNoUseCaseScope());
+		
+		asserter.assertConstant("@PackageScope annotations must contain a non empty packageName.",
+				messages.getPackageScopeEmptyName());
+		asserter.assertConstant("@SourceFileScope annotations must contain a non empty sourceClass.",
+				messages.getSourceFileScopeEmptyClass());
+		asserter.assertConstant("@UseCaseScope annotations must contain a non empty nown.",
+				messages.getUseCaseScopeEmptyNown());
+		asserter.assertConstant("@UseCaseScope annotations must contain a non empty system.",
+				messages.getUseCaseScopeEmptySystem());
+		asserter.assertConstant("@UseCaseScope annotations must contain a non empty verb.",
+				messages.getUseCaseScopeEmptyVerb());
+		
+		
+		
 		asserter.assertConstantsMatchMethods(Tests4J_AnnotationErrors.class);
+		
 	}
 
 	@Override
@@ -54,11 +89,11 @@ public class Tests4J_AnnotationErrorsTrial extends SourceFileCountingTrial {
 
 	@Override
 	public int getAsserts() {
-		return 25;
+		return 53;
 	}
 
 	@Override
 	public int getUniqueAsserts() {
-		return 25;
+		return 53;
 	}
 }

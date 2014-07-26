@@ -8,7 +8,7 @@ import org.adligo.tests4j.models.shared.trials.Test;
 import org.adligo.tests4j_tests.base_abstract_trials.SourceFileCountingTrial;
 import org.adligo.tests4j_tests.models.shared.i18n.I18N_Asserter;
 
-@SourceFileScope (sourceClass=Tests4J_AssertionResultMessages.class, minCoverage=61.0)
+@SourceFileScope (sourceClass=Tests4J_AssertionResultMessages.class)
 public class Tests4J_AssertionResultMessages_Trial extends SourceFileCountingTrial {
 
 	@Test

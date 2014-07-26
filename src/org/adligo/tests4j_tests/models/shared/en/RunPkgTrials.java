@@ -31,6 +31,10 @@ public class RunPkgTrials implements I_Tests4J_TrialList {
 		trials.add(Tests4J_AssertionInputMessages_Trial.class);
 		trials.add(Tests4J_AnnotationErrorsTrial.class);
 		
+		trials.add(Tests4J_LineDiffTextDisplayMessages_Trial.class);
+		trials.add(Tests4J_ParamsReaderMessages_Trial.class);
+		trials.add(Tests4J_ReportMessages_Trial.class);
+		
 		return trials;
 	}
 }

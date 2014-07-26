@@ -17,7 +17,7 @@ public class Tests4J_RemoteInfoTrial extends SourceFileCountingTrial {
 	
 	@Test
 	public void testConstructorExceptions() {
-		I_Tests4J_ParamReaderMessages messages = Tests4J_EnglishConstants.ENGLISH.getTests4j_ParamReaderConstants();
+		I_Tests4J_ParamReaderMessages messages = Tests4J_EnglishConstants.ENGLISH.getParamReaderConstants();
 		
 		assertThrown(new ExpectedThrownData(new IllegalArgumentException(
 				messages.getHostRequired())), 
