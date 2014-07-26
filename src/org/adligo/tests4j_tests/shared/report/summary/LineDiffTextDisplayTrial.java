@@ -12,7 +12,10 @@ import org.adligo.tests4j.models.shared.asserts.line_text.LineDiffType;
 import org.adligo.tests4j.models.shared.asserts.line_text.TextLines;
 import org.adligo.tests4j.models.shared.asserts.line_text.TextLinesCompare;
 import org.adligo.tests4j.models.shared.asserts.line_text.TextLinesCompareResult;
-import org.adligo.tests4j.models.shared.en.Tests4J_LineDiffTextDisplayConstants;
+import org.adligo.tests4j.models.shared.en.Tests4J_EnglishConstants;
+import org.adligo.tests4j.models.shared.en.Tests4J_LineDiffTextDisplayMessages;
+import org.adligo.tests4j.models.shared.i18n.I_Tests4J_AssertionInputMessages;
+import org.adligo.tests4j.models.shared.i18n.I_Tests4J_LineDiffTextDisplayMessages;
 import org.adligo.tests4j.models.shared.system.I_Tests4J_Log;
 import org.adligo.tests4j.models.shared.trials.SourceFileScope;
 import org.adligo.tests4j.models.shared.trials.Test;
@@ -33,8 +36,9 @@ public class LineDiffTextDisplayTrial extends SourceFileCountingTrial implements
 		I_TextLinesCompareResult result = new TextLinesCompare().compare("a\nb", "a\nb\nc", true);
 		dislay.display(this,result, 3);
 		
+		I_Tests4J_LineDiffTextDisplayMessages messages =  Tests4J_EnglishConstants.ENGLISH.getLineDiffTextDisplayMessages();
 		
-		assertEquals(Tests4J_LineDiffTextDisplayConstants.THE_FOLLOWING_ACTUAL_LINE_IS_MISSING_IN_THE_EXPECTED_TEXT + 2, output.get(0));
+		assertEquals(messages.getTheFollowingActualLineOfTextIsMissing() + 2, output.get(0));
 		assertEquals("c", output.get(1));
 		assertEquals(2, output.size());
 	}
@@ -52,8 +56,9 @@ public class LineDiffTextDisplayTrial extends SourceFileCountingTrial implements
 		
 		dislay.display(this,result, 3);
 		
+		I_Tests4J_LineDiffTextDisplayMessages messages =  Tests4J_EnglishConstants.ENGLISH.getLineDiffTextDisplayMessages();
 		
-		assertEquals(Tests4J_LineDiffTextDisplayConstants.TESTS4J_ERROR, output.get(0));
+		assertEquals(messages.getError(), output.get(0));
 		assertEquals(1, output.size());
 	}
 	
@@ -70,8 +75,9 @@ public class LineDiffTextDisplayTrial extends SourceFileCountingTrial implements
 		
 		dislay.display(this,result, 3);
 		
+		I_Tests4J_LineDiffTextDisplayMessages messages =  Tests4J_EnglishConstants.ENGLISH.getLineDiffTextDisplayMessages();
 		
-		assertEquals(Tests4J_LineDiffTextDisplayConstants.TESTS4J_ERROR, output.get(0));
+		assertEquals(messages.getError(), output.get(0));
 		assertEquals(1, output.size());
 	}
 	
@@ -88,8 +94,9 @@ public class LineDiffTextDisplayTrial extends SourceFileCountingTrial implements
 		
 		dislay.display(this,result, 3);
 		
+		I_Tests4J_LineDiffTextDisplayMessages messages =  Tests4J_EnglishConstants.ENGLISH.getLineDiffTextDisplayMessages();
 		
-		assertEquals(Tests4J_LineDiffTextDisplayConstants.TESTS4J_ERROR, output.get(0));
+		assertEquals(messages.getError(), output.get(0));
 		assertEquals(1, output.size());
 	}
 	
@@ -98,8 +105,9 @@ public class LineDiffTextDisplayTrial extends SourceFileCountingTrial implements
 		I_TextLinesCompareResult result = new TextLinesCompare().compare("a\nb\nc", "a\nb", true);
 		dislay.display(this,result, 3);
 		
+		I_Tests4J_LineDiffTextDisplayMessages messages =  Tests4J_EnglishConstants.ENGLISH.getLineDiffTextDisplayMessages();
 		
-		assertEquals(Tests4J_LineDiffTextDisplayConstants.THE_FOLLOWING_EXPECTED_LINE_IS_MISSING_AFTER_THE_ACTUAL_TEXT + 2, output.get(0));
+		assertEquals(messages.getTheFollowingExpectedLineOfTextIsMissing() + 2, output.get(0));
 		assertEquals("c", output.get(1));
 		assertEquals(2, output.size());
 	}
@@ -109,10 +117,11 @@ public class LineDiffTextDisplayTrial extends SourceFileCountingTrial implements
 		I_TextLinesCompareResult result = new TextLinesCompare().compare("", "a\nb", true);
 		dislay.display(this,result, 3);
 		
+		I_Tests4J_LineDiffTextDisplayMessages messages =  Tests4J_EnglishConstants.ENGLISH.getLineDiffTextDisplayMessages();
 		
-		assertEquals(Tests4J_LineDiffTextDisplayConstants.THE_FOLLOWING_ACTUAL_LINE_IS_MISSING_IN_THE_EXPECTED_TEXT + 0, output.get(0));
+		assertEquals(messages.getTheFollowingActualLineOfTextIsMissing() + 0, output.get(0));
 		assertEquals("a", output.get(1));
-		assertEquals(Tests4J_LineDiffTextDisplayConstants.THE_FOLLOWING_ACTUAL_LINE_IS_MISSING_IN_THE_EXPECTED_TEXT + 1, output.get(2));
+		assertEquals(messages.getTheFollowingActualLineOfTextIsMissing() + 1, output.get(2));
 		assertEquals("b", output.get(3));
 		assertEquals(4, output.size());
 	}
@@ -122,8 +131,9 @@ public class LineDiffTextDisplayTrial extends SourceFileCountingTrial implements
 		I_TextLinesCompareResult result = new TextLinesCompare().compare("a", "", true);
 		dislay.display(this,result, 3);
 		
+		I_Tests4J_LineDiffTextDisplayMessages messages =  Tests4J_EnglishConstants.ENGLISH.getLineDiffTextDisplayMessages();
 		
-		assertEquals(Tests4J_LineDiffTextDisplayConstants.THE_FOLLOWING_EXPECTED_LINE_IS_MISSING_AFTER_THE_ACTUAL_TEXT + 0, output.get(0));
+		assertEquals(messages.getTheFollowingExpectedLineOfTextIsMissing() + 0, output.get(0));
 		assertEquals("a", output.get(1));
 		assertEquals(2, output.size());
 	}
@@ -141,8 +151,9 @@ public class LineDiffTextDisplayTrial extends SourceFileCountingTrial implements
 		
 		dislay.display(this,result, 3);
 		
+		I_Tests4J_LineDiffTextDisplayMessages messages =  Tests4J_EnglishConstants.ENGLISH.getLineDiffTextDisplayMessages();
 		
-		assertEquals(Tests4J_LineDiffTextDisplayConstants.TESTS4J_ERROR , output.get(0));
+		assertEquals(messages.getError() , output.get(0));
 		assertEquals(1, output.size());
 	}
 
@@ -158,7 +169,9 @@ public class LineDiffTextDisplayTrial extends SourceFileCountingTrial implements
 				new TextLines("hey2", true),false,Collections.singletonList(ldm));
 		
 		dislay.display(this,result, 3);
-		assertEquals(Tests4J_LineDiffTextDisplayConstants.TESTS4J_ERROR, output.get(0));
+		I_Tests4J_LineDiffTextDisplayMessages messages =  Tests4J_EnglishConstants.ENGLISH.getLineDiffTextDisplayMessages();
+		
+		assertEquals(messages.getError(), output.get(0));
 		assertEquals(1, output.size());
 	}
 	
@@ -173,12 +186,14 @@ public class LineDiffTextDisplayTrial extends SourceFileCountingTrial implements
 				new TextLines("hey2", true),false,Collections.singletonList(ldm));
 		
 		dislay.display(this,result, 3);
-		assertEquals(Tests4J_LineDiffTextDisplayConstants.LINES_ARE_DIFFERENT_FROM_THE_ACTUAL_LINE_AS_FOLLOWS, output.get(0));
-		assertEquals(Tests4J_LineDiffTextDisplayConstants.EXPECTED + " " + 0, output.get(1));
+		I_Tests4J_LineDiffTextDisplayMessages messages =  Tests4J_EnglishConstants.ENGLISH.getLineDiffTextDisplayMessages();
+		
+		assertEquals(messages.getTheLineOfTextIsDifferent(), output.get(0));
+		assertEquals(messages.getExpected()+ " " + 0, output.get(1));
 		assertEquals("hey", output.get(2));
-		assertEquals(Tests4J_LineDiffTextDisplayConstants.ACTUAL + " " + 0, output.get(3));
+		assertEquals(messages.getActual() + " " + 0, output.get(3));
 		assertEquals("hey2", output.get(4));
-		assertEquals(Tests4J_LineDiffTextDisplayConstants.DIFFERENCES, output.get(5));
+		assertEquals(messages.getDifferences(), output.get(5));
 		assertEquals("'2'", output.get(6));
 		assertEquals(7, output.size());
 	}
@@ -194,12 +209,14 @@ public class LineDiffTextDisplayTrial extends SourceFileCountingTrial implements
 				new TextLines("hey", true),false,Collections.singletonList(ldm));
 		
 		dislay.display(this,result, 3);
-		assertEquals(Tests4J_LineDiffTextDisplayConstants.LINES_ARE_DIFFERENT_FROM_THE_ACTUAL_LINE_AS_FOLLOWS, output.get(0));
-		assertEquals(Tests4J_LineDiffTextDisplayConstants.EXPECTED + " " + 0, output.get(1));
+		I_Tests4J_LineDiffTextDisplayMessages messages =  Tests4J_EnglishConstants.ENGLISH.getLineDiffTextDisplayMessages();
+		
+		assertEquals(messages.getTheLineOfTextIsDifferent(), output.get(0));
+		assertEquals(messages.getExpected() + " " + 0, output.get(1));
 		assertEquals("hey2", output.get(2));
-		assertEquals(Tests4J_LineDiffTextDisplayConstants.DIFFERENCES, output.get(3));
+		assertEquals(messages.getDifferences(), output.get(3));
 		assertEquals("'2'", output.get(4));
-		assertEquals(Tests4J_LineDiffTextDisplayConstants.ACTUAL + " " + 0, output.get(5));
+		assertEquals(messages.getActual() + " " + 0, output.get(5));
 		assertEquals("hey", output.get(6));
 
 		assertEquals(7, output.size());
@@ -216,8 +233,10 @@ public class LineDiffTextDisplayTrial extends SourceFileCountingTrial implements
 				new TextLines("hey", true),false,Collections.singletonList(ldm));
 		
 		dislay.display(this,result, 3);
-		assertEquals(Tests4J_LineDiffTextDisplayConstants.LINES_ARE_DIFFERENT_FROM_THE_ACTUAL_LINE_AS_FOLLOWS, output.get(0));
-		assertEquals(Tests4J_LineDiffTextDisplayConstants.TESTS4J_ERROR, output.get(1));
+		I_Tests4J_LineDiffTextDisplayMessages messages =  Tests4J_EnglishConstants.ENGLISH.getLineDiffTextDisplayMessages();
+		
+		assertEquals(messages.getTheLineOfTextIsDifferent(), output.get(0));
+		assertEquals(messages.getError(), output.get(1));
 		assertEquals(2, output.size());
 	}
 	
@@ -232,8 +251,10 @@ public class LineDiffTextDisplayTrial extends SourceFileCountingTrial implements
 				new TextLines("hey", true),false,Collections.singletonList(ldm));
 		
 		dislay.display(this,result, 3);
-		assertEquals(Tests4J_LineDiffTextDisplayConstants.LINES_ARE_DIFFERENT_FROM_THE_ACTUAL_LINE_AS_FOLLOWS, output.get(0));
-		assertEquals(Tests4J_LineDiffTextDisplayConstants.TESTS4J_ERROR, output.get(1));
+		I_Tests4J_LineDiffTextDisplayMessages messages =  Tests4J_EnglishConstants.ENGLISH.getLineDiffTextDisplayMessages();
+		
+		assertEquals(messages.getTheLineOfTextIsDifferent(), output.get(0));
+		assertEquals(messages.getError(), output.get(1));
 		assertEquals(2, output.size());
 	}
 	@Test
@@ -247,14 +268,16 @@ public class LineDiffTextDisplayTrial extends SourceFileCountingTrial implements
 				new TextLines("hey3", true),false,Collections.singletonList(ldm));
 		
 		dislay.display(this,result, 3);
-		assertEquals(Tests4J_LineDiffTextDisplayConstants.LINES_ARE_DIFFERENT_FROM_THE_ACTUAL_LINE_AS_FOLLOWS, output.get(0));
-		assertEquals(Tests4J_LineDiffTextDisplayConstants.EXPECTED + " " + 0, output.get(1));
+		I_Tests4J_LineDiffTextDisplayMessages messages =  Tests4J_EnglishConstants.ENGLISH.getLineDiffTextDisplayMessages();
+		
+		assertEquals(messages.getTheLineOfTextIsDifferent(), output.get(0));
+		assertEquals(messages.getExpected() + " " + 0, output.get(1));
 		assertEquals("hey2", output.get(2));
-		assertEquals(Tests4J_LineDiffTextDisplayConstants.DIFFERENCES, output.get(3));
+		assertEquals(messages.getDifferences(), output.get(3));
 		assertEquals("'2'", output.get(4));
-		assertEquals(Tests4J_LineDiffTextDisplayConstants.ACTUAL + " " + 0, output.get(5));
+		assertEquals(messages.getActual() + " " + 0, output.get(5));
 		assertEquals("hey3", output.get(6));
-		assertEquals(Tests4J_LineDiffTextDisplayConstants.DIFFERENCES, output.get(7));
+		assertEquals(messages.getDifferences(), output.get(7));
 		assertEquals("'3'", output.get(8));
 		assertEquals(9, output.size());
 	}

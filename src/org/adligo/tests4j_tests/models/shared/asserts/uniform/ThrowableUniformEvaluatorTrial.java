@@ -5,6 +5,10 @@ import org.adligo.tests4j.models.shared.asserts.line_text.I_TextLinesCompareResu
 import org.adligo.tests4j.models.shared.asserts.uniform.I_Evaluation;
 import org.adligo.tests4j.models.shared.asserts.uniform.ThrowableUniformEvaluator;
 import org.adligo.tests4j.models.shared.en.Tests4J_AssertionResultMessages;
+import org.adligo.tests4j.models.shared.en.Tests4J_EnglishConstants;
+import org.adligo.tests4j.models.shared.i18n.I_Tests4J_AssertionInputMessages;
+import org.adligo.tests4j.models.shared.i18n.I_Tests4J_AssertionResultMessages;
+import org.adligo.tests4j.models.shared.system.Tests4J_Constants;
 import org.adligo.tests4j.models.shared.trials.SourceFileScope;
 import org.adligo.tests4j.models.shared.trials.Test;
 import org.adligo.tests4j_tests.base_abstract_trials.SourceFileCountingTrial;
@@ -27,18 +31,20 @@ public class ThrowableUniformEvaluatorTrial extends SourceFileCountingTrial {
 						new IllegalArgumentException("hey\nu"), 
 						new IllegalArgumentException("hey\nyou")));
 		assertFalse(eval.isSuccess());
-		assertEquals(
-				new Tests4J_AssertionResultMessages().getTheTextWasNOT_Uniform(),
+		I_Tests4J_AssertionResultMessages messages =  Tests4J_EnglishConstants.ENGLISH.getAssertionResultMessages();
+		assertEquals(messages.getTheTextWasNOT_Uniform(),
 				eval.getFailureReason());
 		I_TextLinesCompareResult result = eval.getData();
 		assertFalse(result.isMatched());
 	
+		I_Tests4J_AssertionInputMessages inMessages = Tests4J_EnglishConstants.ENGLISH.getAssertionInputMessages();
+		
 		eval = evaluator.isUniform(
 				new CompareAssertionData<Throwable>(
 						new IllegalArgumentException("hey\nyou"), 
 						null));
 		assertFalse(eval.isSuccess());
-		assertEquals(Tests4J_AssertionResultMessages.THE_ACTUAL_VALUE_IS_NULL_AND_SHOULD_NOT_BE,
+		assertEquals(inMessages.getTheActualValueIsNull(),
 				eval.getFailureReason());
 		assertNull(eval.getData());
 		
@@ -47,7 +53,8 @@ public class ThrowableUniformEvaluatorTrial extends SourceFileCountingTrial {
 						null, 
 						new IllegalStateException("hey\nyou")));
 		assertFalse(eval.isSuccess());
-		assertEquals(Tests4J_AssertionResultMessages.THE_EXPECTED_VALUE_SHOULD_NEVER_BE_NULL_TRY_ASSERT_NULL,
+		
+		assertEquals(inMessages.getTheExpectedValueShouldNeverBeNull(),
 				eval.getFailureReason());
 		assertNull(eval.getData());
 		
@@ -56,7 +63,8 @@ public class ThrowableUniformEvaluatorTrial extends SourceFileCountingTrial {
 						new IllegalArgumentException("hey\nyou"), 
 						new IllegalStateException("hey\nyou")));
 		assertFalse(eval.isSuccess());
-		assertEquals(Tests4J_AssertionResultMessages.THE_CLASS_OF_THE_ACTUAL_VALUE_IS_NOT_ASSIGNABLE_FROM_THE_CLASS_OF_THE_EXPECTED_VALUE,
+		
+		assertEquals(inMessages.getTheActualClassIsNotAssignableFromTheExpectedClass(),
 				eval.getFailureReason());
 		assertNull(eval.getData());
 		
@@ -85,7 +93,9 @@ public class ThrowableUniformEvaluatorTrial extends SourceFileCountingTrial {
 						new IllegalArgumentException("hey\nyou"), 
 						null));
 		assertFalse(eval.isSuccess());
-		assertEquals(Tests4J_AssertionResultMessages.THE_ACTUAL_VALUE_IS_NULL_AND_SHOULD_NOT_BE,
+		I_Tests4J_AssertionInputMessages messages = Tests4J_EnglishConstants.ENGLISH.getAssertionInputMessages();
+		
+		assertEquals(messages.getTheActualValueIsNull(),
 				eval.getFailureReason());
 		assertNull(eval.getData());
 		
@@ -94,7 +104,8 @@ public class ThrowableUniformEvaluatorTrial extends SourceFileCountingTrial {
 						null, 
 						new IllegalStateException("hey\nyou")));
 		assertFalse(eval.isSuccess());
-		assertEquals(Tests4J_AssertionResultMessages.THE_EXPECTED_VALUE_SHOULD_NEVER_BE_NULL_TRY_ASSERT_NULL,
+		
+		assertEquals(messages.getTheExpectedValueShouldNeverBeNull(),
 				eval.getFailureReason());
 		assertNull(eval.getData());
 		
@@ -111,8 +122,10 @@ public class ThrowableUniformEvaluatorTrial extends SourceFileCountingTrial {
 						new IllegalArgumentException("hey\nyou"), 
 						new IllegalArgumentException("hey\nyou")));
 		assertFalse(eval.isSuccess());
+		
+		I_Tests4J_AssertionResultMessages resultMessages =  Tests4J_EnglishConstants.ENGLISH.getAssertionResultMessages();
 		assertEquals(
-				new Tests4J_AssertionResultMessages().getTheTextWasUniform(),
+				resultMessages.getTheTextWasUniform(),
 				eval.getFailureReason());
 		I_TextLinesCompareResult result = eval.getData();
 		assertTrue(result.isMatched());

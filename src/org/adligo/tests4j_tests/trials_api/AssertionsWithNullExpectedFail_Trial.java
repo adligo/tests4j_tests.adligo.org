@@ -5,164 +5,164 @@ import org.adligo.tests4j.models.shared.results.I_ApiTrialResult;
 import org.adligo.tests4j.models.shared.trials.PackageScope;
 import org.adligo.tests4j.models.shared.trials.Test;
 import org.adligo.tests4j_tests.base_abstract_trials.ApiCountingTrial;
-import org.adligo.tests4j_tests.trials_api.asserts_null_expected_trials.AssertContainsNullFailsTrial;
-import org.adligo.tests4j_tests.trials_api.asserts_null_expected_trials.AssertContainsNullWithMessageFailsTrial;
-import org.adligo.tests4j_tests.trials_api.asserts_null_expected_trials.AssertEqualsNullFailsTrial;
-import org.adligo.tests4j_tests.trials_api.asserts_null_expected_trials.AssertEqualsNullStringFailsTrial;
-import org.adligo.tests4j_tests.trials_api.asserts_null_expected_trials.AssertEqualsNullStringWithMessageFailsTrial;
-import org.adligo.tests4j_tests.trials_api.asserts_null_expected_trials.AssertEqualsNullWithMessageFailsTrial;
-import org.adligo.tests4j_tests.trials_api.asserts_null_expected_trials.AssertNotEqualsNullFailsTrial;
-import org.adligo.tests4j_tests.trials_api.asserts_null_expected_trials.AssertNotEqualsNullStringFailsTrial;
-import org.adligo.tests4j_tests.trials_api.asserts_null_expected_trials.AssertNotEqualsNullStringWithMessageFailsTrial;
-import org.adligo.tests4j_tests.trials_api.asserts_null_expected_trials.AssertNotEqualsNullWithMessageFailsTrial;
-import org.adligo.tests4j_tests.trials_api.asserts_null_expected_trials.AssertNotSameNullFailsTrial;
-import org.adligo.tests4j_tests.trials_api.asserts_null_expected_trials.AssertNotSameNullWithMessageFailsTrial;
-import org.adligo.tests4j_tests.trials_api.asserts_null_expected_trials.AssertNotUniformNullFailsTrial;
-import org.adligo.tests4j_tests.trials_api.asserts_null_expected_trials.AssertNotUniformNullWithMessageFailsTrial;
-import org.adligo.tests4j_tests.trials_api.asserts_null_expected_trials.AssertSameNullFailsTrial;
-import org.adligo.tests4j_tests.trials_api.asserts_null_expected_trials.AssertSameNullWithMessageFailsTrial;
-import org.adligo.tests4j_tests.trials_api.asserts_null_expected_trials.AssertThrownNullFailsTrial;
-import org.adligo.tests4j_tests.trials_api.asserts_null_expected_trials.AssertThrownNullThrowerFailsTrial;
-import org.adligo.tests4j_tests.trials_api.asserts_null_expected_trials.AssertThrownNullThrowerWithMessageFailsTrial;
-import org.adligo.tests4j_tests.trials_api.asserts_null_expected_trials.AssertThrownNullWithMessageFailsTrial;
-import org.adligo.tests4j_tests.trials_api.asserts_null_expected_trials.AssertThrownUniformNullFailsTrial;
-import org.adligo.tests4j_tests.trials_api.asserts_null_expected_trials.AssertThrownUniformNullThrowerFailsTrial;
-import org.adligo.tests4j_tests.trials_api.asserts_null_expected_trials.AssertThrownUniformNullThrowerWithMessageFailsTrial;
-import org.adligo.tests4j_tests.trials_api.asserts_null_expected_trials.AssertThrownUniformNullWithMessageFailsTrial;
-import org.adligo.tests4j_tests.trials_api.asserts_null_expected_trials.AssertUniformNullFailsTrial;
-import org.adligo.tests4j_tests.trials_api.asserts_null_expected_trials.AssertUniformNullWithMessageFailsTrial;
+import org.adligo.tests4j_tests.trials_api.asserts_null_expected_trials.AssertContainsNullFailsTrialRunner;
+import org.adligo.tests4j_tests.trials_api.asserts_null_expected_trials.AssertContainsNullWithMessageFailsTrialRunner;
+import org.adligo.tests4j_tests.trials_api.asserts_null_expected_trials.AssertEqualsNullFailsTrialRunner;
+import org.adligo.tests4j_tests.trials_api.asserts_null_expected_trials.AssertEqualsNullStringFailsTrialRunner;
+import org.adligo.tests4j_tests.trials_api.asserts_null_expected_trials.AssertEqualsNullStringWithMessageFailsTrialRunner;
+import org.adligo.tests4j_tests.trials_api.asserts_null_expected_trials.AssertEqualsNullWithMessageFailsTrialRunner;
+import org.adligo.tests4j_tests.trials_api.asserts_null_expected_trials.AssertNotEqualsNullFailsTrialRunner;
+import org.adligo.tests4j_tests.trials_api.asserts_null_expected_trials.AssertNotEqualsNullStringFailsTrialRunner;
+import org.adligo.tests4j_tests.trials_api.asserts_null_expected_trials.AssertNotEqualsNullStringWithMessageFailsTrialRunner;
+import org.adligo.tests4j_tests.trials_api.asserts_null_expected_trials.AssertNotEqualsNullWithMessageFailsTrialRunner;
+import org.adligo.tests4j_tests.trials_api.asserts_null_expected_trials.AssertNotSameNullFailsTrialRunner;
+import org.adligo.tests4j_tests.trials_api.asserts_null_expected_trials.AssertNotSameNullWithMessageFailsTrialRunner;
+import org.adligo.tests4j_tests.trials_api.asserts_null_expected_trials.AssertNotUniformNullFailsTrialRunner;
+import org.adligo.tests4j_tests.trials_api.asserts_null_expected_trials.AssertNotUniformNullWithMessageFailsTrialRunner;
+import org.adligo.tests4j_tests.trials_api.asserts_null_expected_trials.AssertSameNullFailsTrialRunner;
+import org.adligo.tests4j_tests.trials_api.asserts_null_expected_trials.AssertSameNullWithMessageFailsTrialRunner;
+import org.adligo.tests4j_tests.trials_api.asserts_null_expected_trials.AssertThrownNullFailsTrialRunner;
+import org.adligo.tests4j_tests.trials_api.asserts_null_expected_trials.AssertThrownNullThrowerFailsTrialRunner;
+import org.adligo.tests4j_tests.trials_api.asserts_null_expected_trials.AssertThrownNullThrowerWithMessageFailsTrialRunner;
+import org.adligo.tests4j_tests.trials_api.asserts_null_expected_trials.AssertThrownNullWithMessageFailsTrialRunner;
+import org.adligo.tests4j_tests.trials_api.asserts_null_expected_trials.AssertThrownUniformNullFailsTrialRunner;
+import org.adligo.tests4j_tests.trials_api.asserts_null_expected_trials.AssertThrownUniformNullThrowerFailsTrialRunner;
+import org.adligo.tests4j_tests.trials_api.asserts_null_expected_trials.AssertThrownUniformNullThrowerWithMessageFailsTrialRunner;
+import org.adligo.tests4j_tests.trials_api.asserts_null_expected_trials.AssertThrownUniformNullWithMessageFailsTrialRunner;
+import org.adligo.tests4j_tests.trials_api.asserts_null_expected_trials.AssertUniformNullFailsTrialRunner;
+import org.adligo.tests4j_tests.trials_api.asserts_null_expected_trials.AssertUniformNullWithMessageFailsTrialRunner;
 
 @PackageScope (packageName = "org.adligo.tests4j")
 public class AssertionsWithNullExpectedFail_Trial extends ApiCountingTrial {
 	
 	@Test
 	public void testAssertContainsNullFails() throws Exception {
-		AssertContainsNullFailsTrial.runTestDelegate(this);
+		AssertContainsNullFailsTrialRunner.runTestDelegate(this);
 	}
 	
 	@Test
 	public void testAssertContainsNullWithMessageFails() throws Exception {
-		AssertContainsNullWithMessageFailsTrial.runTestDelegate(this);
+		AssertContainsNullWithMessageFailsTrialRunner.runTestDelegate(this);
 	}
 	
 	@Test
 	public void testAssertEqualsNullFails() throws Exception {
-		AssertEqualsNullFailsTrial.runTestDelegate(this);
+		AssertEqualsNullFailsTrialRunner.runTestDelegate(this);
 	}
 
 	@Test
 	public void testAssertEqualsNullWithMessageFails() throws Exception {
-		AssertEqualsNullWithMessageFailsTrial.runTestDelegate(this);
+		AssertEqualsNullWithMessageFailsTrialRunner.runTestDelegate(this);
 	}
 	
 	@Test
 	public void testAssertEqualsNullStringFails() throws Exception {
-		AssertEqualsNullStringFailsTrial.runTestDelegate(this);
+		AssertEqualsNullStringFailsTrialRunner.runTestDelegate(this);
 	}
 
 	@Test
 	public void testAssertEqualsNullStringWithMessageFails() throws Exception {
-		AssertEqualsNullStringWithMessageFailsTrial.runTestDelegate(this);
+		AssertEqualsNullStringWithMessageFailsTrialRunner.runTestDelegate(this);
 	}
 	
 	@Test
 	public void testAssertNotEqualsNullFails() throws Exception {
-		AssertNotEqualsNullFailsTrial.runTestDelegate(this);
+		AssertNotEqualsNullFailsTrialRunner.runTestDelegate(this);
 	}
 	
 	@Test
 	public void testAssertNotEqualsNullNullWithMessageFails() throws Exception {
-		AssertNotEqualsNullWithMessageFailsTrial.runTestDelegate(this);
+		AssertNotEqualsNullWithMessageFailsTrialRunner.runTestDelegate(this);
 	}
 	
 	@Test
 	public void testAssertNotEqualsNullStringFails() throws Exception {
-		AssertNotEqualsNullStringFailsTrial.runTestDelegate(this);
+		AssertNotEqualsNullStringFailsTrialRunner.runTestDelegate(this);
 	}
 	
 	@Test
 	public void testAssertNotEqualsNullNullStringWithMessageFails() throws Exception {
-		AssertNotEqualsNullStringWithMessageFailsTrial.runTestDelegate(this);
+		AssertNotEqualsNullStringWithMessageFailsTrialRunner.runTestDelegate(this);
 	}
 	
 	@Test
 	public void testAssertNotSameNullFails() throws Exception {
-		AssertNotSameNullFailsTrial.runTestDelegate(this);
+		AssertNotSameNullFailsTrialRunner.runTestDelegate(this);
 	}
 	
 	@Test
 	public void testAssertNotSameNullWithMessageFails() throws Exception {
-		AssertNotSameNullWithMessageFailsTrial.runTestDelegate(this);
+		AssertNotSameNullWithMessageFailsTrialRunner.runTestDelegate(this);
 	}
 	
 	@Test
 	public void testAssertNotUniformNullFails() throws Exception {
-		AssertNotUniformNullFailsTrial.runTestDelegate(this);
+		AssertNotUniformNullFailsTrialRunner.runTestDelegate(this);
 	}
 	
 	@Test
 	public void testAssertNotUniformNullNullWithMessageFails() throws Exception {
-		AssertNotUniformNullWithMessageFailsTrial.runTestDelegate(this);
+		AssertNotUniformNullWithMessageFailsTrialRunner.runTestDelegate(this);
 	}
 	
 	@Test
 	public void testAssertSameNullFails() throws Exception {
-		AssertSameNullFailsTrial.runTestDelegate(this);
+		AssertSameNullFailsTrialRunner.runTestDelegate(this);
 	}
 	
 	@Test
 	public void testAssertSameNullNullWithMessageFails() throws Exception {
-		AssertSameNullWithMessageFailsTrial.runTestDelegate(this);
+		AssertSameNullWithMessageFailsTrialRunner.runTestDelegate(this);
 	}
 	
 	@Test
 	public void testAssertThrownNullFails() throws Exception {
-		AssertThrownNullFailsTrial.runTestDelegate(this);
+		AssertThrownNullFailsTrialRunner.runTestDelegate(this);
 	}
 	
 	@Test
 	public void testAssertThrownNullThrowerFails() throws Exception {
-		AssertThrownNullThrowerFailsTrial.runTestDelegate(this);
+		AssertThrownNullThrowerFailsTrialRunner.runTestDelegate(this);
 	}
 	
 	@Test
 	public void testAssertThrownNullThrowerWithMessageFails() throws Exception {
-		AssertThrownNullThrowerWithMessageFailsTrial.runTestDelegate(this);
+		AssertThrownNullThrowerWithMessageFailsTrialRunner.runTestDelegate(this);
 	}
 	
 	@Test
 	public void testAssertThrownNullWithMessageFails() throws Exception {
-		AssertThrownNullWithMessageFailsTrial.runTestDelegate(this);
+		AssertThrownNullWithMessageFailsTrialRunner.runTestDelegate(this);
 	}
 	
 	@Test
 	public void testAssertThrownUniformNullFails() throws Exception {
-		AssertThrownUniformNullFailsTrial.runTestDelegate(this);
+		AssertThrownUniformNullFailsTrialRunner.runTestDelegate(this);
 	}
 	
 	@Test
 	public void testAssertThrownUniformNullWithMessageFails() throws Exception {
-		AssertThrownUniformNullWithMessageFailsTrial.runTestDelegate(this);
+		AssertThrownUniformNullWithMessageFailsTrialRunner.runTestDelegate(this);
 	}
 	
 	@Test
 	public void testAssertThrownUniformNullThrowerFailsTrialFails() throws Exception {
-		AssertThrownUniformNullThrowerFailsTrial.runTestDelegate(this);
+		AssertThrownUniformNullThrowerFailsTrialRunner.runTestDelegate(this);
 	}
 	
 	@Test
 	public void testAssertUniformNullWithMessageFailsTrialFails() throws Exception {
-		AssertUniformNullWithMessageFailsTrial.runTestDelegate(this);
+		AssertUniformNullWithMessageFailsTrialRunner.runTestDelegate(this);
 	}
 	
 	@Test
 	public void testAssertThrownUniformNullThrowerWithMessageFailsTrialFails() throws Exception {
-		AssertThrownUniformNullThrowerWithMessageFailsTrial.runTestDelegate(this);
+		AssertThrownUniformNullThrowerWithMessageFailsTrialRunner.runTestDelegate(this);
 	}
 	
 	@Test
 	public void testAssertUniformNullFailsTrialFails() throws Exception {
-		AssertUniformNullFailsTrial.runTestDelegate(this);
+		AssertUniformNullFailsTrialRunner.runTestDelegate(this);
 	}
 	
 	
@@ -184,32 +184,32 @@ public class AssertionsWithNullExpectedFail_Trial extends ApiCountingTrial {
 
 	@Override
 	public int getAsserts() {
-		return AssertContainsNullFailsTrial.getAsserts() +
-				AssertContainsNullWithMessageFailsTrial.getAsserts() +
-				AssertEqualsNullFailsTrial.getAsserts() +
-				AssertEqualsNullWithMessageFailsTrial.getAsserts() +
-				AssertEqualsNullStringFailsTrial.getAsserts() +
-				AssertEqualsNullStringWithMessageFailsTrial.getAsserts() +
-				AssertNotEqualsNullFailsTrial.getAsserts()+
-				AssertNotEqualsNullWithMessageFailsTrial.getAsserts() +
-				AssertNotEqualsNullStringFailsTrial.getAsserts()+
-				AssertNotEqualsNullStringWithMessageFailsTrial.getAsserts() +
-				AssertNotSameNullFailsTrial.getAsserts()+
-				AssertNotSameNullWithMessageFailsTrial.getAsserts()   +
-				AssertNotUniformNullFailsTrial.getAsserts() +
-				AssertNotUniformNullWithMessageFailsTrial.getAsserts()+
-				AssertSameNullFailsTrial.getAsserts()  +
-				AssertSameNullWithMessageFailsTrial.getAsserts() +
-				AssertThrownNullFailsTrial.getAsserts() + 
-				AssertThrownNullThrowerFailsTrial.getAsserts() + 
-				AssertThrownNullThrowerWithMessageFailsTrial.getAsserts() +
-				AssertThrownNullWithMessageFailsTrial.getAsserts() +
-				AssertThrownUniformNullFailsTrial.getAsserts() + 
-				AssertThrownUniformNullWithMessageFailsTrial.getAsserts() +
-				AssertUniformNullFailsTrial.getAsserts() + 
-				AssertUniformNullWithMessageFailsTrial.getAsserts() +
-				AssertThrownUniformNullThrowerFailsTrial.getAsserts() +
-				AssertThrownUniformNullThrowerWithMessageFailsTrial.getAsserts();
+		return AssertContainsNullFailsTrialRunner.getAsserts() +
+				AssertContainsNullWithMessageFailsTrialRunner.getAsserts() +
+				AssertEqualsNullFailsTrialRunner.getAsserts() +
+				AssertEqualsNullWithMessageFailsTrialRunner.getAsserts() +
+				AssertEqualsNullStringFailsTrialRunner.getAsserts() +
+				AssertEqualsNullStringWithMessageFailsTrialRunner.getAsserts() +
+				AssertNotEqualsNullFailsTrialRunner.getAsserts()+
+				AssertNotEqualsNullWithMessageFailsTrialRunner.getAsserts() +
+				AssertNotEqualsNullStringFailsTrialRunner.getAsserts()+
+				AssertNotEqualsNullStringWithMessageFailsTrialRunner.getAsserts() +
+				AssertNotSameNullFailsTrialRunner.getAsserts()+
+				AssertNotSameNullWithMessageFailsTrialRunner.getAsserts()   +
+				AssertNotUniformNullFailsTrialRunner.getAsserts() +
+				AssertNotUniformNullWithMessageFailsTrialRunner.getAsserts()+
+				AssertSameNullFailsTrialRunner.getAsserts()  +
+				AssertSameNullWithMessageFailsTrialRunner.getAsserts() +
+				AssertThrownNullFailsTrialRunner.getAsserts() + 
+				AssertThrownNullThrowerFailsTrialRunner.getAsserts() + 
+				AssertThrownNullThrowerWithMessageFailsTrialRunner.getAsserts() +
+				AssertThrownNullWithMessageFailsTrialRunner.getAsserts() +
+				AssertThrownUniformNullFailsTrialRunner.getAsserts() + 
+				AssertThrownUniformNullWithMessageFailsTrialRunner.getAsserts() +
+				AssertUniformNullFailsTrialRunner.getAsserts() + 
+				AssertUniformNullWithMessageFailsTrialRunner.getAsserts() +
+				AssertThrownUniformNullThrowerFailsTrialRunner.getAsserts() +
+				AssertThrownUniformNullThrowerWithMessageFailsTrialRunner.getAsserts();
 	}
 
 	@Override

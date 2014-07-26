@@ -2,7 +2,9 @@ package org.adligo.tests4j_tests.models.shared.system;
 
 import org.adligo.tests4j.models.shared.asserts.ExpectedThrownData;
 import org.adligo.tests4j.models.shared.asserts.common.I_Thrower;
-import org.adligo.tests4j.models.shared.en.Tests4J_ParamsReaderConstants;
+import org.adligo.tests4j.models.shared.en.Tests4J_EnglishConstants;
+import org.adligo.tests4j.models.shared.en.Tests4J_ParamsReaderMessages;
+import org.adligo.tests4j.models.shared.i18n.I_Tests4J_ParamReaderMessages;
 import org.adligo.tests4j.models.shared.system.Tests4J_RemoteInfo;
 import org.adligo.tests4j.models.shared.trials.SourceFileScope;
 import org.adligo.tests4j.models.shared.trials.Test;
@@ -15,8 +17,10 @@ public class Tests4J_RemoteInfoTrial extends SourceFileCountingTrial {
 	
 	@Test
 	public void testConstructorExceptions() {
+		I_Tests4J_ParamReaderMessages messages = Tests4J_EnglishConstants.ENGLISH.getTests4j_ParamReaderConstants();
+		
 		assertThrown(new ExpectedThrownData(new IllegalArgumentException(
-				Tests4J_ParamsReaderConstants.HOST_REQUIRED)), 
+				messages.getHostRequired())), 
 				new I_Thrower() {
 					
 					@Override
@@ -25,7 +29,7 @@ public class Tests4J_RemoteInfoTrial extends SourceFileCountingTrial {
 					}
 				});
 		assertThrown(new ExpectedThrownData(new IllegalArgumentException(
-				Tests4J_ParamsReaderConstants.HOST_REQUIRED)), 
+				messages.getHostRequired())), 
 				new I_Thrower() {
 					
 					@Override
@@ -37,7 +41,7 @@ public class Tests4J_RemoteInfoTrial extends SourceFileCountingTrial {
 		final Tests4J_RemoteInfoMock mock = new Tests4J_RemoteInfoMock();
 		//host null
 		assertThrown(new ExpectedThrownData(new IllegalArgumentException(
-				Tests4J_ParamsReaderConstants.HOST_REQUIRED)), 
+				messages.getHostRequired())), 
 				new I_Thrower() {
 					
 					@Override
@@ -48,7 +52,7 @@ public class Tests4J_RemoteInfoTrial extends SourceFileCountingTrial {
 		//host empty
 		mock.setHost("");
 		assertThrown(new ExpectedThrownData(new IllegalArgumentException(
-				Tests4J_ParamsReaderConstants.HOST_REQUIRED)), 
+				messages.getHostRequired())), 
 				new I_Thrower() {
 					
 					@Override
@@ -60,7 +64,7 @@ public class Tests4J_RemoteInfoTrial extends SourceFileCountingTrial {
 		//authCodeDefault null
 		mock.setHost("abc");
 		assertThrown(new ExpectedThrownData(new IllegalArgumentException(
-				Tests4J_ParamsReaderConstants.AUTH_CODE_OR_AUTH_CODE_DEFAULT_REQUIRED)), 
+				messages.getAuthCodeOrAuthCodeDefaultRequired())), 
 				new I_Thrower() {
 					
 					@Override
@@ -70,7 +74,7 @@ public class Tests4J_RemoteInfoTrial extends SourceFileCountingTrial {
 				});
 		//authCodeDefault empty
 		assertThrown(new ExpectedThrownData(new IllegalArgumentException(
-				Tests4J_ParamsReaderConstants.AUTH_CODE_OR_AUTH_CODE_DEFAULT_REQUIRED)), 
+				messages.getAuthCodeOrAuthCodeDefaultRequired())), 
 				new I_Thrower() {
 					
 					@Override
@@ -82,7 +86,7 @@ public class Tests4J_RemoteInfoTrial extends SourceFileCountingTrial {
 		//authCode null
 		mock.setAuthCode(null);
 		assertThrown(new ExpectedThrownData(new IllegalArgumentException(
-				Tests4J_ParamsReaderConstants.AUTH_CODE_OR_AUTH_CODE_DEFAULT_REQUIRED)), 
+				messages.getAuthCodeOrAuthCodeDefaultRequired())), 
 				new I_Thrower() {
 					
 					@Override
@@ -94,7 +98,7 @@ public class Tests4J_RemoteInfoTrial extends SourceFileCountingTrial {
 		//authCode empty
 		mock.setAuthCode("");
 		assertThrown(new ExpectedThrownData(new IllegalArgumentException(
-				Tests4J_ParamsReaderConstants.AUTH_CODE_OR_AUTH_CODE_DEFAULT_REQUIRED)), 
+				messages.getAuthCodeOrAuthCodeDefaultRequired())), 
 				new I_Thrower() {
 					
 					@Override

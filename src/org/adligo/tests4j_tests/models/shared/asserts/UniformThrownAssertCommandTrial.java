@@ -10,8 +10,9 @@ import org.adligo.tests4j.models.shared.asserts.common.I_Thrower;
 import org.adligo.tests4j.models.shared.asserts.line_text.I_TextLinesCompareResult;
 import org.adligo.tests4j.models.shared.asserts.uniform.I_Evaluation;
 import org.adligo.tests4j.models.shared.asserts.uniform.ThrowableUniformEvaluator;
-import org.adligo.tests4j.models.shared.en.Tests4J_AssertionInputMessages;
-import org.adligo.tests4j.models.shared.en.Tests4J_AssertionResultMessages;
+import org.adligo.tests4j.models.shared.en.Tests4J_EnglishConstants;
+import org.adligo.tests4j.models.shared.i18n.I_Tests4J_AssertionInputMessages;
+import org.adligo.tests4j.models.shared.i18n.I_Tests4J_AssertionResultMessages;
 import org.adligo.tests4j.models.shared.trials.SourceFileScope;
 import org.adligo.tests4j.models.shared.trials.Test;
 import org.adligo.tests4j_tests.base_abstract_trials.SourceFileCountingTrial;
@@ -22,8 +23,10 @@ public class UniformThrownAssertCommandTrial extends SourceFileCountingTrial {
 	@Test
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public void testConstructorExceptions() {
+		I_Tests4J_AssertionInputMessages messages = Tests4J_EnglishConstants.ENGLISH.getAssertionInputMessages();
+		
 		assertThrown(new ExpectedThrownData(new IllegalArgumentException(
-				new Tests4J_AssertionInputMessages().getExpectedThrownDataRequiresThrowable())),
+				messages.getExpectedThrownDataRequiresThrowable())),
 				new I_Thrower() {
 					
 					@Override
@@ -256,7 +259,8 @@ public class UniformThrownAssertCommandTrial extends SourceFileCountingTrial {
 		
 		I_Evaluation<I_TextLinesCompareResult> eval =  utac.getEvaluation();
 		assertFalse(eval.isSuccess());
-		assertEquals(new Tests4J_AssertionResultMessages().getTheTextWasNOT_Uniform(), eval.getFailureReason());
+		I_Tests4J_AssertionResultMessages messages =  Tests4J_EnglishConstants.ENGLISH.getAssertionResultMessages();
+		assertEquals(messages.getTheTextWasNOT_Uniform(), eval.getFailureReason());
 		
 		I_TextLinesCompareResult txt = (I_TextLinesCompareResult) eval.getData();
 		assertNotNull(txt);

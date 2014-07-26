@@ -8,6 +8,8 @@ import org.adligo.tests4j.models.shared.asserts.common.AssertType;
 import org.adligo.tests4j.models.shared.asserts.common.I_AssertionData;
 import org.adligo.tests4j.models.shared.asserts.common.I_Thrower;
 import org.adligo.tests4j.models.shared.en.Tests4J_AssertionResultMessages;
+import org.adligo.tests4j.models.shared.en.Tests4J_EnglishConstants;
+import org.adligo.tests4j.models.shared.i18n.I_Tests4J_AssertionInputMessages;
 import org.adligo.tests4j.models.shared.trials.SourceFileScope;
 import org.adligo.tests4j.models.shared.trials.Test;
 import org.adligo.tests4j_tests.base_abstract_trials.SourceFileCountingTrial;
@@ -26,8 +28,10 @@ public class IdenticalStringAssertCommandTrial extends SourceFileCountingTrial {
 								new CompareAssertionData<String>("hey", "you"));
 					}
 				});
+		
+		I_Tests4J_AssertionInputMessages messages =  Tests4J_EnglishConstants.ENGLISH.getAssertionInputMessages();
 		assertThrown(new ExpectedThrownData(new IllegalArgumentException(
-				new Tests4J_AssertionResultMessages().getTheExpectedValueShouldNeverBeNull())), 
+				messages.getTheExpectedValueShouldNeverBeNull())), 
 				new I_Thrower() {
 					
 					@Override

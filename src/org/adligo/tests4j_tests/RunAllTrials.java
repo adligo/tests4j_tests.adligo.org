@@ -20,9 +20,9 @@ import org.adligo.tests4j.models.shared.system.Tests4J_Params;
 import org.adligo.tests4j.models.shared.trials.I_Trial;
 import org.adligo.tests4j.run.Tests4J;
 import org.adligo.tests4j.run.discovery.Tests4J_ParamsReader;
-import org.adligo.tests4j.shared.report.summary.TestsReporter;
-import org.adligo.tests4j.shared.report.summary.TrialsProgressReporter;
-import org.adligo.tests4j.shared.report.summary.TrialsReporter;
+import org.adligo.tests4j.shared.report.summary.TestsDisplay;
+import org.adligo.tests4j.shared.report.summary.TrialsProgressDisplay;
+import org.adligo.tests4j.shared.report.summary.TrialsDisplay;
 import org.adligo.tests4j_4jacoco.plugin.ScopedJacocoPluginFactory;
 import org.adligo.tests4j_tests.base_abstract_trials.Counts;
 import org.adligo.tests4j_tests.base_abstract_trials.I_CountingTrial;
@@ -41,8 +41,8 @@ public class RunAllTrials implements I_Tests4J_Listener {
 		Tests4J_Params params = getTests(ScopedJacocoPluginFactory.class);
 		
 		
-		params.setLogState(TrialsReporter.class, false);
-		params.setLogState(TestsReporter.class, false);
+		params.setLogState(TrialsDisplay.class, false);
+		params.setLogState(TestsDisplay.class, false);
 		//params.setLogState(TrialsProgressReporter.class, false);
 		
 		
@@ -87,7 +87,7 @@ public class RunAllTrials implements I_Tests4J_Listener {
 		toRet.addTrials(new org.adligo.tests4j_tests.models.shared.asserts.RunPkgTrials());
 		toRet.addTrials(new org.adligo.tests4j_tests.models.shared.common.RunPkgTrials());
 		toRet.addTrials(new org.adligo.tests4j_tests.models.shared.system.RunPkgTrials());
-		toRet.addTrials(new org.adligo.tests4j_tests.models.shared.en.trials.asserts.RunPkgTrials());
+		toRet.addTrials(new org.adligo.tests4j_tests.models.shared.en.RunPkgTrials());
 		toRet.addTrials(new org.adligo.tests4j_tests.models.shared.metadata.RunPkgTrials());
 		toRet.addTrials(new org.adligo.tests4j_tests.models.shared.xml.RunPkgTrials());
 		toRet.addTrials(new org.adligo.tests4j_tests.shared.report.summary.RunPkgTrials());
