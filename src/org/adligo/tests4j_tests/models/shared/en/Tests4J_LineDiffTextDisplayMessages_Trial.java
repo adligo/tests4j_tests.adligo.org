@@ -36,11 +36,11 @@ public class Tests4J_LineDiffTextDisplayMessages_Trial extends SourceFileCountin
 
 	@Override
 	public int getAsserts() {
-		return 15;
+		return 22;
 	}
 
 	@Override
 	public int getUniqueAsserts() {
-		return 15;
+		return 22;
 	}
 }

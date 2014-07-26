@@ -3,6 +3,7 @@ package org.adligo.tests4j_tests.models.shared.en;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.adligo.tests4j.models.shared.en.Tests4J_EnglishConstants;
 import org.adligo.tests4j.models.shared.system.I_Tests4J_TrialList;
 import org.adligo.tests4j.models.shared.system.Tests4J_Params;
 import org.adligo.tests4j.models.shared.trials.I_Trial;
@@ -30,6 +31,9 @@ public class RunPkgTrials implements I_Tests4J_TrialList {
 		trials.add(Tests4J_AssertionResultMessages_Trial.class);
 		trials.add(Tests4J_AssertionInputMessages_Trial.class);
 		trials.add(Tests4J_AnnotationErrorsTrial.class);
+		
+		trials.add(Tests4J_EclipseMessages_Trial.class);
+		trials.add(Tests4J_EnglishConstants_Trial.class);
 		
 		trials.add(Tests4J_LineDiffTextDisplayMessages_Trial.class);
 		trials.add(Tests4J_ParamsReaderMessages_Trial.class);

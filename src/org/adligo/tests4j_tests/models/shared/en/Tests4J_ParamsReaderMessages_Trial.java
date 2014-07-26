@@ -13,7 +13,7 @@ public class Tests4J_ParamsReaderMessages_Trial extends SourceFileCountingTrial 
 
 	@Test
 	public void testMessages() {
-		I_Tests4J_ParamReaderMessages messages = Tests4J_EnglishConstants.ENGLISH.getParamReaderConstants();
+		I_Tests4J_ParamReaderMessages messages = Tests4J_EnglishConstants.ENGLISH.getParamReaderMessages();
 		I18N_Asserter asserter = new I18N_Asserter(this);
 		asserter.assertConstant("A auth code, or auth code default is required.", 
 				messages.getAuthCodeOrAuthCodeDefaultRequired());
@@ -34,11 +34,11 @@ public class Tests4J_ParamsReaderMessages_Trial extends SourceFileCountingTrial 
 
 	@Override
 	public int getAsserts() {
-		return 9;
+		return 13;
 	}
 
 	@Override
 	public int getUniqueAsserts() {
-		return 9;
+		return 13;
 	}
 }

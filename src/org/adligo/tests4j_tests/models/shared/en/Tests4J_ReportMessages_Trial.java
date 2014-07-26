@@ -17,7 +17,7 @@ public class Tests4J_ReportMessages_Trial extends SourceFileCountingTrial {
 	public void testMessages() {
 		I_Tests4J_ReportMessages messages = Tests4J_EnglishConstants.ENGLISH.getReportMessages();
 		I18N_Asserter asserter = new I18N_Asserter(this);
-		asserter.assertConstant("% done.", 
+		asserter.assertConstant("100.0% done.", 
 				messages.getDoneEOS());
 		
 		asserter.assertConstant(" failed.", 
@@ -34,7 +34,7 @@ public class Tests4J_ReportMessages_Trial extends SourceFileCountingTrial {
 		asserter.assertConstant("Passed!", 
 				messages.getPassedFlag());
 		
-		asserter.assertConstant(" complete...", 
+		asserter.assertConstant("% complete...", 
 				messages.getPctComplete());
 		asserter.assertConstant(" starting Test: ", 
 				messages.getStartingTest());
@@ -61,11 +61,11 @@ public class Tests4J_ReportMessages_Trial extends SourceFileCountingTrial {
 
 	@Override
 	public int getAsserts() {
-		return 29;
+		return 43;
 	}
 
 	@Override
 	public int getUniqueAsserts() {
-		return 29;
+		return 43;
 	}
 }

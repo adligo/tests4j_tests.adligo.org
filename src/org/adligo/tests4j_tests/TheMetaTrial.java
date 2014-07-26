@@ -15,7 +15,7 @@ public class TheMetaTrial  extends MetaTrial {
 		//Note when I ignored
 		// MultiRecordingTrial I lost 15% main coverage
 		//TODO reimpl it vs the ThreadLocals
-		super(46.0, 28.3);
+		super(46.0, 29.0);
 		//hmm package comparison data to include;
 		// passing tests
 		// relevant classes with trials %
@@ -62,6 +62,7 @@ public class TheMetaTrial  extends MetaTrial {
 		assertGreaterThanOrEquals(100.0, calc.getPct("org.adligo.tests4j.models.shared.asserts.common"));
 		assertGreaterThanOrEquals(100.0, calc.getPct("org.adligo.tests4j.models.shared.asserts.line_text"));
 		assertGreaterThanOrEquals(100.0, calc.getPct("org.adligo.tests4j.models.shared.common"));
+		assertGreaterThanOrEquals(100.0, calc.getPct("org.adligo.tests4j.models.shared.en"));
 		assertGreaterThanOrEquals(100.0, calc.getPct("org.adligo.tests4j.models.shared.metadata"));
 		assertGreaterThanOrEquals(100.0, calc.getPct("org.adligo.tests4j.models.shared.xml"));
 		
@@ -82,11 +83,11 @@ public class TheMetaTrial  extends MetaTrial {
 			sb.append("'");
 			sb.append(System.lineSeparator());
 		}
-		assertEquals(sb.toString(), 78, metadata.getAllTrialsCount());
+		assertEquals(sb.toString(), 80, metadata.getAllTrialsCount());
 		//should be pretty close to this, the count got off when I 
 		//added the testMinCoverage, method to sourceFileTrials
 		
-		assertEquals(387,  metadata.getAllTestsCount());
+		assertEquals(390,  metadata.getAllTestsCount());
 		
 	}
 

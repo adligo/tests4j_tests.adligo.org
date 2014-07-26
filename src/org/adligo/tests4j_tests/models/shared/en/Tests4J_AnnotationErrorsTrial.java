@@ -89,11 +89,11 @@ public class Tests4J_AnnotationErrorsTrial extends SourceFileCountingTrial {
 
 	@Override
 	public int getAsserts() {
-		return 53;
+		return 79;
 	}
 
 	@Override
 	public int getUniqueAsserts() {
-		return 53;
+		return 79;
 	}
 }

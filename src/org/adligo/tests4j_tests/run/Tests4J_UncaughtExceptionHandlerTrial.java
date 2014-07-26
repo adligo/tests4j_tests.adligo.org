@@ -2,7 +2,7 @@ package org.adligo.tests4j_tests.run;
 
 import org.adligo.tests4j.models.shared.asserts.ExpectedThrownData;
 import org.adligo.tests4j.models.shared.asserts.common.I_Thrower;
-import org.adligo.tests4j.models.shared.system.DefaultLogger;
+import org.adligo.tests4j.models.shared.system.DefaultLog;
 import org.adligo.tests4j.models.shared.system.I_Tests4J_Log;
 import org.adligo.tests4j.models.shared.trials.AdditionalInstrumentation;
 import org.adligo.tests4j.models.shared.trials.AfterTrial;
@@ -49,7 +49,7 @@ public class Tests4J_UncaughtExceptionHandlerTrial extends SourceFileCountingTri
 	
 	@AfterTrial
 	public static void afterTrial() {
-		DefaultLogger defaultLogger = new DefaultLogger();
+		DefaultLog defaultLogger = new DefaultLog();
 		MockTests4J_UncaughtExceptionHandler.setStaticLogger(defaultLogger);
 	}
 	

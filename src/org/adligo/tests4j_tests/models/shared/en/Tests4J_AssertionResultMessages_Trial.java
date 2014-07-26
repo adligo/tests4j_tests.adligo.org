@@ -78,11 +78,11 @@ public class Tests4J_AssertionResultMessages_Trial extends SourceFileCountingTri
 
 	@Override
 	public int getAsserts() {
-		return 35;
+		return 52;
 	}
 
 	@Override
 	public int getUniqueAsserts() {
-		return 35;
+		return 52;
 	}
 }

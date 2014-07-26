@@ -5,6 +5,7 @@ import java.util.Collections;
 import org.adligo.tests4j.models.shared.asserts.ExpectedThrownData;
 import org.adligo.tests4j.models.shared.asserts.common.I_Thrower;
 import org.adligo.tests4j.models.shared.common.MethodBlocker;
+import org.adligo.tests4j.models.shared.system.Tests4J_Constants;
 import org.adligo.tests4j.models.shared.trials.AdditionalInstrumentation;
 import org.adligo.tests4j.models.shared.trials.SourceFileScope;
 import org.adligo.tests4j.models.shared.trials.Test;
@@ -54,7 +55,7 @@ public class MethodBlockerTrial extends SourceFileCountingTrial {
 	@Test
 	public void testConstructorException() {
 		assertThrown(new ExpectedThrownData(new IllegalArgumentException( 
-				"MethodBlocker requires at least one Allowed Caller Class Name.")), 
+				Tests4J_Constants.CONSTANTS.getMethodBlockerRequiresAtLeastOneAllowedCallerClassNames())), 
 			new I_Thrower() {
 			
 			@Override
@@ -69,10 +70,13 @@ public class MethodBlockerTrial extends SourceFileCountingTrial {
 	
 	@Test
 	public void testMethodWithBlockThrowsException() {
+		
+		String message = Tests4J_Constants.CONSTANTS.getTheMethodCanOnlyBeCalledBy_PartOne() +
+				"class org.adligo.tests4j_tests.models.shared.common.mocks.MockWithMethodBlocker.doA" +
+				Tests4J_Constants.CONSTANTS.getTheMethodCanOnlyBeCalledBy_PartTwo() +
+				"[org.adligo.tests4j_tests.models.shared.common.MethodBlockerTrial]";
 		final MockWithMethodBlocker mockWithMethodBlocker = new MockWithMethodBlocker();
-		assertThrown(new ExpectedThrownData(new IllegalStateException(
-		"The Method class org.adligo.tests4j_tests.models.shared.common.mocks.MockWithMethodBlocker.doA"
-		+ " may only be called by [org.adligo.tests4j_tests.models.shared.common.MethodBlockerTrial]")), 
+		assertThrown(new ExpectedThrownData(new IllegalStateException(message)), 
 			new I_Thrower() {
 			
 			@Override
@@ -88,9 +92,11 @@ public class MethodBlockerTrial extends SourceFileCountingTrial {
 		// this test is a bit confusing
 		mockWithMethodBlocker.doA();
 		
-		assertThrown(new ExpectedThrownData(new IllegalStateException(
-		"The Method class org.adligo.tests4j_tests.models.shared.common.mocks.MockWithMethodBlocker.doB "
-		+ "may only be called by [org.adligo.tests4j_tests.models.shared.common.mocks.MockWithMethodBlocker]")), 
+		message = Tests4J_Constants.CONSTANTS.getTheMethodCanOnlyBeCalledBy_PartOne() +
+				"class org.adligo.tests4j_tests.models.shared.common.mocks.MockWithMethodBlocker.doB" +
+				Tests4J_Constants.CONSTANTS.getTheMethodCanOnlyBeCalledBy_PartTwo() +
+				"[org.adligo.tests4j_tests.models.shared.common.mocks.MockWithMethodBlocker]";
+		assertThrown(new ExpectedThrownData(new IllegalStateException(message)), 
 		new I_Thrower() {
 			
 			@Override

@@ -2,7 +2,7 @@ package org.adligo.tests4j_tests.run;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 
-import org.adligo.tests4j.models.shared.system.DefaultLogger;
+import org.adligo.tests4j.models.shared.system.DefaultLog;
 import org.adligo.tests4j.models.shared.system.DefaultSystem;
 import org.adligo.tests4j.models.shared.system.I_Tests4J_System;
 import org.adligo.tests4j.models.shared.system.I_Tests4J_Controls;
@@ -141,7 +141,7 @@ public class Tests4JTrial extends SourceFileCountingTrial implements I_Tests4J_D
 		controllsToSend = new Tests4J_Controls();
 		
 		MockTests4J mock = new MockTests4J();
-		I_Tests4J_Log logger = new DefaultLogger();
+		I_Tests4J_Log logger = new DefaultLog();
 		I_Tests4J_System system = new DefaultSystem();
 		
 		mock.setSystemDelegate(system);
@@ -165,7 +165,7 @@ public class Tests4JTrial extends SourceFileCountingTrial implements I_Tests4J_D
 		
 		
 		MockTests4J mock = new MockTests4J();
-		I_Tests4J_Log logger = new DefaultLogger();
+		I_Tests4J_Log logger = new DefaultLog();
 		I_Tests4J_System system = new DefaultSystem();
 		
 		mock.setSystemDelegate(system);
@@ -190,7 +190,7 @@ public class Tests4JTrial extends SourceFileCountingTrial implements I_Tests4J_D
 		I_Tests4J_Listener listener = new MockTests4J_Listener();
 		
 		MockTests4J mock = new MockTests4J();
-		I_Tests4J_Log logger = new DefaultLogger();
+		I_Tests4J_Log logger = new DefaultLog();
 		I_Tests4J_System system = new DefaultSystem();
 		
 		mock.setSystemDelegate(system);

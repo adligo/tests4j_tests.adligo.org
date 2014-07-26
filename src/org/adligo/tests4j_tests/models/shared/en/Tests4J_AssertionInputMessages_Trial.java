@@ -42,11 +42,11 @@ public class Tests4J_AssertionInputMessages_Trial extends SourceFileCountingTria
 
 	@Override
 	public int getAsserts() {
-		return 13;
+		return 19;
 	}
 
 	@Override
 	public int getUniqueAsserts() {
-		return 13;
+		return 19;
 	}
 }

@@ -20,7 +20,7 @@ public class CommonPackageMetaTrial  extends MetaTrial {
 	private RelevantClassesWithTrialsCalculator calc;
 	
 	public CommonPackageMetaTrial() {
-		super(90.0, 100.0);
+		super(45.0, 100.0);
 	}
 	
 

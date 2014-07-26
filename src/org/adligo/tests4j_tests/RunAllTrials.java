@@ -9,7 +9,7 @@ import java.util.concurrent.Executors;
 import org.adligo.tests4j.models.shared.metadata.I_TrialRunMetadata;
 import org.adligo.tests4j.models.shared.results.I_TrialResult;
 import org.adligo.tests4j.models.shared.results.I_TrialRunResult;
-import org.adligo.tests4j.models.shared.system.DefaultLogger;
+import org.adligo.tests4j.models.shared.system.DefaultLog;
 import org.adligo.tests4j.models.shared.system.DefaultSystem;
 import org.adligo.tests4j.models.shared.system.I_Tests4J_Controls;
 import org.adligo.tests4j.models.shared.system.I_Tests4J_CoveragePlugin;
@@ -21,15 +21,15 @@ import org.adligo.tests4j.models.shared.trials.I_Trial;
 import org.adligo.tests4j.run.Tests4J;
 import org.adligo.tests4j.run.discovery.Tests4J_ParamsReader;
 import org.adligo.tests4j.shared.report.summary.TestsDisplay;
-import org.adligo.tests4j.shared.report.summary.TrialsProgressDisplay;
 import org.adligo.tests4j.shared.report.summary.TrialsDisplay;
+import org.adligo.tests4j.shared.report.summary.TrialsProgressDisplay;
 import org.adligo.tests4j_4jacoco.plugin.ScopedJacocoPluginFactory;
 import org.adligo.tests4j_tests.base_abstract_trials.Counts;
 import org.adligo.tests4j_tests.base_abstract_trials.I_CountingTrial;
 
 public class RunAllTrials implements I_Tests4J_Listener {
 	static long start = System.currentTimeMillis();
-	static I_Tests4J_Log logger = new DefaultLogger();
+	static I_Tests4J_Log logger = new DefaultLog();
 	private static volatile List<String> trialsNotCompleted = new CopyOnWriteArrayList<String>();
 	private static ExecutorService trialsNotCompletedService = Executors.newSingleThreadExecutor();
 	
@@ -43,7 +43,7 @@ public class RunAllTrials implements I_Tests4J_Listener {
 		
 		params.setLogState(TrialsDisplay.class, false);
 		params.setLogState(TestsDisplay.class, false);
-		//params.setLogState(TrialsProgressReporter.class, false);
+		params.setLogState(TrialsProgressDisplay.class, false);
 		
 		
 		params.setMetaTrialClass(TheMetaTrial.class);
