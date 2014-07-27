@@ -1,196 +1,158 @@
 package org.adligo.tests4j_tests.run.discovery;
 
-import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.PriorityQueue;
 
-import org.adligo.tests4j.models.shared.metadata.I_MachineMetadata;
-import org.adligo.tests4j.models.shared.metadata.I_SourceInfoMetadata;
-import org.adligo.tests4j.models.shared.metadata.I_TestMetadata;
-import org.adligo.tests4j.models.shared.metadata.I_TrialMetadata;
-import org.adligo.tests4j.models.shared.metadata.I_TrialRunMetadata;
-import org.adligo.tests4j.models.shared.metadata.I_UseCaseMetadata;
-import org.adligo.tests4j.models.shared.metadata.MachineMetadata;
-import org.adligo.tests4j.models.shared.metadata.MachineMetadataMutant;
-import org.adligo.tests4j.models.shared.metadata.RelevantClassesWithTrialsCalculator;
-import org.adligo.tests4j.models.shared.metadata.SourceInfoMetadata;
-import org.adligo.tests4j.models.shared.metadata.SourceInfoMetadataMutant;
-import org.adligo.tests4j.models.shared.metadata.TestMetadata;
-import org.adligo.tests4j.models.shared.metadata.TestMetadataMutant;
-import org.adligo.tests4j.models.shared.metadata.TrialMetadata;
-import org.adligo.tests4j.models.shared.metadata.TrialMetadataMutant;
-import org.adligo.tests4j.models.shared.metadata.TrialRunMetadata;
-import org.adligo.tests4j.models.shared.metadata.TrialRunMetadataMutant;
-import org.adligo.tests4j.models.shared.metadata.UseCaseMetadata;
-import org.adligo.tests4j.models.shared.trials.AbstractTrial;
-import org.adligo.tests4j.models.shared.trials.AdditionalInstrumentation;
-import org.adligo.tests4j.models.shared.trials.AfterTrial;
-import org.adligo.tests4j.models.shared.trials.ApiTrial;
-import org.adligo.tests4j.models.shared.trials.BeforeTrial;
-import org.adligo.tests4j.models.shared.trials.I_AbstractTrial;
-import org.adligo.tests4j.models.shared.trials.I_ApiTrial;
-import org.adligo.tests4j.models.shared.trials.I_MetaTrial;
-import org.adligo.tests4j.models.shared.trials.I_SourceFileTrial;
-import org.adligo.tests4j.models.shared.trials.I_Trial;
-import org.adligo.tests4j.models.shared.trials.I_TrialBindings;
-import org.adligo.tests4j.models.shared.trials.I_UseCaseTrial;
-import org.adligo.tests4j.models.shared.trials.IgnoreTest;
-import org.adligo.tests4j.models.shared.trials.MetaTrial;
-import org.adligo.tests4j.models.shared.trials.PackageScope;
+import org.adligo.tests4j.models.shared.system.I_Tests4J_System;
 import org.adligo.tests4j.models.shared.trials.SourceFileScope;
-import org.adligo.tests4j.models.shared.trials.SourceFileTrial;
 import org.adligo.tests4j.models.shared.trials.Test;
-import org.adligo.tests4j.models.shared.trials.TrialBindings;
-import org.adligo.tests4j.models.shared.trials.TrialRecursion;
-import org.adligo.tests4j.models.shared.trials.TrialTimeout;
-import org.adligo.tests4j.models.shared.trials.TrialTypeAnnotation;
-import org.adligo.tests4j.models.shared.trials.UseCaseScope;
-import org.adligo.tests4j.models.shared.trials.UseCaseTrial;
 import org.adligo.tests4j.run.discovery.ClassDiscovery;
+import org.adligo.tests4j.run.discovery.I_Dependency;
 import org.adligo.tests4j_tests.base_abstract_trials.SourceFileCountingTrial;
+import org.adligo.tests4j_tests.run.discovery.class_discovery_mocks.MockWithEverything;
+import org.adligo.tests4j_tests.run.discovery.class_discovery_mocks.MockWithField;
+import org.adligo.tests4j_tests.run.discovery.class_discovery_mocks.MockWithMethodParams;
+import org.adligo.tests4j_tests.run.discovery.class_discovery_mocks.MockWithMethodReturn;
+import org.adligo.tests4j_tests.run.discovery.class_discovery_mocks.MockWithNothing;
 
-@SourceFileScope (sourceClass=ClassDiscovery.class, minCoverage=51.0)
+
+@SourceFileScope (sourceClass=ClassDiscovery.class, minCoverage=80.0)
 public class ClassDiscoveryTrial extends SourceFileCountingTrial {
 
 	@Test
-	public void testDiscoveryPackage() throws Exception {
-		ClassDiscovery cd = new ClassDiscovery("org.adligo.tests4j.run.discovery");
-		List<String> clazzNames = cd.getClassNames();
-		assertNotNull(clazzNames);
-		assertEquals(11, clazzNames.size());
-		assertTrue(clazzNames.contains("org.adligo.tests4j.run.discovery.AfterTrialAuditor"));
-		assertTrue(clazzNames.contains("org.adligo.tests4j.run.discovery.BeforeTrialAuditor"));
-		assertTrue(clazzNames.contains("org.adligo.tests4j.run.discovery.ClassDiscovery"));
+	public void testNothing() {
+		List<String> ignoredPackages = new ArrayList<>();
+		ignoredPackages.add("java");
 		
-		assertTrue(clazzNames.contains("org.adligo.tests4j.run.discovery.I_TrialDescription"));
-		assertTrue(clazzNames.contains("org.adligo.tests4j.run.discovery.TestAuditor"));
-		assertTrue(clazzNames.contains("org.adligo.tests4j.run.discovery.Tests4J_ParamsReader"));
-		assertTrue(clazzNames.contains("org.adligo.tests4j.run.discovery.TestDescription"));
-		assertTrue(clazzNames.contains("org.adligo.tests4j.run.discovery.TopPackageSet"));
-		
-		assertTrue(clazzNames.contains("org.adligo.tests4j.run.discovery.TrialDescription"));
-		assertTrue(clazzNames.contains("org.adligo.tests4j.run.discovery.TrialTypeFinder"));
-		assertTrue(clazzNames.contains("org.adligo.tests4j.run.discovery.TrialVerificationFailure"));
-		
-		List<ClassDiscovery>  subs = cd.getSubPackages();
-		assertNotNull(subs);
-		assertEquals(0, subs.size());
+		ClassDiscovery cd = new ClassDiscovery(ignoredPackages, MockWithNothing.class, getLog());
+		PriorityQueue<I_Dependency> deps = cd.getDependencyQueue();
+		assertEquals(1, deps.size());
+		I_Dependency dep = deps.poll();
+		assertEquals(MockWithNothing.class.getName(), dep.getClazzName());
+		assertEquals(0, dep.getReferences());
 	}
 	
-	
+	@Test
+	public void testField() {
+		List<String> ignoredPackages = new ArrayList<>();
+		ignoredPackages.add("java");
+		
+		ClassDiscovery cd = new ClassDiscovery(ignoredPackages, MockWithField.class, getLog());
+		PriorityQueue<I_Dependency> deps = cd.getDependencyQueue();
+		assertEquals(2, deps.size());
+		Map<String, I_Dependency>  results = getDependencieMap(deps);
+		
+		I_Dependency dep = results.get(I_Tests4J_System.class.getName());
+		assertNotNull(dep);
+		assertEquals(1, dep.getReferences());
+		
+		dep = results.get(MockWithField.class.getName());
+		assertNotNull(dep);
+		assertEquals(0, dep.getReferences());
+	}
 
-	@Test
-	public void testMetadataPackage() throws Exception {
-		assertMetadataPackage();
-	}
-
-	private ClassDiscovery assertMetadataPackage() throws IOException {
-		ClassDiscovery cd = new ClassDiscovery("org.adligo.tests4j.models.shared.metadata");
-		List<String> classNames = cd.getClassNames();
-		assertContains(classNames, I_MachineMetadata.class.getName());
-		assertContains(classNames, I_SourceInfoMetadata.class.getName());
-		assertContains(classNames, I_TestMetadata.class.getName());
-		assertContains(classNames, I_TrialMetadata.class.getName());
-		assertContains(classNames, I_TrialRunMetadata.class.getName());
-		assertContains(classNames, I_UseCaseMetadata.class.getName());
-		
-		assertContains(classNames, MachineMetadata.class.getName());
-		assertContains(classNames, MachineMetadataMutant.class.getName());
-		
-		assertContains(classNames, RelevantClassesWithTrialsCalculator.class.getName());
-		
-		assertContains(classNames, SourceInfoMetadata.class.getName());
-		assertContains(classNames, SourceInfoMetadataMutant.class.getName());
-		
-		assertContains(classNames, TestMetadata.class.getName());
-		assertContains(classNames, TestMetadataMutant.class.getName());
-		
-		assertContains(classNames, TrialMetadata.class.getName());
-		assertContains(classNames, TrialMetadataMutant.class.getName());
-		assertContains(classNames, TrialRunMetadata.class.getName());
-		assertContains(classNames, TrialRunMetadataMutant.class.getName());
-		assertContains(classNames, UseCaseMetadata.class.getName());
-		
-		assertEquals(18, classNames.size());
-		List<ClassDiscovery> children =  cd.getSubPackages();
-		assertEquals(0, children.size());
-		return cd;
-	}
-	
-	@Test
-	public void testModelsShared() throws Exception {
-		ClassDiscovery cd = new ClassDiscovery("org.adligo.tests4j.models.shared.trials");
-		List<String> classNames = cd.getClassNames();
-		assertContains(classNames, AdditionalInstrumentation.class.getName());
-		assertContains(classNames, AbstractTrial.class.getName());
-		assertContains(classNames, AfterTrial.class.getName());
-		assertContains(classNames, ApiTrial.class.getName());
-		
-		assertContains(classNames, BeforeTrial.class.getName());
-		
-		assertContains(classNames, I_AbstractTrial.class.getName());
-		assertContains(classNames, I_ApiTrial.class.getName());
-		assertContains(classNames, I_Trial.class.getName());
-		assertContains(classNames, I_TrialBindings.class.getName());
-		assertContains(classNames, I_MetaTrial.class.getName());
-		assertContains(classNames, I_SourceFileTrial.class.getName());
-		assertContains(classNames, I_UseCaseTrial.class.getName());
-		
-		assertContains(classNames, MetaTrial.class.getName());
-		
-		assertContains(classNames, IgnoreTest.class.getName());
-		
-		assertContains(classNames, PackageScope.class.getName());
-		assertContains(classNames, SourceFileScope.class.getName());
-		assertContains(classNames, SourceFileTrial.class.getName());
-		assertContains(classNames, Test.class.getName());
-		
-		assertContains(classNames, TrialBindings.class.getName());
-		assertContains(classNames, TrialTimeout.class.getName());
-		assertContains(classNames, TrialTypeAnnotation.class.getName());
-		assertContains(classNames, TrialRecursion.class.getName());
-		
-		assertContains(classNames, UseCaseScope.class.getName());
-		assertContains(classNames, UseCaseTrial.class.getName());
-		
-		assertEquals(25, classNames.size());
-		List<ClassDiscovery> children =  cd.getSubPackages();
-		
-		
-		assertEquals(0, children.size());
-	}
-	
-	
-	@Test
-	public void testTestForJ() throws Exception {
-		ClassDiscovery cd = new ClassDiscovery("org.adligo.tests4j");
-		List<String> classNames = cd.getClassNames();
-		
-		assertEquals(0, classNames.size());
-		List<ClassDiscovery> children =  cd.getSubPackages();
-		List<String> childNames = new ArrayList<String>();
-		for(ClassDiscovery i: children) {
-			childNames.add(i.getPackageName());
+	private Map<String, I_Dependency>  getDependencieMap(PriorityQueue<I_Dependency> deps) {
+		Map<String, I_Dependency> results = new HashMap<String, I_Dependency>();
+		I_Dependency dep = deps.poll();
+		while (dep != null) {
+			results.put(dep.getClazzName(), dep);
+			dep = deps.poll();
 		}
-		assertContains(childNames, "org.adligo.tests4j.models");
-		assertContains(childNames, "org.adligo.tests4j.run");
-		assertContains(childNames, "org.adligo.tests4j.shared");
+		return results;
+	}
+	
+	@Test
+	public void testMockWithMethodReturn() {
+		List<String> ignoredPackages = new ArrayList<>();
+		ignoredPackages.add("java");
 		
-		assertEquals(3, children.size());
+		ClassDiscovery cd = new ClassDiscovery(ignoredPackages, MockWithMethodReturn.class, getLog());
+		PriorityQueue<I_Dependency> deps = cd.getDependencyQueue();
+		assertEquals(2, deps.size());
+		Map<String, I_Dependency>  results = getDependencieMap(deps);
+		
+		I_Dependency dep = results.get(MockWithNothing.class.getName());
+		assertNotNull(dep);
+		assertEquals(1, dep.getReferences());
+		
+		dep = results.get(MockWithMethodReturn.class.getName());
+		assertNotNull(dep);
+		assertEquals(0, dep.getReferences());
+	}
+	
+	@Test
+	public void testMockWithMethodParams() {
+		List<String> ignoredPackages = new ArrayList<>();
+		ignoredPackages.add("java");
+		
+		ClassDiscovery cd = new ClassDiscovery(ignoredPackages, MockWithMethodParams.class, getLog());
+		PriorityQueue<I_Dependency> deps = cd.getDependencyQueue();
+		assertEquals(3, deps.size());
+		Map<String, I_Dependency>  results = getDependencieMap(deps);
+		
+		I_Dependency dep = results.get(MockWithNothing.class.getName());
+		assertNotNull(dep);
+		assertEquals(2, dep.getReferences());
+		
+		dep = results.get(MockWithMethodReturn.class.getName());
+		assertNotNull(dep);
+		assertEquals(1, dep.getReferences());
+		
+		dep = results.get(MockWithMethodParams.class.getName());
+		assertNotNull(dep);
+		assertEquals(0, dep.getReferences());
+	}
+	
+	@Test
+	public void testMockWithEverything() {
+		List<String> ignoredPackages = new ArrayList<>();
+		ignoredPackages.add("java");
+		
+		ClassDiscovery cd = new ClassDiscovery(ignoredPackages, MockWithEverything.class, getLog());
+		PriorityQueue<I_Dependency> deps = cd.getDependencyQueue();
+		assertEquals(6, deps.size());
+		Map<String, I_Dependency>  results = getDependencieMap(deps);
+		
+		I_Dependency dep = results.get(MockWithNothing.class.getName());
+		assertNotNull(dep);
+		assertEquals(3, dep.getReferences());
+		
+		dep = results.get(MockWithMethodReturn.class.getName());
+		assertNotNull(dep);
+		assertEquals(2, dep.getReferences());
+		
+		dep = results.get(MockWithMethodParams.class.getName());
+		assertNotNull(dep);
+		assertEquals(1, dep.getReferences());
+		
+		dep = results.get(MockWithField.class.getName());
+		assertNotNull(dep);
+		assertEquals(1, dep.getReferences());
+		
+		dep = results.get(I_Tests4J_System.class.getName());
+		assertNotNull(dep);
+		assertEquals(1, dep.getReferences());
+		
+		dep = results.get(MockWithEverything.class.getName());
+		assertNotNull(dep);
+		assertEquals(0, dep.getReferences());
 	}
 	
 	@Override
 	public int getTests() {
-		return 4;
+		return 5;
 	}
 
 	@Override
 	public int getAsserts() {
-		return 66;
+		return 33;
 	}
 
 	@Override
 	public int getUniqueAsserts() {
-		return 56;
+		return 31;
 	}
 }
