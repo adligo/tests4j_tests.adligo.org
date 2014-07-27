@@ -11,11 +11,7 @@ import org.adligo.tests4j.models.shared.results.I_TrialRunResult;
 import org.adligo.tests4j.models.shared.system.I_Tests4J_Controls;
 import org.adligo.tests4j.models.shared.system.I_Tests4J_Listener;
 import org.adligo.tests4j.models.shared.system.Tests4J_Params;
-import org.adligo.tests4j.models.shared.trials.AbstractTrial;
 import org.adligo.tests4j.models.shared.trials.I_Trial;
-import org.adligo.tests4j.run.Tests4J;
-import org.adligo.tests4j.run.helpers.SystemExitTracker;
-import org.adligo.tests4j.shared.report.summary.SummaryReporter;
 
 /**
  * simulates a run of tests4j

@@ -8,6 +8,8 @@ import org.adligo.tests4j.models.shared.system.Tests4J_Params;
 import org.adligo.tests4j.models.shared.trials.I_Trial;
 import org.adligo.tests4j.run.Tests4J;
 import org.adligo.tests4j_4jacoco.plugin.ScopedJacocoPluginFactory;
+import org.adligo.tests4j_4jacoco.plugin.TrialInstrumenter;
+import org.adligo.tests4j_4jacoco.plugin.instrumentation.common.ClassInstrumenter;
 
 public class RunPkgTrials implements I_Tests4J_TrialList {
 
@@ -16,38 +18,30 @@ public class RunPkgTrials implements I_Tests4J_TrialList {
 		Tests4J_Params params = new Tests4J_Params();
 		params.addTrials(new RunPkgTrials());
 		
-		//Tests4J_Manager
+		params.setLogState(TrialInstrumenter.class, true);
 		
+		params.setLogState(ClassInstrumenter.class, true);
 		params.setCoveragePluginFactoryClass(ScopedJacocoPluginFactory.class);
 		Tests4J.run(params);
 	}
-
-
-	public static int getAssertions() {
-		return 92;
-	}
-	
 
 	@Override
 	public List<Class<? extends I_Trial>> getTrials() {
 		List<Class<? extends I_Trial>> trials = new ArrayList<Class<? extends I_Trial>>();
 		
+		trials.add(AbstractProgressDisplayTrial.class);
 		trials.add(LineDiffTextDisplayTrial.class);
-	
 		
+		trials.add(RemoteProgressDisplayTrial.class);
+		trials.add(SetupProgressDisplayTrial.class);
 		
+		trials.add(TestDisplayTrial.class);
+		trials.add(TestFailedDisplayTrial.class);
+		trials.add(TestsProgressDisplayTrial.class);
+		
+		trials.add(TrialDisplayTrial.class);
+		trials.add(TrialFailedDisplayTrial.class);
+		trials.add(TrialsProgressDisplayTrial.class);
 		return trials;
-	}
-
-	public int getMinTests() {
-		return 16;
-	}
-
-	public int getMinUniqueAssertions() {
-		return 84;
-	}
-
-	public int getMinAsserts() {
-		return 92;
 	}
 }

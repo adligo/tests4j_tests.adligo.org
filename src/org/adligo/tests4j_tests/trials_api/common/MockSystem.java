@@ -48,4 +48,10 @@ public class MockSystem implements I_Tests4J_System {
 		return System.currentTimeMillis();
 	}
 
+	@Override
+	public String getLineSeperator() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

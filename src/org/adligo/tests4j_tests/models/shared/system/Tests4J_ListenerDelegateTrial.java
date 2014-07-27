@@ -183,4 +183,10 @@ public class Tests4J_ListenerDelegateTrial extends SourceFileCountingTrial imple
 	public boolean isMainLog() {
 		return false;
 	}
+
+	@Override
+	public String getLineSeperator() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

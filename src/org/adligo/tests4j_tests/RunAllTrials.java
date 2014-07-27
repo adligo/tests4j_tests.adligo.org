@@ -20,10 +20,11 @@ import org.adligo.tests4j.models.shared.system.Tests4J_Params;
 import org.adligo.tests4j.models.shared.trials.I_Trial;
 import org.adligo.tests4j.run.Tests4J;
 import org.adligo.tests4j.run.discovery.Tests4J_ParamsReader;
-import org.adligo.tests4j.shared.report.summary.TestsDisplay;
-import org.adligo.tests4j.shared.report.summary.TrialsDisplay;
+import org.adligo.tests4j.shared.report.summary.TestDisplay;
+import org.adligo.tests4j.shared.report.summary.TrialDisplay;
 import org.adligo.tests4j.shared.report.summary.TrialsProgressDisplay;
 import org.adligo.tests4j_4jacoco.plugin.ScopedJacocoPluginFactory;
+import org.adligo.tests4j_4jacoco.plugin.TrialInstrumenter;
 import org.adligo.tests4j_tests.base_abstract_trials.Counts;
 import org.adligo.tests4j_tests.base_abstract_trials.I_CountingTrial;
 
@@ -41,10 +42,10 @@ public class RunAllTrials implements I_Tests4J_Listener {
 		Tests4J_Params params = getTests(ScopedJacocoPluginFactory.class);
 		
 		
-		params.setLogState(TrialsDisplay.class, false);
-		params.setLogState(TestsDisplay.class, false);
+		params.setLogState(TrialDisplay.class, false);
+		params.setLogState(TestDisplay.class, false);
 		params.setLogState(TrialsProgressDisplay.class, false);
-		
+		//params.setLogState(TrialInstrumenter.class, true);
 		
 		params.setMetaTrialClass(TheMetaTrial.class);
 		//params.setThreadPoolSize(1);

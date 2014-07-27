@@ -12,7 +12,7 @@ import org.adligo.tests4j_tests.base_abstract_trials.SourceFileCountingTrial;
 import org.adligo.tests4j_tests.run.mocks.BadMockTests4J_UncaughtExceptionHandler;
 import org.adligo.tests4j_tests.run.mocks.MockTests4J_UncaughtExceptionHandler;
 
-@SourceFileScope (sourceClass=Tests4J_UncaughtExceptionHandlerTrial.class, minCoverage=76.0)
+@SourceFileScope (sourceClass=Tests4J_UncaughtExceptionHandlerTrial.class, minCoverage=74.0)
 @AdditionalInstrumentation (javaPackages="org.adligo.tests4j_tests.run.mocks")
 public class Tests4J_UncaughtExceptionHandlerTrial extends SourceFileCountingTrial implements I_Tests4J_Log {
 	private String lastLog;
@@ -81,5 +81,10 @@ public class Tests4J_UncaughtExceptionHandlerTrial extends SourceFileCountingTri
 	public boolean isMainLog() {
 		// TODO Auto-generated method stub
 		return false;
+	}
+	@Override
+	public String getLineSeperator() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

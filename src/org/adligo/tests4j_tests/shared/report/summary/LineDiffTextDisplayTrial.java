@@ -13,8 +13,6 @@ import org.adligo.tests4j.models.shared.asserts.line_text.TextLines;
 import org.adligo.tests4j.models.shared.asserts.line_text.TextLinesCompare;
 import org.adligo.tests4j.models.shared.asserts.line_text.TextLinesCompareResult;
 import org.adligo.tests4j.models.shared.en.Tests4J_EnglishConstants;
-import org.adligo.tests4j.models.shared.en.Tests4J_LineDiffTextDisplayMessages;
-import org.adligo.tests4j.models.shared.i18n.I_Tests4J_AssertionInputMessages;
 import org.adligo.tests4j.models.shared.i18n.I_Tests4J_LineDiffTextDisplayMessages;
 import org.adligo.tests4j.models.shared.system.I_Tests4J_Log;
 import org.adligo.tests4j.models.shared.trials.SourceFileScope;
@@ -317,5 +315,11 @@ public class LineDiffTextDisplayTrial extends SourceFileCountingTrial implements
 	@Override
 	public void log(String p) {
 		output.add(p);
+	}
+
+	@Override
+	public String getLineSeperator() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

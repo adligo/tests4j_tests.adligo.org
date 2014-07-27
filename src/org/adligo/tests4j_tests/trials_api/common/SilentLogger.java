@@ -22,4 +22,10 @@ public class SilentLogger implements I_Tests4J_Log{
 		return false;
 	}
 
+	@Override
+	public String getLineSeperator() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
