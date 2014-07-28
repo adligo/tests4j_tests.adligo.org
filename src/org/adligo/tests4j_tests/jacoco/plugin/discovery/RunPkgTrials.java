@@ -1,4 +1,4 @@
-package org.adligo.tests4j_tests.run.discovery;
+package org.adligo.tests4j_tests.jacoco.plugin.discovery;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,9 +27,7 @@ public class RunPkgTrials implements I_Tests4J_TrialList {
 	public List<Class<? extends I_Trial>> getTrials() {
 		List<Class<? extends I_Trial>> trials = new ArrayList<Class<? extends I_Trial>>();
 		
-		trials.add(ClassDiscoveryTrial.class);
-		trials.add(PackageDiscoveryTrial.class);
-		trials.add(TopPackageSetTrial.class);
+		trials.add(ReferenceTrackingClassVisitorTrial.class);
 		
 		return trials;
 	}

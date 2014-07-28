@@ -61,6 +61,7 @@ import org.adligo.tests4j.run.discovery.TopPackageSet;
 import org.adligo.tests4j.run.discovery.TrialDescription;
 import org.adligo.tests4j.run.discovery.TrialTypeFinder;
 import org.adligo.tests4j.run.discovery.TrialVerificationFailure;
+import org.adligo.tests4j.run.helpers.CachedClassBytesClassLoader;
 import org.adligo.tests4j_tests.base_abstract_trials.SourceFileCountingTrial;
 import org.adligo.tests4j_tests.run.discovery.package_discovery_inner_mocks.TwoNestedRunnables;
 
@@ -72,7 +73,7 @@ public class PackageDiscoveryTrial extends SourceFileCountingTrial {
 		PackageDiscovery cd = new PackageDiscovery("org.adligo.tests4j.run.discovery");
 		List<String> clazzNames = cd.getClassNames();
 		assertNotNull(clazzNames);
-		assertEquals(15, clazzNames.size());
+		assertEquals(16, clazzNames.size());
 		assertContains(clazzNames, AfterTrialAuditor.class.getName());
 		assertContains(clazzNames, BeforeTrialAuditor.class.getName());
 		assertContains(clazzNames, Dependency.class.getName());

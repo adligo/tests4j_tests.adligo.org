@@ -39,7 +39,7 @@ public class RunPkgTrials implements I_Tests4J_TrialList {
 		
 		trials.add(ScopedJacocoPluginFactoryTrial.class);
 		trials.add(SimpleJacocoPluginFactoryTrial.class);
-		
+		trials.addAll(new org.adligo.tests4j_tests.jacoco.plugin.discovery.RunPkgTrials().getTrials());
 		trials.addAll(new org.adligo.tests4j_tests.jacoco.plugin.data.common.RunPkgTrials().getTrials());
 		
 		return trials;

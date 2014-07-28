@@ -1,4 +1,4 @@
-package org.adligo.tests4j_tests.run.discovery.class_discovery_mocks;
+package org.adligo.tests4j_tests.run.helpers.class_loading_mocks;
 
 import org.adligo.tests4j.models.shared.system.I_Tests4J_System;
 
