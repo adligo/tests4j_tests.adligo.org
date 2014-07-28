@@ -73,7 +73,7 @@ public class PackageDiscoveryTrial extends SourceFileCountingTrial {
 		PackageDiscovery cd = new PackageDiscovery("org.adligo.tests4j.run.discovery");
 		List<String> clazzNames = cd.getClassNames();
 		assertNotNull(clazzNames);
-		assertEquals(16, clazzNames.size());
+		assertEquals(15, clazzNames.size());
 		assertContains(clazzNames, AfterTrialAuditor.class.getName());
 		assertContains(clazzNames, BeforeTrialAuditor.class.getName());
 		assertContains(clazzNames, Dependency.class.getName());

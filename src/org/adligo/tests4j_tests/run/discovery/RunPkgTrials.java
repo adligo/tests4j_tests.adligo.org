@@ -28,6 +28,9 @@ public class RunPkgTrials implements I_Tests4J_TrialList {
 		List<Class<? extends I_Trial>> trials = new ArrayList<Class<? extends I_Trial>>();
 		
 		trials.add(ClassDiscoveryTrial.class);
+		trials.add(DependencyMutantTrial.class);
+		trials.add(DependencyTrial.class);
+		
 		trials.add(PackageDiscoveryTrial.class);
 		trials.add(TopPackageSetTrial.class);
 		

@@ -32,6 +32,11 @@ public class StringMethodsTrial extends SourceFileCountingTrial {
 		assertEquals(3, StringMethods.indexBoundsFix("hey", 3));
 		assertEquals(1, StringMethods.indexBoundsFix("hey", 1));
 		assertEquals(2, StringMethods.indexBoundsFix("hey", 2));
+		
+		assertEquals("/org/adligo/tests4j/models/shared/common/StringMethods.class",
+				StringMethods.toResource(StringMethods.class.getName()));
+		assertEquals("/org/adligo/tests4j_tests/models/shared/common/StringMethodsTrial.class",
+				StringMethods.toResource(StringMethodsTrial.class.getName()));
 	}
 	
 	@Override
@@ -41,11 +46,11 @@ public class StringMethodsTrial extends SourceFileCountingTrial {
 
 	@Override
 	public int getAsserts() {
-		return 12;
+		return 14;
 	}
 
 	@Override
 	public int getUniqueAsserts() {
-		return 7;
+		return 9;
 	}
 }

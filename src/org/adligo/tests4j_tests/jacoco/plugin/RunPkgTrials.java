@@ -38,6 +38,7 @@ public class RunPkgTrials implements I_Tests4J_TrialList {
 		List<Class<? extends I_Trial>> trials = new ArrayList<Class<? extends I_Trial>>();
 		
 		trials.add(ScopedJacocoPluginFactoryTrial.class);
+		trials.add(SharedClassListTrial.class);
 		trials.add(SimpleJacocoPluginFactoryTrial.class);
 		trials.addAll(new org.adligo.tests4j_tests.jacoco.plugin.discovery.RunPkgTrials().getTrials());
 		trials.addAll(new org.adligo.tests4j_tests.jacoco.plugin.data.common.RunPkgTrials().getTrials());
