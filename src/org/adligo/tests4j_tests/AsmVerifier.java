@@ -17,7 +17,8 @@ public class AsmVerifier {
 		try {
 			String internalName = Type.getInternalName(ScopedJacocoPlugin.class);
 			//internalName = "./org.adligo.tests4j_tests.models.shared.system.Tests4J_ParamsTrial.class";
-			internalName = "./bin/org/adligo/tests4j_tests/Foo.class";
+			//internalName = "./classes_e/org/adligo/tests4j_tests/TheMetaTrial.class";
+			internalName = "./classes_e/org/adligo/tests4j_tests/run/helpers/class_loading_mocks/MockWithArray.class";
 			
 			ASMifier.main(new String[]{
 					internalName});

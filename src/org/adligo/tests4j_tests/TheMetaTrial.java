@@ -84,11 +84,11 @@ public class TheMetaTrial  extends MetaTrial {
 			sb.append("'");
 			sb.append(System.lineSeparator());
 		}
-		assertEquals(sb.toString(), 96, metadata.getAllTrialsCount());
+		assertEquals(sb.toString(), 98, metadata.getAllTrialsCount());
 		//should be pretty close to this, the count got off when I 
 		//added the testMinCoverage, method to sourceFileTrials
 		
-		assertEquals(440,  metadata.getAllTestsCount());
+		assertEquals(458,  metadata.getAllTestsCount());
 		
 	}
 

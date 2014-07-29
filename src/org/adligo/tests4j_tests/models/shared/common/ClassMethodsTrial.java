@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.adligo.tests4j.models.shared.common.ClassMethods;
+import org.adligo.tests4j.models.shared.common.StringMethods;
 import org.adligo.tests4j.models.shared.trials.SourceFileScope;
 import org.adligo.tests4j.models.shared.trials.Test;
 import org.adligo.tests4j_tests.base_abstract_trials.SourceFileCountingTrial;
@@ -36,19 +37,42 @@ public class ClassMethodsTrial extends SourceFileCountingTrial {
 		assertContains(names, ClassMethodsTrial.class.getName());
 	}
 	
+	@Test
+	public void testToResource() {
+		assertEquals("/org/adligo/tests4j/models/shared/common/ClassMethods.class",
+				ClassMethods.toResource(ClassMethods.class.getName()));
+		assertEquals("/org/adligo/tests4j_tests/models/shared/common/ClassMethodsTrial.class",
+				ClassMethods.toResource(ClassMethodsTrial.class.getName()));
+	}
+	
+	@Test
+	public void testFromTypeDescription() {
+		assertEquals(ClassMethods.class.getName(),
+				ClassMethods.fromTypeDescription("Lorg/adligo/tests4j/models/shared/common/ClassMethods;"));
+		assertEquals(ClassMethodsTrial.class.getName(),
+				ClassMethods.fromTypeDescription("Lorg/adligo/tests4j_tests/models/shared/common/ClassMethodsTrial;"));
+		
+		assertEquals("",
+				ClassMethods.fromTypeDescription(""));
+		assertEquals("1",
+				ClassMethods.fromTypeDescription("1"));
+		assertEquals("",
+				ClassMethods.fromTypeDescription("12"));
+	}
+	
 	@Override
 	public int getTests() {
-		return 2;
+		return 4;
 	}
 
 	@Override
 	public int getAsserts() {
-		return 7;
+		return 14;
 	}
 
 	@Override
 	public int getUniqueAsserts() {
-		return 7;
+		return 13;
 	}
 	
 }
