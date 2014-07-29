@@ -4,6 +4,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -19,7 +20,7 @@ import org.adligo.tests4j_tests.run.helpers.class_loading_mocks.MockCachedClassB
 import org.adligo.tests4j_tests.run.helpers.class_loading_mocks.MockInputStream;
 import org.adligo.tests4j_tests.run.helpers.class_loading_mocks.MockWithNothing;
 
-@SourceFileScope (sourceClass=CachedClassBytesClassLoader.class, minCoverage=88.0)
+@SourceFileScope (sourceClass=CachedClassBytesClassLoader.class, minCoverage=84.0)
 public class CachedClassBytesClassLoaderTrial extends SourceFileCountingTrial {
 	private static final String MOCK_PACKAGE_NAME = MockWithNothing.class.getPackage().getName();
 	
@@ -35,9 +36,16 @@ public class CachedClassBytesClassLoaderTrial extends SourceFileCountingTrial {
 				null,
 				null);
 		assertSame(lm, cl.getLog());
-		assertEquals(Collections.emptySet(), cl.getPackagesWithoutWarning());
+		Set<String> pkgsWithOutWarn = cl.getPackagesWithoutWarning();
+		assertNotNull(pkgsWithOutWarn);
+		assertEquals(Collections.singleton("java.").getClass().getName(), pkgsWithOutWarn.getClass().getName() );
+		assertContains(pkgsWithOutWarn, "java.");
+		assertEquals(1, pkgsWithOutWarn.size());
 		assertEquals(Collections.emptySet(), cl.getClassesWithoutWarning());
 		
+		cl = new CachedClassBytesClassLoader(lm,
+				new HashSet<String>(),
+				new HashSet<String>());
 		InputStream in = this.getClass().getResourceAsStream(MOCK_WITH_NOTHING_RESOURCE_NAME);
 		cl.addCache(in, MOCK_WITH_NOTHING_NAME);
 		assertEquals(1, lm.getLogMessagesSize());
@@ -169,12 +177,12 @@ public class CachedClassBytesClassLoaderTrial extends SourceFileCountingTrial {
 
 	@Override
 	public int getAsserts() {
-		return 32;
+		return 35;
 	}
 
 	@Override
 	public int getUniqueAsserts() {
-		return 24;
+		return 27;
 	}
 
 }

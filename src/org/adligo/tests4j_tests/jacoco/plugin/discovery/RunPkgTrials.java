@@ -10,6 +10,7 @@ import org.adligo.tests4j.models.shared.system.Tests4J_Selection;
 import org.adligo.tests4j.models.shared.trials.I_Trial;
 import org.adligo.tests4j.run.Tests4J;
 import org.adligo.tests4j_4jacoco.plugin.ScopedJacocoPluginFactory;
+import org.adligo.tests4j_4jacoco.plugin.discovery.ClassReferenceDiscovery;
 import org.adligo.tests4j_4jacoco.plugin.discovery.ReferenceTrackingClassVisitor;
 import org.adligo.tests4j_4jacoco.plugin.discovery.ReferenceTrackingMethodVisitor;
 
@@ -19,16 +20,23 @@ public class RunPkgTrials implements I_Tests4J_TrialList {
 	public static void main(String [] args) {
 		Tests4J_Params params = new Tests4J_Params();
 		params.addTrials(new RunPkgTrials());
-		params.setLogState(ReferenceTrackingClassVisitor.class, true);
-		params.setLogState(ReferenceTrackingMethodVisitor.class, true);
+		//params.setLogState(ReferenceTrackingClassVisitor.class, true);
+		//params.setLogState(ReferenceTrackingMethodVisitor.class, true);
+		params.setLogState(ClassReferenceDiscovery.class, true);
 		//TieredJacocoPlugin covargePlugin =new TieredJacocoPlugin();
 		params.setCoveragePluginFactoryClass(ScopedJacocoPluginFactory.class);
 		/*
 		params.setTests(Collections.singleton(
 				new Tests4J_Selection(
+						ClassReferenceDiscoveryTrial.class,
+						"test02_MockWithEverything")));
+			*/	
+		/*
+		params.setTests(Collections.singleton(
+				new Tests4J_Selection(
 						ReferenceTrackingClassVisitorTrial.class,
-						"testReferenceCounting_10_MockWithMethodExceptionBlock")));
-			*/			
+						"testReferenceCounting_80_MockWithEverything")));
+		*/
 		//params.setTests(Collections.singleton("testReferenceCounting_80_MockWithEverything"));
 		Tests4J.run(params);
 	}
@@ -39,11 +47,7 @@ public class RunPkgTrials implements I_Tests4J_TrialList {
 		trials.add(ClassReferencesMutantTrial.class);
 		
 		
-		/*
-		 * trials.add(ClassRefernceDiscoveryTrial.class);
-		trials.add(ClassRefernceDiscoveryTrial.class);
-		trials.add(ReferenceTrackingClassVisitorTrial.class);
-		*/
+		trials.add(ClassReferenceDiscoveryTrial.class);
 		trials.add(ReferenceTrackingClassVisitorTrial.class);
 		trials.add(ReferenceTrackingMethodVisitorTrial.class);
 		

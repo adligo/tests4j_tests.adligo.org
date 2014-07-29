@@ -214,9 +214,9 @@ public class ReferenceTrackingClassVisitorTrial extends SourceFileCountingTrial 
 		assertContains(classNames, MockWithStaticField.class.getName());
 		
 		assertContains(classNames, MockWithStaticInitalizer.class.getName());
-		assertContains(classNames, MockWithNothing.class.getName());
+		assertFalse(classNames.contains("."));
 		
-		assertEquals(11, classNames.size());
+		assertEquals(10, classNames.size());
 		
 		in= ReferenceTrackingClassVisitorTrial.class.getResourceAsStream(
 				ClassMethods.toResource(MockWithEverything.class.getName() + "$1"));
@@ -247,7 +247,7 @@ public class ReferenceTrackingClassVisitorTrial extends SourceFileCountingTrial 
 
 	@Override
 	public int getUniqueAsserts() {
-		return 45;
+		return 46;
 	}
 
 }
