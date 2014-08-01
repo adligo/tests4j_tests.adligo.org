@@ -48,9 +48,19 @@ import org.adligo.tests4j.models.shared.trials.UseCaseScope;
 import org.adligo.tests4j.models.shared.trials.UseCaseTrial;
 import org.adligo.tests4j.run.discovery.AfterTrialAuditor;
 import org.adligo.tests4j.run.discovery.BeforeTrialAuditor;
-import org.adligo.tests4j.run.discovery.ClassDiscovery;
+import org.adligo.tests4j.run.discovery.ClassDependencies;
+import org.adligo.tests4j.run.discovery.ClassDependenciesMutant;
+import org.adligo.tests4j.run.discovery.ClassFilter;
+import org.adligo.tests4j.run.discovery.ClassFilterMutant;
+import org.adligo.tests4j.run.discovery.ClassReferences;
+import org.adligo.tests4j.run.discovery.ClassReferencesMutant;
 import org.adligo.tests4j.run.discovery.Dependency;
 import org.adligo.tests4j.run.discovery.DependencyMutant;
+import org.adligo.tests4j.run.discovery.I_ClassDependencies;
+import org.adligo.tests4j.run.discovery.I_ClassDependenciesCache;
+import org.adligo.tests4j.run.discovery.I_ClassFilter;
+import org.adligo.tests4j.run.discovery.I_ClassFilterModel;
+import org.adligo.tests4j.run.discovery.I_ClassReferences;
 import org.adligo.tests4j.run.discovery.I_Dependency;
 import org.adligo.tests4j.run.discovery.I_TrialDescription;
 import org.adligo.tests4j.run.discovery.PackageDiscovery;
@@ -61,7 +71,6 @@ import org.adligo.tests4j.run.discovery.TopPackageSet;
 import org.adligo.tests4j.run.discovery.TrialDescription;
 import org.adligo.tests4j.run.discovery.TrialTypeFinder;
 import org.adligo.tests4j.run.discovery.TrialVerificationFailure;
-import org.adligo.tests4j.run.helpers.CachedClassBytesClassLoader;
 import org.adligo.tests4j_tests.base_abstract_trials.SourceFileCountingTrial;
 import org.adligo.tests4j_tests.run.discovery.package_discovery_inner_mocks.TwoNestedRunnables;
 
@@ -73,15 +82,28 @@ public class PackageDiscoveryTrial extends SourceFileCountingTrial {
 		PackageDiscovery cd = new PackageDiscovery("org.adligo.tests4j.run.discovery");
 		List<String> clazzNames = cd.getClassNames();
 		assertNotNull(clazzNames);
-		assertEquals(15, clazzNames.size());
+		assertEquals(25, clazzNames.size());
 		assertContains(clazzNames, AfterTrialAuditor.class.getName());
 		assertContains(clazzNames, BeforeTrialAuditor.class.getName());
 		assertContains(clazzNames, Dependency.class.getName());
 		assertContains(clazzNames, DependencyMutant.class.getName());
-		assertContains(clazzNames, ClassDiscovery.class.getName());
 		
-		assertContains(clazzNames, I_Dependency.class.getName());;
-		assertContains(clazzNames, I_TrialDescription.class.getName());;
+		assertContains(clazzNames, ClassDependenciesMutant.class.getName());
+		assertContains(clazzNames, ClassDependencies.class.getName());
+		
+		assertContains(clazzNames, ClassFilterMutant.class.getName());
+		assertContains(clazzNames, ClassFilter.class.getName());
+		
+		assertContains(clazzNames, ClassReferencesMutant.class.getName());
+		assertContains(clazzNames, ClassReferences.class.getName());
+		
+		assertContains(clazzNames, I_ClassDependenciesCache.class.getName());
+		assertContains(clazzNames, I_ClassDependencies.class.getName());
+		assertContains(clazzNames, I_ClassFilter.class.getName());
+		assertContains(clazzNames, I_ClassFilterModel.class.getName());
+		assertContains(clazzNames, I_ClassReferences.class.getName());
+		assertContains(clazzNames, I_Dependency.class.getName());
+		assertContains(clazzNames, I_TrialDescription.class.getName());
 		
 		assertContains(clazzNames, PackageDiscovery.class.getName());
 		
@@ -221,11 +243,11 @@ public class PackageDiscoveryTrial extends SourceFileCountingTrial {
 
 	@Override
 	public int getAsserts() {
-		return 75;
+		return 85;
 	}
 
 	@Override
 	public int getUniqueAsserts() {
-		return 75;
+		return 85;
 	}
 }

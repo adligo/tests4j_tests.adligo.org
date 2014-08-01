@@ -9,7 +9,7 @@ import org.adligo.tests4j.models.shared.trials.I_Trial;
 import org.adligo.tests4j.run.Tests4J;
 import org.adligo.tests4j_4jacoco.plugin.ScopedJacocoPluginFactory;
 import org.adligo.tests4j_4jacoco.plugin.TrialInstrumenter;
-import org.adligo.tests4j_4jacoco.plugin.instrumentation.common.ClassInstrumenter;
+import org.adligo.tests4j_4jacoco.plugin.instrumentation.common.StrategySelectionInstrumenter;
 
 public class RunPkgTrials implements I_Tests4J_TrialList {
 
@@ -20,7 +20,7 @@ public class RunPkgTrials implements I_Tests4J_TrialList {
 		
 		params.setLogState(TrialInstrumenter.class, true);
 		
-		params.setLogState(ClassInstrumenter.class, true);
+		params.setLogState(StrategySelectionInstrumenter.class, true);
 		params.setCoveragePluginFactoryClass(ScopedJacocoPluginFactory.class);
 		Tests4J.run(params);
 	}
@@ -37,10 +37,12 @@ public class RunPkgTrials implements I_Tests4J_TrialList {
 		
 		trials.add(TestDisplayTrial.class);
 		trials.add(TestFailedDisplayTrial.class);
+		
 		trials.add(TestsProgressDisplayTrial.class);
 		
 		trials.add(TrialDisplayTrial.class);
 		trials.add(TrialFailedDisplayTrial.class);
+		trials.add(TrialFailedDetailDisplayTrial.class);
 		trials.add(TrialsProgressDisplayTrial.class);
 		return trials;
 	}

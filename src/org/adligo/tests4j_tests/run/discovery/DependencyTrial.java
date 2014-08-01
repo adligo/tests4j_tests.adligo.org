@@ -30,11 +30,11 @@ public class DependencyTrial extends SourceFileCountingTrial {
 		dm.setClazzName("foo");
 		dm.addReference();
 		dm.addReference();
-		assertEquals("foo", dm.getClazzName());
+		assertEquals("foo", dm.getClassName());
 		assertEquals(2, dm.getReferences());
 		
 		Dependency dep = new Dependency(dm);
-		assertEquals("foo", dep.getClazzName());
+		assertEquals("foo", dep.getClassName());
 		assertEquals(2, dep.getReferences());
 	}
 	

@@ -23,7 +23,8 @@ public class Tests4J_ParamsReaderMessages_Trial extends SourceFileCountingTrial 
 				messages.getNoTrialsOrRemotesToRun());
 		asserter.assertConstant("The evaluators are expected to at least contain the default evaluator lookups.", 
 				messages.getTheEvaluatorsAreExpectedToContainTheDefaultKeys());
-		
+		asserter.assertConstant("Test seletions passed to tests4j MUST have a corresponding trial.", 
+				messages.getTestSelectionsMustHaveACorrespondingTrial());
 		asserter.assertConstantsMatchMethods(Tests4J_ParamsReaderMessages.class);
 	}
 
@@ -34,11 +35,11 @@ public class Tests4J_ParamsReaderMessages_Trial extends SourceFileCountingTrial 
 
 	@Override
 	public int getAsserts() {
-		return 13;
+		return 16;
 	}
 
 	@Override
 	public int getUniqueAsserts() {
-		return 13;
+		return 16;
 	}
 }

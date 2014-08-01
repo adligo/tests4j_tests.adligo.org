@@ -80,13 +80,13 @@ public class ThrownAssertCommandTrial extends SourceFileCountingTrial {
 		assertEquals("failure message", a.getFailureMessage());
 		assertEquals(AssertType.AssertThrown, a.getType());
 		
-		a.evaluate(new I_Thrower() {
+		assertFalse(a.evaluate(new I_Thrower() {
 			
 			@Override
 			public void run() {
 				throw new IllegalStateException("...");
 			}
-		});
+		}));
 		
 		I_AssertionData dataAfterEvaluate = a.getData();
 		assertNotNull(dataAfterEvaluate);
@@ -99,18 +99,134 @@ public class ThrownAssertCommandTrial extends SourceFileCountingTrial {
 		
 	}
 	
+	
+	@Test
+	public void testDeepEvaluate() {
+		ThrownAssertCommand a =
+				new ThrownAssertCommand("failure message", 
+						new ExpectedThrownData(new IllegalArgumentException("hey"),
+						new ExpectedThrownData(IllegalStateException.class,
+						new ExpectedThrownData(new IllegalStateException("zzz")))));
+		
+		assertFalse(a.evaluate(new I_Thrower() {
+			
+			@Override
+			public void run() {
+				throw new IllegalStateException("...");
+			}
+		}));
+		assertFalse(a.evaluate(new I_Thrower() {
+					
+					@Override
+					public void run() {
+						throw new IllegalArgumentException("...");
+					}
+				}));
+		assertFalse(a.evaluate(new I_Thrower() {
+			
+			@Override
+			public void run() {
+				throw new IllegalArgumentException("hey");
+			}
+		}));
+
+		assertFalse(a.evaluate(new I_Thrower() {
+			
+			@Override
+			public void run() {
+				IllegalArgumentException top = new IllegalArgumentException("hey");
+				top.initCause(new IllegalArgumentException());
+				throw top;
+			}
+		}));
+		
+		assertFalse(a.evaluate(new I_Thrower() {
+			
+			@Override
+			public void run() {
+				IllegalArgumentException top = new IllegalArgumentException("hey");
+				top.initCause(new IllegalArgumentException("pinch"));
+				throw top;
+			}
+		}));
+		
+		assertFalse(a.evaluate(new I_Thrower() {
+			
+			@Override
+			public void run() {
+				IllegalArgumentException top = new IllegalArgumentException("hey");
+				top.initCause(new IllegalStateException());
+				throw top;
+			}
+		}));
+		
+		assertFalse(a.evaluate(new I_Thrower() {
+			
+			@Override
+			public void run() {
+				IllegalArgumentException top = new IllegalArgumentException("hey");
+				IllegalStateException second = new IllegalStateException();
+				
+				top.initCause(second);
+				second.initCause(new IllegalArgumentException());
+				throw top;
+			}
+		}));
+		
+		
+		assertFalse(a.evaluate(new I_Thrower() {
+			
+			@Override
+			public void run() {
+				IllegalArgumentException top = new IllegalArgumentException("hey");
+				IllegalStateException second = new IllegalStateException();
+				
+				top.initCause(second);
+				second.initCause(new IllegalStateException());
+				throw top;
+			}
+		}));
+		
+		assertFalse(a.evaluate(new I_Thrower() {
+			
+			@Override
+			public void run() {
+				IllegalArgumentException top = new IllegalArgumentException("hey");
+				IllegalStateException second = new IllegalStateException();
+				
+				top.initCause(second);
+				second.initCause(new IllegalStateException("z"));
+				throw top;
+			}
+		}));
+		
+		
+		assertTrue(a.evaluate(new I_Thrower() {
+			
+			@Override
+			public void run() {
+				IllegalArgumentException top = new IllegalArgumentException("hey");
+				IllegalStateException second = new IllegalStateException();
+				
+				top.initCause(second);
+				second.initCause(new IllegalStateException("zzz"));
+				throw top;
+			}
+		}));
+	}
+	
 	@Override
 	public int getTests() {
-		return 3;
+		return 4;
 	}
 
 	@Override
 	public int getAsserts() {
-		return 25;
+		return 36;
 	}
 
 	@Override
 	public int getUniqueAsserts() {
-		return 13;
+		return 16;
 	}
 }

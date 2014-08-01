@@ -8,12 +8,18 @@ package org.adligo.tests4j_tests.run.helpers.class_loading_mocks;
  * and then instrument the bytes in a way that
  * is fast and safe for consistent code coverage assertions. 
  * 
+ * Note the System.out.printlns are just to keep the complier
+ * from removing dead code, so that it shows up in the byte code.
+ * 
  * @author scott
  *
  */
 public abstract class MockWithEverything {
 	private MockWithMethodReturn ret;
 	private MockWithImportOnlyInMethod to;
+	private MockWithAbstractMethodException a;
+	private MockWithAbstractMethodReturn b;
+	private MockWithAbstractMethodParam c;
 	
 	public MockWithEverything() {
 		double d = Math.random();
@@ -31,7 +37,8 @@ public abstract class MockWithEverything {
 						MockWithMethodException mme = new MockWithMethodException();
 						System.out.print( super.toString() + " hey " + mme.getTrial());
 						MockWithMethodExceptionBlock mme2 = new MockWithMethodExceptionBlock();
-						System.out.print( super.toString() + " hey " + mme2.toString());
+						System.out.print( super.toString() + " hey " + mme2.toString() 
+								+ a + b + c);
 					} catch (MockException x) {
 						//doNothing
 					}

@@ -211,6 +211,18 @@ public class AssertionsPass_Trial extends ApiCountingTrial {
 				throw new IllegalStateException("exception message");
 			}
 		}) ;
+		
+		assertThrown(new ExpectedThrownData(new IllegalStateException("exception message"),
+				new ExpectedThrownData(IllegalArgumentException.class)), new I_Thrower() {
+			
+			@Override
+			public void run() {
+				IllegalArgumentException iae = new IllegalArgumentException();
+				IllegalStateException ise = new IllegalStateException("exception message");
+				ise.initCause(iae);
+				throw ise;
+			}
+		}) ;
 	}
 	
 	
@@ -263,11 +275,11 @@ public class AssertionsPass_Trial extends ApiCountingTrial {
 
 	@Override
 	public int getAsserts() {
-		return 88;
+		return 89;
 	}
 
 	@Override
 	public int getUniqueAsserts() {
-		return 56;
+		return 57;
 	}
 }

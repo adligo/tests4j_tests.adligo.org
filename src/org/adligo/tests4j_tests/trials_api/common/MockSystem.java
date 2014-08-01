@@ -17,10 +17,14 @@ import org.adligo.tests4j.models.shared.system.I_Tests4J_System;
 public class MockSystem implements I_Tests4J_System {
 	private final ArrayBlockingQueue<Integer> lastStatus = new ArrayBlockingQueue<>(10);
 	private final AtomicLong time = new AtomicLong();
-	
+	private String lineSeperator;
 	
 	public MockSystem() {
 
+	}
+	
+	public MockSystem(String pLineSepearator) {
+		lineSeperator = pLineSepearator;
 	}
 	
 	public MockSystem(List<Long> pTimes) {
@@ -50,8 +54,7 @@ public class MockSystem implements I_Tests4J_System {
 
 	@Override
 	public String getLineSeperator() {
-		// TODO Auto-generated method stub
-		return null;
+		return lineSeperator;
 	}
 
 }

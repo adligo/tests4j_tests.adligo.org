@@ -4,7 +4,8 @@ import java.util.Set;
 
 import org.adligo.tests4j.models.shared.trials.SourceFileScope;
 import org.adligo.tests4j.models.shared.trials.Test;
-import org.adligo.tests4j_4jacoco.plugin.discovery.ClassReferencesMutant;
+import org.adligo.tests4j.run.discovery.ClassFilter;
+import org.adligo.tests4j.run.discovery.ClassReferencesMutant;
 import org.adligo.tests4j_4jacoco.plugin.discovery.ReferenceTrackingMethodVisitor;
 import org.adligo.tests4j_tests.base_abstract_trials.SourceFileCountingTrial;
 import org.adligo.tests4j_tests.run.helpers.class_loading_mocks.MockException;
@@ -12,16 +13,18 @@ import org.adligo.tests4j_tests.run.helpers.class_loading_mocks.MockWithMethodRe
 import org.adligo.tests4j_tests.run.helpers.class_loading_mocks.MockWithNothing;
 import org.objectweb.asm.Label;
 import org.objectweb.asm.Opcodes;
+import org.objectweb.asm.Type;
 
 @SourceFileScope (sourceClass=ReferenceTrackingMethodVisitor.class, minCoverage=50.0)
 public class ReferenceTrackingMethodVisitorTrial extends SourceFileCountingTrial {
 	ReferenceTrackingMethodVisitor rtcv;
 	ClassReferencesMutant crm = new ClassReferencesMutant();
-	Set<String> names = crm.getClassNames();
+	Set<String> names = crm.getReferences();
 	
 	public void beforeTests() {
 		if (rtcv == null) {
 			rtcv = new ReferenceTrackingMethodVisitor(Opcodes.ASM5, super.getLog());
+			rtcv.setClassFilter(new ClassFilter());
 		}
 		rtcv.setClassReferences(crm);
 		names.clear();
@@ -58,7 +61,7 @@ public class ReferenceTrackingMethodVisitorTrial extends SourceFileCountingTrial
 	
 	
 		names.clear();
-		rtcv.visitLdcInsn("Lorg/adligo/tests4j_tests/run/helpers/class_loading_mocks/MockWithNothing;");
+		rtcv.visitLdcInsn(Type.getType("Lorg/adligo/tests4j_tests/run/helpers/class_loading_mocks/MockWithNothing;"));
 		assertContains(names, MockWithNothing.class.getName());
 		assertEquals(1, names.size());
 		

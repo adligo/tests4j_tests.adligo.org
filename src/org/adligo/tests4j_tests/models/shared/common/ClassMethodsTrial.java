@@ -51,12 +51,18 @@ public class ClassMethodsTrial extends SourceFileCountingTrial {
 				ClassMethods.fromTypeDescription("Lorg/adligo/tests4j/models/shared/common/ClassMethods;"));
 		assertEquals(ClassMethodsTrial.class.getName(),
 				ClassMethods.fromTypeDescription("Lorg/adligo/tests4j_tests/models/shared/common/ClassMethodsTrial;"));
+		assertEquals(ClassMethods.class.getName(),
+				ClassMethods.fromTypeDescription("[Lorg/adligo/tests4j/models/shared/common/ClassMethods;"));
+		assertEquals(ClassMethodsTrial.class.getName(),
+				ClassMethods.fromTypeDescription("[Lorg/adligo/tests4j_tests/models/shared/common/ClassMethodsTrial;"));
 		
+		assertEquals("",
+				ClassMethods.fromTypeDescription(null));
 		assertEquals("",
 				ClassMethods.fromTypeDescription(""));
 		assertEquals("1",
 				ClassMethods.fromTypeDescription("1"));
-		assertEquals("",
+		assertEquals("12",
 				ClassMethods.fromTypeDescription("12"));
 	}
 	
@@ -67,12 +73,12 @@ public class ClassMethodsTrial extends SourceFileCountingTrial {
 
 	@Override
 	public int getAsserts() {
-		return 14;
+		return 17;
 	}
 
 	@Override
 	public int getUniqueAsserts() {
-		return 13;
+		return 14;
 	}
 	
 }

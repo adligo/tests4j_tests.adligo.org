@@ -3,6 +3,7 @@ package org.adligo.tests4j_tests.models.shared.asserts;
 import java.util.Set;
 
 import org.adligo.tests4j.models.shared.asserts.ExpectedThrownData;
+import org.adligo.tests4j.models.shared.asserts.ThrownAssertCommand;
 import org.adligo.tests4j.models.shared.asserts.ThrownAssertionData;
 import org.adligo.tests4j.models.shared.asserts.UniformThrownAssertCommand;
 import org.adligo.tests4j.models.shared.asserts.common.I_AssertionData;
@@ -266,6 +267,7 @@ public class UniformThrownAssertCommandTrial extends SourceFileCountingTrial {
 		assertNotNull(txt);
 	}
 	
+
 	
 	@Test
 	public void testEqualsHashCode() {

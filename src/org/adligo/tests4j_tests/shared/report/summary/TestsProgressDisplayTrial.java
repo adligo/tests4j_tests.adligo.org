@@ -10,7 +10,6 @@ import org.adligo.tests4j_tests.base_abstract_trials.SourceFileCountingTrial;
 import org.adligo.tests4j_tests.models.shared.system.mocks.Tests4J_LogMock;
 
 @SourceFileScope (sourceClass=TestsProgressDisplay.class)
-@AdditionalInstrumentation (javaPackages="org.adligo.tests4j_tests.shared.report.summary")
 public class TestsProgressDisplayTrial extends SourceFileCountingTrial {
 	private Tests4J_LogMock log = new Tests4J_LogMock();
 	private TestsProgressDisplay reporter = new TestsProgressDisplay(log);
