@@ -4,10 +4,11 @@ import org.adligo.tests4j.models.shared.asserts.ExpectedThrownData;
 import org.adligo.tests4j.models.shared.asserts.common.I_Thrower;
 import org.adligo.tests4j.models.shared.trials.SourceFileScope;
 import org.adligo.tests4j.models.shared.trials.Test;
+import org.adligo.tests4j.run.discovery.Dependency;
 import org.adligo.tests4j.run.discovery.DependencyMutant;
 import org.adligo.tests4j_tests.base_abstract_trials.SourceFileCountingTrial;
 
-@SourceFileScope (sourceClass=DependencyMutant.class)
+@SourceFileScope (sourceClass=DependencyMutant.class, minCoverage=80.0)
 public class DependencyMutantTrial extends SourceFileCountingTrial {
 
 	@Test
@@ -68,18 +69,28 @@ public class DependencyMutantTrial extends SourceFileCountingTrial {
 		assertEquals(-1, dm.compareTo(dmB));
 	}
 	
+	@Test
+	public void testToString() {
+		DependencyMutant dm = new DependencyMutant();
+		dm.setClazzName("foo");
+		dm.addReference();
+		dm.addReference();
+		assertEquals("DependencyMutant [clazzName=foo, references=2]", dm.toString());
+		
+		
+	}
 	@Override
 	public int getTests() {
-		return 3;
+		return 4;
 	}
 
 	@Override
 	public int getAsserts() {
-		return 14;
+		return 15;
 	}
 
 	@Override
 	public int getUniqueAsserts() {
-		return 11;
+		return 12;
 	}
 }

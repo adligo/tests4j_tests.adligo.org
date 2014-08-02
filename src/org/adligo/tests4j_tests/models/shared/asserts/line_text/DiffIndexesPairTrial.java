@@ -337,6 +337,46 @@ public class DiffIndexesPairTrial extends SourceFileCountingTrial {
 	}
 	
 	@Test
+	public void testCompareLinesLeftMatchActualLongerAtRight_MockWithArray_vs_MockWithBidirectionalA_Issue() throws Exception {
+		String expected = "org.adligo.tests4j_tests.run.helpers.class_loading_mocks.MockWithArray";
+		String actual = "org.adligo.tests4j_tests.run.helpers.class_loading_mocks.MockWithBidirectionalA";
+		
+		DiffIndexesPair result = new DiffIndexesPair(expected, actual);
+
+		assertNotNull(result);
+		I_DiffIndexes exampleIndexes = result.getExpected();
+		assertNotNull(exampleIndexes);
+		I_DiffIndexes actualIndexes = result.getActual();
+		assertNotNull(actualIndexes);
+		assertEquals(65, exampleIndexes.getDiffLeftToRight());
+		assertEquals(69, exampleIndexes.getDiffRightToLeft());
+		assertEquals(0, exampleIndexes.getMatchLeftToRight());
+		assertEquals(64, exampleIndexes.getMatchRightToLeft());
+		
+		String [] matches = exampleIndexes.getMatches(expected);
+		assertEquals(1, matches.length);
+		assertEquals("org.adligo.tests4j_tests.run.helpers.class_loading_mocks.MockWith", matches[0]);
+		
+		String [] diffs = exampleIndexes.getDifferences(expected);
+		assertEquals(1, diffs.length);
+		assertEquals("Array", diffs[0]);
+		
+		
+		assertEquals(65, actualIndexes.getDiffLeftToRight());
+		assertEquals(78, actualIndexes.getDiffRightToLeft());
+		assertEquals(0, actualIndexes.getMatchLeftToRight());
+		assertEquals(64, actualIndexes.getMatchRightToLeft());
+		
+		matches = actualIndexes.getMatches(actual);
+		assertEquals(1, matches.length);
+		assertEquals("org.adligo.tests4j_tests.run.helpers.class_loading_mocks.MockWith", matches[0]);
+		
+		diffs = actualIndexes.getDifferences(actual);
+		assertEquals(1, diffs.length);
+		assertEquals("BidirectionalA", diffs[0]);
+	}
+	
+	@Test
 	public void testCompareLinesLeftMatchExpectedLongerAtRight_MockWithArray_vs_MockWithMethodReturn_Issue() throws Exception {
 		String expected = "org.adligo.tests4j_tests.run.helpers.class_loading_mocks.MockWithMethodReturn";
 		String actual = "org.adligo.tests4j_tests.run.helpers.class_loading_mocks.MockWithArray";
@@ -360,6 +400,46 @@ public class DiffIndexesPairTrial extends SourceFileCountingTrial {
 		String [] diffs = exampleIndexes.getDifferences(expected);
 		assertEquals(1, diffs.length);
 		assertEquals("MethodReturn", diffs[0]);
+		
+		
+		assertEquals(65, actualIndexes.getDiffLeftToRight());
+		assertEquals(69, actualIndexes.getDiffRightToLeft());
+		assertEquals(0, actualIndexes.getMatchLeftToRight());
+		assertEquals(64, actualIndexes.getMatchRightToLeft());
+		
+		matches = actualIndexes.getMatches(actual);
+		assertEquals(1, matches.length);
+		assertEquals("org.adligo.tests4j_tests.run.helpers.class_loading_mocks.MockWith", matches[0]);
+		
+		diffs = actualIndexes.getDifferences(actual);
+		assertEquals(1, diffs.length);
+		assertEquals("Array", diffs[0]);
+	}
+	
+	@Test
+	public void testCompareLinesLeftMatchExpectedLongerAtRight_MockWithArray_vs_MockWithBidirectionalA_Issue() throws Exception {
+		String expected = "org.adligo.tests4j_tests.run.helpers.class_loading_mocks.MockWithBidirectionalA";
+		String actual = "org.adligo.tests4j_tests.run.helpers.class_loading_mocks.MockWithArray";
+		
+		DiffIndexesPair result = new DiffIndexesPair(expected, actual);
+
+		assertNotNull(result);
+		I_DiffIndexes exampleIndexes = result.getExpected();
+		assertNotNull(exampleIndexes);
+		I_DiffIndexes actualIndexes = result.getActual();
+		assertNotNull(actualIndexes);
+		assertEquals(65, exampleIndexes.getDiffLeftToRight());
+		assertEquals(78, exampleIndexes.getDiffRightToLeft());
+		assertEquals(0, exampleIndexes.getMatchLeftToRight());
+		assertEquals(64, exampleIndexes.getMatchRightToLeft());
+		
+		String [] matches = exampleIndexes.getMatches(expected);
+		assertEquals(1, matches.length);
+		assertEquals("org.adligo.tests4j_tests.run.helpers.class_loading_mocks.MockWith", matches[0]);
+		
+		String [] diffs = exampleIndexes.getDifferences(expected);
+		assertEquals(1, diffs.length);
+		assertEquals("BidirectionalA", diffs[0]);
 		
 		
 		assertEquals(65, actualIndexes.getDiffLeftToRight());
@@ -895,16 +975,16 @@ public class DiffIndexesPairTrial extends SourceFileCountingTrial {
 	
 	@Override
 	public int getTests() {
-		return 26;
+		return 28;
 	}
 
 	@Override
 	public int getAsserts() {
-		return 402;
+		return 440;
 	}
 
 	@Override
 	public int getUniqueAsserts() {
-		return 252;
+		return 276;
 	}
 }

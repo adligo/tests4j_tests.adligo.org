@@ -18,6 +18,7 @@ import org.adligo.tests4j_tests.run.helpers.class_loading_mocks.MockWithAbstract
 import org.adligo.tests4j_tests.run.helpers.class_loading_mocks.MockWithAbstractMethodParam;
 import org.adligo.tests4j_tests.run.helpers.class_loading_mocks.MockWithAbstractMethodReturn;
 import org.adligo.tests4j_tests.run.helpers.class_loading_mocks.MockWithArray;
+import org.adligo.tests4j_tests.run.helpers.class_loading_mocks.MockWithBidirectionalA;
 import org.adligo.tests4j_tests.run.helpers.class_loading_mocks.MockWithEverything;
 import org.adligo.tests4j_tests.run.helpers.class_loading_mocks.MockWithField;
 import org.adligo.tests4j_tests.run.helpers.class_loading_mocks.MockWithImportOnlyInMethod;
@@ -28,6 +29,7 @@ import org.adligo.tests4j_tests.run.helpers.class_loading_mocks.MockWithMethodRe
 import org.adligo.tests4j_tests.run.helpers.class_loading_mocks.MockWithNothing;
 import org.adligo.tests4j_tests.run.helpers.class_loading_mocks.MockWithStaticField;
 import org.adligo.tests4j_tests.run.helpers.class_loading_mocks.MockWithStaticInitalizer;
+import org.adligo.tests4j_tests.run.helpers.class_loading_mocks.MockWithTriangleC;
 import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.Opcodes;
 
@@ -53,6 +55,7 @@ public class ReferenceTrackingClassVisitorTrial extends SourceFileCountingTrial 
 		
 		classReader.accept(rtcv, 0);
 		I_ClassReferences crm = rtcv.getClassReferences();
+		assertEquals(MockWithNothing.class.getName(), crm.getClassName());
 		
 		Set<String> classNames =  crm.getReferences();
 		
@@ -67,6 +70,7 @@ public class ReferenceTrackingClassVisitorTrial extends SourceFileCountingTrial 
 		ClassReader classReader=new ClassReader(in);
 		classReader.accept(rtcv, 0);
 		I_ClassReferences crm = rtcv.getClassReferences();
+		assertEquals(MockWithMethodReturn.class.getName(), crm.getClassName());
 		
 		Set<String> classNames =  crm.getReferences();
 		assertContains(classNames, MockWithMethodReturn.class.getName());
@@ -82,6 +86,7 @@ public class ReferenceTrackingClassVisitorTrial extends SourceFileCountingTrial 
 		ClassReader classReader=new ClassReader(in);
 		classReader.accept(rtcv, 0);
 		I_ClassReferences crm = rtcv.getClassReferences();
+		assertEquals(MockWithField.class.getName(), crm.getClassName());
 		
 		Set<String> classNames =  crm.getReferences();
 		assertContains(classNames, MockWithField.class.getName());
@@ -97,6 +102,7 @@ public class ReferenceTrackingClassVisitorTrial extends SourceFileCountingTrial 
 		ClassReader classReader=new ClassReader(in);
 		classReader.accept(rtcv, 0);
 		I_ClassReferences crm = rtcv.getClassReferences();
+		assertEquals(MockWithMethodParams.class.getName(), crm.getClassName());
 		
 		Set<String> classNames =  crm.getReferences();
 		assertEquals(1, classNames.size());
@@ -110,6 +116,7 @@ public class ReferenceTrackingClassVisitorTrial extends SourceFileCountingTrial 
 		ClassReader classReader=new ClassReader(in);
 		classReader.accept(rtcv, 0);
 		I_ClassReferences crm = rtcv.getClassReferences();
+		assertEquals(MockWithImportOnlyInMethod.class.getName(), crm.getClassName());
 		
 		Set<String> classNames =  crm.getReferences();
 		assertEquals(2, classNames.size());
@@ -126,6 +133,7 @@ public class ReferenceTrackingClassVisitorTrial extends SourceFileCountingTrial 
 		ClassReader classReader=new ClassReader(in);
 		classReader.accept(rtcv, 0);
 		I_ClassReferences crm = rtcv.getClassReferences();
+		assertEquals(MockWithStaticField.class.getName(), crm.getClassName());
 		
 		Set<String> classNames =  crm.getReferences();
 		assertEquals(2, classNames.size());
@@ -141,6 +149,7 @@ public class ReferenceTrackingClassVisitorTrial extends SourceFileCountingTrial 
 		ClassReader classReader=new ClassReader(in);
 		classReader.accept(rtcv, 0);
 		I_ClassReferences crm = rtcv.getClassReferences();
+		assertEquals(MockWithStaticInitalizer.class.getName(), crm.getClassName());
 		
 		Set<String> classNames =  crm.getReferences();
 		
@@ -160,6 +169,7 @@ public class ReferenceTrackingClassVisitorTrial extends SourceFileCountingTrial 
 		
 		classReader.accept(rtcv, 0);
 		I_ClassReferences crm = rtcv.getClassReferences();
+		assertEquals(MockWithArray.class.getName(), crm.getClassName());
 		
 		Set<String> classNames =  crm.getReferences();
 		
@@ -176,6 +186,7 @@ public class ReferenceTrackingClassVisitorTrial extends SourceFileCountingTrial 
 		ClassReader classReader=new ClassReader(in);
 		classReader.accept(rtcv, 0);
 		I_ClassReferences crm = rtcv.getClassReferences();
+		assertEquals(MockWithMethodException.class.getName(), crm.getClassName());
 		
 		Set<String> classNames =  crm.getReferences();
 		
@@ -193,6 +204,7 @@ public class ReferenceTrackingClassVisitorTrial extends SourceFileCountingTrial 
 		
 		classReader.accept(rtcv, 0);
 		I_ClassReferences crm = rtcv.getClassReferences();
+		assertEquals(MockWithMethodExceptionBlock.class.getName(), crm.getClassName());
 		
 		Set<String> classNames =  crm.getReferences();
 		
@@ -218,6 +230,7 @@ public class ReferenceTrackingClassVisitorTrial extends SourceFileCountingTrial 
 		
 		classReader.accept(rtcv, 0);
 		I_ClassReferences crm = rtcv.getClassReferences();
+		assertEquals(MockWithAbstractMethodReturn.class.getName(), crm.getClassName());
 		
 		Set<String> classNames =  crm.getReferences();
 		assertContains(classNames, MockWithAbstractMethodReturn.class.getName());
@@ -239,6 +252,7 @@ public class ReferenceTrackingClassVisitorTrial extends SourceFileCountingTrial 
 		
 		classReader.accept(rtcv, 0);
 		I_ClassReferences crm = rtcv.getClassReferences();
+		assertEquals(MockWithAbstractMethodParam.class.getName(), crm.getClassName());
 		
 		Set<String> classNames =  crm.getReferences();
 		assertContains(classNames, MockWithAbstractMethodParam.class.getName());
@@ -260,6 +274,7 @@ public class ReferenceTrackingClassVisitorTrial extends SourceFileCountingTrial 
 		
 		classReader.accept(rtcv, 0);
 		I_ClassReferences crm = rtcv.getClassReferences();
+		assertEquals(MockWithAbstractMethodException.class.getName(), crm.getClassName());
 		
 		Set<String> classNames =  crm.getReferences();
 		assertContains(classNames, MockWithAbstractMethodException.class.getName());
@@ -267,14 +282,15 @@ public class ReferenceTrackingClassVisitorTrial extends SourceFileCountingTrial 
 	}
 	
 	@Test
-	public void testFindReferences_80_MockWithEverything() throws Exception {
-		//it probably wouln't get to 80
+	public void testFindReferences_100_MockWithEverything() throws Exception {
+		//it probably wouln't get to 100
 		InputStream in= ReferenceTrackingClassVisitorTrial.class.getResourceAsStream(
 				ClassMethods.toResource(MockWithEverything.class.getName()));
 		ClassReader classReader = new ClassReader(in);
 		
 		classReader.accept(rtcv, 0);
 		I_ClassReferences crm = rtcv.getClassReferences();
+		assertEquals(MockWithEverything.class.getName(), crm.getClassName());
 		
 		Set<String> classNames =  crm.getReferences();
 		assertContains(classNames, MockWithAbstractMethodException.class.getName());
@@ -294,9 +310,11 @@ public class ReferenceTrackingClassVisitorTrial extends SourceFileCountingTrial 
 		assertContains(classNames, MockWithStaticField.class.getName());
 		
 		assertContains(classNames, MockWithStaticInitalizer.class.getName());
+		assertContains(classNames, MockWithBidirectionalA.class.getName());
+		assertContains(classNames, MockWithTriangleC.class.getName());
 		assertFalse(classNames.contains("."));
 		
-		assertEquals(13, classNames.size());
+		assertEquals(15, classNames.size());
 		
 		in= ReferenceTrackingClassVisitorTrial.class.getResourceAsStream(
 				ClassMethods.toResource(MockWithEverything.class.getName() + "$1"));
@@ -304,11 +322,11 @@ public class ReferenceTrackingClassVisitorTrial extends SourceFileCountingTrial 
 		rtcv.reset();
 		classReader.accept(rtcv, 0);
 		crm = rtcv.getClassReferences();
+		assertEquals(MockWithEverything.class.getName() + "$1", crm.getClassName());
 		classNames =  crm.getReferences();
 		
 		assertContains(classNames, MockWithEverything.class.getName()); 
 		assertContains(classNames, MockWithEverything.class.getName() + "$1"); 
-		//this doesn't get the exception, it is obtained via reflection
 		assertContains(classNames, MockWithMethodException.class.getName());
 		assertContains(classNames, MockException.class.getName());
 		
@@ -326,12 +344,12 @@ public class ReferenceTrackingClassVisitorTrial extends SourceFileCountingTrial 
 
 	@Override
 	public int getAsserts() {
-		return 59;
+		return 76;
 	}
 
 	@Override
 	public int getUniqueAsserts() {
-		return 59;
+		return 76;
 	}
 
 }

@@ -3,24 +3,26 @@ package org.adligo.tests4j_tests.jacoco.plugin.discovery;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.adligo.tests4j.models.shared.system.I_Tests4J_System;
 import org.adligo.tests4j.models.shared.trials.SourceFileScope;
 import org.adligo.tests4j.models.shared.trials.Test;
 import org.adligo.tests4j.run.discovery.ClassFilter;
 import org.adligo.tests4j.run.discovery.I_ClassDependencies;
-import org.adligo.tests4j.run.discovery.I_ClassDependenciesCache;
-import org.adligo.tests4j.run.discovery.I_Dependency;
+import org.adligo.tests4j.run.discovery.I_ClassReferences;
 import org.adligo.tests4j.run.helpers.CachedClassBytesClassLoader;
-import org.adligo.tests4j_4jacoco.plugin.discovery.ClassDependenciesDiscovery;
+import org.adligo.tests4j_4jacoco.plugin.discovery.ClassReferencesDiscovery;
 import org.adligo.tests4j_4jacoco.plugin.discovery.I_DiscoveryMemory;
 import org.adligo.tests4j_tests.base_abstract_trials.SourceFileCountingTrial;
+import org.adligo.tests4j_tests.models.shared.system.mocks.Tests4J_LogMock;
 import org.adligo.tests4j_tests.run.helpers.class_loading_mocks.MockException;
-import org.adligo.tests4j_tests.run.helpers.class_loading_mocks.MockRefEverything;
 import org.adligo.tests4j_tests.run.helpers.class_loading_mocks.MockWithAbstractMethodException;
 import org.adligo.tests4j_tests.run.helpers.class_loading_mocks.MockWithAbstractMethodParam;
 import org.adligo.tests4j_tests.run.helpers.class_loading_mocks.MockWithAbstractMethodReturn;
 import org.adligo.tests4j_tests.run.helpers.class_loading_mocks.MockWithArray;
+import org.adligo.tests4j_tests.run.helpers.class_loading_mocks.MockWithBidirectionalA;
+import org.adligo.tests4j_tests.run.helpers.class_loading_mocks.MockWithBidirectionalB;
 import org.adligo.tests4j_tests.run.helpers.class_loading_mocks.MockWithEverything;
 import org.adligo.tests4j_tests.run.helpers.class_loading_mocks.MockWithField;
 import org.adligo.tests4j_tests.run.helpers.class_loading_mocks.MockWithImportOnlyInMethod;
@@ -31,18 +33,22 @@ import org.adligo.tests4j_tests.run.helpers.class_loading_mocks.MockWithMethodRe
 import org.adligo.tests4j_tests.run.helpers.class_loading_mocks.MockWithNothing;
 import org.adligo.tests4j_tests.run.helpers.class_loading_mocks.MockWithStaticField;
 import org.adligo.tests4j_tests.run.helpers.class_loading_mocks.MockWithStaticInitalizer;
+import org.adligo.tests4j_tests.run.helpers.class_loading_mocks.MockWithTriangleA;
+import org.adligo.tests4j_tests.run.helpers.class_loading_mocks.MockWithTriangleB;
+import org.adligo.tests4j_tests.run.helpers.class_loading_mocks.MockWithTriangleC;
 
-@SourceFileScope (sourceClass=ClassDependenciesDiscovery.class, minCoverage=50.0)
+@SourceFileScope (sourceClass=ClassReferencesDiscovery.class, minCoverage=50.0)
 public class ClassReferencesDiscoveryTrial extends SourceFileCountingTrial implements I_DiscoveryMemory {
 	private CachedClassBytesClassLoader ccbClassLoader;
-	private ClassDependenciesDiscovery crd;
+	private ClassReferencesDiscovery crd;
 	private Map<String,I_ClassDependencies> depsCache = new HashMap<String, I_ClassDependencies>();
 	private final ClassFilter classFilter = new ClassFilter();
+	private Tests4J_LogMock logMock = new Tests4J_LogMock();
 	
 	@Override
 	public void beforeTests() {
-		ccbClassLoader = new CachedClassBytesClassLoader(super.getLog());
-		crd = new ClassDependenciesDiscovery(ccbClassLoader, super.getLog(), this);
+		ccbClassLoader = new CachedClassBytesClassLoader(logMock);
+		crd = new ClassReferencesDiscovery(ccbClassLoader, logMock, this);
 		depsCache.clear();
 	}
 	
@@ -50,532 +56,450 @@ public class ClassReferencesDiscoveryTrial extends SourceFileCountingTrial imple
 	public void test01_MockWithNothing() throws Exception {
 		String clazzName = MockWithNothing.class.getName();
 		assertFalse(ccbClassLoader.hasCache(clazzName));
-		I_ClassDependencies cd = crd.discoverAndLoad(MockWithNothing.class);
-		assertEquals(MockWithNothing.class.getName(), cd.getClassName());
-		List<I_Dependency> cdeps =  cd.getDependencies();
-		
+		List<String> order = crd.discoverAndLoad(MockWithNothing.class);
+		assertNotNull(order);
+		assertContains(order, clazzName);
+		assertEquals(1, order.size());
 		assertTrue(ccbClassLoader.hasCache(clazzName));
-		I_Dependency dep = cdeps.get(0);
-		assertNotNull(dep);
-		assertEquals(clazzName, dep.getClassName());
-		assertEquals(0, dep.getReferences());
-		assertEquals(1, cdeps.size());
 		
-		assertHasMockWithNothingCache();
-		assertEquals(1, depsCache.size());
+		I_ClassReferences cr =  crd.getReferences(clazzName);
+		assertNotNull(cr);
+		assertEquals(clazzName, cr.getClassName());
+		Set<String> refs = cr.getReferences();
+		assertNotNull(refs);
+		assertContains(refs, clazzName);
+		assertEquals(1, refs.size());
 	}
 
-	protected void assertHasMockWithNothingCache() {
-		String clazzName = MockWithNothing.class.getName();
-		I_Dependency dep;
-		I_ClassDependencies cd = depsCache.get(clazzName);
-		assertNotNull(cd);
-		assertEquals(clazzName, cd.getClassName());
-		List<I_Dependency> cdeps = cd.getDependencies();
-		assertNotNull(cdeps);
-		dep = cdeps.get(0);
-		assertEquals(clazzName, dep.getClassName());
-		assertEquals(0, dep.getReferences());
-		assertEquals(1, cdeps.size());
-	}
-	
 	@Test
-	public void test02_MockWithEverything() throws Exception {
-		String clazzName = MockWithEverything.class.getName();
-		assertFalse(ccbClassLoader.hasCache(clazzName));
-		I_ClassDependencies cd = crd.discoverAndLoad(MockWithEverything.class);
-		assertEquals(MockWithEverything.class.getName(), cd.getClassName());
-		cd.getDependencies();
-		
-		assertTrue(ccbClassLoader.hasCache(clazzName));
-
-		
-		assertHasMockWithEverythingCache();
-		assertEquals(17, depsCache.size());
-	}
-
-	protected void assertHasMockWithEverythingCache() {
-		assertHasMockWithNothingCache();
-		assertHasMockWithMethodReturnCache();
-		assertHasMockWithFieldCache();
-		assertHasMockWithImportOnlyInMethodCache();
-		assertHasMockWithStaticFieldCache();
-		assertHasMockWithStaticInitalizerCache();
-		assertHasMockWithArrayCache();
-		assertHasMockWithMethodExceptionCache();
-		assertHasMockWithMethodExceptionBlockCache();
-		assertHasMockWithAbstractMethodExceptionCache();
-		assertHasMockWithAbstractMethodParamCache();
-		assertHasMockWithAbstractMethodReturnCache();
-		
-		String clazzName = MockWithEverything.class.getName();
-		I_ClassDependencies cd = depsCache.get(clazzName);
-		assertNotNull(cd);
-		List<I_Dependency> deps = cd.getDependencies();
-		assertEquals(clazzName, cd.getClassName());
-		assertNotNull(deps);
-		Map<String, I_Dependency> dmap = new HashMap<String, I_Dependency>();
-		for (I_Dependency d: deps) {
-			dmap.put(d.getClassName(), d);
-		}
-		I_Dependency top = dmap.get(MockWithNothing.class.getName());
-		assertNotNull(top);
-		assertEquals(25, top.getReferences());
-		//for ordering assert the order
-		assertSame(top, deps.get(0));
-		
-		top = dmap.get(MockException.class.getName());
-		assertNotNull(top);
-		assertEquals(6, top.getReferences());
-		//for ordering assert the order
-		assertSame(top, deps.get(1));
-		
-		top = dmap.get(MockWithMethodReturn.class.getName());
-		assertNotNull(top);
-		assertEquals(5, top.getReferences());
-		//for ordering assert the order
-		assertSame(top, deps.get(2));
-		
-		//can't assert the order of the 1 references
-		top = dmap.get(MockWithArray.class.getName());
-		assertNotNull(top);
-		assertEquals(2, top.getReferences());
-		
-		top = dmap.get(MockWithField.class.getName());
-		assertNotNull(top);
-		assertEquals(2, top.getReferences());
-
-		top = dmap.get(MockWithImportOnlyInMethod.class.getName());
-		assertNotNull(top);
-		assertEquals(2, top.getReferences());
-
-		top = dmap.get(MockWithStaticInitalizer.class.getName());
-		assertNotNull(top);
-		assertEquals(2, top.getReferences());
-
-		top = dmap.get(MockWithAbstractMethodException.class.getName());
-		assertNotNull(top);
-		assertEquals(2, top.getReferences());
-
-		top = dmap.get(MockWithAbstractMethodReturn.class.getName());
-		assertNotNull(top);
-		assertEquals(2, top.getReferences());
-		
-		top = dmap.get(MockWithAbstractMethodParam.class.getName());
-		assertNotNull(top);
-		assertEquals(2, top.getReferences());
-		
-		top = dmap.get(MockWithMethodExceptionBlock.class.getName());
-		assertNotNull(top);
-		assertEquals(1, top.getReferences());
-
-		
-
-		
-		top = dmap.get(clazzName);
-		assertNotNull(top);
-		assertEquals(1, top.getReferences());
-		
-		top = dmap.get(clazzName + "$1");
-		assertNotNull(top);
-		assertEquals(1, top.getReferences());
-	}
-	
-	protected void assertHasMockWithMethodReturnCache() {
+	public void test02_MockWithMethodReturn() throws Exception {
 		String clazzName = MockWithMethodReturn.class.getName();
-		I_Dependency dep;
-		I_ClassDependencies cd = depsCache.get(clazzName);
-		assertNotNull(cd);
-		assertEquals(clazzName, cd.getClassName());
-		List<I_Dependency> cdeps = cd.getDependencies();
-		assertNotNull(cdeps);
-		dep = cdeps.get(0);
-		assertEquals(MockWithNothing.class.getName(), dep.getClassName());
-		assertEquals(1, dep.getReferences());
+		assertFalse(ccbClassLoader.hasCache(clazzName));
+		List<String> order = crd.discoverAndLoad(MockWithMethodReturn.class);
+		assertNotNull(order);
+		assertEquals(MockWithNothing.class.getName(), order.get(0));
+		assertEquals(clazzName, order.get(1));
+		assertEquals(2, order.size());
+		assertTrue(ccbClassLoader.hasCache(clazzName));
 		
-		
-		dep = cdeps.get(1);
-		assertEquals(clazzName, dep.getClassName());
-		assertEquals(0, dep.getReferences());
-		assertEquals(2, cdeps.size());
-	}
-	
-	protected void assertHasMockWithFieldCache() {
-		String clazzName = MockWithField.class.getName();
-		I_Dependency dep;
-		I_ClassDependencies cd = depsCache.get(clazzName);
-		assertNotNull(cd);
-		assertEquals(clazzName, cd.getClassName());
-		List<I_Dependency> cdeps = cd.getDependencies();
-		assertNotNull(cdeps);
-		dep = cdeps.get(0);
-		assertEquals(I_Tests4J_System.class.getName(), dep.getClassName());
-		assertEquals(1, dep.getReferences());
-		
-		
-		dep = cdeps.get(1);
-		assertEquals(clazzName, dep.getClassName());
-		assertEquals(0, dep.getReferences());
-		assertEquals(2, cdeps.size());
-	}
-	
-	protected void assertHasMockWithMethodParamsCache() {
-		String clazzName = MockWithMethodParams.class.getName();
-		I_Dependency dep;
-		I_ClassDependencies cd = depsCache.get(clazzName);
-		assertNotNull(cd);
-		assertEquals(clazzName, cd.getClassName());
-		List<I_Dependency> cdeps = cd.getDependencies();
-		assertNotNull(cdeps);
-		Map<String, I_Dependency> deps = new HashMap<String, I_Dependency>();
-		for (I_Dependency d: cdeps) {
-			deps.put(d.getClassName(), d);
-		}
-		
-		dep = deps.get(MockWithNothing.class.getName());
-		assertNotNull(dep);
-		assertEquals(1, dep.getReferences());
-		
-		dep = deps.get(MockWithMethodReturn.class.getName());
-		assertNotNull(dep);
-		assertEquals(1, dep.getReferences());
-		
-		dep = deps.get(MockWithMethodParams.class.getName());
-		assertNotNull(dep);
-		assertEquals(0, dep.getReferences());
-		assertEquals(3, deps.size());
-	}
-	
-	protected void assertHasMockWithImportOnlyInMethodCache() {
-		String clazzName = MockWithImportOnlyInMethod.class.getName();
-		I_Dependency dep;
-		I_ClassDependencies cd = depsCache.get(clazzName);
-		assertNotNull(cd);
-		assertEquals(clazzName, cd.getClassName());
-		List<I_Dependency> cdeps = cd.getDependencies();
-		assertNotNull(cdeps);
-		Map<String, I_Dependency> deps = new HashMap<String, I_Dependency>();
-		for (I_Dependency d: cdeps) {
-			deps.put(d.getClassName(), d);
-		}
-		
-		dep = deps.get(I_Tests4J_System.class.getName());
-		assertNotNull(dep);
-		assertEquals(1, dep.getReferences());
-		
-		dep = deps.get(MockWithImportOnlyInMethod.class.getName());
-		assertNotNull(dep);
-		assertEquals(0, dep.getReferences());
-		assertEquals(2, deps.size());
-	}
-	
-	protected void assertHasMockWithStaticFieldCache() {
-		String clazzName = MockWithStaticField.class.getName();
-		I_Dependency dep;
-		I_ClassDependencies cd = depsCache.get(clazzName);
-		assertNotNull(cd);
-		assertEquals(clazzName, cd.getClassName());
-		List<I_Dependency> cdeps = cd.getDependencies();
-		assertNotNull(cdeps);
-		Map<String, I_Dependency> deps = new HashMap<String, I_Dependency>();
-		for (I_Dependency d: cdeps) {
-			deps.put(d.getClassName(), d);
-		}
-		
-		dep = deps.get(MockWithNothing.class.getName());
-		assertNotNull(dep);
-		assertEquals(1, dep.getReferences());
-		
-		dep = deps.get(MockWithStaticField.class.getName());
-		assertNotNull(dep);
-		assertEquals(0, dep.getReferences());
-		assertEquals(2, deps.size());
-	}
-	
-	protected void assertHasMockWithStaticInitalizerCache() {
-		String clazzName = MockWithStaticInitalizer.class.getName();
-		I_Dependency dep;
-		I_ClassDependencies cd = depsCache.get(clazzName);
-		assertNotNull(cd);
-		assertEquals(clazzName, cd.getClassName());
-		List<I_Dependency> cdeps = cd.getDependencies();
-		assertNotNull(cdeps);
-		Map<String, I_Dependency> deps = new HashMap<String, I_Dependency>();
-		for (I_Dependency d: cdeps) {
-			deps.put(d.getClassName(), d);
-		}
-		
-		dep = deps.get(MockWithNothing.class.getName());
-		assertNotNull(dep);
-		assertEquals(1, dep.getReferences());
-		
-		dep = deps.get(MockWithStaticInitalizer.class.getName());
-		assertNotNull(dep);
-		assertEquals(0, dep.getReferences());
-		assertEquals(2, deps.size());
-	}
-	
-	protected void assertHasMockWithArrayCache() {
-		String clazzName = MockWithArray.class.getName();
-		I_Dependency dep;
-		I_ClassDependencies cd = depsCache.get(clazzName);
-		assertNotNull(cd);
-		assertEquals(clazzName, cd.getClassName());
-		List<I_Dependency> cdeps = cd.getDependencies();
-		assertNotNull(cdeps);
-		Map<String, I_Dependency> deps = new HashMap<String, I_Dependency>();
-		for (I_Dependency d: cdeps) {
-			deps.put(d.getClassName(), d);
-		}
-		
-		dep = deps.get(MockWithNothing.class.getName());
-		assertNotNull(dep);
-		assertEquals(1, dep.getReferences());
-		
-		dep = deps.get(MockWithArray.class.getName());
-		assertNotNull(dep);
-		assertEquals(0, dep.getReferences());
-		assertEquals(2, deps.size());
-	}
-	
-	protected void assertHasMockWithMethodExceptionCache() {
-		String clazzName = MockWithMethodException.class.getName();
-		I_Dependency dep;
-		I_ClassDependencies cd = depsCache.get(clazzName);
-		assertNotNull(cd);
-		assertEquals(clazzName, cd.getClassName());
-		List<I_Dependency> cdeps = cd.getDependencies();
-		assertNotNull(cdeps);
-		Map<String, I_Dependency> deps = new HashMap<String, I_Dependency>();
-		for (I_Dependency d: cdeps) {
-			deps.put(d.getClassName(), d);
-		}
-		
-		dep = deps.get(MockException.class.getName());
-		assertNotNull(dep);
-		assertEquals(1, dep.getReferences());
-		
-		dep = deps.get(MockWithNothing.class.getName());
-		assertNotNull(dep);
-		assertEquals(1, dep.getReferences());
-		
-		dep = deps.get(MockWithMethodException.class.getName());
-		assertNotNull(dep);
-		assertEquals(0, dep.getReferences());
-		assertEquals(3, deps.size());
-	}
-	
-	protected void assertHasMockWithMethodExceptionBlockCache() {
-		String clazzName = MockWithMethodExceptionBlock.class.getName();
-		I_Dependency dep;
-		I_ClassDependencies cd = depsCache.get(clazzName);
-		assertNotNull(cd);
-		assertEquals(clazzName, cd.getClassName());
-		List<I_Dependency> cdeps = cd.getDependencies();
-		assertNotNull(cdeps);
-		Map<String, I_Dependency> deps = new HashMap<String, I_Dependency>();
-		for (I_Dependency d: cdeps) {
-			deps.put(d.getClassName(), d);
-		}
-		
-		dep = deps.get(MockException.class.getName());
-		assertNotNull(dep);
-		assertEquals(2, dep.getReferences());
-
-		dep = deps.get(MockWithNothing.class.getName());
-		assertNotNull(dep);
-		assertEquals(1, dep.getReferences());
-		
-		dep = deps.get(MockWithMethodException.class.getName());
-		assertNotNull(dep);
-		assertEquals(1, dep.getReferences());
-		
-		dep = deps.get(MockWithMethodExceptionBlock.class.getName());
-		assertNotNull(dep);
-		assertEquals(0, dep.getReferences());
-		assertEquals(4, deps.size());
-	}
-	
-	protected void assertHasMockWithAbstractMethodExceptionCache() {
-		String clazzName = MockWithAbstractMethodException.class.getName();
-		I_Dependency dep;
-		I_ClassDependencies cd = depsCache.get(clazzName);
-		assertNotNull(cd);
-		assertEquals(clazzName, cd.getClassName());
-		List<I_Dependency> cdeps = cd.getDependencies();
-		assertNotNull(cdeps);
-		Map<String, I_Dependency> deps = new HashMap<String, I_Dependency>();
-		for (I_Dependency d: cdeps) {
-			deps.put(d.getClassName(), d);
-		}
-		
-		dep = deps.get(MockException.class.getName());
-		assertNotNull(dep);
-		assertEquals(1, dep.getReferences());
-
-		dep = deps.get(MockWithNothing.class.getName());
-		assertNotNull(dep);
-		assertEquals(1, dep.getReferences());
-		
-		dep = deps.get(MockWithAbstractMethodException.class.getName());
-		assertNotNull(dep);
-		assertEquals(0, dep.getReferences());
-		assertEquals(3, deps.size());
-	}
-
-	
-	protected void assertHasMockWithAbstractMethodParamCache() {
-		String clazzName = MockWithAbstractMethodParam.class.getName();
-		I_Dependency dep;
-		I_ClassDependencies cd = depsCache.get(clazzName);
-		assertNotNull(cd);
-		assertEquals(clazzName, cd.getClassName());
-		List<I_Dependency> cdeps = cd.getDependencies();
-		assertNotNull(cdeps);
-		Map<String, I_Dependency> deps = new HashMap<String, I_Dependency>();
-		for (I_Dependency d: cdeps) {
-			deps.put(d.getClassName(), d);
-		}
-		
-		dep = deps.get(MockWithNothing.class.getName());
-		assertNotNull(dep);
-		assertEquals(1, dep.getReferences());
-		
-		dep = deps.get(clazzName);
-		assertNotNull(dep);
-		assertEquals(0, dep.getReferences());
-		assertEquals(2, deps.size());
-	}
-	
-	protected void assertHasMockWithAbstractMethodReturnCache() {
-		String clazzName = MockWithAbstractMethodReturn.class.getName();
-		I_Dependency dep;
-		I_ClassDependencies cd = depsCache.get(clazzName);
-		assertNotNull(cd);
-		assertEquals(clazzName, cd.getClassName());
-		List<I_Dependency> cdeps = cd.getDependencies();
-		assertNotNull(cdeps);
-		Map<String, I_Dependency> deps = new HashMap<String, I_Dependency>();
-		for (I_Dependency d: cdeps) {
-			deps.put(d.getClassName(), d);
-		}
-		
-
-		dep = deps.get(MockWithNothing.class.getName());
-		assertNotNull(dep);
-		assertEquals(1, dep.getReferences());
-		
-		dep = deps.get(clazzName);
-		assertNotNull(dep);
-		assertEquals(0, dep.getReferences());
-		assertEquals(2, deps.size());
+		I_ClassReferences cr =  crd.getReferences(clazzName);
+		assertNotNull(cr);
+		assertEquals(clazzName, cr.getClassName());
+		Set<String> refs = cr.getReferences();
+		assertNotNull(refs);
+		assertContains(refs, MockWithNothing.class.getName());
+		assertContains(refs, clazzName);
+		assertEquals(2, refs.size());
 	}
 	
 	@Test
-	public void test03_RefToMockWithEverything() throws Exception {
-		String clazzName = MockRefEverything.class.getName();
+	public void test03_MockWithFeild() throws Exception {
+		String clazzName = MockWithField.class.getName();
 		assertFalse(ccbClassLoader.hasCache(clazzName));
-		I_ClassDependencies cd = crd.discoverAndLoad(MockRefEverything.class);
-		assertEquals(clazzName, cd.getClassName());
-		
+		List<String> order = crd.discoverAndLoad(MockWithField.class);
+		assertNotNull(order);
+		assertEquals(I_Tests4J_System.class.getName(), order.get(0));
+		assertEquals(clazzName, order.get(1));
+		assertEquals(2, order.size());
 		assertTrue(ccbClassLoader.hasCache(clazzName));
-		assertHasMockWithEverythingCache();
-		I_ClassDependencies cdeps = depsCache.get(clazzName);
-		assertNotNull(cdeps);
-		assertEquals(clazzName, cdeps.getClassName());
 		
-		List<I_Dependency> deps = cd.getDependencies();
-		Map<String,I_Dependency> dmap = new HashMap<String,I_Dependency>();
-		for (I_Dependency d: deps) {
-			dmap.put(d.getClassName(), d);
-		}
+		I_ClassReferences cr =  crd.getReferences(clazzName);
+		assertNotNull(cr);
+		assertEquals(clazzName, cr.getClassName());
+		Set<String> refs = cr.getReferences();
+		assertNotNull(refs);
+		assertContains(refs, I_Tests4J_System.class.getName());
+		assertContains(refs, clazzName);
+		assertEquals(2, refs.size());
+	}
+
+	@Test
+	public void test04_MockWithMethodParams() throws Exception {
+		String clazzName = MockWithMethodParams.class.getName();
+		assertFalse(ccbClassLoader.hasCache(clazzName));
+		List<String> order = crd.discoverAndLoad(MockWithMethodParams.class);
+		assertNotNull(order);
+		assertEquals(MockWithNothing.class.getName(), order.get(0));
+		assertEquals(MockWithMethodReturn.class.getName(), order.get(1));
+		assertEquals(clazzName, order.get(2));
+		assertEquals(3, order.size());
+		assertTrue(ccbClassLoader.hasCache(clazzName));
 		
-		I_Dependency top = dmap.get(MockWithNothing.class.getName());
-		assertNotNull(top);
-		assertEquals(15, top.getReferences());
-		//for ordering assert the order
-		assertSame(top, deps.get(0));
-		
-		top = dmap.get(MockException.class.getName());
-		assertNotNull(top);
-		assertEquals(4, top.getReferences());
-		//for ordering assert the order
-		assertSame(top, deps.get(1));
-		
-		top = dmap.get(MockWithMethodReturn.class.getName());
-		assertNotNull(top);
-		assertEquals(3, top.getReferences());
-		//for ordering assert the order
-		assertSame(top, deps.get(2));
-		
-		//can't assert the order of the 1 references
-		top = dmap.get(MockWithArray.class.getName());
-		assertNotNull(top);
-		assertEquals(1, top.getReferences());
-		
-		top = dmap.get(MockWithMethodExceptionBlock.class.getName());
-		assertNotNull(top);
-		assertEquals(1, top.getReferences());
-		
-		top = dmap.get(MockWithMethodParams.class.getName());
-		assertNotNull(top);
-		assertEquals(1, top.getReferences());
-		
-		top = dmap.get(MockWithField.class.getName());
-		assertNotNull(top);
-		assertEquals(1, top.getReferences());
-		
-		top = dmap.get(MockWithImportOnlyInMethod.class.getName());
-		assertNotNull(top);
-		assertEquals(1, top.getReferences());
-		
-		top = dmap.get(MockWithStaticInitalizer.class.getName());
-		assertNotNull(top);
-		assertEquals(1, top.getReferences());
-		
-		top = dmap.get(MockWithAbstractMethodException.class.getName());
-		assertNotNull(top);
-		assertEquals(1, top.getReferences());
-		
-		top = dmap.get(MockWithAbstractMethodReturn.class.getName());
-		assertNotNull(top);
-		assertEquals(1, top.getReferences());
-		
-		top = dmap.get(MockWithAbstractMethodParam.class.getName());
-		assertNotNull(top);
-		assertEquals(1, top.getReferences());
-		
-		top = dmap.get(MockWithEverything.class.getName());
-		assertNotNull(top);
-		assertEquals(1, top.getReferences());
-		
-		top = dmap.get(MockWithEverything.class.getName() + "$1");
-		assertNotNull(top);
-		assertEquals(0, top.getReferences());
-		
-		top = dmap.get(MockRefEverything.class.getName());
-		assertNotNull(top);
-		assertEquals(0, top.getReferences());
-		
-		assertHasMockWithEverythingCache();
-		assertEquals(18, depsCache.size());
+		I_ClassReferences cr =  crd.getReferences(clazzName);
+		assertNotNull(cr);
+		assertEquals(clazzName, cr.getClassName());
+		Set<String> refs = cr.getReferences();
+		assertNotNull(refs);
+		assertContains(refs, MockWithNothing.class.getName());
+		assertContains(refs, MockWithMethodReturn.class.getName());
+		assertContains(refs, clazzName);
+		assertEquals(3, refs.size());
 	}
 	
-	@Override
-	public int getTests() {
-		// TODO Auto-generated method stub
-		return 3;
+	@Test
+	public void test05_MockWithImportOnlyInMethod() throws Exception {
+		String clazzName = MockWithImportOnlyInMethod.class.getName();
+		assertFalse(ccbClassLoader.hasCache(clazzName));
+		List<String> order = crd.discoverAndLoad(MockWithImportOnlyInMethod.class);
+		assertNotNull(order);
+		assertEquals(I_Tests4J_System.class.getName(), order.get(0));
+		assertEquals(clazzName, order.get(1));
+		assertEquals(2, order.size());
+		assertTrue(ccbClassLoader.hasCache(clazzName));
+		
+		I_ClassReferences cr =  crd.getReferences(clazzName);
+		assertNotNull(cr);
+		assertEquals(clazzName, cr.getClassName());
+		Set<String> refs = cr.getReferences();
+		assertNotNull(refs);
+		assertContains(refs, I_Tests4J_System.class.getName());
+		assertContains(refs, clazzName);
+		assertEquals(2, refs.size());
 	}
-
-	@Override
-	public int getAsserts() {
-		return 323;
+	
+	@Test
+	public void test06_MockWithStaticFeild() throws Exception {
+		String clazzName = MockWithStaticField.class.getName();
+		assertFalse(ccbClassLoader.hasCache(clazzName));
+		List<String> order = crd.discoverAndLoad(MockWithStaticField.class);
+		assertNotNull(order);
+		assertEquals(MockWithNothing.class.getName(), order.get(0));
+		assertEquals(clazzName, order.get(1));
+		assertEquals(2, order.size());
+		assertTrue(ccbClassLoader.hasCache(clazzName));
+		
+		I_ClassReferences cr =  crd.getReferences(clazzName);
+		assertNotNull(cr);
+		assertEquals(clazzName, cr.getClassName());
+		Set<String> refs = cr.getReferences();
+		assertNotNull(refs);
+		assertContains(refs, MockWithNothing.class.getName());
+		assertContains(refs, clazzName);
+		assertEquals(2, refs.size());
 	}
-
-	@Override
-	public int getUniqueAsserts() {
-		return 201;
+	
+	@Test
+	public void test07_MockWithStaticInitalizer() throws Exception {
+		String clazzName = MockWithStaticInitalizer.class.getName();
+		assertFalse(ccbClassLoader.hasCache(clazzName));
+		List<String> order = crd.discoverAndLoad(MockWithStaticInitalizer.class);
+		assertNotNull(order);
+		assertEquals(MockWithNothing.class.getName(), order.get(0));
+		assertEquals(clazzName, order.get(1));
+		assertEquals(2, order.size());
+		assertTrue(ccbClassLoader.hasCache(clazzName));
+		
+		I_ClassReferences cr =  crd.getReferences(clazzName);
+		assertNotNull(cr);
+		assertEquals(clazzName, cr.getClassName());
+		Set<String> refs = cr.getReferences();
+		assertNotNull(refs);
+		assertContains(refs, MockWithNothing.class.getName());
+		assertContains(refs, clazzName);
+		assertEquals(2, refs.size());
 	}
+	
+	@Test
+	public void test08_MockWithArray() throws Exception {
+		String clazzName = MockWithArray.class.getName();
+		assertFalse(ccbClassLoader.hasCache(clazzName));
+		List<String> order = crd.discoverAndLoad(MockWithArray.class);
+		assertNotNull(order);
+		assertEquals(MockWithNothing.class.getName(), order.get(0));
+		assertEquals(clazzName, order.get(1));
+		assertEquals(2, order.size());
+		assertTrue(ccbClassLoader.hasCache(clazzName));
+		
+		I_ClassReferences cr =  crd.getReferences(clazzName);
+		assertNotNull(cr);
+		assertEquals(clazzName, cr.getClassName());
+		Set<String> refs = cr.getReferences();
+		assertNotNull(refs);
+		assertContains(refs, MockWithNothing.class.getName());
+		assertContains(refs, clazzName);
+		assertEquals(2, refs.size());
+	}
+	
+	
+	@Test
+	public void test09_MockWithMethodException() throws Exception {
+		String clazzName = MockWithMethodException.class.getName();
+		assertFalse(ccbClassLoader.hasCache(clazzName));
+		List<String> order = crd.discoverAndLoad(MockWithMethodException.class);
+		assertNotNull(order);
+		assertEquals(MockWithNothing.class.getName(), order.get(0));
+		assertEquals(MockException.class.getName(), order.get(1));
+		assertEquals(clazzName, order.get(2));
+		assertEquals(3, order.size());
+		assertTrue(ccbClassLoader.hasCache(clazzName));
+		
+		I_ClassReferences cr =  crd.getReferences(clazzName);
+		assertNotNull(cr);
+		assertEquals(clazzName, cr.getClassName());
+		Set<String> refs = cr.getReferences();
+		assertNotNull(refs);
+		assertContains(refs, MockWithNothing.class.getName());
+		assertContains(refs, MockException.class.getName());
+		assertContains(refs, clazzName);
+		assertEquals(3, refs.size());
+	}
+	
+	@Test
+	public void test10_MockWithMethodExceptionBlock() throws Exception {
+		String clazzName = MockWithMethodExceptionBlock.class.getName();
+		assertFalse(ccbClassLoader.hasCache(clazzName));
+		List<String> order = crd.discoverAndLoad(MockWithMethodExceptionBlock.class);
+		assertNotNull(order);
+		assertEquals(MockWithNothing.class.getName(), order.get(0));
+		assertEquals(MockException.class.getName(), order.get(1));
+		assertEquals(MockWithMethodException.class.getName(), order.get(2));
+		assertEquals(clazzName, order.get(3));
+		assertEquals(4, order.size());
+		assertTrue(ccbClassLoader.hasCache(clazzName));
+		
+		I_ClassReferences cr =  crd.getReferences(clazzName);
+		assertNotNull(cr);
+		assertEquals(clazzName, cr.getClassName());
+		Set<String> refs = cr.getReferences();
+		assertNotNull(refs);
+		assertContains(refs, MockWithMethodException.class.getName());
+		assertContains(refs, MockException.class.getName());
+		assertContains(refs, clazzName);
+		assertEquals(3, refs.size());
+	}
+	
+	@Test
+	public void test11_MockWithAbstractMethodReturn() throws Exception {
+		String clazzName = MockWithAbstractMethodReturn.class.getName();
+		assertFalse(ccbClassLoader.hasCache(clazzName));
+		List<String> order = crd.discoverAndLoad(MockWithAbstractMethodReturn.class);
+		assertNotNull(order);
+		assertEquals(MockWithNothing.class.getName(), order.get(0));
+		assertEquals(clazzName, order.get(1));
+		assertEquals(2, order.size());
+		assertTrue(ccbClassLoader.hasCache(clazzName));
+		
+		I_ClassReferences cr =  crd.getReferences(clazzName);
+		assertNotNull(cr);
+		assertEquals(clazzName, cr.getClassName());
+		Set<String> refs = cr.getReferences();
+		assertNotNull(refs);
+		assertContains(refs, MockWithNothing.class.getName());
+		assertContains(refs, clazzName);
+		assertEquals(2, refs.size());
+	}
+	
+	@Test
+	public void test12_MockWithAbstractMethodParam() throws Exception {
+		String clazzName = MockWithAbstractMethodParam.class.getName();
+		assertFalse(ccbClassLoader.hasCache(clazzName));
+		List<String> order = crd.discoverAndLoad(MockWithAbstractMethodParam.class);
+		assertNotNull(order);
+		assertEquals(MockWithNothing.class.getName(), order.get(0));
+		assertEquals(clazzName, order.get(1));
+		assertEquals(2, order.size());
+		assertTrue(ccbClassLoader.hasCache(clazzName));
+		
+		I_ClassReferences cr =  crd.getReferences(clazzName);
+		assertNotNull(cr);
+		assertEquals(clazzName, cr.getClassName());
+		Set<String> refs = cr.getReferences();
+		assertNotNull(refs);
+		assertContains(refs, MockWithNothing.class.getName());
+		assertContains(refs, clazzName);
+		assertEquals(2, refs.size());
+	}
+	
+	@Test
+	public void test13_MockWithAbstractMethodParam() throws Exception {
+		String clazzName = MockWithAbstractMethodParam.class.getName();
+		assertFalse(ccbClassLoader.hasCache(clazzName));
+		List<String> order = crd.discoverAndLoad(MockWithAbstractMethodParam.class);
+		assertNotNull(order);
+		assertEquals(MockWithNothing.class.getName(), order.get(0));
+		assertEquals(clazzName, order.get(1));
+		assertEquals(2, order.size());
+		assertTrue(ccbClassLoader.hasCache(clazzName));
+		
+		I_ClassReferences cr =  crd.getReferences(clazzName);
+		assertNotNull(cr);
+		assertEquals(clazzName, cr.getClassName());
+		Set<String> refs = cr.getReferences();
+		assertNotNull(refs);
+		assertContains(refs, MockWithNothing.class.getName());
+		assertContains(refs, clazzName);
+		assertEquals(2, refs.size());
+	}
+	
+	@Test
+	public void test14_MockWithBidirectionalA() throws Exception {
+		String clazzName = MockWithBidirectionalA.class.getName();
+		assertFalse(ccbClassLoader.hasCache(clazzName));
+		List<String> order = crd.discoverAndLoad(MockWithBidirectionalA.class);
+		assertNotNull(order);
+		assertEquals(MockWithBidirectionalB.class.getName(), order.get(0));
+		assertEquals(clazzName, order.get(1));
+		assertEquals(2, order.size());
+		assertTrue(ccbClassLoader.hasCache(clazzName));
+		
+		I_ClassReferences cr =  crd.getReferences(clazzName);
+		assertNotNull(cr);
+		assertEquals(clazzName, cr.getClassName());
+		Set<String> refs = cr.getReferences();
+		assertNotNull(refs);
+		assertContains(refs, MockWithBidirectionalB.class.getName());
+		assertContains(refs, clazzName);
+		assertEquals(2, refs.size());
+	}
+	
+	@Test
+	public void test15_MockWithBidirectionalB() throws Exception {
+		String clazzName = MockWithBidirectionalB.class.getName();
+		assertFalse(ccbClassLoader.hasCache(clazzName));
+		List<String> order = crd.discoverAndLoad(MockWithBidirectionalB.class);
+		assertNotNull(order);
+		assertEquals(MockWithBidirectionalA.class.getName(), order.get(0));
+		assertEquals(clazzName, order.get(1));
+		assertEquals(2, order.size());
+		assertTrue(ccbClassLoader.hasCache(clazzName));
+		
+		I_ClassReferences cr =  crd.getReferences(clazzName);
+		assertNotNull(cr);
+		assertEquals(clazzName, cr.getClassName());
+		Set<String> refs = cr.getReferences();
+		assertNotNull(refs);
+		assertContains(refs, MockWithBidirectionalA.class.getName());
+		assertContains(refs, clazzName);
+		assertEquals(2, refs.size());
+	}
+	
+	@Test
+	public void test16_MockWithTriangleA() throws Exception {
+		String clazzName = MockWithTriangleA.class.getName();
+		assertFalse(ccbClassLoader.hasCache(clazzName));
+		List<String> order = crd.discoverAndLoad(MockWithTriangleA.class);
+		assertNotNull(order);
+		
+		assertEquals(MockWithTriangleC.class.getName(), order.get(0));
+		assertEquals(MockWithTriangleB.class.getName(), order.get(1));
+		assertEquals(clazzName, order.get(2));
+		assertEquals(3, order.size());
+		assertTrue(ccbClassLoader.hasCache(clazzName));
+		
+		I_ClassReferences cr =  crd.getReferences(clazzName);
+		assertNotNull(cr);
+		assertEquals(clazzName, cr.getClassName());
+		Set<String> refs = cr.getReferences();
+		assertNotNull(refs);
+		assertContains(refs, MockWithTriangleB.class.getName());
+		assertContains(refs, clazzName);
+		assertEquals(2, refs.size());
+	}
+	
+	@Test
+	public void test17_MockWithTriangleB() throws Exception {
+		String clazzName = MockWithTriangleB.class.getName();
+		assertFalse(ccbClassLoader.hasCache(clazzName));
+		List<String> order = crd.discoverAndLoad(MockWithTriangleB.class);
+		assertNotNull(order);
+		
+		assertEquals(MockWithTriangleA.class.getName(), order.get(0));
+		assertEquals(MockWithTriangleC.class.getName(), order.get(1));
+		assertEquals(clazzName, order.get(2));
+		assertEquals(3, order.size());
+		assertTrue(ccbClassLoader.hasCache(clazzName));
+		
+		I_ClassReferences cr =  crd.getReferences(clazzName);
+		assertNotNull(cr);
+		assertEquals(clazzName, cr.getClassName());
+		Set<String> refs = cr.getReferences();
+		assertNotNull(refs);
+		assertContains(refs, MockWithTriangleC.class.getName());
+		assertContains(refs, clazzName);
+		assertEquals(2, refs.size());
+	}
+	
+	@Test
+	public void test18_MockWithTriangleC() throws Exception {
+		String clazzName = MockWithTriangleC.class.getName();
+		assertFalse(ccbClassLoader.hasCache(clazzName));
+		List<String> order = crd.discoverAndLoad(MockWithTriangleC.class);
+		assertNotNull(order);
+		
+		assertEquals(MockWithTriangleB.class.getName(), order.get(0));
+		assertEquals(MockWithTriangleA.class.getName(), order.get(1));
+		assertEquals(clazzName, order.get(2));
+		assertEquals(3, order.size());
+		assertTrue(ccbClassLoader.hasCache(clazzName));
+		
+		I_ClassReferences cr =  crd.getReferences(clazzName);
+		assertNotNull(cr);
+		assertEquals(clazzName, cr.getClassName());
+		Set<String> refs = cr.getReferences();
+		assertNotNull(refs);
+		assertContains(refs, MockWithTriangleA.class.getName());
+		assertContains(refs, clazzName);
+		assertEquals(2, refs.size());
+	}
+	
+	@Test
+	public void test100_MockWithEverything() throws Exception {
+		String clazzName = MockWithEverything.class.getName();
+		assertFalse(ccbClassLoader.hasCache(clazzName));
+		List<String> order = crd.discoverAndLoad(MockWithEverything.class);
+		assertNotNull(order);
+		
+		assertEquals(MockWithNothing.class.getName(), order.get(0));
+		assertEquals(MockException.class.getName(), order.get(1));
+		assertEquals(MockWithMethodReturn.class.getName(), order.get(2));
+		assertEquals(MockWithTriangleB.class.getName(), order.get(3));
+		assertEquals(MockWithTriangleC.class.getName(), order.get(4));
+		assertEquals(MockWithTriangleA.class.getName(), order.get(5));
+		assertEquals(MockWithMethodException.class.getName(), order.get(6));
+		assertEquals(I_Tests4J_System.class.getName(), order.get(7));
+		assertEquals(MockWithBidirectionalA.class.getName(), order.get(8));
+		assertEquals(MockWithBidirectionalB.class.getName(), order.get(9));
+		assertEquals(MockWithArray.class.getName(), order.get(10));
+		assertEquals(MockWithMethodExceptionBlock.class.getName(), order.get(11));
+		assertEquals(MockWithMethodParams.class.getName(), order.get(12));
+		assertEquals(MockWithField.class.getName(), order.get(13));
+		assertEquals(MockWithImportOnlyInMethod.class.getName(), order.get(14));
+		assertEquals(MockWithStaticField.class.getName(), order.get(15));
+		assertEquals(MockWithAbstractMethodParam.class.getName(), order.get(16));
+		assertEquals(MockWithAbstractMethodException.class.getName(), order.get(17));
+		assertEquals(MockWithStaticInitalizer.class.getName(), order.get(18));
+		assertEquals(MockWithAbstractMethodReturn.class.getName(), order.get(19));
+		assertEquals(clazzName + "$1", order.get(20));
+		assertEquals(clazzName, order.get(21));
+		assertEquals(22, order.size());
+		assertTrue(ccbClassLoader.hasCache(clazzName));
+		
+		I_ClassReferences cr =  crd.getReferences(clazzName);
+		assertNotNull(cr);
+		assertEquals(clazzName, cr.getClassName());
+		Set<String> refs = cr.getReferences();
+		assertNotNull(refs);
+		
+		assertContains(refs, MockWithNothing.class.getName());
+		assertContains(refs, MockWithMethodReturn.class.getName());
+		assertContains(refs, MockWithBidirectionalA.class.getName());
+		assertContains(refs, MockWithTriangleC.class.getName());
+		assertContains(refs, MockWithArray.class.getName());
+		assertContains(refs, MockWithMethodParams.class.getName());
+		assertContains(refs, MockWithField.class.getName());
+		assertContains(refs, MockWithImportOnlyInMethod.class.getName());
+		assertContains(refs, MockWithStaticField.class.getName());
+		assertContains(refs, MockWithAbstractMethodParam.class.getName());
+		assertContains(refs, MockWithAbstractMethodException.class.getName());
+		assertContains(refs, MockWithStaticInitalizer.class.getName());
+		assertContains(refs, MockWithAbstractMethodReturn.class.getName());
+		assertContains(refs, clazzName + "$1");
+		assertContains(refs, clazzName);
+		
+		assertContains(refs, clazzName);
+		assertEquals(15, refs.size());
+	}
+	
 	@Override
 	public void putIfAbsent(I_ClassDependencies p) {
 		depsCache.put(p.getClassName(),  p);
@@ -588,5 +512,25 @@ public class ClassReferencesDiscoveryTrial extends SourceFileCountingTrial imple
 	@Override
 	public boolean isFiltered(Class<?> clazz) {
 		return classFilter.isFiltered(clazz);
+	}
+
+	@Override
+	public boolean isFiltered(String className) {
+		return classFilter.isFiltered(className);
+	}
+	
+	@Override
+	public int getTests() {
+		return 19;
+	}
+
+	@Override
+	public int getAsserts() {
+		return 270;
+	}
+
+	@Override
+	public int getUniqueAsserts() {
+		return 237;
 	}
 }

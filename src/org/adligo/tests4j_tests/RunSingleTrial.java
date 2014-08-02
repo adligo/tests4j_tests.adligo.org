@@ -6,7 +6,7 @@ import org.adligo.tests4j.shared.report.summary.TestDisplay;
 import org.adligo.tests4j.shared.report.summary.TrialDisplay;
 import org.adligo.tests4j_4jacoco.plugin.Recorder;
 import org.adligo.tests4j_4jacoco.plugin.ScopedJacocoPluginFactory;
-import org.adligo.tests4j_tests.jacoco.plugin.discovery.ClassDependenciesDiscoveryTrial;
+import org.adligo.tests4j_tests.jacoco.plugin.discovery.ClassReferencesDiscoveryTrial;
 
 public class RunSingleTrial {
 
@@ -14,7 +14,7 @@ public class RunSingleTrial {
 	public static void main(String [] args) {
 		Tests4J_Params params = new Tests4J_Params();
 		//params.addTrial(DiffIndexesTrial.class);
-		params.addTrial(ClassDependenciesDiscoveryTrial.class);
+		params.addTrial(ClassReferencesDiscoveryTrial.class);
 	
 		//params.setLogState(AbstractPlugin.class, true);
 		//params.setLogState(Tests4J_NotificationManager.class, true);

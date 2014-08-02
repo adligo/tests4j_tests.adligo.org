@@ -20,6 +20,8 @@ public abstract class MockWithEverything {
 	private MockWithAbstractMethodException a;
 	private MockWithAbstractMethodReturn b;
 	private MockWithAbstractMethodParam c;
+	public MockWithBidirectionalA aa;
+	public MockWithTriangleC cc;
 	
 	public MockWithEverything() {
 		double d = Math.random();

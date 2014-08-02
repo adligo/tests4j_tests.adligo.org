@@ -55,19 +55,31 @@ public class DependencyTrial extends SourceFileCountingTrial {
 		assertEquals(1, b.compareTo(a));
 		assertEquals(-1, a.compareTo(b));
 	}
+	
+	@Test
+	public void testToString() {
+		DependencyMutant dm = new DependencyMutant();
+		dm.setClazzName("foo");
+		dm.addReference();
+		dm.addReference();
+		assertEquals("Dependency [clazzName=foo, references=2]", new Dependency(dm).toString());
+		
+		
+	}
+	
 	@Override
 	public int getTests() {
-		return 3;
+		return 4;
 	}
 
 	@Override
 	public int getAsserts() {
-		return 8;
+		return 9;
 	}
 
 	@Override
 	public int getUniqueAsserts() {
-		return 5;
+		return 6;
 	}
 
 }
