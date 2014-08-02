@@ -135,12 +135,12 @@ public class AssertionProcessorTrial extends SourceFileCountingTrial implements 
 
 	@Override
 	public int getAsserts() {
-		return 40;
+		return 32;
 	}
 
 	@Override
 	public int getUniqueAsserts() {
-		return 31;
+		return 23;
 	}
 	
 }

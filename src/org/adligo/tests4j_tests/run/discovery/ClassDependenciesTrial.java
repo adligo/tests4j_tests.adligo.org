@@ -90,6 +90,6 @@ public class ClassDependenciesTrial extends SourceFileCountingTrial {
 
 	@Override
 	public int getUniqueAsserts() {
-		return 11;
+		return 10;
 	}
 }

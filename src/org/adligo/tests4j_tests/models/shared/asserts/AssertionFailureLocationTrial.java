@@ -32,11 +32,11 @@ public class AssertionFailureLocationTrial extends SourceFileCountingTrial {
 
 	@Override
 	public int getAsserts() {
-		return 8;
+		return 4;
 	}
 
 	@Override
 	public int getUniqueAsserts() {
-		return 8;
+		return 4;
 	}
 }

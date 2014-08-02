@@ -14,7 +14,7 @@ import org.adligo.tests4j.run.discovery.I_Dependency;
 import org.adligo.tests4j_tests.base_abstract_trials.SourceFileCountingTrial;
 
 
-@SourceFileScope (sourceClass=ClassDependenciesMutant.class, minCoverage=70.0)
+@SourceFileScope (sourceClass=ClassDependenciesMutant.class, minCoverage=65.0)
 public class ClassDependenciesMutantTrial extends SourceFileCountingTrial {
 
 	@Test

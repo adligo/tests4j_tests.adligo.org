@@ -5,7 +5,7 @@ import org.adligo.tests4j.models.shared.trials.SourceFileScope;
 import org.adligo.tests4j.models.shared.trials.Test;
 import org.adligo.tests4j_tests.base_abstract_trials.SourceFileCountingTrial;
 
-@SourceFileScope (sourceClass=Platform.class)
+@SourceFileScope (sourceClass=Platform.class, minCoverage=80.0)
 public class PlatformTrial extends SourceFileCountingTrial {
 
 	@Test

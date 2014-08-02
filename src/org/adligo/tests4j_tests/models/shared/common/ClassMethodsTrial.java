@@ -11,7 +11,7 @@ import org.adligo.tests4j_tests.base_abstract_trials.SourceFileCountingTrial;
 import org.adligo.tests4j_tests.models.shared.common.mocks.BaseMockClass;
 import org.adligo.tests4j_tests.models.shared.common.mocks.ChildMockClass;
 
-@SourceFileScope (sourceClass=ClassMethods.class, minCoverage=94.0)
+@SourceFileScope (sourceClass=ClassMethods.class, minCoverage=92.0)
 public class ClassMethodsTrial extends SourceFileCountingTrial {
 
 	@Test

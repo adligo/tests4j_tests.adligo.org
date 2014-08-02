@@ -25,6 +25,10 @@ import org.adligo.tests4j.shared.report.summary.TrialDisplay;
 import org.adligo.tests4j.shared.report.summary.TrialsProgressDisplay;
 import org.adligo.tests4j_4jacoco.plugin.ScopedJacocoPluginFactory;
 import org.adligo.tests4j_4jacoco.plugin.TrialInstrumenter;
+import org.adligo.tests4j_4jacoco.plugin.discovery.ClassDependenciesDiscovery;
+import org.adligo.tests4j_4jacoco.plugin.discovery.ClassInstrumenter;
+import org.adligo.tests4j_4jacoco.plugin.discovery.ClassReferencesDiscovery;
+import org.adligo.tests4j_4jacoco.plugin.discovery.TrialInstrumenter2;
 import org.adligo.tests4j_tests.base_abstract_trials.Counts;
 import org.adligo.tests4j_tests.base_abstract_trials.I_CountingTrial;
 
@@ -45,6 +49,10 @@ public class RunAllTrials implements I_Tests4J_Listener {
 		params.setLogState(TrialDisplay.class, false);
 		params.setLogState(TestDisplay.class, false);
 		params.setLogState(TrialsProgressDisplay.class, false);
+		//params.setLogState(ClassReferencesDiscovery.class, true);
+		//params.setLogState(ClassDependenciesDiscovery.class, true);
+		//params.setLogState(TrialInstrumenter2.class, true);
+		//params.setLogState(ClassInstrumenter.class, true);
 		//params.setLogState(TrialInstrumenter.class, true);
 		
 		params.setMetaTrialClass(TheMetaTrial.class);
