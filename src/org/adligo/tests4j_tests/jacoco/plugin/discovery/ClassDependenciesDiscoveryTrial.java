@@ -38,7 +38,8 @@ import org.adligo.tests4j_tests.run.helpers.class_loading_mocks.MockWithTriangle
 import org.adligo.tests4j_tests.run.helpers.class_loading_mocks.MockWithTriangleB;
 import org.adligo.tests4j_tests.run.helpers.class_loading_mocks.MockWithTriangleC;
 
-@SourceFileScope (sourceClass=ClassDependenciesDiscovery.class, minCoverage=50.0)
+// hmm minCoverage is 89% during a run of just this package and 81% during all the trials run
+@SourceFileScope (sourceClass=ClassDependenciesDiscovery.class, minCoverage=81.0)
 public class ClassDependenciesDiscoveryTrial extends SourceFileCountingTrial implements I_DiscoveryMemory {
 	private CachedClassBytesClassLoader ccbClassLoader;
 	private ClassDependenciesDiscovery crd;

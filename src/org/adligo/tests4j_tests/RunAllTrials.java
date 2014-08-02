@@ -28,7 +28,6 @@ import org.adligo.tests4j_4jacoco.plugin.TrialInstrumenter;
 import org.adligo.tests4j_4jacoco.plugin.discovery.ClassDependenciesDiscovery;
 import org.adligo.tests4j_4jacoco.plugin.discovery.ClassInstrumenter;
 import org.adligo.tests4j_4jacoco.plugin.discovery.ClassReferencesDiscovery;
-import org.adligo.tests4j_4jacoco.plugin.discovery.TrialInstrumenter2;
 import org.adligo.tests4j_tests.base_abstract_trials.Counts;
 import org.adligo.tests4j_tests.base_abstract_trials.I_CountingTrial;
 

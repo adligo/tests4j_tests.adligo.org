@@ -15,7 +15,7 @@ import org.objectweb.asm.Label;
 import org.objectweb.asm.Opcodes;
 import org.objectweb.asm.Type;
 
-@SourceFileScope (sourceClass=ReferenceTrackingMethodVisitor.class, minCoverage=50.0)
+@SourceFileScope (sourceClass=ReferenceTrackingMethodVisitor.class, minCoverage=60.0)
 public class ReferenceTrackingMethodVisitorTrial extends SourceFileCountingTrial {
 	ReferenceTrackingMethodVisitor rtcv;
 	ClassReferencesMutant crm = new ClassReferencesMutant();

@@ -37,7 +37,7 @@ import org.adligo.tests4j_tests.run.helpers.class_loading_mocks.MockWithTriangle
 import org.adligo.tests4j_tests.run.helpers.class_loading_mocks.MockWithTriangleB;
 import org.adligo.tests4j_tests.run.helpers.class_loading_mocks.MockWithTriangleC;
 
-@SourceFileScope (sourceClass=ClassReferencesDiscovery.class, minCoverage=50.0)
+@SourceFileScope (sourceClass=ClassReferencesDiscovery.class, minCoverage=89.0)
 public class ClassReferencesDiscoveryTrial extends SourceFileCountingTrial implements I_DiscoveryMemory {
 	private CachedClassBytesClassLoader ccbClassLoader;
 	private ClassReferencesDiscovery crd;

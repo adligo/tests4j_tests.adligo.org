@@ -33,7 +33,7 @@ import org.adligo.tests4j_tests.run.helpers.class_loading_mocks.MockWithTriangle
 import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.Opcodes;
 
-@SourceFileScope (sourceClass=ReferenceTrackingClassVisitor.class, minCoverage=30.0)
+@SourceFileScope (sourceClass=ReferenceTrackingClassVisitor.class, minCoverage=49.0)
 public class ReferenceTrackingClassVisitorTrial extends SourceFileCountingTrial {
 	ReferenceTrackingClassVisitor rtcv;
 	
