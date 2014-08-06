@@ -37,7 +37,6 @@ public class RunPkgTrials implements I_Tests4J_TrialList {
 		
 		trials.add(PackageDiscoveryTrial.class);
 		trials.add(Tests4J_ParamReaderTrial.class);
-		trials.add(TopPackageSetTrial.class);
 		
 		return trials;
 	}
