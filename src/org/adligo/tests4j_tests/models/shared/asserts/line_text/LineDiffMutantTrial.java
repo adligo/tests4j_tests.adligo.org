@@ -3,7 +3,7 @@ package org.adligo.tests4j_tests.models.shared.asserts.line_text;
 import java.util.Iterator;
 import java.util.TreeSet;
 
-import org.adligo.tests4j.models.shared.asserts.ExpectedThrownData;
+import org.adligo.tests4j.models.shared.asserts.common.ExpectedThrownData;
 import org.adligo.tests4j.models.shared.asserts.common.I_Thrower;
 import org.adligo.tests4j.models.shared.asserts.line_text.DiffIndexesPair;
 import org.adligo.tests4j.models.shared.asserts.line_text.DiffIndexes;
@@ -129,19 +129,19 @@ public class LineDiffMutantTrial extends SourceFileCountingTrial {
 		assertEquals(0, ldm.getExpectedLineNbr());
 		assertNull(ldm.getIndexes());
 		
-		ldm.setType(LineDiffType.PARTIAL_MATCH);
+		ldm.setType(LineDiffType.PartialMatch);
 		ldm.setActualLineNbr(1);
 		ldm.setExpectedLineNbr(0);
 		DiffIndexesPair pair = new DiffIndexesPair(new DiffIndexes(0, 1, null, null) , new DiffIndexes(1, 2, null, null));
 		ldm.setIndexes(pair);
 		
-		assertEquals(LineDiffType.PARTIAL_MATCH, ldm.getType());
+		assertEquals(LineDiffType.PartialMatch, ldm.getType());
 		assertEquals(1, ldm.getActualLineNbr());
 		assertEquals(0, ldm.getExpectedLineNbr());
 		assertSame(pair, ldm.getIndexes());
 		
 		LineDiffMutant ldm2 = new LineDiffMutant(ldm);
-		assertEquals(LineDiffType.PARTIAL_MATCH, ldm2.getType());
+		assertEquals(LineDiffType.PartialMatch, ldm2.getType());
 		assertEquals(1, ldm2.getActualLineNbr());
 		assertEquals(0, ldm2.getExpectedLineNbr());
 		assertSame(pair, ldm2.getIndexes());
@@ -197,7 +197,7 @@ public class LineDiffMutantTrial extends SourceFileCountingTrial {
 		LineDiffMutant d = new LineDiffMutant();
 		d.setActualLineNbr(1);
 		LineDiffMutant e = new LineDiffMutant();
-		e.setType(LineDiffType.MATCH);
+		e.setType(LineDiffType.Match);
 		
 		assertEquals(a,a);
 		assertEquals(a.hashCode(), a.hashCode());

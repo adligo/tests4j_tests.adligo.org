@@ -3,12 +3,12 @@ package org.adligo.tests4j_tests.run.discovery;
 import java.util.Collections;
 import java.util.Set;
 
-import org.adligo.tests4j.models.shared.asserts.ExpectedThrownData;
+import org.adligo.tests4j.models.shared.asserts.common.ExpectedThrownData;
 import org.adligo.tests4j.models.shared.asserts.common.I_Thrower;
+import org.adligo.tests4j.models.shared.dependency.ClassFilter;
+import org.adligo.tests4j.models.shared.dependency.ClassFilterMutant;
 import org.adligo.tests4j.models.shared.trials.SourceFileScope;
 import org.adligo.tests4j.models.shared.trials.Test;
-import org.adligo.tests4j.run.discovery.ClassFilter;
-import org.adligo.tests4j.run.discovery.ClassFilterMutant;
 import org.adligo.tests4j_tests.base_abstract_trials.SourceFileCountingTrial;
 import org.adligo.tests4j_tests.run.helpers.class_loading_mocks.MockWithNothing;
 

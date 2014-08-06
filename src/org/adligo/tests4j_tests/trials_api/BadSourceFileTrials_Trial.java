@@ -149,7 +149,6 @@ public class BadSourceFileTrials_Trial extends ApiCountingTrial {
 
 	@Override
 	public int getUniqueAsserts(){
-		// TODO Auto-generated method stub
-		return 213;
+		return 214;
 	}
 }

@@ -1,0 +1,6 @@
+
+1) When code coverage is different between two trial runs,
+ check to see if the tests4j log states are different 
+ (the additional code coverage may be due to coverage
+ of logging code).
+ 

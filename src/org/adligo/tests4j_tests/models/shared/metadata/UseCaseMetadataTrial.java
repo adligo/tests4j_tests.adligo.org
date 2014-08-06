@@ -1,8 +1,10 @@
 package org.adligo.tests4j_tests.models.shared.metadata;
 
 
-import org.adligo.tests4j.models.shared.asserts.ExpectedThrownData;
+import org.adligo.tests4j.models.shared.asserts.common.ExpectedThrownData;
 import org.adligo.tests4j.models.shared.asserts.common.I_Thrower;
+import org.adligo.tests4j.models.shared.en.Tests4J_EnglishConstants;
+import org.adligo.tests4j.models.shared.i18n.I_Tests4J_AnnotationErrors;
 import org.adligo.tests4j.models.shared.metadata.UseCaseMetadata;
 import org.adligo.tests4j.models.shared.trials.SourceFileScope;
 import org.adligo.tests4j.models.shared.trials.Test;
@@ -15,8 +17,10 @@ public class UseCaseMetadataTrial extends SourceFileCountingTrial {
 	
 	@Test
 	public void testConstructorExceptions() throws Exception {
+		I_Tests4J_AnnotationErrors messages =  Tests4J_EnglishConstants.ENGLISH.getAnnotationErrors();
+		 
 		assertThrown(new ExpectedThrownData(new IllegalArgumentException(
-				UseCaseMetadata.A_USE_CASE_REQUIRES_A_NOWN_AND_A_VERB)), 
+				messages.getUseCaseScopeEmptyNown())), 
 				new I_Thrower() {
 					
 					@Override
@@ -25,7 +29,7 @@ public class UseCaseMetadataTrial extends SourceFileCountingTrial {
 					}
 				});
 		assertThrown(new ExpectedThrownData(new IllegalArgumentException(
-				UseCaseMetadata.A_USE_CASE_REQUIRES_A_NOWN_AND_A_VERB)), 
+				messages.getUseCaseScopeEmptyNown())), 
 				new I_Thrower() {
 					
 					@Override
@@ -33,9 +37,26 @@ public class UseCaseMetadataTrial extends SourceFileCountingTrial {
 						new UseCaseMetadata("", "");
 					}
 				});
-		
 		assertThrown(new ExpectedThrownData(new IllegalArgumentException(
-				UseCaseMetadata.A_USE_CASE_REQUIRES_A_NOWN_AND_A_VERB)), 
+				messages.getUseCaseScopeEmptyVerb())), 
+				new I_Thrower() {
+					
+					@Override
+					public void run() {
+						new UseCaseMetadata("nown", null);
+					}
+				});
+		assertThrown(new ExpectedThrownData(new IllegalArgumentException(
+				messages.getUseCaseScopeEmptyVerb())), 
+				new I_Thrower() {
+					
+					@Override
+					public void run() {
+						new UseCaseMetadata("nown", "");
+					}
+				});
+		assertThrown(new ExpectedThrownData(new IllegalArgumentException(
+				messages.getUseCaseScopeEmptyVerb())), 
 				new I_Thrower() {
 					
 					@Override
@@ -45,7 +66,7 @@ public class UseCaseMetadataTrial extends SourceFileCountingTrial {
 				});
 		
 		assertThrown(new ExpectedThrownData(new IllegalArgumentException(
-				UseCaseMetadata.A_USE_CASE_REQUIRES_A_NOWN_AND_A_VERB)), 
+				messages.getUseCaseScopeEmptyNown())), 
 				new I_Thrower() {
 					
 					@Override
@@ -116,11 +137,11 @@ public class UseCaseMetadataTrial extends SourceFileCountingTrial {
 
 	@Override
 	public int getAsserts() {
-		return 22;
+		return 24;
 	}
 
 	@Override
 	public int getUniqueAsserts() {
-		return 14;
+		return 16;
 	}
 }

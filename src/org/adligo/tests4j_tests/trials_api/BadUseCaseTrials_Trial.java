@@ -164,11 +164,11 @@ public class BadUseCaseTrials_Trial extends ApiCountingTrial {
 				TestWithParamsTrial.getAsserts() +
 				UseCaseAnnotationNoNownTrial.getAsserts() +
 				UseCaseAnnotationNoSystemTrial.getAsserts() +
-				UseCaseAnnotationNoVerbTrial.getAsserts();
+				UseCaseAnnotationNoVerbTrial.getAsserts() ;
 	}
 
 	@Override
 	public int getUniqueAsserts() {
-		return 252;
+		return 253;
 	}
 }

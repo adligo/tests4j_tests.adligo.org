@@ -330,6 +330,6 @@ public class AssertionsFail_Trial extends ApiCountingTrial {
 
 	@Override
 	public int getUniqueAsserts() {
-		return 842;
+		return 840;
 	}
 }

@@ -72,20 +72,22 @@ public class BeforeTrialNotStaticTrial extends SourceFileTrial {
 		I_TrialResult result = results.get(0);
 		asserts.assertNotNull(result);
 		asserts.assertFalse(result.isPassed());
-		I_TrialFailure failure = result.getFailure();
-		asserts.assertNotNull(failure);
+		List<I_TrialFailure> failures = result.getFailures();
+		asserts.assertNotNull(failures);
+		asserts.assertEquals(1, failures.size());
+		I_TrialFailure failure = failures.get(0);
+		
 		I_Tests4J_AnnotationErrors messages =  Tests4J_EnglishConstants.ENGLISH.getAnnotationErrors();
 		asserts.assertEquals(messages.getBeforeTrialNotStatic(),  failure.getMessage());
-		Throwable exception = failure.getException();
-		asserts.assertUniform(new IllegalArgumentException(
-				"org.adligo.tests4j_tests.trials_api.bad_mock_source_file_trials.BeforeTrialNotStaticTrial was not annotated correctly."), 
-				exception);
+		asserts.assertEquals(
+				"org.adligo.tests4j_tests.trials_api.bad_mock_source_file_trials.BeforeTrialNotStaticTrial was not annotated correctly.", 
+				failure.getFailureDetail());
 		
 		MockSystem tracker =  runner.getMockSystem();
 		asserts.assertEquals(0, tracker.getLastStatus());
 	}
 	
 	public static int getAsserts() {
-		return 21;
+		return 22;
 	}
 }

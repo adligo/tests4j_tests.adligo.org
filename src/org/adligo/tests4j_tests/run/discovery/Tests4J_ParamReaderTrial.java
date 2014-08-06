@@ -1,6 +1,6 @@
 package org.adligo.tests4j_tests.run.discovery;
 
-import org.adligo.tests4j.models.shared.asserts.ExpectedThrownData;
+import org.adligo.tests4j.models.shared.asserts.common.ExpectedThrownData;
 import org.adligo.tests4j.models.shared.asserts.common.I_Thrower;
 import org.adligo.tests4j.models.shared.system.Tests4J_Params;
 import org.adligo.tests4j.models.shared.system.Tests4J_Selection;

@@ -31,6 +31,8 @@ public class Tests4J_AssertionInputMessages_Trial extends SourceFileCountingTria
 		asserter.assertConstant("The expected value should never be null, try assertNull().",
 				messages.getTheExpectedValueShouldNeverBeNull());
 		
+		asserter.assertConstant("The uniform thown evaluator is null.",
+				messages.getTheUniformThrownEvaluatorIsNull());
 		
 		asserter.assertConstantsMatchMethods(Tests4J_AssertionInputMessages.class);
 	}
@@ -42,11 +44,11 @@ public class Tests4J_AssertionInputMessages_Trial extends SourceFileCountingTria
 
 	@Override
 	public int getAsserts() {
-		return 19;
+		return 22;
 	}
 
 	@Override
 	public int getUniqueAsserts() {
-		return 19;
+		return 22;
 	}
 }

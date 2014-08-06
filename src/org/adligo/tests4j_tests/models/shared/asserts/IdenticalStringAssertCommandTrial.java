@@ -1,13 +1,11 @@
 package org.adligo.tests4j_tests.models.shared.asserts;
 
-import org.adligo.tests4j.models.shared.asserts.CompareAssertionData;
-import org.adligo.tests4j.models.shared.asserts.ExpectedThrownData;
 import org.adligo.tests4j.models.shared.asserts.IdenticalStringAssertCommand;
-import org.adligo.tests4j.models.shared.asserts.StringCompareAssertionData;
 import org.adligo.tests4j.models.shared.asserts.common.AssertType;
+import org.adligo.tests4j.models.shared.asserts.common.CompareAssertionData;
+import org.adligo.tests4j.models.shared.asserts.common.ExpectedThrownData;
 import org.adligo.tests4j.models.shared.asserts.common.I_AssertionData;
 import org.adligo.tests4j.models.shared.asserts.common.I_Thrower;
-import org.adligo.tests4j.models.shared.en.Tests4J_AssertionResultMessages;
 import org.adligo.tests4j.models.shared.en.Tests4J_EnglishConstants;
 import org.adligo.tests4j.models.shared.i18n.I_Tests4J_AssertionInputMessages;
 import org.adligo.tests4j.models.shared.trials.SourceFileScope;
@@ -24,8 +22,8 @@ public class IdenticalStringAssertCommandTrial extends SourceFileCountingTrial {
 					
 					@Override
 					public void run() {
-						new IdenticalStringAssertCommand(AssertType.AssertTrue , "exceptionMessage",
-								new CompareAssertionData<String>("hey", "you"));
+						new IdenticalStringAssertCommand( "exceptionMessage",
+								new CompareAssertionData<String>("hey", "you", AssertType.AssertTrue ));
 					}
 				});
 		
@@ -36,17 +34,17 @@ public class IdenticalStringAssertCommandTrial extends SourceFileCountingTrial {
 					
 					@Override
 					public void run() {
-						new IdenticalStringAssertCommand(AssertType.AssertEquals , "exceptionMessage",
-								new CompareAssertionData<String>(null, "you"));
+						new IdenticalStringAssertCommand("exceptionMessage",
+								new CompareAssertionData<String>(null, "you", AssertType.AssertEquals));
 					}
 				});
 	}
 	
 	@Test
 	public void testConstructorAndGetters() {
-		IdenticalStringAssertCommand cmd = new IdenticalStringAssertCommand(AssertType.AssertNotEquals , 
+		IdenticalStringAssertCommand cmd = new IdenticalStringAssertCommand(
 				"exceptionMessage",
-				new CompareAssertionData<String>("hey", "you"));
+				new CompareAssertionData<String>("hey", "you", AssertType.AssertNotEquals));
 		assertEquals(AssertType.AssertNotEquals, cmd.getType());
 		assertEquals("hey", cmd.getExpected());
 		assertEquals("you", cmd.getActual());
@@ -55,25 +53,25 @@ public class IdenticalStringAssertCommandTrial extends SourceFileCountingTrial {
 	
 	@Test
 	public void testEqualsAndHashCode() {
-		IdenticalStringAssertCommand a = new IdenticalStringAssertCommand(AssertType.AssertNotEquals , 
+		IdenticalStringAssertCommand a = new IdenticalStringAssertCommand(
 				"exceptionMessage",
-				new CompareAssertionData<String>("hey", "you"));
+				new CompareAssertionData<String>("hey", "you", AssertType.AssertNotEquals));
 		
-		IdenticalStringAssertCommand b = new IdenticalStringAssertCommand(AssertType.AssertNotEquals , 
+		IdenticalStringAssertCommand b = new IdenticalStringAssertCommand( 
 				"exceptionMessage",
-				new CompareAssertionData<String>("hey", "you2"));
+				new CompareAssertionData<String>("hey", "you2", AssertType.AssertNotEquals));
 		
-		IdenticalStringAssertCommand c = new IdenticalStringAssertCommand(AssertType.AssertNotEquals , 
+		IdenticalStringAssertCommand c = new IdenticalStringAssertCommand( 
 				"exceptionMessage",
-				new CompareAssertionData<String>("hey", "you"));
+				new CompareAssertionData<String>("hey", "you", AssertType.AssertNotEquals));
 		
-		IdenticalStringAssertCommand d = new IdenticalStringAssertCommand(AssertType.AssertNotEquals , 
+		IdenticalStringAssertCommand d = new IdenticalStringAssertCommand(
 				"exceptionMessage2",
-				new CompareAssertionData<String>("hey", "you"));
+				new CompareAssertionData<String>("hey", "you", AssertType.AssertNotEquals));
 		
-		IdenticalStringAssertCommand e = new IdenticalStringAssertCommand(AssertType.AssertEquals , 
+		IdenticalStringAssertCommand e = new IdenticalStringAssertCommand(
 				"exceptionMessage",
-				new CompareAssertionData<String>("hey", "you"));
+				new CompareAssertionData<String>("hey", "you", AssertType.AssertEquals));
 		
 		assertEquals(a, a);
 		assertEquals(a.hashCode(), a.hashCode());
@@ -93,36 +91,42 @@ public class IdenticalStringAssertCommandTrial extends SourceFileCountingTrial {
 		assertNotEquals(a, new Object());
 	}
 	
+	@SuppressWarnings("unchecked")
 	@Test
 	public void testEvaluateEquals() {
-		IdenticalStringAssertCommand a = new IdenticalStringAssertCommand(AssertType.AssertEquals , 
-				"exceptionMessage",
-				new CompareAssertionData<String>("hey", "you"));
+		IdenticalStringAssertCommand a = new IdenticalStringAssertCommand(
+				"failureMessage",
+				new CompareAssertionData<String>("hey", "you", AssertType.AssertEquals));
 		
 		assertFalse(a.evaluate());
+		assertEquals("failureMessage", a.getFailureMessage());
 		I_AssertionData data = a.getData();
-		assertTrue(data instanceof StringCompareAssertionData);
-		StringCompareAssertionData scad = (StringCompareAssertionData) data;
-		assertEquals("hey", scad.getExpected());
-		assertEquals("you", scad.getActual());
-		
-		IdenticalStringAssertCommand b = new IdenticalStringAssertCommand(AssertType.AssertEquals , 
-				"exceptionMessage",
-				new CompareAssertionData<String>("hey", "hey"));
-		assertTrue(b.evaluate());	
-		data = a.getData();
 		assertTrue(data instanceof CompareAssertionData);
+		@SuppressWarnings("unchecked")
 		CompareAssertionData<String> cad = (CompareAssertionData<String>) data;
 		assertEquals("hey", cad.getExpected());
 		assertEquals("you", cad.getActual());
+		assertEquals(AssertType.AssertEquals, cad.getType());
+		
+		IdenticalStringAssertCommand b = new IdenticalStringAssertCommand( 
+				"exceptionMessage",
+				new CompareAssertionData<String>("hey", "hey", AssertType.AssertEquals));
+		assertTrue(b.evaluate());	
+		data = a.getData();
+		assertTrue(data instanceof CompareAssertionData);
+		cad = (CompareAssertionData<String>) data;
+		assertEquals("hey", cad.getExpected());
+		assertEquals("you", cad.getActual());
+		assertEquals(AssertType.AssertEquals, cad.getType());
 	}
 	
 	
+	@SuppressWarnings("unchecked")
 	@Test
 	public void testEvaluateNotEquals() {
-		IdenticalStringAssertCommand a = new IdenticalStringAssertCommand(AssertType.AssertNotEquals , 
+		IdenticalStringAssertCommand a = new IdenticalStringAssertCommand(
 				"exceptionMessage",
-				new CompareAssertionData<String>("hey", "you"));
+				new CompareAssertionData<String>("hey", "you", AssertType.AssertNotEquals));
 		
 		assertTrue(a.evaluate());
 		I_AssertionData data = a.getData();
@@ -132,33 +136,31 @@ public class IdenticalStringAssertCommandTrial extends SourceFileCountingTrial {
 		assertEquals("you", cad.getActual());
 		
 		
-		IdenticalStringAssertCommand b = new IdenticalStringAssertCommand(AssertType.AssertNotEquals , 
+		IdenticalStringAssertCommand b = new IdenticalStringAssertCommand(
 				"exceptionMessage",
-				new CompareAssertionData<String>("hey", "hey"));
+				new CompareAssertionData<String>("hey", "hey", AssertType.AssertNotEquals));
 		assertFalse(b.evaluate());	
 		data = b.getData();
-		assertTrue(data instanceof StringCompareAssertionData);
-		StringCompareAssertionData scad = (StringCompareAssertionData) data;
-		assertEquals("hey", scad.getExpected());
-		assertEquals("hey", scad.getActual());
+		assertTrue(data instanceof CompareAssertionData);
+		cad = (CompareAssertionData<String>) data;
+		assertEquals("hey", cad.getExpected());
+		assertEquals("hey", cad.getActual());
+		assertEquals(AssertType.AssertNotEquals, cad.getType());
 	}
 	
-	@Test
-	public void testToString() {
-		
-	}
+
 	@Override
 	public int getTests() {
-		return 6;
+		return 5;
 	}
 
 	@Override
 	public int getAsserts() {
-		return 33;
+		return 37;
 	}
 
 	@Override
 	public int getUniqueAsserts() {
-		return 19;
+		return 22;
 	}
 }

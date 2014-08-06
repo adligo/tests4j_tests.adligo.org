@@ -1,24 +1,24 @@
-package org.adligo.tests4j_tests.run.discovery;
+package org.adligo.tests4j_tests.models.shared.dependency;
 
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
-import org.adligo.tests4j.models.shared.asserts.ExpectedThrownData;
+import org.adligo.tests4j.models.shared.asserts.common.ExpectedThrownData;
 import org.adligo.tests4j.models.shared.asserts.common.I_Thrower;
+import org.adligo.tests4j.models.shared.dependency.ClassDependencies;
+import org.adligo.tests4j.models.shared.dependency.ClassDependenciesMutant;
+import org.adligo.tests4j.models.shared.dependency.ClassReferencesMutant;
+import org.adligo.tests4j.models.shared.dependency.DependencyMutant;
+import org.adligo.tests4j.models.shared.dependency.I_ClassDependencies;
+import org.adligo.tests4j.models.shared.dependency.I_ClassReferences;
 import org.adligo.tests4j.models.shared.trials.SourceFileScope;
 import org.adligo.tests4j.models.shared.trials.Test;
-import org.adligo.tests4j.run.discovery.ClassDependencies;
-import org.adligo.tests4j.run.discovery.ClassDependenciesMutant;
-import org.adligo.tests4j.run.discovery.ClassReferencesMutant;
-import org.adligo.tests4j.run.discovery.DependencyMutant;
-import org.adligo.tests4j.run.discovery.I_ClassDependencies;
-import org.adligo.tests4j.run.discovery.I_ClassReferences;
 import org.adligo.tests4j_tests.base_abstract_trials.SourceFileCountingTrial;
 import org.adligo.tests4j_tests.run.helpers.class_loading_mocks.MockWithArray;
 
 @SourceFileScope (sourceClass=ClassReferencesMutant.class, minCoverage=90.0)
-public class ClassReferencesMutantTrial extends SourceFileCountingTrial {
+public class ClassReferencesTrial extends SourceFileCountingTrial {
 	
 	
 	@Test

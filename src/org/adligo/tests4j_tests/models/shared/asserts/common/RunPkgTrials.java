@@ -32,6 +32,10 @@ public class RunPkgTrials implements I_Tests4J_TrialList {
 		List<Class<? extends I_Trial>> trials = new ArrayList<Class<? extends I_Trial>>();
 		
 		trials.add(AssertTypeTrial.class);
+		trials.add(CompareAssertionDataTrial.class);
+		trials.add(ExpectedThrownDataTrial.class);
+		trials.add(ThrownAssertionDataMutantTrial.class);
+		trials.add(ThrownAssertionDataTrial.class);
 		
 		return trials;
 	}

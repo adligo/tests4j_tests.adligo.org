@@ -1,16 +1,16 @@
-package org.adligo.tests4j_tests.run.discovery;
+package org.adligo.tests4j_tests.models.shared.dependency;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.adligo.tests4j.models.shared.dependency.ClassDependencies;
+import org.adligo.tests4j.models.shared.dependency.ClassDependenciesMutant;
+import org.adligo.tests4j.models.shared.dependency.DependencyMutant;
+import org.adligo.tests4j.models.shared.dependency.I_ClassDependencies;
+import org.adligo.tests4j.models.shared.dependency.I_Dependency;
 import org.adligo.tests4j.models.shared.trials.SourceFileScope;
 import org.adligo.tests4j.models.shared.trials.Test;
-import org.adligo.tests4j.run.discovery.ClassDependencies;
-import org.adligo.tests4j.run.discovery.ClassDependenciesMutant;
-import org.adligo.tests4j.run.discovery.DependencyMutant;
-import org.adligo.tests4j.run.discovery.I_ClassDependencies;
-import org.adligo.tests4j.run.discovery.I_Dependency;
 import org.adligo.tests4j_tests.base_abstract_trials.SourceFileCountingTrial;
 
 

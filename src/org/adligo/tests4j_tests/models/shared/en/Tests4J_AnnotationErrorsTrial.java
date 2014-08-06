@@ -46,10 +46,8 @@ public class Tests4J_AnnotationErrorsTrial extends SourceFileCountingTrial {
 		
 		asserter.assertConstant("The minCoverage must be between 0.0 and 100.0 percent.",
 			messages.getMinCoverageMustBeBetweenZeroAndOneHundred());
-		asserter.assertConstant(" is missing a @TrialType annotation.",
-			messages.getMissingTypeAnnotationPost());
-		asserter.assertConstant("The trail ",
-			messages.getMissingTypeAnnotationPre());
+		asserter.assertConstant("The trial is missing a @TrialType annotation.",
+			messages.getTrialTypeMissing());
 		
 		asserter.assertConstant("Trials may only have one method annotated with @AfterTrial.",
 			messages.getMultipleAfterTrial());
@@ -89,11 +87,11 @@ public class Tests4J_AnnotationErrorsTrial extends SourceFileCountingTrial {
 
 	@Override
 	public int getAsserts() {
-		return 79;
+		return 76;
 	}
 
 	@Override
 	public int getUniqueAsserts() {
-		return 79;
+		return 76;
 	}
 }

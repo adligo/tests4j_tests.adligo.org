@@ -1,8 +1,8 @@
 package org.adligo.tests4j_tests.models.shared.asserts;
 
 import org.adligo.tests4j.models.shared.asserts.BooleanAssertCommand;
-import org.adligo.tests4j.models.shared.asserts.ExpectedThrownData;
 import org.adligo.tests4j.models.shared.asserts.common.AssertType;
+import org.adligo.tests4j.models.shared.asserts.common.ExpectedThrownData;
 import org.adligo.tests4j.models.shared.asserts.common.I_Thrower;
 import org.adligo.tests4j.models.shared.trials.SourceFileScope;
 import org.adligo.tests4j.models.shared.trials.Test;
@@ -66,8 +66,8 @@ public class BooleanAssertCommandTrial extends SourceFileCountingTrial {
 	public void testData() {
 		BooleanAssertCommand bac = new BooleanAssertCommand(AssertType.AssertTrue, "some failure message", true);
 		assertSame(bac, bac.getData());
-		assertTrue((Boolean) bac.getData(BooleanAssertCommand.EXPECTED_VALUE));
-		assertTrue((Boolean) bac.getData(BooleanAssertCommand.VALUE));
+		assertTrue((Boolean) bac.getExpected());
+		assertTrue((Boolean) bac.getActual());
 	}
 
 	@Override

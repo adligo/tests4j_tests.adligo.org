@@ -1,8 +1,8 @@
 package org.adligo.tests4j_tests.models.shared.asserts;
 
 import org.adligo.tests4j.models.shared.asserts.AssertionFailureLocation;
-import org.adligo.tests4j.models.shared.coverage.I_SourceFileCoverage;
-import org.adligo.tests4j.models.shared.results.I_SourceFileTrialResult;
+import org.adligo.tests4j.models.shared.asserts.line_text.TextLines;
+import org.adligo.tests4j.models.shared.common.StackTraceBuilder;
 import org.adligo.tests4j.models.shared.trials.SourceFileScope;
 import org.adligo.tests4j.models.shared.trials.Test;
 import org.adligo.tests4j_tests.base_abstract_trials.SourceFileCountingTrial;
@@ -22,7 +22,10 @@ public class AssertionFailureLocationTrial extends SourceFileCountingTrial {
 		assertEquals("testAssertionStack",  e.getMethodName());
 		assertEquals(16,  e.getLineNumber());
 		
-		StackAssertions.assertAssertionFailureLocation_StackWasFromTests4J(this, afl);
+		TextLines lines = new TextLines(StackTraceBuilder.toString(afl, true), true);
+		assertUniform("	org.adligo.tests4j.models.shared.asserts.AssertionFailureLocation", lines.getLine(0));
+		assertUniform("\tat org.adligo.tests4j_tests.models.shared.asserts.AssertionFailureLocationTrial.testAssertionStack(AssertionFailureLocationTrial.java:16)", lines.getLine(1));
+		
 	}
 
 	@Override
@@ -32,11 +35,11 @@ public class AssertionFailureLocationTrial extends SourceFileCountingTrial {
 
 	@Override
 	public int getAsserts() {
-		return 4;
+		return 6;
 	}
 
 	@Override
 	public int getUniqueAsserts() {
-		return 4;
+		return 5;
 	}
 }

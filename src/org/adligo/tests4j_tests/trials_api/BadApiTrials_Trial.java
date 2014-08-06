@@ -4,15 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.adligo.tests4j.models.shared.coverage.I_PackageCoverage;
-import org.adligo.tests4j.models.shared.metadata.I_TestMetadata;
 import org.adligo.tests4j.models.shared.metadata.I_TrialMetadata;
 import org.adligo.tests4j.models.shared.metadata.I_TrialRunMetadata;
 import org.adligo.tests4j.models.shared.results.I_ApiTrialResult;
-import org.adligo.tests4j.models.shared.results.I_TrialFailure;
 import org.adligo.tests4j.models.shared.results.I_TrialResult;
-import org.adligo.tests4j.models.shared.trials.ApiTrial;
 import org.adligo.tests4j.models.shared.trials.I_Trial;
-import org.adligo.tests4j.models.shared.trials.IgnoreTest;
 import org.adligo.tests4j.models.shared.trials.PackageScope;
 import org.adligo.tests4j.models.shared.trials.Test;
 import org.adligo.tests4j_tests.base_abstract_trials.ApiCountingTrial;
@@ -33,7 +29,6 @@ import org.adligo.tests4j_tests.trials_api.bad_mock_api_trials.ProtectedTestTria
 import org.adligo.tests4j_tests.trials_api.bad_mock_api_trials.SimpleRerunTrial;
 import org.adligo.tests4j_tests.trials_api.bad_mock_api_trials.StaticTestTrial;
 import org.adligo.tests4j_tests.trials_api.bad_mock_api_trials.TestWithParamsTrial;
-import org.adligo.tests4j_tests.trials_api.common.ExpectedFailureRunner;
 import org.adligo.tests4j_tests.trials_api.common.ExpectedPassRunner;
 
 @PackageScope (packageName = "org.adligo.tests4j.run")
@@ -69,13 +64,11 @@ public class BadApiTrials_Trial extends ApiCountingTrial {
 		BeforeTrialHasParamsTrial.runTestDelegate(this);
 	}
 	
-
 	@Test
 	public void testBeforeTrialNotPublic() throws Exception {
 		BeforeTrialNotPublicTrial.runTestDelegate(this);
 	}
 	
-
 	@Test
 	public void testBeforeTrialNotStatic() throws Exception {
 		BeforeTrialNotStaticTrial.runTestDelegate(this);
@@ -172,10 +165,9 @@ public class BadApiTrials_Trial extends ApiCountingTrial {
 
 	@Override
 	public int getAsserts() {
-		// TODO Auto-generated method stub
 		return AbstractTestTrial.getAsserts() +
 				AfterTrialHasParamsTrial.getAsserts() +
-				AfterTrialNotPublicTrial.getAsserts() +
+				AfterTrialNotPublicTrial.getAsserts() + 
 				AfterTrialNotStaticTrial.getAsserts()  +
 				BadPackageConstructorTrial.getAsserts() +
 				BeforeTrialHasParamsTrial.getAsserts() +
@@ -194,7 +186,6 @@ public class BadApiTrials_Trial extends ApiCountingTrial {
 
 	@Override
 	public int getUniqueAsserts() {
-		// TODO Auto-generated method stub
-		return 334;
+		return 335;
 	}
 }

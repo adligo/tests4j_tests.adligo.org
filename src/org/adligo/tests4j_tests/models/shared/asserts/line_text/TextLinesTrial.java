@@ -12,7 +12,7 @@ public class TextLinesTrial extends SourceFileCountingTrial {
 	@Test
 	public void testLinesWithNormalizedLineFeeds() {
 		TextLines lines = new TextLines("a\n" +
-				"b", true);
+				"b");
 		assertEquals(2, lines.getLines());
 		assertEquals("a", lines.getLine(0));
 		assertEquals("b", lines.getLine(1));

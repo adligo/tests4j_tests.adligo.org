@@ -1,9 +1,9 @@
 package org.adligo.tests4j_tests.models.shared.asserts;
 
 import org.adligo.tests4j.models.shared.asserts.AbstractCompareAssertCommand;
-import org.adligo.tests4j.models.shared.asserts.CompareAssertionData;
-import org.adligo.tests4j.models.shared.asserts.ExpectedThrownData;
 import org.adligo.tests4j.models.shared.asserts.common.AssertType;
+import org.adligo.tests4j.models.shared.asserts.common.CompareAssertionData;
+import org.adligo.tests4j.models.shared.asserts.common.ExpectedThrownData;
 import org.adligo.tests4j.models.shared.asserts.common.I_CompareAssertionData;
 import org.adligo.tests4j.models.shared.asserts.common.I_Thrower;
 import org.adligo.tests4j.models.shared.coverage.I_SourceFileCoverage;
@@ -20,13 +20,11 @@ public class AbstractCompareAssertCommandTrial extends SourceFileCountingTrial {
 
 	@Test
 	public void testConstructorExceptions() {
-		assertEquals("AbstractCompareAssertCommand requires non null data.", AbstractCompareAssertCommand.NULL_DATA);
-		assertThrown(new ExpectedThrownData(new IllegalArgumentException(
-					AbstractCompareAssertCommand.NULL_DATA)), 
+		assertThrown(new ExpectedThrownData(NullPointerException.class), 
 			new I_Thrower() {
 				@Override
 				public void run() {
-					new ExtendedCompareAssertCommand(AssertType.AssertEquals, "failed", 
+					new ExtendedCompareAssertCommand("failed", 
 							(I_CompareAssertionData<?>) null);
 				}
 		});
@@ -34,16 +32,16 @@ public class AbstractCompareAssertCommandTrial extends SourceFileCountingTrial {
 	
 	@Test
 	public void testGettersAndEvaluate() {
-		ExtendedCompareAssertCommand cac = new ExtendedCompareAssertCommand(AssertType.AssertEquals, "failed message", 
-				new CompareAssertionData<Boolean>(true, false));
+		ExtendedCompareAssertCommand cac = new ExtendedCompareAssertCommand("failed message", 
+				new CompareAssertionData<Boolean>(true, false, AssertType.AssertEquals));
 		
 		assertTrue((Boolean) cac.getExpected());
 		assertFalse((Boolean) cac.getActual());
 		assertEquals("failed message", cac.getFailureMessage());
 		assertFalse(cac.evaluate());
 		
-		cac = new ExtendedCompareAssertCommand(AssertType.AssertEquals, "failed message2", 
-				new CompareAssertionData<Boolean>(false, true));
+		cac = new ExtendedCompareAssertCommand( "failed message2", 
+				new CompareAssertionData<Boolean>(false, true, AssertType.AssertEquals));
 		
 		assertFalse((Boolean) cac.getExpected());
 		assertTrue((Boolean) cac.getActual());
@@ -51,8 +49,8 @@ public class AbstractCompareAssertCommandTrial extends SourceFileCountingTrial {
 		assertFalse(cac.evaluate());
 		
 		
-		cac = new ExtendedCompareAssertCommand(AssertType.AssertEquals, "failed message3", 
-				new CompareAssertionData<Boolean>(true, true));
+		cac = new ExtendedCompareAssertCommand( "failed message3", 
+				new CompareAssertionData<Boolean>(true, true, AssertType.AssertEquals));
 		
 		assertTrue((Boolean) cac.getExpected());
 		assertTrue((Boolean) cac.getActual());
@@ -68,11 +66,11 @@ public class AbstractCompareAssertCommandTrial extends SourceFileCountingTrial {
 
 	@Override
 	public int getAsserts() {
-		return 14;
+		return 13;
 	}
 
 	@Override
 	public int getUniqueAsserts() {
-		return 7;
+		return 6;
 	}
 }

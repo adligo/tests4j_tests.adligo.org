@@ -1,11 +1,12 @@
 package org.adligo.tests4j_tests.models.shared.asserts.uniform;
 
-import org.adligo.tests4j.models.shared.asserts.CompareAssertionData;
+import org.adligo.tests4j.models.shared.asserts.common.AssertType;
+import org.adligo.tests4j.models.shared.asserts.common.CompareAssertionData;
 import org.adligo.tests4j.models.shared.asserts.line_text.I_TextLinesCompareResult;
 import org.adligo.tests4j.models.shared.asserts.uniform.I_Evaluation;
 import org.adligo.tests4j.models.shared.asserts.uniform.StringUniformEvaluator;
 import org.adligo.tests4j.models.shared.en.Tests4J_EnglishConstants;
-import org.adligo.tests4j.models.shared.i18n.I_Tests4J_AssertionResultMessages;
+import org.adligo.tests4j.models.shared.i18n.I_Tests4J_ResultMessages;
 import org.adligo.tests4j.models.shared.trials.SourceFileScope;
 import org.adligo.tests4j.models.shared.trials.Test;
 import org.adligo.tests4j_tests.base_abstract_trials.SourceFileCountingTrial;
@@ -23,9 +24,9 @@ public class StringUniformEvaluatorTrial extends SourceFileCountingTrial {
 	public void testIsUniform() {
 		StringUniformEvaluator evaluator = new StringUniformEvaluator();
 		I_Evaluation<I_TextLinesCompareResult> eval = evaluator.isUniform(
-				new CompareAssertionData<String>("hey\nu", "hey\nyou"));
+				new CompareAssertionData<String>("hey\nu", "hey\nyou", AssertType.AssertUniform));
 		assertFalse(eval.isSuccess());
-		I_Tests4J_AssertionResultMessages messages =  Tests4J_EnglishConstants.ENGLISH.getAssertionResultMessages();
+		I_Tests4J_ResultMessages messages =  Tests4J_EnglishConstants.ENGLISH.getResultMessages();
 		assertEquals(messages.getTheTextWasNOT_Uniform(),
 				eval.getFailureReason());
 		I_TextLinesCompareResult result = eval.getData();
@@ -33,7 +34,7 @@ public class StringUniformEvaluatorTrial extends SourceFileCountingTrial {
 		
 		
 		eval = evaluator.isUniform(
-				new CompareAssertionData<String>("hey\nyou", "hey\nyou"));
+				new CompareAssertionData<String>("hey\nyou", "hey\nyou", AssertType.AssertUniform));
 		assertTrue(eval.isSuccess());
 		assertNull(eval.getFailureReason());
 		assertNull(eval.getData());
@@ -43,16 +44,16 @@ public class StringUniformEvaluatorTrial extends SourceFileCountingTrial {
 	public void testIsNotUniform() {
 		StringUniformEvaluator evaluator = new StringUniformEvaluator();
 		I_Evaluation<I_TextLinesCompareResult> eval = evaluator.isNotUniform(
-				new CompareAssertionData<String>("hey\nu", "hey\nyou"));
+				new CompareAssertionData<String>("hey\nu", "hey\nyou", AssertType.AssertUniform));
 		assertTrue(eval.isSuccess());
 		assertNull(eval.getFailureReason());
 		assertNull(eval.getData());
 		
 		eval = evaluator.isNotUniform(
-				new CompareAssertionData<String>("hey\nyou", "hey\nyou"));
+				new CompareAssertionData<String>("hey\nyou", "hey\nyou", AssertType.AssertUniform));
 		assertFalse(eval.isSuccess());
 		
-		I_Tests4J_AssertionResultMessages messages =  Tests4J_EnglishConstants.ENGLISH.getAssertionResultMessages();
+		I_Tests4J_ResultMessages messages =  Tests4J_EnglishConstants.ENGLISH.getResultMessages();
 		assertEquals(messages.getTheTextWasUniform(),
 				eval.getFailureReason());
 		I_TextLinesCompareResult result = eval.getData();

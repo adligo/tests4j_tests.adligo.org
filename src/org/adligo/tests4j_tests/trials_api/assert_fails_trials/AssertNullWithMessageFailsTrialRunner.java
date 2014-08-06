@@ -3,35 +3,23 @@ package org.adligo.tests4j_tests.trials_api.assert_fails_trials;
 import java.util.List;
 
 import org.adligo.tests4j.models.shared.asserts.common.I_Asserts;
+import org.adligo.tests4j.models.shared.asserts.common.I_TestFailure;
+import org.adligo.tests4j.models.shared.asserts.line_text.TextLines;
 import org.adligo.tests4j.models.shared.metadata.I_TestMetadata;
 import org.adligo.tests4j.models.shared.metadata.I_TrialMetadata;
 import org.adligo.tests4j.models.shared.metadata.I_TrialRunMetadata;
-import org.adligo.tests4j.models.shared.results.I_TestFailure;
 import org.adligo.tests4j.models.shared.results.I_TestResult;
 import org.adligo.tests4j.models.shared.results.I_TrialFailure;
 import org.adligo.tests4j.models.shared.results.I_TrialResult;
 import org.adligo.tests4j.models.shared.results.TestResult;
-import org.adligo.tests4j.models.shared.trials.ApiTrial;
-import org.adligo.tests4j.models.shared.trials.PackageScope;
-import org.adligo.tests4j.models.shared.trials.Test;
-import org.adligo.tests4j.models.shared.trials.TrialRecursion;
 import org.adligo.tests4j_tests.trials_api.common.ExpectedFailureRunner;
 import org.adligo.tests4j_tests.trials_api.common.MockSystem;
 
-@TrialRecursion
-@PackageScope (packageName="org.adligo.tests4j")
-public class AssertNullWithMessageFailsTrialRunner extends ApiTrial {
-
-	public static final String TEST_ASSERT_FAILS_MESSAGE = "testAssertNullWithMessage message";
-
-	@Test
-	public void testAssertNullWithMessage() {
-		assertNull(TEST_ASSERT_FAILS_MESSAGE, 0);
-	}
+public class AssertNullWithMessageFailsTrialRunner {
 	
 	public static void runTestDelegate(I_Asserts asserts)  throws Exception {
 		ExpectedFailureRunner runner = new ExpectedFailureRunner();
-		runner.run(AssertNullWithMessageFailsTrialRunner.class);
+		runner.run(AssertNullWithMessageFailsTrial.class);
 		
 		I_TrialRunMetadata metadata = runner.getMetadata();
 		asserts.assertNotNull(metadata);
@@ -42,7 +30,7 @@ public class AssertNullWithMessageFailsTrialRunner extends ApiTrial {
 		asserts.assertEquals(1, trialsMetadata.size());
 		I_TrialMetadata trialMeta = trialsMetadata.get(0);
 		asserts.assertNotNull(trialMeta);
-		asserts.assertEquals(AssertNullWithMessageFailsTrialRunner.class.getName(), 
+		asserts.assertEquals(AssertNullWithMessageFailsTrial.class.getName(), 
 				trialMeta.getTrialName());
 		asserts.assertEquals(0L, trialMeta.getTimeout());
 		asserts.assertFalse(trialMeta.isIgnored());
@@ -63,8 +51,9 @@ public class AssertNullWithMessageFailsTrialRunner extends ApiTrial {
 		I_TrialResult result = results.get(0);
 		asserts.assertNotNull(result);
 		asserts.assertFalse(result.isPassed());
-		I_TrialFailure failure = result.getFailure();
-		asserts.assertNull(failure);
+		List<I_TrialFailure> failures = result.getFailures();
+		asserts.assertNotNull(failures);
+		asserts.assertEquals(0, failures.size());
 		
 		List<I_TestResult> testResults = result.getResults();
 		asserts.assertNotNull(testResults);
@@ -82,21 +71,19 @@ public class AssertNullWithMessageFailsTrialRunner extends ApiTrial {
 		
 		I_TestFailure testFailure = testResult.getFailure();
 		asserts.assertNotNull(testFailure);
-		asserts.assertEquals(TEST_ASSERT_FAILS_MESSAGE, testFailure.getMessage());
+		asserts.assertEquals(AssertNullWithMessageFailsTrial.TEST_ASSERT_FAILS_MESSAGE, 
+				testFailure.getFailureMessage());
 		
-		Throwable locationFailed = testFailure.getLocationFailed();
-		StackTraceElement [] elements = locationFailed.getStackTrace();
-		asserts.assertGreaterThanOrEquals(1.0, elements.length);
-		StackTraceElement topElement = elements[0];
-		asserts.assertEquals(AssertNullWithMessageFailsTrialRunner.class.getName(), topElement.getClassName());
-		asserts.assertEquals("testAssertNullWithMessage", topElement.getMethodName());
-		asserts.assertEquals(29, topElement.getLineNumber());
+		String failedLocation = testFailure.getFailureDetail();
+		TextLines lines = new TextLines(failedLocation);
+		asserts.assertEquals("\torg.adligo.tests4j.models.shared.asserts.AssertionFailureLocation", lines.getLine(0));
+		asserts.assertEquals("\tat org.adligo.tests4j_tests.trials_api.assert_fails_trials.AssertNullWithMessageFailsTrial.testAssertNullWithMessage(AssertNullWithMessageFailsTrial.java:16)", lines.getLine(1));
 		
 		MockSystem tracker =  runner.getMockSystem();
 		asserts.assertEquals(0, tracker.getLastStatus());
 	}
 	
 	public static int getAsserts() {
-		return 35;
+		return 34;
 	}
 }

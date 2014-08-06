@@ -24,10 +24,6 @@ import org.adligo.tests4j.shared.report.summary.TestDisplay;
 import org.adligo.tests4j.shared.report.summary.TrialDisplay;
 import org.adligo.tests4j.shared.report.summary.TrialsProgressDisplay;
 import org.adligo.tests4j_4jacoco.plugin.ScopedJacocoPluginFactory;
-import org.adligo.tests4j_4jacoco.plugin.TrialInstrumenter;
-import org.adligo.tests4j_4jacoco.plugin.discovery.ClassDependenciesDiscovery;
-import org.adligo.tests4j_4jacoco.plugin.discovery.ClassInstrumenter;
-import org.adligo.tests4j_4jacoco.plugin.discovery.ClassReferencesDiscovery;
 import org.adligo.tests4j_tests.base_abstract_trials.Counts;
 import org.adligo.tests4j_tests.base_abstract_trials.I_CountingTrial;
 
@@ -94,6 +90,7 @@ public class RunAllTrials implements I_Tests4J_Listener {
 		
 		toRet.addTrials(new org.adligo.tests4j_tests.models.shared.asserts.RunPkgTrials());
 		toRet.addTrials(new org.adligo.tests4j_tests.models.shared.common.RunPkgTrials());
+		toRet.addTrials(new org.adligo.tests4j_tests.models.shared.dependency.RunPkgTrials());
 		toRet.addTrials(new org.adligo.tests4j_tests.models.shared.system.RunPkgTrials());
 		toRet.addTrials(new org.adligo.tests4j_tests.models.shared.en.RunPkgTrials());
 		toRet.addTrials(new org.adligo.tests4j_tests.models.shared.metadata.RunPkgTrials());

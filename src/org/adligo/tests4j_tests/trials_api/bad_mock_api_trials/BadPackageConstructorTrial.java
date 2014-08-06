@@ -3,6 +3,7 @@ package org.adligo.tests4j_tests.trials_api.bad_mock_api_trials;
 import java.util.List;
 
 import org.adligo.tests4j.models.shared.asserts.common.I_Asserts;
+import org.adligo.tests4j.models.shared.asserts.line_text.TextLines;
 import org.adligo.tests4j.models.shared.metadata.I_TestMetadata;
 import org.adligo.tests4j.models.shared.metadata.I_TrialMetadata;
 import org.adligo.tests4j.models.shared.metadata.I_TrialRunMetadata;
@@ -68,19 +69,22 @@ public class BadPackageConstructorTrial extends ApiTrial {
 		I_TrialResult result = results.get(0);
 		asserts.assertNotNull(result);
 		asserts.assertFalse(result.isPassed());
-		I_TrialFailure failure = result.getFailure();
-		asserts.assertNotNull(failure);
+		List<I_TrialFailure> failures = result.getFailures();
+		asserts.assertNotNull(failures);
+		asserts.assertEquals(1, failures.size());
+		I_TrialFailure failure = failures.get(0);
+		
 		asserts.assertEquals("Classes which implement I_AbstractTrial must have a zero argument constructor.", failure.getMessage());
-		Throwable exception = failure.getException();
-		asserts.assertUniform(new NoSuchMethodException(
-				"org.adligo.tests4j_tests.trials_api.bad_mock_api_trials.BadPackageConstructorTrial.<init>()"), 
-				exception);
+		TextLines lines = new TextLines(failure.getFailureDetail());
+		asserts.assertEquals("\tjava.lang.NoSuchMethodException: org.adligo.tests4j_tests.trials_api.bad_mock_api_trials.BadPackageConstructorTrial.<init>()", lines.getLine(0));
+		//make sure its a full stack trace without testing java line numbers
+		asserts.assertGreaterThanOrEquals(3,lines.getLines());
 		
 		MockSystem tracker =  runner.getMockSystem();
 		asserts.assertEquals(0, tracker.getLastStatus());
 	}
 	
 	public static int getAsserts() {
-		return 21;
+		return 23;
 	}
 }

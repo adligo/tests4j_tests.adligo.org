@@ -1,16 +1,16 @@
 package org.adligo.tests4j_tests.models.shared.asserts;
 
-import org.adligo.tests4j.models.shared.asserts.CompareAssertionData;
-import org.adligo.tests4j.models.shared.asserts.ExpectedThrownData;
 import org.adligo.tests4j.models.shared.asserts.UniformAssertCommand;
 import org.adligo.tests4j.models.shared.asserts.common.AssertType;
+import org.adligo.tests4j.models.shared.asserts.common.CompareAssertionData;
+import org.adligo.tests4j.models.shared.asserts.common.ExpectedThrownData;
 import org.adligo.tests4j.models.shared.asserts.common.I_Thrower;
 import org.adligo.tests4j.models.shared.asserts.line_text.I_TextLinesCompareResult;
 import org.adligo.tests4j.models.shared.asserts.uniform.I_Evaluation;
 import org.adligo.tests4j.models.shared.asserts.uniform.StringUniformEvaluator;
 import org.adligo.tests4j.models.shared.en.Tests4J_EnglishConstants;
 import org.adligo.tests4j.models.shared.i18n.I_Tests4J_AssertionInputMessages;
-import org.adligo.tests4j.models.shared.i18n.I_Tests4J_AssertionResultMessages;
+import org.adligo.tests4j.models.shared.i18n.I_Tests4J_ResultMessages;
 import org.adligo.tests4j.models.shared.trials.SourceFileScope;
 import org.adligo.tests4j.models.shared.trials.Test;
 import org.adligo.tests4j_tests.base_abstract_trials.SourceFileCountingTrial;
@@ -27,16 +27,16 @@ public class UniformAssertCommandTrial extends SourceFileCountingTrial {
 					
 					@Override
 					public void run() {
-						new UniformAssertCommand(AssertType.AssertFalse, "failureMessage", null, null);
+						new UniformAssertCommand("failureMessage", new CompareAssertionData<String>(null,null, AssertType.AssertFalse), null);
 					}
 		});
 			
-		assertThrown(new ExpectedThrownData(new IllegalArgumentException(UniformAssertCommand.NULL_DATA)), 
+		assertThrown(new ExpectedThrownData(NullPointerException.class), 
 				new I_Thrower(){
 
 					@Override
 					public void run() {
-						new UniformAssertCommand(AssertType.AssertUniform, "failureMessage", null, null);
+						new UniformAssertCommand("failureMessage", null, null);						
 					}
 		});
 		
@@ -47,8 +47,8 @@ public class UniformAssertCommandTrial extends SourceFileCountingTrial {
 
 					@Override
 					public void run() {
-						new UniformAssertCommand(AssertType.AssertUniform, "failureMessage", 
-								new CompareAssertionData<String>(null, null), null);
+						new UniformAssertCommand("failureMessage", 
+								new CompareAssertionData<String>(null, null, AssertType.AssertUniform), null);
 					}
 		});
 		
@@ -58,8 +58,8 @@ public class UniformAssertCommandTrial extends SourceFileCountingTrial {
 
 					@Override
 					public void run() {
-						new UniformAssertCommand(AssertType.AssertUniform, "failureMessage", 
-								new CompareAssertionData<String>("1", "2"), null);
+						new UniformAssertCommand("failureMessage", 
+								new CompareAssertionData<String>("1", "2", AssertType.AssertUniform), null);
 					}
 		});
 	}
@@ -69,8 +69,8 @@ public class UniformAssertCommandTrial extends SourceFileCountingTrial {
 	public void testGettersAndEvaluate() {
 		UniformAssertCommand<String, I_TextLinesCompareResult> uac = new UniformAssertCommand
 					<String, I_TextLinesCompareResult>(
-							AssertType.AssertUniform, "failureMessage", 
-				new CompareAssertionData<String>("a", "b"), new StringUniformEvaluator());
+							 "failureMessage", 
+				new CompareAssertionData<String>("a", "b", AssertType.AssertUniform), new StringUniformEvaluator());
 		assertEquals(AssertType.AssertUniform, uac.getType());
 		assertEquals("failureMessage", uac.getFailureMessage());
 		assertEquals("a", uac.getExpected());
@@ -81,7 +81,7 @@ public class UniformAssertCommandTrial extends SourceFileCountingTrial {
 		I_Evaluation<I_TextLinesCompareResult> eval = uac.getEvaluation();
 		assertNotNull(eval);
 		
-		I_Tests4J_AssertionResultMessages messages =  Tests4J_EnglishConstants.ENGLISH.getAssertionResultMessages();
+		I_Tests4J_ResultMessages messages =  Tests4J_EnglishConstants.ENGLISH.getResultMessages();
 		assertEquals(messages.getTheTextWasNOT_Uniform(), 
 				eval.getFailureReason());
 		I_TextLinesCompareResult data = eval.getData();

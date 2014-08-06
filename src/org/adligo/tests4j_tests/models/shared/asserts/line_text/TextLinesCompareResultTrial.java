@@ -23,7 +23,7 @@ public class TextLinesCompareResultTrial extends SourceFileCountingTrial {
 	@Test
 	public void testConstructorAndGetters() {
 		LineDiffMutant ldm = new LineDiffMutant();
-		ldm.setType(LineDiffType.MISSING_EXPECTED_LINE);
+		ldm.setType(LineDiffType.MissingExpectedLine);
 		ldm.setExpectedLineNbr(0);
 		
 		List<I_LineDiff> lineDiffs = new ArrayList<I_LineDiff>();
@@ -51,7 +51,7 @@ public class TextLinesCompareResultTrial extends SourceFileCountingTrial {
 	@Test
 	public void testToString() {
 		LineDiffMutant ldm = new LineDiffMutant();
-		ldm.setType(LineDiffType.MISSING_EXPECTED_LINE);
+		ldm.setType(LineDiffType.MissingExpectedLine);
 		ldm.setExpectedLineNbr(0);
 		
 		List<I_LineDiff> lineDiffs = new ArrayList<I_LineDiff>();
@@ -60,7 +60,7 @@ public class TextLinesCompareResultTrial extends SourceFileCountingTrial {
 				new TextLines("b", true), false, lineDiffs);
 		assertEquals("TextLinesCompareResult [example=TextLines [lines=[a]], "
 				+ "actual=TextLines [lines=[b]], matched=false, "
-				+ "lineDiffs=[LineDiff [type=MISSING_EXPECTED_LINE, "
+				+ "lineDiffs=[LineDiff [type=MissingExpectedLine, "
 				+ "exampleLineNbr=0, actualLineNbr=null]]]",result.toString());
 	}
 	

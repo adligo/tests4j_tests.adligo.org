@@ -1,11 +1,11 @@
 package org.adligo.tests4j_tests.models.shared.asserts;
 
-import org.adligo.tests4j.models.shared.asserts.CompareAssertionData;
-import org.adligo.tests4j.models.shared.asserts.ExpectedThrownData;
 import org.adligo.tests4j.models.shared.asserts.IdenticalAssertCommand;
 import org.adligo.tests4j.models.shared.asserts.common.AssertType;
+import org.adligo.tests4j.models.shared.asserts.common.CompareAssertionData;
+import org.adligo.tests4j.models.shared.asserts.common.ExpectedThrownData;
 import org.adligo.tests4j.models.shared.asserts.common.I_Thrower;
-import org.adligo.tests4j.models.shared.en.Tests4J_AssertionResultMessages;
+import org.adligo.tests4j.models.shared.en.Tests4J_ResultMessages;
 import org.adligo.tests4j.models.shared.en.Tests4J_EnglishConstants;
 import org.adligo.tests4j.models.shared.i18n.I_Tests4J_AssertionInputMessages;
 import org.adligo.tests4j.models.shared.trials.SourceFileScope;
@@ -22,7 +22,7 @@ public class IdenticalAssertCommandTrial extends SourceFileCountingTrial {
 
 					@Override
 					public void run() {
-						new IdenticalAssertCommand(AssertType.AssertFalse, "failureMessage", new CompareAssertionData<Double>(0.0, 0.0));
+						new IdenticalAssertCommand("failureMessage", new CompareAssertionData<Double>(0.0, 0.0, AssertType.AssertFalse));
 					}
 			
 		});
@@ -34,7 +34,7 @@ public class IdenticalAssertCommandTrial extends SourceFileCountingTrial {
 
 					@Override
 					public void run() {
-						new IdenticalAssertCommand(AssertType.AssertFalse, "failureMessage", new CompareAssertionData<Double>(null, 0.0));
+						new IdenticalAssertCommand("failureMessage", new CompareAssertionData<Double>(null, 0.0, AssertType.AssertFalse));
 					}
 			
 		});
@@ -42,9 +42,8 @@ public class IdenticalAssertCommandTrial extends SourceFileCountingTrial {
 	
 	@Test
 	public void testGetters() {
-		CompareAssertionData<Double> cad = new CompareAssertionData<Double>(0.0, 1.0);
-		IdenticalAssertCommand a = new IdenticalAssertCommand(AssertType.AssertEquals, 
-				"failureMessage", cad);
+		CompareAssertionData<Double> cad = new CompareAssertionData<Double>(0.0, 1.0, AssertType.AssertEquals);
+		IdenticalAssertCommand a = new IdenticalAssertCommand("failureMessage", cad);
 		
 		assertSame(cad, a.getData());
 		assertEquals(1.0, a.getActual());
@@ -55,17 +54,18 @@ public class IdenticalAssertCommandTrial extends SourceFileCountingTrial {
 	
 	@Test
 	public void testEqualsHashCode() {
-		IdenticalAssertCommand a = new IdenticalAssertCommand(AssertType.AssertEquals, 
-				"failureMessage", new CompareAssertionData<Double>(0.0, 1.0));
-		IdenticalAssertCommand b = new IdenticalAssertCommand(AssertType.AssertEquals, 
-				"failureMessage", new CompareAssertionData<Double>(0.0, 0.0));
-		IdenticalAssertCommand c = new IdenticalAssertCommand(AssertType.AssertEquals, 
-				"failureMessage", new CompareAssertionData<Double>(0.0, 1.0));
-		IdenticalAssertCommand d = new IdenticalAssertCommand(AssertType.AssertEquals, 
-				"failureMessage", new CompareAssertionData<Double>(1.0, 1.0));
-		IdenticalAssertCommand e = new IdenticalAssertCommand(AssertType.AssertEquals, 
-				"failureMessage2", new CompareAssertionData<Double>(0.0, 1.0));
-		
+		IdenticalAssertCommand a = new IdenticalAssertCommand(
+				"failureMessage", new CompareAssertionData<Double>(0.0, 1.0, AssertType.AssertNotSame));
+		IdenticalAssertCommand b = new IdenticalAssertCommand(
+				"failureMessage", new CompareAssertionData<Double>(0.0, 0.0, AssertType.AssertNotSame));
+		IdenticalAssertCommand c = new IdenticalAssertCommand(
+				"failureMessage", new CompareAssertionData<Double>(0.0, 1.0, AssertType.AssertNotSame));
+		IdenticalAssertCommand d = new IdenticalAssertCommand(
+				"failureMessage", new CompareAssertionData<Double>(1.0, 1.0, AssertType.AssertNotSame));
+		IdenticalAssertCommand e = new IdenticalAssertCommand(
+				"failureMessage2", new CompareAssertionData<Double>(0.0, 1.0, AssertType.AssertNotSame));
+		IdenticalAssertCommand f = new IdenticalAssertCommand(
+				"failureMessage", new CompareAssertionData<Double>(0.0, 1.0, AssertType.AssertSame));
 		
 		
 		assertEquals(a, a);
@@ -82,31 +82,34 @@ public class IdenticalAssertCommandTrial extends SourceFileCountingTrial {
 		
 		assertNotEquals(a, e);
 		assertNotEquals(a.hashCode(), e.hashCode());
+		
+		assertNotEquals(a, f);
+		assertNotEquals(a.hashCode(), f.hashCode());
 	}
 	
 	@Test
 	public void testEvaluate() {
-		assertFalse(new IdenticalAssertCommand(AssertType.AssertEquals, 
-				"failureMessage", new CompareAssertionData<Double>(0.0, 1.0)).evaluate());
-		assertTrue(new IdenticalAssertCommand(AssertType.AssertEquals, 
-				"failureMessage", new CompareAssertionData<Double>(0.0, 0.0)).evaluate());
+		assertFalse(new IdenticalAssertCommand(
+				"failureMessage", new CompareAssertionData<Double>(0.0, 1.0, AssertType.AssertEquals)).evaluate());
+		assertTrue(new IdenticalAssertCommand(
+				"failureMessage", new CompareAssertionData<Double>(0.0, 0.0, AssertType.AssertEquals)).evaluate());
 		
-		assertFalse(new IdenticalAssertCommand(AssertType.AssertNotEquals, 
-				"failureMessage", new CompareAssertionData<Double>(0.0, 0.0)).evaluate());
-		assertTrue(new IdenticalAssertCommand(AssertType.AssertNotEquals, 
-				"failureMessage", new CompareAssertionData<Double>(1.0, 0.0)).evaluate());
+		assertFalse(new IdenticalAssertCommand(
+				"failureMessage", new CompareAssertionData<Double>(0.0, 0.0, AssertType.AssertNotEquals)).evaluate());
+		assertTrue(new IdenticalAssertCommand(
+				"failureMessage", new CompareAssertionData<Double>(1.0, 0.0, AssertType.AssertNotEquals)).evaluate());
 		
 		Object a = new Object();
 		Object b = new Object();
-		assertFalse(new IdenticalAssertCommand(AssertType.AssertSame, 
-				"failureMessage", new CompareAssertionData<Object>(a, b)).evaluate());
-		assertTrue(new IdenticalAssertCommand(AssertType.AssertSame, 
-				"failureMessage", new CompareAssertionData<Object>(a, a)).evaluate());
+		assertFalse(new IdenticalAssertCommand( 
+				"failureMessage", new CompareAssertionData<Object>(a, b, AssertType.AssertSame)).evaluate());
+		assertTrue(new IdenticalAssertCommand( 
+				"failureMessage", new CompareAssertionData<Object>(a, a, AssertType.AssertSame)).evaluate());
 		
-		assertFalse(new IdenticalAssertCommand(AssertType.AssertNotSame, 
-				"failureMessage", new CompareAssertionData<Object>(a, a)).evaluate());
-		assertTrue(new IdenticalAssertCommand(AssertType.AssertNotSame, 
-				"failureMessage", new CompareAssertionData<Object>(a, b)).evaluate());
+		assertFalse(new IdenticalAssertCommand( 
+				"failureMessage", new CompareAssertionData<Object>(a, a, AssertType.AssertNotSame)).evaluate());
+		assertTrue(new IdenticalAssertCommand(
+				"failureMessage", new CompareAssertionData<Object>(a, b, AssertType.AssertNotSame)).evaluate());
 	}
 	
 	@Override
@@ -116,11 +119,11 @@ public class IdenticalAssertCommandTrial extends SourceFileCountingTrial {
 
 	@Override
 	public int getAsserts() {
-		return 25;
+		return 27;
 	}
 
 	@Override
 	public int getUniqueAsserts() {
-		return 13;
+		return 14;
 	}
 }

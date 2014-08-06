@@ -55,19 +55,21 @@ public class NoPackageScopeAnnotationTrial extends ApiTrial {
 		I_TrialResult result = results.get(0);
 		asserts.assertNotNull(result);
 		asserts.assertFalse(result.isPassed());
-		I_TrialFailure failure = result.getFailure();
-		asserts.assertNotNull(failure);
+		List<I_TrialFailure> failures = result.getFailures();
+		asserts.assertNotNull(failures);
+		asserts.assertEquals(1, failures.size());
+		I_TrialFailure failure = failures.get(0);
+		
 		asserts.assertEquals("ApiTrials must be annotated with a @PackageScope annotation.", failure.getMessage());
-		Throwable exception = failure.getException();
-		asserts.assertUniform(new IllegalArgumentException(
-				"org.adligo.tests4j_tests.trials_api.bad_mock_api_trials.NoPackageScopeAnnotationTrial was not annotated correctly."), 
-				exception);
+		asserts.assertEquals(
+				"org.adligo.tests4j_tests.trials_api.bad_mock_api_trials.NoPackageScopeAnnotationTrial was not annotated correctly.", 
+				failure.getFailureDetail());
 		
 		MockSystem tracker =  runner.getMockSystem();
 		asserts.assertEquals(0, tracker.getLastStatus());
 	}
 	
 	public static int getAsserts() {
-		return 18;
+		return 19;
 	}
 }

@@ -1,11 +1,11 @@
-package org.adligo.tests4j_tests.run.discovery;
+package org.adligo.tests4j_tests.models.shared.dependency;
 
-import org.adligo.tests4j.models.shared.asserts.ExpectedThrownData;
+import org.adligo.tests4j.models.shared.asserts.common.ExpectedThrownData;
 import org.adligo.tests4j.models.shared.asserts.common.I_Thrower;
+import org.adligo.tests4j.models.shared.dependency.Dependency;
+import org.adligo.tests4j.models.shared.dependency.DependencyMutant;
 import org.adligo.tests4j.models.shared.trials.SourceFileScope;
 import org.adligo.tests4j.models.shared.trials.Test;
-import org.adligo.tests4j.run.discovery.Dependency;
-import org.adligo.tests4j.run.discovery.DependencyMutant;
 import org.adligo.tests4j_tests.base_abstract_trials.SourceFileCountingTrial;
 
 @SourceFileScope (sourceClass=DependencyMutant.class, minCoverage=80.0)

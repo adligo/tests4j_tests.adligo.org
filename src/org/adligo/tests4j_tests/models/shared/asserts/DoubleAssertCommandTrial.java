@@ -1,9 +1,9 @@
 package org.adligo.tests4j_tests.models.shared.asserts;
 
-import org.adligo.tests4j.models.shared.asserts.CompareAssertionData;
 import org.adligo.tests4j.models.shared.asserts.DoubleAssertCommand;
-import org.adligo.tests4j.models.shared.asserts.ExpectedThrownData;
 import org.adligo.tests4j.models.shared.asserts.common.AssertType;
+import org.adligo.tests4j.models.shared.asserts.common.CompareAssertionData;
+import org.adligo.tests4j.models.shared.asserts.common.ExpectedThrownData;
 import org.adligo.tests4j.models.shared.asserts.common.I_Thrower;
 import org.adligo.tests4j.models.shared.trials.SourceFileScope;
 import org.adligo.tests4j.models.shared.trials.Test;
@@ -19,24 +19,24 @@ public class DoubleAssertCommandTrial extends SourceFileCountingTrial {
 					
 					@Override
 					public void run() {
-						new DoubleAssertCommand(AssertType.AssertEquals, "failureMessage", 
-								new CompareAssertionData<Double>(0.0, 0.0));
+						new DoubleAssertCommand("failureMessage", 
+								new CompareAssertionData<Double>(0.0, 0.0, AssertType.AssertEquals));
 					}
 				});
 	}
 	
 	@Test
 	public void testEqualsHashCode() {
-		DoubleAssertCommand a =  new DoubleAssertCommand(AssertType.AssertGreaterThanOrEquals, "failureMessage", 
-				new CompareAssertionData<Double>(0.0, 0.0));
-		DoubleAssertCommand b =  new DoubleAssertCommand(AssertType.AssertGreaterThanOrEquals, "failureMessage2", 
-				new CompareAssertionData<Double>(0.0, 0.0));
-		DoubleAssertCommand c =  new DoubleAssertCommand(AssertType.AssertGreaterThanOrEquals, "failureMessage", 
-				new CompareAssertionData<Double>(0.0, 0.0));
-		DoubleAssertCommand d =  new DoubleAssertCommand(AssertType.AssertGreaterThanOrEquals, "failureMessage", 
-				new CompareAssertionData<Double>(0.0,1.0));
-		DoubleAssertCommand e =  new DoubleAssertCommand(AssertType.AssertGreaterThanOrEquals, "failureMessage", 
-				new CompareAssertionData<Double>(1.0, 0.0));
+		DoubleAssertCommand a =  new DoubleAssertCommand("failureMessage", 
+				new CompareAssertionData<Double>(0.0, 0.0, AssertType.AssertGreaterThanOrEquals));
+		DoubleAssertCommand b =  new DoubleAssertCommand("failureMessage2", 
+				new CompareAssertionData<Double>(0.0, 0.0, AssertType.AssertGreaterThanOrEquals));
+		DoubleAssertCommand c =  new DoubleAssertCommand("failureMessage", 
+				new CompareAssertionData<Double>(0.0, 0.0, AssertType.AssertGreaterThanOrEquals));
+		DoubleAssertCommand d =  new DoubleAssertCommand("failureMessage", 
+				new CompareAssertionData<Double>(0.0,1.0, AssertType.AssertGreaterThanOrEquals));
+		DoubleAssertCommand e =  new DoubleAssertCommand("failureMessage", 
+				new CompareAssertionData<Double>(1.0, 0.0, AssertType.AssertGreaterThanOrEquals));
 		
 		assertEquals(a, a);
 		assertEquals(a.hashCode(), a.hashCode());
@@ -56,8 +56,8 @@ public class DoubleAssertCommandTrial extends SourceFileCountingTrial {
 	
 	@Test
 	public void testGetters()  {
-		CompareAssertionData<Double> cad = new CompareAssertionData<Double>(1.0, 0.0);
-		DoubleAssertCommand e =  new DoubleAssertCommand(AssertType.AssertGreaterThanOrEquals, 
+		CompareAssertionData<Double> cad = new CompareAssertionData<Double>(1.0, 0.0, AssertType.AssertGreaterThanOrEquals);
+		DoubleAssertCommand e =  new DoubleAssertCommand(
 				"failureMessage",  cad);
 		
 		assertSame(cad, e.getData());
@@ -69,19 +69,19 @@ public class DoubleAssertCommandTrial extends SourceFileCountingTrial {
 	
 	@Test
 	public void testEvaluate()  {
-		CompareAssertionData<Double> cad = new CompareAssertionData<Double>(1.0, 0.0);
-		DoubleAssertCommand e =  new DoubleAssertCommand(AssertType.AssertGreaterThanOrEquals, 
+		CompareAssertionData<Double> cad = new CompareAssertionData<Double>(1.0, 0.0, AssertType.AssertGreaterThanOrEquals);
+		DoubleAssertCommand e =  new DoubleAssertCommand(
 				"failureMessage",  cad);
 		assertFalse(e.evaluate());
 		
-		assertFalse(new DoubleAssertCommand(AssertType.AssertGreaterThanOrEquals, "failureMessage", 
-				new CompareAssertionData<Double>(0.01, 0.0)).evaluate());
+		assertFalse(new DoubleAssertCommand("failureMessage", 
+				new CompareAssertionData<Double>(0.01, 0.0, AssertType.AssertGreaterThanOrEquals)).evaluate());
 		
-		assertTrue(new DoubleAssertCommand(AssertType.AssertGreaterThanOrEquals, "failureMessage", 
-				new CompareAssertionData<Double>(0.0, 0.0)).evaluate());
+		assertTrue(new DoubleAssertCommand("failureMessage", 
+				new CompareAssertionData<Double>(0.0, 0.0, AssertType.AssertGreaterThanOrEquals)).evaluate());
 		
-		assertTrue(new DoubleAssertCommand(AssertType.AssertGreaterThanOrEquals, "failureMessage", 
-				new CompareAssertionData<Double>(0.0, 0.01)).evaluate());
+		assertTrue(new DoubleAssertCommand("failureMessage", 
+				new CompareAssertionData<Double>(0.0, 0.01, AssertType.AssertGreaterThanOrEquals)).evaluate());
 	}
 	
 	@Override

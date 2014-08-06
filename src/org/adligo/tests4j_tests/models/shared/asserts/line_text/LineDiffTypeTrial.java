@@ -12,24 +12,24 @@ public class LineDiffTypeTrial extends SourceFileCountingTrial {
 	@Test
 	public void testTypes() {
 		assertEquals(4, LineDiffType.values().length);
-		assertEquals("MATCH", LineDiffType.MATCH.toString());
-		assertEquals("PARTIAL_MATCH", LineDiffType.PARTIAL_MATCH.toString());
-		assertEquals("MISSING_EXPECTED_LINE", LineDiffType.MISSING_EXPECTED_LINE.toString());
-		assertEquals("MISSING_ACTUAL_LINE", LineDiffType.MISSING_ACTUAL_LINE.toString());
+		assertEquals("Match", LineDiffType.Match.toString());
+		assertEquals("PartialMatch", LineDiffType.PartialMatch.toString());
+		assertEquals("MissingExpectedLine", LineDiffType.MissingExpectedLine.toString());
+		assertEquals("MissingActualLine", LineDiffType.MissingActualLine.toString());
 		
 	}
 
 	@Test
 	public void testLookup() {
 		MockLineDiffType mock  = new MockLineDiffType();
-		mock.setId(LineDiffType.MATCH.getId());
-		assertSame(LineDiffType.MATCH, LineDiffType.get(mock));
-		mock.setId(LineDiffType.PARTIAL_MATCH.getId());
-		assertSame(LineDiffType.PARTIAL_MATCH, LineDiffType.get(mock));
-		mock.setId(LineDiffType.MISSING_ACTUAL_LINE.getId());
-		assertSame(LineDiffType.MISSING_ACTUAL_LINE, LineDiffType.get(mock));
-		mock.setId(LineDiffType.MISSING_EXPECTED_LINE.getId());
-		assertSame(LineDiffType.MISSING_EXPECTED_LINE, LineDiffType.get(mock));
+		mock.setId(LineDiffType.Match.getId());
+		assertSame(LineDiffType.Match, LineDiffType.get(mock));
+		mock.setId(LineDiffType.PartialMatch.getId());
+		assertSame(LineDiffType.PartialMatch, LineDiffType.get(mock));
+		mock.setId(LineDiffType.MissingActualLine.getId());
+		assertSame(LineDiffType.MissingActualLine, LineDiffType.get(mock));
+		mock.setId(LineDiffType.MissingExpectedLine.getId());
+		assertSame(LineDiffType.MissingExpectedLine, LineDiffType.get(mock));
 		
 	}
 	

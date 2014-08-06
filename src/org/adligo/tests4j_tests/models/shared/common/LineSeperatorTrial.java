@@ -1,10 +1,11 @@
 package org.adligo.tests4j_tests.models.shared.common;
 
-import org.adligo.tests4j.models.shared.asserts.ExpectedThrownData;
+import org.adligo.tests4j.models.shared.asserts.common.ExpectedThrownData;
 import org.adligo.tests4j.models.shared.asserts.common.I_Thrower;
 import org.adligo.tests4j.models.shared.common.LineSeperator;
 import org.adligo.tests4j.models.shared.coverage.I_SourceFileCoverage;
 import org.adligo.tests4j.models.shared.results.I_SourceFileTrialResult;
+import org.adligo.tests4j.models.shared.trials.AfterTrial;
 import org.adligo.tests4j.models.shared.trials.SourceFileScope;
 import org.adligo.tests4j.models.shared.trials.SourceFileTrial;
 import org.adligo.tests4j.models.shared.trials.Test;
@@ -37,7 +38,10 @@ public class LineSeperatorTrial extends SourceFileCountingTrial {
 		});
 	}
 	
-
+	@AfterTrial
+	public static void afterTrial() {
+		LineSeperator.setLineSeperator(System.lineSeparator());
+	}
 	
 
 	@Override

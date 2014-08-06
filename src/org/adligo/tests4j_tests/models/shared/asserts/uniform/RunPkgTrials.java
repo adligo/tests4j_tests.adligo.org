@@ -22,10 +22,10 @@ public class RunPkgTrials implements I_Tests4J_TrialList {
 		Tests4J_Params params = new Tests4J_Params();
 		params.addTrials(new RunPkgTrials());
 		
-		params.setLogState(Tests4J_ThreadFactory.class, true);
-		params.setLogState(MultiProbeDataStore.class, true);
-		params.setLogState(MultiProbesMap.class, true);
-		params.setLogState(Tests4J_TrialsRunable.class, true);
+		//params.setLogState(Tests4J_ThreadFactory.class, true);
+		//params.setLogState(MultiProbeDataStore.class, true);
+		//params.setLogState(MultiProbesMap.class, true);
+		//params.setLogState(Tests4J_TrialsRunable.class, true);
 		
 		params.setCoveragePluginFactoryClass(ScopedJacocoPluginFactory.class);
 		Tests4J.run(params);
@@ -41,6 +41,7 @@ public class RunPkgTrials implements I_Tests4J_TrialList {
 		trials.add(EvaluatorLookupTrial.class);
 		trials.add(StringUniformEvaluatorTrial.class);
 		trials.add(ThrowableUniformEvaluatorTrial.class);
+		
 		return trials;
 	}
 }

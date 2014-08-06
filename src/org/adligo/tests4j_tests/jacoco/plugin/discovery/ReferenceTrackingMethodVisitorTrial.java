@@ -2,10 +2,10 @@ package org.adligo.tests4j_tests.jacoco.plugin.discovery;
 
 import java.util.Set;
 
+import org.adligo.tests4j.models.shared.dependency.ClassFilter;
+import org.adligo.tests4j.models.shared.dependency.ClassReferencesMutant;
 import org.adligo.tests4j.models.shared.trials.SourceFileScope;
 import org.adligo.tests4j.models.shared.trials.Test;
-import org.adligo.tests4j.run.discovery.ClassFilter;
-import org.adligo.tests4j.run.discovery.ClassReferencesMutant;
 import org.adligo.tests4j_4jacoco.plugin.discovery.ReferenceTrackingMethodVisitor;
 import org.adligo.tests4j_tests.base_abstract_trials.SourceFileCountingTrial;
 import org.adligo.tests4j_tests.run.helpers.class_loading_mocks.MockException;
@@ -15,7 +15,7 @@ import org.objectweb.asm.Label;
 import org.objectweb.asm.Opcodes;
 import org.objectweb.asm.Type;
 
-@SourceFileScope (sourceClass=ReferenceTrackingMethodVisitor.class, minCoverage=60.0)
+@SourceFileScope (sourceClass=ReferenceTrackingMethodVisitor.class, minCoverage=56.0)
 public class ReferenceTrackingMethodVisitorTrial extends SourceFileCountingTrial {
 	ReferenceTrackingMethodVisitor rtcv;
 	ClassReferencesMutant crm = new ClassReferencesMutant();

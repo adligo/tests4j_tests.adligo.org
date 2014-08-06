@@ -1,19 +1,19 @@
 package org.adligo.tests4j_tests.models.shared.en;
 
-import org.adligo.tests4j.models.shared.en.Tests4J_AssertionResultMessages;
+import org.adligo.tests4j.models.shared.en.Tests4J_ResultMessages;
 import org.adligo.tests4j.models.shared.en.Tests4J_EnglishConstants;
-import org.adligo.tests4j.models.shared.i18n.I_Tests4J_AssertionResultMessages;
+import org.adligo.tests4j.models.shared.i18n.I_Tests4J_ResultMessages;
 import org.adligo.tests4j.models.shared.trials.SourceFileScope;
 import org.adligo.tests4j.models.shared.trials.Test;
 import org.adligo.tests4j_tests.base_abstract_trials.SourceFileCountingTrial;
 import org.adligo.tests4j_tests.models.shared.i18n.I18N_Asserter;
 
-@SourceFileScope (sourceClass=Tests4J_AssertionResultMessages.class)
+@SourceFileScope (sourceClass=Tests4J_ResultMessages.class)
 public class Tests4J_AssertionResultMessages_Trial extends SourceFileCountingTrial {
 
 	@Test
 	public void testMessages() {
-		I_Tests4J_AssertionResultMessages messages = Tests4J_EnglishConstants.ENGLISH.getAssertionResultMessages();
+		I_Tests4J_ResultMessages messages = Tests4J_EnglishConstants.ENGLISH.getResultMessages();
 		I18N_Asserter asserter = new I18N_Asserter(this);
 		
 		asserter.assertConstant("An unexpected exception was thrown.",
@@ -27,7 +27,7 @@ public class Tests4J_AssertionResultMessages_Trial extends SourceFileCountingTri
 				messages.getTheCollectionShouldContainTheValue());
 		
 		asserter.assertConstant("Either no throwable was thrown or the expected throwable was NOT uniform with the actual throwable.",
-				messages.getTheExpectedThrowableDataDidNotMatchTheActual());
+				messages.getTheExpectedThrowableDataWasNotUniformTheActual());
 	
 		
 		asserter.assertConstant("The objects should NOT be equal.",
@@ -66,9 +66,24 @@ public class Tests4J_AssertionResultMessages_Trial extends SourceFileCountingTri
 		asserter.assertConstant("The value should NOT be null.",
 				messages.getTheValueShould_NOT_BeNull());
 		
-
+		asserter.assertConstant("The expected thrown class did NOT match the actual thrown class.",
+				messages.getThrowableClassMismatch());
+		asserter.assertConstant("The expected throwable message was NOT equals to the actual thrown message.",
+				messages.getThrowableMessageNotEquals());
+		asserter.assertConstant("The expected throwable message was NOT uniform with the actual thrown message.",
+				messages.getThrowableMessageNotUniform());
 		
-		asserter.assertConstantsMatchMethods(Tests4J_AssertionResultMessages.class);
+		asserter.assertConstant("The expected throwable did not match the actual throwable, or nothing was thrown.",
+				messages.getTheExpectedThrowableDidNotMatch());
+		
+		asserter.assertConstant("The test timed out.",
+				messages.getTestTimedOut());
+		asserter.assertConstant("The trial timed out.",
+				messages.getTrialTimedOut());
+		asserter.assertConstant("The code coverage should be above the expected value.",
+				messages.getCodeCoveragIsOff());
+
+		asserter.assertConstantsMatchMethods(Tests4J_ResultMessages.class);
 	}
 
 	@Override
@@ -78,11 +93,11 @@ public class Tests4J_AssertionResultMessages_Trial extends SourceFileCountingTri
 
 	@Override
 	public int getAsserts() {
-		return 52;
+		return 73;
 	}
 
 	@Override
 	public int getUniqueAsserts() {
-		return 52;
+		return 73;
 	}
 }

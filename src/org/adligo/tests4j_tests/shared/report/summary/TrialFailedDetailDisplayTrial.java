@@ -1,5 +1,7 @@
 package org.adligo.tests4j_tests.shared.report.summary;
 
+import org.adligo.tests4j.models.shared.en.Tests4J_EnglishConstants;
+import org.adligo.tests4j.models.shared.i18n.I_Tests4J_ReportMessages;
 import org.adligo.tests4j.models.shared.results.BaseTrialResultMutant;
 import org.adligo.tests4j.models.shared.trials.SourceFileScope;
 import org.adligo.tests4j.models.shared.trials.Test;
@@ -40,7 +42,11 @@ public class TrialFailedDetailDisplayTrial extends SourceFileCountingTrial {
 		btrm.setTrialName("someTrialName");
 		
 		display.logTrialFailure(btrm);
-		assertEquals("someTrialName failed!", log.getLogMessage(0));
+		
+		I_Tests4J_ReportMessages messages =  Tests4J_EnglishConstants.ENGLISH.getReportMessages();
+		
+		assertEquals("someTrialName" + messages.getFailedEOS() + 
+				log.getLineSeperator(), log.getLogMessage(0));
 		assertEquals(1, log.getLogMessagesSize());
 		assertEquals(0, log.getExceptionsSize());
 		assertEquals(1, log.getStatesSize());

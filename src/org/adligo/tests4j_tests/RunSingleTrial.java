@@ -5,16 +5,17 @@ import org.adligo.tests4j.run.Tests4J;
 import org.adligo.tests4j.shared.report.summary.TestDisplay;
 import org.adligo.tests4j.shared.report.summary.TrialDisplay;
 import org.adligo.tests4j_4jacoco.plugin.Recorder;
-import org.adligo.tests4j_4jacoco.plugin.ScopedJacocoPluginFactory;
-import org.adligo.tests4j_tests.jacoco.plugin.discovery.ClassReferencesDiscoveryTrial;
+import org.adligo.tests4j_tests.trials_api.BadApiTrials_Trial;
+import org.adligo.tests4j_tests.trials_api.BadSourceFileTrials_Trial;
+import org.adligo.tests4j_tests.trials_api.BadUseCaseTrials_Trial;
 
 public class RunSingleTrial {
 
 	
 	public static void main(String [] args) {
 		Tests4J_Params params = new Tests4J_Params();
-		//params.addTrial(DiffIndexesTrial.class);
-		params.addTrial(ClassReferencesDiscoveryTrial.class);
+		//params.addTrial(NoPackageScopeAnnotationTrial.class);
+		params.addTrial(BadUseCaseTrials_Trial.class);
 	
 		//params.setLogState(AbstractPlugin.class, true);
 		//params.setLogState(Tests4J_NotificationManager.class, true);
@@ -24,14 +25,14 @@ public class RunSingleTrial {
 		//params.addLoggingClass(Tests4J_Memory.class);
 		//params.addLoggingClass(Tests4J_SecurityManager.class);
 		params.setLogState(TrialDisplay.class, false);
-		params.setLogState(TestDisplay.class, false);
+		params.setLogState(TestDisplay.class, true);
 		
 		//logging from jacoco
 		//params.addLoggingClass(AbstractPlugin.class);
 		params.setLogState(Recorder.class, true);
 		
 		//SimpleJacocoPlugin plugin = new SimpleJacocoPlugin();
-		params.setCoveragePluginFactoryClass(ScopedJacocoPluginFactory.class);
+		//params.setCoveragePluginFactoryClass(ScopedJacocoPluginFactory.class);
 		//params.setCoveragePluginConfiguratorClass(RunSingleTrialPluginConfigurator.class);
 		Tests4J.run(params);
 	}

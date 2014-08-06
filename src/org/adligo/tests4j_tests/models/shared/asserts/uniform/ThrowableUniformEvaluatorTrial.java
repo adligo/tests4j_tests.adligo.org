@@ -1,13 +1,14 @@
 package org.adligo.tests4j_tests.models.shared.asserts.uniform;
 
-import org.adligo.tests4j.models.shared.asserts.CompareAssertionData;
+import org.adligo.tests4j.models.shared.asserts.common.AssertType;
+import org.adligo.tests4j.models.shared.asserts.common.CompareAssertionData;
 import org.adligo.tests4j.models.shared.asserts.line_text.I_TextLinesCompareResult;
 import org.adligo.tests4j.models.shared.asserts.uniform.I_Evaluation;
 import org.adligo.tests4j.models.shared.asserts.uniform.ThrowableUniformEvaluator;
-import org.adligo.tests4j.models.shared.en.Tests4J_AssertionResultMessages;
+import org.adligo.tests4j.models.shared.en.Tests4J_ResultMessages;
 import org.adligo.tests4j.models.shared.en.Tests4J_EnglishConstants;
 import org.adligo.tests4j.models.shared.i18n.I_Tests4J_AssertionInputMessages;
-import org.adligo.tests4j.models.shared.i18n.I_Tests4J_AssertionResultMessages;
+import org.adligo.tests4j.models.shared.i18n.I_Tests4J_ResultMessages;
 import org.adligo.tests4j.models.shared.system.Tests4J_Constants;
 import org.adligo.tests4j.models.shared.trials.SourceFileScope;
 import org.adligo.tests4j.models.shared.trials.Test;
@@ -29,9 +30,10 @@ public class ThrowableUniformEvaluatorTrial extends SourceFileCountingTrial {
 		I_Evaluation<I_TextLinesCompareResult> eval = evaluator.isUniform(
 				new CompareAssertionData<Throwable>(
 						new IllegalArgumentException("hey\nu"), 
-						new IllegalArgumentException("hey\nyou")));
+						new IllegalArgumentException("hey\nyou"), 
+						AssertType.AssertUniform));
 		assertFalse(eval.isSuccess());
-		I_Tests4J_AssertionResultMessages messages =  Tests4J_EnglishConstants.ENGLISH.getAssertionResultMessages();
+		I_Tests4J_ResultMessages messages =  Tests4J_EnglishConstants.ENGLISH.getResultMessages();
 		assertEquals(messages.getTheTextWasNOT_Uniform(),
 				eval.getFailureReason());
 		I_TextLinesCompareResult result = eval.getData();
@@ -42,7 +44,7 @@ public class ThrowableUniformEvaluatorTrial extends SourceFileCountingTrial {
 		eval = evaluator.isUniform(
 				new CompareAssertionData<Throwable>(
 						new IllegalArgumentException("hey\nyou"), 
-						null));
+						null,AssertType.AssertUniform));
 		assertFalse(eval.isSuccess());
 		assertEquals(inMessages.getTheActualValueIsNull(),
 				eval.getFailureReason());
@@ -51,7 +53,7 @@ public class ThrowableUniformEvaluatorTrial extends SourceFileCountingTrial {
 		eval = evaluator.isUniform(
 				new CompareAssertionData<Throwable>(
 						null, 
-						new IllegalStateException("hey\nyou")));
+						new IllegalStateException("hey\nyou"), AssertType.AssertUniform));
 		assertFalse(eval.isSuccess());
 		
 		assertEquals(inMessages.getTheExpectedValueShouldNeverBeNull(),
@@ -61,7 +63,8 @@ public class ThrowableUniformEvaluatorTrial extends SourceFileCountingTrial {
 		eval = evaluator.isUniform(
 				new CompareAssertionData<Throwable>(
 						new IllegalArgumentException("hey\nyou"), 
-						new IllegalStateException("hey\nyou")));
+						new IllegalStateException("hey\nyou"),
+						AssertType.AssertUniform));
 		assertFalse(eval.isSuccess());
 		
 		assertEquals(inMessages.getTheActualClassIsNotAssignableFromTheExpectedClass(),
@@ -71,7 +74,8 @@ public class ThrowableUniformEvaluatorTrial extends SourceFileCountingTrial {
 		eval = evaluator.isUniform(
 				new CompareAssertionData<Throwable>(
 						new IllegalArgumentException("hey\nyou"), 
-						new IllegalArgumentException("hey\nyou")));
+						new IllegalArgumentException("hey\nyou"),
+						AssertType.AssertUniform));
 		assertTrue(eval.isSuccess());
 		assertNull(eval.getFailureReason());
 		assertNull(eval.getData());
@@ -83,7 +87,8 @@ public class ThrowableUniformEvaluatorTrial extends SourceFileCountingTrial {
 		I_Evaluation<I_TextLinesCompareResult> eval = evaluator.isNotUniform(
 				new CompareAssertionData<Throwable>(
 						new IllegalArgumentException("hey\nu"), 
-						new IllegalArgumentException("hey\nyou")));
+						new IllegalArgumentException("hey\nyou"),
+						AssertType.AssertUniform));
 		assertTrue(eval.isSuccess());
 		assertNull(eval.getFailureReason());
 		assertNull(eval.getData());
@@ -91,7 +96,7 @@ public class ThrowableUniformEvaluatorTrial extends SourceFileCountingTrial {
 		eval = evaluator.isNotUniform(
 				new CompareAssertionData<Throwable>(
 						new IllegalArgumentException("hey\nyou"), 
-						null));
+						null,AssertType.AssertUniform));
 		assertFalse(eval.isSuccess());
 		I_Tests4J_AssertionInputMessages messages = Tests4J_EnglishConstants.ENGLISH.getAssertionInputMessages();
 		
@@ -102,7 +107,8 @@ public class ThrowableUniformEvaluatorTrial extends SourceFileCountingTrial {
 		eval = evaluator.isNotUniform(
 				new CompareAssertionData<Throwable>(
 						null, 
-						new IllegalStateException("hey\nyou")));
+						new IllegalStateException("hey\nyou"),
+						AssertType.AssertUniform));
 		assertFalse(eval.isSuccess());
 		
 		assertEquals(messages.getTheExpectedValueShouldNeverBeNull(),
@@ -112,7 +118,8 @@ public class ThrowableUniformEvaluatorTrial extends SourceFileCountingTrial {
 		eval = evaluator.isNotUniform(
 				new CompareAssertionData<Throwable>(
 						new IllegalArgumentException("hey\nyou"), 
-						new IllegalStateException("hey\nyou")));
+						new IllegalStateException("hey\nyou"),
+						AssertType.AssertUniform));
 		assertTrue(eval.isSuccess());
 		assertNull(eval.getFailureReason());
 		assertNull(eval.getData());
@@ -120,10 +127,11 @@ public class ThrowableUniformEvaluatorTrial extends SourceFileCountingTrial {
 		eval = evaluator.isNotUniform(
 				new CompareAssertionData<Throwable>(
 						new IllegalArgumentException("hey\nyou"), 
-						new IllegalArgumentException("hey\nyou")));
+						new IllegalArgumentException("hey\nyou"),
+						AssertType.AssertUniform));
 		assertFalse(eval.isSuccess());
 		
-		I_Tests4J_AssertionResultMessages resultMessages =  Tests4J_EnglishConstants.ENGLISH.getAssertionResultMessages();
+		I_Tests4J_ResultMessages resultMessages =  Tests4J_EnglishConstants.ENGLISH.getResultMessages();
 		assertEquals(
 				resultMessages.getTheTextWasUniform(),
 				eval.getFailureReason());

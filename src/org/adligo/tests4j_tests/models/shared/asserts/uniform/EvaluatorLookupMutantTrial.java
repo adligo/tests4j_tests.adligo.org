@@ -4,7 +4,9 @@ import java.util.Map;
 
 import org.adligo.tests4j.models.shared.asserts.uniform.EvaluatorLookupMutant;
 import org.adligo.tests4j.models.shared.asserts.uniform.I_UniformAssertionEvaluator;
+import org.adligo.tests4j.models.shared.asserts.uniform.I_UniformThrownAssertionEvaluator;
 import org.adligo.tests4j.models.shared.asserts.uniform.StringUniformEvaluator;
+import org.adligo.tests4j.models.shared.asserts.uniform.UniformThrownAssertionEvaluator;
 import org.adligo.tests4j.models.shared.trials.SourceFileScope;
 import org.adligo.tests4j.models.shared.trials.Test;
 import org.adligo.tests4j_tests.base_abstract_trials.SourceFileCountingTrial;
@@ -48,6 +50,14 @@ public class EvaluatorLookupMutantTrial extends SourceFileCountingTrial {
 		data = elm.getLookupData();
 		assertNotNull(data);
 		assertEquals(0, data.size());
+		
+		I_UniformThrownAssertionEvaluator<?> tevall =  elm.getThrownEvaulator();
+		assertNotNull(tevall);
+		
+		UniformThrownAssertionEvaluator inst = new UniformThrownAssertionEvaluator();
+		elm.setThrownEvaulator(inst);
+		assertSame(inst, elm.getThrownEvaulator());
+		
 	}
 
 
@@ -58,11 +68,11 @@ public class EvaluatorLookupMutantTrial extends SourceFileCountingTrial {
 
 	@Override
 	public int getAsserts() {
-		return 13;
+		return 15;
 	}
 
 	@Override
 	public int getUniqueAsserts() {
-		return 12;
+		return 14;
 	}
 }

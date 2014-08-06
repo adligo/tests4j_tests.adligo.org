@@ -44,7 +44,7 @@ public class LineDiffTextDisplayTrial extends SourceFileCountingTrial implements
 	@Test
 	public void testSingleActualLineMissing_NullActualLine() {
 		LineDiffMutant ldm = new LineDiffMutant();
-		ldm.setType(LineDiffType.PARTIAL_MATCH);
+		ldm.setType(LineDiffType.PartialMatch);
 		ldm.setActualLineNbr(null);
 		ldm.setExpectedLineNbr(-1);
 		ldm.setIndexes(new DiffIndexesPair(new DiffIndexes(null, null, 0, 2), new DiffIndexes(3,3 , 0, 2)));
@@ -63,7 +63,7 @@ public class LineDiffTextDisplayTrial extends SourceFileCountingTrial implements
 	@Test
 	public void testSinglePartialMatch_NullActualLine() {
 		LineDiffMutant ldm = new LineDiffMutant();
-		ldm.setType(LineDiffType.MISSING_ACTUAL_LINE);
+		ldm.setType(LineDiffType.MissingActualLine);
 		ldm.setActualLineNbr(null);
 		ldm.setExpectedLineNbr(0);
 		ldm.setIndexes(new DiffIndexesPair(new DiffIndexes(null, null, 0, 2), new DiffIndexes(3,3 , 0, 2)));
@@ -82,7 +82,7 @@ public class LineDiffTextDisplayTrial extends SourceFileCountingTrial implements
 	@Test
 	public void testSinglePartialMatch_NullExpectedLine() {
 		LineDiffMutant ldm = new LineDiffMutant();
-		ldm.setType(LineDiffType.PARTIAL_MATCH);
+		ldm.setType(LineDiffType.PartialMatch);
 		ldm.setActualLineNbr(null);
 		ldm.setExpectedLineNbr(-1);
 		ldm.setIndexes(new DiffIndexesPair(new DiffIndexes(null, null, 0, 2), new DiffIndexes(3,3 , 0, 2)));
@@ -139,7 +139,7 @@ public class LineDiffTextDisplayTrial extends SourceFileCountingTrial implements
 	@Test
 	public void testSingleExpecteLineMissing_NullExpectedLine() {
 		LineDiffMutant ldm = new LineDiffMutant();
-		ldm.setType(LineDiffType.PARTIAL_MATCH);
+		ldm.setType(LineDiffType.PartialMatch);
 		ldm.setActualLineNbr(null);
 		ldm.setExpectedLineNbr(-1);
 		ldm.setIndexes(new DiffIndexesPair(new DiffIndexes(null, null, 0, 2), new DiffIndexes(3,3 , 0, 2)));
@@ -159,7 +159,7 @@ public class LineDiffTextDisplayTrial extends SourceFileCountingTrial implements
 	@Test
 	public void testDisplaySingleDiffSafeNullType_NullActualLine() {
 		LineDiffMutant ldm = new LineDiffMutant();
-		ldm.setType(LineDiffType.PARTIAL_MATCH);
+		ldm.setType(LineDiffType.PartialMatch);
 		ldm.setExpectedLineNbr(0);
 		ldm.setIndexes(new DiffIndexesPair(new DiffIndexes(null, null, 0, 2), new DiffIndexes(3,3 , 0, 2)));
 		
@@ -176,7 +176,7 @@ public class LineDiffTextDisplayTrial extends SourceFileCountingTrial implements
 	@Test
 	public void testDisplaySingleDiffComplex_ActualDifferent() {
 		LineDiffMutant ldm = new LineDiffMutant();
-		ldm.setType(LineDiffType.PARTIAL_MATCH);
+		ldm.setType(LineDiffType.PartialMatch);
 		ldm.setIndexes(new DiffIndexesPair(new DiffIndexes(null, null, 0, 2), new DiffIndexes(3,3 , 0, 2)));
 		ldm.setExpectedLineNbr(0);
 		ldm.setActualLineNbr(0);
@@ -199,7 +199,7 @@ public class LineDiffTextDisplayTrial extends SourceFileCountingTrial implements
 	@Test
 	public void testDisplaySingleDiffComplex_ExpectedDifferent() {
 		LineDiffMutant ldm = new LineDiffMutant();
-		ldm.setType(LineDiffType.PARTIAL_MATCH);
+		ldm.setType(LineDiffType.PartialMatch);
 		ldm.setIndexes(new DiffIndexesPair(new DiffIndexes(3, 3, 0, 2), new DiffIndexes(null, null , 0, 2)));
 		ldm.setExpectedLineNbr(0);
 		ldm.setActualLineNbr(0);
@@ -223,7 +223,7 @@ public class LineDiffTextDisplayTrial extends SourceFileCountingTrial implements
 	@Test
 	public void testDisplaySingleDiffComplex_BadExpectedIndexes() {
 		LineDiffMutant ldm = new LineDiffMutant();
-		ldm.setType(LineDiffType.PARTIAL_MATCH);
+		ldm.setType(LineDiffType.PartialMatch);
 		ldm.setIndexes(new DiffIndexesPair(new DiffIndexes(0, 7, null, null), new DiffIndexes(0,0 , null, null)));
 		ldm.setExpectedLineNbr(0);
 		ldm.setActualLineNbr(0);
@@ -241,7 +241,7 @@ public class LineDiffTextDisplayTrial extends SourceFileCountingTrial implements
 	@Test
 	public void testDisplaySingleDiffComplex_BadActualIndexes() {
 		LineDiffMutant ldm = new LineDiffMutant();
-		ldm.setType(LineDiffType.PARTIAL_MATCH);
+		ldm.setType(LineDiffType.PartialMatch);
 		ldm.setIndexes(new DiffIndexesPair(new DiffIndexes(0, 7, null, null), new DiffIndexes(0,0 , null, null)));
 		ldm.setExpectedLineNbr(0);
 		ldm.setActualLineNbr(0);
@@ -258,7 +258,7 @@ public class LineDiffTextDisplayTrial extends SourceFileCountingTrial implements
 	@Test
 	public void testDisplaySingleDiffComplex_BothDifferent() {
 		LineDiffMutant ldm = new LineDiffMutant();
-		ldm.setType(LineDiffType.PARTIAL_MATCH);
+		ldm.setType(LineDiffType.PartialMatch);
 		ldm.setIndexes(new DiffIndexesPair(new DiffIndexes(3, 3, 0, 2), new DiffIndexes(3,3 , 0, 2)));
 		ldm.setExpectedLineNbr(0);
 		ldm.setActualLineNbr(0);

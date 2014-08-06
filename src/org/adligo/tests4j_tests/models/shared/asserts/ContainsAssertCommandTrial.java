@@ -2,11 +2,12 @@ package org.adligo.tests4j_tests.models.shared.asserts;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.Set;
 
 import org.adligo.tests4j.models.shared.asserts.ContainsAssertCommand;
-import org.adligo.tests4j.models.shared.asserts.ExpectedThrownData;
 import org.adligo.tests4j.models.shared.asserts.common.AssertType;
+import org.adligo.tests4j.models.shared.asserts.common.ExpectedThrownData;
+import org.adligo.tests4j.models.shared.asserts.common.I_AssertionData;
+import org.adligo.tests4j.models.shared.asserts.common.I_CollectionContainsAssertionData;
 import org.adligo.tests4j.models.shared.asserts.common.I_Thrower;
 import org.adligo.tests4j.models.shared.en.Tests4J_EnglishConstants;
 import org.adligo.tests4j.models.shared.i18n.I_Tests4J_AssertionInputMessages;
@@ -67,14 +68,12 @@ public class ContainsAssertCommandTrial extends SourceFileCountingTrial {
 		String hey = "hey";
 		ContainsAssertCommand a = 
 				new ContainsAssertCommand("failure message", col, hey);
-		Set<String> keys = a.getKeys();
-		assertNotNull(keys);
-		assertEquals(2, keys.size());
-		assertTrue(keys.contains(ContainsAssertCommand.VALUE));
-		assertTrue(keys.contains(ContainsAssertCommand.COLLECTION));
+		I_AssertionData data = a.getData();
+		assertNotNull(data);
+		I_CollectionContainsAssertionData ccad  = (I_CollectionContainsAssertionData) data;
 		
-		assertSame(col, a.getData(ContainsAssertCommand.COLLECTION));
-		assertSame(hey, a.getData(ContainsAssertCommand.VALUE));
+		assertSame(col, ccad.getCollection());
+		assertSame(hey, ccad.getValue());
 		assertSame(a, a.getData());
 		assertEquals("failure message", a.getFailureMessage());
 		assertEquals(AssertType.AssertContains, a.getType());
@@ -101,11 +100,11 @@ public class ContainsAssertCommandTrial extends SourceFileCountingTrial {
 
 	@Override
 	public int getAsserts() {
-		return 22;
+		return 19;
 	}
 
 	@Override
 	public int getUniqueAsserts() {
-		return 15;
+		return 13;
 	}
 }

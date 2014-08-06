@@ -5,12 +5,14 @@ import java.util.Map;
 import org.adligo.tests4j.models.shared.asserts.uniform.EvaluatorLookup;
 import org.adligo.tests4j.models.shared.asserts.uniform.EvaluatorLookupMutant;
 import org.adligo.tests4j.models.shared.asserts.uniform.I_UniformAssertionEvaluator;
+import org.adligo.tests4j.models.shared.asserts.uniform.I_UniformThrownAssertionEvaluator;
 import org.adligo.tests4j.models.shared.asserts.uniform.StringUniformEvaluator;
+import org.adligo.tests4j.models.shared.asserts.uniform.UniformThrownAssertionEvaluator;
 import org.adligo.tests4j.models.shared.trials.SourceFileScope;
 import org.adligo.tests4j.models.shared.trials.Test;
 import org.adligo.tests4j_tests.base_abstract_trials.SourceFileCountingTrial;
 
-@SourceFileScope (sourceClass=EvaluatorLookup.class, minCoverage=88.0)
+@SourceFileScope (sourceClass=EvaluatorLookup.class, minCoverage=85.0)
 public class EvaluatorLookupTrial extends SourceFileCountingTrial {
 
 	@Test
@@ -19,6 +21,10 @@ public class EvaluatorLookupTrial extends SourceFileCountingTrial {
 		StringUniformEvaluator eval = new StringUniformEvaluator();
 		elm.setEvaluator(String.class, eval);
 		
+		UniformThrownAssertionEvaluator inst = new UniformThrownAssertionEvaluator();
+		elm.setThrownEvaulator(inst);
+		assertSame(inst, elm.getThrownEvaulator());
+		
 		EvaluatorLookup elmCopied = new EvaluatorLookup(elm);
 		Map<String, I_UniformAssertionEvaluator<?, ?>> data = elmCopied.getLookupData();
 		assertNotNull(data);
@@ -26,6 +32,12 @@ public class EvaluatorLookupTrial extends SourceFileCountingTrial {
 		assertEquals(1, data.size());
 		assertSame(eval, data.get(String.class.getName()));
 	
+		I_UniformThrownAssertionEvaluator<?> tevall =  elm.getThrownEvaulator();
+		assertSame(inst, tevall);
+		
+		EvaluatorLookup defaultEl = new EvaluatorLookup();
+		assertNotNull(defaultEl.getThrownEvaulator());
+		assertNotNull(defaultEl.getLookupData());
 	}
 
 
@@ -36,11 +48,11 @@ public class EvaluatorLookupTrial extends SourceFileCountingTrial {
 
 	@Override
 	public int getAsserts() {
-		return 4;
+		return 8;
 	}
 
 	@Override
 	public int getUniqueAsserts() {
-		return 4;
+		return 7;
 	}
 }

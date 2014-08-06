@@ -1,19 +1,24 @@
 package org.adligo.tests4j_tests.models.shared.asserts;
 
-import org.adligo.tests4j.models.shared.asserts.ExpectedThrownData;
 import org.adligo.tests4j.models.shared.asserts.ThrownAssertCommand;
-import org.adligo.tests4j.models.shared.asserts.ThrownAssertionData;
 import org.adligo.tests4j.models.shared.asserts.common.AssertType;
+import org.adligo.tests4j.models.shared.asserts.common.ExpectedThrownData;
 import org.adligo.tests4j.models.shared.asserts.common.I_AssertionData;
+import org.adligo.tests4j.models.shared.asserts.common.I_ExpectedThrownData;
+import org.adligo.tests4j.models.shared.asserts.common.I_ThrowableInfo;
 import org.adligo.tests4j.models.shared.asserts.common.I_Thrower;
+import org.adligo.tests4j.models.shared.asserts.common.ThrownAssertionData;
 import org.adligo.tests4j.models.shared.en.Tests4J_EnglishConstants;
 import org.adligo.tests4j.models.shared.i18n.I_Tests4J_AssertionInputMessages;
+import org.adligo.tests4j.models.shared.i18n.I_Tests4J_ResultMessages;
+import org.adligo.tests4j.models.shared.system.I_Tests4J_Log;
 import org.adligo.tests4j.models.shared.trials.SourceFileScope;
 import org.adligo.tests4j.models.shared.trials.Test;
 import org.adligo.tests4j_tests.base_abstract_trials.SourceFileCountingTrial;
 
-@SourceFileScope (sourceClass=ThrownAssertCommand.class, minCoverage=65.0)
+@SourceFileScope (sourceClass=ThrownAssertCommand.class, minCoverage=77.0)
 public class ThrownAssertCommandTrial extends SourceFileCountingTrial {
+
 
 	@Test
 	public void testConstructorExceptions() {
@@ -73,10 +78,12 @@ public class ThrownAssertCommandTrial extends SourceFileCountingTrial {
 		assertNotNull(data);
 		assertTrue(data instanceof ThrownAssertionData);
 		ThrownAssertionData tad = (ThrownAssertionData) data;
-		assertNull(tad.getActualMessage());
-		assertNull(tad.getActualThrowable());
-		assertEquals(IllegalArgumentException.class, tad.getExpectedThrowable());
-		assertEquals("hey", tad.getExpectedMessage());
+		I_ExpectedThrownData expected =  tad.getExpected();
+		Throwable actual = tad.getActual();
+		
+		assertNull(actual);
+		assertEquals(IllegalArgumentException.class, expected.getThrowableClass());
+		assertEquals("hey", expected.getMessage());
 		assertEquals("failure message", a.getFailureMessage());
 		assertEquals(AssertType.AssertThrown, a.getType());
 		
@@ -88,14 +95,25 @@ public class ThrownAssertCommandTrial extends SourceFileCountingTrial {
 			}
 		}));
 		
+		I_Tests4J_ResultMessages messages =  Tests4J_EnglishConstants.ENGLISH.getResultMessages();
+		assertEquals(messages.getThrowableClassMismatch(), a.getFailureReason());
+		assertEquals(1, a.getFailureThrowable());
+		
 		I_AssertionData dataAfterEvaluate = a.getData();
 		assertNotNull(dataAfterEvaluate);
 		assertTrue(dataAfterEvaluate instanceof ThrownAssertionData);
-		ThrownAssertionData tad_AfterEvaluate = (ThrownAssertionData) data;
-		assertNull(tad_AfterEvaluate.getActualMessage());
-		assertNull(tad_AfterEvaluate.getActualThrowable());
-		assertEquals(IllegalArgumentException.class, tad_AfterEvaluate.getExpectedThrowable());
-		assertEquals("hey", tad_AfterEvaluate.getExpectedMessage());
+		ThrownAssertionData tad_AfterEvaluate = (ThrownAssertionData) dataAfterEvaluate;
+		
+		expected = tad_AfterEvaluate.getExpected();
+		actual = tad_AfterEvaluate.getActual();
+		assertEquals("...",actual.getMessage());
+		assertEquals(IllegalStateException.class ,actual.getClass());
+		assertEquals(IllegalArgumentException.class, expected.getThrowableClass());
+		assertEquals("hey", expected.getMessage());
+		
+		assertEquals(messages.getThrowableClassMismatch(), tad_AfterEvaluate.getFailureReason());
+		assertEquals(1, tad_AfterEvaluate.getFailureThrowable());
+		
 		
 	}
 	
@@ -115,6 +133,11 @@ public class ThrownAssertCommandTrial extends SourceFileCountingTrial {
 				throw new IllegalStateException("...");
 			}
 		}));
+		I_Tests4J_ResultMessages messages =  Tests4J_EnglishConstants.ENGLISH.getResultMessages();
+
+		assertEquals(messages.getThrowableClassMismatch(), a.getFailureReason());
+		assertEquals(1, a.getFailureThrowable());
+		
 		assertFalse(a.evaluate(new I_Thrower() {
 					
 					@Override
@@ -122,6 +145,9 @@ public class ThrownAssertCommandTrial extends SourceFileCountingTrial {
 						throw new IllegalArgumentException("...");
 					}
 				}));
+		assertEquals(messages.getThrowableMessageNotEquals(), a.getFailureReason());
+		assertEquals(1, a.getFailureThrowable());
+		
 		assertFalse(a.evaluate(new I_Thrower() {
 			
 			@Override
@@ -129,7 +155,9 @@ public class ThrownAssertCommandTrial extends SourceFileCountingTrial {
 				throw new IllegalArgumentException("hey");
 			}
 		}));
-
+		assertEquals(messages.getThrowableClassMismatch(), a.getFailureReason());
+		assertEquals(2, a.getFailureThrowable());
+		
 		assertFalse(a.evaluate(new I_Thrower() {
 			
 			@Override
@@ -140,6 +168,9 @@ public class ThrownAssertCommandTrial extends SourceFileCountingTrial {
 			}
 		}));
 		
+		assertEquals(messages.getThrowableClassMismatch(), a.getFailureReason());
+		assertEquals(2, a.getFailureThrowable());
+		
 		assertFalse(a.evaluate(new I_Thrower() {
 			
 			@Override
@@ -149,6 +180,8 @@ public class ThrownAssertCommandTrial extends SourceFileCountingTrial {
 				throw top;
 			}
 		}));
+		assertEquals(messages.getThrowableClassMismatch(), a.getFailureReason());
+		assertEquals(2, a.getFailureThrowable());
 		
 		assertFalse(a.evaluate(new I_Thrower() {
 			
@@ -159,6 +192,8 @@ public class ThrownAssertCommandTrial extends SourceFileCountingTrial {
 				throw top;
 			}
 		}));
+		assertEquals(messages.getThrowableClassMismatch(), a.getFailureReason());
+		assertEquals(3, a.getFailureThrowable());
 		
 		assertFalse(a.evaluate(new I_Thrower() {
 			
@@ -172,7 +207,8 @@ public class ThrownAssertCommandTrial extends SourceFileCountingTrial {
 				throw top;
 			}
 		}));
-		
+		assertEquals(messages.getThrowableClassMismatch(), a.getFailureReason());
+		assertEquals(3, a.getFailureThrowable());
 		
 		assertFalse(a.evaluate(new I_Thrower() {
 			
@@ -186,6 +222,8 @@ public class ThrownAssertCommandTrial extends SourceFileCountingTrial {
 				throw top;
 			}
 		}));
+		assertEquals(messages.getThrowableMessageNotEquals(), a.getFailureReason());
+		assertEquals(3, a.getFailureThrowable());
 		
 		assertFalse(a.evaluate(new I_Thrower() {
 			
@@ -199,7 +237,8 @@ public class ThrownAssertCommandTrial extends SourceFileCountingTrial {
 				throw top;
 			}
 		}));
-		
+		assertEquals(messages.getThrowableMessageNotEquals(), a.getFailureReason());
+		assertEquals(3, a.getFailureThrowable());
 		
 		assertTrue(a.evaluate(new I_Thrower() {
 			
@@ -222,11 +261,12 @@ public class ThrownAssertCommandTrial extends SourceFileCountingTrial {
 
 	@Override
 	public int getAsserts() {
-		return 36;
+		return 57;
 	}
 
 	@Override
 	public int getUniqueAsserts() {
-		return 16;
+		return 25;
 	}
+
 }

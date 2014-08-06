@@ -7,9 +7,7 @@ import org.adligo.tests4j.models.shared.system.I_Tests4J_TrialList;
 import org.adligo.tests4j.models.shared.system.Tests4J_Params;
 import org.adligo.tests4j.models.shared.trials.I_Trial;
 import org.adligo.tests4j.run.Tests4J;
-import org.adligo.tests4j.run.helpers.Tests4J_TrialsRunable;
 import org.adligo.tests4j_4jacoco.plugin.ScopedJacocoPluginFactory;
-import org.adligo.tests4j_4jacoco.plugin.data.multi.MultiProbesMap;
 
 public class RunPkgTrials implements I_Tests4J_TrialList {
 
@@ -36,22 +34,13 @@ public class RunPkgTrials implements I_Tests4J_TrialList {
 		
 		trials.add(BooleanAssertCommandTrial.class);
 		
-		trials.add(CompareAssertionDataTrial.class);
+		
 		trials.add(ContainsAssertCommandTrial.class);
-		
 		trials.add(DoubleAssertCommandTrial.class);
-		
-		trials.add(ExpectedThrownDataTrial.class);
-		
 		trials.add(IdenticalAssertCommandTrial.class);
 		trials.add(IdenticalStringAssertCommandTrial.class);
 		
-		trials.add(StringCompareAssertionDataTrial.class);
-		
 		trials.add(ThrownAssertCommandTrial.class);
-		trials.add(ThrownAssertionDataMutantTrial.class);
-		trials.add(ThrownAssertionDataTrial.class);
-		
 		trials.add(UniformAssertCommandTrial.class);
 		trials.add(UniformThrownAssertCommandTrial.class);
 		

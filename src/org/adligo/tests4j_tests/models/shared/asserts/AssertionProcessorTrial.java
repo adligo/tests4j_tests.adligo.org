@@ -2,14 +2,16 @@ package org.adligo.tests4j_tests.models.shared.asserts;
 
 import org.adligo.tests4j.models.shared.asserts.AssertionProcessor;
 import org.adligo.tests4j.models.shared.asserts.BooleanAssertCommand;
-import org.adligo.tests4j.models.shared.asserts.ExpectedThrownData;
 import org.adligo.tests4j.models.shared.asserts.ThrownAssertCommand;
-import org.adligo.tests4j.models.shared.asserts.ThrownAssertionData;
 import org.adligo.tests4j.models.shared.asserts.common.AssertType;
+import org.adligo.tests4j.models.shared.asserts.common.ExpectedThrownData;
 import org.adligo.tests4j.models.shared.asserts.common.I_AssertCommand;
-import org.adligo.tests4j.models.shared.asserts.common.I_AssertionData;
+import org.adligo.tests4j.models.shared.asserts.common.I_AssertCompareFailure;
+import org.adligo.tests4j.models.shared.asserts.common.I_AssertThrownFailure;
+import org.adligo.tests4j.models.shared.asserts.common.I_TestFailure;
+import org.adligo.tests4j.models.shared.asserts.common.I_ThrowableInfo;
 import org.adligo.tests4j.models.shared.asserts.common.I_Thrower;
-import org.adligo.tests4j.models.shared.results.I_TestFailure;
+import org.adligo.tests4j.models.shared.asserts.line_text.TextLines;
 import org.adligo.tests4j.models.shared.system.I_Tests4J_AssertListener;
 import org.adligo.tests4j.models.shared.trials.SourceFileScope;
 import org.adligo.tests4j.models.shared.trials.Test;
@@ -45,27 +47,18 @@ public class AssertionProcessorTrial extends SourceFileCountingTrial implements 
 		AssertionProcessor.evaluate(this, bac);
 		assertNull(lastAssertCommand);
 		assertNotNull(lastTestFailure);
-		assertEquals("should be true", lastTestFailure.getMessage());
-		assertNull(lastTestFailure.getException());
+		assertEquals("should be true", lastTestFailure.getFailureMessage());
+		TextLines lines = new TextLines(lastTestFailure.getFailureDetail(), true);
+		assertUniform("	org.adligo.tests4j.models.shared.asserts.AssertionFailureLocation", lines.getLine(0));
+		assertUniform("\tat org.adligo.tests4j_tests.models.shared.asserts.AssertionProcessorTrial.testSimple(AssertionProcessorTrial.java:47)", lines.getLine(1));
 		
-		Throwable locationFailed = lastTestFailure.getLocationFailed();
-		assertNotNull(locationFailed);
-		I_AssertionData data =  lastTestFailure.getData();
-		assertNotNull(data);
-		
-		StackTraceElement [] elements = locationFailed.getStackTrace();
-		
-		StackTraceElement e = elements[0];
-		assertEquals(AssertionProcessorTrial.class.getName(),  e.getClassName());
-		assertEquals("testSimple",  e.getMethodName());
-		assertEquals(45,  e.getLineNumber());
-		
-		StackAssertions.assertAssertionFailureLocation_StackWasFromTests4J(this, locationFailed);
-		
-		
-		
-		assertFalse((Boolean) data.getData(BooleanAssertCommand.VALUE));
-		assertTrue((Boolean) data.getData(BooleanAssertCommand.EXPECTED_VALUE));
+		assertTrue(lastTestFailure instanceof I_AssertCompareFailure);
+		I_AssertCompareFailure acf = (I_AssertCompareFailure) lastTestFailure;
+		assertEquals(AssertType.AssertTrue, acf.getAssertType());
+		assertEquals(Boolean.class.getName(),  acf.getExpectedClass());
+		assertEquals("true", acf.getExpectedValue());
+		assertEquals(Boolean.class.getName(),  acf.getActualClass());
+		assertEquals("false", acf.getActualValue());
 	}
 	
 	@Test
@@ -74,30 +67,40 @@ public class AssertionProcessorTrial extends SourceFileCountingTrial implements 
 		assertNull(lastTestFailure);
 		ThrownAssertCommand tac = new ThrownAssertCommand("should be true", 
 				new ExpectedThrownData(new RuntimeException("thrown message")));
+		throwable = new RuntimeException();
 		AssertionProcessor.evaluate(this, tac, this);
 		assertNull(lastAssertCommand);
 		
 		assertNotNull(lastTestFailure);
-		assertEquals("should be true", lastTestFailure.getMessage());
-		assertNull(lastTestFailure.getException());
+		assertEquals("should be true", lastTestFailure.getFailureMessage());
+		TextLines lines = new TextLines(lastTestFailure.getFailureDetail(), true);
+		assertUniform("\torg.adligo.tests4j.models.shared.asserts.AssertionFailureLocation",lines.getLine(0));
+		assertUniform("\tat org.adligo.tests4j_tests.models.shared.asserts.AssertionProcessorTrial.testThrown(AssertionProcessorTrial.java:71)",lines.getLine(1));
 		
-		Throwable locationFailed = lastTestFailure.getLocationFailed();
-		assertNotNull(locationFailed);
-		StackTraceElement [] elements = locationFailed.getStackTrace();
+		assertEquals(AssertType.AssertThrown, lastTestFailure.getAssertType());
+		assertTrue(lastTestFailure instanceof I_AssertThrownFailure);
+		I_AssertThrownFailure acf = (I_AssertThrownFailure) lastTestFailure;
 		
-		StackTraceElement e = elements[0];
-		assertEquals(AssertionProcessorTrial.class.getName(),  e.getClassName());
-		assertEquals("testThrown",  e.getMethodName());
-		assertEquals(77,  e.getLineNumber());
+		assertEquals(1, acf.getThrowable());
 		
-		StackAssertions.assertAssertionFailureLocation_StackWasFromTests4J(this, locationFailed);
+		I_ThrowableInfo expected = acf.getExpected();
+		assertNotNull(expected);
+		assertEquals("java.lang.RuntimeException",expected.getClassName());
+		assertEquals("thrown message",expected.getMessage());
+		assertNull(expected.getStacktrace());
+		assertNull(expected.getCause());
 		
-		I_AssertionData data =  lastTestFailure.getData();
-		assertNotNull(data);
-		assertNull(data.getData(ThrownAssertionData.ACTUAL_MESSAGE));
-		assertNull( data.getData(ThrownAssertionData.ACTUAL_THROWABLE_CLASS));
-		assertEquals("thrown message", data.getData(ThrownAssertionData.EXPECTED_MESSAGE));
-		assertEquals(RuntimeException.class, data.getData(ThrownAssertionData.EXPECTED_THROWABLE_CLASS));
+		I_ThrowableInfo actual = acf.getActual();
+		assertNotNull(actual);
+		assertEquals("java.lang.RuntimeException",actual.getClassName());
+		assertNull(actual.getMessage());
+		String stack = actual.getStacktrace();
+		assertNotNull(stack);
+		lines = new TextLines(stack);
+		assertEquals("\tjava.lang.RuntimeException", lines.getLine(0));
+		assertEquals("\tat org.adligo.tests4j_tests.models.shared.asserts.AssertionProcessorTrial.testThrown(AssertionProcessorTrial.java:70)", lines.getLine(1));
+		assertNull(actual.getCause());
+		
 		
 		lastTestFailure = null;
 		throwable = new RuntimeException("thrown message");
@@ -135,12 +138,12 @@ public class AssertionProcessorTrial extends SourceFileCountingTrial implements 
 
 	@Override
 	public int getAsserts() {
-		return 32;
+		return 39;
 	}
 
 	@Override
 	public int getUniqueAsserts() {
-		return 23;
+		return 26;
 	}
 	
 }

@@ -15,7 +15,7 @@ public class TheMetaTrial  extends MetaTrial {
 		//Note when I ignored
 		// MultiRecordingTrial I lost 15% main coverage
 		//TODO reimpl it vs the ThreadLocals
-		super(67.0, 32.6);
+		super(67.0, 32.1);
 		//hmm package comparison data to include;
 		// passing tests
 		// relevant classes with trials %
@@ -26,7 +26,7 @@ public class TheMetaTrial  extends MetaTrial {
 
 	@Override
 	public void afterNonMetaTrialsRun(I_TrialRunResult results) throws Exception {
-		super.assertPackageTrialsPassed(results, "org.adligo.tests4j.models.shared.asserts", 17);
+		super.assertPackageTrialsPassed(results, "org.adligo.tests4j.models.shared.asserts", 12);
 		super.assertPackageTrialsPassed(results, "org.adligo.tests4j.models.shared.asserts.common", 1);
 		super.assertPackageTrialsPassed(results, "org.adligo.tests4j.models.shared.asserts.line_text", 9);
 		super.assertPackageTrialsPassed(results, "org.adligo.tests4j.models.shared.common", 6);
@@ -46,9 +46,9 @@ public class TheMetaTrial  extends MetaTrial {
 		//does not include assertions from this class yet
 		//I think the single threaded count is off somewhere
 		//less by at least 300 now from the log, which varies
-		assertGreaterThanOrEquals(23200,results.getAsserts());
+		assertGreaterThanOrEquals(23100,results.getAsserts());
 		//at least 250 off from the log, which varies
-		assertGreaterThanOrEquals(7000,results.getUniqueAsserts());
+		assertGreaterThanOrEquals(6800,results.getUniqueAsserts());
 		// should be something like assertEquals(4122L,results.getUniqueAsserts());
 		super.afterNonMetaTrialsRun(results);
 	}
@@ -89,7 +89,7 @@ public class TheMetaTrial  extends MetaTrial {
 		//added the testMinCoverage, method to sourceFileTrials
 		
 		//cool number
-		assertEquals(513,  metadata.getAllTestsCount());
+		assertEquals(515,  metadata.getAllTestsCount());
 		
 	}
 

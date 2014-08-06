@@ -2,6 +2,7 @@ package org.adligo.tests4j_tests.trials_api;
 
 import org.adligo.tests4j.models.shared.coverage.I_PackageCoverage;
 import org.adligo.tests4j.models.shared.results.I_ApiTrialResult;
+import org.adligo.tests4j.models.shared.trials.IgnoreTest;
 import org.adligo.tests4j.models.shared.trials.PackageScope;
 import org.adligo.tests4j.models.shared.trials.Test;
 import org.adligo.tests4j_tests.base_abstract_trials.ApiCountingTrial;
@@ -151,14 +152,16 @@ public class AssertionsWithNullExpectedFail_Trial extends ApiCountingTrial {
 	}
 	
 	@Test
+	public void testAssertThrownUniformNullThrowerWithMessageFailsTrialFails() throws Exception {
+		AssertThrownUniformNullThrowerWithMessageFailsTrialRunner.runTestDelegate(this);
+	}
+	
+	@Test
 	public void testAssertUniformNullWithMessageFailsTrialFails() throws Exception {
 		AssertUniformNullWithMessageFailsTrialRunner.runTestDelegate(this);
 	}
 	
-	@Test
-	public void testAssertThrownUniformNullThrowerWithMessageFailsTrialFails() throws Exception {
-		AssertThrownUniformNullThrowerWithMessageFailsTrialRunner.runTestDelegate(this);
-	}
+	
 	
 	@Test
 	public void testAssertUniformNullFailsTrialFails() throws Exception {
@@ -184,8 +187,8 @@ public class AssertionsWithNullExpectedFail_Trial extends ApiCountingTrial {
 
 	@Override
 	public int getAsserts() {
-		return AssertContainsNullFailsTrialRunner.getAsserts() +
-				AssertContainsNullWithMessageFailsTrialRunner.getAsserts() +
+		return AssertContainsNullFailsTrialRunner.getAsserts()+
+				AssertContainsNullWithMessageFailsTrialRunner.getAsserts()  +
 				AssertEqualsNullFailsTrialRunner.getAsserts() +
 				AssertEqualsNullWithMessageFailsTrialRunner.getAsserts() +
 				AssertEqualsNullStringFailsTrialRunner.getAsserts() +
@@ -206,10 +209,10 @@ public class AssertionsWithNullExpectedFail_Trial extends ApiCountingTrial {
 				AssertThrownNullWithMessageFailsTrialRunner.getAsserts() +
 				AssertThrownUniformNullFailsTrialRunner.getAsserts() + 
 				AssertThrownUniformNullWithMessageFailsTrialRunner.getAsserts() +
-				AssertUniformNullFailsTrialRunner.getAsserts() + 
-				AssertUniformNullWithMessageFailsTrialRunner.getAsserts() +
 				AssertThrownUniformNullThrowerFailsTrialRunner.getAsserts() +
-				AssertThrownUniformNullThrowerWithMessageFailsTrialRunner.getAsserts();
+				AssertThrownUniformNullThrowerWithMessageFailsTrialRunner.getAsserts() +
+				AssertUniformNullFailsTrialRunner.getAsserts()+ 
+				AssertUniformNullWithMessageFailsTrialRunner.getAsserts();
 	}
 
 	@Override

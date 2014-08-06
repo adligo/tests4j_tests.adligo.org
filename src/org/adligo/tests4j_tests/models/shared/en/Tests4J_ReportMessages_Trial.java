@@ -51,6 +51,19 @@ public class Tests4J_ReportMessages_Trial extends SourceFileCountingTrial {
 		asserter.assertConstant(" Trials: ", 
 				messages.getTrialsHeading());
 		
+		asserter.assertConstant("Expected;", 
+				messages.getExpected());
+		asserter.assertConstant("Actual;", 
+				messages.getActual());
+		asserter.assertConstant("Class: ", 
+				messages.getClassHeadding());
+		asserter.assertConstant("Differences;", 
+				messages.getDifferences());
+		asserter.assertConstant("The following expected line numbers were missing: ", 
+				messages.getTheFollowingExpectedLineNumbersWereMissing());
+		asserter.assertConstant("The following actual line numbers not in the expected text: ", 
+				messages.getTheFollowingActualLineNumberNotExpected());
+		
 		asserter.assertConstantsMatchMethods(Tests4J_ReportMessages.class);
 	}
 
@@ -61,11 +74,11 @@ public class Tests4J_ReportMessages_Trial extends SourceFileCountingTrial {
 
 	@Override
 	public int getAsserts() {
-		return 43;
+		return 61;
 	}
 
 	@Override
 	public int getUniqueAsserts() {
-		return 43;
+		return 61;
 	}
 }

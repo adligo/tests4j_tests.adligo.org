@@ -3,20 +3,17 @@ package org.adligo.tests4j_tests.trials_api.assert_fails_trials;
 import java.util.List;
 
 import org.adligo.tests4j.models.shared.asserts.common.I_Asserts;
+import org.adligo.tests4j.models.shared.asserts.common.I_TestFailure;
+import org.adligo.tests4j.models.shared.asserts.line_text.TextLines;
 import org.adligo.tests4j.models.shared.en.Tests4J_EnglishConstants;
-import org.adligo.tests4j.models.shared.i18n.I_Tests4J_AssertionResultMessages;
+import org.adligo.tests4j.models.shared.i18n.I_Tests4J_ResultMessages;
 import org.adligo.tests4j.models.shared.metadata.I_TestMetadata;
 import org.adligo.tests4j.models.shared.metadata.I_TrialMetadata;
 import org.adligo.tests4j.models.shared.metadata.I_TrialRunMetadata;
-import org.adligo.tests4j.models.shared.results.I_TestFailure;
 import org.adligo.tests4j.models.shared.results.I_TestResult;
 import org.adligo.tests4j.models.shared.results.I_TrialFailure;
 import org.adligo.tests4j.models.shared.results.I_TrialResult;
 import org.adligo.tests4j.models.shared.results.TestResult;
-import org.adligo.tests4j.models.shared.trials.ApiTrial;
-import org.adligo.tests4j.models.shared.trials.PackageScope;
-import org.adligo.tests4j.models.shared.trials.Test;
-import org.adligo.tests4j.models.shared.trials.TrialRecursion;
 import org.adligo.tests4j_tests.trials_api.common.ExpectedFailureRunner;
 import org.adligo.tests4j_tests.trials_api.common.MockSystem;
 
@@ -57,8 +54,9 @@ public class AssertTrueFailsTrialRunner {
 		I_TrialResult result = results.get(0);
 		asserts.assertNotNull(result);
 		asserts.assertFalse(result.isPassed());
-		I_TrialFailure failure = result.getFailure();
-		asserts.assertNull(failure);
+		List<I_TrialFailure> failures = result.getFailures();
+		asserts.assertNotNull(failures);
+		asserts.assertEquals(0, failures.size());
 		
 		List<I_TestResult> testResults = result.getResults();
 		asserts.assertNotNull(testResults);
@@ -76,16 +74,13 @@ public class AssertTrueFailsTrialRunner {
 		
 		I_TestFailure testFailure = testResult.getFailure();
 		asserts.assertNotNull(testFailure);
-		I_Tests4J_AssertionResultMessages messages =  Tests4J_EnglishConstants.ENGLISH.getAssertionResultMessages();
-		asserts.assertEquals(messages.getTheValueShouldBeTrue(), testFailure.getMessage());
+		I_Tests4J_ResultMessages messages =  Tests4J_EnglishConstants.ENGLISH.getResultMessages();
+		asserts.assertEquals(messages.getTheValueShouldBeTrue(), testFailure.getFailureMessage());
 		
-		Throwable locationFailed = testFailure.getLocationFailed();
-		StackTraceElement [] elements = locationFailed.getStackTrace();
-		asserts.assertGreaterThanOrEquals(1.0, elements.length);
-		StackTraceElement topElement = elements[0];
-		asserts.assertEquals(AssertTrueFailsTrial.class.getName(), topElement.getClassName());
-		asserts.assertEquals("testAssertTrueIsFalse", topElement.getMethodName());
-		asserts.assertEquals(14, topElement.getLineNumber());
+		String failedLocation = testFailure.getFailureDetail();
+		TextLines lines = new TextLines(failedLocation);
+		asserts.assertEquals("\torg.adligo.tests4j.models.shared.asserts.AssertionFailureLocation", lines.getLine(0));
+		asserts.assertEquals("\tat org.adligo.tests4j_tests.trials_api.assert_fails_trials.AssertTrueFailsTrial.testAssertTrueIsFalse(AssertTrueFailsTrial.java:14)", lines.getLine(1));
 		
 		MockSystem tracker =  runner.getMockSystem();
 		asserts.assertEquals(0, tracker.getLastStatus());
@@ -93,6 +88,6 @@ public class AssertTrueFailsTrialRunner {
 	
 
 	public static int getAsserts() {
-		return 35;
+		return 34;
 	}
 }
