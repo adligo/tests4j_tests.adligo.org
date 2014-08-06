@@ -1,9 +1,14 @@
 Write Machine Info metadata (information about how many threads, perhaps processor info exc)
 Add run duration to main metadata
-Try to find bug in code coverage on a single thread.
 
-LineDiffTextDisplayTrial
-working on metadata package source file tests
+api trials that need writing
+testTimeout
+trialTimeout
+codeCoverageFailure
+codeDependencyFailure
+afterTrialTestsFailure
+metaTrialFailures
+
 
 CoveragePluginDelegator trial
 Tests4j_Params trial (up to 100%), as the class looks good

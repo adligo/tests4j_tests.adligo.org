@@ -4,6 +4,7 @@ import org.adligo.tests4j.models.shared.asserts.common.ExpectedThrownData;
 import org.adligo.tests4j.models.shared.asserts.common.I_Thrower;
 import org.adligo.tests4j.models.shared.asserts.line_text.DiffIndexes;
 import org.adligo.tests4j.models.shared.asserts.line_text.I_DiffIndexes;
+import org.adligo.tests4j.models.shared.common.Tests4J_System;
 import org.adligo.tests4j.models.shared.trials.SourceFileScope;
 import org.adligo.tests4j.models.shared.trials.Test;
 import org.adligo.tests4j_tests.base_abstract_trials.SourceFileCountingTrial;
@@ -100,6 +101,8 @@ public class DiffIndexesTrial extends SourceFileCountingTrial {
 				});
 		
 		assertThrown(new ExpectedThrownData(new IllegalArgumentException(
+				DiffIndexes.MATCH_ERROR_PART_ONE + 
+				Tests4J_System.SYSTEM.getLineSeperator() +
 				DiffIndexes.MATCH_L2R_DIFF_L2R_MATCH_R2L_DIFF_R2L)),
 				new I_Thrower() {
 					
@@ -110,6 +113,8 @@ public class DiffIndexesTrial extends SourceFileCountingTrial {
 				});
 		
 		assertThrown(new ExpectedThrownData(new IllegalArgumentException(
+				DiffIndexes.MATCH_ERROR_PART_ONE + 
+				Tests4J_System.SYSTEM.getLineSeperator() +
 				DiffIndexes.DIFF_L2R_MATCH_L2R_DIFF_R2L_MATCH_R2L)),
 				new I_Thrower() {
 					

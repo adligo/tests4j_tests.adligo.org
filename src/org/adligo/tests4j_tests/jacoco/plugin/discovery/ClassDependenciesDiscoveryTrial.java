@@ -5,10 +5,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.adligo.tests4j.models.shared.common.I_System;
 import org.adligo.tests4j.models.shared.dependency.ClassFilter;
 import org.adligo.tests4j.models.shared.dependency.I_ClassDependencies;
 import org.adligo.tests4j.models.shared.dependency.I_Dependency;
-import org.adligo.tests4j.models.shared.system.I_Tests4J_System;
 import org.adligo.tests4j.models.shared.trials.IgnoreTest;
 import org.adligo.tests4j.models.shared.trials.SourceFileScope;
 import org.adligo.tests4j.models.shared.trials.Test;
@@ -155,7 +155,7 @@ public class ClassDependenciesDiscoveryTrial extends SourceFileCountingTrial imp
 		assertContains(fives, MockWithTriangleA.class.getName());
 		assertContains(fives, MockWithTriangleB.class.getName());
 		assertContains(fives, MockWithMethodReturn.class.getName());
-		assertContains(fives, I_Tests4J_System.class.getName());
+		assertContains(fives, I_System.class.getName());
 		assertContains(fives, MockWithBidirectionalA.class.getName());
 		assertEquals(5, fives.size());
 		
@@ -213,7 +213,7 @@ public class ClassDependenciesDiscoveryTrial extends SourceFileCountingTrial imp
 		List<I_Dependency> cdeps = cd.getDependencies();
 		assertNotNull(cdeps);
 		dep = cdeps.get(0);
-		assertEquals(I_Tests4J_System.class.getName(), dep.getClassName());
+		assertEquals(I_System.class.getName(), dep.getClassName());
 		assertEquals(1, dep.getReferences());
 		
 		
@@ -263,7 +263,7 @@ public class ClassDependenciesDiscoveryTrial extends SourceFileCountingTrial imp
 			deps.put(d.getClassName(), d);
 		}
 		
-		dep = deps.get(I_Tests4J_System.class.getName());
+		dep = deps.get(I_System.class.getName());
 		assertNotNull(dep);
 		assertEquals(1, dep.getReferences());
 		

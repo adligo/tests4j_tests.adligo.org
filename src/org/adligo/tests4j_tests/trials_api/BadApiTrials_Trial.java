@@ -186,6 +186,6 @@ public class BadApiTrials_Trial extends ApiCountingTrial {
 
 	@Override
 	public int getUniqueAsserts() {
-		return 335;
+		return 333;
 	}
 }

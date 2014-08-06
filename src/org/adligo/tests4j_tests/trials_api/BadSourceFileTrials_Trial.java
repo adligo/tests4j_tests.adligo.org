@@ -149,6 +149,6 @@ public class BadSourceFileTrials_Trial extends ApiCountingTrial {
 
 	@Override
 	public int getUniqueAsserts(){
-		return 214;
+		return 212;
 	}
 }

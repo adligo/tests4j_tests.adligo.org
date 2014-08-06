@@ -58,8 +58,6 @@ public class Tests4J_AnnotationErrorsTrial extends SourceFileCountingTrial {
 			messages.getNoPackageScope());
 		asserter.assertConstant("SourceFileTrials must be annotated with @SourceFileScope.",
 			messages.getNoSourceFileScope());
-		asserter.assertConstant("Trial classes must have at least one method annotated with @Test.",
-				messages.getNoTests());
 		asserter.assertConstant("UseCaseTrials must be annotated with @UseCaseScope.",
 				messages.getNoUseCaseScope());
 		
@@ -87,11 +85,11 @@ public class Tests4J_AnnotationErrorsTrial extends SourceFileCountingTrial {
 
 	@Override
 	public int getAsserts() {
-		return 76;
+		return 73;
 	}
 
 	@Override
 	public int getUniqueAsserts() {
-		return 76;
+		return 73;
 	}
 }

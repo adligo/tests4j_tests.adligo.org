@@ -56,24 +56,16 @@ public class NoTestsTrial extends UseCaseTrial {
 		asserts.assertEquals(0, testsMetadata.size());
 		
 		asserts.assertNotNull(result);
-		asserts.assertFalse(result.isPassed());
+		asserts.assertTrue(result.isPassed());
 		List<I_TrialFailure> failures = result.getFailures();
 		asserts.assertNotNull(failures);
-		asserts.assertEquals(1, failures.size());
-		I_TrialFailure failure = failures.get(0);
-		
-		
-		I_Tests4J_AnnotationErrors messages =  Tests4J_EnglishConstants.ENGLISH.getAnnotationErrors();
-		 asserts.assertEquals(messages.getNoTests(), failure.getMessage());
-		 asserts.assertEquals(
-				"org.adligo.tests4j_tests.trials_api.bad_mock_use_case_trials.NoTestsTrial was not annotated correctly.", 
-				failure.getFailureDetail());
+		asserts.assertEquals(0, failures.size());
 		
 		MockSystem tracker =  runner.getMockSystem();
 		asserts.assertEquals(0, tracker.getLastStatus());
 	}
 	
 	public static int getAsserts() {
-		return 19;
+		return 17;
 	}
 }

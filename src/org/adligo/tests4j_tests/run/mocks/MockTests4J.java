@@ -1,6 +1,6 @@
 package org.adligo.tests4j_tests.run.mocks;
 
-import org.adligo.tests4j.models.shared.system.I_Tests4J_System;
+import org.adligo.tests4j.models.shared.common.I_System;
 import org.adligo.tests4j.models.shared.system.I_Tests4J_Controls;
 import org.adligo.tests4j.models.shared.system.I_Tests4J_DelegateFactory;
 import org.adligo.tests4j.models.shared.system.I_Tests4J_Log;
@@ -25,13 +25,13 @@ public class MockTests4J extends Tests4J {
 	}
 
 
-	public I_Tests4J_System getSystemDelegate() {
+	public I_System getSystemDelegate() {
 		// TODO Auto-generated method stub
 		return super.getSystem();
 	}
 
 
-	public void setSystemDelegate(I_Tests4J_System system) {
+	public void setSystemDelegate(I_System system) {
 		// TODO Auto-generated method stub
 		super.setSystem(system);
 	}

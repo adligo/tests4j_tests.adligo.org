@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.atomic.AtomicLong;
 
-import org.adligo.tests4j.models.shared.system.I_Tests4J_System;
+import org.adligo.tests4j.models.shared.common.I_System;
 
 
 /**
@@ -14,7 +14,7 @@ import org.adligo.tests4j.models.shared.system.I_Tests4J_System;
  * @author scott
  *
  */
-public class MockSystem implements I_Tests4J_System {
+public class MockSystem implements I_System {
 	private final ArrayBlockingQueue<Integer> lastStatus = new ArrayBlockingQueue<>(10);
 	private final AtomicLong time = new AtomicLong();
 	private String lineSeperator;

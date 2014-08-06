@@ -2,9 +2,9 @@ package org.adligo.tests4j_tests.run;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 
+import org.adligo.tests4j.models.shared.common.DefaultSystem;
+import org.adligo.tests4j.models.shared.common.I_System;
 import org.adligo.tests4j.models.shared.system.DefaultLog;
-import org.adligo.tests4j.models.shared.system.DefaultSystem;
-import org.adligo.tests4j.models.shared.system.I_Tests4J_System;
 import org.adligo.tests4j.models.shared.system.I_Tests4J_Controls;
 import org.adligo.tests4j.models.shared.system.I_Tests4J_Delegate;
 import org.adligo.tests4j.models.shared.system.I_Tests4J_DelegateFactory;
@@ -29,7 +29,7 @@ public class Tests4JTrial extends SourceFileCountingTrial implements I_Tests4J_D
 	private I_Tests4J_DelegateFactory factory = new MockTests4J_DelegateFactory(this);
 	private I_Tests4J_Listener lastSetupListener;
 	private I_Tests4J_Params lastSetupParams;
-	private I_Tests4J_System lastSystem;
+	private I_System lastSystem;
 	private final AtomicBoolean ran = new AtomicBoolean();
 	private final AtomicBoolean setupResultToSend = new AtomicBoolean();
 	private I_Tests4J_Controls controllsToSend;
@@ -142,7 +142,7 @@ public class Tests4JTrial extends SourceFileCountingTrial implements I_Tests4J_D
 		
 		MockTests4J mock = new MockTests4J();
 		I_Tests4J_Log logger = new DefaultLog();
-		I_Tests4J_System system = new DefaultSystem();
+		I_System system = new DefaultSystem();
 		
 		mock.setSystemDelegate(system);
 		assertSame(system, mock.getSystemDelegate());
@@ -166,7 +166,7 @@ public class Tests4JTrial extends SourceFileCountingTrial implements I_Tests4J_D
 		
 		MockTests4J mock = new MockTests4J();
 		I_Tests4J_Log logger = new DefaultLog();
-		I_Tests4J_System system = new DefaultSystem();
+		I_System system = new DefaultSystem();
 		
 		mock.setSystemDelegate(system);
 		assertSame(system, mock.getSystemDelegate());
@@ -191,7 +191,7 @@ public class Tests4JTrial extends SourceFileCountingTrial implements I_Tests4J_D
 		
 		MockTests4J mock = new MockTests4J();
 		I_Tests4J_Log logger = new DefaultLog();
-		I_Tests4J_System system = new DefaultSystem();
+		I_System system = new DefaultSystem();
 		
 		mock.setSystemDelegate(system);
 		assertSame(system, mock.getSystemDelegate());
@@ -229,7 +229,7 @@ public class Tests4JTrial extends SourceFileCountingTrial implements I_Tests4J_D
 
 
 	@Override
-	public  void setSystem(I_Tests4J_System system) {
+	public  void setSystem(I_System system) {
 		lastSystem = system;
 	}
 	
