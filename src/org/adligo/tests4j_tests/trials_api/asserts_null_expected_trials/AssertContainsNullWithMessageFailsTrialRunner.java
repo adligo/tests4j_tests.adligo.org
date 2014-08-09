@@ -15,7 +15,7 @@ import org.adligo.tests4j.models.shared.results.I_TrialFailure;
 import org.adligo.tests4j.models.shared.results.I_TrialResult;
 import org.adligo.tests4j.models.shared.results.TestResult;
 import org.adligo.tests4j_tests.trials_api.common.ExpectedFailureRunner;
-import org.adligo.tests4j_tests.trials_api.common.MockSystem;
+import org.adligo.tests4j_tests.trials_api.common.SystemRunnerMock;
 
 public class AssertContainsNullWithMessageFailsTrialRunner {
 	
@@ -82,7 +82,7 @@ public class AssertContainsNullWithMessageFailsTrialRunner {
 		asserts.assertEquals("\torg.adligo.tests4j.models.shared.asserts.AssertionFailureLocation", lines.getLine(0));
 		asserts.assertEquals("\tat org.adligo.tests4j_tests.trials_api.asserts_null_expected_trials.AssertContainsNullWithMessageFailsTrial.testAssertContainsNullFails(AssertContainsNullWithMessageFailsTrial.java:14)", lines.getLine(1));
 		
-		MockSystem tracker =  runner.getMockSystem();
+		SystemRunnerMock tracker =  runner.getMockSystem();
 		asserts.assertEquals(0, tracker.getLastStatus());
 	}
 	

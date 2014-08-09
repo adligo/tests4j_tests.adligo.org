@@ -14,7 +14,7 @@ import org.adligo.tests4j.models.shared.trials.SourceFileTrial;
 import org.adligo.tests4j.models.shared.trials.Test;
 import org.adligo.tests4j.models.shared.trials.TrialRecursion;
 import org.adligo.tests4j_tests.trials_api.common.ExpectedFailureRunner;
-import org.adligo.tests4j_tests.trials_api.common.MockSystem;
+import org.adligo.tests4j_tests.trials_api.common.SystemRunnerMock;
 
 /**
  * note this test NOT RUN DIRECTLY 
@@ -83,7 +83,7 @@ public class BadConstructorTrial extends SourceFileTrial {
 		//make sure it's a full stack trace
 		asserts.assertGreaterThanOrEquals(2, lines.getLines());
 		
-		MockSystem tracker =  runner.getMockSystem();
+		SystemRunnerMock tracker =  runner.getMockSystem();
 		asserts.assertEquals(0, tracker.getLastStatus());
 	}
 	

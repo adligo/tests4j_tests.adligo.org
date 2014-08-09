@@ -38,7 +38,7 @@ public class RemoteProgressDisplayTrial extends SourceFileCountingTrial {
 		reporter.onProgress("setup", 7.777);
 		assertEquals(1, log.getLogMessagesSize());
 		I_Tests4J_ReportMessages messages = Tests4J_EnglishConstants.ENGLISH.getReportMessages();
-		assertEquals("Tests4J: setup 7.78" + messages.getPctComplete(),
+		assertEquals("Tests4J: setup 7.77" + messages.getPctComplete(),
 				log.getLogMessage(0));
 		assertEquals(0, log.getExceptionsSize());
 		assertEquals(1, log.getStatesSize());

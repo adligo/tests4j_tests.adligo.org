@@ -7,9 +7,9 @@ import org.adligo.tests4j.models.shared.system.I_Tests4J_Params;
 import org.adligo.tests4j.models.shared.system.I_Tests4J_Listener;
 import org.adligo.tests4j.run.Tests4J;
 
-public class MockTests4J extends Tests4J {
+public class Tests4JRunnerMock extends Tests4J {
 
-	protected MockTests4J() {
+	protected Tests4JRunnerMock() {
 		super();
 	}
 

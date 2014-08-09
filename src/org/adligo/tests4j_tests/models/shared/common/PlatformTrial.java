@@ -13,11 +13,11 @@ public class PlatformTrial extends SourceFileCountingTrial {
 		assertEquals(3, Platform.values().length);
 		assertEquals("JSE", Platform.JSE.toString());
 		assertEquals("GWTC", Platform.GWTC.toString());
-		assertEquals("ADFM", Platform.ADFM.toString());
+		assertEquals("MOBILE", Platform.MOBILE.toString());
 		
 		assertSame(Platform.JSE, Platform.get(Platform.JSE));
 		assertSame(Platform.GWTC, Platform.get(Platform.GWTC));
-		assertSame(Platform.ADFM, Platform.get(Platform.ADFM));
+		assertSame(Platform.MOBILE, Platform.get(Platform.MOBILE));
 	}
 	
 	@Override

@@ -10,10 +10,10 @@ public class MockTests4J_UncaughtExceptionHandler extends Tests4J_UncaughtExcept
 	}
 	
 	public static void setStaticLogger(I_Tests4J_Log logger) {
-		Tests4J_UncaughtExceptionHandler.setLogger(logger);
+		Tests4J_UncaughtExceptionHandler.setLog(logger);
 	}
 	
 	public static I_Tests4J_Log getStaticLogger() {
-		return Tests4J_UncaughtExceptionHandler.getLogger();
+		return Tests4J_UncaughtExceptionHandler.getLog();
 	}
 }

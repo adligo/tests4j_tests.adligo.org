@@ -10,11 +10,11 @@ import org.adligo.tests4j.run.discovery.Tests4J_ParamsReader;
 import org.adligo.tests4j_tests.base_abstract_trials.SourceFileCountingTrial;
 import org.adligo.tests4j_tests.run.helpers.mock_trials.MockWithArrayTrial;
 import org.adligo.tests4j_tests.run.helpers.mock_trials.MockWithNothingTrial;
-import org.adligo.tests4j_tests.trials_api.common.MockSystem;
+import org.adligo.tests4j_tests.trials_api.common.SystemRunnerMock;
 
 @SourceFileScope (sourceClass=Tests4J_ParamsReader.class, minCoverage=20.0)
 public class Tests4J_ParamReaderTrial extends SourceFileCountingTrial {
-	private MockSystem ms = new MockSystem("\n");
+	private SystemRunnerMock ms = new SystemRunnerMock("\n");
 	
 
 	@Test

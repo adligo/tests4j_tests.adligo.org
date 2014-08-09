@@ -14,7 +14,7 @@ import org.adligo.tests4j.models.shared.trials.ApiTrial;
 import org.adligo.tests4j.models.shared.trials.PackageScope;
 import org.adligo.tests4j.models.shared.trials.TrialRecursion;
 import org.adligo.tests4j_tests.trials_api.common.ExpectedFailureRunner;
-import org.adligo.tests4j_tests.trials_api.common.MockSystem;
+import org.adligo.tests4j_tests.trials_api.common.SystemRunnerMock;
 
 /**
  * note this trial is run by the Run_UseCaseTrial_Trial,
@@ -62,7 +62,7 @@ public class NoTestsTrial extends ApiTrial {
 		asserts.assertEquals(0, failures.size());
 		
 		
-		MockSystem tracker =  runner.getMockSystem();
+		SystemRunnerMock tracker =  runner.getMockSystem();
 		asserts.assertEquals(0, tracker.getLastStatus());
 	}
 	

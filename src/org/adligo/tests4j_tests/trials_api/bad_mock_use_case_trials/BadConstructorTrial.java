@@ -14,7 +14,7 @@ import org.adligo.tests4j.models.shared.trials.TrialRecursion;
 import org.adligo.tests4j.models.shared.trials.UseCaseScope;
 import org.adligo.tests4j.models.shared.trials.UseCaseTrial;
 import org.adligo.tests4j_tests.trials_api.common.ExpectedFailureRunner;
-import org.adligo.tests4j_tests.trials_api.common.MockSystem;
+import org.adligo.tests4j_tests.trials_api.common.SystemRunnerMock;
 
 /**
  * note this trial is run by the Run_UseCaseTrial_Trial,
@@ -80,7 +80,7 @@ public class BadConstructorTrial extends UseCaseTrial {
 		//it should be a full stack trace with 10 or so lines
 		asserts.assertGreaterThanOrEquals(3, lines.getLines());
 		
-		MockSystem tracker =  runner.getMockSystem();
+		SystemRunnerMock tracker =  runner.getMockSystem();
 		asserts.assertEquals(0, tracker.getLastStatus());
 	}
 	

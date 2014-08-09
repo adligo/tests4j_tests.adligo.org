@@ -37,6 +37,12 @@ public class Tests4J_EnglishConstants_Trial extends SourceFileCountingTrial {
 				messages.getTheMethodCanOnlyBeCalledBy_PartTwo());
 		asserter.assertConstant("MethodBlocker requires at least one allowed caller class name.", 
 				messages.getMethodBlockerRequiresAtLeastOneAllowedCallerClassNames());
+		
+		asserter.assertConstant("MethodBlocker requires a blocking method name.", 
+				messages.getMethodBlockerRequiresABlockingMethod());
+		
+		asserter.assertConstant("MethodBlocker requires a blocking class.", 
+				messages.getMethodBlockerRequiresABlockingClass());
 		List<String> okFields= new ArrayList<String>();
 		okFields.add(I18N_Asserter.JACOCO_DATA);
 		okFields.add("ENGLISH");
@@ -75,11 +81,11 @@ public class Tests4J_EnglishConstants_Trial extends SourceFileCountingTrial {
 
 	@Override
 	public int getAsserts() {
-		return 26;
+		return 32;
 	}
 
 	@Override
 	public int getUniqueAsserts() {
-		return 26;
+		return 32;
 	}
 }

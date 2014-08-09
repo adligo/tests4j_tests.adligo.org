@@ -15,7 +15,7 @@ import org.adligo.tests4j.models.shared.trials.Test;
 import org.adligo.tests4j.models.shared.trials.TrialRecursion;
 import org.adligo.tests4j_tests.trials_api.BadApiTrials_Trial;
 import org.adligo.tests4j_tests.trials_api.common.ExpectedFailureRunner;
-import org.adligo.tests4j_tests.trials_api.common.MockSystem;
+import org.adligo.tests4j_tests.trials_api.common.SystemRunnerMock;
 
 /**
  * note this test NOT RUN DIRECTLY 
@@ -80,7 +80,7 @@ public class BadPackageConstructorTrial extends ApiTrial {
 		//make sure its a full stack trace without testing java line numbers
 		asserts.assertGreaterThanOrEquals(3,lines.getLines());
 		
-		MockSystem tracker =  runner.getMockSystem();
+		SystemRunnerMock tracker =  runner.getMockSystem();
 		asserts.assertEquals(0, tracker.getLastStatus());
 	}
 	

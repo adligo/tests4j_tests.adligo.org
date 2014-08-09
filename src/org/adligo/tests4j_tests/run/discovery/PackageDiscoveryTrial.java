@@ -4,19 +4,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.adligo.tests4j.models.shared.dependency.ClassDependencies;
-import org.adligo.tests4j.models.shared.dependency.ClassDependenciesMutant;
-import org.adligo.tests4j.models.shared.dependency.ClassFilter;
-import org.adligo.tests4j.models.shared.dependency.ClassFilterMutant;
-import org.adligo.tests4j.models.shared.dependency.ClassReferences;
-import org.adligo.tests4j.models.shared.dependency.ClassReferencesMutant;
-import org.adligo.tests4j.models.shared.dependency.Dependency;
-import org.adligo.tests4j.models.shared.dependency.DependencyMutant;
-import org.adligo.tests4j.models.shared.dependency.I_ClassDependencies;
-import org.adligo.tests4j.models.shared.dependency.I_ClassFilter;
-import org.adligo.tests4j.models.shared.dependency.I_ClassFilterModel;
-import org.adligo.tests4j.models.shared.dependency.I_ClassReferences;
-import org.adligo.tests4j.models.shared.dependency.I_Dependency;
 import org.adligo.tests4j.models.shared.metadata.I_MachineMetadata;
 import org.adligo.tests4j.models.shared.metadata.I_SourceInfoMetadata;
 import org.adligo.tests4j.models.shared.metadata.I_TestMetadata;
@@ -25,7 +12,6 @@ import org.adligo.tests4j.models.shared.metadata.I_TrialRunMetadata;
 import org.adligo.tests4j.models.shared.metadata.I_UseCaseMetadata;
 import org.adligo.tests4j.models.shared.metadata.MachineMetadata;
 import org.adligo.tests4j.models.shared.metadata.MachineMetadataMutant;
-import org.adligo.tests4j.models.shared.metadata.RelevantClassesWithTrialsCalculator;
 import org.adligo.tests4j.models.shared.metadata.SourceInfoMetadata;
 import org.adligo.tests4j.models.shared.metadata.SourceInfoMetadataMutant;
 import org.adligo.tests4j.models.shared.metadata.TestMetadata;
@@ -48,10 +34,11 @@ import org.adligo.tests4j.models.shared.trials.I_Trial;
 import org.adligo.tests4j.models.shared.trials.I_TrialBindings;
 import org.adligo.tests4j.models.shared.trials.I_UseCaseTrial;
 import org.adligo.tests4j.models.shared.trials.IgnoreTest;
-import org.adligo.tests4j.models.shared.trials.MetaTrial;
 import org.adligo.tests4j.models.shared.trials.PackageScope;
+import org.adligo.tests4j.models.shared.trials.PlatformType;
 import org.adligo.tests4j.models.shared.trials.SourceFileScope;
 import org.adligo.tests4j.models.shared.trials.SourceFileTrial;
+import org.adligo.tests4j.models.shared.trials.TargetedPlatform;
 import org.adligo.tests4j.models.shared.trials.Test;
 import org.adligo.tests4j.models.shared.trials.TrialBindings;
 import org.adligo.tests4j.models.shared.trials.TrialRecursion;
@@ -64,6 +51,7 @@ import org.adligo.tests4j.run.discovery.BeforeTrialAuditor;
 import org.adligo.tests4j.run.discovery.I_ClassDependenciesCache;
 import org.adligo.tests4j.run.discovery.I_TrialDescription;
 import org.adligo.tests4j.run.discovery.PackageDiscovery;
+import org.adligo.tests4j.run.discovery.RelevantClassesWithTrialsCalculator;
 import org.adligo.tests4j.run.discovery.TestAuditor;
 import org.adligo.tests4j.run.discovery.TestDescription;
 import org.adligo.tests4j.run.discovery.Tests4J_ParamsReader;
@@ -80,7 +68,7 @@ public class PackageDiscoveryTrial extends SourceFileCountingTrial {
 		PackageDiscovery cd = new PackageDiscovery("org.adligo.tests4j.run.discovery");
 		List<String> clazzNames = cd.getClassNames();
 		assertNotNull(clazzNames);
-		assertEquals(10, clazzNames.size());
+		assertEquals(11, clazzNames.size());
 		assertContains(clazzNames, AfterTrialAuditor.class.getName());
 		assertContains(clazzNames, BeforeTrialAuditor.class.getName());
 		
@@ -88,6 +76,8 @@ public class PackageDiscoveryTrial extends SourceFileCountingTrial {
 		assertContains(clazzNames, I_TrialDescription.class.getName());
 		
 		assertContains(clazzNames, PackageDiscovery.class.getName());
+
+		assertContains(clazzNames, RelevantClassesWithTrialsCalculator.class.getName());
 		
 		assertContains(clazzNames, TestAuditor.class.getName());
 		assertContains(clazzNames, Tests4J_ParamsReader.class.getName());
@@ -121,8 +111,6 @@ public class PackageDiscoveryTrial extends SourceFileCountingTrial {
 		assertContains(classNames, MachineMetadata.class.getName());
 		assertContains(classNames, MachineMetadataMutant.class.getName());
 		
-		assertContains(classNames, RelevantClassesWithTrialsCalculator.class.getName());
-		
 		assertContains(classNames, SourceInfoMetadata.class.getName());
 		assertContains(classNames, SourceInfoMetadataMutant.class.getName());
 		
@@ -135,7 +123,7 @@ public class PackageDiscoveryTrial extends SourceFileCountingTrial {
 		assertContains(classNames, TrialRunMetadataMutant.class.getName());
 		assertContains(classNames, UseCaseMetadata.class.getName());
 		
-		assertEquals(18, classNames.size());
+		assertEquals(17, classNames.size());
 		List<PackageDiscovery> children =  cd.getSubPackages();
 		assertEquals(0, children.size());
 		return cd;
@@ -160,13 +148,14 @@ public class PackageDiscoveryTrial extends SourceFileCountingTrial {
 		assertContains(classNames, I_SourceFileTrial.class.getName());
 		assertContains(classNames, I_UseCaseTrial.class.getName());
 		
-		assertContains(classNames, MetaTrial.class.getName());
-		
 		assertContains(classNames, IgnoreTest.class.getName());
+		
+		assertContains(classNames, PlatformType.class.getName());
 		
 		assertContains(classNames, PackageScope.class.getName());
 		assertContains(classNames, SourceFileScope.class.getName());
 		assertContains(classNames, SourceFileTrial.class.getName());
+		assertContains(classNames, TargetedPlatform.class.getName());
 		assertContains(classNames, Test.class.getName());
 		
 		assertContains(classNames, TrialBindings.class.getName());
@@ -177,7 +166,7 @@ public class PackageDiscoveryTrial extends SourceFileCountingTrial {
 		assertContains(classNames, UseCaseScope.class.getName());
 		assertContains(classNames, UseCaseTrial.class.getName());
 		
-		assertEquals(25, classNames.size());
+		assertEquals(26, classNames.size());
 		List<PackageDiscovery> children =  cd.getSubPackages();
 		
 		
@@ -223,11 +212,11 @@ public class PackageDiscoveryTrial extends SourceFileCountingTrial {
 
 	@Override
 	public int getAsserts() {
-		return 70;
+		return 71;
 	}
 
 	@Override
 	public int getUniqueAsserts() {
-		return 70;
+		return 71;
 	}
 }

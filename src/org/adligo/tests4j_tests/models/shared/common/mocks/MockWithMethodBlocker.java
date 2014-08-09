@@ -1,26 +1,36 @@
 package org.adligo.tests4j_tests.models.shared.common.mocks;
 
-import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 import org.adligo.tests4j.models.shared.common.MethodBlocker;
 
 
 public class MockWithMethodBlocker {
-
+	private MethodBlocker aBlock = getABlock();
+	private MethodBlocker bBlock = getBBlock();
+	private MethodBlocker dBlock = getDBlock();
+	
 	public void doA() {
+		aBlock.checkAllowed();
+	}
+
+	private MethodBlocker getABlock() {
 		List<String> allowedCallersClassNames = new ArrayList<String>();
 		allowedCallersClassNames.add("org.adligo.tests4j_tests.models.shared.common.MethodBlockerTrial");
-		new MethodBlocker(MockWithMethodBlocker.class, "doA", allowedCallersClassNames);
+		MethodBlocker mb = new MethodBlocker(MockWithMethodBlocker.class, "doA", allowedCallersClassNames);
+		return mb;
 	}
 	
 	public void doB() {
+		bBlock.checkAllowed();
+	}
+
+	private MethodBlocker getBBlock() {
 		List<String> allowedCallersClassNames = new ArrayList<String>();
 		allowedCallersClassNames.add("org.adligo.tests4j_tests.models.shared.common.mocks.MockWithMethodBlocker");
-		new MethodBlocker(MockWithMethodBlocker.class, "doB", allowedCallersClassNames);
+		MethodBlocker mb = new MethodBlocker(MockWithMethodBlocker.class, "doB", allowedCallersClassNames);
+		return mb;
 	}
 	
 	public void doC() {
@@ -28,10 +38,15 @@ public class MockWithMethodBlocker {
 	}
 	
 	public void doD() {
+		dBlock.checkAllowed();
+	}
+
+	private MethodBlocker getDBlock() {
 		List<String> allowedCallersClassNames = new ArrayList<String>();
 		allowedCallersClassNames.add("org.adligo.tests4j_tests.models.shared.common.MethodBlockerTrial");
 		allowedCallersClassNames.add("org.adligo.tests4j_tests.models.shared.common.mocks.MockWithMethodBlocker");
-		new MethodBlocker(MockWithMethodBlocker.class, "doD", allowedCallersClassNames);
+		MethodBlocker mb = new MethodBlocker(MockWithMethodBlocker.class, "doD", allowedCallersClassNames);
+		return mb;
 	}
 	
 	public void doE() {

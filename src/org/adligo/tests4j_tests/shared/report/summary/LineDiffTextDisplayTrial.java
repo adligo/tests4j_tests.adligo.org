@@ -322,4 +322,10 @@ public class LineDiffTextDisplayTrial extends SourceFileCountingTrial implements
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public boolean isLogEnabled(Class<?> clazz) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 }

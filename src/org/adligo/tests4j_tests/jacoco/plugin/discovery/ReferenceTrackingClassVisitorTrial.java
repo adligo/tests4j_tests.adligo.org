@@ -7,7 +7,6 @@ import java.util.Set;
 import org.adligo.tests4j.models.shared.common.ClassMethods;
 import org.adligo.tests4j.models.shared.common.I_System;
 import org.adligo.tests4j.models.shared.dependency.ClassFilter;
-import org.adligo.tests4j.models.shared.dependency.ClassReferencesMutant;
 import org.adligo.tests4j.models.shared.dependency.I_ClassReferences;
 import org.adligo.tests4j.models.shared.trials.SourceFileScope;
 import org.adligo.tests4j.models.shared.trials.Test;
@@ -33,7 +32,7 @@ import org.adligo.tests4j_tests.run.helpers.class_loading_mocks.MockWithTriangle
 import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.Opcodes;
 
-@SourceFileScope (sourceClass=ReferenceTrackingClassVisitor.class, minCoverage=49.0)
+@SourceFileScope (sourceClass=ReferenceTrackingClassVisitor.class, minCoverage=36.0)
 public class ReferenceTrackingClassVisitorTrial extends SourceFileCountingTrial {
 	ReferenceTrackingClassVisitor rtcv;
 	

@@ -14,17 +14,23 @@ import org.adligo.tests4j.models.shared.common.Tests4J_System;
  * Tests4J_System.SYSTEM so that only the trial's
  * threads (and test thread) can see the system set with 
  * setSystem(I_System);
+ * 
+ * Note that even though this is a InheritableThreadLocal
+ * the static methods should be called from the beforeTests and afterTests
+ * methods so the thread local is on the same thread as the tests.
+ * It has intermittent issues I couldn't find otherwise.
+ * 
  * @author scott
  *
  */
-public class ThreadlocalSystemMock extends DelegateSystem implements I_System {
+public class ThreadLocalSystemMock extends DelegateSystem implements I_System {
 	private InheritableThreadLocal<I_System> ith = new InheritableThreadLocal<>();
 	private static final I_System DEFAULT = new DefaultSystem();
 	private static final Set<String> callers = new CopyOnWriteArraySet<String>();
-	private static final ThreadlocalSystemMock INSTANCE = new ThreadlocalSystemMock();
+	private static final ThreadLocalSystemMock INSTANCE = new ThreadLocalSystemMock();
 	
-	ThreadlocalSystemMock() {
-		super.setDelegate(this);
+	ThreadLocalSystemMock() {
+		super();
 	}
 	
 	public static void setConstantToMock() {
@@ -70,8 +76,8 @@ public class ThreadlocalSystemMock extends DelegateSystem implements I_System {
 	}
 
 	@Override
-	public void doSystemExit(int p) {
-		getSystem().doSystemExit(p);
+	public void exitJvm(int p) {
+		getSystem().exitJvm(p);
 	}
 
 	@Override

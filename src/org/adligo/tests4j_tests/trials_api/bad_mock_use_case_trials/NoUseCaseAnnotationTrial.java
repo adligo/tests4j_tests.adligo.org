@@ -12,7 +12,7 @@ import org.adligo.tests4j.models.shared.trials.Test;
 import org.adligo.tests4j.models.shared.trials.TrialRecursion;
 import org.adligo.tests4j.models.shared.trials.UseCaseTrial;
 import org.adligo.tests4j_tests.trials_api.common.ExpectedFailureRunner;
-import org.adligo.tests4j_tests.trials_api.common.MockSystem;
+import org.adligo.tests4j_tests.trials_api.common.SystemRunnerMock;
 
 /**
  * note this trial is run by the Run_UseCaseTrial_Trial,
@@ -69,7 +69,7 @@ public class NoUseCaseAnnotationTrial extends UseCaseTrial {
 				"org.adligo.tests4j_tests.trials_api.bad_mock_use_case_trials.NoUseCaseAnnotationTrial was not annotated correctly.", 
 				failure.getFailureDetail());
 		
-		MockSystem tracker =  runner.getMockSystem();
+		SystemRunnerMock tracker =  runner.getMockSystem();
 		asserts.assertEquals(0, tracker.getLastStatus());
 	}
 	

@@ -17,7 +17,7 @@ import org.adligo.tests4j.models.shared.trials.PackageScope;
 import org.adligo.tests4j.models.shared.trials.Test;
 import org.adligo.tests4j.models.shared.trials.TrialRecursion;
 import org.adligo.tests4j_tests.trials_api.common.ExpectedFailureRunner;
-import org.adligo.tests4j_tests.trials_api.common.MockSystem;
+import org.adligo.tests4j_tests.trials_api.common.SystemRunnerMock;
 
 public class AssertGreaterThanOrEqualsDoubleLongWithMessageFailsTrialRunner {
 	
@@ -83,7 +83,7 @@ public class AssertGreaterThanOrEqualsDoubleLongWithMessageFailsTrialRunner {
 		asserts.assertEquals("\torg.adligo.tests4j.models.shared.asserts.AssertionFailureLocation", lines.getLine(0));
 		asserts.assertEquals("\tat org.adligo.tests4j_tests.trials_api.assert_fails_trials.AssertGreaterThanOrEqualsDoubleLongWithMessageFailsTrial.testAsserGreaterThanEqualsDoubleLongFailsWithMessage(AssertGreaterThanOrEqualsDoubleLongWithMessageFailsTrial.java:16)", lines.getLine(1));
 		
-		MockSystem tracker =  runner.getMockSystem();
+		SystemRunnerMock tracker =  runner.getMockSystem();
 		asserts.assertEquals(0, tracker.getLastStatus());
 	}
 	

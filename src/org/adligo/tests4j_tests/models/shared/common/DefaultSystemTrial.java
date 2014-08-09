@@ -11,6 +11,10 @@ public class DefaultSystemTrial extends SourceFileCountingTrial {
 	@Test
 	public void testMethods() {
 		DefaultSystem ds = new DefaultSystem();
+		//note this is actually for a visual check
+		//on the log a run of tests4j_tests
+		//so that I can make sure I don't break System.out.println() 
+		// for test developers.
 		ds.println("Tests4J: DefaultSystemTrial println1");
 		System.out.println("Tests4J: DefaultSystemTrial println2");
 		long start = System.currentTimeMillis();

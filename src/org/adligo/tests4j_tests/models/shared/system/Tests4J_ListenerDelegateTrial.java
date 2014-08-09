@@ -189,4 +189,10 @@ public class Tests4J_ListenerDelegateTrial extends SourceFileCountingTrial imple
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public boolean isLogEnabled(Class<?> clazz) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 }

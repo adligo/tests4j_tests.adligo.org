@@ -3,17 +3,16 @@ package org.adligo.tests4j_tests.run;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import org.adligo.tests4j.models.shared.common.DefaultSystem;
+import org.adligo.tests4j.models.shared.common.DelegateSystem;
 import org.adligo.tests4j.models.shared.common.I_System;
 import org.adligo.tests4j.models.shared.system.DefaultLog;
 import org.adligo.tests4j.models.shared.system.I_Tests4J_Controls;
 import org.adligo.tests4j.models.shared.system.I_Tests4J_Delegate;
 import org.adligo.tests4j.models.shared.system.I_Tests4J_DelegateFactory;
+import org.adligo.tests4j.models.shared.system.I_Tests4J_Listener;
 import org.adligo.tests4j.models.shared.system.I_Tests4J_Log;
 import org.adligo.tests4j.models.shared.system.I_Tests4J_Params;
-import org.adligo.tests4j.models.shared.system.I_Tests4J_Listener;
 import org.adligo.tests4j.models.shared.system.Tests4J_Params;
-import org.adligo.tests4j.models.shared.trials.AfterTrial;
-import org.adligo.tests4j.models.shared.trials.BeforeTrial;
 import org.adligo.tests4j.models.shared.trials.SourceFileScope;
 import org.adligo.tests4j.models.shared.trials.Test;
 import org.adligo.tests4j.run.Tests4J;
@@ -68,7 +67,7 @@ public class Tests4JTrial extends SourceFileCountingTrial implements I_Tests4J_D
 		assertSame(controllsToSend, controlls);
 		assertTrue(ran.get());
 		
-		assertEquals(DefaultSystem.class.getName(), lastSystem.getClass().getName());
+		assertEquals(DelegateSystem.class.getName(), lastSystem.getClass().getName());
 		assertEquals(params, lastSetupParams);
 		assertNull(lastSetupListener);
 		
@@ -87,7 +86,7 @@ public class Tests4JTrial extends SourceFileCountingTrial implements I_Tests4J_D
 		assertSame(controllsToSend, controlls);
 		
 		assertFalse(ran.get());
-		assertEquals(DefaultSystem.class.getName(), lastSystem.getClass().getName());
+		assertEquals(DelegateSystem.class.getName(), lastSystem.getClass().getName());
 		assertSame(params, lastSetupParams);
 		assertNull(lastSetupListener);
 		assertFalse(ran.get());
@@ -107,7 +106,7 @@ public class Tests4JTrial extends SourceFileCountingTrial implements I_Tests4J_D
 		assertSame(controllsToSend, controlls);
 		assertTrue(ran.get());
 		
-		assertEquals(DefaultSystem.class.getName(), lastSystem.getClass().getName());
+		assertEquals(DelegateSystem.class.getName(), lastSystem.getClass().getName());
 		assertSame(params, lastSetupParams);
 		assertSame(listener, lastSetupListener);
 	}
@@ -127,7 +126,7 @@ public class Tests4JTrial extends SourceFileCountingTrial implements I_Tests4J_D
 		assertSame(controllsToSend, controlls);
 		assertFalse(ran.get());
 		
-		assertEquals(DefaultSystem.class.getName(), lastSystem.getClass().getName());
+		assertEquals(DelegateSystem.class.getName(), lastSystem.getClass().getName());
 		assertSame(params, lastSetupParams);
 		assertSame(listener, lastSetupListener);
 	}

@@ -47,6 +47,7 @@ public class RunPkgTrials implements I_Tests4J_TrialList {
 		trials.add(PlatformTrial.class);
 		trials.add(StringMethodsTrial.class);
 		trials.add(StackTraceBuilderTrial.class);
+		trials.add(Tests4J_SystemTrial.class);
 		trials.add(TrialTypeEnumTrial.class);
 		
 		return trials;

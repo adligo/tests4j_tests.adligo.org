@@ -14,24 +14,24 @@ import org.adligo.tests4j.models.shared.common.I_System;
  * @author scott
  *
  */
-public class MockSystem implements I_System {
+public class SystemRunnerMock implements I_System {
 	private final ArrayBlockingQueue<Integer> lastStatus = new ArrayBlockingQueue<>(10);
 	private final AtomicLong time = new AtomicLong();
 	private String lineSeperator;
 	
-	public MockSystem() {
+	public SystemRunnerMock() {
 
 	}
 	
-	public MockSystem(String pLineSepearator) {
+	public SystemRunnerMock(String pLineSepearator) {
 		lineSeperator = pLineSepearator;
 	}
 	
-	public MockSystem(List<Long> pTimes) {
+	public SystemRunnerMock(List<Long> pTimes) {
 	}
 	
 	@Override
-	public void doSystemExit(final int p) {
+	public void exitJvm(final int p) {
 		synchronized (lastStatus) {
 			lastStatus.add(p);
 		}

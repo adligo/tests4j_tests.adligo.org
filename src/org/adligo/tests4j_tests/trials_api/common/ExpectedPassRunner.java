@@ -23,7 +23,7 @@ public class ExpectedPassRunner implements I_Tests4J_Listener {
 	private final ArrayBlockingQueue<List<I_TrialResult>> block = new ArrayBlockingQueue<List<I_TrialResult>>(1);
 	private final CopyOnWriteArrayList<I_TrialResult> results = new CopyOnWriteArrayList<I_TrialResult>();
 	private final ArrayBlockingQueue<I_TrialRunMetadata> metaBlock = new ArrayBlockingQueue<>(1);
-	private MockSystem mockSystem = new MockSystem();
+	private SystemRunnerMock mockSystem = new SystemRunnerMock();
 	
 	
 	public void run(Class<? extends I_Trial> trial) {
@@ -40,7 +40,7 @@ public class ExpectedPassRunner implements I_Tests4J_Listener {
 		//silentReporter.setLogOn(TrialDescription.class.getName());
 
 		
-		MockTests4J mock = new MockTests4J();
+		Tests4JRunnerMock mock = new Tests4JRunnerMock();
 		mock.setSystem(mockSystem);
 		
 		I_Tests4J_Controls controlls = mock.instanceRun(params, this);
@@ -109,7 +109,7 @@ public class ExpectedPassRunner implements I_Tests4J_Listener {
 		
 	}
 
-	public MockSystem getMockSystem() {
+	public SystemRunnerMock getMockSystem() {
 		return mockSystem;
 	}
 

@@ -17,7 +17,7 @@ import org.adligo.tests4j.models.shared.trials.PackageScope;
 import org.adligo.tests4j.models.shared.trials.Test;
 import org.adligo.tests4j.models.shared.trials.TrialRecursion;
 import org.adligo.tests4j_tests.trials_api.common.ExpectedFailureRunner;
-import org.adligo.tests4j_tests.trials_api.common.MockSystem;
+import org.adligo.tests4j_tests.trials_api.common.SystemRunnerMock;
 
 @TrialRecursion
 @PackageScope (packageName="org.adligo.tests4j")
@@ -85,7 +85,7 @@ public class AssertNotEqualsStringWithMessageFailsTrialRunner {
 		asserts.assertEquals("\torg.adligo.tests4j.models.shared.asserts.AssertionFailureLocation", lines.getLine(0));
 		asserts.assertEquals("\tat org.adligo.tests4j_tests.trials_api.assert_fails_trials.AssertNotEqualsStringWithMessageFailsTrial.testAssertNotEqualsWithMessage(AssertNotEqualsStringWithMessageFailsTrial.java:16)", lines.getLine(1));
 		
-		MockSystem tracker =  runner.getMockSystem();
+		SystemRunnerMock tracker =  runner.getMockSystem();
 		asserts.assertEquals(0, tracker.getLastStatus());
 	}
 	

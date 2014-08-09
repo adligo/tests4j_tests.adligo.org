@@ -10,6 +10,6 @@ public class BadMockTests4J_UncaughtExceptionHandler extends Tests4J_UncaughtExc
 	}
 	
 	public static void setStaticLogger(I_Tests4J_Log logger) {
-		Tests4J_UncaughtExceptionHandler.setLogger(logger);
+		Tests4J_UncaughtExceptionHandler.setLog(logger);
 	}
 }
