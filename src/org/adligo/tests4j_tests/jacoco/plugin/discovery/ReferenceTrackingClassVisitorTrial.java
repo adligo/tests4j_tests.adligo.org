@@ -1,18 +1,22 @@
 package org.adligo.tests4j_tests.jacoco.plugin.discovery;
 
 import java.io.InputStream;
+import java.io.PrintStream;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
 import org.adligo.tests4j.models.shared.common.ClassMethods;
 import org.adligo.tests4j.models.shared.common.I_System;
 import org.adligo.tests4j.models.shared.dependency.ClassFilter;
+import org.adligo.tests4j.models.shared.dependency.ClassFilterMutant;
 import org.adligo.tests4j.models.shared.dependency.I_ClassReferences;
 import org.adligo.tests4j.models.shared.trials.SourceFileScope;
 import org.adligo.tests4j.models.shared.trials.Test;
 import org.adligo.tests4j_4jacoco.plugin.discovery.ReferenceTrackingClassVisitor;
 import org.adligo.tests4j_tests.base_abstract_trials.SourceFileCountingTrial;
 import org.adligo.tests4j_tests.run.helpers.class_loading_mocks.MockException;
+import org.adligo.tests4j_tests.run.helpers.class_loading_mocks.MockI_OtherStringAndLong;
 import org.adligo.tests4j_tests.run.helpers.class_loading_mocks.MockWithAbstractMethodException;
 import org.adligo.tests4j_tests.run.helpers.class_loading_mocks.MockWithAbstractMethodParam;
 import org.adligo.tests4j_tests.run.helpers.class_loading_mocks.MockWithAbstractMethodReturn;
@@ -41,7 +45,11 @@ public class ReferenceTrackingClassVisitorTrial extends SourceFileCountingTrial 
 	public void beforeTests() {
 		if (rtcv == null) {
 			rtcv = new ReferenceTrackingClassVisitor(Opcodes.ASM5, super.getLog());
-			rtcv.setClassFilter(new ClassFilter());
+			rtcv.setInstrumentClassFilter(new ClassFilter());
+			
+			ClassFilterMutant cfm = new ClassFilterMutant();
+			cfm.setIgnoredPackageNames(Collections.unmodifiableSet(new HashSet<String>()));
+			rtcv.setBasicClassFilter(new ClassFilter(cfm));
 		}
 		rtcv.reset();
 	}
@@ -58,8 +66,9 @@ public class ReferenceTrackingClassVisitorTrial extends SourceFileCountingTrial 
 		
 		Set<String> classNames =  crm.getReferences();
 		
+		assertContains(classNames, Object.class.getName());
 		assertContains(classNames, MockWithNothing.class.getName());
-		assertEquals(1, classNames.size());
+		assertEquals(2, classNames.size());
 	}
 	
 	@Test
@@ -72,9 +81,10 @@ public class ReferenceTrackingClassVisitorTrial extends SourceFileCountingTrial 
 		assertEquals(MockWithMethodReturn.class.getName(), crm.getClassName());
 		
 		Set<String> classNames =  crm.getReferences();
+		assertContains(classNames, Object.class.getName());
 		assertContains(classNames, MockWithMethodReturn.class.getName());
 		assertContains(classNames, MockWithNothing.class.getName());
-		assertEquals(2, classNames.size());
+		assertEquals(3, classNames.size());
 	}
 	
 	@Test
@@ -88,9 +98,10 @@ public class ReferenceTrackingClassVisitorTrial extends SourceFileCountingTrial 
 		assertEquals(MockWithField.class.getName(), crm.getClassName());
 		
 		Set<String> classNames =  crm.getReferences();
+		assertContains(classNames, Object.class.getName());
 		assertContains(classNames, MockWithField.class.getName());
 		assertContains(classNames, I_System.class.getName());
-		assertEquals(2, classNames.size());
+		assertEquals(3, classNames.size());
 	}
 	
 	@Test
@@ -104,8 +115,9 @@ public class ReferenceTrackingClassVisitorTrial extends SourceFileCountingTrial 
 		assertEquals(MockWithMethodParams.class.getName(), crm.getClassName());
 		
 		Set<String> classNames =  crm.getReferences();
-		assertEquals(1, classNames.size());
+		assertContains(classNames, Object.class.getName());
 		assertContains(classNames, MockWithMethodParams.class.getName());
+		assertEquals(2, classNames.size());
 	}
 	
 	@Test
@@ -118,9 +130,11 @@ public class ReferenceTrackingClassVisitorTrial extends SourceFileCountingTrial 
 		assertEquals(MockWithImportOnlyInMethod.class.getName(), crm.getClassName());
 		
 		Set<String> classNames =  crm.getReferences();
-		assertEquals(2, classNames.size());
+		
+		assertContains(classNames, Object.class.getName());
 		assertContains(classNames, MockWithImportOnlyInMethod.class.getName());
 		assertContains(classNames, I_System.class.getName());
+		assertEquals(3, classNames.size());
 	}
 	
 	
@@ -135,9 +149,11 @@ public class ReferenceTrackingClassVisitorTrial extends SourceFileCountingTrial 
 		assertEquals(MockWithStaticField.class.getName(), crm.getClassName());
 		
 		Set<String> classNames =  crm.getReferences();
-		assertEquals(2, classNames.size());
+		
+		assertContains(classNames, Object.class.getName());
 		assertContains(classNames, MockWithStaticField.class.getName());
 		assertContains(classNames, MockWithNothing.class.getName());
+		assertEquals(3, classNames.size());
 	}
 	
 	@Test
@@ -152,9 +168,10 @@ public class ReferenceTrackingClassVisitorTrial extends SourceFileCountingTrial 
 		
 		Set<String> classNames =  crm.getReferences();
 		
+		assertContains(classNames, Object.class.getName());
 		assertContains(classNames, MockWithStaticInitalizer.class.getName());
 		assertContains(classNames, MockWithNothing.class.getName());
-		assertEquals(2, classNames.size());
+		assertEquals(3, classNames.size());
 	}
 	
 
@@ -171,10 +188,10 @@ public class ReferenceTrackingClassVisitorTrial extends SourceFileCountingTrial 
 		assertEquals(MockWithArray.class.getName(), crm.getClassName());
 		
 		Set<String> classNames =  crm.getReferences();
-		
+		assertContains(classNames, Object.class.getName());
 		assertContains(classNames, MockWithArray.class.getName());
 		assertContains(classNames, MockWithNothing.class.getName());
-		assertEquals(2, classNames.size());
+		assertEquals(3, classNames.size());
 	}
 	
 	@Test
@@ -189,9 +206,10 @@ public class ReferenceTrackingClassVisitorTrial extends SourceFileCountingTrial 
 		
 		Set<String> classNames =  crm.getReferences();
 		
+		assertContains(classNames, Object.class.getName());
 		assertContains(classNames, MockWithMethodException.class.getName());
 		assertContains(classNames, MockException.class.getName());
-		assertEquals(2, classNames.size());
+		assertEquals(3, classNames.size());
 	}
 	
 	@Test
@@ -207,10 +225,11 @@ public class ReferenceTrackingClassVisitorTrial extends SourceFileCountingTrial 
 		
 		Set<String> classNames =  crm.getReferences();
 		
+		assertContains(classNames, Object.class.getName());
 		assertContains(classNames, MockWithMethodExceptionBlock.class.getName());
 		assertContains(classNames, MockWithMethodException.class.getName());
 		assertContains(classNames, MockException.class.getName());
-		assertEquals(3, classNames.size());
+		assertEquals(4, classNames.size());
 	}
 	
 	
@@ -232,8 +251,9 @@ public class ReferenceTrackingClassVisitorTrial extends SourceFileCountingTrial 
 		assertEquals(MockWithAbstractMethodReturn.class.getName(), crm.getClassName());
 		
 		Set<String> classNames =  crm.getReferences();
+		assertContains(classNames, Object.class.getName());
 		assertContains(classNames, MockWithAbstractMethodReturn.class.getName());
-		assertEquals(1, classNames.size());
+		assertEquals(2, classNames.size());
 	}
 	
 	/**
@@ -254,8 +274,9 @@ public class ReferenceTrackingClassVisitorTrial extends SourceFileCountingTrial 
 		assertEquals(MockWithAbstractMethodParam.class.getName(), crm.getClassName());
 		
 		Set<String> classNames =  crm.getReferences();
+		assertContains(classNames, Object.class.getName());
 		assertContains(classNames, MockWithAbstractMethodParam.class.getName());
-		assertEquals(1, classNames.size());
+		assertEquals(2, classNames.size());
 	}
 	
 	/**
@@ -276,8 +297,9 @@ public class ReferenceTrackingClassVisitorTrial extends SourceFileCountingTrial 
 		assertEquals(MockWithAbstractMethodException.class.getName(), crm.getClassName());
 		
 		Set<String> classNames =  crm.getReferences();
+		assertContains(classNames, Object.class.getName());
 		assertContains(classNames, MockWithAbstractMethodException.class.getName());
-		assertEquals(1, classNames.size());
+		assertEquals(2, classNames.size());
 	}
 	
 	@Test
@@ -292,6 +314,18 @@ public class ReferenceTrackingClassVisitorTrial extends SourceFileCountingTrial 
 		assertEquals(MockWithEverything.class.getName(), crm.getClassName());
 		
 		Set<String> classNames =  crm.getReferences();
+		
+		assertContains(classNames, Class.class.getName());
+		assertContains(classNames, Math.class.getName());
+		assertContains(classNames, Object.class.getName());
+		
+		assertContains(classNames, PrintStream.class.getName());
+		assertContains(classNames, String.class.getName());
+		assertContains(classNames, StringBuilder.class.getName());
+		assertContains(classNames, System.class.getName());
+		
+		assertContains(classNames, MockI_OtherStringAndLong.class.getName());
+		
 		assertContains(classNames, MockWithAbstractMethodException.class.getName());
 		assertContains(classNames, MockWithAbstractMethodReturn.class.getName());
 		assertContains(classNames, MockWithAbstractMethodParam.class.getName());
@@ -313,7 +347,7 @@ public class ReferenceTrackingClassVisitorTrial extends SourceFileCountingTrial 
 		assertContains(classNames, MockWithTriangleC.class.getName());
 		assertFalse(classNames.contains("."));
 		
-		assertEquals(15, classNames.size());
+		assertEquals(25, classNames.size());
 		
 		in= ReferenceTrackingClassVisitorTrial.class.getResourceAsStream(
 				ClassMethods.toResource(MockWithEverything.class.getName() + "$1"));
@@ -324,6 +358,12 @@ public class ReferenceTrackingClassVisitorTrial extends SourceFileCountingTrial 
 		assertEquals(MockWithEverything.class.getName() + "$1", crm.getClassName());
 		classNames =  crm.getReferences();
 		
+		assertContains(classNames, Object.class.getName());
+		assertContains(classNames, PrintStream.class.getName());
+		assertContains(classNames, String.class.getName());
+		assertContains(classNames, StringBuilder.class.getName());
+		assertContains(classNames, System.class.getName());
+		
 		assertContains(classNames, MockWithEverything.class.getName()); 
 		assertContains(classNames, MockWithEverything.class.getName() + "$1"); 
 		assertContains(classNames, MockWithMethodException.class.getName());
@@ -333,7 +373,7 @@ public class ReferenceTrackingClassVisitorTrial extends SourceFileCountingTrial 
 		assertContains(classNames, MockWithMethodReturn.class.getName());
 		assertContains(classNames, MockWithNothing.class.getName());
 		assertContains(classNames,MockWithStaticField.class.getName());
-		assertEquals(8, classNames.size());
+		assertEquals(13, classNames.size());
 	}
 	
 	@Override
@@ -343,12 +383,12 @@ public class ReferenceTrackingClassVisitorTrial extends SourceFileCountingTrial 
 
 	@Override
 	public int getAsserts() {
-		return 76;
+		return 102;
 	}
 
 	@Override
 	public int getUniqueAsserts() {
-		return 76;
+		return 102;
 	}
 
 }

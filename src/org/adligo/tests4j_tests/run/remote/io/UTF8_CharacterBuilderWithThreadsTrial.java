@@ -123,7 +123,7 @@ public class UTF8_CharacterBuilderWithThreadsTrial extends SourceFileCountingTri
 		double dc = (double) finishedCharGroups.addAndGet(1);
 		double max = (double) charGroupCount;
 		double pct = dc/max * 100;
-		//log(this.getClass().getName() +  " at " + ((int) pct) + "% " +charGroupCount);
+		log(this.getClass().getName() +  " at " + ((int) pct) + "% " +charGroupCount);
 	}
 
 	@Override

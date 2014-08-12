@@ -4,10 +4,8 @@ import org.adligo.tests4j.models.shared.system.Tests4J_Params;
 import org.adligo.tests4j.run.Tests4J;
 import org.adligo.tests4j.shared.report.summary.TestDisplay;
 import org.adligo.tests4j.shared.report.summary.TrialDisplay;
-import org.adligo.tests4j_4jacoco.plugin.Recorder;
-import org.adligo.tests4j_tests.trials_api.BadApiTrials_Trial;
-import org.adligo.tests4j_tests.trials_api.BadSourceFileTrials_Trial;
-import org.adligo.tests4j_tests.trials_api.BadUseCaseTrials_Trial;
+import org.adligo.tests4j_4jacoco.plugin.ScopedJacocoPluginFactory;
+import org.adligo.tests4j_tests.jacoco.plugin.discovery.ClassReferencesDiscoveryTrial;
 
 public class RunSingleTrial {
 
@@ -15,8 +13,11 @@ public class RunSingleTrial {
 	public static void main(String [] args) {
 		Tests4J_Params params = new Tests4J_Params();
 		//params.addTrial(NoPackageScopeAnnotationTrial.class);
-		params.addTrial(BadUseCaseTrials_Trial.class);
-	
+		//params.addTrial(ReferenceTrackingClassVisitorTrial.class);
+		//params.addTrial(ReferenceTrackingMethodVisitorTrial.class);
+		params.addTrial(ClassReferencesDiscoveryTrial.class);
+		//params.addTrial(ClassDependenciesDiscoveryTrial.class);
+				
 		//params.setLogState(AbstractPlugin.class, true);
 		//params.setLogState(Tests4J_NotificationManager.class, true);
 		//params.setLogState(Tests4J_TrialsRunable.class, true);
@@ -29,10 +30,11 @@ public class RunSingleTrial {
 		
 		//logging from jacoco
 		//params.addLoggingClass(AbstractPlugin.class);
-		params.setLogState(Recorder.class, true);
+		//params.setLogState(Recorder.class, true);
 		
+		//params.addTest(new Tests4J_Selection(ClassReferencesDiscoveryTrial.class, "test011_MockWithMethodExceptionBlock"));
 		//SimpleJacocoPlugin plugin = new SimpleJacocoPlugin();
-		//params.setCoveragePluginFactoryClass(ScopedJacocoPluginFactory.class);
+		params.setCoveragePluginFactoryClass(ScopedJacocoPluginFactory.class);
 		//params.setCoveragePluginConfiguratorClass(RunSingleTrialPluginConfigurator.class);
 		Tests4J.run(params);
 	}

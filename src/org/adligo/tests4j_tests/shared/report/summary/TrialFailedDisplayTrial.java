@@ -13,7 +13,7 @@ import org.adligo.tests4j.shared.report.summary.TrialFailedDisplay;
 import org.adligo.tests4j_tests.base_abstract_trials.SourceFileCountingTrial;
 import org.adligo.tests4j_tests.models.shared.system.mocks.Tests4J_LogMock;
 
-@SourceFileScope (sourceClass=TrialFailedDisplay.class)
+@SourceFileScope (sourceClass=TrialFailedDisplay.class, minCoverage=70.0)
 public class TrialFailedDisplayTrial extends SourceFileCountingTrial {
 	private Tests4J_LogMock log = new Tests4J_LogMock();
 	

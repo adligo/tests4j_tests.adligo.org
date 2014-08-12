@@ -22,6 +22,9 @@ public abstract class MockWithEverything {
 	private MockWithAbstractMethodParam c;
 	public MockWithBidirectionalA aa;
 	public MockWithTriangleC cc;
+	public MockWithString str;
+	public MockWithExtensionB bme;
+	public MockI_OtherStringAndLong fusbar;
 	
 	public MockWithEverything() {
 		double d = Math.random();

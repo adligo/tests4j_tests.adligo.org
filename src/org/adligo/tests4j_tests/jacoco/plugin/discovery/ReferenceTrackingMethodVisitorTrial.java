@@ -1,8 +1,11 @@
 package org.adligo.tests4j_tests.jacoco.plugin.discovery;
 
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.Set;
 
 import org.adligo.tests4j.models.shared.dependency.ClassFilter;
+import org.adligo.tests4j.models.shared.dependency.ClassFilterMutant;
 import org.adligo.tests4j.models.shared.dependency.ClassReferencesMutant;
 import org.adligo.tests4j.models.shared.trials.SourceFileScope;
 import org.adligo.tests4j.models.shared.trials.Test;
@@ -24,10 +27,15 @@ public class ReferenceTrackingMethodVisitorTrial extends SourceFileCountingTrial
 	public void beforeTests() {
 		if (rtcv == null) {
 			rtcv = new ReferenceTrackingMethodVisitor(Opcodes.ASM5, super.getLog());
-			rtcv.setClassFilter(new ClassFilter());
+			
+			ClassFilterMutant cfm = new ClassFilterMutant();
+			cfm.setIgnoredPackageNames(Collections.unmodifiableSet(new HashSet<String>()));
+			rtcv.setClassFilter(new ClassFilter(cfm));
 		}
 		rtcv.setClassReferences(crm);
 		names.clear();
+		
+		
 	}
 	
 	
@@ -42,16 +50,19 @@ public class ReferenceTrackingMethodVisitorTrial extends SourceFileCountingTrial
 		assertContains(names, ReferenceTrackingMethodVisitor.class.getName());
 		assertContains(names, ReferenceTrackingMethodVisitorTrial.class.getName());
 		rtcv.visitLocalVariable("name", "Ljava/lang/String;", "signature", new Label(), new Label(), 1);
-		assertEquals(2, names.size());
+		
 		assertContains(names, ReferenceTrackingMethodVisitor.class.getName());
 		assertContains(names, ReferenceTrackingMethodVisitorTrial.class.getName());
+		assertContains(names, String.class.getName());
+		assertEquals(3, names.size());
 		
 		rtcv.visitMethodInsn(Opcodes.AALOAD, "org/adligo/tests4j_tests/run/helpers/class_loading_mocks/MockWithNothing", "foo", "()V", true);
 		
 		assertContains(names, MockWithNothing.class.getName());
 		assertContains(names, ReferenceTrackingMethodVisitor.class.getName());
 		assertContains(names, ReferenceTrackingMethodVisitorTrial.class.getName());
-		assertEquals(3, names.size());
+		assertContains(names, String.class.getName());
+		assertEquals(4, names.size());
 		
 		names.clear();
 		rtcv.visitFieldInsn(Opcodes.AALOAD, "org/adligo/tests4j_tests/run/helpers/class_loading_mocks/MockWithNothing", "name", "Lorg/adligo/tests4j_tests/run/helpers/class_loading_mocks/MockWithMethodReturn;");
@@ -84,12 +95,12 @@ public class ReferenceTrackingMethodVisitorTrial extends SourceFileCountingTrial
 
 	@Override
 	public int getAsserts() {
-		return 19;
+		return 21;
 	}
 
 	@Override
 	public int getUniqueAsserts() {
-		return 13;
+		return 18;
 	}
 
 }

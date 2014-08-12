@@ -2,15 +2,10 @@ package org.adligo.tests4j_tests.run.remote.io.helpers;
 
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
 import java.util.concurrent.ArrayBlockingQueue;
 
-import org.adligo.tests4j.models.shared.asserts.common.I_Asserts;
+import org.adligo.tests4j.models.shared.system.I_Tests4J_Log;
 import org.adligo.tests4j.run.remote.io.UTF8_CharacterBuilder;
 
 
@@ -38,8 +33,7 @@ public class UTF8_CharacterBuilder_ChuckTester implements Runnable {
 				try {
 					sc = nextCharsGroup.take();
 				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+					monitor.getLog().onException(e);
 					return;
 				}
 				//monitor.log("testing chunk starting at " + sc.getStart() + " with " + sc.getCapture() + " characters");

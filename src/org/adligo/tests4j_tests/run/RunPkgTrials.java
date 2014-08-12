@@ -18,7 +18,7 @@ public class RunPkgTrials implements I_Tests4J_TrialList {
 		
 		
 		//TieredJacocoPlugin covargePlugin =new TieredJacocoPlugin();
-		params.setCoveragePluginFactoryClass(ScopedJacocoPluginFactory.class);
+		//params.setCoveragePluginFactoryClass(ScopedJacocoPluginFactory.class);
 		
 		Tests4J.run(params);
 	}
@@ -29,11 +29,11 @@ public class RunPkgTrials implements I_Tests4J_TrialList {
 		
 		trials.add(Tests4JTrial.class);
 		trials.add(Tests4J_UncaughtExceptionHandlerTrial.class);
-		
 		trials.addAll(new org.adligo.tests4j_tests.run.discovery.RunPkgTrials().getTrials());
 		trials.addAll(new org.adligo.tests4j_tests.run.helpers.RunPkgTrials().getTrials());
 		trials.addAll(new org.adligo.tests4j_tests.run.remote.io.RunPkgTrials().getTrials());
 		trials.addAll(new org.adligo.tests4j_tests.run.remote.socket_api.RunPkgTrials().getTrials());
+		
 		return trials;
 	}
 }
