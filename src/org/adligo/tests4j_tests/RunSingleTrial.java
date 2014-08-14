@@ -5,7 +5,9 @@ import org.adligo.tests4j.run.Tests4J;
 import org.adligo.tests4j.shared.report.summary.TestDisplay;
 import org.adligo.tests4j.shared.report.summary.TrialDisplay;
 import org.adligo.tests4j_4jacoco.plugin.ScopedJacocoPluginFactory;
-import org.adligo.tests4j_tests.jacoco.plugin.discovery.ClassReferencesDiscoveryTrial;
+import org.adligo.tests4j_4jacoco.plugin.discovery.ClassDependenciesDiscovery;
+import org.adligo.tests4j_4jacoco.plugin.discovery.ClassReferencesDiscovery;
+import org.adligo.tests4j_tests.trials_api.AssertionsWithNullExpectedFail_Trial;
 
 public class RunSingleTrial {
 
@@ -15,27 +17,20 @@ public class RunSingleTrial {
 		//params.addTrial(NoPackageScopeAnnotationTrial.class);
 		//params.addTrial(ReferenceTrackingClassVisitorTrial.class);
 		//params.addTrial(ReferenceTrackingMethodVisitorTrial.class);
-		params.addTrial(ClassReferencesDiscoveryTrial.class);
-		//params.addTrial(ClassDependenciesDiscoveryTrial.class);
+		//params.addTrial(ClassReferencesDiscoveryTrial.class);
+		params.addTrial(AssertionsWithNullExpectedFail_Trial.class);
 				
-		//params.setLogState(AbstractPlugin.class, true);
-		//params.setLogState(Tests4J_NotificationManager.class, true);
-		//params.setLogState(Tests4J_TrialsRunable.class, true);
-		//params.setLogState(TrialInstrumenter.class, true);
-		//params.addLoggingClass(TrialsProcessor.class);
-		//params.addLoggingClass(Tests4J_Memory.class);
-		//params.addLoggingClass(Tests4J_SecurityManager.class);
+
 		params.setLogState(TrialDisplay.class, false);
 		params.setLogState(TestDisplay.class, true);
+		//params.setLogState(ClassReferencesDiscovery.class, true);
+		params.setLogState(ClassDependenciesDiscovery.class, true);
 		
 		//logging from jacoco
 		//params.addLoggingClass(AbstractPlugin.class);
 		//params.setLogState(Recorder.class, true);
 		
-		//params.addTest(new Tests4J_Selection(ClassReferencesDiscoveryTrial.class, "test011_MockWithMethodExceptionBlock"));
-		//SimpleJacocoPlugin plugin = new SimpleJacocoPlugin();
 		params.setCoveragePluginFactoryClass(ScopedJacocoPluginFactory.class);
-		//params.setCoveragePluginConfiguratorClass(RunSingleTrialPluginConfigurator.class);
 		Tests4J.run(params);
 	}
 

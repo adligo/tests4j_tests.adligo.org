@@ -27,7 +27,7 @@ public class DependencyTrial extends SourceFileCountingTrial {
 	@Test
 	public void testCopyConstructor() {
 		DependencyMutant dm = new DependencyMutant();
-		dm.setClazzName("foo");
+		dm.setClassName("foo");
 		dm.addReference();
 		dm.addReference();
 		assertEquals("foo", dm.getClassName());
@@ -43,10 +43,10 @@ public class DependencyTrial extends SourceFileCountingTrial {
 		DependencyMutant dm = new DependencyMutant();
 		dm.addReference();
 		assertEquals(1, dm.getReferences());
-		dm.setClazzName("someName");
+		dm.setClassName("someName");
 		
 		DependencyMutant dmB = new DependencyMutant();
-		dmB.setClazzName("otherClassName");
+		dmB.setClassName("otherClassName");
 		
 		Dependency a = new Dependency(dm);
 		Dependency b = new Dependency(dmB);
@@ -59,7 +59,7 @@ public class DependencyTrial extends SourceFileCountingTrial {
 	@Test
 	public void testToString() {
 		DependencyMutant dm = new DependencyMutant();
-		dm.setClazzName("foo");
+		dm.setClassName("foo");
 		dm.addReference();
 		dm.addReference();
 		assertEquals("Dependency [clazzName=foo, references=2]", new Dependency(dm).toString());

@@ -14,6 +14,8 @@ import org.adligo.tests4j.models.shared.dependency.I_ClassReferences;
 import org.adligo.tests4j.models.shared.trials.SourceFileScope;
 import org.adligo.tests4j.models.shared.trials.Test;
 import org.adligo.tests4j_4jacoco.plugin.discovery.ReferenceTrackingClassVisitor;
+import org.adligo.tests4j_4jacoco.plugin.discovery.ReferenceTrackingMethodVisitor;
+import org.adligo.tests4j_4jacoco.plugin.instrumentation.map.MapInstrConstants;
 import org.adligo.tests4j_tests.base_abstract_trials.SourceFileCountingTrial;
 import org.adligo.tests4j_tests.run.helpers.class_loading_mocks.MockException;
 import org.adligo.tests4j_tests.run.helpers.class_loading_mocks.MockI_OtherStringAndLong;
@@ -55,7 +57,7 @@ public class ReferenceTrackingClassVisitorTrial extends SourceFileCountingTrial 
 	}
 	
 	@Test
-	public void testFindReferences_01_MockWithNothing() throws Exception {
+	public void testFindReferences_001_MockWithNothing() throws Exception {
 		InputStream in= ReferenceTrackingClassVisitorTrial.class.getResourceAsStream(
 				ClassMethods.toResource(MockWithNothing.class.getName()));
 		ClassReader classReader=new ClassReader(in);
@@ -72,7 +74,7 @@ public class ReferenceTrackingClassVisitorTrial extends SourceFileCountingTrial 
 	}
 	
 	@Test
-	public void testFindReferences_02_MockWithMethodReturn() throws Exception {
+	public void testFindReferences_002_MockWithMethodReturn() throws Exception {
 		InputStream in= ReferenceTrackingClassVisitorTrial.class.getResourceAsStream(
 				ClassMethods.toResource(MockWithMethodReturn.class.getName()));
 		ClassReader classReader=new ClassReader(in);
@@ -88,7 +90,7 @@ public class ReferenceTrackingClassVisitorTrial extends SourceFileCountingTrial 
 	}
 	
 	@Test
-	public void testFindReferences_03_MockWithField() throws Exception {
+	public void testFindReferences_003_MockWithField() throws Exception {
 		
 		InputStream in= ReferenceTrackingClassVisitorTrial.class.getResourceAsStream(
 				ClassMethods.toResource(MockWithField.class.getName()));
@@ -105,7 +107,7 @@ public class ReferenceTrackingClassVisitorTrial extends SourceFileCountingTrial 
 	}
 	
 	@Test
-	public void testFindReferences_04_MockWithMethodParams() throws Exception {
+	public void testFindReferences_004_MockWithMethodParams() throws Exception {
 		
 		InputStream in= ReferenceTrackingClassVisitorTrial.class.getResourceAsStream(
 				ClassMethods.toResource(MockWithMethodParams.class.getName()));
@@ -121,7 +123,7 @@ public class ReferenceTrackingClassVisitorTrial extends SourceFileCountingTrial 
 	}
 	
 	@Test
-	public void testFindReferences_05_MockWithImportOnlyInMethod() throws Exception {
+	public void testFindReferences_005_MockWithImportOnlyInMethod() throws Exception {
 		InputStream in= ReferenceTrackingClassVisitorTrial.class.getResourceAsStream(
 				ClassMethods.toResource(MockWithImportOnlyInMethod.class.getName()));
 		ClassReader classReader=new ClassReader(in);
@@ -139,7 +141,7 @@ public class ReferenceTrackingClassVisitorTrial extends SourceFileCountingTrial 
 	
 	
 	@Test
-	public void testFindReferences_06_MockWithStaticField() throws Exception {
+	public void testFindReferences_006_MockWithStaticField() throws Exception {
 		
 		InputStream in= ReferenceTrackingClassVisitorTrial.class.getResourceAsStream(
 				ClassMethods.toResource(MockWithStaticField.class.getName()));
@@ -157,7 +159,7 @@ public class ReferenceTrackingClassVisitorTrial extends SourceFileCountingTrial 
 	}
 	
 	@Test
-	public void testFindReferences_07_MockWithStaticInitalizer() throws Exception {
+	public void testFindReferences_007_MockWithStaticInitalizer() throws Exception {
 		
 		InputStream in= ReferenceTrackingClassVisitorTrial.class.getResourceAsStream(
 				ClassMethods.toResource(MockWithStaticInitalizer.class.getName()));
@@ -177,7 +179,7 @@ public class ReferenceTrackingClassVisitorTrial extends SourceFileCountingTrial 
 
 	
 	@Test
-	public void testFindReferences_08_MockWithArray() throws Exception {
+	public void testFindReferences_008_MockWithArray() throws Exception {
 		
 		InputStream in= ReferenceTrackingClassVisitorTrial.class.getResourceAsStream(
 				ClassMethods.toResource(MockWithArray.class.getName()));
@@ -195,7 +197,7 @@ public class ReferenceTrackingClassVisitorTrial extends SourceFileCountingTrial 
 	}
 	
 	@Test
-	public void testFindReferences_09_MockWithMethodException() throws Exception {
+	public void testFindReferences_009_MockWithMethodException() throws Exception {
 		
 		InputStream in= ReferenceTrackingClassVisitorTrial.class.getResourceAsStream(
 				ClassMethods.toResource(MockWithMethodException.class.getName()));
@@ -213,7 +215,7 @@ public class ReferenceTrackingClassVisitorTrial extends SourceFileCountingTrial 
 	}
 	
 	@Test
-	public void testFindReferences_10_MockWithMethodExceptionBlock() throws Exception {
+	public void testFindReferences_010_MockWithMethodExceptionBlock() throws Exception {
 		
 		InputStream in= ReferenceTrackingClassVisitorTrial.class.getResourceAsStream(
 				ClassMethods.toResource(MockWithMethodExceptionBlock.class.getName()));
@@ -241,7 +243,7 @@ public class ReferenceTrackingClassVisitorTrial extends SourceFileCountingTrial 
 	 * @throws Exception
 	 */
 	@Test
-	public void testFindReferences_11_MockWithAbstractMethodReturn() throws Exception {
+	public void testFindReferences_011_MockWithAbstractMethodReturn() throws Exception {
 		InputStream in= ReferenceTrackingClassVisitorTrial.class.getResourceAsStream(
 				ClassMethods.toResource(MockWithAbstractMethodReturn.class.getName()));
 		ClassReader classReader=new ClassReader(in);
@@ -264,7 +266,7 @@ public class ReferenceTrackingClassVisitorTrial extends SourceFileCountingTrial 
 	 * @throws Exception
 	 */
 	@Test
-	public void testFindReferences_12_MockWithAbstractMethodParam() throws Exception {
+	public void testFindReferences_012_MockWithAbstractMethodParam() throws Exception {
 		InputStream in= ReferenceTrackingClassVisitorTrial.class.getResourceAsStream(
 				ClassMethods.toResource(MockWithAbstractMethodParam.class.getName()));
 		ClassReader classReader=new ClassReader(in);
@@ -287,7 +289,7 @@ public class ReferenceTrackingClassVisitorTrial extends SourceFileCountingTrial 
 	 * @throws Exception
 	 */
 	@Test
-	public void testFindReferences_13_MockWithAbstractMethodParam() throws Exception {
+	public void testFindReferences_013_MockWithAbstractMethodParam() throws Exception {
 		InputStream in= ReferenceTrackingClassVisitorTrial.class.getResourceAsStream(
 				ClassMethods.toResource(MockWithAbstractMethodException.class.getName()));
 		ClassReader classReader=new ClassReader(in);
@@ -300,6 +302,29 @@ public class ReferenceTrackingClassVisitorTrial extends SourceFileCountingTrial 
 		assertContains(classNames, Object.class.getName());
 		assertContains(classNames, MockWithAbstractMethodException.class.getName());
 		assertEquals(2, classNames.size());
+	}
+	
+	@Test
+	public void testFindReferences_014_JacocoInitAndData() throws Exception {
+		rtcv.reset();
+		rtcv.visit(51, MapInstrConstants.DATAFIELD_ACC, "MockMock", 
+				"", "Ljava.lang.Object", new String [] {});
+		
+		rtcv.visitField(MapInstrConstants.DATAFIELD_ACC, "field1", 
+				"Ljava.lang.Object;", "", null);
+		rtcv.visitField(MapInstrConstants.DATAFIELD_ACC, MapInstrConstants.FIELD_NAME, 
+				"Ljava.util.Map;", "", null);
+		
+		ReferenceTrackingMethodVisitor methodVisitor = (ReferenceTrackingMethodVisitor)
+				rtcv.visitMethod(MapInstrConstants.DATAFIELD_ACC, "<init>", 
+						"", "", new String []{});
+		assertEquals("<init>", methodVisitor.getCurrentMethodName());
+		
+	    I_ClassReferences refs = rtcv.getClassReferences();
+		assertEquals("MockMock", refs.getClassName());
+		Set<String> crefs = refs.getReferences();
+		assertContains(crefs, Object.class.getName());
+		assertEquals(1, crefs.size());
 	}
 	
 	@Test
@@ -378,17 +403,17 @@ public class ReferenceTrackingClassVisitorTrial extends SourceFileCountingTrial 
 	
 	@Override
 	public int getTests() {
-		return 14;
+		return 15;
 	}
 
 	@Override
 	public int getAsserts() {
-		return 102;
+		return 106;
 	}
 
 	@Override
 	public int getUniqueAsserts() {
-		return 102;
+		return 106;
 	}
 
 }

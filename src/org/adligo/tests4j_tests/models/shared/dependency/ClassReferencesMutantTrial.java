@@ -6,7 +6,6 @@ import java.util.Set;
 
 import org.adligo.tests4j.models.shared.asserts.common.ExpectedThrownData;
 import org.adligo.tests4j.models.shared.asserts.common.I_Thrower;
-import org.adligo.tests4j.models.shared.dependency.ClassDependencies;
 import org.adligo.tests4j.models.shared.dependency.ClassDependenciesMutant;
 import org.adligo.tests4j.models.shared.dependency.ClassReferencesMutant;
 import org.adligo.tests4j.models.shared.dependency.DependencyMutant;
@@ -15,7 +14,6 @@ import org.adligo.tests4j.models.shared.dependency.I_ClassReferences;
 import org.adligo.tests4j.models.shared.trials.SourceFileScope;
 import org.adligo.tests4j.models.shared.trials.Test;
 import org.adligo.tests4j_tests.base_abstract_trials.SourceFileCountingTrial;
-import org.adligo.tests4j_tests.run.helpers.class_loading_mocks.MockWithArray;
 
 @SourceFileScope (sourceClass=ClassReferencesMutant.class, minCoverage=90.0)
 public class ClassReferencesMutantTrial extends SourceFileCountingTrial {
@@ -47,6 +45,10 @@ public class ClassReferencesMutantTrial extends SourceFileCountingTrial {
 		crm.setClassName("className");
 		crm.addReference("hey");
 		
+		Set<String> circles = new HashSet<String>();
+		circles.add("someOtherName");
+		crm.setCircularReferences(circles);
+		
 		ClassReferencesMutant copy = new ClassReferencesMutant(crm);
 		assertEquals("className", copy.getClassName());
 		
@@ -54,15 +56,21 @@ public class ClassReferencesMutantTrial extends SourceFileCountingTrial {
 		assertNotNull(refs);
 		assertContains(refs, "hey");
 		assertEquals(1, refs.size());
+		
+		assertTrue(copy.hasCircularReferences());
+		Set<String> copyCircles = crm.getCircularReferences();
+		assertContains(copyCircles, "someOtherName");
+		assertEquals(1, copyCircles.size());
+		
 	}
 	
 	@Test
 	public void testCopyConstructor_Dependencies() throws Exception {
 		ClassDependenciesMutant cdm = new ClassDependenciesMutant();
-		cdm.setClazzName("tn");
+		cdm.setClassName("tn");
 		
 		DependencyMutant dm = new DependencyMutant();
-		dm.setClazzName("cdn");
+		dm.setClassName("cdn");
 		cdm.addDependency(dm);
 		
 		ClassReferencesMutant copy = new ClassReferencesMutant(cdm);
@@ -117,12 +125,12 @@ public class ClassReferencesMutantTrial extends SourceFileCountingTrial {
 
 	@Override
 	public int getAsserts() {
-		return 25;
+		return 28;
 	}
 
 	@Override
 	public int getUniqueAsserts() {
-		return 20;
+		return 22;
 	}
 
 }

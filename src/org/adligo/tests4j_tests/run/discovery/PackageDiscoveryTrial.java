@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.adligo.tests4j.models.shared.dependency.I_ClassDependenciesCache;
 import org.adligo.tests4j.models.shared.metadata.I_MachineMetadata;
 import org.adligo.tests4j.models.shared.metadata.I_SourceInfoMetadata;
 import org.adligo.tests4j.models.shared.metadata.I_TestMetadata;
@@ -41,6 +42,7 @@ import org.adligo.tests4j.models.shared.trials.SourceFileTrial;
 import org.adligo.tests4j.models.shared.trials.TargetedPlatform;
 import org.adligo.tests4j.models.shared.trials.Test;
 import org.adligo.tests4j.models.shared.trials.TrialBindings;
+import org.adligo.tests4j.models.shared.trials.TrialDelegate;
 import org.adligo.tests4j.models.shared.trials.TrialRecursion;
 import org.adligo.tests4j.models.shared.trials.TrialTimeout;
 import org.adligo.tests4j.models.shared.trials.TrialTypeAnnotation;
@@ -48,7 +50,6 @@ import org.adligo.tests4j.models.shared.trials.UseCaseScope;
 import org.adligo.tests4j.models.shared.trials.UseCaseTrial;
 import org.adligo.tests4j.run.discovery.AfterTrialAuditor;
 import org.adligo.tests4j.run.discovery.BeforeTrialAuditor;
-import org.adligo.tests4j.run.discovery.I_ClassDependenciesCache;
 import org.adligo.tests4j.run.discovery.I_TrialDescription;
 import org.adligo.tests4j.run.discovery.PackageDiscovery;
 import org.adligo.tests4j.run.discovery.RelevantClassesWithTrialsCalculator;
@@ -68,11 +69,10 @@ public class PackageDiscoveryTrial extends SourceFileCountingTrial {
 		PackageDiscovery cd = new PackageDiscovery("org.adligo.tests4j.run.discovery");
 		List<String> clazzNames = cd.getClassNames();
 		assertNotNull(clazzNames);
-		assertEquals(11, clazzNames.size());
+		assertEquals(10, clazzNames.size());
 		assertContains(clazzNames, AfterTrialAuditor.class.getName());
 		assertContains(clazzNames, BeforeTrialAuditor.class.getName());
 		
-		assertContains(clazzNames, I_ClassDependenciesCache.class.getName());
 		assertContains(clazzNames, I_TrialDescription.class.getName());
 		
 		assertContains(clazzNames, PackageDiscovery.class.getName());
@@ -140,6 +140,8 @@ public class PackageDiscoveryTrial extends SourceFileCountingTrial {
 		
 		assertContains(classNames, BeforeTrial.class.getName());
 		
+		assertContains(classNames, TrialDelegate.class.getName());
+		
 		assertContains(classNames, I_AbstractTrial.class.getName());
 		assertContains(classNames, I_ApiTrial.class.getName());
 		assertContains(classNames, I_Trial.class.getName());
@@ -166,7 +168,7 @@ public class PackageDiscoveryTrial extends SourceFileCountingTrial {
 		assertContains(classNames, UseCaseScope.class.getName());
 		assertContains(classNames, UseCaseTrial.class.getName());
 		
-		assertEquals(26, classNames.size());
+		assertEquals(27, classNames.size());
 		List<PackageDiscovery> children =  cd.getSubPackages();
 		
 		

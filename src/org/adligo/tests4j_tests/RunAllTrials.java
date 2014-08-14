@@ -21,9 +21,8 @@ import org.adligo.tests4j.models.shared.trials.I_Trial;
 import org.adligo.tests4j.run.Tests4J;
 import org.adligo.tests4j.run.discovery.Tests4J_ParamsReader;
 import org.adligo.tests4j.shared.report.summary.TestDisplay;
-import org.adligo.tests4j.shared.report.summary.TrialDisplay;
-import org.adligo.tests4j.shared.report.summary.TrialsProgressDisplay;
-import org.adligo.tests4j_4jacoco.plugin.SimpleJacocoPluginFactory;
+import org.adligo.tests4j_4jacoco.plugin.ScopedJacocoPluginFactory;
+import org.adligo.tests4j_4jacoco.plugin.discovery.ClassInstrumenter;
 import org.adligo.tests4j_tests.base_abstract_trials.Counts;
 import org.adligo.tests4j_tests.base_abstract_trials.I_CountingTrial;
 
@@ -36,14 +35,17 @@ public class RunAllTrials implements I_Tests4J_Listener {
 	
 	public static void main(String [] args) {
 		
-		Tests4J_Params params = getTests(SimpleJacocoPluginFactory.class);
+		//Tests4J_Params params = getTests(SimpleJacocoPluginFactory.class);
 		
-		//Tests4J_Params params = getTests(ScopedJacocoPluginFactory.class);
+		Tests4J_Params params = getTests();
+		params.setCoveragePluginFactoryClass(ScopedJacocoPluginFactory.class);
 		
-		
-		params.setLogState(TrialDisplay.class, false);
+		//params.setLogState(TrialDisplay.class, false);
 		params.setLogState(TestDisplay.class, false);
-		params.setLogState(TrialsProgressDisplay.class, false);
+		//params.setLogState(ClassDependenciesDiscovery.class, true);
+		params.setLogState(ClassInstrumenter.class, true);
+		
+		//params.setLogState(TrialsProgressDisplay.class, false);
 		//params.setLogState(ClassReferencesDiscovery.class, true);
 		//params.setLogState(ClassDependenciesDiscovery.class, true);
 		//params.setLogState(TrialInstrumenter2.class, true);
@@ -53,6 +55,7 @@ public class RunAllTrials implements I_Tests4J_Listener {
 		params.setMetaTrialClass(TheMetaTrial.class);
 		//params.setThreadPoolSize(1);
 		//params.setCoveragePlugin(new TieredJacocoPlugin());
+		setupCounts(params);
 		I_Tests4J_Controls controls =  Tests4J.run(params, new RunAllTrials());
 		/*
 		try {
@@ -84,9 +87,8 @@ public class RunAllTrials implements I_Tests4J_Listener {
 		});
 	}
 
-	public static synchronized Tests4J_Params getTests(Class<? extends I_Tests4J_CoveragePluginFactory> factoryClass) {
+	public static synchronized Tests4J_Params getTests() {
 		Tests4J_Params toRet = new Tests4J_Params();
-		toRet.setCoveragePluginFactoryClass(factoryClass);
 		
 		toRet.addTrials(new org.adligo.tests4j_tests.models.shared.asserts.RunPkgTrials());
 		toRet.addTrials(new org.adligo.tests4j_tests.models.shared.common.RunPkgTrials());
@@ -100,10 +102,13 @@ public class RunAllTrials implements I_Tests4J_Listener {
 		toRet.addTrials(new org.adligo.tests4j_tests.jacoco.api_trials.RunPkgTrials());
 		toRet.addTrials(new org.adligo.tests4j_tests.jacoco.plugin.RunPkgTrials());
 		
-		//toRet.addTrials(new org.adligo.tests4j_tests.run.RunPkgTrials());
-
+		toRet.addTrials(new org.adligo.tests4j_tests.run.RunPkgTrials());
+		toRet.addTrials(new org.adligo.tests4j_tests.trials_api.RunPkgTrials());
 		
-		//toRet.addTrials(new org.adligo.tests4j_tests.trials_api.RunPkgTrials());
+		return toRet;
+	}
+
+	private static void setupCounts(Tests4J_Params toRet) {
 		
 		Tests4J_ParamsReader reader = new Tests4J_ParamsReader(new DefaultSystem(),toRet);
 		I_Tests4J_CoveragePlugin plugin = reader.getCoveragePlugin();
@@ -137,7 +142,6 @@ public class RunAllTrials implements I_Tests4J_Listener {
 				"\nafterTests " + counts.getAfterTests() +
 				"\nafterAsserts " + counts.getAfterAsserts() + 
 				"\nafterUniqueAsserts " + counts.getAfterUniqueAsserts());
-		return toRet;
 	}
 
 	@Override

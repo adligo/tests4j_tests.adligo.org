@@ -56,12 +56,9 @@ public class TheMetaTrial  extends AbstractTrial implements I_MetaTrial {
 			sb.append("'");
 			sb.append(System.lineSeparator());
 		}
-		assertEquals(sb.toString(), 93, metadata.getAllTrialsCount());
-		//assertEquals(sb.toString(), 111, metadata.getAllTrialsCount());
+		assertEquals(sb.toString(), 113, metadata.getAllTrialsCount());
 
-		//cool number
-		assertEquals(375,  metadata.getAllTestsCount());
-		//assertEquals(513,  metadata.getAllTestsCount());
+		assertEquals(562,  metadata.getAllTestsCount());
 		
 	}
 

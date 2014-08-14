@@ -8,11 +8,6 @@ import org.adligo.tests4j.models.shared.system.Tests4J_Params;
 import org.adligo.tests4j.models.shared.trials.I_Trial;
 import org.adligo.tests4j.run.Tests4J;
 import org.adligo.tests4j_4jacoco.plugin.ScopedJacocoPluginFactory;
-import org.adligo.tests4j_tests.models.shared.dependency.ClassDependenciesMutantTrial;
-import org.adligo.tests4j_tests.models.shared.dependency.ClassDependenciesTrial;
-import org.adligo.tests4j_tests.models.shared.dependency.ClassReferencesMutantTrial;
-import org.adligo.tests4j_tests.models.shared.dependency.DependencyMutantTrial;
-import org.adligo.tests4j_tests.models.shared.dependency.DependencyTrial;
 
 public class RunPkgTrials implements I_Tests4J_TrialList {
 
@@ -31,6 +26,9 @@ public class RunPkgTrials implements I_Tests4J_TrialList {
 	@Override
 	public List<Class<? extends I_Trial>> getTrials() {
 		List<Class<? extends I_Trial>> trials = new ArrayList<Class<? extends I_Trial>>();
+		
+		trials.add(ClassCircularReferencesMutantTrial.class);
+		trials.add(ClassCircularReferencesTrial.class);
 		
 		trials.add(ClassDependenciesMutantTrial.class);
 		trials.add(ClassDependenciesTrial.class);

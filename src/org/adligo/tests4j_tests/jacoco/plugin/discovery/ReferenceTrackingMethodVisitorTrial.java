@@ -10,6 +10,7 @@ import org.adligo.tests4j.models.shared.dependency.ClassReferencesMutant;
 import org.adligo.tests4j.models.shared.trials.SourceFileScope;
 import org.adligo.tests4j.models.shared.trials.Test;
 import org.adligo.tests4j_4jacoco.plugin.discovery.ReferenceTrackingMethodVisitor;
+import org.adligo.tests4j_4jacoco.plugin.instrumentation.map.MapInstrConstants;
 import org.adligo.tests4j_tests.base_abstract_trials.SourceFileCountingTrial;
 import org.adligo.tests4j_tests.run.helpers.class_loading_mocks.MockException;
 import org.adligo.tests4j_tests.run.helpers.class_loading_mocks.MockWithMethodReturn;
@@ -18,7 +19,7 @@ import org.objectweb.asm.Label;
 import org.objectweb.asm.Opcodes;
 import org.objectweb.asm.Type;
 
-@SourceFileScope (sourceClass=ReferenceTrackingMethodVisitor.class, minCoverage=56.0)
+@SourceFileScope (sourceClass=ReferenceTrackingMethodVisitor.class, minCoverage=64.0)
 public class ReferenceTrackingMethodVisitorTrial extends SourceFileCountingTrial {
 	ReferenceTrackingMethodVisitor rtcv;
 	ClassReferencesMutant crm = new ClassReferencesMutant();
@@ -41,6 +42,7 @@ public class ReferenceTrackingMethodVisitorTrial extends SourceFileCountingTrial
 	
 	@Test
 	public void testReferenceCounting_BasicExecution() throws Exception {
+		rtcv.setCurrentMethodName("<init>");
 		rtcv.visitLocalVariable("name", "Lorg/adligo/tests4j_tests/jacoco/plugin/discovery/ReferenceTrackingMethodVisitorTrial;", "signature", new Label(), new Label(), 1);
 		assertEquals(1, names.size());
 		assertContains(names, ReferenceTrackingMethodVisitorTrial.class.getName());
@@ -85,22 +87,46 @@ public class ReferenceTrackingMethodVisitorTrial extends SourceFileCountingTrial
 	}
 	
 
+	@Test
+	public void testReferenceCounting_JacocoInit() throws Exception {
+		rtcv.setCurrentMethodName(MapInstrConstants.METHOD_NAME);
+		rtcv.visitLocalVariable("name", "Lorg/adligo/tests4j_tests/jacoco/plugin/discovery/ReferenceTrackingMethodVisitorTrial;", "signature", new Label(), new Label(), 1);
+		assertEquals(0, names.size());
+		
+		rtcv.visitLocalVariable("name", "Lorg/adligo/tests4j_4jacoco/plugin/discovery/ReferenceTrackingMethodVisitor;", "signature", new Label(), new Label(), 1);
+		assertEquals(0, names.size());
+		rtcv.visitLocalVariable("name", "Ljava/lang/String;", "signature", new Label(), new Label(), 1);
+		assertEquals(0, names.size());
+		
+		rtcv.visitMethodInsn(Opcodes.AALOAD, "org/adligo/tests4j_tests/run/helpers/class_loading_mocks/MockWithNothing", "foo", "()V", true);
+		assertEquals(0, names.size());
+		
+		rtcv.visitFieldInsn(Opcodes.AALOAD, "org/adligo/tests4j_tests/run/helpers/class_loading_mocks/MockWithNothing", "name", "Lorg/adligo/tests4j_tests/run/helpers/class_loading_mocks/MockWithMethodReturn;");
+		assertEquals(0, names.size());
 	
+	
+		rtcv.visitLdcInsn(Type.getType("Lorg/adligo/tests4j_tests/run/helpers/class_loading_mocks/MockWithNothing;"));
+		assertEquals(0, names.size());
+		
+		rtcv.visitTryCatchBlock(new Label(), new Label(), new Label(), 
+				"org/adligo/tests4j_tests/run/helpers/class_loading_mocks/MockException");
+		assertEquals(0, names.size());
+	}
 	
 	
 	@Override
 	public int getTests() {
-		return 1;
+		return 2;
 	}
 
 	@Override
 	public int getAsserts() {
-		return 21;
+		return 28;
 	}
 
 	@Override
 	public int getUniqueAsserts() {
-		return 18;
+		return 19;
 	}
 
 }

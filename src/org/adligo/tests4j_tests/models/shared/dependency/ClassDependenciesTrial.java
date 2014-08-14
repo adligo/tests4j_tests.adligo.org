@@ -27,30 +27,23 @@ public class ClassDependenciesTrial extends SourceFileCountingTrial {
 						new ClassDependencies(null);
 					}
 				});
-		assertThrown(new ExpectedThrownData(new IllegalArgumentException(ClassDependencies.NO_NAME)),
-				new I_Thrower() {
-					
-					@Override
-					public void run() throws Throwable {
-						new ClassDependencies(new ClassDependenciesMutant());
-					}
-				});
+		
 	}
 	@Test
 	public void testMethodsAndCopyConstructor() {
 		ClassDependenciesMutant cdm = new ClassDependenciesMutant();
-		cdm.setClazzName("calzzzNamez");
+		cdm.setClassName("calzzzNamez");
 		assertEquals("calzzzNamez", cdm.getClassName());
 		
 		DependencyMutant dm = new DependencyMutant();
-		dm.setClazzName("otherClazzName");
+		dm.setClassName("otherClazzName");
 		dm.addReference();
 		cdm.putDependency(dm);
 		DependencyMutant dmFrom = cdm.getDependency("otherClazzName");
 		assertSame(dm, dmFrom);
 		
 		dm = new DependencyMutant();
-		dm.setClazzName("3rdName");
+		dm.setClassName("3rdName");
 		dm.addReference();
 		dm.addReference();
 		cdm.putDependency(dm);
@@ -85,11 +78,11 @@ public class ClassDependenciesTrial extends SourceFileCountingTrial {
 
 	@Override
 	public int getAsserts() {
-		return 18;
+		return 17;
 	}
 
 	@Override
 	public int getUniqueAsserts() {
-		return 10;
+		return 9;
 	}
 }

@@ -10,6 +10,7 @@ import org.adligo.tests4j.run.Tests4J;
 import org.adligo.tests4j.shared.report.summary.TestDisplay;
 import org.adligo.tests4j.shared.report.summary.TrialDisplay;
 import org.adligo.tests4j_4jacoco.plugin.ScopedJacocoPluginFactory;
+import org.adligo.tests4j_4jacoco.plugin.discovery.ClassDependenciesDiscovery;
 
 public class RunPkgTrials implements I_Tests4J_TrialList {
 
@@ -19,6 +20,7 @@ public class RunPkgTrials implements I_Tests4J_TrialList {
 		params.addTrials(new RunPkgTrials());
 		params.setLogState(TrialDisplay.class, false);
 		params.setLogState(TestDisplay.class, false);
+		params.setLogState(ClassDependenciesDiscovery.class, true);
 		
 		//Tests4J_Manager
 		

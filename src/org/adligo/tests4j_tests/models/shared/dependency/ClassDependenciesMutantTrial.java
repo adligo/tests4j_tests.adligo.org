@@ -1,8 +1,10 @@
 package org.adligo.tests4j_tests.models.shared.dependency;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.adligo.tests4j.models.shared.dependency.ClassDependencies;
 import org.adligo.tests4j.models.shared.dependency.ClassDependenciesMutant;
@@ -20,15 +22,19 @@ public class ClassDependenciesMutantTrial extends SourceFileCountingTrial {
 	@Test
 	public void testMethodsAndCopyConstructor() {
 		ClassDependenciesMutant cdm = new ClassDependenciesMutant();
-		cdm.setClazzName("calzzzName2z");
+		cdm.setClassName("calzzzName2z");
+		
+		Set<String> circles = new HashSet<String>();
+		circles.add("someOtherName");
+		cdm.setCircularReferences(circles);
 		
 		DependencyMutant dm = new DependencyMutant();
-		dm.setClazzName("otherClazzName1");
+		dm.setClassName("otherClazzName1");
 		dm.addReference();
 		cdm.putDependency(dm);
 		
 		dm = new DependencyMutant();
-		dm.setClazzName("3rdName3");
+		dm.setClassName("3rdName3");
 		dm.addReference();
 		dm.addReference();
 		cdm.putDependency(dm);
@@ -36,6 +42,11 @@ public class ClassDependenciesMutantTrial extends SourceFileCountingTrial {
 		ClassDependencies cdm2 = new ClassDependencies(cdm);
 		assertEquals("calzzzName2z",cdm2.getClassName());
 		assertDependencies(cdm);
+		
+		assertTrue(cdm2.hasCircularReferences());
+		Set<String> copyCircles = cdm2.getCircularReferences();
+		assertContains(copyCircles, "someOtherName");
+		assertEquals(1, copyCircles.size());
 	}
 
 	protected void assertDependencies(I_ClassDependencies cdm) {
@@ -55,15 +66,15 @@ public class ClassDependenciesMutantTrial extends SourceFileCountingTrial {
 	@Test
 	public void testAddSimple() {
 		ClassDependenciesMutant cdm = new ClassDependenciesMutant();
-		cdm.setClazzName("calzzzName2z");
+		cdm.setClassName("calzzzName2z");
 		
 		DependencyMutant dm = new DependencyMutant();
-		dm.setClazzName("otherClazzName1");
+		dm.setClassName("otherClazzName1");
 		dm.addReference();
 		cdm.putDependency(dm);
 		
 		dm = new DependencyMutant();
-		dm.setClazzName("3rdName3");
+		dm.setClassName("3rdName3");
 		dm.addReference();
 		dm.addReference();
 		cdm.putDependency(dm);
@@ -76,24 +87,24 @@ public class ClassDependenciesMutantTrial extends SourceFileCountingTrial {
 	@Test
 	public void testAddInnerClassOntoSourceFileClass() {
 		ClassDependenciesMutant cdm = new ClassDependenciesMutant();
-		cdm.setClazzName("calzzzName2z$1");
+		cdm.setClassName("calzzzName2z$1");
 		
 		DependencyMutant dm = new DependencyMutant();
-		dm.setClazzName("calzzzName2z");
+		dm.setClassName("calzzzName2z");
 		cdm.putDependency(dm);
 		
 		dm = new DependencyMutant();
-		dm.setClazzName("calzzzName2z$1");
+		dm.setClassName("calzzzName2z$1");
 		cdm.putDependency(dm);
 		
 		ClassDependenciesMutant cdm2 = new ClassDependenciesMutant();
-		cdm2.setClazzName("calzzzName2z");
+		cdm2.setClassName("calzzzName2z");
 		dm = new DependencyMutant();
-		dm.setClazzName("calzzzName2z");
+		dm.setClassName("calzzzName2z");
 		cdm2.putDependency(dm);
 		
 		dm = new DependencyMutant();
-		dm.setClazzName("calzzzName2z$1");
+		dm.setClassName("calzzzName2z$1");
 		cdm2.putDependency(dm);
 		
 		cdm2.add(cdm);
@@ -117,24 +128,24 @@ public class ClassDependenciesMutantTrial extends SourceFileCountingTrial {
 	@Test
 	public void testAddSourceFileClassOntoInnerClass() {
 		ClassDependenciesMutant cdm = new ClassDependenciesMutant();
-		cdm.setClazzName("calzzzName2z");
+		cdm.setClassName("calzzzName2z");
 		
 		DependencyMutant dm = new DependencyMutant();
-		dm.setClazzName("calzzzName2z");
+		dm.setClassName("calzzzName2z");
 		cdm.putDependency(dm);
 		
 		dm = new DependencyMutant();
-		dm.setClazzName("calzzzName2z$1");
+		dm.setClassName("calzzzName2z$1");
 		cdm.putDependency(dm);
 		
 		ClassDependenciesMutant cdm2 = new ClassDependenciesMutant();
-		cdm2.setClazzName("calzzzName2z$1");
+		cdm2.setClassName("calzzzName2z$1");
 		dm = new DependencyMutant();
-		dm.setClazzName("calzzzName2z");
+		dm.setClassName("calzzzName2z");
 		cdm2.putDependency(dm);
 		
 		dm = new DependencyMutant();
-		dm.setClazzName("calzzzName2z$1");
+		dm.setClassName("calzzzName2z$1");
 		cdm2.putDependency(dm);
 		
 		cdm2.add(cdm);
@@ -162,11 +173,11 @@ public class ClassDependenciesMutantTrial extends SourceFileCountingTrial {
 
 	@Override
 	public int getAsserts() {
-		return 25;
+		return 28;
 	}
 
 	@Override
 	public int getUniqueAsserts() {
-		return 21;
+		return 23;
 	}
 }
