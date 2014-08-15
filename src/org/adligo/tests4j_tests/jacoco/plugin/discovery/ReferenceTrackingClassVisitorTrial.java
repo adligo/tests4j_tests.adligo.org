@@ -1,29 +1,20 @@
 package org.adligo.tests4j_tests.jacoco.plugin.discovery;
 
 import java.io.InputStream;
-import java.io.PrintStream;
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
 import org.adligo.tests4j.models.shared.common.ClassMethods;
-import org.adligo.tests4j.models.shared.common.I_System;
-import org.adligo.tests4j.models.shared.dependency.ClassFilter;
-import org.adligo.tests4j.models.shared.dependency.ClassFilterMutant;
-import org.adligo.tests4j.models.shared.dependency.I_ClassReferences;
 import org.adligo.tests4j.models.shared.trials.SourceFileScope;
 import org.adligo.tests4j.models.shared.trials.Test;
 import org.adligo.tests4j_4jacoco.plugin.discovery.ReferenceTrackingClassVisitor;
 import org.adligo.tests4j_4jacoco.plugin.discovery.ReferenceTrackingMethodVisitor;
 import org.adligo.tests4j_4jacoco.plugin.instrumentation.map.MapInstrConstants;
 import org.adligo.tests4j_tests.base_abstract_trials.SourceFileCountingTrial;
-import org.adligo.tests4j_tests.run.helpers.class_loading_mocks.MockException;
-import org.adligo.tests4j_tests.run.helpers.class_loading_mocks.MockI_OtherStringAndLong;
 import org.adligo.tests4j_tests.run.helpers.class_loading_mocks.MockWithAbstractMethodException;
 import org.adligo.tests4j_tests.run.helpers.class_loading_mocks.MockWithAbstractMethodParam;
 import org.adligo.tests4j_tests.run.helpers.class_loading_mocks.MockWithAbstractMethodReturn;
 import org.adligo.tests4j_tests.run.helpers.class_loading_mocks.MockWithArray;
-import org.adligo.tests4j_tests.run.helpers.class_loading_mocks.MockWithBidirectionalA;
 import org.adligo.tests4j_tests.run.helpers.class_loading_mocks.MockWithEverything;
 import org.adligo.tests4j_tests.run.helpers.class_loading_mocks.MockWithField;
 import org.adligo.tests4j_tests.run.helpers.class_loading_mocks.MockWithImportOnlyInMethod;
@@ -34,12 +25,59 @@ import org.adligo.tests4j_tests.run.helpers.class_loading_mocks.MockWithMethodRe
 import org.adligo.tests4j_tests.run.helpers.class_loading_mocks.MockWithNothing;
 import org.adligo.tests4j_tests.run.helpers.class_loading_mocks.MockWithStaticField;
 import org.adligo.tests4j_tests.run.helpers.class_loading_mocks.MockWithStaticInitalizer;
-import org.adligo.tests4j_tests.run.helpers.class_loading_mocks.MockWithTriangleC;
 import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.Opcodes;
 
+import com.sun.org.apache.regexp.internal.recompile;
+
 @SourceFileScope (sourceClass=ReferenceTrackingClassVisitor.class, minCoverage=36.0)
 public class ReferenceTrackingClassVisitorTrial extends SourceFileCountingTrial {
+	public static final String PRINT_STREAM = "Ljava/io/PrintStream;";
+	
+	public static final String CLASS = "Ljava/lang/Class;";
+	public static final String OBJ = "Ljava/lang/Object;";
+	public static final String MATH = "Ljava/lang/Math;";
+	public static final String STRING = "Ljava/lang/String;";
+	public static final String STRING_BUILDER = "Ljava/lang/StringBuilder;";
+	public static final String SYSTEM = "Ljava/lang/System;";
+	
+	public static final String I_SYSTEM = "Lorg/adligo/tests4j/models/shared/common/I_System;";
+	public static final String M_EXCEPTION = "Lorg/adligo/tests4j_tests/run/helpers/class_loading_mocks/MockException;";
+	public static final String M_EXCEPTION_BARE = "org/adligo/tests4j_tests/run/helpers/class_loading_mocks/MockException";
+	
+	public static final String MI_OTHER_STRING_AND_LONG = "Lorg/adligo/tests4j_tests/run/helpers/class_loading_mocks/MockI_OtherStringAndLong;";
+	
+	public static final String MW_ARRAY = "Lorg/adligo/tests4j_tests/run/helpers/class_loading_mocks/MockWithArray;";
+	public static final String MW_BI_A = "Lorg/adligo/tests4j_tests/run/helpers/class_loading_mocks/MockWithBidirectionalA;";
+	
+	public static final String MW_EVERYTHING = "Lorg/adligo/tests4j_tests/run/helpers/class_loading_mocks/MockWithEverything;";
+	public static final String MW_EVERYTHING_1 = "Lorg/adligo/tests4j_tests/run/helpers/class_loading_mocks/MockWithEverything$1;";
+	public static final String MW_EXT_B = "Lorg/adligo/tests4j_tests/run/helpers/class_loading_mocks/MockWithExtensionB;";
+	
+	public static final String MW_ABS_METHOD_EXCEPTION = "Lorg/adligo/tests4j_tests/run/helpers/class_loading_mocks/MockWithAbstractMethodException;";
+	public static final String MW_ABS_METHOD_PARAM = "Lorg/adligo/tests4j_tests/run/helpers/class_loading_mocks/MockWithAbstractMethodParam;";
+	public static final String MW_ABS_METHOD_RETURN = "Lorg/adligo/tests4j_tests/run/helpers/class_loading_mocks/MockWithAbstractMethodReturn;";
+	
+	public static final String MW_FIELD = "Lorg/adligo/tests4j_tests/run/helpers/class_loading_mocks/MockWithField;";
+	
+	public static final String MW_IMPORT_ONLY_IN_METHOD = "Lorg/adligo/tests4j_tests/run/helpers/class_loading_mocks/MockWithImportOnlyInMethod;";
+	
+	public static final String MW_METHOD_EXCEPTION = "Lorg/adligo/tests4j_tests/run/helpers/class_loading_mocks/MockWithMethodException;";
+	public static final String MW_METHOD_EXCEPTION_BLOCK = "Lorg/adligo/tests4j_tests/run/helpers/class_loading_mocks/MockWithMethodExceptionBlock;";
+	public static final String MW_METHOD_PARAMS = "Lorg/adligo/tests4j_tests/run/helpers/class_loading_mocks/MockWithMethodParams;";
+	
+	public static final String MW_METHOD_RETURN = "Lorg/adligo/tests4j_tests/run/helpers/class_loading_mocks/MockWithMethodReturn;";
+	
+	public static final String MW_NOTHING = "Lorg/adligo/tests4j_tests/run/helpers/class_loading_mocks/MockWithNothing;";
+	public static final String MW_NOTHING_BARE = "org/adligo/tests4j_tests/run/helpers/class_loading_mocks/MockWithNothing";
+	
+	public static final String MW_STATIC_FIELD = "Lorg/adligo/tests4j_tests/run/helpers/class_loading_mocks/MockWithStaticField;";
+	public static final String MW_STATIC_INIT = "Lorg/adligo/tests4j_tests/run/helpers/class_loading_mocks/MockWithStaticInitalizer;";
+	
+	public static final String MW_STRING = "Lorg/adligo/tests4j_tests/run/helpers/class_loading_mocks/MockWithString;";
+	public static final String MW_TRI_C = "Lorg/adligo/tests4j_tests/run/helpers/class_loading_mocks/MockWithTriangleC;";
+	
+	
 	ReferenceTrackingClassVisitor rtcv;
 	
 	Set<String> names = new HashSet<String>();
@@ -47,131 +85,142 @@ public class ReferenceTrackingClassVisitorTrial extends SourceFileCountingTrial 
 	public void beforeTests() {
 		if (rtcv == null) {
 			rtcv = new ReferenceTrackingClassVisitor(Opcodes.ASM5, super.getLog());
-			rtcv.setInstrumentClassFilter(new ClassFilter());
-			
-			ClassFilterMutant cfm = new ClassFilterMutant();
-			cfm.setIgnoredPackageNames(Collections.unmodifiableSet(new HashSet<String>()));
-			rtcv.setBasicClassFilter(new ClassFilter(cfm));
 		}
 		rtcv.reset();
 	}
 	
 	@Test
 	public void testFindReferences_001_MockWithNothing() throws Exception {
+		Class<?> clazz = MockWithNothing.class;
+		String className = clazz.getName();
 		InputStream in= ReferenceTrackingClassVisitorTrial.class.getResourceAsStream(
-				ClassMethods.toResource(MockWithNothing.class.getName()));
+				ClassMethods.toResource(className));
 		ClassReader classReader=new ClassReader(in);
 		
 		classReader.accept(rtcv, 0);
-		assertEquals(MockWithNothing.class.getName(), rtcv.getClassName());
+		assertEquals(className, rtcv.getClassName());
 		
 		Set<String> classNames =  rtcv.getClassReferences();
 		
-		assertContains(classNames, Object.class.getName());
-		assertContains(classNames, MockWithNothing.class.getName());
+		assertContains(classNames, OBJ);
+		assertContains(classNames, MW_NOTHING);
 		assertEquals(2, classNames.size());
 	}
 	
 	@Test
 	public void testFindReferences_002_MockWithMethodReturn() throws Exception {
+		Class<?> clazz = MockWithMethodReturn.class;
+		String className = clazz.getName();
+		
 		InputStream in= ReferenceTrackingClassVisitorTrial.class.getResourceAsStream(
-				ClassMethods.toResource(MockWithMethodReturn.class.getName()));
+				ClassMethods.toResource(className));
 		ClassReader classReader=new ClassReader(in);
 		classReader.accept(rtcv, 0);
 		
-		assertEquals(MockWithMethodReturn.class.getName(),  rtcv.getClassName());
+		assertEquals(className,  rtcv.getClassName());
 		
 		Set<String> classNames =  rtcv.getClassReferences();
-		assertContains(classNames, Object.class.getName());
-		assertContains(classNames, MockWithMethodReturn.class.getName());
-		assertContains(classNames, MockWithNothing.class.getName());
+		assertContains(classNames, OBJ);
+		assertContains(classNames, MW_METHOD_RETURN);
+		assertContains(classNames, MW_NOTHING);
 		assertEquals(3, classNames.size());
 	}
 	
 	@Test
 	public void testFindReferences_003_MockWithField() throws Exception {
+		Class<?> clazz = MockWithField.class;
+		String className = clazz.getName();
 		
 		InputStream in= ReferenceTrackingClassVisitorTrial.class.getResourceAsStream(
-				ClassMethods.toResource(MockWithField.class.getName()));
+				ClassMethods.toResource(className));
 		ClassReader classReader=new ClassReader(in);
 		classReader.accept(rtcv, 0);
 		
-		assertEquals(MockWithField.class.getName(),  rtcv.getClassName());
+		assertEquals(className,  rtcv.getClassName());
 		
 		Set<String> classNames =  rtcv.getClassReferences();
-		assertContains(classNames, Object.class.getName());
-		assertContains(classNames, MockWithField.class.getName());
-		assertContains(classNames, I_System.class.getName());
+		assertContains(classNames, OBJ);
+		assertContains(classNames, MW_FIELD);
+		assertContains(classNames, I_SYSTEM);
 		assertEquals(3, classNames.size());
 	}
 	
 	@Test
 	public void testFindReferences_004_MockWithMethodParams() throws Exception {
+		Class<?> clazz = MockWithMethodParams.class;
+		String className = clazz.getName();
 		
 		InputStream in= ReferenceTrackingClassVisitorTrial.class.getResourceAsStream(
-				ClassMethods.toResource(MockWithMethodParams.class.getName()));
+				ClassMethods.toResource(className));
 		ClassReader classReader=new ClassReader(in);
 		classReader.accept(rtcv, 0);
 		
-		assertEquals(MockWithMethodParams.class.getName(),  rtcv.getClassName());
+		assertEquals(className,  rtcv.getClassName());
 		
 		Set<String> classNames =  rtcv.getClassReferences();
-		assertContains(classNames, Object.class.getName());
-		assertContains(classNames, MockWithMethodParams.class.getName());
+		assertContains(classNames, OBJ);
+		assertContains(classNames, MW_METHOD_PARAMS);
 		assertEquals(2, classNames.size());
 	}
 	
 	@Test
 	public void testFindReferences_005_MockWithImportOnlyInMethod() throws Exception {
+		Class<?> clazz = MockWithImportOnlyInMethod.class;
+		String className = clazz.getName();
+		
 		InputStream in= ReferenceTrackingClassVisitorTrial.class.getResourceAsStream(
-				ClassMethods.toResource(MockWithImportOnlyInMethod.class.getName()));
+				ClassMethods.toResource(className));
 		ClassReader classReader=new ClassReader(in);
 		classReader.accept(rtcv, 0);
 		
-		assertEquals(MockWithImportOnlyInMethod.class.getName(),  rtcv.getClassName());
+		assertEquals(className,  rtcv.getClassName());
 		
 		Set<String> classNames =  rtcv.getClassReferences();
 		
-		assertContains(classNames, Object.class.getName());
-		assertContains(classNames, MockWithImportOnlyInMethod.class.getName());
-		assertContains(classNames, I_System.class.getName());
+		assertContains(classNames, OBJ);
+		assertContains(classNames, MW_IMPORT_ONLY_IN_METHOD);
+		assertContains(classNames, I_SYSTEM);
 		assertEquals(3, classNames.size());
 	}
 	
 	
 	@Test
 	public void testFindReferences_006_MockWithStaticField() throws Exception {
+		Class<?> clazz = MockWithStaticField.class;
+		String className = clazz.getName();
 		
 		InputStream in= ReferenceTrackingClassVisitorTrial.class.getResourceAsStream(
-				ClassMethods.toResource(MockWithStaticField.class.getName()));
+				ClassMethods.toResource(className));
 		ClassReader classReader=new ClassReader(in);
 		classReader.accept(rtcv, 0);
 		
-		assertEquals(MockWithStaticField.class.getName(),  rtcv.getClassName());
+		assertEquals(className,  rtcv.getClassName());
 		
 		Set<String> classNames =  rtcv.getClassReferences();
 		
-		assertContains(classNames, Object.class.getName());
-		assertContains(classNames, MockWithStaticField.class.getName());
-		assertContains(classNames, MockWithNothing.class.getName());
+		assertContains(classNames, OBJ);
+		assertContains(classNames, MW_STATIC_FIELD);
+		assertContains(classNames, MW_NOTHING);
 		assertEquals(3, classNames.size());
 	}
 	
 	@Test
 	public void testFindReferences_007_MockWithStaticInitalizer() throws Exception {
+		Class<?> clazz = MockWithStaticInitalizer.class;
+		String className = clazz.getName();
 		
 		InputStream in= ReferenceTrackingClassVisitorTrial.class.getResourceAsStream(
-				ClassMethods.toResource(MockWithStaticInitalizer.class.getName()));
+				ClassMethods.toResource(className));
 		ClassReader classReader=new ClassReader(in);
 		classReader.accept(rtcv, 0);
 		
-		assertEquals(MockWithStaticInitalizer.class.getName(),  rtcv.getClassName());
+		assertEquals(className,  rtcv.getClassName());
 		
 		Set<String> classNames =  rtcv.getClassReferences();
 		
-		assertContains(classNames, Object.class.getName());
-		assertContains(classNames, MockWithStaticInitalizer.class.getName());
-		assertContains(classNames, MockWithNothing.class.getName());
+		assertContains(classNames, OBJ);
+		assertContains(classNames, MW_STATIC_INIT);
+		assertContains(classNames, MW_NOTHING);
 		assertEquals(3, classNames.size());
 	}
 	
@@ -179,57 +228,63 @@ public class ReferenceTrackingClassVisitorTrial extends SourceFileCountingTrial 
 	
 	@Test
 	public void testFindReferences_008_MockWithArray() throws Exception {
+		Class<?> clazz = MockWithArray.class;
+		String className = clazz.getName();
 		
 		InputStream in= ReferenceTrackingClassVisitorTrial.class.getResourceAsStream(
-				ClassMethods.toResource(MockWithArray.class.getName()));
+				ClassMethods.toResource(className));
 		ClassReader classReader=new ClassReader(in);
 		
 		classReader.accept(rtcv, 0);
 		
-		assertEquals(MockWithArray.class.getName(),  rtcv.getClassName());
+		assertEquals(className,  rtcv.getClassName());
 		
 		Set<String> classNames =  rtcv.getClassReferences();
-		assertContains(classNames, Object.class.getName());
-		assertContains(classNames, MockWithArray.class.getName());
-		assertContains(classNames, MockWithNothing.class.getName());
+		assertContains(classNames, OBJ);
+		assertContains(classNames, MW_ARRAY);
+		assertContains(classNames, "[" + MW_NOTHING);
 		assertEquals(3, classNames.size());
 	}
 	
 	@Test
 	public void testFindReferences_009_MockWithMethodException() throws Exception {
+		Class<?> clazz = MockWithMethodException.class;
+		String className = clazz.getName();
 		
 		InputStream in= ReferenceTrackingClassVisitorTrial.class.getResourceAsStream(
-				ClassMethods.toResource(MockWithMethodException.class.getName()));
+				ClassMethods.toResource(className));
 		ClassReader classReader=new ClassReader(in);
 		classReader.accept(rtcv, 0);
 		
-		assertEquals(MockWithMethodException.class.getName(),  rtcv.getClassName());
+		assertEquals(className,  rtcv.getClassName());
 		
 		Set<String> classNames =  rtcv.getClassReferences();
 		
-		assertContains(classNames, Object.class.getName());
-		assertContains(classNames, MockWithMethodException.class.getName());
-		assertContains(classNames, MockException.class.getName());
+		assertContains(classNames, OBJ);
+		assertContains(classNames, MW_METHOD_EXCEPTION);
+		assertContains(classNames, M_EXCEPTION);
 		assertEquals(3, classNames.size());
 	}
 	
 	@Test
 	public void testFindReferences_010_MockWithMethodExceptionBlock() throws Exception {
+		Class<?> clazz = MockWithMethodExceptionBlock.class;
+		String className = clazz.getName();
 		
 		InputStream in= ReferenceTrackingClassVisitorTrial.class.getResourceAsStream(
-				ClassMethods.toResource(MockWithMethodExceptionBlock.class.getName()));
+				ClassMethods.toResource(className));
 		ClassReader classReader=new ClassReader(in);
 		
 		classReader.accept(rtcv, 0);
 		
-		assertEquals(MockWithMethodExceptionBlock.class.getName(),  rtcv.getClassName());
+		assertEquals(className,  rtcv.getClassName());
 		
 		Set<String> classNames =  rtcv.getClassReferences();
 		
-		assertContains(classNames, Object.class.getName());
-		assertContains(classNames, MockWithMethodExceptionBlock.class.getName());
-		assertContains(classNames, MockWithMethodException.class.getName());
-		assertContains(classNames, MockException.class.getName());
+		assertContains(classNames, OBJ);
+		assertContains(classNames, MW_METHOD_EXCEPTION_BLOCK);
+		assertContains(classNames, MW_METHOD_EXCEPTION);
+		assertContains(classNames, M_EXCEPTION);
 		assertEquals(4, classNames.size());
 	}
 	
@@ -243,17 +298,20 @@ public class ReferenceTrackingClassVisitorTrial extends SourceFileCountingTrial 
 	 */
 	@Test
 	public void testFindReferences_011_MockWithAbstractMethodReturn() throws Exception {
+		Class<?> clazz = MockWithAbstractMethodReturn.class;
+		String className = clazz.getName();
+		
 		InputStream in= ReferenceTrackingClassVisitorTrial.class.getResourceAsStream(
-				ClassMethods.toResource(MockWithAbstractMethodReturn.class.getName()));
+				ClassMethods.toResource(className));
 		ClassReader classReader=new ClassReader(in);
 		
 		classReader.accept(rtcv, 0);
 		
-		assertEquals(MockWithAbstractMethodReturn.class.getName(),  rtcv.getClassName());
+		assertEquals(className,  rtcv.getClassName());
 		
 		Set<String> classNames =  rtcv.getClassReferences();
-		assertContains(classNames, Object.class.getName());
-		assertContains(classNames, MockWithAbstractMethodReturn.class.getName());
+		assertContains(classNames, OBJ);
+		assertContains(classNames, MW_ABS_METHOD_RETURN);
 		assertEquals(2, classNames.size());
 	}
 	
@@ -266,17 +324,20 @@ public class ReferenceTrackingClassVisitorTrial extends SourceFileCountingTrial 
 	 */
 	@Test
 	public void testFindReferences_012_MockWithAbstractMethodParam() throws Exception {
+		Class<?> clazz = MockWithAbstractMethodParam.class;
+		String className = clazz.getName();
+		
 		InputStream in= ReferenceTrackingClassVisitorTrial.class.getResourceAsStream(
-				ClassMethods.toResource(MockWithAbstractMethodParam.class.getName()));
+				ClassMethods.toResource(className));
 		ClassReader classReader=new ClassReader(in);
 		
 		classReader.accept(rtcv, 0);
 		
-		assertEquals(MockWithAbstractMethodParam.class.getName(),  rtcv.getClassName());
+		assertEquals(className,  rtcv.getClassName());
 		
 		Set<String> classNames =  rtcv.getClassReferences();
-		assertContains(classNames, Object.class.getName());
-		assertContains(classNames, MockWithAbstractMethodParam.class.getName());
+		assertContains(classNames, OBJ);
+		assertContains(classNames, MW_ABS_METHOD_PARAM);
 		assertEquals(2, classNames.size());
 	}
 	
@@ -288,31 +349,35 @@ public class ReferenceTrackingClassVisitorTrial extends SourceFileCountingTrial 
 	 * @throws Exception
 	 */
 	@Test
-	public void testFindReferences_013_MockWithAbstractMethodParam() throws Exception {
+	public void testFindReferences_013_MockWithAbstractMethodException() throws Exception {
+		Class<?> clazz = MockWithAbstractMethodException.class;
+		String className = clazz.getName();
+		
 		InputStream in= ReferenceTrackingClassVisitorTrial.class.getResourceAsStream(
-				ClassMethods.toResource(MockWithAbstractMethodException.class.getName()));
+				ClassMethods.toResource(className));
 		ClassReader classReader=new ClassReader(in);
 		
 		classReader.accept(rtcv, 0);
 		
-		assertEquals(MockWithAbstractMethodException.class.getName(),  rtcv.getClassName());
+		assertEquals(className,  rtcv.getClassName());
 		
 		Set<String> classNames =  rtcv.getClassReferences();
-		assertContains(classNames, Object.class.getName());
-		assertContains(classNames, MockWithAbstractMethodException.class.getName());
+		assertContains(classNames, OBJ);
+		assertContains(classNames, MW_ABS_METHOD_EXCEPTION);
 		assertEquals(2, classNames.size());
 	}
 	
 	@Test
 	public void testFindReferences_014_JacocoInitAndData() throws Exception {
+		
 		rtcv.reset();
 		rtcv.visit(51, MapInstrConstants.DATAFIELD_ACC, "MockMock", 
-				"", "Ljava.lang.Object", new String [] {});
+				"", OBJ, new String [] {});
 		
 		rtcv.visitField(MapInstrConstants.DATAFIELD_ACC, "field1", 
-				"Ljava.lang.Object;", "", null);
+				OBJ, "", null);
 		rtcv.visitField(MapInstrConstants.DATAFIELD_ACC, MapInstrConstants.FIELD_NAME, 
-				"Ljava.util.Map;", "", null);
+				"Ljava/util/Map;", "", null);
 		
 		ReferenceTrackingMethodVisitor methodVisitor = (ReferenceTrackingMethodVisitor)
 				rtcv.visitMethod(MapInstrConstants.DATAFIELD_ACC, "<init>", 
@@ -322,56 +387,38 @@ public class ReferenceTrackingClassVisitorTrial extends SourceFileCountingTrial 
 		
 		assertEquals("MockMock",  rtcv.getClassName());
 		Set<String> crefs = rtcv.getClassReferences();
-		assertContains(crefs, Object.class.getName());
+		assertContains(crefs, OBJ);
 		assertEquals(1, crefs.size());
 	}
 	
 	@Test
 	public void testFindReferences_100_MockWithEverything() throws Exception {
+		Class<?> clazz = MockWithEverything.class;
+		String className = clazz.getName();
+		
 		//it probably wouln't get to 100
 		InputStream in= ReferenceTrackingClassVisitorTrial.class.getResourceAsStream(
-				ClassMethods.toResource(MockWithEverything.class.getName()));
+				ClassMethods.toResource(className));
 		ClassReader classReader = new ClassReader(in);
 		
 		classReader.accept(rtcv, 0);
 		
-		assertEquals(MockWithEverything.class.getName(), rtcv.getClassName());
+		assertEquals(className, rtcv.getClassName());
 		
 		Set<String> classNames =  rtcv.getClassReferences();
 		
-		assertContains(classNames, Class.class.getName());
-		assertContains(classNames, Math.class.getName());
-		assertContains(classNames, Object.class.getName());
-		
-		assertContains(classNames, PrintStream.class.getName());
-		assertContains(classNames, String.class.getName());
-		assertContains(classNames, StringBuilder.class.getName());
-		assertContains(classNames, System.class.getName());
-		
-		assertContains(classNames, MockI_OtherStringAndLong.class.getName());
-		
-		assertContains(classNames, MockWithAbstractMethodException.class.getName());
-		assertContains(classNames, MockWithAbstractMethodReturn.class.getName());
-		assertContains(classNames, MockWithAbstractMethodParam.class.getName());
-		
-		assertContains(classNames, MockWithEverything.class.getName());
-		assertContains(classNames, MockWithEverything.class.getName() + "$1"); 
-		assertContains(classNames, MockWithArray.class.getName());
-		
-		assertContains(classNames, MockWithField.class.getName());
-		assertContains(classNames, MockWithNothing.class.getName());
-		assertContains(classNames, MockWithImportOnlyInMethod.class.getName());
-		
-		assertContains(classNames, MockWithMethodReturn.class.getName());
-		assertContains(classNames, MockWithMethodParams.class.getName());
-		assertContains(classNames, MockWithStaticField.class.getName());
-		
-		assertContains(classNames, MockWithStaticInitalizer.class.getName());
-		assertContains(classNames, MockWithBidirectionalA.class.getName());
-		assertContains(classNames, MockWithTriangleC.class.getName());
+		Set<String> expected = getEverything();
+		for (String e: expected) {
+			assertContains(classNames, e);
+		}
 		assertFalse(classNames.contains("."));
 		
-		assertEquals(25, classNames.size());
+		Set<String> left = new HashSet<String>(classNames);
+		left.removeAll(expected);
+		assertEquals(0, left.size());
+		
+		assertEquals(26, classNames.size());
+		assertEquals(classNames.size(), expected.size());
 		
 		in= ReferenceTrackingClassVisitorTrial.class.getResourceAsStream(
 				ClassMethods.toResource(MockWithEverything.class.getName() + "$1"));
@@ -382,22 +429,75 @@ public class ReferenceTrackingClassVisitorTrial extends SourceFileCountingTrial 
 		assertEquals(MockWithEverything.class.getName() + "$1", rtcv.getClassName());
 		classNames =  rtcv.getClassReferences();
 		
-		assertContains(classNames, Object.class.getName());
-		assertContains(classNames, PrintStream.class.getName());
-		assertContains(classNames, String.class.getName());
-		assertContains(classNames, StringBuilder.class.getName());
-		assertContains(classNames, System.class.getName());
+		expected = getEverything_1();
+		for (String e: expected) {
+			assertContains(classNames, e);
+		}
+		left = new HashSet<String>(classNames);
+		left.removeAll(expected);
+		assertEquals(0, left.size());
 		
-		assertContains(classNames, MockWithEverything.class.getName()); 
-		assertContains(classNames, MockWithEverything.class.getName() + "$1"); 
-		assertContains(classNames, MockWithMethodException.class.getName());
-		assertContains(classNames, MockException.class.getName());
-		
-		assertContains(classNames, MockWithMethodExceptionBlock.class.getName());
-		assertContains(classNames, MockWithMethodReturn.class.getName());
-		assertContains(classNames, MockWithNothing.class.getName());
-		assertContains(classNames,MockWithStaticField.class.getName());
 		assertEquals(13, classNames.size());
+		assertEquals(classNames.size(), expected.size());
+		
+	}
+
+	private Set<String> getEverything() {
+		Set<String> expected = new HashSet<String>();
+		expected.add( CLASS);
+		expected.add( MATH);
+		expected.add( OBJ);
+		
+		expected.add( PRINT_STREAM);
+		expected.add( STRING);
+		expected.add( STRING_BUILDER);
+		expected.add( SYSTEM);
+		
+		expected.add( MI_OTHER_STRING_AND_LONG);
+		
+		expected.add( MW_ABS_METHOD_EXCEPTION);
+		expected.add( MW_ABS_METHOD_RETURN);
+		expected.add( MW_ABS_METHOD_PARAM);
+		
+		expected.add( MW_EVERYTHING);
+		expected.add( MW_EVERYTHING_1); 
+		expected.add( MW_ARRAY);
+		
+		expected.add( MW_FIELD);
+		expected.add( MW_NOTHING);
+		expected.add( MW_IMPORT_ONLY_IN_METHOD);
+		
+		expected.add( MW_METHOD_RETURN);
+		expected.add( MW_METHOD_PARAMS);
+		expected.add( MW_STATIC_FIELD);
+		
+		expected.add( MW_STATIC_INIT);
+		expected.add( MW_BI_A);
+		expected.add( MW_TRI_C);
+		expected.add( "D");
+		expected.add(MW_EXT_B);
+		expected.add(MW_STRING);
+		return expected;
+	}
+
+	private Set<String> getEverything_1() {
+		Set<String> expected = new HashSet<String>();
+		expected.add( OBJ);
+		expected.add( PRINT_STREAM);
+		expected.add( STRING);
+		expected.add( STRING_BUILDER);
+		expected.add( SYSTEM);
+		
+		expected.add( MW_EVERYTHING); 
+		expected.add( MW_EVERYTHING_1); 
+		expected.add( MW_METHOD_EXCEPTION);
+		expected.add( M_EXCEPTION);
+		
+		expected.add( MW_METHOD_EXCEPTION_BLOCK);
+		expected.add( MW_METHOD_RETURN);
+		expected.add( MW_NOTHING);
+		expected.add(MW_STATIC_FIELD);
+		return expected;
 	}
 	
 	@Override
@@ -407,12 +507,12 @@ public class ReferenceTrackingClassVisitorTrial extends SourceFileCountingTrial 
 
 	@Override
 	public int getAsserts() {
-		return 106;
+		return 113;
 	}
 
 	@Override
 	public int getUniqueAsserts() {
-		return 106;
+		return 110;
 	}
 
 }

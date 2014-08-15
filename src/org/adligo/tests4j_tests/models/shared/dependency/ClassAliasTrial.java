@@ -63,13 +63,9 @@ public class ClassAliasTrial extends SourceFileCountingTrial {
 		ClassAlias c = new ClassAlias(Object.class);
 		
 		assertEquals(a, a);
-		assertEquals(a, Object.class);
-		assertEquals(a, Object.class.getName());
 		assertEquals(a.hashCode(), a.hashCode());
 		assertEquals(Object.class.getName(), a.toString());
 		
-		assertEquals(b, Class.class);
-		assertEquals(b, Class.class.getName());
 		assertNotEquals(a, b);
 		assertNotEquals(a.hashCode(), b.hashCode());
 		assertEquals(Class.class.getName(), b.toString());
@@ -86,12 +82,12 @@ public class ClassAliasTrial extends SourceFileCountingTrial {
 
 	@Override
 	public int getAsserts() {
-		return 28;
+		return 24;
 	}
 
 	@Override
 	public int getUniqueAsserts() {
-		return 11;
+		return 9;
 	}
 }
 

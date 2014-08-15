@@ -62,6 +62,7 @@ public class ClassFilterMutantTrial extends SourceFileCountingTrial {
 		assertTrue(cfm.isFiltered(MockWithNothing.class));
 		assertFalse(cfm.isFiltered(this.getClass()));
 		
+		cfm = new ClassFilterMutant();
 		cfm.setIgnoredPackageNames(new HashSet<String>());
 		assertFalse(cfm.isFiltered(String.class));
 		//I am not sure how to send the primitive Class instance here

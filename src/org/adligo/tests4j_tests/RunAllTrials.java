@@ -40,6 +40,7 @@ public class RunAllTrials implements I_Tests4J_Listener {
 		
 		Tests4J_Params params = getTests();
 		params.setCoveragePluginFactoryClass(ScopedJacocoPluginFactory.class);
+		setupCounts(params);
 		
 		params.setLogState(TrialDisplay.class, false);
 		params.setLogState(TestDisplay.class, false);
@@ -56,7 +57,7 @@ public class RunAllTrials implements I_Tests4J_Listener {
 		params.setMetaTrialClass(TheMetaTrial.class);
 		//params.setThreadPoolSize(1);
 		//params.setCoveragePlugin(new TieredJacocoPlugin());
-		setupCounts(params);
+		//
 		I_Tests4J_Controls controls =  Tests4J.run(params, new RunAllTrials());
 		/*
 		try {
