@@ -48,8 +48,10 @@ public class CachedClassBytesClassLoaderTrial extends SourceFileCountingTrial {
 				new HashSet<String>());
 		final InputStream in = this.getClass().getResourceAsStream(MOCK_WITH_NOTHING_RESOURCE_NAME);
 		cl.addCache(in, MOCK_WITH_NOTHING_NAME);
-		assertEquals(1, lm.getLogMessagesSize());
-		String message = lm.getLogMessage(0);
+		assertEquals(1, lm.getExceptionsSize());
+		Throwable exception = lm.getException(0);
+		assertEquals(IllegalStateException.class.getName(), exception.getClass().getName());
+		String message = exception.getMessage();
 		assertTrue(message, message.contains(" the following class should to be cached at this point," + lm.getLineSeperator() +
 				" using the parent classloader (which can mess up code coverage assertions);" + lm.getLineSeperator() +
 				"java.lang.Object"));
@@ -74,7 +76,8 @@ public class CachedClassBytesClassLoaderTrial extends SourceFileCountingTrial {
 	
 	@Test
 	public void testClassNotCachedState() throws Exception {
-		CachedClassBytesClassLoader cl = new CachedClassBytesClassLoader(super.getLog(),
+		Tests4J_LogMock lm = new Tests4J_LogMock();
+		CachedClassBytesClassLoader cl = new CachedClassBytesClassLoader(lm,
 				Collections.singleton("java."),
 				Collections.singleton(""));
 		Set<String> pkgs = cl.getPackagesNotRequired();
@@ -99,7 +102,8 @@ public class CachedClassBytesClassLoaderTrial extends SourceFileCountingTrial {
 	
 	@Test
 	public void testCreateCachedState() throws Exception {
-		CachedClassBytesClassLoader cl = new CachedClassBytesClassLoader(super.getLog(),
+		Tests4J_LogMock lm = new Tests4J_LogMock();
+		CachedClassBytesClassLoader cl = new CachedClassBytesClassLoader(lm,
 				Collections.singleton("java."),
 				Collections.singleton(""));
 		
@@ -112,7 +116,8 @@ public class CachedClassBytesClassLoaderTrial extends SourceFileCountingTrial {
 	
 	@Test
 	public void testAddCacheTwice() throws Exception {
-		CachedClassBytesClassLoader cl = new CachedClassBytesClassLoader(super.getLog(),
+		Tests4J_LogMock lm = new Tests4J_LogMock();
+		CachedClassBytesClassLoader cl = new CachedClassBytesClassLoader(lm,
 				Collections.singleton("java."),
 				Collections.singleton(""));
 		
@@ -128,7 +133,8 @@ public class CachedClassBytesClassLoaderTrial extends SourceFileCountingTrial {
 	
 	@Test
 	public void testMapReCheck() throws Exception {
-		MockCachedClassBytesClassLoader cl = new MockCachedClassBytesClassLoader(super.getLog(),
+		Tests4J_LogMock lm = new Tests4J_LogMock();
+		MockCachedClassBytesClassLoader cl = new MockCachedClassBytesClassLoader(lm,
 				Collections.singleton("java."),
 				Collections.singleton(""));
 		
@@ -154,7 +160,8 @@ public class CachedClassBytesClassLoaderTrial extends SourceFileCountingTrial {
 	
 	@Test
 	public void testInputStreamGetsClosed() throws Exception {
-		final CachedClassBytesClassLoader cl = new CachedClassBytesClassLoader(super.getLog(),
+		Tests4J_LogMock lm = new Tests4J_LogMock();
+		final CachedClassBytesClassLoader cl = new CachedClassBytesClassLoader(lm,
 				Collections.singleton("java."),
 				Collections.singleton(""));
 		
@@ -177,12 +184,12 @@ public class CachedClassBytesClassLoaderTrial extends SourceFileCountingTrial {
 
 	@Override
 	public int getAsserts() {
-		return 35;
+		return 36;
 	}
 
 	@Override
 	public int getUniqueAsserts() {
-		return 27;
+		return 28;
 	}
 
 }

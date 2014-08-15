@@ -11,11 +11,13 @@ import org.adligo.tests4j.models.shared.dependency.ClassParentsLocal;
 import org.adligo.tests4j.models.shared.dependency.I_ClassFilter;
 import org.adligo.tests4j.models.shared.dependency.I_ClassParentsLocal;
 import org.adligo.tests4j.models.shared.dependency.I_ClassReferences;
+import org.adligo.tests4j.models.shared.dependency.I_ClassReferencesCache;
 import org.adligo.tests4j.models.shared.dependency.I_ClassReferencesLocal;
 import org.adligo.tests4j.models.shared.trials.SourceFileScope;
 import org.adligo.tests4j.models.shared.trials.Test;
 import org.adligo.tests4j.run.helpers.CachedClassBytesClassLoader;
 import org.adligo.tests4j_4jacoco.plugin.discovery.ClassParentsDiscovery;
+import org.adligo.tests4j_4jacoco.plugin.discovery.ClassReferencesCache;
 import org.adligo.tests4j_4jacoco.plugin.discovery.I_DiscoveryMemory;
 import org.adligo.tests4j_tests.base_abstract_trials.SourceFileCountingTrial;
 import org.adligo.tests4j_tests.jacoco.plugin.discovery.delegates.CPDT_Assert_Linear_to_20;
@@ -49,6 +51,7 @@ import org.adligo.tests4j_tests.run.helpers.class_loading_mocks.MockWithTriangle
 public class ClassParentsDiscoveryTrial extends SourceFileCountingTrial implements I_DiscoveryMemory, I_ClassParentsDiscoveryTrial {
 	private CachedClassBytesClassLoader ccbClassLoader;
 	private ClassParentsDiscovery classParentsDiscovery;
+	private ClassReferencesCache initalRefCache = new ClassReferencesCache();
 	private Map<String,I_ClassParentsLocal> parentsCache = new HashMap<String, I_ClassParentsLocal>();
 	private final ClassFilter classFilter = new ClassFilter();
 	private Tests4J_LogMock logMock = new Tests4J_LogMock();
@@ -348,6 +351,10 @@ public class ClassParentsDiscoveryTrial extends SourceFileCountingTrial implemen
 	@Override
 	public int getUniqueAsserts() {
 		return 467;
+	}
+	@Override
+	public I_ClassReferencesCache getInitialReferencesCache() {
+		return initalRefCache;
 	}
 
 
