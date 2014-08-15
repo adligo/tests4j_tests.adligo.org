@@ -13,9 +13,6 @@ public class MockCachedClassBytesClassLoader extends CachedClassBytesClassLoader
 		super(pLog, pPackagesWithoutWarning, pClassesWithoutWarning);
 	}
 
-	public void loadClassInternal(String name) {
-		super.defineClassFromBytes(name);
-	}
 	
 	public void putBytes(String className, byte [] bytes) {
 		super.putBytes(className, bytes);

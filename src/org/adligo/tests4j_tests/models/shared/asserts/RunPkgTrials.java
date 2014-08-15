@@ -7,7 +7,11 @@ import org.adligo.tests4j.models.shared.system.I_Tests4J_TrialList;
 import org.adligo.tests4j.models.shared.system.Tests4J_Params;
 import org.adligo.tests4j.models.shared.trials.I_Trial;
 import org.adligo.tests4j.run.Tests4J;
+import org.adligo.tests4j.shared.report.summary.TestDisplay;
+import org.adligo.tests4j.shared.report.summary.TrialDisplay;
 import org.adligo.tests4j_4jacoco.plugin.ScopedJacocoPluginFactory;
+import org.adligo.tests4j_4jacoco.plugin.discovery.ClassInstrumenter;
+import org.adligo.tests4j_4jacoco.plugin.discovery.ClassReferencesDiscovery;
 
 public class RunPkgTrials implements I_Tests4J_TrialList {
 
@@ -17,7 +21,11 @@ public class RunPkgTrials implements I_Tests4J_TrialList {
 		params.addTrials(new RunPkgTrials());
 		//params.setLogState(Tests4J_TrialsRunable.class, true);
 		//params.setLogState(MultiProbesMap.class, true);
-		
+		params.setLogState(TrialDisplay.class, false);
+		params.setLogState(TestDisplay.class, true);
+		//params.setLogState(ClassReferencesDiscovery.class, true);
+		params.setLogState(ClassInstrumenter.class, true);
+		params.setLogState(ClassReferencesDiscovery.class, true);
 		params.setCoveragePluginFactoryClass(ScopedJacocoPluginFactory.class);
 		
 		Tests4J.run(params);
@@ -31,10 +39,7 @@ public class RunPkgTrials implements I_Tests4J_TrialList {
 		trials.add(AbstractCompareAssertCommandTrial.class);
 		trials.add(AssertionFailureLocationTrial.class);
 		trials.add(AssertionProcessorTrial.class);
-		
 		trials.add(BooleanAssertCommandTrial.class);
-		
-		
 		trials.add(ContainsAssertCommandTrial.class);
 		trials.add(DoubleAssertCommandTrial.class);
 		trials.add(IdenticalAssertCommandTrial.class);

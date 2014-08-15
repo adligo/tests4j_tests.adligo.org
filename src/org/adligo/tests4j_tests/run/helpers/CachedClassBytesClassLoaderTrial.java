@@ -36,21 +36,22 @@ public class CachedClassBytesClassLoaderTrial extends SourceFileCountingTrial {
 				null,
 				null);
 		assertSame(lm, cl.getLog());
-		Set<String> pkgsWithOutWarn = cl.getPackagesWithoutWarning();
+		Set<String> pkgsWithOutWarn = cl.getPackagesNotRequired();
 		assertNotNull(pkgsWithOutWarn);
 		assertEquals(Collections.singleton("java.").getClass().getName(), pkgsWithOutWarn.getClass().getName() );
 		assertContains(pkgsWithOutWarn, "java.");
 		assertEquals(1, pkgsWithOutWarn.size());
-		assertEquals(Collections.emptySet(), cl.getClassesWithoutWarning());
+		assertEquals(Collections.emptySet(), cl.getClassesNotRequired());
 		
 		cl = new CachedClassBytesClassLoader(lm,
 				new HashSet<String>(),
 				new HashSet<String>());
-		InputStream in = this.getClass().getResourceAsStream(MOCK_WITH_NOTHING_RESOURCE_NAME);
+		final InputStream in = this.getClass().getResourceAsStream(MOCK_WITH_NOTHING_RESOURCE_NAME);
 		cl.addCache(in, MOCK_WITH_NOTHING_NAME);
 		assertEquals(1, lm.getLogMessagesSize());
 		String message = lm.getLogMessage(0);
-		assertTrue(message, message.contains(" using parent class loader for the following class;" + lm.getLineSeperator() +
+		assertTrue(message, message.contains(" the following class should to be cached at this point," + lm.getLineSeperator() +
+				" using the parent classloader (which can mess up code coverage assertions);" + lm.getLineSeperator() +
 				"java.lang.Object"));
 		
 		List<String> cachedClasses = cl.getAllCachedClasses();
@@ -76,10 +77,10 @@ public class CachedClassBytesClassLoaderTrial extends SourceFileCountingTrial {
 		CachedClassBytesClassLoader cl = new CachedClassBytesClassLoader(super.getLog(),
 				Collections.singleton("java."),
 				Collections.singleton(""));
-		Set<String> pkgs = cl.getPackagesWithoutWarning();
+		Set<String> pkgs = cl.getPackagesNotRequired();
 		assertEquals(1, pkgs.size());
 		assertContains(pkgs, "java.");
-		Set<String> classes = cl.getClassesWithoutWarning();
+		Set<String> classes = cl.getClassesNotRequired();
 		assertEquals(1, classes.size());
 		assertContains(classes, "");
 		
@@ -141,7 +142,6 @@ public class CachedClassBytesClassLoaderTrial extends SourceFileCountingTrial {
 			}
 			bytes = baos.toByteArray();
 			cl.putBytes(MOCK_WITH_NOTHING_NAME, bytes);
-			cl.loadClassInternal(MOCK_WITH_NOTHING_NAME);
 			Class<?> c = cl.getCachedClass(MOCK_WITH_NOTHING_NAME);
 			assertNotNull(c);
 			assertSame(c, cl.getLoadedClass(MOCK_WITH_NOTHING_NAME));

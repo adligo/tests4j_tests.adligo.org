@@ -6,7 +6,7 @@ import java.util.Set;
 
 import org.adligo.tests4j.models.shared.dependency.ClassFilter;
 import org.adligo.tests4j.models.shared.dependency.ClassFilterMutant;
-import org.adligo.tests4j.models.shared.dependency.ClassReferencesMutant;
+import org.adligo.tests4j.models.shared.dependency.ClassReferencesLocalMutant;
 import org.adligo.tests4j.models.shared.trials.SourceFileScope;
 import org.adligo.tests4j.models.shared.trials.Test;
 import org.adligo.tests4j_4jacoco.plugin.discovery.ReferenceTrackingMethodVisitor;
@@ -22,8 +22,7 @@ import org.objectweb.asm.Type;
 @SourceFileScope (sourceClass=ReferenceTrackingMethodVisitor.class, minCoverage=64.0)
 public class ReferenceTrackingMethodVisitorTrial extends SourceFileCountingTrial {
 	ReferenceTrackingMethodVisitor rtcv;
-	ClassReferencesMutant crm = new ClassReferencesMutant();
-	Set<String> names = crm.getReferences();
+	Set<String> names = new HashSet<String>();
 	
 	public void beforeTests() {
 		if (rtcv == null) {
@@ -33,10 +32,8 @@ public class ReferenceTrackingMethodVisitorTrial extends SourceFileCountingTrial
 			cfm.setIgnoredPackageNames(Collections.unmodifiableSet(new HashSet<String>()));
 			rtcv.setClassFilter(new ClassFilter(cfm));
 		}
-		rtcv.setClassReferences(crm);
+		rtcv.setClassReferences(names);
 		names.clear();
-		
-		
 	}
 	
 	

@@ -6,6 +6,7 @@ import java.util.TreeSet;
 
 import org.adligo.tests4j.models.shared.asserts.common.ExpectedThrownData;
 import org.adligo.tests4j.models.shared.asserts.common.I_Thrower;
+import org.adligo.tests4j.models.shared.dependency.ClassAlias;
 import org.adligo.tests4j.models.shared.dependency.DependencyMutant;
 import org.adligo.tests4j.models.shared.dependency.I_Dependency;
 import org.adligo.tests4j.models.shared.trials.SourceFileScope;
@@ -22,39 +23,31 @@ public class DependencyMutantTrial extends SourceFileCountingTrial {
 	public void testSetterExceptions() {
 		final DependencyMutant dm = new DependencyMutant();
 		assertThrown(new ExpectedThrownData(new IllegalArgumentException(
-				DependencyMutant.CLASS_NAME_MAY_NOT_BE_SET_TO_A_EMPTY_VALUE)),
+				DependencyMutant.CLASS_ALIAS_MAY_NOT_BE_SET_TO_A_NULL_VALUE)),
 				new I_Thrower() {
 					
 					@Override
 					public void run() {
-						dm.setClassName(null);
-					}
-				});
-		assertThrown(new ExpectedThrownData(new IllegalArgumentException(
-				DependencyMutant.CLASS_NAME_MAY_NOT_BE_SET_TO_A_EMPTY_VALUE)),
-				new I_Thrower() {
-					
-					@Override
-					public void run() {
-						dm.setClassName("");
+						dm.setAlias(null);
 					}
 				});
 	}
 	@Test
 	public void testGetsSetsAndConstructor() {
 		DependencyMutant dm = new DependencyMutant();
-		assertNull(dm.getClassName());
+		assertNull(dm.getAlias());
 		assertEquals(0, dm.getReferences());
 		
 		dm.addReference();
 		assertEquals(1, dm.getReferences());
 		
-		dm.setClassName("someName");
-		assertEquals("someName", dm.getClassName());
+		ClassAlias ca = new ClassAlias("someName");
+		dm.setAlias(ca);
+		assertEquals(ca, dm.getAlias());
 		
 		DependencyMutant copy = new DependencyMutant(dm);
 		assertEquals(1, copy.getReferences());
-		assertEquals("someName", copy.getClassName());
+		assertEquals(ca, copy.getAlias());
 	}
 	
 	
@@ -65,19 +58,21 @@ public class DependencyMutantTrial extends SourceFileCountingTrial {
 		dm.addReference();
 		assertEquals(2, dm.getReferences());
 		
-		dm.setClassName("someName");
-		assertEquals("someName", dm.getClassName());
+		ClassAlias ca = new ClassAlias("someName");
+		dm.setAlias(ca);
+		assertEquals(ca, dm.getAlias());
 		
 		DependencyMutant dmB = new DependencyMutant();
 		assertEquals(0, dmB.getReferences());
-		dmB.setClassName("otherClassName");
-		assertEquals("otherClassName", dmB.getClassName());
+		ca = new ClassAlias("otherClassName");
+		dmB.setAlias(ca);
+		assertEquals(ca, dmB.getAlias());
 		
 		assertEquals(2, dmB.compareTo(dm));
 		assertEquals(-2, dm.compareTo(dmB));
 		
 		DependencyMutant dmC = new DependencyMutant(dm);
-		dmC.setClassName("someOtherName");
+		dmC.setAlias(new ClassAlias("someOtherName"));
 		
 		//compare the names
 		assertEquals(-1, dm.compareTo(dmC));
@@ -97,31 +92,31 @@ public class DependencyMutantTrial extends SourceFileCountingTrial {
 	@Test
 	public void testComparatorImpl_FromMockWithMethodException() {
 		DependencyMutant dmObj = new DependencyMutant();
-		dmObj.setClassName(Object.class.getName());
+		dmObj.setAlias(new ClassAlias(Object.class));
 		for (int i = 0; i < 4; i++) {
 			dmObj.addReference();
 		}
 		
 		DependencyMutant dmExc = new DependencyMutant();
-		dmExc.setClassName(Exception.class.getName());
+		dmExc.setAlias(new ClassAlias(Exception.class));
 		for (int i = 0; i < 4; i++) {
 			dmExc.addReference();
 		}
 		
 		DependencyMutant dmMe = new DependencyMutant();
-		dmMe.setClassName(MockException.class.getName());
+		dmMe.setAlias(new ClassAlias(MockException.class));
 		for (int i = 0; i < 4; i++) {
 			dmMe.addReference();
 		}
 		
 		DependencyMutant dmN = new DependencyMutant();
-		dmN.setClassName(MockWithNothing.class.getName());
+		dmN.setAlias(new ClassAlias(MockWithNothing.class));
 		for (int i = 0; i < 4; i++) {
 			dmN.addReference();
 		}
 		
 		DependencyMutant dmMw = new DependencyMutant();
-		dmMw.setClassName(MockWithMethodException.class.getName());
+		dmMw.setAlias(new ClassAlias(MockWithMethodException.class));
 		
 		Set<I_Dependency> order = new TreeSet<I_Dependency>();
 		order.add(dmObj);
@@ -141,10 +136,10 @@ public class DependencyMutantTrial extends SourceFileCountingTrial {
 	@Test
 	public void testToString() {
 		DependencyMutant dm = new DependencyMutant();
-		dm.setClassName("foo");
+		dm.setAlias(new ClassAlias("foo"));
 		dm.addReference();
 		dm.addReference();
-		assertEquals("DependencyMutant [clazzName=foo, references=2]", dm.toString());
+		assertEquals("DependencyMutant [alias=foo, references=2]", dm.toString());
 		
 		
 	}
@@ -155,11 +150,11 @@ public class DependencyMutantTrial extends SourceFileCountingTrial {
 
 	@Override
 	public int getAsserts() {
-		return 25;
+		return 24;
 	}
 
 	@Override
 	public int getUniqueAsserts() {
-		return 22;
+		return 21;
 	}
 }

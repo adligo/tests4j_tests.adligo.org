@@ -7,7 +7,6 @@ import org.adligo.tests4j.models.shared.system.I_Tests4J_TrialList;
 import org.adligo.tests4j.models.shared.system.Tests4J_Params;
 import org.adligo.tests4j.models.shared.trials.I_Trial;
 import org.adligo.tests4j.run.Tests4J;
-import org.adligo.tests4j_4jacoco.plugin.ScopedJacocoPluginFactory;
 import org.adligo.tests4j_4jacoco.plugin.discovery.ClassInstrumenter;
 import org.adligo.tests4j_4jacoco.plugin.discovery.ClassReferencesDiscovery;
 
@@ -61,11 +60,10 @@ public class RunPkgTrials implements I_Tests4J_TrialList {
 	public List<Class<? extends I_Trial>> getTrials() {
 		List<Class<? extends I_Trial>> trials = new ArrayList<Class<? extends I_Trial>>();
 		
-		
-		trials.add(ClassDependenciesDiscoveryTrial.class);
-		trials.add(ClassReferencesDiscoveryTrial.class);
-		trials.add(ReferenceTrackingClassVisitorTrial.class);
 		trials.add(ReferenceTrackingMethodVisitorTrial.class);
+		trials.add(ReferenceTrackingClassVisitorTrial.class);
+		trials.add(ClassParentsDiscoveryTrial.class);
+		trials.add(ClassReferencesDiscoveryTrial.class);
 		
 		return trials;
 	}

@@ -6,13 +6,14 @@ import org.adligo.tests4j.models.shared.trials.SourceFileScope;
 import org.adligo.tests4j.models.shared.trials.Test;
 import org.adligo.tests4j.shared.report.summary.TestDisplay;
 import org.adligo.tests4j.shared.report.summary.TestFailedDisplay;
+import org.adligo.tests4j.shared.report.summary.ThreadDisplay;
 import org.adligo.tests4j_tests.base_abstract_trials.SourceFileCountingTrial;
 import org.adligo.tests4j_tests.models.shared.system.mocks.Tests4J_LogMock;
 
-@SourceFileScope (sourceClass=TestDisplay.class, minCoverage=98.0)
+@SourceFileScope (sourceClass=TestDisplay.class, minCoverage=80.0)
 public class TestDisplayTrial extends SourceFileCountingTrial {
 	private Tests4J_LogMock log = new Tests4J_LogMock();
-	private TestDisplay reporter = new TestDisplay(log);
+	private TestDisplay reporter = new TestDisplay(log, new ThreadDisplay(log));
 	
 	@Override
 	public void beforeTests() {

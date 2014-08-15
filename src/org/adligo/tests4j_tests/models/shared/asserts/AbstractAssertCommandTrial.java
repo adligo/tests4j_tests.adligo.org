@@ -4,16 +4,12 @@ import org.adligo.tests4j.models.shared.asserts.AbstractAssertCommand;
 import org.adligo.tests4j.models.shared.asserts.common.AssertType;
 import org.adligo.tests4j.models.shared.asserts.common.ExpectedThrownData;
 import org.adligo.tests4j.models.shared.asserts.common.I_Thrower;
-import org.adligo.tests4j.models.shared.coverage.I_SourceFileCoverage;
-import org.adligo.tests4j.models.shared.results.I_SourceFileTrialResult;
-import org.adligo.tests4j.models.shared.trials.AdditionalInstrumentation;
 import org.adligo.tests4j.models.shared.trials.SourceFileScope;
 import org.adligo.tests4j.models.shared.trials.Test;
 import org.adligo.tests4j_tests.base_abstract_trials.SourceFileCountingTrial;
 import org.adligo.tests4j_tests.models.shared.asserts.mocks.ExtendedAssertCommand;
 
 @SourceFileScope (sourceClass=AbstractAssertCommand.class, minCoverage=78.0)
-@AdditionalInstrumentation (javaPackages="org.adligo.tests4j_tests.models.shared.asserts.mocks")
 public class AbstractAssertCommandTrial extends SourceFileCountingTrial {
 
 	@Test

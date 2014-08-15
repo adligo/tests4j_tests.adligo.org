@@ -5,15 +5,16 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.adligo.tests4j.models.shared.dependency.ClassAliasLocal;
+import org.adligo.tests4j.models.shared.dependency.I_ClassAlias;
 import org.adligo.tests4j.models.shared.dependency.I_ClassReferences;
+import org.adligo.tests4j.models.shared.dependency.I_ClassReferencesLocal;
 import org.adligo.tests4j.models.shared.dependency.I_Dependency;
 import org.adligo.tests4j.models.shared.trials.TrialDelegate;
 import org.adligo.tests4j.run.helpers.I_CachedClassBytesClassLoader;
 import org.adligo.tests4j_4jacoco.plugin.discovery.ClassReferencesDiscovery;
-import org.adligo.tests4j_tests.run.helpers.class_loading_mocks.MockWithAbstractMethodReturn;
 import org.adligo.tests4j_tests.run.helpers.class_loading_mocks.MockWithBidirectionalA;
 import org.adligo.tests4j_tests.run.helpers.class_loading_mocks.MockWithBidirectionalB;
-import org.adligo.tests4j_tests.run.helpers.class_loading_mocks.MockWithNothing;
 import org.adligo.tests4j_tests.run.helpers.class_loading_mocks.MockWithTriangleA;
 import org.adligo.tests4j_tests.run.helpers.class_loading_mocks.MockWithTriangleB;
 import org.adligo.tests4j_tests.run.helpers.class_loading_mocks.MockWithTriangleC;
@@ -31,9 +32,10 @@ public class CRDT_Assert_Circular_to_10 extends TrialDelegate {
 		I_CachedClassBytesClassLoader ccbClassLoader = trial.getCcbClassLoader();
 		ClassReferencesDiscovery crd = trial.getClassReferenceDiscovery();
 		
-		String className = MockWithBidirectionalA.class.getName();
+		Class<?> clazz = MockWithBidirectionalA.class;
+		String className = clazz.getName();
 		assertFalse(ccbClassLoader.hasCache(className));
-		List<String> order = crd.discoverAndLoad(MockWithBidirectionalA.class);
+		List<String> order = crd.findOrLoad(clazz);
 		assertNotNull(order);
 		assertEquals(Object.class.getName(), order.get(0));
 		assertEquals(className, order.get(1));
@@ -44,13 +46,13 @@ public class CRDT_Assert_Circular_to_10 extends TrialDelegate {
 		
 		assertBiToDeps(crd, className);
 		
-		I_ClassReferences cr =  crd.getReferences(className);
+		I_ClassReferences cr =  crd.getReferences(new ClassAliasLocal(clazz));
 		assertBiARefs(className, cr);
 		
 		assertHasMockWithBidirectionalACache();
 		assertHasMockWithBidirectionalBCache();
 		
-		Map<String,I_ClassReferences> refsCache = trial.getRefsCache();
+		Map<String,I_ClassReferencesLocal> refsCache = trial.getRefsCache();
 		assertEquals(2, refsCache.size());
 	}
 
@@ -59,15 +61,18 @@ public class CRDT_Assert_Circular_to_10 extends TrialDelegate {
 		Set<I_Dependency> deps = crd.toDependencies(className);
 		Iterator<I_Dependency> it = deps.iterator();
 		I_Dependency dep =  it.next();
-		assertEquals(Object.class.getName(), dep.getClassName());
+		I_ClassAlias alias = dep.getAlias();
+		assertEquals(Object.class.getName(), alias.getName());
 		assertEquals(2, dep.getReferences());
 
 		dep =  it.next();
-		assertEquals(MockWithBidirectionalA.class.getName(), dep.getClassName());
+		alias = dep.getAlias();
+		assertEquals(MockWithBidirectionalA.class.getName(), alias.getName());
 		assertEquals(1, dep.getReferences());
 		
 		dep =  it.next();
-		assertEquals(MockWithBidirectionalB.class.getName(), dep.getClassName());
+		alias = dep.getAlias();
+		assertEquals(MockWithBidirectionalB.class.getName(), alias.getName());
 		assertEquals(1, dep.getReferences());
 		
 		assertEquals(3, deps.size());
@@ -76,7 +81,7 @@ public class CRDT_Assert_Circular_to_10 extends TrialDelegate {
 
 	public void assertHasMockWithBidirectionalACache() {
 		String className = MockWithBidirectionalA.class.getName();
-		Map<String,I_ClassReferences> refsCache = trial.getRefsCache();
+		Map<String,I_ClassReferencesLocal> refsCache = trial.getRefsCache();
 		
 		I_ClassReferences crefs =  refsCache.get(className);
 		assertBiARefs(className, crefs);
@@ -86,14 +91,14 @@ public class CRDT_Assert_Circular_to_10 extends TrialDelegate {
 	private void assertBiARefs(String className, I_ClassReferences crefs) {
 		
 		assertNotNull(crefs);
-		assertEquals(className, crefs.getClassName());
+		assertEquals(className, crefs.getName());
 		assertTrue(crefs.hasCircularReferences());
 		
-		Set<String> circular = crefs.getCircularReferences();
+		Set<String> circular = crefs.getCircularReferenceNames();
 		assertContains(circular, MockWithBidirectionalB.class.getName());
 		assertEquals(1, circular.size());
 		
-		Set<String> refs = crefs.getReferences();
+		Set<String> refs = crefs.getReferenceNames();
 		assertNotNull(refs);
 		assertContains(refs, MockWithBidirectionalB.class.getName());
 		assertContains(refs, Object.class.getName());
@@ -105,9 +110,10 @@ public class CRDT_Assert_Circular_to_10 extends TrialDelegate {
 		I_CachedClassBytesClassLoader ccbClassLoader = trial.getCcbClassLoader();
 		ClassReferencesDiscovery crd = trial.getClassReferenceDiscovery();
 		
-		String className = MockWithBidirectionalB.class.getName();
+		Class<?> clazz = MockWithBidirectionalB.class;
+		String className = clazz.getName();
 		assertFalse(ccbClassLoader.hasCache(className));
-		List<String> order = crd.discoverAndLoad(MockWithBidirectionalB.class);
+		List<String> order = crd.findOrLoad(clazz);
 		assertNotNull(order);
 		
 		assertEquals(Object.class.getName(), order.get(0));
@@ -119,20 +125,20 @@ public class CRDT_Assert_Circular_to_10 extends TrialDelegate {
 		
 		assertBiToDeps(crd, className);
 		
-		I_ClassReferences cr =  crd.getReferences(className);
+		I_ClassReferences cr =  crd.getReferences(new ClassAliasLocal(clazz));
 		assertBiBRefs(className, cr);
 		
 		assertHasMockWithBidirectionalBCache();
 		assertHasMockWithBidirectionalACache();
 		
-		Map<String,I_ClassReferences> refsCache = trial.getRefsCache();
+		Map<String,I_ClassReferencesLocal> refsCache = trial.getRefsCache();
 		assertEquals(2, refsCache.size());
 	
 	}
 
 	public void assertHasMockWithBidirectionalBCache() {
 		String className = MockWithBidirectionalB.class.getName();
-		Map<String,I_ClassReferences> refsCache = trial.getRefsCache();
+		Map<String,I_ClassReferencesLocal> refsCache = trial.getRefsCache();
 		I_ClassReferences crefs =  refsCache.get(className);
 		assertBiBRefs(className, crefs);
 	}
@@ -140,13 +146,13 @@ public class CRDT_Assert_Circular_to_10 extends TrialDelegate {
 
 	private void assertBiBRefs(String clazzName, I_ClassReferences cr) {
 		assertNotNull(cr);
-		assertEquals(clazzName, cr.getClassName());
+		assertEquals(clazzName, cr.getName());
 		assertTrue(cr.hasCircularReferences());
-		Set<String> circles = cr.getCircularReferences();
+		Set<String> circles = cr.getCircularReferenceNames();
 		assertContains(circles, MockWithBidirectionalA.class.getName());
 		assertEquals(1, circles.size());
 		
-		Set<String> refs = cr.getReferences();
+		Set<String> refs = cr.getReferenceNames();
 		assertNotNull(refs);
 		assertContains(refs, MockWithBidirectionalA.class.getName());
 		assertContains(refs, Object.class.getName());
@@ -158,10 +164,10 @@ public class CRDT_Assert_Circular_to_10 extends TrialDelegate {
 		I_CachedClassBytesClassLoader ccbClassLoader = trial.getCcbClassLoader();
 		ClassReferencesDiscovery crd = trial.getClassReferenceDiscovery();
 		
-		
-		String className = MockWithTriangleA.class.getName();
+		Class<?> clazz = MockWithTriangleA.class;
+		String className = clazz.getName();
 		assertFalse(ccbClassLoader.hasCache(className));
-		List<String> order = crd.discoverAndLoad(MockWithTriangleA.class);
+		List<String> order = crd.findOrLoad(clazz);
 		assertNotNull(order);
 		
 		assertEquals(Object.class.getName(), order.get(0));
@@ -174,34 +180,34 @@ public class CRDT_Assert_Circular_to_10 extends TrialDelegate {
 		
 		assertTriangleToDeps(crd, className);
 		
-		I_ClassReferences cr =  crd.getReferences(className);
+		I_ClassReferences cr =  crd.getReferences(new ClassAliasLocal(clazz));
 		assertTriARefs(className, cr);
 		
 		assertHasMockWithTriangleACache();
 		assertHasMockWithTriangleBCache();
 		assertHasMockWithTriangleCCache();
 		
-		Map<String,I_ClassReferences> refsCache = trial.getRefsCache();
+		Map<String,I_ClassReferencesLocal> refsCache = trial.getRefsCache();
 		assertEquals(3, refsCache.size());
 	}
 	
 	public void assertHasMockWithTriangleACache() {
 		String className = MockWithTriangleA.class.getName();
-		Map<String,I_ClassReferences> refsCache = trial.getRefsCache();
+		Map<String,I_ClassReferencesLocal> refsCache = trial.getRefsCache();
 		I_ClassReferences crefs =  refsCache.get(className);
 		assertTriARefs(className, crefs);
 	}
 	
 	private void assertTriARefs(String clazzName, I_ClassReferences cr) {
 		assertNotNull(cr);
-		assertEquals(clazzName, cr.getClassName());
+		assertEquals(clazzName, cr.getName());
 		assertTrue(cr.hasCircularReferences());
-		Set<String> circles = cr.getCircularReferences();
+		Set<String> circles = cr.getCircularReferenceNames();
 		assertContains(circles, MockWithTriangleB.class.getName());
 		assertContains(circles, MockWithTriangleC.class.getName());
 		assertEquals(2, circles.size());
 		
-		Set<String> refs = cr.getReferences();
+		Set<String> refs = cr.getReferenceNames();
 		assertNotNull(refs);
 		assertContains(refs, MockWithTriangleB.class.getName());
 		assertContains(refs, MockWithTriangleA.class.getName());
@@ -214,19 +220,23 @@ public class CRDT_Assert_Circular_to_10 extends TrialDelegate {
 		Set<I_Dependency> deps = crd.toDependencies(className);
 		Iterator<I_Dependency> it = deps.iterator();
 		I_Dependency dep =  it.next();
-		assertEquals(Object.class.getName(), dep.getClassName());
+		I_ClassAlias alias = dep.getAlias();
+		assertEquals(Object.class.getName(), alias.getName());
 		assertEquals(3, dep.getReferences());
 
 		dep =  it.next();
-		assertEquals(MockWithTriangleA.class.getName(), dep.getClassName());
+		alias = dep.getAlias();
+		assertEquals(MockWithTriangleA.class.getName(), alias.getName());
 		assertEquals(2, dep.getReferences());
 		
 		dep =  it.next();
-		assertEquals(MockWithTriangleB.class.getName(), dep.getClassName());
+		alias = dep.getAlias();
+		assertEquals(MockWithTriangleB.class.getName(), alias.getName());
 		assertEquals(2, dep.getReferences());
 		
 		dep =  it.next();
-		assertEquals(MockWithTriangleC.class.getName(), dep.getClassName());
+		alias = dep.getAlias();
+		assertEquals(MockWithTriangleC.class.getName(), alias.getName());
 		assertEquals(2, dep.getReferences());
 		
 		assertEquals(4, deps.size());
@@ -236,9 +246,10 @@ public class CRDT_Assert_Circular_to_10 extends TrialDelegate {
 		I_CachedClassBytesClassLoader ccbClassLoader = trial.getCcbClassLoader();
 		ClassReferencesDiscovery crd = trial.getClassReferenceDiscovery();
 		
-		String className = MockWithTriangleB.class.getName();
+		Class<?> clazz = MockWithTriangleB.class;
+		String className = clazz.getName();
 		assertFalse(ccbClassLoader.hasCache(className));
-		List<String> order = crd.discoverAndLoad(MockWithTriangleB.class);
+		List<String> order = crd.findOrLoad(clazz);
 		assertNotNull(order);
 		
 		assertEquals(Object.class.getName(), order.get(0));
@@ -251,14 +262,14 @@ public class CRDT_Assert_Circular_to_10 extends TrialDelegate {
 		
 		assertTriangleToDeps(crd, className);
 		
-		I_ClassReferences cr =  crd.getReferences(className);
+		I_ClassReferences cr =  crd.getReferences(new ClassAliasLocal(clazz));
 		assertTriaBRefs(className, cr);
 		
 		assertHasMockWithTriangleACache();
 		assertHasMockWithTriangleBCache();
 		assertHasMockWithTriangleCCache();
 		
-		Map<String,I_ClassReferences> refsCache = trial.getRefsCache();
+		Map<String,I_ClassReferencesLocal> refsCache = trial.getRefsCache();
 		assertEquals(3, refsCache.size());
 	}
 
@@ -267,20 +278,20 @@ public class CRDT_Assert_Circular_to_10 extends TrialDelegate {
 	
 	public void assertHasMockWithTriangleBCache() {
 		String className = MockWithTriangleB.class.getName();
-		Map<String,I_ClassReferences> refsCache = trial.getRefsCache();
+		Map<String,I_ClassReferencesLocal> refsCache = trial.getRefsCache();
 		I_ClassReferences crefs =  refsCache.get(className);
 		assertTriaBRefs(className, crefs);
 	}
 	
 	private void assertTriaBRefs(String clazzName, I_ClassReferences cr) {
 		assertNotNull(cr);
-		assertEquals(clazzName, cr.getClassName());
-		Set<String> circles = cr.getCircularReferences();
+		assertEquals(clazzName, cr.getName());
+		Set<String> circles = cr.getCircularReferenceNames();
 		assertContains(circles, MockWithTriangleA.class.getName());
 		assertContains(circles, MockWithTriangleC.class.getName());
 		assertEquals(2, circles.size());
 		
-		Set<String> refs = cr.getReferences();
+		Set<String> refs = cr.getReferenceNames();
 		assertNotNull(refs);
 		assertContains(refs, MockWithTriangleC.class.getName());
 		assertContains(refs, MockWithTriangleA.class.getName());
@@ -293,9 +304,10 @@ public class CRDT_Assert_Circular_to_10 extends TrialDelegate {
 		I_CachedClassBytesClassLoader ccbClassLoader = trial.getCcbClassLoader();
 		ClassReferencesDiscovery crd = trial.getClassReferenceDiscovery();
 		
-		String className = MockWithTriangleC.class.getName();
+		Class<?> clazz = MockWithTriangleC.class;
+		String className = clazz.getName();
 		assertFalse(ccbClassLoader.hasCache(className));
-		List<String> order = crd.discoverAndLoad(MockWithTriangleC.class);
+		List<String> order = crd.findOrLoad(clazz);
 		assertNotNull(order);
 		
 		assertEquals(Object.class.getName(), order.get(0));
@@ -308,20 +320,20 @@ public class CRDT_Assert_Circular_to_10 extends TrialDelegate {
 		
 		assertTriangleToDeps(crd, className);
 		
-		I_ClassReferences cr =  crd.getReferences(className);
+		I_ClassReferences cr =  crd.getReferences(new ClassAliasLocal(clazz));
 		assertTriCRefs(className, cr);
 		
 		assertHasMockWithTriangleACache();
 		assertHasMockWithTriangleBCache();
 		assertHasMockWithTriangleCCache();
 		
-		Map<String,I_ClassReferences> refsCache = trial.getRefsCache();
+		Map<String,I_ClassReferencesLocal> refsCache = trial.getRefsCache();
 		assertEquals(3, refsCache.size());
 	}
 	
 	public void assertHasMockWithTriangleCCache() {
 		String className = MockWithTriangleC.class.getName();
-		Map<String,I_ClassReferences> refsCache = trial.getRefsCache();
+		Map<String,I_ClassReferencesLocal> refsCache = trial.getRefsCache();
 		I_ClassReferences crefs =  refsCache.get(className);
 
 		assertTriCRefs(className, crefs);
@@ -330,13 +342,13 @@ public class CRDT_Assert_Circular_to_10 extends TrialDelegate {
 
 	private void assertTriCRefs(String className, I_ClassReferences crefs) {
 		assertNotNull(crefs);
-		assertEquals(className, crefs.getClassName());
-		Set<String> circles = crefs.getCircularReferences();
+		assertEquals(className, crefs.getName());
+		Set<String> circles = crefs.getCircularReferenceNames();
 		assertContains(circles, MockWithTriangleB.class.getName());
 		assertContains(circles, MockWithTriangleA.class.getName());
 		assertEquals(2, circles.size());
 		
-		Set<String> refs = crefs.getReferences();
+		Set<String> refs = crefs.getReferenceNames();
 		assertNotNull(refs);
 		assertContains(refs, MockWithTriangleB.class.getName());
 		assertContains(refs, MockWithTriangleC.class.getName());

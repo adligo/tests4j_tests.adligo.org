@@ -7,10 +7,10 @@ import java.util.Map;
 
 import org.adligo.tests4j.models.shared.dependency.ClassFilter;
 import org.adligo.tests4j.models.shared.dependency.ClassFilterMutant;
-import org.adligo.tests4j.models.shared.dependency.I_ClassDependencies;
+import org.adligo.tests4j.models.shared.dependency.ClassReferencesLocal;
 import org.adligo.tests4j.models.shared.dependency.I_ClassFilter;
-import org.adligo.tests4j.models.shared.dependency.I_ClassReferences;
-import org.adligo.tests4j.models.shared.trials.IgnoreTest;
+import org.adligo.tests4j.models.shared.dependency.I_ClassParentsLocal;
+import org.adligo.tests4j.models.shared.dependency.I_ClassReferencesLocal;
 import org.adligo.tests4j.models.shared.trials.SourceFileScope;
 import org.adligo.tests4j.models.shared.trials.Test;
 import org.adligo.tests4j.run.helpers.CachedClassBytesClassLoader;
@@ -27,11 +27,11 @@ import org.adligo.tests4j_tests.jacoco.plugin.discovery.delegates.CRDT_Assert_Si
 import org.adligo.tests4j_tests.jacoco.plugin.discovery.delegates.I_ClassReferencesDiscoveryTrial;
 import org.adligo.tests4j_tests.models.shared.system.mocks.Tests4J_LogMock;
 
-@SourceFileScope (sourceClass=ClassReferencesDiscovery.class, minCoverage=89.0)
+@SourceFileScope (sourceClass=ClassReferencesDiscovery.class, minCoverage=85.0)
 public class ClassReferencesDiscoveryTrial extends SourceFileCountingTrial implements I_DiscoveryMemory, I_ClassReferencesDiscoveryTrial {
 	private CachedClassBytesClassLoader ccbClassLoader;
 	private ClassReferencesDiscovery classReferenceDiscovery;
-	private Map<String,I_ClassReferences> refsCache = new HashMap<String, I_ClassReferences>();
+	private Map<String,I_ClassReferencesLocal> refsCache = new HashMap<String, I_ClassReferencesLocal>();
 	private final ClassFilter classFilter = new ClassFilter();
 	private Tests4J_LogMock logMock = new Tests4J_LogMock();
 	private I_ClassFilter primitiveClassFilter;
@@ -119,7 +119,6 @@ public class ClassReferencesDiscoveryTrial extends SourceFileCountingTrial imple
 		linear_to10.delegate007_MockWithArray();
 	}
 	
-	
 	@Test
 	public void test1008_MockWithMethodException() throws Exception {
 		linear_to10.delegate008_MockWithMethodException();
@@ -192,7 +191,6 @@ public class ClassReferencesDiscoveryTrial extends SourceFileCountingTrial imple
 	
 	@Test
 	public void test1021_MockI_OtherStringAndLong() throws Exception {
-		
 		linear_to30.delegate021_MockI_OtherStringAndLong();
 	}
 	
@@ -240,15 +238,6 @@ public class ClassReferencesDiscoveryTrial extends SourceFileCountingTrial imple
 		delegate.test();
 	}
 	
-	@Override
-	public void putDependenciesIfAbsent(I_ClassDependencies p) {
-		throw new RuntimeException("This should not get called");
-	}
-	@Override
-	public I_ClassDependencies getDependencies(String name) {
-		throw new RuntimeException("This should not get called");
-	}
-
 	@Override
 	public boolean isFiltered(Class<?> clazz) {
 		return classFilter.isFiltered(clazz);
@@ -304,18 +293,19 @@ public class ClassReferencesDiscoveryTrial extends SourceFileCountingTrial imple
 	}
 	
 	@Override
-	public void putReferencesIfAbsent(I_ClassReferences p) {
-		if (!refsCache.containsKey(p.getClassName())) {
-			refsCache.put(p.getClassName(), p);
+	public void putReferencesIfAbsent(I_ClassReferencesLocal p) {
+		assertEquals(ClassReferencesLocal.class.getName(), p.getClass().getName());
+		if (!refsCache.containsKey(p.getName())) {
+			refsCache.put(p.getName(), p);
 		}
 	}
 	
 	@Override
-	public I_ClassReferences getReferences(String name) {
+	public I_ClassReferencesLocal getReferences(String name) {
 		return refsCache.get(name);
 	}
 
-	public Map<String, I_ClassReferences> getRefsCache() {
+	public Map<String, I_ClassReferencesLocal> getRefsCache() {
 		return refsCache;
 	}
 
@@ -346,12 +336,20 @@ public class ClassReferencesDiscoveryTrial extends SourceFileCountingTrial imple
 
 	@Override
 	public int getAsserts() {
-		return 2386;
+		return 2668;
 	}
 
 	@Override
 	public int getUniqueAsserts() {
-		return 1129;
+		return 1290;
+	}
+	@Override
+	public void putParentsIfAbsent(I_ClassParentsLocal p) {
+		
+	}
+	@Override
+	public I_ClassParentsLocal getParents(String name) {
+		return null;
 	}
 
 

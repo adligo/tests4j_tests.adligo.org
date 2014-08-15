@@ -2,6 +2,7 @@ package org.adligo.tests4j_tests.models.shared.dependency;
 
 import org.adligo.tests4j.models.shared.asserts.common.ExpectedThrownData;
 import org.adligo.tests4j.models.shared.asserts.common.I_Thrower;
+import org.adligo.tests4j.models.shared.dependency.ClassAlias;
 import org.adligo.tests4j.models.shared.dependency.Dependency;
 import org.adligo.tests4j.models.shared.dependency.DependencyMutant;
 import org.adligo.tests4j.models.shared.trials.SourceFileScope;
@@ -13,7 +14,7 @@ public class DependencyTrial extends SourceFileCountingTrial {
 
 	@Test
 	public void testConstructorExceptions() {
-		assertThrown(new ExpectedThrownData(new IllegalArgumentException(DependencyMutant.CLASS_NAME_MAY_NOT_BE_SET_TO_A_EMPTY_VALUE)),
+		assertThrown(new ExpectedThrownData(new IllegalArgumentException(DependencyMutant.CLASS_ALIAS_MAY_NOT_BE_SET_TO_A_NULL_VALUE)),
 				new I_Thrower() {
 					
 					@Override
@@ -27,14 +28,15 @@ public class DependencyTrial extends SourceFileCountingTrial {
 	@Test
 	public void testCopyConstructor() {
 		DependencyMutant dm = new DependencyMutant();
-		dm.setClassName("foo");
+		ClassAlias ca = new ClassAlias("foo");
+		dm.setAlias(ca);
 		dm.addReference();
 		dm.addReference();
-		assertEquals("foo", dm.getClassName());
+		assertEquals(ca, dm.getAlias());
 		assertEquals(2, dm.getReferences());
 		
 		Dependency dep = new Dependency(dm);
-		assertEquals("foo", dep.getClassName());
+		assertEquals(ca, dep.getAlias());
 		assertEquals(2, dep.getReferences());
 	}
 	
@@ -43,10 +45,10 @@ public class DependencyTrial extends SourceFileCountingTrial {
 		DependencyMutant dm = new DependencyMutant();
 		dm.addReference();
 		assertEquals(1, dm.getReferences());
-		dm.setClassName("someName");
+		dm.setAlias(new ClassAlias("someName"));
 		
 		DependencyMutant dmB = new DependencyMutant();
-		dmB.setClassName("otherClassName");
+		dmB.setAlias(new ClassAlias("otherClassName"));
 		
 		Dependency a = new Dependency(dm);
 		Dependency b = new Dependency(dmB);
@@ -59,10 +61,10 @@ public class DependencyTrial extends SourceFileCountingTrial {
 	@Test
 	public void testToString() {
 		DependencyMutant dm = new DependencyMutant();
-		dm.setClassName("foo");
+		dm.setAlias(new ClassAlias("foo"));
 		dm.addReference();
 		dm.addReference();
-		assertEquals("Dependency [clazzName=foo, references=2]", new Dependency(dm).toString());
+		assertEquals("Dependency [alias=foo, references=2]", new Dependency(dm).toString());
 		
 		
 	}

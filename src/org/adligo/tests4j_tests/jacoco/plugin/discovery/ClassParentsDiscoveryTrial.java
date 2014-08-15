@@ -1,0 +1,356 @@
+package org.adligo.tests4j_tests.jacoco.plugin.discovery;
+
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+
+import org.adligo.tests4j.models.shared.dependency.ClassFilter;
+import org.adligo.tests4j.models.shared.dependency.ClassFilterMutant;
+import org.adligo.tests4j.models.shared.dependency.ClassParentsLocal;
+import org.adligo.tests4j.models.shared.dependency.I_ClassFilter;
+import org.adligo.tests4j.models.shared.dependency.I_ClassParentsLocal;
+import org.adligo.tests4j.models.shared.dependency.I_ClassReferences;
+import org.adligo.tests4j.models.shared.dependency.I_ClassReferencesLocal;
+import org.adligo.tests4j.models.shared.trials.SourceFileScope;
+import org.adligo.tests4j.models.shared.trials.Test;
+import org.adligo.tests4j.run.helpers.CachedClassBytesClassLoader;
+import org.adligo.tests4j_4jacoco.plugin.discovery.ClassParentsDiscovery;
+import org.adligo.tests4j_4jacoco.plugin.discovery.I_DiscoveryMemory;
+import org.adligo.tests4j_tests.base_abstract_trials.SourceFileCountingTrial;
+import org.adligo.tests4j_tests.jacoco.plugin.discovery.delegates.CPDT_Assert_Linear_to_20;
+import org.adligo.tests4j_tests.jacoco.plugin.discovery.delegates.CPDT_Assert_Linear_to_30;
+import org.adligo.tests4j_tests.jacoco.plugin.discovery.delegates.CPDT_Assert_Simple;
+import org.adligo.tests4j_tests.jacoco.plugin.discovery.delegates.I_ClassParentsDiscoveryTrial;
+import org.adligo.tests4j_tests.models.shared.system.mocks.Tests4J_LogMock;
+import org.adligo.tests4j_tests.run.helpers.class_loading_mocks.MockI_GetLong;
+import org.adligo.tests4j_tests.run.helpers.class_loading_mocks.MockI_GetString;
+import org.adligo.tests4j_tests.run.helpers.class_loading_mocks.MockI_SetLong;
+import org.adligo.tests4j_tests.run.helpers.class_loading_mocks.MockI_SetString;
+import org.adligo.tests4j_tests.run.helpers.class_loading_mocks.MockWithAbstractMethodParam;
+import org.adligo.tests4j_tests.run.helpers.class_loading_mocks.MockWithAbstractMethodReturn;
+import org.adligo.tests4j_tests.run.helpers.class_loading_mocks.MockWithArray;
+import org.adligo.tests4j_tests.run.helpers.class_loading_mocks.MockWithBidirectionalA;
+import org.adligo.tests4j_tests.run.helpers.class_loading_mocks.MockWithBidirectionalB;
+import org.adligo.tests4j_tests.run.helpers.class_loading_mocks.MockWithEverything;
+import org.adligo.tests4j_tests.run.helpers.class_loading_mocks.MockWithImportOnlyInMethod;
+import org.adligo.tests4j_tests.run.helpers.class_loading_mocks.MockWithMethodException;
+import org.adligo.tests4j_tests.run.helpers.class_loading_mocks.MockWithMethodExceptionBlock;
+import org.adligo.tests4j_tests.run.helpers.class_loading_mocks.MockWithMethodParams;
+import org.adligo.tests4j_tests.run.helpers.class_loading_mocks.MockWithMethodReturn;
+import org.adligo.tests4j_tests.run.helpers.class_loading_mocks.MockWithRefMockWithEverything;
+import org.adligo.tests4j_tests.run.helpers.class_loading_mocks.MockWithStaticField;
+import org.adligo.tests4j_tests.run.helpers.class_loading_mocks.MockWithStaticInitalizer;
+import org.adligo.tests4j_tests.run.helpers.class_loading_mocks.MockWithTriangleA;
+import org.adligo.tests4j_tests.run.helpers.class_loading_mocks.MockWithTriangleB;
+import org.adligo.tests4j_tests.run.helpers.class_loading_mocks.MockWithTriangleC;
+
+@SourceFileScope (sourceClass=ClassParentsDiscovery.class, minCoverage=86.0)
+public class ClassParentsDiscoveryTrial extends SourceFileCountingTrial implements I_DiscoveryMemory, I_ClassParentsDiscoveryTrial {
+	private CachedClassBytesClassLoader ccbClassLoader;
+	private ClassParentsDiscovery classParentsDiscovery;
+	private Map<String,I_ClassParentsLocal> parentsCache = new HashMap<String, I_ClassParentsLocal>();
+	private final ClassFilter classFilter = new ClassFilter();
+	private Tests4J_LogMock logMock = new Tests4J_LogMock();
+	private I_ClassFilter primitiveClassFilter;
+	private CPDT_Assert_Simple simple;
+	private CPDT_Assert_Linear_to_20 linearTo20;
+	private CPDT_Assert_Linear_to_30 linearTo30;
+	
+	public ClassParentsDiscoveryTrial() {
+		ClassFilterMutant cfm = new ClassFilterMutant();
+		cfm.setIgnoredPackageNames(Collections.unmodifiableSet(new HashSet<String>()));
+		primitiveClassFilter =new ClassFilter(cfm);
+		simple = new CPDT_Assert_Simple(this);
+		linearTo20 = new CPDT_Assert_Linear_to_20(this);
+		linearTo30 = new CPDT_Assert_Linear_to_30(this);
+	}
+	@Override
+	public void beforeTests() {
+		ccbClassLoader = new CachedClassBytesClassLoader(logMock);
+		classParentsDiscovery = new ClassParentsDiscovery(ccbClassLoader, logMock, this);
+		
+		
+		parentsCache.clear();
+	}
+	
+	@Test
+	public void test0001_MockWithNothing() throws Exception {
+		simple.delegate001_MockWithNothing();
+	}
+
+
+	@Test
+	public void test0002_MockWithString() throws Exception {
+		simple.delegate002_MockWithString();
+	}
+	
+	@Test
+	public void test0003_MockWithString() throws Exception {
+		simple.delegate003_MockException();
+	}
+	
+	/**
+	 * 1000 start linear assertions
+	 * @throws Exception
+	 */
+	@Test
+	public void test1001_MockWithMethodReturn() throws Exception {
+		simple.delegateObjectOnlyParents(MockWithMethodReturn.class);
+	}
+	
+	@Test
+	public void test1002_MockWithFeild() throws Exception {
+		simple.delegateObjectOnlyParents(MockWithMethodParams.class);
+	}
+
+	@Test
+	public void test1003_MockWithMethodParams() throws Exception {
+		simple.delegateObjectOnlyParents(MockWithMethodParams.class);
+	}
+	
+	@Test
+	public void test1004_MockWithImportOnlyInMethod() throws Exception {
+		simple.delegateObjectOnlyParents(MockWithImportOnlyInMethod.class);
+	}
+	
+	@Test
+	public void test1005_MockWithStaticFeild() throws Exception {
+		simple.delegateObjectOnlyParents(MockWithStaticField.class);
+	}
+	
+	@Test
+	public void test1006_MockWithStaticInitalizer() throws Exception {
+		simple.delegateObjectOnlyParents(MockWithStaticInitalizer.class);
+	}
+	
+	@Test
+	public void test1007_MockWithArray() throws Exception {
+		simple.delegateObjectOnlyParents(MockWithArray.class);
+	}
+	
+	
+	@Test
+	public void test1008_MockWithMethodException() throws Exception {
+		simple.delegateObjectOnlyParents(MockWithMethodException.class);
+	}
+	
+	@Test
+	public void test1009_MockWithMethodExceptionBlock() throws Exception {
+		simple.delegateObjectOnlyParents(MockWithMethodExceptionBlock.class);
+	}
+	
+	@Test
+	public void test1010_MockWithAbstractMethodReturn() throws Exception {
+		simple.delegateObjectOnlyParents(MockWithAbstractMethodReturn.class);
+	}
+	
+	@Test
+	public void test1011_MockWithAbstractMethodParam() throws Exception {
+		simple.delegateObjectOnlyParents(MockWithAbstractMethodParam.class);
+	}
+
+	@Test
+	public void test1012_MockWithExtensionA() throws Exception {
+		linearTo20.delegate012_MockWithExtensionA();
+	}
+	
+	@Test
+	public void test1013_MockWithExtensionB() throws Exception {
+		linearTo20.delegate013_MockWithExtensionB();
+	}
+	
+	/**
+	 * sushi anyone?
+	 * @throws Exception
+	 */
+	@Test
+	public void test1014_MockI_GetLong() throws Exception {
+		simple.delegateNoParents(MockI_GetLong.class);
+	}
+	
+	@Test
+	public void test1015_MockI_SetLong() throws Exception {
+		simple.delegateNoParents(MockI_SetLong.class);
+	}
+	
+	@Test
+	public void test1016_MockI_GetString() throws Exception {
+		simple.delegateNoParents(MockI_GetString.class);
+	}
+	
+	@Test
+	public void test1017_MockI_SetString() throws Exception {
+		simple.delegateNoParents(MockI_SetString.class);
+	}
+	
+	@Test
+	public void test1018_MockI_GetAndSetLong() throws Exception {
+		linearTo20.delegate018_MockI_GetAndSetLong();
+	}
+	
+	@Test
+	public void test1019_MockI_GetAndSetString() throws Exception {
+		linearTo20.delegate019_MockI_GetAndSetString();
+	}
+	
+	@Test
+	public void test1020_MockI_StringAndLong() throws Exception {
+		linearTo20.delegate020_MockI_StringAndLong();
+	}
+	
+	@Test
+	public void test1021_MockI_OtherStringAndLong() throws Exception {
+		linearTo30.delegate021_MockI_OtherStringAndLong();
+	}
+	
+	/**
+	 * 2000's are circular reference tests
+	 * @throws Exception
+	 */
+	@Test
+	public void test2001_MockWithBidirectionalA() throws Exception {
+		simple.delegateObjectOnlyParents(MockWithBidirectionalA.class);
+	}
+	
+	@Test
+	public void test2002_MockWithBidirectionalB() throws Exception {
+		simple.delegateObjectOnlyParents(MockWithBidirectionalB.class);
+	}
+	
+	@Test
+	public void test2003_MockWithTriangleA() throws Exception {
+		simple.delegateObjectOnlyParents(MockWithTriangleA.class);
+	}
+	
+	@Test
+	public void test2004_MockWithTriangleB() throws Exception {
+		simple.delegateObjectOnlyParents(MockWithTriangleB.class);
+	}
+	
+	@Test
+	public void test2005_MockWithTriangleC() throws Exception {
+		simple.delegateObjectOnlyParents(MockWithTriangleC.class);
+	}
+	
+	/**
+	 * 3000's are large scale tests
+	 * @throws Exception
+	 */
+	@Test
+	public void test3001_MockWithEverything() throws Exception {
+		simple.delegateObjectOnlyParents(MockWithEverything.class);
+	}
+	
+	@Test
+	public void test3002_MockRefEverything() throws Exception {
+		simple.delegateObjectOnlyParents(MockWithRefMockWithEverything.class);
+	}
+	
+	@Override
+	public boolean isFiltered(Class<?> clazz) {
+		return classFilter.isFiltered(clazz);
+	}
+
+	@Override
+	public boolean isFiltered(String className) {
+		return classFilter.isFiltered(className);
+	}
+	
+	/* (non-Javadoc)
+	 * @see org.adligo.tests4j_tests.jacoco.plugin.discovery.I_ClassParentsDiscoveryTrial#getBasicClassFilter()
+	 */
+	@Override
+	public I_ClassFilter getBasicClassFilter() {
+		return primitiveClassFilter;
+	}
+	/* (non-Javadoc)
+	 * @see org.adligo.tests4j_tests.jacoco.plugin.discovery.I_ClassParentsDiscoveryTrial#getCcbClassLoader()
+	 */
+	@Override
+	public CachedClassBytesClassLoader getCcbClassLoader() {
+		return ccbClassLoader;
+	}
+	/* (non-Javadoc)
+	 * @see org.adligo.tests4j_tests.jacoco.plugin.discovery.I_ClassParentsDiscoveryTrial#getClassReferenceDiscovery()
+	 */
+	@Override
+	public ClassParentsDiscovery getClassParentsDiscovery() {
+		return classParentsDiscovery;
+	}
+	
+	/* (non-Javadoc)
+	 * @see org.adligo.tests4j_tests.jacoco.plugin.discovery.I_ClassParentsDiscoveryTrial#getClassFilter()
+	 */
+	@Override
+	public ClassFilter getClassFilter() {
+		return classFilter;
+	}
+	/* (non-Javadoc)
+	 * @see org.adligo.tests4j_tests.jacoco.plugin.discovery.I_ClassParentsDiscoveryTrial#getLogMock()
+	 */
+	@Override
+	public Tests4J_LogMock getLogMock() {
+		return logMock;
+	}
+	/* (non-Javadoc)
+	 * @see org.adligo.tests4j_tests.jacoco.plugin.discovery.I_ClassParentsDiscoveryTrial#getPrimitiveClassFilter()
+	 */
+	@Override
+	public I_ClassFilter getPrimitiveClassFilter() {
+		return primitiveClassFilter;
+	}
+	
+	@Override
+	public void putReferencesIfAbsent(I_ClassReferencesLocal p) {
+		
+	}
+	
+	@Override
+	public I_ClassReferencesLocal getReferences(String name) {
+		return null;
+	}
+
+	public Map<String, I_ClassParentsLocal> getParentsCache() {
+		return parentsCache;
+	}
+
+	@Override
+	public void putParentsIfAbsent(I_ClassParentsLocal p) {
+		assertEquals(ClassParentsLocal.class.getName(), p.getClass().getName());
+		if (!parentsCache.containsKey(p.getName())) {
+			parentsCache.put(p.getName(), p);
+		}
+	}
+	@Override
+	public I_ClassParentsLocal getParents(String name) {
+		return parentsCache.get(name);
+	}
+	@Override
+	public CPDT_Assert_Simple getSimple() {
+		return simple;
+	}
+	@Override
+	public CPDT_Assert_Linear_to_20 getLinearTo20() {
+		return linearTo20;
+	}
+	
+	@Override
+	public int getTests() {
+		return 31;
+	}
+
+	@Override
+	public int getAsserts() {
+		return 2090;
+	}
+
+	@Override
+	public int getUniqueAsserts() {
+		return 467;
+	}
+
+
+
+
+}

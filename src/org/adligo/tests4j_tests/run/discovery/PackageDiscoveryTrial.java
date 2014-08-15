@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.adligo.tests4j.models.shared.dependency.I_ClassDependenciesCache;
 import org.adligo.tests4j.models.shared.metadata.I_MachineMetadata;
 import org.adligo.tests4j.models.shared.metadata.I_SourceInfoMetadata;
 import org.adligo.tests4j.models.shared.metadata.I_TestMetadata;

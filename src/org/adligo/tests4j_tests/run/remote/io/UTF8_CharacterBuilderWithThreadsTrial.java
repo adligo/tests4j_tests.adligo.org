@@ -61,6 +61,8 @@ public class UTF8_CharacterBuilderWithThreadsTrial extends SourceFileCountingTri
 	private static ArrayBlockingQueue<StartCapture> charGroups = 
 			new ArrayBlockingQueue<StartCapture>(charGroupCount );
 	private AtomicInteger finishedCharGroups = new AtomicInteger();
+	private int lastPct = 0;
+	private int pctIncrement = 20;
 	
 	@BeforeTrial
 	public static void beforeTrial() {
@@ -119,11 +121,15 @@ public class UTF8_CharacterBuilderWithThreadsTrial extends SourceFileCountingTri
 	}
 
 	@Override
-	public void completedCharGroup() {
+	public synchronized void completedCharGroup() {
+		
 		double dc = (double) finishedCharGroups.addAndGet(1);
 		double max = (double) charGroupCount;
 		double pct = dc/max * 100;
-		log(this.getClass().getName() +  " at " + ((int) pct) + "% " +charGroupCount);
+		if (lastPct + pctIncrement < pct) {
+			lastPct = lastPct + pctIncrement;
+			log(this.getClass().getName() +  " at " + ((int) pct) + "% " +charGroupCount);
+		}
 	}
 
 	@Override

@@ -1,12 +1,21 @@
 package org.adligo.tests4j_tests.jacoco.plugin.discovery.delegates;
 
+import java.io.Closeable;
+import java.io.FilterOutputStream;
+import java.io.Flushable;
+import java.io.OutputStream;
 import java.io.PrintStream;
+import java.io.Serializable;
+import java.lang.reflect.AnnotatedElement;
+import java.lang.reflect.GenericDeclaration;
+import java.lang.reflect.Type;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
 import org.adligo.tests4j.models.shared.common.I_System;
-import org.adligo.tests4j.models.shared.dependency.I_ClassReferences;
+import org.adligo.tests4j.models.shared.dependency.ClassAliasLocal;
+import org.adligo.tests4j.models.shared.dependency.I_ClassReferencesLocal;
 import org.adligo.tests4j.models.shared.trials.TrialDelegate;
 import org.adligo.tests4j.run.helpers.I_CachedClassBytesClassLoader;
 import org.adligo.tests4j_4jacoco.plugin.discovery.ClassReferencesDiscovery;
@@ -54,12 +63,13 @@ public class CRDT_Assert_MockWithEverything extends TrialDelegate {
 		I_CachedClassBytesClassLoader ccbClassLoader = trial.getCcbClassLoader();
 		ClassReferencesDiscovery crd = trial.getClassReferenceDiscovery();
 		
-		String clazzName = MockWithEverything.class.getName();
-		assertFalse(ccbClassLoader.hasCache(clazzName));
-		List<String> order = crd.discoverAndLoad(MockWithEverything.class);
-		assertOrder(ccbClassLoader, clazzName, order);
+		Class<?> clazz = MockWithEverything.class;
+		String className = clazz.getName();
+		assertFalse(ccbClassLoader.hasCache(className));
+		List<String> order = crd.findOrLoad(MockWithEverything.class);
+		assertOrder(ccbClassLoader, className, order);
 		
-		assertReferences(crd, clazzName);
+		assertReferences(crd, clazz);
 		
 		assertHasMockWithEverythingCache();
 	}
@@ -73,75 +83,94 @@ public class CRDT_Assert_MockWithEverything extends TrialDelegate {
 		assertEquals(Object.class.getName(), order.get(counter++));
 		
 		assertEquals(MockWithNothing.class.getName(), order.get(counter++));
+		assertEquals(Serializable.class.getName(), order.get(counter++));
+		assertEquals(CharSequence.class.getName(), order.get(counter++));
+		assertEquals(Comparable.class.getName(), order.get(counter++));
+		assertEquals(Number.class.getName(), order.get(counter++));
+		assertEquals(Throwable.class.getName(), order.get(counter++));
+		assertEquals(Exception.class.getName(), order.get(counter++));
+		
+		assertEquals(MockWithTriangleA.class.getName(), order.get(counter++));
+		assertEquals(MockWithTriangleB.class.getName(), order.get(counter++));
+		assertEquals(MockWithTriangleC.class.getName(), order.get(counter++));
+		
+		assertEquals(MockWithBidirectionalA.class.getName(), order.get(counter++));
+		assertEquals(MockWithBidirectionalB.class.getName(), order.get(counter++));
+		
+		assertEquals(MockWithExtensionA.class.getName(), order.get(counter++));
+		assertEquals(MockWithMethodReturn.class.getName(), order.get(counter++));
+		
+		assertEquals(AutoCloseable.class.getName(), order.get(counter++));
+		assertEquals(Closeable.class.getName(), order.get(counter++));
+		assertEquals(Flushable.class.getName(), order.get(counter++));
+		assertEquals(OutputStream.class.getName(), order.get(counter++));
+		assertEquals(FilterOutputStream.class.getName(), order.get(counter++));
+		assertEquals(Appendable.class.getName(), order.get(counter++));
+		
+		assertEquals(AnnotatedElement.class.getName(), order.get(counter++));
+		assertEquals(GenericDeclaration.class.getName(), order.get(counter++));
+		assertEquals(Type.class.getName(), order.get(counter++));
+		
+		assertEquals(Math.class.getName(), order.get(counter++));
+		assertEquals("java.lang.AbstractStringBuilder", order.get(counter++));	
+		assertEquals(System.class.getName(), order.get(counter++));
+		
+		assertEquals(MockWithAbstractMethodParam.class.getName(), order.get(counter++));
+		assertEquals(MockWithAbstractMethodReturn.class.getName(), order.get(counter++));
+		assertEquals(MockWithArray.class.getName(), order.get(counter++));
+		assertEquals(MockWithExtensionB.class.getName(), order.get(counter++));
+		assertEquals(MockWithMethodParams.class.getName(), order.get(counter++));
+		assertEquals(MockWithStaticField.class.getName(), order.get(counter++));
+		assertEquals(MockWithStaticInitalizer.class.getName(), order.get(counter++));
+		
 		assertEquals(String.class.getName(), order.get(counter++));
 		assertEquals(Long.class.getName(), order.get(counter++));
-		assertEquals(Exception.class.getName(), order.get(counter++));
+		
 		assertEquals(MockException.class.getName(), order.get(counter++));
 		
 		assertEquals(MockI_GetLong.class.getName(), order.get(counter++));
 		assertEquals(MockI_GetString.class.getName(), order.get(counter++));
 		assertEquals(MockI_SetLong.class.getName(), order.get(counter++));
 		assertEquals(MockI_SetString.class.getName(), order.get(counter++));
-		
-		
-		
 		assertEquals(I_System.class.getName(), order.get(counter++));
+		
 		assertEquals(MockI_GetAndSetLong.class.getName(), order.get(counter++));
 		assertEquals(MockI_GetAndSetString.class.getName(), order.get(counter++));
-		assertEquals(MockWithTriangleA.class.getName(), order.get(counter++));
-		assertEquals(MockWithTriangleB.class.getName(), order.get(counter++));
-		assertEquals(MockWithTriangleC.class.getName(), order.get(counter++));
 		
 		assertEquals(MockI_StringAndLong.class.getName(), order.get(counter++));
-		assertEquals(MockWithBidirectionalA.class.getName(), order.get(counter++));
-		assertEquals(MockWithBidirectionalB.class.getName(), order.get(counter++));
-		
-		assertEquals(MockWithExtensionA.class.getName(), order.get(counter++));
-		
 		assertEquals(MockWithMethodException.class.getName(), order.get(counter++));
-		assertEquals(MockWithMethodReturn.class.getName(), order.get(counter++));
+		
 		
 		assertEquals(PrintStream.class.getName(), order.get(counter++));
 		assertEquals(Class.class.getName(), order.get(counter++));
-		assertEquals(Math.class.getName(), order.get(counter++));
+		
 		assertEquals(StringBuilder.class.getName(), order.get(counter++));	
-		assertEquals(System.class.getName(), order.get(counter++));
 		
 		assertEquals(MockI_OtherStringAndLong.class.getName(), order.get(counter++));
 		assertEquals(MockWithAbstractMethodException.class.getName(), order.get(counter++));
-		assertEquals(MockWithAbstractMethodParam.class.getName(), order.get(counter++));
-		assertEquals(MockWithAbstractMethodReturn.class.getName(), order.get(counter++));
-		
-		assertEquals(MockWithArray.class.getName(), order.get(counter++));
-		assertEquals(MockWithExtensionB.class.getName(), order.get(counter++));
 		
 		assertEquals(MockWithField.class.getName(), order.get(counter++));
 		assertEquals(MockWithImportOnlyInMethod.class.getName(), order.get(counter++));
 		
 		assertEquals(MockWithMethodExceptionBlock.class.getName(), order.get(counter++));
-		assertEquals(MockWithMethodParams.class.getName(), order.get(counter++));
-		assertEquals(MockWithStaticField.class.getName(), order.get(counter++));
-		
-		assertEquals(MockWithStaticInitalizer.class.getName(), order.get(counter++));
 		assertEquals(MockWithString.class.getName(), order.get(counter++));
 		
-		
-
 		assertEquals(clazzName, order.get(counter++));
 		assertEquals(clazzName + "$1", order.get(counter++));
 		
-		assertEquals(42, counter);
-		assertEquals(42, order.size());
+		assertEquals(57, counter);
+		assertEquals(57, order.size());
 		assertTrue(ccbClassLoader.hasCache(clazzName));
 	}
 	
 
-	private void assertReferences(ClassReferencesDiscovery crd, String clazzName) {
-		I_ClassReferences cr =  crd.getReferences(clazzName);
+	private void assertReferences(ClassReferencesDiscovery crd, Class<?> clazz) {
+		String clazzName = clazz.getName();
+		I_ClassReferencesLocal cr =  crd.getReferences(new ClassAliasLocal(clazz));
 		assertRefs(clazzName, cr);
 		assertHasMockWithEverythingCache();
 		
-		Map<String,I_ClassReferences> refsCache = trial.getRefsCache();
+		Map<String,I_ClassReferencesLocal> refsCache = trial.getRefsCache();
 		assertEquals(33, refsCache.size());
 	}
 
@@ -162,24 +191,24 @@ public class CRDT_Assert_MockWithEverything extends TrialDelegate {
 		c10.assertHasAllCache();
 		
 		String className = MockWithEverything.class.getName();
-		Map<String,I_ClassReferences> refsCache = trial.getRefsCache();
-		I_ClassReferences crefs =  refsCache.get(className);
+		Map<String,I_ClassReferencesLocal> refsCache = trial.getRefsCache();
+		I_ClassReferencesLocal crefs =  refsCache.get(className);
 		
 		
 		assertRefs(className, crefs);
 	}
 
-	private void assertRefs(String className, I_ClassReferences crefs) {
+	private void assertRefs(String className, I_ClassReferencesLocal crefs) {
 		
 		assertNotNull(crefs);
-		assertEquals(className, crefs.getClassName());
+		assertEquals(className, crefs.getName());
 		assertTrue(crefs.hasCircularReferences());
 		
-		Set<String> circles = crefs.getCircularReferences();
+		Set<String> circles = crefs.getCircularReferenceNames();
 		assertContains(circles, className + "$1");
 		assertEquals(1, circles.size());
 		
-		Set<String> refs = crefs.getReferences();
+		Set<String> refs = crefs.getReferenceNames();
 		assertNotNull(refs);
 		assertContains(refs, Object.class.getName());
 		assertContains(refs, Class.class.getName());
@@ -226,6 +255,6 @@ public class CRDT_Assert_MockWithEverything extends TrialDelegate {
 		assertContains(refs, className + "$1");
 		assertContains(refs, className);
 		
-		assertEquals(42, refs.size());
+		assertEquals(44, refs.size());
 	}
 }

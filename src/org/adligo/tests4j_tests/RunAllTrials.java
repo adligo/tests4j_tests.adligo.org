@@ -13,7 +13,6 @@ import org.adligo.tests4j.models.shared.results.I_TrialRunResult;
 import org.adligo.tests4j.models.shared.system.DefaultLog;
 import org.adligo.tests4j.models.shared.system.I_Tests4J_Controls;
 import org.adligo.tests4j.models.shared.system.I_Tests4J_CoveragePlugin;
-import org.adligo.tests4j.models.shared.system.I_Tests4J_CoveragePluginFactory;
 import org.adligo.tests4j.models.shared.system.I_Tests4J_Listener;
 import org.adligo.tests4j.models.shared.system.I_Tests4J_Log;
 import org.adligo.tests4j.models.shared.system.Tests4J_Params;
@@ -21,8 +20,10 @@ import org.adligo.tests4j.models.shared.trials.I_Trial;
 import org.adligo.tests4j.run.Tests4J;
 import org.adligo.tests4j.run.discovery.Tests4J_ParamsReader;
 import org.adligo.tests4j.shared.report.summary.TestDisplay;
+import org.adligo.tests4j.shared.report.summary.TrialDisplay;
 import org.adligo.tests4j_4jacoco.plugin.ScopedJacocoPluginFactory;
 import org.adligo.tests4j_4jacoco.plugin.discovery.ClassInstrumenter;
+import org.adligo.tests4j_4jacoco.plugin.discovery.ClassReferencesDiscovery;
 import org.adligo.tests4j_tests.base_abstract_trials.Counts;
 import org.adligo.tests4j_tests.base_abstract_trials.I_CountingTrial;
 
@@ -40,16 +41,16 @@ public class RunAllTrials implements I_Tests4J_Listener {
 		Tests4J_Params params = getTests();
 		params.setCoveragePluginFactoryClass(ScopedJacocoPluginFactory.class);
 		
-		//params.setLogState(TrialDisplay.class, false);
+		params.setLogState(TrialDisplay.class, false);
 		params.setLogState(TestDisplay.class, false);
 		//params.setLogState(ClassDependenciesDiscovery.class, true);
-		params.setLogState(ClassInstrumenter.class, true);
+		//params.setLogState(ClassInstrumenter.class, true);
 		
 		//params.setLogState(TrialsProgressDisplay.class, false);
 		//params.setLogState(ClassReferencesDiscovery.class, true);
-		//params.setLogState(ClassDependenciesDiscovery.class, true);
 		//params.setLogState(TrialInstrumenter2.class, true);
 		//params.setLogState(ClassInstrumenter.class, true);
+		//params.setLogState(ClassParentsDiscovery.class, true);
 		//params.setLogState(TrialInstrumenter.class, true);
 		
 		params.setMetaTrialClass(TheMetaTrial.class);

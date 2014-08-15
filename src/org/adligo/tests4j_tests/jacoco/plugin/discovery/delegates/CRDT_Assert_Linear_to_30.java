@@ -1,11 +1,14 @@
 package org.adligo.tests4j_tests.jacoco.plugin.discovery.delegates;
 
+import java.io.Serializable;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.adligo.tests4j.models.shared.dependency.I_ClassReferences;
+import org.adligo.tests4j.models.shared.dependency.ClassAliasLocal;
+import org.adligo.tests4j.models.shared.dependency.I_ClassAlias;
+import org.adligo.tests4j.models.shared.dependency.I_ClassReferencesLocal;
 import org.adligo.tests4j.models.shared.dependency.I_Dependency;
 import org.adligo.tests4j.models.shared.trials.TrialDelegate;
 import org.adligo.tests4j.run.helpers.I_CachedClassBytesClassLoader;
@@ -32,70 +35,87 @@ public class CRDT_Assert_Linear_to_30 extends TrialDelegate {
 		I_CachedClassBytesClassLoader ccbClassLoader = trial.getCcbClassLoader();
 		ClassReferencesDiscovery crd = trial.getClassReferenceDiscovery();
 		
-		String className = MockI_OtherStringAndLong.class.getName();
+		Class<?> clazz = MockI_OtherStringAndLong.class;
+		String className = clazz.getName();
 		assertFalse(ccbClassLoader.hasCache(className));
-		List<String> order = crd.discoverAndLoad(MockI_OtherStringAndLong.class);
+		List<String> order = crd.findOrLoad(MockI_OtherStringAndLong.class);
 		assertNotNull(order);
 		
-		//4 counts
-		assertEquals(Long.class.getName(), order.get(0));
-		assertEquals(String.class.getName(), order.get(1));
 		
-		//2 counts
-		assertEquals(MockI_GetLong.class.getName(), order.get(2));
-		assertEquals(MockI_GetString.class.getName(), order.get(3));
-		assertEquals(MockI_SetLong.class.getName(), order.get(4));
-		assertEquals(MockI_SetString.class.getName(), order.get(5));
+		assertEquals(Object.class.getName(), order.get(0));
+		assertEquals(Serializable.class.getName(), order.get(1));
 		
+		assertEquals(Number.class.getName(), order.get(2));
+		assertEquals(Comparable.class.getName(), order.get(3));
+		assertEquals(CharSequence.class.getName(), order.get(4));
+		
+		assertEquals(Long.class.getName(), order.get(5));
+		assertEquals(String.class.getName(), order.get(6));
+
+		assertEquals(MockI_GetLong.class.getName(), order.get(7));
+		assertEquals(MockI_GetString.class.getName(), order.get(8));
+		
+		assertEquals(MockI_SetLong.class.getName(), order.get(9));		
+		assertEquals(MockI_SetString.class.getName(), order.get(10));
+		
+		assertEquals(MockI_GetAndSetLong.class.getName(), order.get(11));
+		assertEquals(MockI_GetAndSetString.class.getName(), order.get(12));
+
 		//1 counts
-		assertEquals(MockI_GetAndSetLong.class.getName(), order.get(6));
-		assertEquals(MockI_GetAndSetString.class.getName(), order.get(7));
-		
-		assertEquals(MockI_StringAndLong.class.getName(), order.get(8));
-		assertEquals(className, order.get(9));
-		assertEquals(10, order.size());
+		assertEquals(MockI_StringAndLong.class.getName(), order.get(13));
+		assertEquals(className, order.get(14));
+		assertEquals(15, order.size());
 		assertTrue(ccbClassLoader.hasCache(className));
 		
 		Set<I_Dependency> deps = crd.toDependencies(className);
 		Iterator<I_Dependency> it = deps.iterator();
 		I_Dependency dep =  it.next();
-		assertEquals(Long.class.getName(), dep.getClassName());
+		I_ClassAlias alias = dep.getAlias();
+		assertEquals(Long.class.getName(), alias.getName());
 		assertEquals(5, dep.getReferences());
 		
 		dep =  it.next();
-		assertEquals(String.class.getName(), dep.getClassName());
+		alias = dep.getAlias();
+		assertEquals(String.class.getName(), alias.getName());
 		assertEquals(5, dep.getReferences());
 		
 		dep =  it.next();
-		assertEquals(MockI_GetLong.class.getName(), dep.getClassName());
+		alias = dep.getAlias();
+		assertEquals(MockI_GetLong.class.getName(), alias.getName());
 		assertEquals(3, dep.getReferences());
 
 		dep =  it.next();
-		assertEquals(MockI_GetString.class.getName(), dep.getClassName());
+		alias = dep.getAlias();
+		assertEquals(MockI_GetString.class.getName(), alias.getName());
 		assertEquals(3, dep.getReferences());
 		
 		dep =  it.next();
-		assertEquals(MockI_SetLong.class.getName(), dep.getClassName());
+		alias = dep.getAlias();
+		assertEquals(MockI_SetLong.class.getName(), alias.getName());
 		assertEquals(3, dep.getReferences());
 		
 		dep =  it.next();
-		assertEquals(MockI_SetString.class.getName(), dep.getClassName());
+		alias = dep.getAlias();
+		assertEquals(MockI_SetString.class.getName(), alias.getName());
 		assertEquals(3, dep.getReferences());
 		
 		dep =  it.next();
-		assertEquals(MockI_GetAndSetLong.class.getName(), dep.getClassName());
+		alias = dep.getAlias();
+		assertEquals(MockI_GetAndSetLong.class.getName(), alias.getName());
 		assertEquals(2, dep.getReferences());
 		
 		dep =  it.next();
-		assertEquals(MockI_GetAndSetString.class.getName(), dep.getClassName());
+		alias = dep.getAlias();
+		assertEquals(MockI_GetAndSetString.class.getName(), alias.getName());
 		assertEquals(2, dep.getReferences());
 		
 		dep =  it.next();
-		assertEquals(MockI_StringAndLong.class.getName(), dep.getClassName());
+		alias = dep.getAlias();
+		assertEquals(MockI_StringAndLong.class.getName(), alias.getName());
 		assertEquals(1, dep.getReferences());
 		
 		assertEquals(9, deps.size());
-		I_ClassReferences cr =  crd.getReferences(className);
+		I_ClassReferencesLocal cr =  crd.getReferences(new ClassAliasLocal(clazz));
 		assertMockI_OtherStringAndLongCacheRefs(className, cr);
 		
 		CRDT_Assert_Linear_to_20 to20 = trial.getLinear_to20();
@@ -110,25 +130,25 @@ public class CRDT_Assert_Linear_to_30 extends TrialDelegate {
 		to20.assertHasMockI_StringAndLongCache();
 		assertHasMockI_OtherStringAndLongCache();
 		
-		Map<String,I_ClassReferences> refsCache = trial.getRefsCache();
+		Map<String,I_ClassReferencesLocal> refsCache = trial.getRefsCache();
 		assertEquals(8, refsCache.size());
 	}
 	
 	public void assertHasMockI_OtherStringAndLongCache() {
 		String className = MockI_OtherStringAndLong.class.getName();
-		Map<String,I_ClassReferences> refsCache = trial.getRefsCache();
-		I_ClassReferences crefs =  refsCache.get(className);
+		Map<String,I_ClassReferencesLocal> refsCache = trial.getRefsCache();
+		I_ClassReferencesLocal crefs =  refsCache.get(className);
 		assertMockI_OtherStringAndLongCacheRefs(className, crefs);
 	}
 
 
 	private void assertMockI_OtherStringAndLongCacheRefs(String className,
-			I_ClassReferences crefs) {
+			I_ClassReferencesLocal crefs) {
 		assertNotNull(crefs);
-		assertEquals(className, crefs.getClassName());
+		assertEquals(className, crefs.getName());
 		assertFalse(crefs.hasCircularReferences());
 		
-		Set<String> refs = crefs.getReferences();
+		Set<String> refs = crefs.getReferenceNames();
 		assertNotNull(refs);
 		assertContains(refs, String.class.getName());
 		assertContains(refs, Long.class.getName());
