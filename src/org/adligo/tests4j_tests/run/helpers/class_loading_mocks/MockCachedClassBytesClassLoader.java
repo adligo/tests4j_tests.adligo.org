@@ -10,7 +10,7 @@ public class MockCachedClassBytesClassLoader extends CachedClassBytesClassLoader
 	public MockCachedClassBytesClassLoader(I_Tests4J_Log pLog,
 			Set<String> pPackagesWithoutWarning,
 			Set<String> pClassesWithoutWarning) {
-		super(pLog, pPackagesWithoutWarning, pClassesWithoutWarning);
+		super(pLog, pPackagesWithoutWarning, pClassesWithoutWarning, null);
 	}
 
 	

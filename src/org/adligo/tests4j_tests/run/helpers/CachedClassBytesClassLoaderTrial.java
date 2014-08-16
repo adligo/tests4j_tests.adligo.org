@@ -33,8 +33,7 @@ public class CachedClassBytesClassLoaderTrial extends SourceFileCountingTrial {
 		Tests4J_LogMock lm = new Tests4J_LogMock();
 		lm.setState(CachedClassBytesClassLoader.class, true);
 		CachedClassBytesClassLoader cl = new CachedClassBytesClassLoader(lm,
-				null,
-				null);
+				null, null, null);
 		assertSame(lm, cl.getLog());
 		Set<String> pkgsWithOutWarn = cl.getPackagesNotRequired();
 		assertNotNull(pkgsWithOutWarn);
@@ -45,7 +44,7 @@ public class CachedClassBytesClassLoaderTrial extends SourceFileCountingTrial {
 		
 		cl = new CachedClassBytesClassLoader(lm,
 				new HashSet<String>(),
-				new HashSet<String>());
+				new HashSet<String>(), null);
 		final InputStream in = this.getClass().getResourceAsStream(MOCK_WITH_NOTHING_RESOURCE_NAME);
 		cl.addCache(in, MOCK_WITH_NOTHING_NAME);
 		assertEquals(1, lm.getExceptionsSize());
@@ -79,7 +78,7 @@ public class CachedClassBytesClassLoaderTrial extends SourceFileCountingTrial {
 		Tests4J_LogMock lm = new Tests4J_LogMock();
 		CachedClassBytesClassLoader cl = new CachedClassBytesClassLoader(lm,
 				Collections.singleton("java."),
-				Collections.singleton(""));
+				Collections.singleton(""), null);
 		Set<String> pkgs = cl.getPackagesNotRequired();
 		assertEquals(1, pkgs.size());
 		assertContains(pkgs, "java.");
@@ -105,7 +104,7 @@ public class CachedClassBytesClassLoaderTrial extends SourceFileCountingTrial {
 		Tests4J_LogMock lm = new Tests4J_LogMock();
 		CachedClassBytesClassLoader cl = new CachedClassBytesClassLoader(lm,
 				Collections.singleton("java."),
-				Collections.singleton(""));
+				Collections.singleton(""), null);
 		
 		InputStream in = this.getClass().getResourceAsStream(MOCK_WITH_NOTHING_RESOURCE_NAME);
 		cl.addCache(in, MOCK_WITH_NOTHING_NAME);
@@ -119,7 +118,7 @@ public class CachedClassBytesClassLoaderTrial extends SourceFileCountingTrial {
 		Tests4J_LogMock lm = new Tests4J_LogMock();
 		CachedClassBytesClassLoader cl = new CachedClassBytesClassLoader(lm,
 				Collections.singleton("java."),
-				Collections.singleton(""));
+				Collections.singleton(""), null);
 		
 		InputStream in = this.getClass().getResourceAsStream(MOCK_WITH_NOTHING_RESOURCE_NAME);
 		Class<?> a = cl.addCache(in, MOCK_WITH_NOTHING_NAME);
@@ -163,7 +162,7 @@ public class CachedClassBytesClassLoaderTrial extends SourceFileCountingTrial {
 		Tests4J_LogMock lm = new Tests4J_LogMock();
 		final CachedClassBytesClassLoader cl = new CachedClassBytesClassLoader(lm,
 				Collections.singleton("java."),
-				Collections.singleton(""));
+				Collections.singleton(""), null);
 		
 		IOException ioX =new IOException("testException");
 		final MockInputStream mis = new MockInputStream(ioX);
