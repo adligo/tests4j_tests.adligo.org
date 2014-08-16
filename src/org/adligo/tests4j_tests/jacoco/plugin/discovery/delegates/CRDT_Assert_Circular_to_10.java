@@ -49,11 +49,14 @@ public class CRDT_Assert_Circular_to_10 extends TrialDelegate {
 		I_ClassReferences cr =  crd.getReferences(new ClassAliasLocal(clazz));
 		assertBiARefs(className, cr);
 		
+		CRDT_Assert_Simple simple = trial.getSimple();
+		simple.assertHasObjectCache();
+		
 		assertHasMockWithBidirectionalACache();
 		assertHasMockWithBidirectionalBCache();
 		
 		Map<String,I_ClassReferencesLocal> refsCache = trial.getRefsCache();
-		assertEquals(2, refsCache.size());
+		assertEquals(3, refsCache.size());
 	}
 
 
@@ -128,11 +131,14 @@ public class CRDT_Assert_Circular_to_10 extends TrialDelegate {
 		I_ClassReferences cr =  crd.getReferences(new ClassAliasLocal(clazz));
 		assertBiBRefs(className, cr);
 		
+		CRDT_Assert_Simple simple = trial.getSimple();
+		simple.assertHasObjectCache();
+		
 		assertHasMockWithBidirectionalBCache();
 		assertHasMockWithBidirectionalACache();
 		
 		Map<String,I_ClassReferencesLocal> refsCache = trial.getRefsCache();
-		assertEquals(2, refsCache.size());
+		assertEquals(3, refsCache.size());
 	
 	}
 
@@ -183,12 +189,15 @@ public class CRDT_Assert_Circular_to_10 extends TrialDelegate {
 		I_ClassReferences cr =  crd.getReferences(new ClassAliasLocal(clazz));
 		assertTriARefs(className, cr);
 		
+		CRDT_Assert_Simple simple = trial.getSimple();
+		simple.assertHasObjectCache();
+		
 		assertHasMockWithTriangleACache();
 		assertHasMockWithTriangleBCache();
 		assertHasMockWithTriangleCCache();
 		
 		Map<String,I_ClassReferencesLocal> refsCache = trial.getRefsCache();
-		assertEquals(3, refsCache.size());
+		assertEquals(4, refsCache.size());
 	}
 	
 	public void assertHasMockWithTriangleACache() {
@@ -265,12 +274,15 @@ public class CRDT_Assert_Circular_to_10 extends TrialDelegate {
 		I_ClassReferences cr =  crd.getReferences(new ClassAliasLocal(clazz));
 		assertTriaBRefs(className, cr);
 		
+		CRDT_Assert_Simple simple = trial.getSimple();
+		simple.assertHasObjectCache();
+		
 		assertHasMockWithTriangleACache();
 		assertHasMockWithTriangleBCache();
 		assertHasMockWithTriangleCCache();
 		
 		Map<String,I_ClassReferencesLocal> refsCache = trial.getRefsCache();
-		assertEquals(3, refsCache.size());
+		assertEquals(4, refsCache.size());
 	}
 
 
@@ -323,12 +335,15 @@ public class CRDT_Assert_Circular_to_10 extends TrialDelegate {
 		I_ClassReferences cr =  crd.getReferences(new ClassAliasLocal(clazz));
 		assertTriCRefs(className, cr);
 		
+		CRDT_Assert_Simple simple = trial.getSimple();
+		simple.assertHasObjectCache();
+		
 		assertHasMockWithTriangleACache();
 		assertHasMockWithTriangleBCache();
 		assertHasMockWithTriangleCCache();
 		
 		Map<String,I_ClassReferencesLocal> refsCache = trial.getRefsCache();
-		assertEquals(3, refsCache.size());
+		assertEquals(4, refsCache.size());
 	}
 	
 	public void assertHasMockWithTriangleCCache() {

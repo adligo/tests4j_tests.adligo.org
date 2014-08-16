@@ -1,6 +1,7 @@
 package org.adligo.tests4j_tests;
 
 import org.adligo.tests4j.models.shared.system.Tests4J_Params;
+import org.adligo.tests4j.models.shared.system.Tests4J_Selection;
 import org.adligo.tests4j.run.Tests4J;
 import org.adligo.tests4j.shared.report.summary.TestDisplay;
 import org.adligo.tests4j.shared.report.summary.TrialDisplay;
@@ -17,7 +18,7 @@ public class RunSingleTrial {
 		//params.addTrial(ReferenceTrackingClassVisitorTrial.class);
 		//params.addTrial(ReferenceTrackingMethodVisitorTrial.class);
 		params.addTrial(ClassReferencesDiscoveryTrial.class);
-
+		params.addTest(new Tests4J_Selection(ClassReferencesDiscoveryTrial.class, "test2003_MockWithTriangleA"));
 		
 		params.setLogState(MultiProbesMap.class, true);
 		

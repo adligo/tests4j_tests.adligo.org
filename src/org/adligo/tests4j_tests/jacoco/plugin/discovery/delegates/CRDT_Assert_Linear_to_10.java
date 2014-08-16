@@ -72,11 +72,12 @@ public class CRDT_Assert_Linear_to_10 extends TrialDelegate {
 		assertMockWithMethodReturnRefs(className, cr);
 		
 		CRDT_Assert_Simple simple =  trial.getSimple();
+		simple.assertHasObjectCache();
 		simple.assertHasMockWithNothingCache();
 		assertHasMockWithMethodReturnCache();
 		
 		Map<String,I_ClassReferencesLocal> refsCache = trial.getRefsCache();
-		assertEquals(2, refsCache.size());
+		assertEquals(3, refsCache.size());
 	}
 	
 	public void assertHasMockWithMethodReturnCache() {
@@ -112,16 +113,19 @@ public class CRDT_Assert_Linear_to_10 extends TrialDelegate {
 		//string is first because I_System doesn't reference itself or Object
 		// MockWithField -> self(MockWithField super Object) and I_System
 		//  I_System -> String ONLY
-		assertEquals(Object.class.getName(), order.get(0));
-		assertEquals(Serializable.class.getName(), order.get(1));
-		assertEquals(CharSequence.class.getName(), order.get(2));
-		assertEquals(Comparable.class.getName(), order.get(3));
+		int counter = 0;
+		assertEquals(Serializable.class.getName(), order.get(counter++));
+		assertEquals(CharSequence.class.getName(), order.get(counter++));
+		assertEquals(Comparable.class.getName(), order.get(counter++));
+		assertEquals(Object.class.getName(), order.get(counter++));
 		
-		assertEquals(String.class.getName(), order.get(4));
-		assertEquals(I_System.class.getName(), order.get(5));
+
 		
-		assertEquals(className, order.get(6));
-		assertEquals(7, order.size());
+		assertEquals(String.class.getName(), order.get(counter++));
+		assertEquals(I_System.class.getName(), order.get(counter++));
+		
+		assertEquals(className, order.get(counter++));
+		assertEquals(counter, order.size());
 		assertTrue(ccbClassLoader.hasCache(className));
 		
 		Set<I_Dependency> deps = crd.toDependencies(className);
@@ -129,29 +133,51 @@ public class CRDT_Assert_Linear_to_10 extends TrialDelegate {
 		I_Dependency dep =  it.next();
 		
 		I_ClassAlias alias = dep.getAlias();
-		assertEquals(String.class.getName(), alias.getName());
-		assertEquals(2, dep.getReferences());
+		assertEquals(Serializable.class.getName(), alias.getName());
+		assertEquals(3, dep.getReferences());
+
+		dep =  it.next();
+		alias = dep.getAlias();
+		assertEquals(CharSequence.class.getName(), alias.getName());
+		assertEquals(3, dep.getReferences());
+		
+		dep =  it.next();
+		alias = dep.getAlias();
+		assertEquals(Comparable.class.getName(), alias.getName());
+		assertEquals(3, dep.getReferences());
 		
 		dep =  it.next();
 		alias = dep.getAlias();
 		assertEquals(Object.class.getName(), alias.getName());
-		assertEquals(1, dep.getReferences());
+		assertEquals(3, dep.getReferences());
+		
+		dep =  it.next();
+		alias = dep.getAlias();
+		assertEquals(String.class.getName(), alias.getName());
+		assertEquals(2, dep.getReferences());
 		
 		dep =  it.next();
 		alias = dep.getAlias();
 		assertEquals(I_System.class.getName(), alias.getName());
 		assertEquals(1, dep.getReferences());
 		
-		assertEquals(3, deps.size());
+		assertEquals(6, deps.size());
 		
 		I_ClassReferences cr =  crd.getReferences(new ClassAliasLocal(clazz));
 		assertMockWithFieldRefs(className, cr);
+		
+		CRDT_Assert_Simple simple = trial.getSimple();
+		simple.assertHasObjectCache();
+		simple.assertHasStringCache();
+		simple.assertHasSerilizableCache();
+		simple.assertHasCharSequenceCache();
+		simple.assertHasCompareableCache();
 		
 		assertHasI_SystemCache();
 		assertHasMockWithFieldCache();
 		
 		Map<String,I_ClassReferencesLocal> refsCache = trial.getRefsCache();
-		assertEquals(2, refsCache.size());
+		assertEquals(7, refsCache.size());
 	}
 
 	public void assertHasI_SystemCache() {
@@ -163,9 +189,14 @@ public class CRDT_Assert_Linear_to_10 extends TrialDelegate {
 		assertFalse(crefs.hasCircularReferences());
 		
 		Set<String> refs = crefs.getReferenceNames();
+		assertContains(refs, Object.class.getName());
+		assertContains(refs, Serializable.class.getName());
+		assertContains(refs, CharSequence.class.getName());
+		assertContains(refs, Comparable.class.getName());
+		
 		assertContains(refs, String.class.getName());
 		assertContains(refs, className);
-		assertEquals(2, refs.size());
+		assertEquals(6, refs.size());
 	}
 	
 	public void assertHasMockWithFieldCache() {
@@ -184,9 +215,13 @@ public class CRDT_Assert_Linear_to_10 extends TrialDelegate {
 		Set<String> refs = crefs.getReferenceNames();
 		assertContains(refs, I_System.class.getName());
 		assertContains(refs, Object.class.getName());
+		assertContains(refs, Serializable.class.getName());
+		assertContains(refs, CharSequence.class.getName());
+		assertContains(refs, Comparable.class.getName());
+		
 		assertContains(refs, String.class.getName());
 		assertContains(refs, className);
-		assertEquals(4, refs.size());
+		assertEquals(7, refs.size());
 	}
 	
 	public void delegate003_MockWithMethodParams() throws Exception {
@@ -229,13 +264,14 @@ public class CRDT_Assert_Linear_to_10 extends TrialDelegate {
 		assertMockWithMethodParamsRefs(className, cr);
 
 		CRDT_Assert_Simple simple =  trial.getSimple();
+		simple.assertHasObjectCache();
 		simple.assertHasMockWithNothingCache();
 		
 		assertHasMockWithMethodReturnCache();
 		assertHasMockWithMethodParamsCache();
 		
 		Map<String,I_ClassReferencesLocal> refsCache = trial.getRefsCache();
-		assertEquals(3, refsCache.size());
+		assertEquals(4, refsCache.size());
 	}
 	
 
@@ -270,45 +306,68 @@ public class CRDT_Assert_Linear_to_10 extends TrialDelegate {
 		assertFalse(ccbClassLoader.hasCache(className));
 		List<String> order = crd.findOrLoad(clazz);
 		assertNotNull(order);
-		assertEquals(Object.class.getName(), order.get(0));
-		assertEquals(Serializable.class.getName(), order.get(1));
-		assertEquals(CharSequence.class.getName(), order.get(2));
-		assertEquals(Comparable.class.getName(), order.get(3));
 		
-		assertEquals(String.class.getName(), order.get(4));
-		assertEquals(I_System.class.getName(), order.get(5));
+		int counter = 0;
+		assertEquals(Serializable.class.getName(), order.get(counter++));
+		assertEquals(CharSequence.class.getName(), order.get(counter++));
+		assertEquals(Comparable.class.getName(), order.get(counter++));
+		assertEquals(Object.class.getName(), order.get(counter++));
 		
-		assertEquals(className, order.get(6));
-		assertEquals(7, order.size());
+		assertEquals(String.class.getName(), order.get(counter++));
+		assertEquals(I_System.class.getName(), order.get(counter++));
+		
+		assertEquals(className, order.get(counter++));
+		assertEquals(counter, order.size());
 		assertTrue(ccbClassLoader.hasCache(className));
 		
 		Set<I_Dependency> deps = crd.toDependencies(className);
 		Iterator<I_Dependency> it = deps.iterator();
 		I_Dependency dep =  it.next();
 		I_ClassAlias alias = dep.getAlias();
-		assertEquals(String.class.getName(), alias.getName());
-		assertEquals(2, dep.getReferences());
+		assertEquals(Serializable.class.getName(), alias.getName());
+		assertEquals(3, dep.getReferences());
+		
+		dep =  it.next();
+		alias = dep.getAlias();
+		assertEquals(CharSequence.class.getName(), alias.getName());
+		assertEquals(3, dep.getReferences());
+		
+		dep =  it.next();
+		alias = dep.getAlias();
+		assertEquals(Comparable.class.getName(), alias.getName());
+		assertEquals(3, dep.getReferences());
 		
 		dep =  it.next();
 		alias = dep.getAlias();
 		assertEquals(Object.class.getName(), alias.getName());
-		assertEquals(1, dep.getReferences());
+		assertEquals(3, dep.getReferences());
+		
+		dep =  it.next();
+		alias = dep.getAlias();
+		assertEquals(String.class.getName(), alias.getName());
+		assertEquals(2, dep.getReferences());
 		
 		dep =  it.next();
 		alias = dep.getAlias();
 		assertEquals(I_System.class.getName(), alias.getName());
 		assertEquals(1, dep.getReferences());
 		
-		assertEquals(3, deps.size());
+		assertEquals(6, deps.size());
 		
 		I_ClassReferences cr =  crd.getReferences(new ClassAliasLocal(clazz));
 		assertMockWithImportOnlyInMethodRefs(className, cr);
+		CRDT_Assert_Simple simple = trial.getSimple();
+		simple.assertHasObjectCache();
+		simple.assertHasSerilizableCache();
+		simple.assertHasCharSequenceCache();
+		simple.assertHasCompareableCache();
+		simple.assertHasStringCache();
 		
 		assertHasI_SystemCache();
 		assertHasMockWithImportOnlyInMethodCache();
 		
 		Map<String,I_ClassReferencesLocal> refsCache = trial.getRefsCache();
-		assertEquals(2, refsCache.size());
+		assertEquals(7, refsCache.size());
 	}
 	
 	public void assertHasMockWithImportOnlyInMethodCache() {
@@ -325,11 +384,16 @@ public class CRDT_Assert_Linear_to_10 extends TrialDelegate {
 		assertFalse(crefs.hasCircularReferences());
 		
 		Set<String> refs = crefs.getReferenceNames();
-		assertContains(refs, I_System.class.getName());
 		assertContains(refs, Object.class.getName());
+		assertContains(refs, Serializable.class.getName());
+		assertContains(refs, CharSequence.class.getName());
+		assertContains(refs, Comparable.class.getName());
+		
+		assertContains(refs, I_System.class.getName());
+		
 		assertContains(refs, String.class.getName());
 		assertContains(refs, className);
-		assertEquals(4, refs.size());
+		assertEquals(7, refs.size());
 	}
 
 	public void delegate005_MockWithStaticFeild() throws Exception {
@@ -365,12 +429,12 @@ public class CRDT_Assert_Linear_to_10 extends TrialDelegate {
 		assertMockWithStaticFieldRefs(className, cr);
 		
 		CRDT_Assert_Simple simple =  trial.getSimple();
+		simple.assertHasObjectCache();
 		simple.assertHasMockWithNothingCache();
-		
 		assertHasMockWithStaticFieldCache();
 		
 		Map<String,I_ClassReferencesLocal> refsCache = trial.getRefsCache();
-		assertEquals(2, refsCache.size());
+		assertEquals(3, refsCache.size());
 	}
 	
 	public void assertHasMockWithStaticFieldCache() {
@@ -428,12 +492,13 @@ public class CRDT_Assert_Linear_to_10 extends TrialDelegate {
 		assertMockWithStaticInitalizerRefs(className, cr);
 		
 		CRDT_Assert_Simple simple =  trial.getSimple();
+		simple.assertHasObjectCache();
 		simple.assertHasMockWithNothingCache();
 		
 		assertHasMockWithStaticInitalizerCache();
 		
 		Map<String,I_ClassReferencesLocal> refsCache = trial.getRefsCache();
-		assertEquals(2, refsCache.size());
+		assertEquals(3, refsCache.size());
 		
 	}
 	
@@ -490,12 +555,13 @@ public class CRDT_Assert_Linear_to_10 extends TrialDelegate {
 		assertMockWithArrayRefs(className, cr);
 		
 		CRDT_Assert_Simple simple =  trial.getSimple();
+		simple.assertHasObjectCache();
 		simple.assertHasMockWithNothingCache();
 		
 		assertHasMockWithArrayCache();
 		
 		Map<String,I_ClassReferencesLocal> refsCache = trial.getRefsCache();
-		assertEquals(2, refsCache.size());
+		assertEquals(3, refsCache.size());
 	}
 
 	
@@ -529,40 +595,40 @@ public class CRDT_Assert_Linear_to_10 extends TrialDelegate {
 		List<String> order = crd.findOrLoad(clazz);
 		assertNotNull(order);
 		
-		assertEquals(Object.class.getName(), order.get(0));
-		assertEquals(Serializable.class.getName(), order.get(1));
+		int counter = 0;
+		assertEquals(Object.class.getName(), order.get(counter++));
+		assertEquals(Serializable.class.getName(), order.get(counter++));
 		
-		assertEquals(Throwable.class.getName(), order.get(2));
-		assertEquals(Exception.class.getName(), order.get(3));
+		assertEquals(Throwable.class.getName(), order.get(counter++));
+		assertEquals(Exception.class.getName(), order.get(counter++));
 		
-		assertEquals(MockWithNothing.class.getName(), order.get(4));
-		assertEquals(MockException.class.getName(), order.get(5));
+		assertEquals(MockException.class.getName(), order.get(counter++));
+		assertEquals(MockWithNothing.class.getName(), order.get(counter++));
 		
-		assertEquals(className, order.get(6));
-		assertEquals(7, order.size());
+		assertEquals(className, order.get(counter++));
+		assertEquals(counter, order.size());
 		assertTrue(ccbClassLoader.hasCache(className));
 		
 		Set<I_Dependency> deps = crd.toDependencies(className);
 		Iterator<I_Dependency> it = deps.iterator();
 		I_Dependency dep =  it.next();
-		
 		I_ClassAlias alias = dep.getAlias();
 		assertEquals(Object.class.getName(), alias.getName());
-		assertEquals(3, dep.getReferences());
+		assertEquals(5, dep.getReferences());
 		
 		dep =  it.next();
 		alias = dep.getAlias();
 		assertEquals(Serializable.class.getName(), alias.getName());
-		assertEquals(2, dep.getReferences());
-		
-		dep =  it.next();
-		alias = dep.getAlias();
-		assertEquals(Exception.class.getName(), alias.getName());
-		assertEquals(2, dep.getReferences());
+		assertEquals(4, dep.getReferences());
 		
 		dep =  it.next();
 		alias = dep.getAlias();
 		assertEquals(Throwable.class.getName(), alias.getName());
+		assertEquals(3, dep.getReferences());
+		
+		dep =  it.next();
+		alias = dep.getAlias();
+		assertEquals(Exception.class.getName(), alias.getName());
 		assertEquals(2, dep.getReferences());
 		
 		dep =  it.next();
@@ -581,13 +647,18 @@ public class CRDT_Assert_Linear_to_10 extends TrialDelegate {
 		assertMockWithMethodExceptionRefs(className, cr);
 		
 		CRDT_Assert_Simple simple =  trial.getSimple();
+		simple.assertHasObjectCache();
+		simple.assertHasSerilizableCache();
+		simple.assertHasThrowableCache();
+		simple.assertHasExceptionCache();
+		
 		simple.assertHasMockWithNothingCache();
 		simple.assertHasMockExceptionCache();
 		
 		assertHasMockWithMethodExceptionCache();
 		
 		Map<String,I_ClassReferencesLocal> refsCache = trial.getRefsCache();
-		assertEquals(3, refsCache.size());
+		assertEquals(7, refsCache.size());
 	}
 	
 	public void assertHasMockWithMethodExceptionCache() {
@@ -624,21 +695,21 @@ public class CRDT_Assert_Linear_to_10 extends TrialDelegate {
 		List<String> order = crd.findOrLoad(clazz);
 		assertNotNull(order);
 		
-		assertEquals(Object.class.getName(), order.get(0));
-		assertEquals(Serializable.class.getName(), order.get(1));
+		int counter = 0;
+		assertEquals(Object.class.getName(), order.get(counter++));
+		assertEquals(Serializable.class.getName(), order.get(counter++));
 		
-		assertEquals(Throwable.class.getName(), order.get(2));
-		assertEquals(Exception.class.getName(), order.get(3));
+		assertEquals(Throwable.class.getName(), order.get(counter++));
+		assertEquals(Exception.class.getName(), order.get(counter++));
 		
-		assertEquals(MockWithNothing.class.getName(), order.get(4));
-		assertEquals(MockException.class.getName(), order.get(5));
-		
+		assertEquals(MockException.class.getName(), order.get(counter++));
+		assertEquals(MockWithNothing.class.getName(), order.get(counter++));
 		
 		//this has a 2 count
-		assertEquals(MockWithMethodException.class.getName(), order.get(6));
+		assertEquals(MockWithMethodException.class.getName(), order.get(counter++));
 
-		assertEquals(className, order.get(7));
-		assertEquals(8, order.size());
+		assertEquals(className, order.get(counter++));
+		assertEquals(counter, order.size());
 		assertTrue(ccbClassLoader.hasCache(className));
 		
 		Set<I_Dependency> deps = crd.toDependencies(className);
@@ -646,21 +717,21 @@ public class CRDT_Assert_Linear_to_10 extends TrialDelegate {
 		I_Dependency dep =  it.next();
 		I_ClassAlias alias = dep.getAlias();
 		assertEquals(Object.class.getName(), alias.getName());
-		assertEquals(4, dep.getReferences());
+		assertEquals(6, dep.getReferences());
 		
 		dep =  it.next();
 		alias = dep.getAlias();
 		assertEquals(Serializable.class.getName(), alias.getName());
-		assertEquals(3, dep.getReferences());
-		
-		dep =  it.next();
-		alias = dep.getAlias();
-		assertEquals(Exception.class.getName(), alias.getName());
-		assertEquals(3, dep.getReferences());
+		assertEquals(5, dep.getReferences());
 		
 		dep =  it.next();
 		alias = dep.getAlias();
 		assertEquals(Throwable.class.getName(), alias.getName());
+		assertEquals(4, dep.getReferences());
+		
+		dep =  it.next();
+		alias = dep.getAlias();
+		assertEquals(Exception.class.getName(), alias.getName());
 		assertEquals(3, dep.getReferences());
 		
 		dep =  it.next();
@@ -684,6 +755,10 @@ public class CRDT_Assert_Linear_to_10 extends TrialDelegate {
 		assertMockWithMethodExceptionBlockRefs(className, cr);
 		
 		CRDT_Assert_Simple simple =  trial.getSimple();
+		simple.assertHasObjectCache();
+		simple.assertHasThrowableCache();
+		simple.assertHasExceptionCache();
+		
 		simple.assertHasMockWithNothingCache();
 		simple.assertHasMockExceptionCache();
 		
@@ -691,7 +766,8 @@ public class CRDT_Assert_Linear_to_10 extends TrialDelegate {
 		assertHasMockWithMethodExceptionBlockCache();
 		
 		Map<String,I_ClassReferencesLocal> refsCache = trial.getRefsCache();
-		assertEquals(4, refsCache.size());
+		//7?
+		assertEquals(8, refsCache.size());
 	}
 	
 	public void assertHasMockWithMethodExceptionBlockCache() {
@@ -753,12 +829,13 @@ public class CRDT_Assert_Linear_to_10 extends TrialDelegate {
 		assertMockWithAbstractMethodReturnRefs(className, cr);
 		
 		CRDT_Assert_Simple simple =  trial.getSimple();
+		simple.assertHasObjectCache();
 		simple.assertHasMockWithNothingCache();
 		
 		assertHasMockWithAbstractMethodReturnCache();
 		
 		Map<String,I_ClassReferencesLocal> refsCache = trial.getRefsCache();
-		assertEquals(2, refsCache.size());
+		assertEquals(3, refsCache.size());
 	}
 	
 	public void assertHasMockWithAbstractMethodReturnCache() {

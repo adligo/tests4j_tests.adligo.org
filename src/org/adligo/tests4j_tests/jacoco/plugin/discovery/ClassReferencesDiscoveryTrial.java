@@ -15,7 +15,6 @@ import org.adligo.tests4j.models.shared.dependency.I_ClassReferencesLocal;
 import org.adligo.tests4j.models.shared.trials.SourceFileScope;
 import org.adligo.tests4j.models.shared.trials.Test;
 import org.adligo.tests4j.run.helpers.CachedClassBytesClassLoader;
-import org.adligo.tests4j_4jacoco.plugin.discovery.ClassReferencesCache;
 import org.adligo.tests4j_4jacoco.plugin.discovery.ClassReferencesDiscovery;
 import org.adligo.tests4j_4jacoco.plugin.discovery.I_DiscoveryMemory;
 import org.adligo.tests4j_tests.base_abstract_trials.SourceFileCountingTrial;
@@ -26,14 +25,17 @@ import org.adligo.tests4j_tests.jacoco.plugin.discovery.delegates.CRDT_Assert_Li
 import org.adligo.tests4j_tests.jacoco.plugin.discovery.delegates.CRDT_Assert_MockRefEverything;
 import org.adligo.tests4j_tests.jacoco.plugin.discovery.delegates.CRDT_Assert_MockWithEverything;
 import org.adligo.tests4j_tests.jacoco.plugin.discovery.delegates.CRDT_Assert_Simple;
+import org.adligo.tests4j_tests.jacoco.plugin.discovery.delegates.ClassReferencesCacheMock;
 import org.adligo.tests4j_tests.jacoco.plugin.discovery.delegates.I_ClassReferencesDiscoveryTrial;
 import org.adligo.tests4j_tests.models.shared.system.mocks.Tests4J_LogMock;
 
-@SourceFileScope (sourceClass=ClassReferencesDiscovery.class, minCoverage=85.0)
+@SourceFileScope (sourceClass=ClassReferencesDiscovery.class, minCoverage=75.0)
 public class ClassReferencesDiscoveryTrial extends SourceFileCountingTrial implements I_DiscoveryMemory, I_ClassReferencesDiscoveryTrial {
 	private CachedClassBytesClassLoader ccbClassLoader;
 	private ClassReferencesDiscovery classReferenceDiscovery;
-	private ClassReferencesCache initialRefCache = new ClassReferencesCache();
+	private ClassReferencesCacheMock initialRefCache = new ClassReferencesCacheMock();
+	private ClassReferencesCacheMock preCircleRefCache = new ClassReferencesCacheMock();
+	
 	private Map<String,I_ClassReferencesLocal> refsCache = new HashMap<String, I_ClassReferencesLocal>();
 	private final ClassFilter classFilter = new ClassFilter();
 	private Tests4J_LogMock logMock = new Tests4J_LogMock();
@@ -63,8 +65,9 @@ public class ClassReferencesDiscoveryTrial extends SourceFileCountingTrial imple
 		ccbClassLoader = new CachedClassBytesClassLoader(logMock);
 		classReferenceDiscovery = new ClassReferencesDiscovery(ccbClassLoader, logMock, this);
 		
-		
 		refsCache.clear();
+		initialRefCache.clear();
+		preCircleRefCache.clear();
 	}
 	
 	@Test
@@ -79,7 +82,7 @@ public class ClassReferencesDiscoveryTrial extends SourceFileCountingTrial imple
 	}
 	
 	@Test
-	public void test0003_MockWithString() throws Exception {
+	public void test0003_MockException() throws Exception {
 		simple.delegate003_MockException();
 	}
 	
@@ -332,20 +335,7 @@ public class ClassReferencesDiscoveryTrial extends SourceFileCountingTrial imple
 	public CRDT_Assert_MockWithEverything getEverythingDelegate() {
 		return everythingDelegate;
 	}
-	@Override
-	public int getTests() {
-		return 31;
-	}
-
-	@Override
-	public int getAsserts() {
-		return 2668;
-	}
-
-	@Override
-	public int getUniqueAsserts() {
-		return 1290;
-	}
+	
 	@Override
 	public void putParentsIfAbsent(I_ClassParentsLocal p) {
 		
@@ -358,6 +348,26 @@ public class ClassReferencesDiscoveryTrial extends SourceFileCountingTrial imple
 	public I_ClassReferencesCache getInitialReferencesCache() {
 		return initialRefCache;
 	}
+	@Override
+	public I_ClassReferencesCache getPreCirclesReferencesCache() {
+		return preCircleRefCache;
+	}
+	
+	@Override
+	public int getTests() {
+		return 31;
+	}
+
+	@Override
+	public int getAsserts() {
+		return 3736;
+	}
+
+	@Override
+	public int getUniqueAsserts() {
+		return 1736;
+	}
+	
 
 
 }

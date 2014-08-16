@@ -23,6 +23,7 @@ import org.adligo.tests4j_tests.base_abstract_trials.SourceFileCountingTrial;
 import org.adligo.tests4j_tests.jacoco.plugin.discovery.delegates.CPDT_Assert_Linear_to_20;
 import org.adligo.tests4j_tests.jacoco.plugin.discovery.delegates.CPDT_Assert_Linear_to_30;
 import org.adligo.tests4j_tests.jacoco.plugin.discovery.delegates.CPDT_Assert_Simple;
+import org.adligo.tests4j_tests.jacoco.plugin.discovery.delegates.ClassReferencesCacheMock;
 import org.adligo.tests4j_tests.jacoco.plugin.discovery.delegates.I_ClassParentsDiscoveryTrial;
 import org.adligo.tests4j_tests.models.shared.system.mocks.Tests4J_LogMock;
 import org.adligo.tests4j_tests.run.helpers.class_loading_mocks.MockI_GetLong;
@@ -52,6 +53,8 @@ public class ClassParentsDiscoveryTrial extends SourceFileCountingTrial implemen
 	private CachedClassBytesClassLoader ccbClassLoader;
 	private ClassParentsDiscovery classParentsDiscovery;
 	private ClassReferencesCache initalRefCache = new ClassReferencesCache();
+	private ClassReferencesCacheMock preCircleRefCache = new ClassReferencesCacheMock();
+	
 	private Map<String,I_ClassParentsLocal> parentsCache = new HashMap<String, I_ClassParentsLocal>();
 	private final ClassFilter classFilter = new ClassFilter();
 	private Tests4J_LogMock logMock = new Tests4J_LogMock();
@@ -73,7 +76,7 @@ public class ClassParentsDiscoveryTrial extends SourceFileCountingTrial implemen
 		ccbClassLoader = new CachedClassBytesClassLoader(logMock);
 		classParentsDiscovery = new ClassParentsDiscovery(ccbClassLoader, logMock, this);
 		
-		
+		preCircleRefCache.clear();
 		parentsCache.clear();
 	}
 	
@@ -355,6 +358,10 @@ public class ClassParentsDiscoveryTrial extends SourceFileCountingTrial implemen
 	@Override
 	public I_ClassReferencesCache getInitialReferencesCache() {
 		return initalRefCache;
+	}
+	@Override
+	public I_ClassReferencesCache getPreCirclesReferencesCache() {
+		return preCircleRefCache;
 	}
 
 

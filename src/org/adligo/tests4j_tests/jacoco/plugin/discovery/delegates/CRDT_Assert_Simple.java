@@ -53,10 +53,10 @@ public class CRDT_Assert_Simple extends TrialDelegate {
 		
 		I_ClassReferences cr =  classReferenceDiscovery.getReferences(new ClassAliasLocal(clazz));
 		assertMockWithNothingRefs(className, cr);
-	
+		assertHasObjectCache();
 		assertHasMockWithNothingCache();
 		Map<String,I_ClassReferencesLocal> refsCache = trial.getRefsCache();
-		assertEquals(1, refsCache.size());
+		assertEquals(2, refsCache.size());
 	}
 
 	public void assertHasMockWithNothingCache() {
@@ -88,39 +88,61 @@ public class CRDT_Assert_Simple extends TrialDelegate {
 		List<String> order = classReferenceDiscovery.findOrLoad(clazz);
 		assertNotNull(order);
 		
-		assertEquals(Object.class.getName(), order.get(0));
-		assertEquals(Serializable.class.getName(), order.get(1));
-		assertEquals(CharSequence.class.getName(), order.get(2));
-		assertEquals(Comparable.class.getName(), order.get(3));
+		int counter = 0;
+		assertEquals(Serializable.class.getName(), order.get(counter++));
+		assertEquals(CharSequence.class.getName(), order.get(counter++));
+		assertEquals(Comparable.class.getName(), order.get(counter++));
+		assertEquals(Object.class.getName(), order.get(counter++));
 		
-		assertEquals(String.class.getName(), order.get(4));
-		assertEquals(className, order.get(5));
-		assertEquals(6, order.size());
+		assertEquals(String.class.getName(), order.get(counter++));
+		assertEquals(className, order.get(counter++));
+		assertEquals(counter, order.size());
 		
 		assertTrue(ccbClassLoader.hasCache(className));
 		
 		Set<I_Dependency> deps = classReferenceDiscovery.toDependencies(className);
 		Iterator<I_Dependency> it = deps.iterator();
 		I_Dependency dep =  it.next();
-		
 		I_ClassAlias alias = dep.getAlias();
+		assertEquals(Serializable.class.getName(), alias.getName());
+		assertEquals(2, dep.getReferences());
+		
+		dep =  it.next();
+		alias = dep.getAlias();
+		assertEquals(CharSequence.class.getName(), alias.getName());
+		assertEquals(2, dep.getReferences());
+		
+		dep =  it.next();
+		alias = dep.getAlias();
+		assertEquals(Comparable.class.getName(), alias.getName());
+		assertEquals(2, dep.getReferences());
+		
+		dep =  it.next();
+		alias = dep.getAlias();
 		assertEquals(Object.class.getName(), alias.getName());
-		assertEquals(1, dep.getReferences());
+		assertEquals(2, dep.getReferences());
 		
 		dep =  it.next();
 		alias = dep.getAlias();
 		assertEquals(String.class.getName(), alias.getName());
 		assertEquals(1, dep.getReferences());
 		
-		assertEquals(2, deps.size());
+		assertEquals(5, deps.size());
 		
 		
 		I_ClassReferences cr =  classReferenceDiscovery.getReferences(new ClassAliasLocal(clazz));
 		assertMockWithStringRefs(className, cr);
 		
+		assertHasObjectCache();
+		assertHasSerilizableCache();
+		assertHasCharSequenceCache();
+		
+		assertHasCompareableCache();
+		assertHasStringCache();
+		
 		assertHasMockWithStringCache();
 		Map<String,I_ClassReferencesLocal> refsCache = trial.getRefsCache();
-		assertEquals(1, refsCache.size());
+		assertEquals(6, refsCache.size());
 	}
 	
 	public void assertHasMockWithStringCache() {
@@ -137,10 +159,14 @@ public class CRDT_Assert_Simple extends TrialDelegate {
 		assertFalse(refs.hasCircularReferences());
 		
 		Set<String> refsRefs = refs.getReferenceNames();
+		assertContains(refsRefs, Serializable.class.getName());
+		assertContains(refsRefs, CharSequence.class.getName());
+		assertContains(refsRefs, Comparable.class.getName());
+		
 		assertContains(refsRefs, String.class.getName());
 		assertContains(refsRefs, Object.class.getName());
 		assertContains(refsRefs, className);
-		assertEquals(3, refsRefs.size());
+		assertEquals(6, refsRefs.size());
 	}
 	
 	public void delegate003_MockException() throws Exception {
@@ -169,30 +195,153 @@ public class CRDT_Assert_Simple extends TrialDelegate {
 		
 		I_ClassAlias alias = dep.getAlias();
 		assertEquals(Serializable.class.getName(), alias.getName());
-		assertEquals(1, dep.getReferences());
+		assertEquals(3, dep.getReferences());
+
+		dep =  it.next();
+		alias = dep.getAlias();
+		assertEquals(Object.class.getName(), alias.getName());
+		assertEquals(3, dep.getReferences());
+
+		dep =  it.next();
+		alias = dep.getAlias();
+		assertEquals(Throwable.class.getName(), alias.getName());
+		assertEquals(2, dep.getReferences());
 		
 		dep =  it.next();
 		alias = dep.getAlias();
 		assertEquals(Exception.class.getName(), alias.getName());
-		assertEquals(1, dep.getReferences());
-		
-		dep =  it.next();
-		alias = dep.getAlias();
-		assertEquals(Object.class.getName(), alias.getName());
-		assertEquals(1, dep.getReferences());
-		
-		dep =  it.next();
-		alias = dep.getAlias();
-		assertEquals(Throwable.class.getName(), alias.getName());
 		assertEquals(1, dep.getReferences());
 		assertEquals(4, deps.size());
 		
 		I_ClassReferences cr =  classReferenceDiscovery.getReferences(new ClassAliasLocal(clazz));
 		assertMockExceptionRefs(className, cr);
 		
+		assertHasObjectCache();
+		assertHasThrowableCache();
+		assertHasExceptionCache();
 		assertHasMockExceptionCache();
 		Map<String,I_ClassReferencesLocal> refsCache = trial.getRefsCache();
-		assertEquals(1, refsCache.size());
+		assertEquals(5, refsCache.size());
+	}
+	
+	public void assertHasObjectCache() {
+		String className = Object.class.getName();
+		Map<String,I_ClassReferencesLocal> refsCache = trial.getRefsCache();
+		I_ClassReferences refs =  refsCache.get(className);
+		assertSimple(className, refs);
+	}
+
+	public void assertHasSerilizableCache() {
+		String className = Serializable.class.getName();
+		Map<String,I_ClassReferencesLocal> refsCache = trial.getRefsCache();
+		I_ClassReferences refs =  refsCache.get(className);
+		assertSimple(className, refs);
+	}
+	
+	public void assertHasCompareableCache() {
+		String className = Comparable.class.getName();
+		Map<String,I_ClassReferencesLocal> refsCache = trial.getRefsCache();
+		I_ClassReferences refs =  refsCache.get(className);
+		assertSimple(className, refs);
+	}
+	
+	public void assertHasCharSequenceCache() {
+		String className = Comparable.class.getName();
+		Map<String,I_ClassReferencesLocal> refsCache = trial.getRefsCache();
+		I_ClassReferences refs =  refsCache.get(className);
+		assertSimple(className, refs);
+	}
+	
+	private void assertSimple(String className,
+			I_ClassReferences refs) {
+		assertNotNull(refs);
+		assertEquals(className, refs.getName());
+		assertFalse(refs.hasCircularReferences());
+		
+		Set<String> refsRefs = refs.getReferenceNames();
+		assertEquals(0, refsRefs.size());
+	}
+	
+	public void assertHasThrowableCache() {
+		String className = Throwable.class.getName();
+		Map<String,I_ClassReferencesLocal> refsCache = trial.getRefsCache();
+		I_ClassReferences refs =  refsCache.get(className);
+		
+		assertNotNull(refs);
+		assertEquals(className, refs.getName());
+		assertFalse(refs.hasCircularReferences());
+		
+		Set<String> refsRefs = refs.getReferenceNames();
+		assertContains(refsRefs, Serializable.class.getName());
+		assertContains(refsRefs, Object.class.getName());
+		assertEquals(2, refsRefs.size());
+	}
+	
+	
+	
+	public void assertHasExceptionCache() {
+		String className = Exception.class.getName();
+		Map<String,I_ClassReferencesLocal> refsCache = trial.getRefsCache();
+		I_ClassReferences refs =  refsCache.get(className);
+		
+		assertNotNull(refs);
+		assertEquals(className, refs.getName());
+		assertFalse(refs.hasCircularReferences());
+		
+		Set<String> refsRefs = refs.getReferenceNames();
+		assertContains(refsRefs, Object.class.getName());
+		assertContains(refsRefs, Throwable.class.getName());
+		assertContains(refsRefs, Serializable.class.getName());
+		assertEquals(3, refsRefs.size());
+	}
+	
+	public void assertHasNumberCache() {
+		String className = Number.class.getName();
+		Map<String,I_ClassReferencesLocal> refsCache = trial.getRefsCache();
+		I_ClassReferences refs =  refsCache.get(className);
+		
+		assertNotNull(refs);
+		assertEquals(className, refs.getName());
+		assertFalse(refs.hasCircularReferences());
+		
+		Set<String> refsRefs = refs.getReferenceNames();
+		assertContains(refsRefs, Object.class.getName());
+		assertContains(refsRefs, Serializable.class.getName());
+		assertEquals(2, refsRefs.size());
+	}
+	
+	public void assertHasLongCache() {
+		String className = Long.class.getName();
+		Map<String,I_ClassReferencesLocal> refsCache = trial.getRefsCache();
+		I_ClassReferences refs =  refsCache.get(className);
+		
+		assertNotNull(refs);
+		assertEquals(className, refs.getName());
+		assertFalse(refs.hasCircularReferences());
+		
+		Set<String> refsRefs = refs.getReferenceNames();
+		assertContains(refsRefs, Object.class.getName());
+		assertContains(refsRefs, Serializable.class.getName());
+		assertContains(refsRefs, Number.class.getName());
+		assertContains(refsRefs, Comparable.class.getName());
+		assertEquals(4, refsRefs.size());
+	}
+	
+	public void assertHasStringCache() {
+		String className = String.class.getName();
+		Map<String,I_ClassReferencesLocal> refsCache = trial.getRefsCache();
+		I_ClassReferences refs =  refsCache.get(className);
+		
+		assertNotNull(refs);
+		assertEquals(className, refs.getName());
+		assertFalse(refs.hasCircularReferences());
+		
+		Set<String> refsRefs = refs.getReferenceNames();
+		assertContains(refsRefs, Object.class.getName());
+		assertContains(refsRefs, Serializable.class.getName());
+		assertContains(refsRefs, CharSequence.class.getName());
+		assertContains(refsRefs, Comparable.class.getName());
+		assertEquals(4, refsRefs.size());
 	}
 	
 	public void assertHasMockExceptionCache() {
@@ -218,6 +367,17 @@ public class CRDT_Assert_Simple extends TrialDelegate {
 	}
 	
 	public void assertHasAllCache() {
+		assertHasObjectCache();
+		assertHasThrowableCache();
+		assertHasExceptionCache();
+		assertHasMockExceptionCache();
+		
+		assertHasSerilizableCache();
+		assertHasCharSequenceCache();
+		
+		assertHasCompareableCache();
+		assertHasStringCache();
+		
 		assertHasMockExceptionCache();
 		assertHasMockWithNothingCache();
 		assertHasMockWithStringCache();

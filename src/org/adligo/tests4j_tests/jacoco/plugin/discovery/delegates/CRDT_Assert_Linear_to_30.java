@@ -41,36 +41,61 @@ public class CRDT_Assert_Linear_to_30 extends TrialDelegate {
 		List<String> order = crd.findOrLoad(MockI_OtherStringAndLong.class);
 		assertNotNull(order);
 		
+		int counter = 0;
+		assertEquals(Serializable.class.getName(), order.get(counter++));
+		assertEquals(Object.class.getName(), order.get(counter++));
+		assertEquals(Comparable.class.getName(), order.get(counter++));
 		
-		assertEquals(Object.class.getName(), order.get(0));
-		assertEquals(Serializable.class.getName(), order.get(1));
+		assertEquals(CharSequence.class.getName(), order.get(counter++));
+		assertEquals(Number.class.getName(), order.get(counter++));
 		
-		assertEquals(Number.class.getName(), order.get(2));
-		assertEquals(Comparable.class.getName(), order.get(3));
-		assertEquals(CharSequence.class.getName(), order.get(4));
-		
-		assertEquals(Long.class.getName(), order.get(5));
-		assertEquals(String.class.getName(), order.get(6));
+		assertEquals(Long.class.getName(), order.get(counter++));
+		assertEquals(String.class.getName(), order.get(counter++));
 
-		assertEquals(MockI_GetLong.class.getName(), order.get(7));
-		assertEquals(MockI_GetString.class.getName(), order.get(8));
+		assertEquals(MockI_GetLong.class.getName(), order.get(counter++));
+		assertEquals(MockI_GetString.class.getName(), order.get(counter++));
 		
-		assertEquals(MockI_SetLong.class.getName(), order.get(9));		
-		assertEquals(MockI_SetString.class.getName(), order.get(10));
+		assertEquals(MockI_SetLong.class.getName(), order.get(counter++));		
+		assertEquals(MockI_SetString.class.getName(), order.get(counter++));
 		
-		assertEquals(MockI_GetAndSetLong.class.getName(), order.get(11));
-		assertEquals(MockI_GetAndSetString.class.getName(), order.get(12));
+		assertEquals(MockI_GetAndSetLong.class.getName(), order.get(counter++));
+		assertEquals(MockI_GetAndSetString.class.getName(), order.get(counter++));
 
 		//1 counts
-		assertEquals(MockI_StringAndLong.class.getName(), order.get(13));
-		assertEquals(className, order.get(14));
-		assertEquals(15, order.size());
+		assertEquals(MockI_StringAndLong.class.getName(), order.get(counter++));
+		assertEquals(className, order.get(counter++));
+		assertEquals(counter, order.size());
 		assertTrue(ccbClassLoader.hasCache(className));
 		
 		Set<I_Dependency> deps = crd.toDependencies(className);
 		Iterator<I_Dependency> it = deps.iterator();
 		I_Dependency dep =  it.next();
 		I_ClassAlias alias = dep.getAlias();
+		assertEquals(Serializable.class.getName(), alias.getName());
+		assertEquals(11, dep.getReferences());
+		
+		dep =  it.next();
+		alias = dep.getAlias();
+		assertEquals(Object.class.getName(), alias.getName());
+		assertEquals(11, dep.getReferences());
+
+		dep =  it.next();
+		alias = dep.getAlias();
+		assertEquals(Comparable.class.getName(), alias.getName());
+		assertEquals(10, dep.getReferences());
+		
+		dep =  it.next();
+		alias = dep.getAlias();
+		assertEquals(CharSequence.class.getName(), alias.getName());
+		assertEquals(6, dep.getReferences());
+		
+		dep =  it.next();
+		alias = dep.getAlias();
+		assertEquals(Number.class.getName(), alias.getName());
+		assertEquals(6, dep.getReferences());
+		
+		dep =  it.next();
+		alias = dep.getAlias();
 		assertEquals(Long.class.getName(), alias.getName());
 		assertEquals(5, dep.getReferences());
 		
@@ -114,9 +139,20 @@ public class CRDT_Assert_Linear_to_30 extends TrialDelegate {
 		assertEquals(MockI_StringAndLong.class.getName(), alias.getName());
 		assertEquals(1, dep.getReferences());
 		
-		assertEquals(9, deps.size());
+		assertEquals(14, deps.size());
 		I_ClassReferencesLocal cr =  crd.getReferences(new ClassAliasLocal(clazz));
 		assertMockI_OtherStringAndLongCacheRefs(className, cr);
+		
+		CRDT_Assert_Simple simple = trial.getSimple();
+		simple.assertHasObjectCache();
+		simple.assertHasSerilizableCache();
+		simple.assertHasCharSequenceCache();
+		
+		simple.assertHasCompareableCache();
+		simple.assertHasNumberCache();
+		simple.assertHasLongCache();
+		simple.assertHasStringCache();
+		
 		
 		CRDT_Assert_Linear_to_20 to20 = trial.getLinear_to20();
 		to20.assertHasMockI_GetLongCache();
@@ -131,7 +167,7 @@ public class CRDT_Assert_Linear_to_30 extends TrialDelegate {
 		assertHasMockI_OtherStringAndLongCache();
 		
 		Map<String,I_ClassReferencesLocal> refsCache = trial.getRefsCache();
-		assertEquals(8, refsCache.size());
+		assertEquals(15, refsCache.size());
 	}
 	
 	public void assertHasMockI_OtherStringAndLongCache() {
@@ -150,9 +186,14 @@ public class CRDT_Assert_Linear_to_30 extends TrialDelegate {
 		
 		Set<String> refs = crefs.getReferenceNames();
 		assertNotNull(refs);
+		assertContains(refs, Serializable.class.getName());
+		assertContains(refs, Object.class.getName());
+		assertContains(refs, Comparable.class.getName());
+		assertContains(refs, CharSequence.class.getName());
+		assertContains(refs, Number.class.getName());
+		
 		assertContains(refs, String.class.getName());
 		assertContains(refs, Long.class.getName());
-		
 		
 		assertContains(refs, MockI_GetString.class.getName());
 		assertContains(refs, MockI_SetString.class.getName());
@@ -164,7 +205,7 @@ public class CRDT_Assert_Linear_to_30 extends TrialDelegate {
 		
 		assertContains(refs, MockI_StringAndLong.class.getName());
 		assertContains(refs, className);
-		assertEquals(10, refs.size());
+		assertEquals(15, refs.size());
 	}
 	
 	public void assertHasAllCache() {
