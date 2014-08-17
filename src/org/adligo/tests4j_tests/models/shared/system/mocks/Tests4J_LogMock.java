@@ -34,7 +34,7 @@ public class Tests4J_LogMock implements I_Tests4J_Log {
 	}
 
 	@Override
-	public void onException(Throwable p) {
+	public void onThrowable(Throwable p) {
 		exceptions.add(p);
 	}
 

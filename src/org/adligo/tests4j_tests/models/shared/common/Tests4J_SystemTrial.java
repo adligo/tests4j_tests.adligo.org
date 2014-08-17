@@ -7,7 +7,7 @@ import org.adligo.tests4j_tests.base_abstract_trials.SourceFileCountingTrial;
 import org.adligo.tests4j_tests.models.shared.common.mocks.SystemSimpleMock;
 import org.adligo.tests4j_tests.models.shared.common.mocks.ThreadLocalSystemMock;
 
-@SourceFileScope (sourceClass=Tests4J_System.class, minCoverage=85.0)
+@SourceFileScope (sourceClass=Tests4J_System.class, minCoverage=80.0)
 public class Tests4J_SystemTrial extends SourceFileCountingTrial {
 	private static final SystemSimpleMock MOCK = new SystemSimpleMock();
 	

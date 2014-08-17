@@ -5,66 +5,113 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 
+import org.adligo.tests4j.models.shared.common.CacheControl;
+import org.adligo.tests4j.models.shared.dependency.ClassDependenciesLocal;
 import org.adligo.tests4j.models.shared.dependency.ClassFilter;
 import org.adligo.tests4j.models.shared.dependency.ClassFilterMutant;
-import org.adligo.tests4j.models.shared.dependency.ClassReferencesLocal;
+import org.adligo.tests4j.models.shared.dependency.I_ClassDependenciesCache;
+import org.adligo.tests4j.models.shared.dependency.I_ClassDependenciesLocal;
 import org.adligo.tests4j.models.shared.dependency.I_ClassFilter;
+import org.adligo.tests4j.models.shared.dependency.I_ClassParentsCache;
 import org.adligo.tests4j.models.shared.dependency.I_ClassParentsLocal;
-import org.adligo.tests4j.models.shared.dependency.I_ClassReferencesCache;
-import org.adligo.tests4j.models.shared.dependency.I_ClassReferencesLocal;
-import org.adligo.tests4j.models.shared.trials.SourceFileScope;
+import org.adligo.tests4j.models.shared.trials.PackageScope;
 import org.adligo.tests4j.models.shared.trials.Test;
 import org.adligo.tests4j.run.helpers.CachedClassBytesClassLoader;
-import org.adligo.tests4j_4jacoco.plugin.discovery.ClassReferencesDiscovery;
-import org.adligo.tests4j_4jacoco.plugin.discovery.I_DiscoveryMemory;
-import org.adligo.tests4j_tests.base_abstract_trials.SourceFileCountingTrial;
-import org.adligo.tests4j_tests.jacoco.plugin.discovery.delegates.CRDT_Assert_Circular_to_10;
-import org.adligo.tests4j_tests.jacoco.plugin.discovery.delegates.CRDT_Assert_Linear_to_10;
-import org.adligo.tests4j_tests.jacoco.plugin.discovery.delegates.CRDT_Assert_Linear_to_20;
-import org.adligo.tests4j_tests.jacoco.plugin.discovery.delegates.CRDT_Assert_Linear_to_30;
-import org.adligo.tests4j_tests.jacoco.plugin.discovery.delegates.CRDT_Assert_MockRefEverything;
-import org.adligo.tests4j_tests.jacoco.plugin.discovery.delegates.CRDT_Assert_MockWithEverything;
-import org.adligo.tests4j_tests.jacoco.plugin.discovery.delegates.CRDT_Assert_Simple;
+import org.adligo.tests4j_4jacoco.plugin.discovery.CircularDependenciesDiscovery;
+import org.adligo.tests4j_4jacoco.plugin.discovery.ClassParentsCache;
+import org.adligo.tests4j_4jacoco.plugin.discovery.ClassParentsDiscovery;
+import org.adligo.tests4j_4jacoco.plugin.discovery.FullDependenciesDiscovery;
+import org.adligo.tests4j_4jacoco.plugin.discovery.InitialDependenciesDiscovery;
+import org.adligo.tests4j_4jacoco.plugin.discovery.OrderedClassDiscovery;
+import org.adligo.tests4j_4jacoco.plugin.discovery.ReferenceTrackingClassVisitor;
+import org.adligo.tests4j_tests.base_abstract_trials.ApiCountingTrial;
 import org.adligo.tests4j_tests.jacoco.plugin.discovery.delegates.ClassReferencesCacheMock;
-import org.adligo.tests4j_tests.jacoco.plugin.discovery.delegates.I_ClassReferencesDiscoveryTrial;
+import org.adligo.tests4j_tests.jacoco.plugin.discovery.delegates.DAT_Assert_Circular_to_10;
+import org.adligo.tests4j_tests.jacoco.plugin.discovery.delegates.DAT_Assert_Linear_to_10;
+import org.adligo.tests4j_tests.jacoco.plugin.discovery.delegates.DAT_Assert_Linear_to_20;
+import org.adligo.tests4j_tests.jacoco.plugin.discovery.delegates.DAT_Assert_Linear_to_30;
+import org.adligo.tests4j_tests.jacoco.plugin.discovery.delegates.DAT_Assert_MockRefEverything;
+import org.adligo.tests4j_tests.jacoco.plugin.discovery.delegates.DAT_Assert_MockWithEverything;
+import org.adligo.tests4j_tests.jacoco.plugin.discovery.delegates.DAT_Assert_Simple;
+import org.adligo.tests4j_tests.jacoco.plugin.discovery.delegates.I_DiscoveryApiTrial;
 import org.adligo.tests4j_tests.models.shared.system.mocks.Tests4J_LogMock;
+import org.objectweb.asm.Opcodes;
 
-@SourceFileScope (sourceClass=ClassReferencesDiscovery.class, minCoverage=75.0)
-public class ClassReferencesDiscoveryTrial extends SourceFileCountingTrial implements I_DiscoveryMemory, I_ClassReferencesDiscoveryTrial {
+@PackageScope (packageName="org.adligo.tests4j_4jacoco.plugin.discovery")
+public class DiscoveryApiTrial extends ApiCountingTrial implements I_DiscoveryApiTrial, I_ClassDependenciesCache {
 	private CachedClassBytesClassLoader ccbClassLoader;
-	private ClassReferencesDiscovery classReferenceDiscovery;
+	private OrderedClassDiscovery orderedClassDiscovery;
 	private ClassReferencesCacheMock initialRefCache = new ClassReferencesCacheMock();
 	private ClassReferencesCacheMock preCircleRefCache = new ClassReferencesCacheMock();
 	
-	private Map<String,I_ClassReferencesLocal> refsCache = new HashMap<String, I_ClassReferencesLocal>();
+	private Map<String,I_ClassDependenciesLocal> refsCache = new HashMap<String, I_ClassDependenciesLocal>();
 	private final ClassFilter classFilter = new ClassFilter();
 	private Tests4J_LogMock logMock = new Tests4J_LogMock();
 	private I_ClassFilter primitiveClassFilter;
-	private CRDT_Assert_Simple simple;
-	private CRDT_Assert_Linear_to_10 linear_to10;
-	private CRDT_Assert_Linear_to_20 linear_to20;
-	private CRDT_Assert_Linear_to_30 linear_to30;
-	private CRDT_Assert_Circular_to_10 circular;
-	private CRDT_Assert_MockWithEverything everythingDelegate;
+	private DAT_Assert_Simple simple;
+	private DAT_Assert_Linear_to_10 linear_to10;
+	private DAT_Assert_Linear_to_20 linear_to20;
+	private DAT_Assert_Linear_to_30 linear_to30;
+	private DAT_Assert_Circular_to_10 circular;
+	private DAT_Assert_MockWithEverything everythingDelegate;
+
+	private CacheControl cacheControl = new CacheControl();
+	private ClassParentsCache parentsCache = new ClassParentsCache(cacheControl);
 	
-	public ClassReferencesDiscoveryTrial() {
+	public DiscoveryApiTrial() {
 		ClassFilterMutant cfm = new ClassFilterMutant();
 		cfm.setIgnoredPackageNames(Collections.unmodifiableSet(new HashSet<String>()));
 		primitiveClassFilter =new ClassFilter(cfm);
 		
-		simple = new CRDT_Assert_Simple(this);
-		linear_to10 = new CRDT_Assert_Linear_to_10(this);
-		linear_to20 = new CRDT_Assert_Linear_to_20(this);
-		linear_to30 = new CRDT_Assert_Linear_to_30(this);
-		circular = new CRDT_Assert_Circular_to_10(this);
-		everythingDelegate = new CRDT_Assert_MockWithEverything(this);
+		simple = new DAT_Assert_Simple(this);
+		linear_to10 = new DAT_Assert_Linear_to_10(this);
+		linear_to20 = new DAT_Assert_Linear_to_20(this);
+		linear_to30 = new DAT_Assert_Linear_to_30(this);
+		circular = new DAT_Assert_Circular_to_10(this);
+		everythingDelegate = new DAT_Assert_MockWithEverything(this);
+		
+		ccbClassLoader = new CachedClassBytesClassLoader(logMock, null, null
+				, cacheControl);
+		orderedClassDiscovery = new OrderedClassDiscovery();
+		orderedClassDiscovery.setCache(this);
+		orderedClassDiscovery.setLog(logMock);
+		orderedClassDiscovery.setClassFilter(classFilter);
+		
+		ClassParentsDiscovery classParentsDiscovery = new ClassParentsDiscovery();
+		classParentsDiscovery.setCache(parentsCache);
+		classParentsDiscovery.setClassFilter(classFilter);
+		classParentsDiscovery.setClassLoader(ccbClassLoader);
+		classParentsDiscovery.setLog(logMock);
+		
+		InitialDependenciesDiscovery inital = new InitialDependenciesDiscovery();
+		inital.setBasicClassFilter(primitiveClassFilter);
+		inital.setCache(initialRefCache);
+		inital.setClassFilter(classFilter);
+		inital.setClassLoader(ccbClassLoader);
+		inital.setClassParentsDiscovery(classParentsDiscovery);
+		inital.setClassVisitor(new ReferenceTrackingClassVisitor(Opcodes.ASM5, logMock));
+		inital.setLog(logMock);
+		
+		FullDependenciesDiscovery fullDependenciesDiscovery = new FullDependenciesDiscovery();
+		fullDependenciesDiscovery.setCache(preCircleRefCache);
+		fullDependenciesDiscovery.setLog(logMock);
+		fullDependenciesDiscovery.setClassFilter(classFilter);
+		fullDependenciesDiscovery.setInitialDependenciesDiscovery(inital);
+		
+		orderedClassDiscovery.setFullDependenciesDiscovery(fullDependenciesDiscovery);
+		
+		CircularDependenciesDiscovery circleDependencyDiscovery = new CircularDependenciesDiscovery();
+		circleDependencyDiscovery.setCache(this);
+		circleDependencyDiscovery.setFullDependenciesDiscovery(fullDependenciesDiscovery);
+		circleDependencyDiscovery.setClassFilter(classFilter);
+		circleDependencyDiscovery.setLog(logMock);
+		
+		orderedClassDiscovery.setCircularDependenciesDiscovery(circleDependencyDiscovery);
 		
 	}
 	@Override
 	public void beforeTests() {
-		ccbClassLoader = new CachedClassBytesClassLoader(logMock);
-		classReferenceDiscovery = new ClassReferencesDiscovery(ccbClassLoader, logMock, this);
-		
+		cacheControl.clear();
 		refsCache.clear();
 		initialRefCache.clear();
 		preCircleRefCache.clear();
@@ -240,16 +287,14 @@ public class ClassReferencesDiscoveryTrial extends SourceFileCountingTrial imple
 	
 	@Test
 	public void test3002_MockRefEverything() throws Exception {
-		CRDT_Assert_MockRefEverything delegate = new CRDT_Assert_MockRefEverything(this);
+		DAT_Assert_MockRefEverything delegate = new DAT_Assert_MockRefEverything(this);
 		delegate.test();
 	}
 	
-	@Override
 	public boolean isFiltered(Class<?> clazz) {
 		return classFilter.isFiltered(clazz);
 	}
 
-	@Override
 	public boolean isFiltered(String className) {
 		return classFilter.isFiltered(className);
 	}
@@ -272,8 +317,8 @@ public class ClassReferencesDiscoveryTrial extends SourceFileCountingTrial imple
 	 * @see org.adligo.tests4j_tests.jacoco.plugin.discovery.I_ClassReferencesDiscoveryTrial#getClassReferenceDiscovery()
 	 */
 	@Override
-	public ClassReferencesDiscovery getClassReferenceDiscovery() {
-		return classReferenceDiscovery;
+	public OrderedClassDiscovery getOrderedClassDiscovery() {
+		return orderedClassDiscovery;
 	}
 	
 	/* (non-Javadoc)
@@ -298,58 +343,52 @@ public class ClassReferencesDiscoveryTrial extends SourceFileCountingTrial imple
 		return primitiveClassFilter;
 	}
 	
-	@Override
-	public void putReferencesIfAbsent(I_ClassReferencesLocal p) {
-		assertEquals(ClassReferencesLocal.class.getName(), p.getClass().getName());
+	public void putDependenciesIfAbsent(I_ClassDependenciesLocal p) {
+		assertEquals(ClassDependenciesLocal.class.getName(), p.getClass().getName());
 		if (!refsCache.containsKey(p.getName())) {
 			refsCache.put(p.getName(), p);
 		}
 	}
 	
-	@Override
-	public I_ClassReferencesLocal getReferences(String name) {
+	public I_ClassDependenciesLocal getDependencies(String name) {
 		return refsCache.get(name);
 	}
 
-	public Map<String, I_ClassReferencesLocal> getRefsCache() {
+	public Map<String, I_ClassDependenciesLocal> getRefsCache() {
 		return refsCache;
 	}
 
-	public CRDT_Assert_Simple getSimple() {
+	public DAT_Assert_Simple getSimple() {
 		return simple;
 	}
-	public CRDT_Assert_Linear_to_10 getLinear_to10() {
+	public DAT_Assert_Linear_to_10 getLinear_to10() {
 		return linear_to10;
 	}
-	public CRDT_Assert_Linear_to_20 getLinear_to20() {
+	public DAT_Assert_Linear_to_20 getLinear_to20() {
 		return linear_to20;
 	}
-	public CRDT_Assert_Linear_to_30 getLinear_to30() {
+	public DAT_Assert_Linear_to_30 getLinear_to30() {
 		return linear_to30;
 	}
 	
-	public CRDT_Assert_Circular_to_10 getCircular_to_10() {
+	public DAT_Assert_Circular_to_10 getCircular_to_10() {
 		return circular;
 	}
 	
-	public CRDT_Assert_MockWithEverything getEverythingDelegate() {
+	public DAT_Assert_MockWithEverything getEverythingDelegate() {
 		return everythingDelegate;
 	}
 	
-	@Override
 	public void putParentsIfAbsent(I_ClassParentsLocal p) {
 		
 	}
-	@Override
 	public I_ClassParentsLocal getParents(String name) {
 		return null;
 	}
-	@Override
-	public I_ClassReferencesCache getInitialReferencesCache() {
+	public I_ClassDependenciesCache getInitialReferencesCache() {
 		return initialRefCache;
 	}
-	@Override
-	public I_ClassReferencesCache getPreCirclesReferencesCache() {
+	public I_ClassDependenciesCache getPreCirclesReferencesCache() {
 		return preCircleRefCache;
 	}
 	

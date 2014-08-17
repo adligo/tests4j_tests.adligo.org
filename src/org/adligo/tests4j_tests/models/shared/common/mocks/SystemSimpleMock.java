@@ -1,5 +1,6 @@
 package org.adligo.tests4j_tests.models.shared.common.mocks;
 
+import org.adligo.tests4j.models.shared.common.DefaultSystem;
 import org.adligo.tests4j.models.shared.common.I_System;
 
 public class SystemSimpleMock implements I_System {
@@ -42,6 +43,11 @@ public class SystemSimpleMock implements I_System {
 
 	public void setNextLineSeperator(String nextLineSeperator) {
 		this.nextLineSeperator = nextLineSeperator;
+	}
+
+	@Override
+	public String getCurrentThreadName() {
+		return "MOCK_" + DefaultSystem.DEFAULT_THREAD_NAME;
 	}
 
 }

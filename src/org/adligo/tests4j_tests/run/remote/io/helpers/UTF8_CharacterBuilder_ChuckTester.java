@@ -33,7 +33,7 @@ public class UTF8_CharacterBuilder_ChuckTester implements Runnable {
 				try {
 					sc = nextCharsGroup.take();
 				} catch (InterruptedException e) {
-					monitor.getLog().onException(e);
+					monitor.getLog().onThrowable(e);
 					return;
 				}
 				//monitor.log("testing chunk starting at " + sc.getStart() + " with " + sc.getCapture() + " characters");

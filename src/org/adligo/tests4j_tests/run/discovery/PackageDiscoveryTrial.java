@@ -24,6 +24,7 @@ import org.adligo.tests4j.models.shared.metadata.UseCaseMetadata;
 import org.adligo.tests4j.models.shared.trials.AbstractTrial;
 import org.adligo.tests4j.models.shared.trials.AdditionalInstrumentation;
 import org.adligo.tests4j.models.shared.trials.AfterTrial;
+import org.adligo.tests4j.models.shared.trials.AllowedDependencies;
 import org.adligo.tests4j.models.shared.trials.ApiTrial;
 import org.adligo.tests4j.models.shared.trials.BeforeTrial;
 import org.adligo.tests4j.models.shared.trials.I_AbstractTrial;
@@ -132,6 +133,7 @@ public class PackageDiscoveryTrial extends SourceFileCountingTrial {
 	public void testModelsShared() throws Exception {
 		PackageDiscovery cd = new PackageDiscovery("org.adligo.tests4j.models.shared.trials");
 		List<String> classNames = cd.getClassNames();
+		assertContains(classNames, AllowedDependencies.class.getName());
 		assertContains(classNames, AdditionalInstrumentation.class.getName());
 		assertContains(classNames, AbstractTrial.class.getName());
 		assertContains(classNames, AfterTrial.class.getName());
@@ -167,7 +169,7 @@ public class PackageDiscoveryTrial extends SourceFileCountingTrial {
 		assertContains(classNames, UseCaseScope.class.getName());
 		assertContains(classNames, UseCaseTrial.class.getName());
 		
-		assertEquals(27, classNames.size());
+		assertEquals(28, classNames.size());
 		List<PackageDiscovery> children =  cd.getSubPackages();
 		
 		
@@ -213,11 +215,11 @@ public class PackageDiscoveryTrial extends SourceFileCountingTrial {
 
 	@Override
 	public int getAsserts() {
-		return 71;
+		return 72;
 	}
 
 	@Override
 	public int getUniqueAsserts() {
-		return 71;
+		return 72;
 	}
 }

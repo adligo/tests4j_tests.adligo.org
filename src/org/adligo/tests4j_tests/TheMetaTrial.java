@@ -29,7 +29,7 @@ public class TheMetaTrial  extends AbstractTrial implements I_MetaTrial {
 	public void afterMetadataCalculated(I_TrialRunMetadata metadata) throws Exception {
 		calculator = new RelevantClassesWithTrialsCalculator(metadata);
 		
-		assertGreaterThanOrEquals(32.8, calculator.getPct());
+		assertGreaterThanOrEquals(31.8, calculator.getPct());
 		//this assert is also for the child-packages;
 		assertGreaterThanOrEquals(100.0, calculator.getPct("org.adligo.tests4j.models.shared.asserts"));
 		assertGreaterThanOrEquals(100.0, calculator.getPct("org.adligo.tests4j.models.shared.asserts.common"));
@@ -56,7 +56,7 @@ public class TheMetaTrial  extends AbstractTrial implements I_MetaTrial {
 			sb.append("'");
 			sb.append(System.lineSeparator());
 		}
-		assertEquals(sb.toString(), 112, metadata.getAllTrialsCount());
+		assertEquals(sb.toString(), 111, metadata.getAllTrialsCount());
 
 		assertEquals(559,  metadata.getAllTestsCount());
 		
@@ -68,8 +68,7 @@ public class TheMetaTrial  extends AbstractTrial implements I_MetaTrial {
 		//you may want to require this for your project.
 		if (results.hasCoverage()) {
 			double actual = results.getCoveragePercentage();
-			//assertGreaterThanOrEquals(67.0, actual);
-			assertGreaterThanOrEquals(56.0, actual);
+			assertGreaterThanOrEquals(68.0, actual);
 			
 		}
 		//TODO
@@ -79,17 +78,14 @@ public class TheMetaTrial  extends AbstractTrial implements I_MetaTrial {
 		// does include afterMetadataCalculated(I_TrialRunMetadata metadata)
 		// - 4 ignored tests in
 		// MultiRecordingTrial
-		assertGreaterThanOrEquals(448, results.getTestsPassed());
-		//assertGreaterThanOrEquals(600, results.getTestsPassed());
+		assertGreaterThanOrEquals(700, results.getTestsPassed());
 		
 		//does not include assertions from this class yet
 		//I think the single threaded count is off somewhere
 		//less by at least 300 now from the log, which varies
-		//assertGreaterThanOrEquals(22900,results.getAsserts());
-		assertGreaterThanOrEquals(4100,results.getAsserts());
+		assertGreaterThanOrEquals(28100,results.getAsserts());
 		//at least 250 off from the log, which varies
-		//assertGreaterThanOrEquals(6700,results.getUniqueAsserts());
-		assertGreaterThanOrEquals(3000,results.getUniqueAsserts());
+		assertGreaterThanOrEquals(8500,results.getUniqueAsserts());
 	}
 
 

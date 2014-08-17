@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.atomic.AtomicLong;
 
+import org.adligo.tests4j.models.shared.common.DefaultSystem;
 import org.adligo.tests4j.models.shared.common.I_System;
 
 
@@ -55,6 +56,11 @@ public class SystemRunnerMock implements I_System {
 	@Override
 	public String getLineSeperator() {
 		return lineSeperator;
+	}
+
+	@Override
+	public String getCurrentThreadName() {
+		return "SystemRunnerMock_" + DefaultSystem.DEFAULT_THREAD_NAME;
 	}
 
 }

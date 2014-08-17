@@ -7,38 +7,38 @@ import org.adligo.tests4j.models.shared.dependency.I_ClassAlias;
 import org.adligo.tests4j.models.shared.dependency.I_ClassAliasLocal;
 import org.adligo.tests4j.models.shared.dependency.I_ClassParents;
 import org.adligo.tests4j.models.shared.dependency.I_ClassParentsLocal;
-import org.adligo.tests4j.models.shared.dependency.I_ClassReferencesLocal;
+import org.adligo.tests4j.models.shared.dependency.I_ClassDependenciesLocal;
 import org.adligo.tests4j.models.shared.xml.I_XML_Builder;
 
-public class ClassReferencesLocalMockNull implements I_ClassReferencesLocal {
+public class ClassReferencesLocalMockNull implements I_ClassDependenciesLocal {
 
 	@Override
-	public boolean hasCircularReferences() {
+	public boolean hasCircularDependencies() {
 		return false;
 	}
 
 	@Override
-	public Set<I_ClassAlias> getCircularReferences() {
+	public Set<I_ClassAlias> getCircularDependencies() {
 		return null;
 	}
 
 	@Override
-	public Set<String> getCircularReferenceNames() {
+	public Set<String> getCircularDependenciesNames() {
 		return null;
 	}
 
 	@Override
-	public boolean hasReferences() {
+	public boolean hasDependencies() {
 		return false;
 	}
 
 	@Override
-	public Set<I_ClassAlias> getReferences() {
+	public Set<I_ClassAlias> getDependencies() {
 		return null;
 	}
 
 	@Override
-	public Set<String> getReferenceNames() {
+	public Set<String> getDependencyNames() {
 		return null;
 	}
 
@@ -78,12 +78,12 @@ public class ClassReferencesLocalMockNull implements I_ClassReferencesLocal {
 	}
 
 	@Override
-	public Set<I_ClassAliasLocal> getCircularReferencesLocal() {
+	public Set<I_ClassAliasLocal> getCircularDependenciesLocal() {
 		return null;
 	}
 
 	@Override
-	public Set<I_ClassParentsLocal> getReferencesLocal() {
+	public Set<I_ClassParentsLocal> getDependenciesLocal() {
 		return null;
 	}
 

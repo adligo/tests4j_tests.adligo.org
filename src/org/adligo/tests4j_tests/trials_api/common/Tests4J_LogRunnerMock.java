@@ -9,7 +9,7 @@ public class Tests4J_LogRunnerMock implements I_Tests4J_Log{
 	}
 
 	@Override
-	public void onException(Throwable p) {
+	public void onThrowable(Throwable p) {
 	}
 
 	@Override

@@ -7,8 +7,8 @@ import org.adligo.tests4j.models.shared.system.I_Tests4J_TrialList;
 import org.adligo.tests4j.models.shared.system.Tests4J_Params;
 import org.adligo.tests4j.models.shared.trials.I_Trial;
 import org.adligo.tests4j.run.Tests4J;
-import org.adligo.tests4j_4jacoco.plugin.ScopedJacocoPluginFactory;
-import org.adligo.tests4j_4jacoco.plugin.TrialInstrumenter;
+import org.adligo.tests4j_4jacoco.plugin.CoveragePluginFactory;
+import org.adligo.tests4j_4jacoco.plugin.instrumentation.TrialInstrumenter;
 import org.adligo.tests4j_4jacoco.plugin.instrumentation.common.StrategySelectionInstrumenter;
 
 public class RunPkgTrials implements I_Tests4J_TrialList {
@@ -21,7 +21,7 @@ public class RunPkgTrials implements I_Tests4J_TrialList {
 		params.setLogState(TrialInstrumenter.class, true);
 		
 		params.setLogState(StrategySelectionInstrumenter.class, true);
-		params.setCoveragePluginFactoryClass(ScopedJacocoPluginFactory.class);
+		params.setCoveragePluginFactoryClass(CoveragePluginFactory.class);
 		Tests4J.run(params);
 	}
 

@@ -5,20 +5,18 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 
+import org.adligo.tests4j.models.shared.common.CacheControl;
 import org.adligo.tests4j.models.shared.dependency.ClassFilter;
 import org.adligo.tests4j.models.shared.dependency.ClassFilterMutant;
 import org.adligo.tests4j.models.shared.dependency.ClassParentsLocal;
-import org.adligo.tests4j.models.shared.dependency.I_ClassFilter;
+import org.adligo.tests4j.models.shared.dependency.I_ClassParentsCache;
 import org.adligo.tests4j.models.shared.dependency.I_ClassParentsLocal;
-import org.adligo.tests4j.models.shared.dependency.I_ClassReferences;
-import org.adligo.tests4j.models.shared.dependency.I_ClassReferencesCache;
-import org.adligo.tests4j.models.shared.dependency.I_ClassReferencesLocal;
+import org.adligo.tests4j.models.shared.trials.IgnoreTest;
 import org.adligo.tests4j.models.shared.trials.SourceFileScope;
 import org.adligo.tests4j.models.shared.trials.Test;
 import org.adligo.tests4j.run.helpers.CachedClassBytesClassLoader;
 import org.adligo.tests4j_4jacoco.plugin.discovery.ClassParentsDiscovery;
-import org.adligo.tests4j_4jacoco.plugin.discovery.ClassReferencesCache;
-import org.adligo.tests4j_4jacoco.plugin.discovery.I_DiscoveryMemory;
+import org.adligo.tests4j_4jacoco.plugin.discovery.I_ClassParentsDiscovery;
 import org.adligo.tests4j_tests.base_abstract_trials.SourceFileCountingTrial;
 import org.adligo.tests4j_tests.jacoco.plugin.discovery.delegates.CPDT_Assert_Linear_to_20;
 import org.adligo.tests4j_tests.jacoco.plugin.discovery.delegates.CPDT_Assert_Linear_to_30;
@@ -48,36 +46,40 @@ import org.adligo.tests4j_tests.run.helpers.class_loading_mocks.MockWithTriangle
 import org.adligo.tests4j_tests.run.helpers.class_loading_mocks.MockWithTriangleB;
 import org.adligo.tests4j_tests.run.helpers.class_loading_mocks.MockWithTriangleC;
 
-@SourceFileScope (sourceClass=ClassParentsDiscovery.class, minCoverage=86.0)
-public class ClassParentsDiscoveryTrial extends SourceFileCountingTrial implements I_DiscoveryMemory, I_ClassParentsDiscoveryTrial {
+@SourceFileScope (sourceClass=ClassParentsDiscovery.class, minCoverage=82.0)
+public class ClassParentsDiscoveryTrial extends SourceFileCountingTrial implements I_ClassParentsCache, I_ClassParentsDiscoveryTrial {
 	private CachedClassBytesClassLoader ccbClassLoader;
 	private ClassParentsDiscovery classParentsDiscovery;
-	private ClassReferencesCache initalRefCache = new ClassReferencesCache();
-	private ClassReferencesCacheMock preCircleRefCache = new ClassReferencesCacheMock();
 	
 	private Map<String,I_ClassParentsLocal> parentsCache = new HashMap<String, I_ClassParentsLocal>();
 	private final ClassFilter classFilter = new ClassFilter();
 	private Tests4J_LogMock logMock = new Tests4J_LogMock();
-	private I_ClassFilter primitiveClassFilter;
 	private CPDT_Assert_Simple simple;
 	private CPDT_Assert_Linear_to_20 linearTo20;
 	private CPDT_Assert_Linear_to_30 linearTo30;
+	private CacheControl cacheControl = new CacheControl();
 	
 	public ClassParentsDiscoveryTrial() {
 		ClassFilterMutant cfm = new ClassFilterMutant();
 		cfm.setIgnoredPackageNames(Collections.unmodifiableSet(new HashSet<String>()));
-		primitiveClassFilter =new ClassFilter(cfm);
 		simple = new CPDT_Assert_Simple(this);
 		linearTo20 = new CPDT_Assert_Linear_to_20(this);
 		linearTo30 = new CPDT_Assert_Linear_to_30(this);
+		
+		ccbClassLoader = new CachedClassBytesClassLoader(logMock,
+				null,null, cacheControl);
+		
+		
+		classParentsDiscovery = new ClassParentsDiscovery();
+		classParentsDiscovery.setCache(this);
+		classParentsDiscovery.setLog(logMock);
+		classParentsDiscovery.setClassFilter(classFilter);
+		classParentsDiscovery.setClassLoader(ccbClassLoader);
 	}
 	@Override
 	public void beforeTests() {
-		ccbClassLoader = new CachedClassBytesClassLoader(logMock);
-		classParentsDiscovery = new ClassParentsDiscovery(ccbClassLoader, logMock, this);
-		
-		preCircleRefCache.clear();
 		parentsCache.clear();
+		cacheControl.clear();
 	}
 	
 	@Test
@@ -253,23 +255,7 @@ public class ClassParentsDiscoveryTrial extends SourceFileCountingTrial implemen
 		simple.delegateObjectOnlyParents(MockWithRefMockWithEverything.class);
 	}
 	
-	@Override
-	public boolean isFiltered(Class<?> clazz) {
-		return classFilter.isFiltered(clazz);
-	}
-
-	@Override
-	public boolean isFiltered(String className) {
-		return classFilter.isFiltered(className);
-	}
 	
-	/* (non-Javadoc)
-	 * @see org.adligo.tests4j_tests.jacoco.plugin.discovery.I_ClassParentsDiscoveryTrial#getBasicClassFilter()
-	 */
-	@Override
-	public I_ClassFilter getBasicClassFilter() {
-		return primitiveClassFilter;
-	}
 	/* (non-Javadoc)
 	 * @see org.adligo.tests4j_tests.jacoco.plugin.discovery.I_ClassParentsDiscoveryTrial#getCcbClassLoader()
 	 */
@@ -281,7 +267,7 @@ public class ClassParentsDiscoveryTrial extends SourceFileCountingTrial implemen
 	 * @see org.adligo.tests4j_tests.jacoco.plugin.discovery.I_ClassParentsDiscoveryTrial#getClassReferenceDiscovery()
 	 */
 	@Override
-	public ClassParentsDiscovery getClassParentsDiscovery() {
+	public I_ClassParentsDiscovery getClassParentsDiscovery() {
 		return classParentsDiscovery;
 	}
 	
@@ -299,28 +285,20 @@ public class ClassParentsDiscoveryTrial extends SourceFileCountingTrial implemen
 	public Tests4J_LogMock getLogMock() {
 		return logMock;
 	}
-	/* (non-Javadoc)
-	 * @see org.adligo.tests4j_tests.jacoco.plugin.discovery.I_ClassParentsDiscoveryTrial#getPrimitiveClassFilter()
-	 */
-	@Override
-	public I_ClassFilter getPrimitiveClassFilter() {
-		return primitiveClassFilter;
-	}
-	
-	@Override
-	public void putReferencesIfAbsent(I_ClassReferencesLocal p) {
-		
-	}
-	
-	@Override
-	public I_ClassReferencesLocal getReferences(String name) {
-		return null;
-	}
 
 	public Map<String, I_ClassParentsLocal> getParentsCache() {
 		return parentsCache;
 	}
 
+	@Override
+	public CPDT_Assert_Simple getSimple() {
+		return simple;
+	}
+	@Override
+	public CPDT_Assert_Linear_to_20 getLinearTo20() {
+		return linearTo20;
+	}
+	
 	@Override
 	public void putParentsIfAbsent(I_ClassParentsLocal p) {
 		assertEquals(ClassParentsLocal.class.getName(), p.getClass().getName());
@@ -331,14 +309,6 @@ public class ClassParentsDiscoveryTrial extends SourceFileCountingTrial implemen
 	@Override
 	public I_ClassParentsLocal getParents(String name) {
 		return parentsCache.get(name);
-	}
-	@Override
-	public CPDT_Assert_Simple getSimple() {
-		return simple;
-	}
-	@Override
-	public CPDT_Assert_Linear_to_20 getLinearTo20() {
-		return linearTo20;
 	}
 	
 	@Override
@@ -355,14 +325,7 @@ public class ClassParentsDiscoveryTrial extends SourceFileCountingTrial implemen
 	public int getUniqueAsserts() {
 		return 467;
 	}
-	@Override
-	public I_ClassReferencesCache getInitialReferencesCache() {
-		return initalRefCache;
-	}
-	@Override
-	public I_ClassReferencesCache getPreCirclesReferencesCache() {
-		return preCircleRefCache;
-	}
+	
 
 
 

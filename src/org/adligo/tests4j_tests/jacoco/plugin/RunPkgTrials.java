@@ -10,7 +10,7 @@ import org.adligo.tests4j.models.shared.trials.I_Trial;
 import org.adligo.tests4j.run.Tests4J;
 import org.adligo.tests4j.run.helpers.Tests4J_ThreadFactory;
 import org.adligo.tests4j.run.helpers.Tests4J_TrialsRunable;
-import org.adligo.tests4j_4jacoco.plugin.ScopedJacocoPluginFactory;
+import org.adligo.tests4j_4jacoco.plugin.CoveragePluginFactory;
 import org.adligo.tests4j_4jacoco.plugin.data.multi.MultiProbeDataStore;
 import org.adligo.tests4j_4jacoco.plugin.data.multi.MultiProbesMap;
 import org.adligo.tests4j_4jacoco.plugin.data.multi.ThreadGroupLocal;
@@ -22,14 +22,14 @@ public class RunPkgTrials implements I_Tests4J_TrialList {
 		Tests4J_Params params = new Tests4J_Params();
 		params.addTrials(new RunPkgTrials());
 		
-		params.setLogState(Tests4J_ThreadFactory.class, true);
-		params.setLogState(MultiProbeDataStore.class, true);
+		//params.setLogState(Tests4J_ThreadFactory.class, true);
+		//params.setLogState(MultiProbeDataStore.class, true);
 		params.setLogState(MultiProbesMap.class, true);
-		params.setLogState(Tests4J_TrialsRunable.class, true);
-		params.setLogState(ThreadGroupLocal.class, true);
+		//params.setLogState(Tests4J_TrialsRunable.class, true);
+		//params.setLogState(ThreadGroupLocal.class, true);
 		
 		
-		params.setCoveragePluginFactoryClass(ScopedJacocoPluginFactory.class);
+		params.setCoveragePluginFactoryClass(CoveragePluginFactory.class);
 		Tests4J.run(params);
 	}
 
@@ -37,9 +37,8 @@ public class RunPkgTrials implements I_Tests4J_TrialList {
 	public List<Class<? extends I_Trial>> getTrials() {
 		List<Class<? extends I_Trial>> trials = new ArrayList<Class<? extends I_Trial>>();
 		
-		trials.add(ScopedJacocoPluginFactoryTrial.class);
+		trials.add(CoveragePluginFactoryTrial.class);
 		trials.add(SharedClassListTrial.class);
-		trials.add(SimpleJacocoPluginFactoryTrial.class);
 		trials.addAll(new org.adligo.tests4j_tests.jacoco.plugin.discovery.RunPkgTrials().getTrials());
 		trials.addAll(new org.adligo.tests4j_tests.jacoco.plugin.data.common.RunPkgTrials().getTrials());
 		

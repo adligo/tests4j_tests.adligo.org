@@ -75,7 +75,7 @@ public class Tests4J_UncaughtExceptionHandlerTrial extends SourceFileCountingTri
 	}
 	
 	@Override
-	public void onException(Throwable p) {
+	public void onThrowable(Throwable p) {
 		lastThrowable = p;
 	}
 	@Override

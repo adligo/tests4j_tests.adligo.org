@@ -3,6 +3,8 @@ package org.adligo.tests4j_tests.jacoco.plugin;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.adligo.tests4j.models.shared.asserts.common.ExpectedThrownData;
+import org.adligo.tests4j.models.shared.asserts.common.I_Thrower;
 import org.adligo.tests4j.models.shared.trials.SourceFileScope;
 import org.adligo.tests4j.models.shared.trials.Test;
 import org.adligo.tests4j_4jacoco.plugin.SharedClassList;
@@ -28,22 +30,34 @@ public class SharedClassListTrial extends SourceFileCountingTrial {
 			assertTrue("The class " + clazz + " must be in one of the packages " +
 					System.lineSeparator() + allowedPackages, inPkg);
 		}
-		
 	}
 
+
+	@Test 
+	public void testRuntimeException() {
+		assertThrown(new ExpectedThrownData(new RuntimeException("java.lang.ClassNotFoundException: hey"),
+				new ExpectedThrownData(new ClassNotFoundException("hey"))), 
+				new I_Thrower() {
+					
+					@Override
+					public void run() throws Throwable {
+						SharedClassList.checkClass("hey");
+					}
+				});
+	}
 	@Override
 	public int getTests() {
-		return 1;
+		return 2;
 	}
 
 	@Override
 	public int getAsserts() {
-		return 121;
+		return 122;
 	}
 
 	@Override
 	public int getUniqueAsserts() {
-		return 121;
+		return 122;
 	}
 
 }

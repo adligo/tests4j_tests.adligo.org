@@ -9,7 +9,7 @@ import org.adligo.tests4j.models.shared.trials.I_Trial;
 import org.adligo.tests4j.run.Tests4J;
 import org.adligo.tests4j.shared.report.summary.TestDisplay;
 import org.adligo.tests4j.shared.report.summary.TrialDisplay;
-import org.adligo.tests4j_4jacoco.plugin.ScopedJacocoPluginFactory;
+import org.adligo.tests4j_4jacoco.plugin.CoveragePluginFactory;
 
 public class RunPkgTrials implements I_Tests4J_TrialList {
 
@@ -22,7 +22,7 @@ public class RunPkgTrials implements I_Tests4J_TrialList {
 		
 		//Tests4J_Manager
 		
-		params.setCoveragePluginFactoryClass(ScopedJacocoPluginFactory.class);
+		params.setCoveragePluginFactoryClass(CoveragePluginFactory.class);
 		Tests4J.run(params);
 	}
 

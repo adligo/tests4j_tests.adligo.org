@@ -6,7 +6,7 @@ import org.adligo.tests4j.models.shared.dependency.I_ClassParents;
 import org.adligo.tests4j.models.shared.dependency.I_ClassParentsLocal;
 import org.adligo.tests4j.models.shared.trials.TrialDelegate;
 import org.adligo.tests4j.run.helpers.I_CachedClassBytesClassLoader;
-import org.adligo.tests4j_4jacoco.plugin.discovery.ClassParentsDiscovery;
+import org.adligo.tests4j_4jacoco.plugin.discovery.I_ClassParentsDiscovery;
 import org.adligo.tests4j_tests.run.helpers.class_loading_mocks.MockI_GetAndSetLong;
 import org.adligo.tests4j_tests.run.helpers.class_loading_mocks.MockI_GetAndSetString;
 import org.adligo.tests4j_tests.run.helpers.class_loading_mocks.MockI_GetLong;
@@ -30,7 +30,7 @@ public class CPDT_Assert_Linear_to_20 extends TrialDelegate {
 	public void delegate012_MockWithExtensionA() throws Exception {
 		I_CachedClassBytesClassLoader ccbClassLoader = trial.getCcbClassLoader();
 		
-		ClassParentsDiscovery cpd = trial.getClassParentsDiscovery();
+		I_ClassParentsDiscovery cpd = trial.getClassParentsDiscovery();
 		
 		Class<?> clazz = MockWithExtensionA.class;
 		assertEquals(0, ccbClassLoader.getCacheSize());
@@ -71,7 +71,7 @@ public class CPDT_Assert_Linear_to_20 extends TrialDelegate {
 	public void delegate013_MockWithExtensionB() throws Exception {
 		I_CachedClassBytesClassLoader ccbClassLoader = trial.getCcbClassLoader();
 		
-		ClassParentsDiscovery cpd = trial.getClassParentsDiscovery();
+		I_ClassParentsDiscovery cpd = trial.getClassParentsDiscovery();
 		
 		Class<?> clazz = MockWithExtensionB.class;
 		assertEquals(0, ccbClassLoader.getCacheSize());
@@ -116,7 +116,7 @@ public class CPDT_Assert_Linear_to_20 extends TrialDelegate {
 	public void delegate018_MockI_GetAndSetLong() throws Exception {
 		Class<?> clazz = MockI_GetAndSetLong.class;
 		I_CachedClassBytesClassLoader ccbClassLoader = trial.getCcbClassLoader();
-		ClassParentsDiscovery classReferenceDiscovery = trial.getClassParentsDiscovery();
+		I_ClassParentsDiscovery classReferenceDiscovery = trial.getClassParentsDiscovery();
 		
 		String className = clazz.getName();
 		assertFalse(ccbClassLoader.hasCache(className));
@@ -158,7 +158,7 @@ public class CPDT_Assert_Linear_to_20 extends TrialDelegate {
 	public void delegate019_MockI_GetAndSetString() throws Exception {
 		Class<?> clazz = MockI_GetAndSetString.class;
 		I_CachedClassBytesClassLoader ccbClassLoader = trial.getCcbClassLoader();
-		ClassParentsDiscovery classReferenceDiscovery = trial.getClassParentsDiscovery();
+		I_ClassParentsDiscovery classReferenceDiscovery = trial.getClassParentsDiscovery();
 		
 		String className = clazz.getName();
 		assertFalse(ccbClassLoader.hasCache(className));
@@ -200,7 +200,7 @@ public class CPDT_Assert_Linear_to_20 extends TrialDelegate {
 	public void delegate020_MockI_StringAndLong() throws Exception {
 		Class<?> clazz = MockI_StringAndLong.class;
 		I_CachedClassBytesClassLoader ccbClassLoader = trial.getCcbClassLoader();
-		ClassParentsDiscovery classReferenceDiscovery = trial.getClassParentsDiscovery();
+		I_ClassParentsDiscovery classReferenceDiscovery = trial.getClassParentsDiscovery();
 		
 		String className = clazz.getName();
 		assertFalse(ccbClassLoader.hasCache(className));

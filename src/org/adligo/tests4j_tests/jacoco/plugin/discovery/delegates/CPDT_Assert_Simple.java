@@ -8,7 +8,7 @@ import org.adligo.tests4j.models.shared.dependency.I_ClassParents;
 import org.adligo.tests4j.models.shared.dependency.I_ClassParentsLocal;
 import org.adligo.tests4j.models.shared.trials.TrialDelegate;
 import org.adligo.tests4j.run.helpers.I_CachedClassBytesClassLoader;
-import org.adligo.tests4j_4jacoco.plugin.discovery.ClassParentsDiscovery;
+import org.adligo.tests4j_4jacoco.plugin.discovery.I_ClassParentsDiscovery;
 import org.adligo.tests4j_tests.run.helpers.class_loading_mocks.MockException;
 import org.adligo.tests4j_tests.run.helpers.class_loading_mocks.MockWithNothing;
 import org.adligo.tests4j_tests.run.helpers.class_loading_mocks.MockWithString;
@@ -27,7 +27,7 @@ public class CPDT_Assert_Simple extends TrialDelegate {
 	
 	public void delegateObjectOnlyParents(Class<?> clazz) throws Exception {
 		I_CachedClassBytesClassLoader ccbClassLoader = trial.getCcbClassLoader();
-		ClassParentsDiscovery classReferenceDiscovery = trial.getClassParentsDiscovery();
+		I_ClassParentsDiscovery classReferenceDiscovery = trial.getClassParentsDiscovery();
 		
 		String className = clazz.getName();
 		assertFalse(ccbClassLoader.hasCache(className));
@@ -46,11 +46,11 @@ public class CPDT_Assert_Simple extends TrialDelegate {
 	
 	public void delegateNoParents(Class<?> clazz) throws Exception {
 		I_CachedClassBytesClassLoader ccbClassLoader = trial.getCcbClassLoader();
-		ClassParentsDiscovery classReferenceDiscovery = trial.getClassParentsDiscovery();
+		I_ClassParentsDiscovery classParentsDiscovery = trial.getClassParentsDiscovery();
 		
 		String className = clazz.getName();
 		assertFalse(ccbClassLoader.hasCache(className));
-		I_ClassParents cps = classReferenceDiscovery.findOrLoad(clazz);
+		I_ClassParents cps = classParentsDiscovery.findOrLoad(clazz);
 		
 		assertNoParents((I_ClassParentsLocal) cps, className);
 		
@@ -125,12 +125,12 @@ public class CPDT_Assert_Simple extends TrialDelegate {
 	
 	public void delegate003_MockException() throws Exception {
 		I_CachedClassBytesClassLoader ccbClassLoader = trial.getCcbClassLoader();
-		ClassParentsDiscovery classReferenceDiscovery = trial.getClassParentsDiscovery();
+		I_ClassParentsDiscovery classParentsDiscovery = trial.getClassParentsDiscovery();
 		
 		Class<?> clazz = MockException.class;
 		String className = clazz.getName();
 		assertFalse(ccbClassLoader.hasCache(className));
-		I_ClassParents cps = classReferenceDiscovery.findOrLoad(clazz);
+		I_ClassParents cps = classParentsDiscovery.findOrLoad(clazz);
 		
 		assertExceptionParents(className,(I_ClassParentsLocal) cps);
 		

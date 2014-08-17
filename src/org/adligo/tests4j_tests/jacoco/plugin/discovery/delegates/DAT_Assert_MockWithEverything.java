@@ -15,10 +15,10 @@ import java.util.Set;
 
 import org.adligo.tests4j.models.shared.common.I_System;
 import org.adligo.tests4j.models.shared.dependency.ClassAliasLocal;
-import org.adligo.tests4j.models.shared.dependency.I_ClassReferencesLocal;
+import org.adligo.tests4j.models.shared.dependency.I_ClassDependenciesLocal;
 import org.adligo.tests4j.models.shared.trials.TrialDelegate;
 import org.adligo.tests4j.run.helpers.I_CachedClassBytesClassLoader;
-import org.adligo.tests4j_4jacoco.plugin.discovery.ClassReferencesDiscovery;
+import org.adligo.tests4j_4jacoco.plugin.discovery.OrderedClassDiscovery;
 import org.adligo.tests4j_tests.run.helpers.class_loading_mocks.MockException;
 import org.adligo.tests4j_tests.run.helpers.class_loading_mocks.MockI_GetAndSetLong;
 import org.adligo.tests4j_tests.run.helpers.class_loading_mocks.MockI_GetAndSetString;
@@ -51,25 +51,25 @@ import org.adligo.tests4j_tests.run.helpers.class_loading_mocks.MockWithTriangle
 import org.adligo.tests4j_tests.run.helpers.class_loading_mocks.MockWithTriangleB;
 import org.adligo.tests4j_tests.run.helpers.class_loading_mocks.MockWithTriangleC;
 
-public class CRDT_Assert_MockWithEverything extends TrialDelegate {
-	private I_ClassReferencesDiscoveryTrial trial;
+public class DAT_Assert_MockWithEverything extends TrialDelegate {
+	private I_DiscoveryApiTrial trial;
 	
-	public CRDT_Assert_MockWithEverything(I_ClassReferencesDiscoveryTrial p) {
+	public DAT_Assert_MockWithEverything(I_DiscoveryApiTrial p) {
 		super(p);
 		trial = p;
 	}
 
 	public void test() throws Exception {
 		I_CachedClassBytesClassLoader ccbClassLoader = trial.getCcbClassLoader();
-		ClassReferencesDiscovery crd = trial.getClassReferenceDiscovery();
+		OrderedClassDiscovery orderedClassDiscovery = trial.getOrderedClassDiscovery();
 		
 		Class<?> clazz = MockWithEverything.class;
 		String className = clazz.getName();
 		assertFalse(ccbClassLoader.hasCache(className));
-		List<String> order = crd.findOrLoad(MockWithEverything.class);
+		List<String> order = orderedClassDiscovery.findOrLoad(MockWithEverything.class);
 		assertOrder(ccbClassLoader, className, order);
 		
-		assertReferences(crd, clazz);
+		assertReferences(orderedClassDiscovery, clazz);
 		
 		assertHasMockWithEverythingCache();
 	}
@@ -177,51 +177,51 @@ public class CRDT_Assert_MockWithEverything extends TrialDelegate {
 	}
 	
 
-	private void assertReferences(ClassReferencesDiscovery crd, Class<?> clazz) {
+	private void assertReferences(OrderedClassDiscovery orderedClassDiscovery, Class<?> clazz) {
 		String clazzName = clazz.getName();
-		I_ClassReferencesLocal cr =  crd.getReferences(new ClassAliasLocal(clazz));
+		I_ClassDependenciesLocal cr =  orderedClassDiscovery.getReferences(new ClassAliasLocal(clazz));
 		assertRefs(clazzName, cr);
 		assertHasMockWithEverythingCache();
 		
-		Map<String,I_ClassReferencesLocal> refsCache = trial.getRefsCache();
+		Map<String,I_ClassDependenciesLocal> refsCache = trial.getRefsCache();
 		assertEquals(57, refsCache.size());
 	}
 
 	public void assertHasMockWithEverythingCache() { 
-		CRDT_Assert_Simple simple = trial.getSimple();
+		DAT_Assert_Simple simple = trial.getSimple();
 		simple.assertHasAllCache();
 		
-		CRDT_Assert_Linear_to_10 l10 = trial.getLinear_to10();
+		DAT_Assert_Linear_to_10 l10 = trial.getLinear_to10();
 		l10.assertHasAllCache();
 		
-		CRDT_Assert_Linear_to_20 l20 = trial.getLinear_to20();
+		DAT_Assert_Linear_to_20 l20 = trial.getLinear_to20();
 		l20.assertHasAllCache();
 		
-		CRDT_Assert_Linear_to_30 l30 = trial.getLinear_to30();
+		DAT_Assert_Linear_to_30 l30 = trial.getLinear_to30();
 		l30.assertHasAllCache();
 		
-		CRDT_Assert_Circular_to_10 c10 = trial.getCircular_to_10();
+		DAT_Assert_Circular_to_10 c10 = trial.getCircular_to_10();
 		c10.assertHasAllCache();
 		
 		String className = MockWithEverything.class.getName();
-		Map<String,I_ClassReferencesLocal> refsCache = trial.getRefsCache();
-		I_ClassReferencesLocal crefs =  refsCache.get(className);
+		Map<String,I_ClassDependenciesLocal> refsCache = trial.getRefsCache();
+		I_ClassDependenciesLocal crefs =  refsCache.get(className);
 		
 		
 		assertRefs(className, crefs);
 	}
 
-	private void assertRefs(String className, I_ClassReferencesLocal crefs) {
+	private void assertRefs(String className, I_ClassDependenciesLocal crefs) {
 		
 		assertNotNull(crefs);
 		assertEquals(className, crefs.getName());
-		assertTrue(crefs.hasCircularReferences());
+		assertTrue(crefs.hasCircularDependencies());
 		
-		Set<String> circles = crefs.getCircularReferenceNames();
+		Set<String> circles = crefs.getCircularDependenciesNames();
 		assertContains(circles, className + "$1");
 		assertEquals(1, circles.size());
 		
-		Set<String> refs = crefs.getReferenceNames();
+		Set<String> refs = crefs.getDependencyNames();
 		assertNotNull(refs);
 		assertContains(refs, Object.class.getName());
 		assertContains(refs, Class.class.getName());

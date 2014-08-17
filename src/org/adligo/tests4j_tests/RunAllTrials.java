@@ -6,24 +6,20 @@ import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-import org.adligo.tests4j.models.shared.common.DefaultSystem;
 import org.adligo.tests4j.models.shared.metadata.I_TrialRunMetadata;
 import org.adligo.tests4j.models.shared.results.I_TrialResult;
 import org.adligo.tests4j.models.shared.results.I_TrialRunResult;
 import org.adligo.tests4j.models.shared.system.DefaultLog;
 import org.adligo.tests4j.models.shared.system.I_Tests4J_Controls;
-import org.adligo.tests4j.models.shared.system.I_Tests4J_CoveragePlugin;
+import org.adligo.tests4j.models.shared.system.I_Tests4J_CoveragePluginParams;
 import org.adligo.tests4j.models.shared.system.I_Tests4J_Listener;
 import org.adligo.tests4j.models.shared.system.I_Tests4J_Log;
 import org.adligo.tests4j.models.shared.system.Tests4J_Params;
 import org.adligo.tests4j.models.shared.trials.I_Trial;
 import org.adligo.tests4j.run.Tests4J;
-import org.adligo.tests4j.run.discovery.Tests4J_ParamsReader;
 import org.adligo.tests4j.shared.report.summary.TestDisplay;
 import org.adligo.tests4j.shared.report.summary.TrialDisplay;
-import org.adligo.tests4j_4jacoco.plugin.ScopedJacocoPluginFactory;
-import org.adligo.tests4j_4jacoco.plugin.discovery.ClassInstrumenter;
-import org.adligo.tests4j_4jacoco.plugin.discovery.ClassReferencesDiscovery;
+import org.adligo.tests4j_4jacoco.plugin.CoveragePluginFactory;
 import org.adligo.tests4j_tests.base_abstract_trials.Counts;
 import org.adligo.tests4j_tests.base_abstract_trials.I_CountingTrial;
 
@@ -39,7 +35,7 @@ public class RunAllTrials implements I_Tests4J_Listener {
 		//Tests4J_Params params = getTests(SimpleJacocoPluginFactory.class);
 		
 		Tests4J_Params params = getTests();
-		params.setCoveragePluginFactoryClass(ScopedJacocoPluginFactory.class);
+		params.setCoveragePluginFactoryClass(CoveragePluginFactory.class);
 		setupCounts(params);
 		
 		params.setLogState(TrialDisplay.class, false);
@@ -110,12 +106,11 @@ public class RunAllTrials implements I_Tests4J_Listener {
 		return toRet;
 	}
 
-	private static void setupCounts(Tests4J_Params toRet) {
+	private static void setupCounts(Tests4J_Params params) {
 		
-		Tests4J_ParamsReader reader = new Tests4J_ParamsReader(new DefaultSystem(),toRet);
-		I_Tests4J_CoveragePlugin plugin = reader.getCoveragePlugin();
+		I_Tests4J_CoveragePluginParams coverageParams = params.getCoverageParams();
 		
-		List<Class<? extends I_Trial>> trials = toRet.getTrials();
+		List<Class<? extends I_Trial>> trials = params.getTrials();
 		Counts counts = new Counts();
 		for (Class<? extends I_Trial> trialClass: trials) {
 			try {
@@ -126,9 +121,9 @@ public class RunAllTrials implements I_Tests4J_Listener {
 				
 				counts.setAfterTests(counts.getAfterTests() + ct.getATests());
 				counts.setAfterAsserts(counts.getAfterAsserts()  + 
-						ct.getAAsserts(plugin.canThreadGroupLocalRecord()));
+						ct.getAAsserts(coverageParams.isCanThreadLocalGroupRecord()));
 				counts.setAfterUniqueAsserts(counts.getAfterUniqueAsserts()  + 
-						ct.getAUniqueAsserts(plugin.canThreadGroupLocalRecord()));
+						ct.getAUniqueAsserts(coverageParams.isCanThreadLocalGroupRecord()));
 			} catch (InstantiationException | IllegalAccessException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
