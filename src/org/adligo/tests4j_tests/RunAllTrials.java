@@ -9,19 +9,19 @@ import java.util.concurrent.Executors;
 import org.adligo.tests4j.models.shared.metadata.I_TrialRunMetadata;
 import org.adligo.tests4j.models.shared.results.I_TrialResult;
 import org.adligo.tests4j.models.shared.results.I_TrialRunResult;
-import org.adligo.tests4j.models.shared.system.I_Tests4J_Controls;
 import org.adligo.tests4j.models.shared.system.I_Tests4J_CoveragePluginParams;
 import org.adligo.tests4j.models.shared.system.I_Tests4J_Listener;
 import org.adligo.tests4j.models.shared.system.Tests4J_Params;
 import org.adligo.tests4j.models.shared.trials.I_Trial;
 import org.adligo.tests4j.run.Tests4J;
+import org.adligo.tests4j.run.helpers.Tests4J_NotificationManager;
 import org.adligo.tests4j.shared.output.DefaultLog;
 import org.adligo.tests4j.shared.output.I_Tests4J_Log;
 import org.adligo.tests4j.shared.report.summary.TestDisplay;
 import org.adligo.tests4j.shared.report.summary.TrialDisplay;
 import org.adligo.tests4j_4jacoco.plugin.CoveragePluginFactory;
-import org.adligo.tests4j_tests.base_abstract_trials.Counts;
-import org.adligo.tests4j_tests.base_abstract_trials.I_CountingTrial;
+import org.adligo.tests4j_tests.base_trials.Counts;
+import org.adligo.tests4j_tests.base_trials.I_CountingTrial;
 
 public class RunAllTrials implements I_Tests4J_Listener {
 	static long start = System.currentTimeMillis();
@@ -37,14 +37,15 @@ public class RunAllTrials implements I_Tests4J_Listener {
 		Tests4J_Params params = getTests();
 		params.setCoveragePluginFactoryClass(CoveragePluginFactory.class);
 		setupCounts(params);
-		params.setRecommendedSetupThreadCount(1);
+		//params.setRecommendedSetupThreadCount(1);
+		//params.setRecommendedTrialThreadCount(1);
 		
 		params.setLogState(TrialDisplay.class, false);
 		params.setLogState(TestDisplay.class, false);
-		//params.setLogState(ClassDependenciesDiscovery.class, true);
+		//params.setLogState(Tests4J_SetupRunnable.class, true);
 		//params.setLogState(ClassInstrumenter.class, true);
 		
-		//params.setLogState(TrialsProgressDisplay.class, false);
+		//params.setLogState(Tests4J_NotificationManager.class, true);
 		//params.setLogState(ClassReferencesDiscovery.class, true);
 		//params.setLogState(TrialInstrumenter2.class, true);
 		//params.setLogState(ClassInstrumenter.class, true);

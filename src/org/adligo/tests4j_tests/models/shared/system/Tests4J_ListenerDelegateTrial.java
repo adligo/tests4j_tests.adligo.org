@@ -9,7 +9,7 @@ import org.adligo.tests4j.models.shared.system.Tests4J_ListenerDelegator;
 import org.adligo.tests4j.models.shared.trials.SourceFileScope;
 import org.adligo.tests4j.models.shared.trials.Test;
 import org.adligo.tests4j.shared.output.I_Tests4J_Log;
-import org.adligo.tests4j_tests.base_abstract_trials.SourceFileCountingTrial;
+import org.adligo.tests4j_tests.base_trials.SourceFileCountingTrial;
 import org.adligo.tests4j_tests.models.shared.system.mocks.Clumsey_Tests4J_Listener;
 import org.adligo.tests4j_tests.models.shared.system.mocks.Tracking_Tests4J_Listener;
 

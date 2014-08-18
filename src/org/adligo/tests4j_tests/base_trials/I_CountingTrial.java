@@ -1,4 +1,4 @@
-package org.adligo.tests4j_tests.base_abstract_trials;
+package org.adligo.tests4j_tests.base_trials;
 
 /**
  * This interface was added because I was

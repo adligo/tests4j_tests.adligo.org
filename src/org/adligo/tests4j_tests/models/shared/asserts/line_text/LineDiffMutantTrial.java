@@ -13,7 +13,7 @@ import org.adligo.tests4j.models.shared.asserts.line_text.LineDiffMutant;
 import org.adligo.tests4j.models.shared.asserts.line_text.LineDiffType;
 import org.adligo.tests4j.models.shared.trials.SourceFileScope;
 import org.adligo.tests4j.models.shared.trials.Test;
-import org.adligo.tests4j_tests.base_abstract_trials.SourceFileCountingTrial;
+import org.adligo.tests4j_tests.base_trials.SourceFileCountingTrial;
 
 @SourceFileScope (sourceClass=LineDiffMutant.class, minCoverage=84.0)
 public class LineDiffMutantTrial extends SourceFileCountingTrial {

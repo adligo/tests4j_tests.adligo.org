@@ -5,7 +5,7 @@ import java.io.IOException;
 import org.adligo.tests4j.models.shared.trials.SourceFileScope;
 import org.adligo.tests4j.models.shared.trials.Test;
 import org.adligo.tests4j.shared.output.ByteListOutputStream;
-import org.adligo.tests4j_tests.base_abstract_trials.SourceFileCountingTrial;
+import org.adligo.tests4j_tests.base_trials.SourceFileCountingTrial;
 
 @SourceFileScope(sourceClass=ByteListOutputStream.class)
 public class ByteListOutputStreamTrial extends SourceFileCountingTrial {

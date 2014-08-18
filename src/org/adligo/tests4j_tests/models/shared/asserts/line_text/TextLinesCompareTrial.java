@@ -12,7 +12,7 @@ import org.adligo.tests4j.models.shared.asserts.line_text.TextLinesCompare;
 import org.adligo.tests4j.models.shared.en.Tests4J_LineDiffTextDisplayMessages;
 import org.adligo.tests4j.models.shared.trials.SourceFileScope;
 import org.adligo.tests4j.models.shared.trials.Test;
-import org.adligo.tests4j_tests.base_abstract_trials.SourceFileCountingTrial;
+import org.adligo.tests4j_tests.base_trials.SourceFileCountingTrial;
 
 @SourceFileScope (sourceClass=TextLinesCompare.class, minCoverage=90.0)
 public class TextLinesCompareTrial extends SourceFileCountingTrial {

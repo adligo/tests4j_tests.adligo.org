@@ -3,7 +3,7 @@ package org.adligo.tests4j_tests.run.remote.io;
 import org.adligo.tests4j.models.shared.trials.SourceFileScope;
 import org.adligo.tests4j.models.shared.trials.Test;
 import org.adligo.tests4j.run.remote.io.ByteMutant;
-import org.adligo.tests4j_tests.base_abstract_trials.SourceFileCountingTrial;
+import org.adligo.tests4j_tests.base_trials.SourceFileCountingTrial;
 
 
 @SourceFileScope (sourceClass=ByteMutant.class, minCoverage=82.0)

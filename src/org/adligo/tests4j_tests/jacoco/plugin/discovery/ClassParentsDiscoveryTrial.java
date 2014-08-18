@@ -17,7 +17,7 @@ import org.adligo.tests4j.models.shared.trials.Test;
 import org.adligo.tests4j.run.helpers.CachedClassBytesClassLoader;
 import org.adligo.tests4j_4jacoco.plugin.discovery.ClassParentsDiscovery;
 import org.adligo.tests4j_4jacoco.plugin.discovery.I_ClassParentsDiscovery;
-import org.adligo.tests4j_tests.base_abstract_trials.SourceFileCountingTrial;
+import org.adligo.tests4j_tests.base_trials.SourceFileCountingTrial;
 import org.adligo.tests4j_tests.jacoco.plugin.discovery.delegates.CPDT_Assert_Linear_to_20;
 import org.adligo.tests4j_tests.jacoco.plugin.discovery.delegates.CPDT_Assert_Linear_to_30;
 import org.adligo.tests4j_tests.jacoco.plugin.discovery.delegates.CPDT_Assert_Simple;

@@ -3,7 +3,7 @@ package org.adligo.tests4j_tests.models.shared.asserts.line_text;
 import org.adligo.tests4j.models.shared.asserts.line_text.DiffIndexesMutant;
 import org.adligo.tests4j.models.shared.trials.SourceFileScope;
 import org.adligo.tests4j.models.shared.trials.Test;
-import org.adligo.tests4j_tests.base_abstract_trials.SourceFileCountingTrial;
+import org.adligo.tests4j_tests.base_trials.SourceFileCountingTrial;
 
 @SourceFileScope (sourceClass=DiffIndexesMutant.class, minCoverage=59.0)
 public class DiffIndexesMutantTrial extends SourceFileCountingTrial {

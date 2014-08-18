@@ -14,13 +14,13 @@ import org.adligo.tests4j.models.shared.common.ClassMethods;
 import org.adligo.tests4j.models.shared.trials.SourceFileScope;
 import org.adligo.tests4j.models.shared.trials.Test;
 import org.adligo.tests4j.run.helpers.CachedClassBytesClassLoader;
-import org.adligo.tests4j_tests.base_abstract_trials.SourceFileCountingTrial;
+import org.adligo.tests4j_tests.base_trials.SourceFileCountingTrial;
 import org.adligo.tests4j_tests.models.shared.system.mocks.Tests4J_LogMock;
 import org.adligo.tests4j_tests.run.helpers.class_loading_mocks.MockCachedClassBytesClassLoader;
 import org.adligo.tests4j_tests.run.helpers.class_loading_mocks.MockInputStream;
 import org.adligo.tests4j_tests.run.helpers.class_loading_mocks.MockWithNothing;
 
-@SourceFileScope (sourceClass=CachedClassBytesClassLoader.class, minCoverage=84.0)
+@SourceFileScope (sourceClass=CachedClassBytesClassLoader.class, minCoverage=78.0)
 public class CachedClassBytesClassLoaderTrial extends SourceFileCountingTrial {
 	private static final String MOCK_PACKAGE_NAME = MockWithNothing.class.getPackage().getName();
 	

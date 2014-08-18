@@ -18,7 +18,7 @@ import org.adligo.tests4j.models.shared.trials.SourceFileScope;
 import org.adligo.tests4j.models.shared.trials.Test;
 import org.adligo.tests4j.shared.output.I_Tests4J_Log;
 import org.adligo.tests4j.shared.report.summary.LineDiffTextDisplay;
-import org.adligo.tests4j_tests.base_abstract_trials.SourceFileCountingTrial;
+import org.adligo.tests4j_tests.base_trials.SourceFileCountingTrial;
 
 @SourceFileScope (sourceClass=LineDiffTextDisplay.class, minCoverage=90.0)
 public class LineDiffTextDisplayTrial extends SourceFileCountingTrial implements  I_Tests4J_Log {

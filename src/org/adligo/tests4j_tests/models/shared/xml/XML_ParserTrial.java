@@ -3,7 +3,7 @@ package org.adligo.tests4j_tests.models.shared.xml;
 import org.adligo.tests4j.models.shared.trials.SourceFileScope;
 import org.adligo.tests4j.models.shared.trials.Test;
 import org.adligo.tests4j.models.shared.xml.XML_Parser;
-import org.adligo.tests4j_tests.base_abstract_trials.SourceFileCountingTrial;
+import org.adligo.tests4j_tests.base_trials.SourceFileCountingTrial;
 
 @SourceFileScope (sourceClass=XML_Parser.class, minCoverage=92.0)
 public class XML_ParserTrial extends SourceFileCountingTrial {

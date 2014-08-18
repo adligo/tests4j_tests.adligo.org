@@ -24,7 +24,7 @@ import org.adligo.tests4j_4jacoco.plugin.discovery.FullDependenciesDiscovery;
 import org.adligo.tests4j_4jacoco.plugin.discovery.InitialDependenciesDiscovery;
 import org.adligo.tests4j_4jacoco.plugin.discovery.OrderedClassDiscovery;
 import org.adligo.tests4j_4jacoco.plugin.discovery.ReferenceTrackingClassVisitor;
-import org.adligo.tests4j_tests.base_abstract_trials.ApiCountingTrial;
+import org.adligo.tests4j_tests.base_trials.ApiCountingTrial;
 import org.adligo.tests4j_tests.jacoco.plugin.discovery.delegates.ClassReferencesCacheMock;
 import org.adligo.tests4j_tests.jacoco.plugin.discovery.delegates.DAT_Assert_Circular_to_10;
 import org.adligo.tests4j_tests.jacoco.plugin.discovery.delegates.DAT_Assert_Linear_to_10;

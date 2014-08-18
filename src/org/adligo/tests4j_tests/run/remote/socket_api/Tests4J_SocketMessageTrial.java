@@ -5,7 +5,7 @@ import org.adligo.tests4j.models.shared.asserts.common.I_Thrower;
 import org.adligo.tests4j.models.shared.trials.SourceFileScope;
 import org.adligo.tests4j.models.shared.trials.Test;
 import org.adligo.tests4j.run.remote.socket_api.Tests4J_SocketMessage;
-import org.adligo.tests4j_tests.base_abstract_trials.SourceFileCountingTrial;
+import org.adligo.tests4j_tests.base_trials.SourceFileCountingTrial;
 
 @SourceFileScope (sourceClass=Tests4J_SocketMessage.class, minCoverage=9.0)
 public class Tests4J_SocketMessageTrial extends SourceFileCountingTrial {

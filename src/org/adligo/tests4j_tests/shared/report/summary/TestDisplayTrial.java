@@ -7,7 +7,7 @@ import org.adligo.tests4j.models.shared.trials.Test;
 import org.adligo.tests4j.shared.report.summary.TestDisplay;
 import org.adligo.tests4j.shared.report.summary.TestFailedDisplay;
 import org.adligo.tests4j.shared.report.summary.ThreadDisplay;
-import org.adligo.tests4j_tests.base_abstract_trials.SourceFileCountingTrial;
+import org.adligo.tests4j_tests.base_trials.SourceFileCountingTrial;
 import org.adligo.tests4j_tests.models.shared.system.mocks.Tests4J_LogMock;
 
 @SourceFileScope (sourceClass=TestDisplay.class, minCoverage=80.0)

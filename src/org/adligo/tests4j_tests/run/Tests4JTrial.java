@@ -17,7 +17,7 @@ import org.adligo.tests4j.run.Tests4J;
 import org.adligo.tests4j.run.helpers.Tests4J_Controls;
 import org.adligo.tests4j.shared.output.DefaultLog;
 import org.adligo.tests4j.shared.output.I_Tests4J_Log;
-import org.adligo.tests4j_tests.base_abstract_trials.SourceFileCountingTrial;
+import org.adligo.tests4j_tests.base_trials.SourceFileCountingTrial;
 import org.adligo.tests4j_tests.run.helpers.MockTests4J_DelegateFactory;
 import org.adligo.tests4j_tests.run.mocks.MockTests4J;
 import org.adligo.tests4j_tests.run.mocks.MockTests4J_Listener;

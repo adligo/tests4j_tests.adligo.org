@@ -13,7 +13,7 @@ import org.adligo.tests4j.models.shared.trials.SourceFileScope;
 import org.adligo.tests4j.models.shared.trials.Test;
 import org.adligo.tests4j.run.helpers.Tests4J_ThreadFactory;
 import org.adligo.tests4j.run.remote.io.UTF8_CharacterBuilder;
-import org.adligo.tests4j_tests.base_abstract_trials.SourceFileCountingTrial;
+import org.adligo.tests4j_tests.base_trials.SourceFileCountingTrial;
 import org.adligo.tests4j_tests.run.remote.io.helpers.I_UTF8_TestProgressMonitor;
 import org.adligo.tests4j_tests.run.remote.io.helpers.StartCapture;
 import org.adligo.tests4j_tests.run.remote.io.helpers.UTF8_CharacterBuilder_ChuckTester;

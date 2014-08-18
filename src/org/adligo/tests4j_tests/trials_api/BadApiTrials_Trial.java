@@ -11,7 +11,7 @@ import org.adligo.tests4j.models.shared.results.I_TrialResult;
 import org.adligo.tests4j.models.shared.trials.I_Trial;
 import org.adligo.tests4j.models.shared.trials.PackageScope;
 import org.adligo.tests4j.models.shared.trials.Test;
-import org.adligo.tests4j_tests.base_abstract_trials.ApiCountingTrial;
+import org.adligo.tests4j_tests.base_trials.ApiCountingTrial;
 import org.adligo.tests4j_tests.trials_api.bad_mock_api_trials.AbstractTestTrial;
 import org.adligo.tests4j_tests.trials_api.bad_mock_api_trials.AfterTrialHasParamsTrial;
 import org.adligo.tests4j_tests.trials_api.bad_mock_api_trials.AfterTrialNotPublicTrial;

@@ -7,7 +7,7 @@ import org.adligo.tests4j.models.shared.trials.Test;
 import org.adligo.tests4j.shared.output.DefaultLog;
 import org.adligo.tests4j_4jacoco.plugin.CoveragePlugin;
 import org.adligo.tests4j_4jacoco.plugin.CoveragePluginFactory;
-import org.adligo.tests4j_tests.base_abstract_trials.SourceFileCountingTrial;
+import org.adligo.tests4j_tests.base_trials.SourceFileCountingTrial;
 
 @SourceFileScope (sourceClass=CoveragePluginFactory.class, minCoverage=40.0)
 public class CoveragePluginFactoryTrial extends SourceFileCountingTrial {

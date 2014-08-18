@@ -1,12 +1,10 @@
-package org.adligo.tests4j_tests.base_abstract_trials;
+package org.adligo.tests4j_tests.base_trials;
 
-import org.adligo.tests4j.models.shared.results.I_SourceFileTrialResult;
-import org.adligo.tests4j.models.shared.trials.SourceFileTrial;
+import org.adligo.tests4j.models.shared.results.I_ApiTrialResult;
+import org.adligo.tests4j.models.shared.trials.ApiTrial;
 
-public abstract class SourceFileCountingTrial extends SourceFileTrial implements I_CountingTrial {
-	
-	@Override
-	public void afterTrialTests(I_SourceFileTrialResult p) {
+public abstract class ApiCountingTrial extends ApiTrial implements I_CountingTrial {
+	public void assertCounts(I_ApiTrialResult p) {
 		assertEquals("The number of Tests is off.", getTests(), p.getTestCount());
 		assertEquals("The number of Asserts is off.",getAsserts(), p.getAssertionCount());
 		assertEquals("The number of Unique Asserts is off.", getUniqueAsserts(), p.getUniqueAssertionCount());
