@@ -24,7 +24,7 @@ public class RunPkgTrials implements I_Tests4J_TrialList {
 		
 		//params.setLogState(Tests4J_ThreadFactory.class, true);
 		//params.setLogState(MultiProbeDataStore.class, true);
-		params.setLogState(MultiProbesMap.class, true);
+		//params.setLogState(MultiProbesMap.class, true);
 		//params.setLogState(Tests4J_TrialsRunable.class, true);
 		//params.setLogState(ThreadGroupLocal.class, true);
 		

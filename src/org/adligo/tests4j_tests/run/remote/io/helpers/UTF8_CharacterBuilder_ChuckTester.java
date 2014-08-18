@@ -5,8 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ArrayBlockingQueue;
 
-import org.adligo.tests4j.models.shared.system.I_Tests4J_Log;
 import org.adligo.tests4j.run.remote.io.UTF8_CharacterBuilder;
+import org.adligo.tests4j.shared.output.I_Tests4J_Log;
 
 
 public class UTF8_CharacterBuilder_ChuckTester implements Runnable {

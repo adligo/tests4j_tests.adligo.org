@@ -1,4 +1,4 @@
-package org.adligo.tests4j_tests.models.shared.system;
+package org.adligo.tests4j_tests.shared.output;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,9 +27,7 @@ public class RunPkgTrials implements I_Tests4J_TrialList {
 	public List<Class<? extends I_Trial>> getTrials() {
 		List<Class<? extends I_Trial>> trials = new ArrayList<Class<? extends I_Trial>>();
 		
-		trials.add(Tests4J_ParamsTrial.class);
-		trials.add(Tests4J_ListenerDelegateTrial.class);
-		trials.add(Tests4J_RemoteInfoTrial.class);
+		trials.add(ByteListOutputStreamTrial.class);
 		
 		return trials;
 	}

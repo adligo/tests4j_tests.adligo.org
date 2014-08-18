@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.adligo.tests4j.models.shared.system.I_Tests4J_Log;
+import org.adligo.tests4j.shared.output.I_Tests4J_Log;
 
 /**
  * a reusable implementation of I_Tests4J_Log

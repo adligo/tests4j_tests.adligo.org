@@ -11,9 +11,9 @@ import org.adligo.tests4j.models.shared.asserts.common.ThrownAssertionData;
 import org.adligo.tests4j.models.shared.en.Tests4J_EnglishConstants;
 import org.adligo.tests4j.models.shared.i18n.I_Tests4J_AssertionInputMessages;
 import org.adligo.tests4j.models.shared.i18n.I_Tests4J_ResultMessages;
-import org.adligo.tests4j.models.shared.system.I_Tests4J_Log;
 import org.adligo.tests4j.models.shared.trials.SourceFileScope;
 import org.adligo.tests4j.models.shared.trials.Test;
+import org.adligo.tests4j.shared.output.I_Tests4J_Log;
 import org.adligo.tests4j_tests.base_abstract_trials.SourceFileCountingTrial;
 
 @SourceFileScope (sourceClass=ThrownAssertCommand.class, minCoverage=77.0)

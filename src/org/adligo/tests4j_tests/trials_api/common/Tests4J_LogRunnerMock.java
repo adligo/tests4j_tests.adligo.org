@@ -1,6 +1,6 @@
 package org.adligo.tests4j_tests.trials_api.common;
 
-import org.adligo.tests4j.models.shared.system.I_Tests4J_Log;
+import org.adligo.tests4j.shared.output.I_Tests4J_Log;
 
 public class Tests4J_LogRunnerMock implements I_Tests4J_Log{
 

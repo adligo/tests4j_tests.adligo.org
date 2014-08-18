@@ -2,8 +2,8 @@ package org.adligo.tests4j_tests.run.helpers.class_loading_mocks;
 
 import java.util.Set;
 
-import org.adligo.tests4j.models.shared.system.I_Tests4J_Log;
 import org.adligo.tests4j.run.helpers.CachedClassBytesClassLoader;
+import org.adligo.tests4j.shared.output.I_Tests4J_Log;
 
 public class MockCachedClassBytesClassLoader extends CachedClassBytesClassLoader {
 

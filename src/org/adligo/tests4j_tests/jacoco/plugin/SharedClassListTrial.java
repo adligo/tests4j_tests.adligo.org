@@ -18,6 +18,7 @@ public class SharedClassListTrial extends SourceFileCountingTrial {
 		Set<String> allowedPackages = new HashSet<String>();
 		allowedPackages.add("org.adligo.tests4j.");
 		allowedPackages.add("org.adligo.tests4j_4jacoco.");
+		allowedPackages.add("org.objectweb.asm.");
 		
 		Set<String>  classes = SharedClassList.WHITELIST;
 		for (String clazz: classes) {
@@ -52,12 +53,12 @@ public class SharedClassListTrial extends SourceFileCountingTrial {
 
 	@Override
 	public int getAsserts() {
-		return 122;
+		return 140;
 	}
 
 	@Override
 	public int getUniqueAsserts() {
-		return 122;
+		return 140;
 	}
 
 }

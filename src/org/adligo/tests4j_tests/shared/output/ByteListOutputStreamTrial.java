@@ -1,10 +1,10 @@
-package org.adligo.tests4j_tests.models.shared.system;
+package org.adligo.tests4j_tests.shared.output;
 
 import java.io.IOException;
 
-import org.adligo.tests4j.models.shared.system.ByteListOutputStream;
 import org.adligo.tests4j.models.shared.trials.SourceFileScope;
 import org.adligo.tests4j.models.shared.trials.Test;
+import org.adligo.tests4j.shared.output.ByteListOutputStream;
 import org.adligo.tests4j_tests.base_abstract_trials.SourceFileCountingTrial;
 
 @SourceFileScope(sourceClass=ByteListOutputStream.class)
@@ -20,7 +20,7 @@ public class ByteListOutputStreamTrial extends SourceFileCountingTrial {
 		for (int i = 0; i < bytes.length; i++) {
 			blos.write(bytes[i]);
 		}
-		String result = blos.toString();
+		String result = blos.flushString();
 		assertEquals(alpha10, result);
 		blos.close();
 	}
@@ -36,7 +36,7 @@ public class ByteListOutputStreamTrial extends SourceFileCountingTrial {
 		for (int i = 0; i < bytes.length; i++) {
 			blos.write(bytes[i]);
 		}
-		assertEquals(alphabet90, blos.toString());
+		assertEquals(alphabet90, blos.flushString());
 		blos.close();
 	}
 
