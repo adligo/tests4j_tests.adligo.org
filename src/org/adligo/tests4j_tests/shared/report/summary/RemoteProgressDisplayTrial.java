@@ -41,6 +41,7 @@ public class RemoteProgressDisplayTrial extends SourceFileCountingTrial {
 		for (int i = 0; i < 17; i++) {
 			info.addDone();
 		}
+		reporter.onProgress(log, info);
 		
 		assertEquals(1, log.getLogMessagesSize());
 		I_Tests4J_ReportMessages messages = Tests4J_EnglishConstants.ENGLISH.getReportMessages();

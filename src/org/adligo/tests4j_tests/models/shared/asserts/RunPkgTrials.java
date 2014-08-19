@@ -34,6 +34,10 @@ public class RunPkgTrials implements I_Tests4J_TrialList {
 	@Override
 	public List<Class<? extends I_Trial>> getTrials() {
 		List<Class<? extends I_Trial>> trials = new ArrayList<Class<? extends I_Trial>>();
+		//dependency order is important
+		trials.addAll(new org.adligo.tests4j_tests.models.shared.asserts.common.RunPkgTrials().getTrials());
+		trials.addAll(new org.adligo.tests4j_tests.models.shared.asserts.line_text.RunPkgTrials().getTrials());
+		trials.addAll(new org.adligo.tests4j_tests.models.shared.asserts.uniform.RunPkgTrials().getTrials());
 		
 		trials.add(AbstractAssertCommandTrial.class);
 		trials.add(AbstractCompareAssertCommandTrial.class);
@@ -49,9 +53,7 @@ public class RunPkgTrials implements I_Tests4J_TrialList {
 		trials.add(UniformAssertCommandTrial.class);
 		trials.add(UniformThrownAssertCommandTrial.class);
 		
-		trials.addAll(new org.adligo.tests4j_tests.models.shared.asserts.common.RunPkgTrials().getTrials());
-		trials.addAll(new org.adligo.tests4j_tests.models.shared.asserts.line_text.RunPkgTrials().getTrials());
-		trials.addAll(new org.adligo.tests4j_tests.models.shared.asserts.uniform.RunPkgTrials().getTrials());
+		
 		
 		return trials;
 	}

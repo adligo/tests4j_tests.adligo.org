@@ -9,15 +9,16 @@ import org.adligo.tests4j.models.shared.results.I_TrialResult;
 import org.adligo.tests4j.models.shared.results.TestResultMutant;
 import org.adligo.tests4j.models.shared.trials.SourceFileScope;
 import org.adligo.tests4j.models.shared.trials.Test;
+import org.adligo.tests4j.shared.report.summary.ThreadDisplay;
 import org.adligo.tests4j.shared.report.summary.TrialDisplay;
 import org.adligo.tests4j.shared.report.summary.TrialFailedDisplay;
 import org.adligo.tests4j_tests.base_trials.SourceFileCountingTrial;
 import org.adligo.tests4j_tests.models.shared.system.mocks.Tests4J_LogMock;
 
-@SourceFileScope (sourceClass=TrialDisplay.class)
+@SourceFileScope (sourceClass=TrialDisplay.class, minCoverage=89.0)
 public class TrialDisplayTrial extends SourceFileCountingTrial {
 	private Tests4J_LogMock log = new Tests4J_LogMock();
-	
+	private ThreadDisplay threadDisplay = new ThreadDisplay(log);
 	@Override
 	public void beforeTests() {
 		log.clear();
@@ -27,7 +28,7 @@ public class TrialDisplayTrial extends SourceFileCountingTrial {
 	
 	@Test
 	public void testStartReportLogOff() {
-		TrialDisplay display = new TrialDisplay(log);
+		TrialDisplay display = new TrialDisplay(log, threadDisplay);
 		
 		display.onStartingTrial("someTrialName");
 		assertEquals(0, log.getLogMessagesSize());
@@ -41,7 +42,7 @@ public class TrialDisplayTrial extends SourceFileCountingTrial {
 	
 	@Test
 	public void testStartReportLogOn() {
-		TrialDisplay display = new TrialDisplay(log);
+		TrialDisplay display = new TrialDisplay(log, threadDisplay);
 		log.setState(TrialDisplay.class, true);
 		
 		display.onStartingTrial("someTrialName");
@@ -60,7 +61,7 @@ public class TrialDisplayTrial extends SourceFileCountingTrial {
 	
 	@Test
 	public void testPassedLogOff() {
-		TrialDisplay display = new TrialDisplay(log);
+		TrialDisplay display = new TrialDisplay(log, threadDisplay);
 		
 		BaseTrialResultMutant btrm = new BaseTrialResultMutant();
 		btrm.setTrialName("someTrialName");
@@ -86,7 +87,7 @@ public class TrialDisplayTrial extends SourceFileCountingTrial {
 	
 	@Test
 	public void testPassedLogOn() {
-		TrialDisplay display = new TrialDisplay(log);
+		TrialDisplay display = new TrialDisplay(log, threadDisplay);
 		log.setState(TrialDisplay.class, true);
 		
 		BaseTrialResultMutant btrm = new BaseTrialResultMutant();
@@ -117,7 +118,7 @@ public class TrialDisplayTrial extends SourceFileCountingTrial {
 	
 	@Test
 	public void testFailedLogOff() {
-		TrialDisplay display = new TrialDisplay(log);
+		TrialDisplay display = new TrialDisplay(log, threadDisplay);
 		
 		BaseTrialResultMutant btrm = new BaseTrialResultMutant();
 		btrm.setTrialName("someOtherTrialName");
@@ -137,7 +138,7 @@ public class TrialDisplayTrial extends SourceFileCountingTrial {
 	
 	@Test
 	public void testFailedLogOn() {
-		TrialDisplay display = new TrialDisplay(log);
+		TrialDisplay display = new TrialDisplay(log, threadDisplay);
 		log.setState(TrialFailedDisplay.class, true);
 		
 		BaseTrialResultMutant btrm = new BaseTrialResultMutant();

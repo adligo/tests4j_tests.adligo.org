@@ -11,7 +11,7 @@ import org.adligo.tests4j.shared.report.summary.TestsProgressDisplay;
 import org.adligo.tests4j_tests.base_trials.SourceFileCountingTrial;
 import org.adligo.tests4j_tests.models.shared.system.mocks.Tests4J_LogMock;
 
-@SourceFileScope (sourceClass=AbstractProcessDisplay.class)
+@SourceFileScope (sourceClass=AbstractProcessDisplay.class, minCoverage=36.0)
 @AdditionalInstrumentation (javaPackages="org.adligo.tests4j_tests.shared.report.summary")
 public class AbstractProgressDisplayTrial extends SourceFileCountingTrial {
 	private Tests4J_LogMock log = new Tests4J_LogMock();
@@ -45,10 +45,11 @@ public class AbstractProgressDisplayTrial extends SourceFileCountingTrial {
 		for (int i = 0; i < 17; i++) {
 			info.addDone();
 		}
+		reporter.onProgress(log, info);
 		
 		assertEquals(1, log.getLogMessagesSize());
 		I_Tests4J_ReportMessages messages = Tests4J_EnglishConstants.ENGLISH.getReportMessages();
-		assertEquals("Tests4J: hey 17.34" + messages.getPctComplete(),
+		assertEquals("Tests4J: setup 17.34" + messages.getPctComplete(),
 				log.getLogMessage(0));
 		assertEquals(0, log.getExceptionsSize());
 		assertEquals(1, log.getStatesSize());
@@ -61,13 +62,13 @@ public class AbstractProgressDisplayTrial extends SourceFileCountingTrial {
 
 		
 		log.setState(MockProgressDisplay.class, true);
-		Tests4J_ProcessInfo info = new Tests4J_ProcessInfo("setup", 1, 100);
+		Tests4J_ProcessInfo info = new Tests4J_ProcessInfo("setup", 1, 1);
 		info.addDone();
 		reporter.onProgress(log, info);
 		
 		assertEquals(1, log.getLogMessagesSize());
 		I_Tests4J_ReportMessages messages = Tests4J_EnglishConstants.ENGLISH.getReportMessages();
-		assertEquals("Tests4J: hey " + messages.getDoneEOS() + log.getLineSeperator(),
+		assertEquals("Tests4J: setup " + messages.getDoneEOS() + log.getLineSeperator(),
 				log.getLogMessage(0));
 		assertEquals(0, log.getExceptionsSize());
 		assertEquals(1, log.getStatesSize());

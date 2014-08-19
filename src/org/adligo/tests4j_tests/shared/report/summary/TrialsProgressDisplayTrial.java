@@ -57,9 +57,7 @@ public class TrialsProgressDisplayTrial extends SourceFileCountingTrial {
 
 		log.setState(TrialsProgressDisplay.class, true);
 		Tests4J_ProcessInfo info = new Tests4J_ProcessInfo("trials", 0, 1);
-		for (int i = 0; i < 1; i++) {
-			info.addDone();
-		}
+		info.addDone();
 		reporter.onProgress(log, info);
 		
 		assertEquals(1, log.getLogMessagesSize());

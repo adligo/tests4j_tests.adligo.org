@@ -37,7 +37,7 @@ public class SetupProgressDisplayTrial extends SourceFileCountingTrial {
 	
 	@Test
 	public void testProgressReportPartDone() {
-		log.setState(TestsProgressDisplay.class, true);
+		log.setState(SetupProgressDisplay.class, true);
 		Tests4J_ProcessInfo info = new Tests4J_ProcessInfo("setup", 0, 98);
 		for (int i = 0; i < 17; i++) {
 			info.addDone();
@@ -47,7 +47,7 @@ public class SetupProgressDisplayTrial extends SourceFileCountingTrial {
 		
 		assertEquals(1, log.getLogMessagesSize());
 		I_Tests4J_ReportMessages messages = Tests4J_EnglishConstants.ENGLISH.getReportMessages();
-		assertEquals("Tests4J: setup 17.17" + messages.getPctComplete(),
+		assertEquals("Tests4J: setup 17.34" + messages.getPctComplete(),
 				log.getLogMessage(0));
 		assertEquals(0, log.getExceptionsSize());
 		assertEquals(1, log.getStatesSize());

@@ -20,11 +20,12 @@ import org.adligo.tests4j.run.Tests4J;
 import org.adligo.tests4j.shared.output.DefaultLog;
 import org.adligo.tests4j.shared.output.I_Tests4J_Log;
 import org.adligo.tests4j.shared.report.summary.SetupProcessDisplay;
+import org.adligo.tests4j.shared.report.summary.SetupProgressDisplay;
 import org.adligo.tests4j.shared.report.summary.TestDisplay;
 import org.adligo.tests4j.shared.report.summary.TrialDisplay;
 import org.adligo.tests4j.shared.report.summary.TrialsProcessDisplay;
+import org.adligo.tests4j.shared.report.summary.TrialsProgressDisplay;
 import org.adligo.tests4j_4jacoco.plugin.CoveragePluginFactory;
-import org.adligo.tests4j_4jacoco.plugin.data.multi.MultiProbesMap;
 import org.adligo.tests4j_tests.base_trials.Counts;
 import org.adligo.tests4j_tests.base_trials.I_CountingTrial;
 
@@ -42,23 +43,27 @@ public class RunAllTrials implements I_Tests4J_Listener {
 			Tests4J_Params params = getTests();
 			params.setCoveragePluginFactoryClass(CoveragePluginFactory.class);
 			setupCounts(params);
-			
+			/*
 			File file = new File("biglog.log");
 			if (file.exists()) {
 				file.delete();
 			}
 			FileOutputStream biglog = new FileOutputStream(file);
 			params.addAdditionalReportOutputStreams(biglog);
-			
-			//params.setRecommendedSetupThreadCount(2);
-			//params.setRecommendedTrialThreadCount(4);
+			*/
+			params.setRecommendedSetupThreadCount(1);
+			params.setRecommendedTrialThreadCount(1);
 			
 			params.setLogState(TrialDisplay.class, false);
 			params.setLogState(TestDisplay.class, false);
-			params.setLogState(SetupProcessDisplay.class, true);
-			params.setLogState(TrialsProcessDisplay.class, true);
+			//params.setLogState(ThreadDisplay.class, true);
+			params.setLogState(SetupProcessDisplay.class, false);
+			params.setLogState(SetupProgressDisplay.class, true);
 			
-			params.setLogState(MultiProbesMap.class, true);
+			params.setLogState(TrialsProcessDisplay.class, false);
+			params.setLogState(TrialsProgressDisplay.class, true);
+			//params.setLogState(MultiProbesMap.class, true);
+			
 			//params.setLogState(Tests4J_NotificationManager.class, true);
 			//params.setLogState(ClassReferencesDiscovery.class, true);
 			//params.setLogState(TrialInstrumenter2.class, true);
@@ -105,16 +110,31 @@ public class RunAllTrials implements I_Tests4J_Listener {
 		}
 	}
 
+	/**
+	 * Note packages are loaded in dependency order to obvoid weird
+	 * code coverage issues, where a static method is called by a class
+	 * depending on the class which you are trying to test and sets a probe
+	 * which is impossible to get to after it has been executed;
+	 * Also this should help the through put of the tests
+	 * as dependant code is loaded first.
+	 * @return
+	 */
 	public static synchronized Tests4J_Params getTests() {
 		Tests4J_Params toRet = new Tests4J_Params();
 		
-		toRet.addTrials(new org.adligo.tests4j_tests.models.shared.asserts.RunPkgTrials());
-		toRet.addTrials(new org.adligo.tests4j_tests.models.shared.common.RunPkgTrials());
-		toRet.addTrials(new org.adligo.tests4j_tests.models.shared.dependency.RunPkgTrials());
-		toRet.addTrials(new org.adligo.tests4j_tests.models.shared.system.RunPkgTrials());
 		toRet.addTrials(new org.adligo.tests4j_tests.models.shared.en.RunPkgTrials());
-		toRet.addTrials(new org.adligo.tests4j_tests.models.shared.metadata.RunPkgTrials());
+		
+		toRet.addTrials(new org.adligo.tests4j_tests.models.shared.common.RunPkgTrials());
+		
 		toRet.addTrials(new org.adligo.tests4j_tests.models.shared.xml.RunPkgTrials());
+		
+		toRet.addTrials(new org.adligo.tests4j_tests.models.shared.asserts.RunPkgTrials());
+		
+		toRet.addTrials(new org.adligo.tests4j_tests.models.shared.dependency.RunPkgTrials());
+
+		toRet.addTrials(new org.adligo.tests4j_tests.models.shared.metadata.RunPkgTrials());
+		
+		toRet.addTrials(new org.adligo.tests4j_tests.models.shared.system.RunPkgTrials());
 		toRet.addTrials(new org.adligo.tests4j_tests.shared.RunPkgTrials());
 		
 		toRet.addTrials(new org.adligo.tests4j_tests.jacoco.api_trials.RunPkgTrials());
