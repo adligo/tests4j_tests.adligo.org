@@ -51,7 +51,7 @@ public class RunAllTrials implements I_Tests4J_Listener {
 			FileOutputStream biglog = new FileOutputStream(file);
 			params.addAdditionalReportOutputStreams(biglog);
 			*/
-			params.setRecommendedSetupThreadCount(1);
+			//params.setRecommendedSetupThreadCount(1);
 			params.setRecommendedTrialThreadCount(1);
 			
 			params.setLogState(TrialDisplay.class, false);
