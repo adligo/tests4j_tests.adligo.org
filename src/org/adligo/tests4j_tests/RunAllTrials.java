@@ -1,5 +1,7 @@
 package org.adligo.tests4j_tests;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
@@ -11,15 +13,18 @@ import org.adligo.tests4j.models.shared.results.I_TrialResult;
 import org.adligo.tests4j.models.shared.results.I_TrialRunResult;
 import org.adligo.tests4j.models.shared.system.I_Tests4J_CoveragePluginParams;
 import org.adligo.tests4j.models.shared.system.I_Tests4J_Listener;
+import org.adligo.tests4j.models.shared.system.I_Tests4J_ProcessInfo;
 import org.adligo.tests4j.models.shared.system.Tests4J_Params;
 import org.adligo.tests4j.models.shared.trials.I_Trial;
 import org.adligo.tests4j.run.Tests4J;
-import org.adligo.tests4j.run.helpers.Tests4J_NotificationManager;
 import org.adligo.tests4j.shared.output.DefaultLog;
 import org.adligo.tests4j.shared.output.I_Tests4J_Log;
+import org.adligo.tests4j.shared.report.summary.SetupProcessDisplay;
 import org.adligo.tests4j.shared.report.summary.TestDisplay;
 import org.adligo.tests4j.shared.report.summary.TrialDisplay;
+import org.adligo.tests4j.shared.report.summary.TrialsProcessDisplay;
 import org.adligo.tests4j_4jacoco.plugin.CoveragePluginFactory;
+import org.adligo.tests4j_4jacoco.plugin.data.multi.MultiProbesMap;
 import org.adligo.tests4j_tests.base_trials.Counts;
 import org.adligo.tests4j_tests.base_trials.I_CountingTrial;
 
@@ -31,61 +36,73 @@ public class RunAllTrials implements I_Tests4J_Listener {
 	
 	
 	public static void main(String [] args) {
-		
-		//Tests4J_Params params = getTests(SimpleJacocoPluginFactory.class);
-		
-		Tests4J_Params params = getTests();
-		params.setCoveragePluginFactoryClass(CoveragePluginFactory.class);
-		setupCounts(params);
-		//params.setRecommendedSetupThreadCount(1);
-		//params.setRecommendedTrialThreadCount(1);
-		
-		params.setLogState(TrialDisplay.class, false);
-		params.setLogState(TestDisplay.class, false);
-		//params.setLogState(Tests4J_SetupRunnable.class, true);
-		//params.setLogState(ClassInstrumenter.class, true);
-		
-		//params.setLogState(Tests4J_NotificationManager.class, true);
-		//params.setLogState(ClassReferencesDiscovery.class, true);
-		//params.setLogState(TrialInstrumenter2.class, true);
-		//params.setLogState(ClassInstrumenter.class, true);
-		//params.setLogState(ClassParentsDiscovery.class, true);
-		//params.setLogState(TrialInstrumenter.class, true);
-		
-		params.setMetaTrialClass(TheMetaTrial.class);
-		//params.setThreadPoolSize(1);
-		//params.setCoveragePlugin(new TieredJacocoPlugin());
-		//
-		 Tests4J.run(params, new RunAllTrials());
-		//I_Tests4J_Controls controls = 
-		 /*
 		try {
-			Thread.sleep(100);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		*/
-		//controls.cancel();
-		
-		//tsh.logAllThreadStates();
-		trialsNotCompletedService.submit(new Runnable() {
+			//Tests4J_Params params = getTests(SimpleJacocoPluginFactory.class);
 			
-			@Override
-			public void run() {
-				while (true) {
-					if (trialsNotCompleted.size() >= 1) {
-						logger.log("The following trials have started but not completed");
-						logger.log(trialsNotCompleted.toString());
-					}
-					try {
-						Thread.sleep(1000);
-					} catch (InterruptedException x) {
-						
+			Tests4J_Params params = getTests();
+			params.setCoveragePluginFactoryClass(CoveragePluginFactory.class);
+			setupCounts(params);
+			
+			File file = new File("biglog.log");
+			if (file.exists()) {
+				file.delete();
+			}
+			FileOutputStream biglog = new FileOutputStream(file);
+			params.addAdditionalReportOutputStreams(biglog);
+			
+			//params.setRecommendedSetupThreadCount(2);
+			//params.setRecommendedTrialThreadCount(4);
+			
+			params.setLogState(TrialDisplay.class, false);
+			params.setLogState(TestDisplay.class, false);
+			params.setLogState(SetupProcessDisplay.class, true);
+			params.setLogState(TrialsProcessDisplay.class, true);
+			
+			params.setLogState(MultiProbesMap.class, true);
+			//params.setLogState(Tests4J_NotificationManager.class, true);
+			//params.setLogState(ClassReferencesDiscovery.class, true);
+			//params.setLogState(TrialInstrumenter2.class, true);
+			//params.setLogState(ClassInstrumenter.class, true);
+			//params.setLogState(ClassParentsDiscovery.class, true);
+			//params.setLogState(TrialInstrumenter.class, true);
+			
+			params.setMetaTrialClass(TheMetaTrial.class);
+			//params.setThreadPoolSize(1);
+			//params.setCoveragePlugin(new TieredJacocoPlugin());
+			//
+			 Tests4J.run(params, new RunAllTrials());
+			//I_Tests4J_Controls controls = 
+			 /*
+			try {
+				Thread.sleep(100);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			*/
+			//controls.cancel();
+			
+			//tsh.logAllThreadStates();
+			trialsNotCompletedService.submit(new Runnable() {
+				
+				@Override
+				public void run() {
+					while (true) {
+						if (trialsNotCompleted.size() >= 1) {
+							logger.log("The following trials have started but not completed");
+							logger.log(trialsNotCompleted.toString());
+						}
+						try {
+							Thread.sleep(1000);
+						} catch (InterruptedException x) {
+							
+						}
 					}
 				}
-			}
-		});
+			});
+		} catch (Throwable x) {
+			x.printStackTrace();
+		}
 	}
 
 	public static synchronized Tests4J_Params getTests() {
@@ -104,7 +121,7 @@ public class RunAllTrials implements I_Tests4J_Listener {
 		toRet.addTrials(new org.adligo.tests4j_tests.jacoco.plugin.RunPkgTrials());
 		
 		toRet.addTrials(new org.adligo.tests4j_tests.run.RunPkgTrials());
-		toRet.addTrials(new org.adligo.tests4j_tests.trials_api.RunPkgTrials());
+		//toRet.addTrials(new org.adligo.tests4j_tests.trials_api.RunPkgTrials());
 		
 		return toRet;
 	}
@@ -181,7 +198,13 @@ public class RunAllTrials implements I_Tests4J_Listener {
 	}
 
 	@Override
-	public void onProgress(String process, double pctComplete) {
+	public void onProccessStateChange(I_Tests4J_ProcessInfo info) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onProgress(I_Tests4J_ProcessInfo info) {
 		// TODO Auto-generated method stub
 		
 	}

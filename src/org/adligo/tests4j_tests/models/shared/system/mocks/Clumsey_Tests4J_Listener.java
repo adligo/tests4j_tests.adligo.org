@@ -4,6 +4,7 @@ import org.adligo.tests4j.models.shared.metadata.I_TrialRunMetadata;
 import org.adligo.tests4j.models.shared.results.I_TrialResult;
 import org.adligo.tests4j.models.shared.results.I_TrialRunResult;
 import org.adligo.tests4j.models.shared.system.I_Tests4J_Listener;
+import org.adligo.tests4j.models.shared.system.I_Tests4J_ProcessInfo;
 
 public class Clumsey_Tests4J_Listener implements I_Tests4J_Listener {
 
@@ -39,9 +40,13 @@ public class Clumsey_Tests4J_Listener implements I_Tests4J_Listener {
 	}
 
 	@Override
-	public void onProgress(String process, double pctComplete) {
-		// TODO Auto-generated method stub
-		
+	public void onProccessStateChange(I_Tests4J_ProcessInfo info) {
+		throw new RuntimeException("mock from onProccessStateChange");
+	}
+
+	@Override
+	public void onProgress(I_Tests4J_ProcessInfo info) {
+		throw new RuntimeException("mock from onProccessStateChange");
 	}
 
 }

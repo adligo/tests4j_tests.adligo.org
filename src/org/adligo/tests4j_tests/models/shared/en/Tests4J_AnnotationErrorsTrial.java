@@ -31,48 +31,50 @@ public class Tests4J_AnnotationErrorsTrial extends SourceFileCountingTrial {
 				messages.getBeforeTrialNotPublic());
 		asserter.assertConstant("Methods annotated with @BeforeTrial must be static.", 
 				messages.getBeforeTrialNotStatic());
+		
 		asserter.assertConstant("Methods annotated with @Test may not have a negative timeout.",
 			messages.getHasNegativeTimeout());
 		asserter.assertConstant("Methods annotated with @Test must not take any parameters.",
 			messages.getHasParams());
 		asserter.assertConstant("Methods annotated with @Test must NOT be abstract.",
 			messages.getIsAbstract());
+		
 		asserter.assertConstant("Methods annotated with @Test must be public.",
 			messages.getIsNotPublic());
 		asserter.assertConstant("Methods annotated with @Test must NOT be static.",
 			messages.getIsStatic());
-		asserter.assertConstant(" was not annotated correctly.",
-			messages.getWasAnnotatedIncorrectly());
-		
 		asserter.assertConstant("The minCoverage must be between 0.0 and 100.0 percent.",
 			messages.getMinCoverageMustBeBetweenZeroAndOneHundred());
-		asserter.assertConstant("The trial is missing a @TrialType annotation.",
-			messages.getTrialTypeMissing());
 		
 		asserter.assertConstant("Trials may only have one method annotated with @AfterTrial.",
 			messages.getMultipleAfterTrial());
 		asserter.assertConstant("Trials may only have one method annotated with @BeforeTrial.",
 			messages.getMultipleBeforeTrial());
-		
 		asserter.assertConstant("ApiTrials must be annotated with a @PackageScope annotation.",
 			messages.getNoPackageScope());
+		
 		asserter.assertConstant("SourceFileTrials must be annotated with @SourceFileScope.",
 			messages.getNoSourceFileScope());
 		asserter.assertConstant("UseCaseTrials must be annotated with @UseCaseScope.",
 				messages.getNoUseCaseScope());
-		
 		asserter.assertConstant("@PackageScope annotations must contain a non empty packageName.",
 				messages.getPackageScopeEmptyName());
+
 		asserter.assertConstant("@SourceFileScope annotations must contain a non empty sourceClass.",
 				messages.getSourceFileScopeEmptyClass());
+		asserter.assertConstant("The trial is missing a @TrialType annotation.",
+				messages.getTrialTypeMissing());
 		asserter.assertConstant("@UseCaseScope annotations must contain a non empty nown.",
 				messages.getUseCaseScopeEmptyNown());
+		
 		asserter.assertConstant("@UseCaseScope annotations must contain a non empty system.",
 				messages.getUseCaseScopeEmptySystem());
 		asserter.assertConstant("@UseCaseScope annotations must contain a non empty verb.",
 				messages.getUseCaseScopeEmptyVerb());
+		asserter.assertConstant(" was not annotated correctly.",
+				messages.getWasAnnotatedIncorrectly());
 		
-		
+
 		
 		asserter.assertConstantsMatchMethods(Tests4J_AnnotationErrors.class);
 		

@@ -64,6 +64,15 @@ public class Tests4J_ReportMessages_Trial extends SourceFileCountingTrial {
 		asserter.assertConstant("The following actual line numbers not in the expected text: ", 
 				messages.getTheFollowingActualLineNumberNotExpected());
 		
+		asserter.assertConstant("Starting process <X/> with <Y/> threads.", 
+				messages.getStartingProcessXWithYThreads());
+		asserter.assertConstant("Process <V/> has <X/> runnables running and <Y/> <Z/> done.", 
+				messages.getProcessVhasXRunnablesRunningAndYZdone());
+		asserter.assertConstant("non-meta trials", 
+				messages.getNonMetaTrials());
+		asserter.assertConstant("trial descriptions", 
+				messages.getTrialDescriptionsInStatement());
+		
 		asserter.assertConstantsMatchMethods(Tests4J_ReportMessages.class);
 	}
 
@@ -74,11 +83,11 @@ public class Tests4J_ReportMessages_Trial extends SourceFileCountingTrial {
 
 	@Override
 	public int getAsserts() {
-		return 61;
+		return 73;
 	}
 
 	@Override
 	public int getUniqueAsserts() {
-		return 61;
+		return 73;
 	}
 }

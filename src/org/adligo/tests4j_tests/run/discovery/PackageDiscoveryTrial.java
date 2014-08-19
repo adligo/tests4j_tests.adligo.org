@@ -2,7 +2,9 @@ package org.adligo.tests4j_tests.run.discovery;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.adligo.tests4j.models.shared.metadata.I_MachineMetadata;
 import org.adligo.tests4j.models.shared.metadata.I_SourceInfoMetadata;
@@ -58,6 +60,7 @@ import org.adligo.tests4j.run.discovery.TestDescription;
 import org.adligo.tests4j.run.discovery.Tests4J_ParamsReader;
 import org.adligo.tests4j.run.discovery.TrialDescription;
 import org.adligo.tests4j.run.discovery.TrialTypeFinder;
+import org.adligo.tests4j.run.helpers.I_CachedClassBytesClassLoader;
 import org.adligo.tests4j_tests.base_trials.SourceFileCountingTrial;
 import org.adligo.tests4j_tests.run.discovery.package_discovery_inner_mocks.TwoNestedRunnables;
 
@@ -178,7 +181,8 @@ public class PackageDiscoveryTrial extends SourceFileCountingTrial {
 	
 	@Test
 	public void testInnerClasses() throws Exception {
-		PackageDiscovery cd = new PackageDiscovery("org.adligo.tests4j_tests.run.discovery.package_discovery_inner_mocks");
+		PackageDiscovery cd = new PackageDiscovery(
+				"org.adligo.tests4j_tests.run.discovery.package_discovery_inner_mocks");
 		List<String> classNames = cd.getClassNames();
 		assertContains(classNames, TwoNestedRunnables.class.getName());
 		assertContains(classNames, "org.adligo.tests4j_tests.run.discovery.package_discovery_inner_mocks.TwoNestedRunnables$1");

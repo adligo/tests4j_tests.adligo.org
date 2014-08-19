@@ -9,6 +9,7 @@ import org.adligo.tests4j.models.shared.trials.I_Trial;
 import org.adligo.tests4j.run.Tests4J;
 import org.adligo.tests4j.run.helpers.Tests4J_ThreadFactory;
 import org.adligo.tests4j.run.helpers.Tests4J_TrialsRunable;
+import org.adligo.tests4j_4jacoco.plugin.CoveragePluginFactory;
 import org.adligo.tests4j_4jacoco.plugin.data.multi.MultiProbeDataStore;
 import org.adligo.tests4j_4jacoco.plugin.data.multi.MultiProbesMap;
 import org.adligo.tests4j_4jacoco.plugin.data.multi.ThreadGroupLocal;
@@ -26,7 +27,7 @@ public class RunPkgTrials implements I_Tests4J_TrialList {
 		params.setLogState(Tests4J_TrialsRunable.class, true);
 		params.setLogState(ThreadGroupLocal.class, true);
 		
-		//params.setCoveragePluginFactoryClass(ScopedJacocoPluginFactory.class);
+		params.setCoveragePluginFactoryClass(CoveragePluginFactory.class);
 		Tests4J.run(params);
 	}
 

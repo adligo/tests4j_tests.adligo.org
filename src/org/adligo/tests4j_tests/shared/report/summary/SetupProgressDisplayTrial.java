@@ -5,14 +5,16 @@ import org.adligo.tests4j.models.shared.i18n.I_Tests4J_ReportMessages;
 import org.adligo.tests4j.models.shared.trials.AdditionalInstrumentation;
 import org.adligo.tests4j.models.shared.trials.SourceFileScope;
 import org.adligo.tests4j.models.shared.trials.Test;
+import org.adligo.tests4j.run.helpers.Tests4J_ProcessInfo;
 import org.adligo.tests4j.shared.report.summary.SetupProgressDisplay;
+import org.adligo.tests4j.shared.report.summary.TestsProgressDisplay;
 import org.adligo.tests4j_tests.base_trials.SourceFileCountingTrial;
 import org.adligo.tests4j_tests.models.shared.system.mocks.Tests4J_LogMock;
 
 @SourceFileScope (sourceClass=SetupProgressDisplay.class)
 public class SetupProgressDisplayTrial extends SourceFileCountingTrial {
 	private Tests4J_LogMock log = new Tests4J_LogMock();
-	private SetupProgressDisplay reporter = new SetupProgressDisplay(log);
+	private SetupProgressDisplay reporter = new SetupProgressDisplay();
 	
 	@Override
 	public void beforeTests() {
@@ -23,8 +25,9 @@ public class SetupProgressDisplayTrial extends SourceFileCountingTrial {
 	
 	@Test
 	public void testProgressReportLogOff() {
-		
-		reporter.onProgress("setup", 7.0);
+		Tests4J_ProcessInfo info = new Tests4J_ProcessInfo("setup", 0, 100);
+		info.addDone();
+		reporter.onProgress(log, info);
 		assertEquals(0, log.getLogMessagesSize());
 		assertEquals(0, log.getExceptionsSize());
 		assertEquals(0, log.getStatesSize());
@@ -34,11 +37,17 @@ public class SetupProgressDisplayTrial extends SourceFileCountingTrial {
 	
 	@Test
 	public void testProgressReportPartDone() {
-		log.setState(SetupProgressDisplay.class, true);
-		reporter.onProgress("setup", 7.777);
+		log.setState(TestsProgressDisplay.class, true);
+		Tests4J_ProcessInfo info = new Tests4J_ProcessInfo("setup", 0, 98);
+		for (int i = 0; i < 17; i++) {
+			info.addDone();
+		}
+		
+		reporter.onProgress(log, info);
+		
 		assertEquals(1, log.getLogMessagesSize());
 		I_Tests4J_ReportMessages messages = Tests4J_EnglishConstants.ENGLISH.getReportMessages();
-		assertEquals("Tests4J: setup 7.77" + messages.getPctComplete(),
+		assertEquals("Tests4J: setup 17.17" + messages.getPctComplete(),
 				log.getLogMessage(0));
 		assertEquals(0, log.getExceptionsSize());
 		assertEquals(1, log.getStatesSize());
@@ -51,7 +60,9 @@ public class SetupProgressDisplayTrial extends SourceFileCountingTrial {
 
 		
 		log.setState(SetupProgressDisplay.class, true);
-		reporter.onProgress("setup", 100.0);
+		Tests4J_ProcessInfo info = new Tests4J_ProcessInfo("setup", 0, 1);
+		info.addDone();
+		reporter.onProgress(log, info);
 		
 		assertEquals(1, log.getLogMessagesSize());
 		I_Tests4J_ReportMessages messages = Tests4J_EnglishConstants.ENGLISH.getReportMessages();

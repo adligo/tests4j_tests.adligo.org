@@ -1,9 +1,13 @@
 package org.adligo.tests4j_tests.models.shared.system.mocks;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.adligo.tests4j.models.shared.metadata.I_TrialRunMetadata;
 import org.adligo.tests4j.models.shared.results.I_TrialResult;
 import org.adligo.tests4j.models.shared.results.I_TrialRunResult;
 import org.adligo.tests4j.models.shared.system.I_Tests4J_Listener;
+import org.adligo.tests4j.models.shared.system.I_Tests4J_ProcessInfo;
 
 public class Tracking_Tests4J_Listener implements I_Tests4J_Listener {
 	private I_TrialRunMetadata lastMetadata;
@@ -13,7 +17,8 @@ public class Tracking_Tests4J_Listener implements I_Tests4J_Listener {
 	private I_TrialResult lastTestResult;
 	private I_TrialResult lastTrialResult;
 	private I_TrialRunResult lastResult;
-			
+	private I_Tests4J_ProcessInfo lastInfo;
+	private I_Tests4J_ProcessInfo lastProgress;
 	@Override
 	public void onMetadataCalculated(I_TrialRunMetadata metadata) {
 		lastMetadata = metadata;
@@ -85,16 +90,23 @@ public class Tracking_Tests4J_Listener implements I_Tests4J_Listener {
 		lastTestResult = null;
 		lastTrialResult = null;
 		lastResult = null;
+		lastInfo = null;
+		lastProgress = null;
 	}
 
 	public Boolean getLastPassed() {
 		return lastPassed;
 	}
 
+
 	@Override
-	public void onProgress(String process, double pctComplete) {
-		// TODO Auto-generated method stub
-		
+	public void onProccessStateChange(I_Tests4J_ProcessInfo info) {
+		lastInfo = info;
+	}
+
+	@Override
+	public void onProgress(I_Tests4J_ProcessInfo info) {
+		lastProgress = info;
 	}
 
 }
