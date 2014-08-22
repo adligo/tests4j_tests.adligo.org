@@ -29,7 +29,7 @@ public class TheMetaTrial  extends AbstractTrial implements I_MetaTrial {
 	public void afterMetadataCalculated(I_TrialRunMetadata metadata) throws Exception {
 		calculator = new RelevantClassesWithTrialsCalculator(metadata);
 		
-		assertGreaterThanOrEquals(31.0, calculator.getPct());
+		assertGreaterThanOrEquals(30.2, calculator.getPct());
 		//this assert is also for the child-packages;
 		assertGreaterThanOrEquals(100.0, calculator.getPct("org.adligo.tests4j.models.shared.asserts"));
 		assertGreaterThanOrEquals(100.0, calculator.getPct("org.adligo.tests4j.models.shared.asserts.common"));
@@ -56,11 +56,9 @@ public class TheMetaTrial  extends AbstractTrial implements I_MetaTrial {
 			sb.append("'");
 			sb.append(System.lineSeparator());
 		}
-		//assertEquals(sb.toString(), 112, metadata.getAllTrialsCount());
-		assertEquals(sb.toString(), 106, metadata.getAllTrialsCount());
+		assertEquals(sb.toString(), 111, metadata.getAllTrialsCount());
 		
-		//assertEquals(559,  metadata.getAllTestsCount());
-		assertEquals(422,  metadata.getAllTestsCount());
+		assertEquals(559,  metadata.getAllTestsCount());
 	}
 
 	@Override

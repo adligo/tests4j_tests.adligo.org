@@ -18,6 +18,7 @@ import org.adligo.tests4j.models.shared.dependency.ClassAliasLocal;
 import org.adligo.tests4j.models.shared.dependency.I_ClassDependenciesLocal;
 import org.adligo.tests4j.models.shared.trials.TrialDelegate;
 import org.adligo.tests4j.run.helpers.I_CachedClassBytesClassLoader;
+import org.adligo.tests4j_4jacoco.plugin.common.I_OrderedClassDependencies;
 import org.adligo.tests4j_4jacoco.plugin.discovery.OrderedClassDiscovery;
 import org.adligo.tests4j_tests.run.helpers.class_loading_mocks.MockException;
 import org.adligo.tests4j_tests.run.helpers.class_loading_mocks.MockI_GetAndSetLong;
@@ -66,7 +67,8 @@ public class DAT_Assert_MockWithEverything extends TrialDelegate {
 		Class<?> clazz = MockWithEverything.class;
 		String className = clazz.getName();
 		assertFalse(ccbClassLoader.hasCache(className));
-		List<String> order = orderedClassDiscovery.findOrLoad(MockWithEverything.class);
+		I_OrderedClassDependencies ocd = orderedClassDiscovery.findOrLoad(clazz);
+		List<String> order = ocd.getOrder();
 		assertOrder(ccbClassLoader, className, order);
 		
 		assertReferences(orderedClassDiscovery, clazz);
@@ -98,18 +100,21 @@ public class DAT_Assert_MockWithEverything extends TrialDelegate {
 		assertEquals(MockWithNothing.class.getName(), order.get(counter++));
 		
 		assertEquals(String.class.getName(), order.get(counter++));
-		
+		assertEquals(AutoCloseable.class.getName(), order.get(counter++));
+		assertEquals(Closeable.class.getName(), order.get(counter++));
+		assertEquals(Flushable.class.getName(), order.get(counter++));
+		assertEquals(Appendable.class.getName(), order.get(counter++));
 		assertEquals(Number.class.getName(), order.get(counter++));
+		
+		assertEquals(OutputStream.class.getName(), order.get(counter++));
 		
 		assertEquals(Long.class.getName(), order.get(counter++));
 		assertEquals(Throwable.class.getName(), order.get(counter++));
 		
-		assertEquals(AutoCloseable.class.getName(), order.get(counter++));
+		assertEquals(FilterOutputStream.class.getName(), order.get(counter++));
 		assertEquals(Exception.class.getName(), order.get(counter++));
 		
-		assertEquals(Closeable.class.getName(), order.get(counter++));
-		assertEquals(Flushable.class.getName(), order.get(counter++));
-		assertEquals(Appendable.class.getName(), order.get(counter++));
+		assertEquals(PrintStream.class.getName(), order.get(counter++));
 		
 		assertEquals(MockException.class.getName(), order.get(counter++));
 		
@@ -117,7 +122,6 @@ public class DAT_Assert_MockWithEverything extends TrialDelegate {
 		assertEquals(MockI_GetString.class.getName(), order.get(counter++));
 		assertEquals(MockI_SetLong.class.getName(), order.get(counter++));
 		assertEquals(MockI_SetString.class.getName(), order.get(counter++));
-		assertEquals(OutputStream.class.getName(), order.get(counter++));
 		
 		assertEquals(I_System.class.getName(), order.get(counter++));
 		
@@ -129,7 +133,6 @@ public class DAT_Assert_MockWithEverything extends TrialDelegate {
 		assertEquals(MockWithTriangleB.class.getName(), order.get(counter++));
 		assertEquals(MockWithTriangleC.class.getName(), order.get(counter++));
 		
-		assertEquals(FilterOutputStream.class.getName(), order.get(counter++));
 		assertEquals("java.lang.AbstractStringBuilder", order.get(counter++));	
 		assertEquals(AnnotatedElement.class.getName(), order.get(counter++));
 		assertEquals(GenericDeclaration.class.getName(), order.get(counter++));
@@ -143,7 +146,6 @@ public class DAT_Assert_MockWithEverything extends TrialDelegate {
 		assertEquals(MockWithMethodException.class.getName(), order.get(counter++));
 		assertEquals(MockWithMethodReturn.class.getName(), order.get(counter++));
 		
-		assertEquals(PrintStream.class.getName(), order.get(counter++));
 		assertEquals(Class.class.getName(), order.get(counter++));
 		assertEquals(Math.class.getName(), order.get(counter++));
 		assertEquals(StringBuilder.class.getName(), order.get(counter++));	

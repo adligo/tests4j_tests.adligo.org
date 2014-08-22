@@ -12,6 +12,7 @@ import org.adligo.tests4j.models.shared.dependency.I_ClassDependenciesLocal;
 import org.adligo.tests4j.models.shared.dependency.I_Dependency;
 import org.adligo.tests4j.models.shared.trials.TrialDelegate;
 import org.adligo.tests4j.run.helpers.I_CachedClassBytesClassLoader;
+import org.adligo.tests4j_4jacoco.plugin.common.I_OrderedClassDependencies;
 import org.adligo.tests4j_4jacoco.plugin.discovery.OrderedClassDiscovery;
 import org.adligo.tests4j_tests.run.helpers.class_loading_mocks.MockWithBidirectionalA;
 import org.adligo.tests4j_tests.run.helpers.class_loading_mocks.MockWithBidirectionalB;
@@ -35,7 +36,8 @@ public class DAT_Assert_Circular_to_10 extends TrialDelegate {
 		Class<?> clazz = MockWithBidirectionalA.class;
 		String className = clazz.getName();
 		assertFalse(ccbClassLoader.hasCache(className));
-		List<String> order = orderedClassDiscovery.findOrLoad(clazz);
+		I_OrderedClassDependencies ocd = orderedClassDiscovery.findOrLoad(clazz);
+		List<String> order = ocd.getOrder();
 		assertNotNull(order);
 		assertEquals(Object.class.getName(), order.get(0));
 		assertEquals(className, order.get(1));
@@ -116,7 +118,8 @@ public class DAT_Assert_Circular_to_10 extends TrialDelegate {
 		Class<?> clazz = MockWithBidirectionalB.class;
 		String className = clazz.getName();
 		assertFalse(ccbClassLoader.hasCache(className));
-		List<String> order = orderedClassDiscovery.findOrLoad(clazz);
+		I_OrderedClassDependencies ocd = orderedClassDiscovery.findOrLoad(clazz);
+		List<String> order = ocd.getOrder();
 		assertNotNull(order);
 		
 		assertEquals(Object.class.getName(), order.get(0));
@@ -173,7 +176,8 @@ public class DAT_Assert_Circular_to_10 extends TrialDelegate {
 		Class<?> clazz = MockWithTriangleA.class;
 		String className = clazz.getName();
 		assertFalse(ccbClassLoader.hasCache(className));
-		List<String> order = orderedClassDiscovery.findOrLoad(clazz);
+		I_OrderedClassDependencies ocd = orderedClassDiscovery.findOrLoad(clazz);
+		List<String> order = ocd.getOrder();
 		assertNotNull(order);
 		
 		assertEquals(Object.class.getName(), order.get(0));
@@ -258,7 +262,8 @@ public class DAT_Assert_Circular_to_10 extends TrialDelegate {
 		Class<?> clazz = MockWithTriangleB.class;
 		String className = clazz.getName();
 		assertFalse(ccbClassLoader.hasCache(className));
-		List<String> order = orderedClassDiscovery.findOrLoad(clazz);
+		I_OrderedClassDependencies ocd = orderedClassDiscovery.findOrLoad(clazz);
+		List<String> order = ocd.getOrder();
 		assertNotNull(order);
 		
 		assertEquals(Object.class.getName(), order.get(0));
@@ -319,7 +324,8 @@ public class DAT_Assert_Circular_to_10 extends TrialDelegate {
 		Class<?> clazz = MockWithTriangleC.class;
 		String className = clazz.getName();
 		assertFalse(ccbClassLoader.hasCache(className));
-		List<String> order = orderedClassDiscovery.findOrLoad(clazz);
+		I_OrderedClassDependencies ocd = orderedClassDiscovery.findOrLoad(clazz);
+		List<String> order = ocd.getOrder();
 		assertNotNull(order);
 		
 		assertEquals(Object.class.getName(), order.get(0));

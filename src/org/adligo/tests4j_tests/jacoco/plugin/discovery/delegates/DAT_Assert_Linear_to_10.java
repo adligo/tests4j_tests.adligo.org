@@ -1,5 +1,10 @@
 package org.adligo.tests4j_tests.jacoco.plugin.discovery.delegates;
 
+import java.io.Closeable;
+import java.io.FilterOutputStream;
+import java.io.Flushable;
+import java.io.OutputStream;
+import java.io.PrintStream;
 import java.io.Serializable;
 import java.util.Iterator;
 import java.util.List;
@@ -9,12 +14,12 @@ import java.util.Set;
 import org.adligo.tests4j.models.shared.common.I_System;
 import org.adligo.tests4j.models.shared.dependency.ClassAliasLocal;
 import org.adligo.tests4j.models.shared.dependency.I_ClassAlias;
-import org.adligo.tests4j.models.shared.dependency.I_ClassAliasLocal;
 import org.adligo.tests4j.models.shared.dependency.I_ClassDependencies;
 import org.adligo.tests4j.models.shared.dependency.I_ClassDependenciesLocal;
 import org.adligo.tests4j.models.shared.dependency.I_Dependency;
 import org.adligo.tests4j.models.shared.trials.TrialDelegate;
 import org.adligo.tests4j.run.helpers.I_CachedClassBytesClassLoader;
+import org.adligo.tests4j_4jacoco.plugin.common.I_OrderedClassDependencies;
 import org.adligo.tests4j_4jacoco.plugin.discovery.OrderedClassDiscovery;
 import org.adligo.tests4j_tests.run.helpers.class_loading_mocks.MockException;
 import org.adligo.tests4j_tests.run.helpers.class_loading_mocks.MockWithAbstractMethodReturn;
@@ -45,7 +50,8 @@ public class DAT_Assert_Linear_to_10 extends TrialDelegate {
 		Class<?> clazz = MockWithMethodReturn.class;
 		String className = clazz.getName();
 		assertFalse(ccbClassLoader.hasCache(className));
-		List<String> order = orderedClassDiscovery.findOrLoad(clazz);
+		I_OrderedClassDependencies ocd = orderedClassDiscovery.findOrLoad(clazz);
+		List<String> order = ocd.getOrder();
 		assertTrue(ccbClassLoader.hasCache(className));
 		
 		assertNotNull(order);
@@ -107,20 +113,26 @@ public class DAT_Assert_Linear_to_10 extends TrialDelegate {
 		Class<?> clazz = MockWithField.class;
 		String className = clazz.getName();
 		assertFalse(ccbClassLoader.hasCache(className));
-		List<String> order = orderedClassDiscovery.findOrLoad(clazz);
+		I_OrderedClassDependencies ocd = orderedClassDiscovery.findOrLoad(clazz);
+		List<String> order = ocd.getOrder();
 		assertNotNull(order);
 		
 		//string is first because I_System doesn't reference itself or Object
 		// MockWithField -> self(MockWithField super Object) and I_System
 		//  I_System -> String ONLY
 		int counter = 0;
+		assertEquals(AutoCloseable.class.getName(), order.get(counter++));
+		assertEquals(Object.class.getName(), order.get(counter++));
+		assertEquals(Closeable.class.getName(), order.get(counter++));
+		assertEquals(Flushable.class.getName(), order.get(counter++));
+		assertEquals(OutputStream.class.getName(), order.get(counter++));
+		assertEquals(FilterOutputStream.class.getName(), order.get(counter++));
 		assertEquals(Serializable.class.getName(), order.get(counter++));
+		assertEquals(Appendable.class.getName(), order.get(counter++));
 		assertEquals(CharSequence.class.getName(), order.get(counter++));
 		assertEquals(Comparable.class.getName(), order.get(counter++));
-		assertEquals(Object.class.getName(), order.get(counter++));
 		
-
-		
+		assertEquals(PrintStream.class.getName(), order.get(counter++));
 		assertEquals(String.class.getName(), order.get(counter++));
 		assertEquals(I_System.class.getName(), order.get(counter++));
 		
@@ -133,9 +145,44 @@ public class DAT_Assert_Linear_to_10 extends TrialDelegate {
 		I_Dependency dep =  it.next();
 		
 		I_ClassAlias alias = dep.getAlias();
+		assertEquals(AutoCloseable.class.getName(), alias.getName());
+		assertEquals(6, dep.getReferences());
+
+		dep =  it.next();
+		alias = dep.getAlias();
+		assertEquals(Object.class.getName(), alias.getName());
+		assertEquals(6, dep.getReferences());
+		
+		dep =  it.next();
+		alias = dep.getAlias();
+		assertEquals(Closeable.class.getName(), alias.getName());
+		assertEquals(5, dep.getReferences());
+
+		dep =  it.next();
+		alias = dep.getAlias();
+		assertEquals(Flushable.class.getName(), alias.getName());
+		assertEquals(5, dep.getReferences());
+		
+		dep =  it.next();
+		alias = dep.getAlias();
+		assertEquals(OutputStream.class.getName(), alias.getName());
+		assertEquals(4, dep.getReferences());
+
+		dep =  it.next();
+		alias = dep.getAlias();
+		assertEquals(FilterOutputStream.class.getName(), alias.getName());
+		assertEquals(3, dep.getReferences());
+		
+		dep =  it.next();
+		alias = dep.getAlias();
 		assertEquals(Serializable.class.getName(), alias.getName());
 		assertEquals(3, dep.getReferences());
 
+		dep =  it.next();
+		alias = dep.getAlias();
+		assertEquals(Appendable.class.getName(), alias.getName());
+		assertEquals(3, dep.getReferences());
+		
 		dep =  it.next();
 		alias = dep.getAlias();
 		assertEquals(CharSequence.class.getName(), alias.getName());
@@ -148,8 +195,8 @@ public class DAT_Assert_Linear_to_10 extends TrialDelegate {
 		
 		dep =  it.next();
 		alias = dep.getAlias();
-		assertEquals(Object.class.getName(), alias.getName());
-		assertEquals(3, dep.getReferences());
+		assertEquals(PrintStream.class.getName(), alias.getName());
+		assertEquals(2, dep.getReferences());
 		
 		dep =  it.next();
 		alias = dep.getAlias();
@@ -161,13 +208,24 @@ public class DAT_Assert_Linear_to_10 extends TrialDelegate {
 		assertEquals(I_System.class.getName(), alias.getName());
 		assertEquals(1, dep.getReferences());
 		
-		assertEquals(6, deps.size());
+		assertEquals(13, deps.size());
 		
 		I_ClassDependencies cr =  orderedClassDiscovery.getReferences(new ClassAliasLocal(clazz));
 		assertMockWithFieldRefs(className, cr);
 		
 		DAT_Assert_Simple simple = trial.getSimple();
+		simple.assertHasAutoCloseableCache();
+		simple.assertHasAppendableCache();
+		simple.assertHasCloseableCache();
+		
+		simple.assertHasFilterOutputStreamCache();
+		simple.assertHasFlushableCache();
+		
 		simple.assertHasObjectCache();
+		simple.assertHasOutputStreamCache();
+		
+		simple.assertHasPrintStreamCache();
+		
 		simple.assertHasStringCache();
 		simple.assertHasSerilizableCache();
 		simple.assertHasCharSequenceCache();
@@ -177,7 +235,7 @@ public class DAT_Assert_Linear_to_10 extends TrialDelegate {
 		assertHasMockWithFieldCache();
 		
 		Map<String,I_ClassDependenciesLocal> refsCache = trial.getRefsCache();
-		assertEquals(7, refsCache.size());
+		assertEquals(14, refsCache.size());
 	}
 
 	public void assertHasI_SystemCache() {
@@ -189,14 +247,24 @@ public class DAT_Assert_Linear_to_10 extends TrialDelegate {
 		assertFalse(crefs.hasCircularDependencies());
 		
 		Set<String> refs = crefs.getDependencyNames();
-		assertContains(refs, Object.class.getName());
-		assertContains(refs, Serializable.class.getName());
+		assertContains(refs, Appendable.class.getName());
+		assertContains(refs, AutoCloseable.class.getName());
 		assertContains(refs, CharSequence.class.getName());
+		assertContains(refs, Closeable.class.getName());
 		assertContains(refs, Comparable.class.getName());
+		
+		assertContains(refs, FilterOutputStream.class.getName());
+		assertContains(refs, Flushable.class.getName());
+		
+		assertContains(refs, Object.class.getName());
+		assertContains(refs, OutputStream.class.getName());
+		assertContains(refs, PrintStream.class.getName());
+		
+		assertContains(refs, Serializable.class.getName());
 		
 		assertContains(refs, String.class.getName());
 		assertContains(refs, className);
-		assertEquals(6, refs.size());
+		assertEquals(13, refs.size());
 	}
 	
 	public void assertHasMockWithFieldCache() {
@@ -213,15 +281,26 @@ public class DAT_Assert_Linear_to_10 extends TrialDelegate {
 		assertFalse(crefs.hasCircularDependencies());
 		
 		Set<String> refs = crefs.getDependencyNames();
-		assertContains(refs, I_System.class.getName());
-		assertContains(refs, Object.class.getName());
-		assertContains(refs, Serializable.class.getName());
+		assertContains(refs, Appendable.class.getName());
+		assertContains(refs, AutoCloseable.class.getName());
 		assertContains(refs, CharSequence.class.getName());
+		assertContains(refs, Closeable.class.getName());
 		assertContains(refs, Comparable.class.getName());
+		
+		assertContains(refs, FilterOutputStream.class.getName());
+		assertContains(refs, Flushable.class.getName());
+		
+		assertContains(refs, I_System.class.getName());
+		
+		assertContains(refs, Object.class.getName());
+		assertContains(refs, OutputStream.class.getName());
+		assertContains(refs, PrintStream.class.getName());
+		
+		assertContains(refs, Serializable.class.getName());
 		
 		assertContains(refs, String.class.getName());
 		assertContains(refs, className);
-		assertEquals(7, refs.size());
+		assertEquals(14, refs.size());
 	}
 	
 	public void delegate003_MockWithMethodParams() throws Exception {
@@ -231,7 +310,8 @@ public class DAT_Assert_Linear_to_10 extends TrialDelegate {
 		Class<?> clazz = MockWithMethodParams.class;
 		String className = clazz.getName();
 		assertFalse(ccbClassLoader.hasCache(className));
-		List<String> order = orderedClassDiscovery.findOrLoad(clazz);
+		I_OrderedClassDependencies ocd = orderedClassDiscovery.findOrLoad(clazz);
+		List<String> order = ocd.getOrder();
 		assertNotNull(order);
 		assertEquals(Object.class.getName(), order.get(0));
 		assertEquals(MockWithNothing.class.getName(), order.get(1));
@@ -304,15 +384,25 @@ public class DAT_Assert_Linear_to_10 extends TrialDelegate {
 		Class<?> clazz = MockWithImportOnlyInMethod.class;
 		String className = clazz.getName();
 		assertFalse(ccbClassLoader.hasCache(className));
-		List<String> order = orderedClassDiscovery.findOrLoad(clazz);
+		I_OrderedClassDependencies ocd = orderedClassDiscovery.findOrLoad(clazz);
+		List<String> order = ocd.getOrder();
 		assertNotNull(order);
 		
 		int counter = 0;
-		assertEquals(Serializable.class.getName(), order.get(counter++));
-		assertEquals(CharSequence.class.getName(), order.get(counter++));
-		assertEquals(Comparable.class.getName(), order.get(counter++));
+		assertEquals(AutoCloseable.class.getName(), order.get(counter++));
 		assertEquals(Object.class.getName(), order.get(counter++));
 		
+		assertEquals(Closeable.class.getName(), order.get(counter++));
+		assertEquals(Flushable.class.getName(), order.get(counter++));
+		assertEquals(OutputStream.class.getName(), order.get(counter++));
+		assertEquals(FilterOutputStream.class.getName(), order.get(counter++));
+		
+		assertEquals(Serializable.class.getName(), order.get(counter++));
+		assertEquals(Appendable.class.getName(), order.get(counter++));
+		assertEquals(CharSequence.class.getName(), order.get(counter++));
+		assertEquals(Comparable.class.getName(), order.get(counter++));
+		
+		assertEquals(PrintStream.class.getName(), order.get(counter++));
 		assertEquals(String.class.getName(), order.get(counter++));
 		assertEquals(I_System.class.getName(), order.get(counter++));
 		
@@ -324,7 +414,42 @@ public class DAT_Assert_Linear_to_10 extends TrialDelegate {
 		Iterator<I_Dependency> it = deps.iterator();
 		I_Dependency dep =  it.next();
 		I_ClassAlias alias = dep.getAlias();
+		assertEquals(AutoCloseable.class.getName(), alias.getName());
+		assertEquals(6, dep.getReferences());
+		
+		dep =  it.next();
+		alias = dep.getAlias();
+		assertEquals(Object.class.getName(), alias.getName());
+		assertEquals(6, dep.getReferences());
+		
+		dep =  it.next();
+		alias = dep.getAlias();
+		assertEquals(Closeable.class.getName(), alias.getName());
+		assertEquals(5, dep.getReferences());
+		
+		dep =  it.next();
+		alias = dep.getAlias();
+		assertEquals(Flushable.class.getName(), alias.getName());
+		assertEquals(5, dep.getReferences());
+		
+		dep =  it.next();
+		alias = dep.getAlias();
+		assertEquals(OutputStream.class.getName(), alias.getName());
+		assertEquals(4, dep.getReferences());
+		
+		dep =  it.next();
+		alias = dep.getAlias();
+		assertEquals(FilterOutputStream.class.getName(), alias.getName());
+		assertEquals(3, dep.getReferences());
+		
+		dep =  it.next();
+		alias = dep.getAlias();
 		assertEquals(Serializable.class.getName(), alias.getName());
+		assertEquals(3, dep.getReferences());
+		
+		dep =  it.next();
+		alias = dep.getAlias();
+		assertEquals(Appendable.class.getName(), alias.getName());
 		assertEquals(3, dep.getReferences());
 		
 		dep =  it.next();
@@ -339,8 +464,8 @@ public class DAT_Assert_Linear_to_10 extends TrialDelegate {
 		
 		dep =  it.next();
 		alias = dep.getAlias();
-		assertEquals(Object.class.getName(), alias.getName());
-		assertEquals(3, dep.getReferences());
+		assertEquals(PrintStream.class.getName(), alias.getName());
+		assertEquals(2, dep.getReferences());
 		
 		dep =  it.next();
 		alias = dep.getAlias();
@@ -352,12 +477,24 @@ public class DAT_Assert_Linear_to_10 extends TrialDelegate {
 		assertEquals(I_System.class.getName(), alias.getName());
 		assertEquals(1, dep.getReferences());
 		
-		assertEquals(6, deps.size());
+		assertEquals(13, deps.size());
 		
 		I_ClassDependencies cr =  orderedClassDiscovery.getReferences(new ClassAliasLocal(clazz));
 		assertMockWithImportOnlyInMethodRefs(className, cr);
 		DAT_Assert_Simple simple = trial.getSimple();
+		simple.assertHasAppendableCache();
+		simple.assertHasAutoCloseableCache();
+		
+		simple.assertHasCloseableCache();
+		
+		simple.assertHasFilterOutputStreamCache();
+		simple.assertHasFlushableCache();
+		
 		simple.assertHasObjectCache();
+		simple.assertHasOutputStreamCache();
+		
+		simple.assertHasPrintStreamCache();
+		
 		simple.assertHasSerilizableCache();
 		simple.assertHasCharSequenceCache();
 		simple.assertHasCompareableCache();
@@ -367,7 +504,7 @@ public class DAT_Assert_Linear_to_10 extends TrialDelegate {
 		assertHasMockWithImportOnlyInMethodCache();
 		
 		Map<String,I_ClassDependenciesLocal> refsCache = trial.getRefsCache();
-		assertEquals(7, refsCache.size());
+		assertEquals(14, refsCache.size());
 	}
 	
 	public void assertHasMockWithImportOnlyInMethodCache() {
@@ -384,16 +521,27 @@ public class DAT_Assert_Linear_to_10 extends TrialDelegate {
 		assertFalse(crefs.hasCircularDependencies());
 		
 		Set<String> refs = crefs.getDependencyNames();
-		assertContains(refs, Object.class.getName());
-		assertContains(refs, Serializable.class.getName());
+		assertContains(refs, Appendable.class.getName());
+		assertContains(refs, AutoCloseable.class.getName());
 		assertContains(refs, CharSequence.class.getName());
+		assertContains(refs, Closeable.class.getName());
 		assertContains(refs, Comparable.class.getName());
 		
 		assertContains(refs, I_System.class.getName());
 		
+		assertContains(refs, FilterOutputStream.class.getName());
+		assertContains(refs, Flushable.class.getName());
+		
+		assertContains(refs, Object.class.getName());
+		assertContains(refs, OutputStream.class.getName());
+		assertContains(refs, PrintStream.class.getName());
+		
+		assertContains(refs, Serializable.class.getName());
+		
 		assertContains(refs, String.class.getName());
+		
 		assertContains(refs, className);
-		assertEquals(7, refs.size());
+		assertEquals(14, refs.size());
 	}
 
 	public void delegate005_MockWithStaticFeild() throws Exception {
@@ -403,7 +551,8 @@ public class DAT_Assert_Linear_to_10 extends TrialDelegate {
 		Class<?> clazz = MockWithStaticField.class;
 		String className = clazz.getName();
 		assertFalse(ccbClassLoader.hasCache(className));
-		List<String> order = orderedClassDiscovery.findOrLoad(clazz);
+		I_OrderedClassDependencies ocd = orderedClassDiscovery.findOrLoad(clazz);
+		List<String> order = ocd.getOrder();
 		assertNotNull(order);
 		assertEquals(Object.class.getName(), order.get(0));
 		assertEquals(MockWithNothing.class.getName(), order.get(1));
@@ -464,7 +613,8 @@ public class DAT_Assert_Linear_to_10 extends TrialDelegate {
 		Class<?> clazz = MockWithStaticInitalizer.class;
 		String className = clazz.getName();
 		assertFalse(ccbClassLoader.hasCache(className));
-		List<String> order = orderedClassDiscovery.findOrLoad(clazz);
+		I_OrderedClassDependencies ocd = orderedClassDiscovery.findOrLoad(clazz);
+		List<String> order = ocd.getOrder();
 		assertNotNull(order);
 		assertEquals(Object.class.getName(), order.get(0));
 		assertEquals(MockWithNothing.class.getName(), order.get(1));
@@ -529,7 +679,8 @@ public class DAT_Assert_Linear_to_10 extends TrialDelegate {
 		Class<?> clazz = MockWithArray.class;
 		String className = clazz.getName();
 		assertFalse(ccbClassLoader.hasCache(className));
-		List<String> order = orderedClassDiscovery.findOrLoad(clazz);
+		I_OrderedClassDependencies ocd = orderedClassDiscovery.findOrLoad(clazz);
+		List<String> order = ocd.getOrder();
 		assertNotNull(order);
 		assertEquals(Object.class.getName(), order.get(0));
 		assertEquals(MockWithNothing.class.getName(), order.get(1));
@@ -592,7 +743,8 @@ public class DAT_Assert_Linear_to_10 extends TrialDelegate {
 		Class<?> clazz = MockWithMethodException.class;
 		String className = clazz.getName();
 		assertFalse(ccbClassLoader.hasCache(className));
-		List<String> order = orderedClassDiscovery.findOrLoad(clazz);
+		I_OrderedClassDependencies ocd = orderedClassDiscovery.findOrLoad(clazz);
+		List<String> order = ocd.getOrder();
 		assertNotNull(order);
 		
 		int counter = 0;
@@ -692,7 +844,8 @@ public class DAT_Assert_Linear_to_10 extends TrialDelegate {
 		Class<?> clazz = MockWithMethodExceptionBlock.class;
 		String className = clazz.getName();
 		assertFalse(ccbClassLoader.hasCache(className));
-		List<String> order = orderedClassDiscovery.findOrLoad(clazz);
+		I_OrderedClassDependencies ocd = orderedClassDiscovery.findOrLoad(clazz);
+		List<String> order = ocd.getOrder();
 		assertNotNull(order);
 		
 		int counter = 0;
@@ -802,7 +955,8 @@ public class DAT_Assert_Linear_to_10 extends TrialDelegate {
 		Class<?> clazz = MockWithAbstractMethodReturn.class;
 		String className = clazz.getName();
 		assertFalse(ccbClassLoader.hasCache(className));
-		List<String> order = orderedClassDiscovery.findOrLoad(clazz);
+		I_OrderedClassDependencies ocd = orderedClassDiscovery.findOrLoad(clazz);
+		List<String> order = ocd.getOrder();
 		assertNotNull(order);
 		
 		assertEquals(Object.class.getName(), order.get(0));

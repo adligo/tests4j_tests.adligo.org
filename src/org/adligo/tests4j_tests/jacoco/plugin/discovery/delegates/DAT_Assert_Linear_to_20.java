@@ -13,6 +13,7 @@ import org.adligo.tests4j.models.shared.dependency.I_ClassDependenciesLocal;
 import org.adligo.tests4j.models.shared.dependency.I_Dependency;
 import org.adligo.tests4j.models.shared.trials.TrialDelegate;
 import org.adligo.tests4j.run.helpers.I_CachedClassBytesClassLoader;
+import org.adligo.tests4j_4jacoco.plugin.common.I_OrderedClassDependencies;
 import org.adligo.tests4j_4jacoco.plugin.discovery.OrderedClassDiscovery;
 import org.adligo.tests4j_tests.run.helpers.class_loading_mocks.MockI_GetAndSetLong;
 import org.adligo.tests4j_tests.run.helpers.class_loading_mocks.MockI_GetAndSetString;
@@ -41,7 +42,8 @@ public class DAT_Assert_Linear_to_20 extends TrialDelegate {
 		Class<?> clazz = MockWithAbstractMethodParam.class;
 		String className = clazz.getName();
 		assertFalse(ccbClassLoader.hasCache(className));
-		List<String> order = orderedClassDiscovery.findOrLoad(clazz);
+		I_OrderedClassDependencies ocd = orderedClassDiscovery.findOrLoad(clazz);
+		List<String> order = ocd.getOrder();
 		assertNotNull(order);
 		assertEquals(Object.class.getName(), order.get(0));
 		assertEquals(MockWithNothing.class.getName(), order.get(1));
@@ -103,7 +105,8 @@ public class DAT_Assert_Linear_to_20 extends TrialDelegate {
 		Class<?> clazz = MockWithExtensionA.class;
 		String className = clazz.getName();
 		assertFalse(ccbClassLoader.hasCache(className));
-		List<String> order = orderedClassDiscovery.findOrLoad(clazz);
+		I_OrderedClassDependencies ocd = orderedClassDiscovery.findOrLoad(clazz);
+		List<String> order = ocd.getOrder();
 		assertNotNull(order);
 		
 		//ok in this case Object is not on top as 
@@ -171,7 +174,8 @@ public class DAT_Assert_Linear_to_20 extends TrialDelegate {
 		Class<?> clazz = MockWithExtensionB.class;
 		String className = clazz.getName();
 		assertFalse(ccbClassLoader.hasCache(className));
-		List<String> order = orderedClassDiscovery.findOrLoad(clazz);
+		I_OrderedClassDependencies ocd = orderedClassDiscovery.findOrLoad(clazz);
+		List<String> order = ocd.getOrder();
 		assertNotNull(order);
 		
 		assertEquals(Object.class.getName(), order.get(0));
@@ -248,7 +252,8 @@ public class DAT_Assert_Linear_to_20 extends TrialDelegate {
 		Class<?> clazz = MockI_GetLong.class;
 		String className = clazz.getName();
 		assertFalse(ccbClassLoader.hasCache(className));
-		List<String> order = orderedClassDiscovery.findOrLoad(MockI_GetLong.class);
+		I_OrderedClassDependencies ocd = orderedClassDiscovery.findOrLoad(MockI_GetLong.class);
+		List<String> order = ocd.getOrder();
 		assertNotNull(order);
 		
 		int counter = 0;
@@ -338,7 +343,8 @@ public class DAT_Assert_Linear_to_20 extends TrialDelegate {
 		Class<?> clazz = MockI_SetLong.class;
 		String className = clazz.getName();
 		assertFalse(ccbClassLoader.hasCache(className));
-		List<String> order = orderedClassDiscovery.findOrLoad(clazz);
+		I_OrderedClassDependencies ocd = orderedClassDiscovery.findOrLoad(clazz);
+		List<String> order = ocd.getOrder();
 		assertNotNull(order);
 		
 		int counter = 0;
@@ -427,7 +433,8 @@ public class DAT_Assert_Linear_to_20 extends TrialDelegate {
 		Class<?> clazz = MockI_GetString.class;
 		String className = clazz.getName();
 		assertFalse(ccbClassLoader.hasCache(className));
-		List<String> order = orderedClassDiscovery.findOrLoad(MockI_GetString.class);
+		I_OrderedClassDependencies ocd = orderedClassDiscovery.findOrLoad(MockI_GetString.class);
+		List<String> order = ocd.getOrder();
 		assertNotNull(order);
 		
 		int counter = 0;
@@ -520,7 +527,8 @@ public class DAT_Assert_Linear_to_20 extends TrialDelegate {
 		Class<?> clazz = MockI_SetString.class;
 		String className = clazz.getName();
 		assertFalse(ccbClassLoader.hasCache(className));
-		List<String> order = orderedClassDiscovery.findOrLoad(clazz);
+		I_OrderedClassDependencies ocd = orderedClassDiscovery.findOrLoad(clazz);
+		List<String> order = ocd.getOrder();
 		assertNotNull(order);
 		
 		int counter = 0;
@@ -610,7 +618,8 @@ public class DAT_Assert_Linear_to_20 extends TrialDelegate {
 		Class<?> clazz = MockI_GetAndSetLong.class;
 		String className = clazz.getName();
 		assertFalse(ccbClassLoader.hasCache(className));
-		List<String> order = orderedClassDiscovery.findOrLoad(clazz);
+		I_OrderedClassDependencies ocd = orderedClassDiscovery.findOrLoad(clazz);
+		List<String> order = ocd.getOrder();
 		assertNotNull(order);
 		
 		int counter = 0;
@@ -721,7 +730,8 @@ public class DAT_Assert_Linear_to_20 extends TrialDelegate {
 		Class<?> clazz = MockI_GetAndSetString.class;
 		String className = clazz.getName();
 		assertFalse(ccbClassLoader.hasCache(className));
-		List<String> order = orderedClassDiscovery.findOrLoad(MockI_GetAndSetString.class);
+		I_OrderedClassDependencies ocd = orderedClassDiscovery.findOrLoad(MockI_GetAndSetString.class);
+		List<String> order = ocd.getOrder();
 		assertNotNull(order);
 		
 		int counter = 0;
@@ -836,7 +846,8 @@ public class DAT_Assert_Linear_to_20 extends TrialDelegate {
 		Class<?> clazz = MockI_StringAndLong.class;
 		String className = clazz.getName();
 		assertFalse(ccbClassLoader.hasCache(className));
-		List<String> order = orderedClassDiscovery.findOrLoad(clazz);
+		I_OrderedClassDependencies ocd = orderedClassDiscovery.findOrLoad(clazz);
+		List<String> order = ocd.getOrder();
 		assertNotNull(order);
 		
 		int counter = 0;

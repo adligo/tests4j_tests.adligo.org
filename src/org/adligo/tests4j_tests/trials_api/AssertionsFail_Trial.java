@@ -268,11 +268,10 @@ public class AssertionsFail_Trial extends ApiCountingTrial {
 	
 	@Override
 	public void afterTrialTests(I_ApiTrialResult p) {
-		assertCounts(p);
+		super.afterTrialTests(p);
 		if (p.hasRecordedCoverage()) {
 			I_PackageCoverage coverage = p.getPackageCoverage();
-			//TODO this is not feeding correclty yet
-			assertGreaterThanOrEquals(0.0, coverage.getPercentageCoveredDouble());
+			assertGreaterThanOrEquals(10.0, coverage.getPercentageCoveredDouble());
 		}
 	}
 	

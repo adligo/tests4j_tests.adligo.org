@@ -1,13 +1,11 @@
 package org.adligo.tests4j_tests;
 
 import org.adligo.tests4j.models.shared.system.Tests4J_Params;
-import org.adligo.tests4j.models.shared.system.Tests4J_Selection;
 import org.adligo.tests4j.run.Tests4J;
 import org.adligo.tests4j.shared.report.summary.TestDisplay;
 import org.adligo.tests4j.shared.report.summary.TrialDisplay;
-import org.adligo.tests4j_4jacoco.plugin.CoveragePluginFactory;
 import org.adligo.tests4j_4jacoco.plugin.data.multi.MultiProbesMap;
-import org.adligo.tests4j_tests.jacoco.plugin.discovery.DiscoveryApiTrial;
+import org.adligo.tests4j_tests.trials_api.BadUseCaseTrials_Trial;
 
 public class RunSingleTrial {
 
@@ -17,8 +15,8 @@ public class RunSingleTrial {
 		//params.addTrial(NoPackageScopeAnnotationTrial.class);
 		//params.addTrial(ReferenceTrackingClassVisitorTrial.class);
 		//params.addTrial(ReferenceTrackingMethodVisitorTrial.class);
-		params.addTrial(DiscoveryApiTrial.class);
-		params.addTest(new Tests4J_Selection(DiscoveryApiTrial.class, "test2003_MockWithTriangleA"));
+		params.addTrial(BadUseCaseTrials_Trial.class);
+		//params.addTest(new Tests4J_Selection(DiscoveryApiTrial.class, "test2003_MockWithTriangleA"));
 		
 		params.setLogState(MultiProbesMap.class, true);
 		

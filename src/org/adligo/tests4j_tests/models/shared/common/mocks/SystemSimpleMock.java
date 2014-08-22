@@ -1,5 +1,7 @@
 package org.adligo.tests4j_tests.models.shared.common.mocks;
 
+import java.io.PrintStream;
+
 import org.adligo.tests4j.models.shared.common.DefaultSystem;
 import org.adligo.tests4j.models.shared.common.I_System;
 
@@ -48,6 +50,12 @@ public class SystemSimpleMock implements I_System {
 	@Override
 	public String getCurrentThreadName() {
 		return "MOCK_" + DefaultSystem.DEFAULT_THREAD_NAME;
+	}
+
+	@Override
+	public PrintStream getOut() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

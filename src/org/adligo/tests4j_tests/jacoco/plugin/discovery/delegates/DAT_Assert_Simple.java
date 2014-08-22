@@ -1,5 +1,10 @@
 package org.adligo.tests4j_tests.jacoco.plugin.discovery.delegates;
 
+import java.io.Closeable;
+import java.io.FilterOutputStream;
+import java.io.Flushable;
+import java.io.OutputStream;
+import java.io.PrintStream;
 import java.io.Serializable;
 import java.util.Iterator;
 import java.util.List;
@@ -13,6 +18,7 @@ import org.adligo.tests4j.models.shared.dependency.I_ClassDependenciesLocal;
 import org.adligo.tests4j.models.shared.dependency.I_Dependency;
 import org.adligo.tests4j.models.shared.trials.TrialDelegate;
 import org.adligo.tests4j.run.helpers.I_CachedClassBytesClassLoader;
+import org.adligo.tests4j_4jacoco.plugin.common.I_OrderedClassDependencies;
 import org.adligo.tests4j_4jacoco.plugin.discovery.OrderedClassDiscovery;
 import org.adligo.tests4j_tests.run.helpers.class_loading_mocks.MockException;
 import org.adligo.tests4j_tests.run.helpers.class_loading_mocks.MockWithNothing;
@@ -33,7 +39,8 @@ public class DAT_Assert_Simple extends TrialDelegate {
 		Class<?> clazz = MockWithNothing.class;
 		String className = clazz.getName();
 		assertFalse(ccbClassLoader.hasCache(className));
-		List<String> order = orderedClassDiscovery.findOrLoad(clazz);
+		I_OrderedClassDependencies ocd = orderedClassDiscovery.findOrLoad(clazz);
+		List<String> order = ocd.getOrder();
 		
 		assertNotNull(order);
 		assertEquals(Object.class.getName(), order.get(0));
@@ -85,7 +92,8 @@ public class DAT_Assert_Simple extends TrialDelegate {
 		Class<?> clazz = MockWithString.class;
 		String className = clazz.getName();
 		assertFalse(ccbClassLoader.hasCache(className));
-		List<String> order = orderedClassDiscovery.findOrLoad(clazz);
+		I_OrderedClassDependencies ocd = orderedClassDiscovery.findOrLoad(clazz);
+		List<String> order = ocd.getOrder();
 		assertNotNull(order);
 		
 		int counter = 0;
@@ -176,7 +184,8 @@ public class DAT_Assert_Simple extends TrialDelegate {
 		Class<?> clazz = MockException.class;
 		String className = clazz.getName();
 		assertFalse(ccbClassLoader.hasCache(className));
-		List<String> order = orderedClassDiscovery.findOrLoad(clazz);
+		I_OrderedClassDependencies ocd = orderedClassDiscovery.findOrLoad(clazz);
+		List<String> order = ocd.getOrder();
 		assertNotNull(order);
 		assertEquals(Serializable.class.getName(), order.get(0));
 		assertEquals(Object.class.getName(), order.get(1));
@@ -231,6 +240,13 @@ public class DAT_Assert_Simple extends TrialDelegate {
 		assertSimple(className, refs);
 	}
 
+	public void assertHasAutoCloseableCache() {
+		String className = AutoCloseable.class.getName();
+		Map<String,I_ClassDependenciesLocal> refsCache = trial.getRefsCache();
+		I_ClassDependencies refs =  refsCache.get(className);
+		assertSimple(className, refs);
+	}
+	
 	public void assertHasSerilizableCache() {
 		String className = Serializable.class.getName();
 		Map<String,I_ClassDependenciesLocal> refsCache = trial.getRefsCache();
@@ -252,6 +268,20 @@ public class DAT_Assert_Simple extends TrialDelegate {
 		assertSimple(className, refs);
 	}
 	
+	public void assertHasAppendableCache() {
+		String className = Appendable.class.getName();
+		Map<String,I_ClassDependenciesLocal> refsCache = trial.getRefsCache();
+		I_ClassDependencies refs =  refsCache.get(className);
+		assertSimple(className, refs);
+	}
+	
+	public void assertHasFlushableCache() {
+		String className = Flushable.class.getName();
+		Map<String,I_ClassDependenciesLocal> refsCache = trial.getRefsCache();
+		I_ClassDependencies refs =  refsCache.get(className);
+		assertSimple(className, refs);
+	}
+	
 	private void assertSimple(String className,
 			I_ClassDependencies refs) {
 		assertNotNull(refs);
@@ -260,6 +290,71 @@ public class DAT_Assert_Simple extends TrialDelegate {
 		
 		Set<String> refsRefs = refs.getDependencyNames();
 		assertEquals(0, refsRefs.size());
+	}
+	
+	public void assertHasCloseableCache() {
+		String className = Closeable.class.getName();
+		Map<String,I_ClassDependenciesLocal> refsCache = trial.getRefsCache();
+		I_ClassDependencies refs =  refsCache.get(className);
+		assertNotNull(refs);
+		assertEquals(className, refs.getName());
+		assertFalse(refs.hasCircularDependencies());
+		
+		Set<String> refsRefs = refs.getDependencyNames();
+		assertContains(refsRefs, AutoCloseable.class.getName());
+		assertEquals(1, refsRefs.size());
+	}
+	
+	public void assertHasOutputStreamCache() {
+		String className = OutputStream.class.getName();
+		Map<String,I_ClassDependenciesLocal> refsCache = trial.getRefsCache();
+		I_ClassDependencies refs =  refsCache.get(className);
+		assertNotNull(refs);
+		assertEquals(className, refs.getName());
+		assertFalse(refs.hasCircularDependencies());
+		
+		Set<String> refsRefs = refs.getDependencyNames();
+		assertContains(refsRefs, AutoCloseable.class.getName());
+		assertContains(refsRefs, Closeable.class.getName());
+		assertContains(refsRefs, Flushable.class.getName());
+		assertContains(refsRefs, Object.class.getName());
+		assertEquals(4, refsRefs.size());
+	}
+	
+	public void assertHasFilterOutputStreamCache() {
+		String className = FilterOutputStream.class.getName();
+		Map<String,I_ClassDependenciesLocal> refsCache = trial.getRefsCache();
+		I_ClassDependencies refs =  refsCache.get(className);
+		assertNotNull(refs);
+		assertEquals(className, refs.getName());
+		assertFalse(refs.hasCircularDependencies());
+		
+		Set<String> refsRefs = refs.getDependencyNames();
+		assertContains(refsRefs, AutoCloseable.class.getName());
+		assertContains(refsRefs, Closeable.class.getName());
+		assertContains(refsRefs, Flushable.class.getName());
+		assertContains(refsRefs, Object.class.getName());
+		assertContains(refsRefs, OutputStream.class.getName());
+		assertEquals(5, refsRefs.size());
+	}
+	
+	public void assertHasPrintStreamCache() {
+		String className = PrintStream.class.getName();
+		Map<String,I_ClassDependenciesLocal> refsCache = trial.getRefsCache();
+		I_ClassDependencies refs =  refsCache.get(className);
+		assertNotNull(refs);
+		assertEquals(className, refs.getName());
+		assertFalse(refs.hasCircularDependencies());
+		
+		Set<String> refsRefs = refs.getDependencyNames();
+		assertContains(refsRefs, Appendable.class.getName());
+		assertContains(refsRefs, AutoCloseable.class.getName());
+		assertContains(refsRefs, Closeable.class.getName());
+		assertContains(refsRefs, FilterOutputStream.class.getName());
+		assertContains(refsRefs, Flushable.class.getName());
+		assertContains(refsRefs, Object.class.getName());
+		assertContains(refsRefs, OutputStream.class.getName());
+		assertEquals(7, refsRefs.size());
 	}
 	
 	public void assertHasThrowableCache() {

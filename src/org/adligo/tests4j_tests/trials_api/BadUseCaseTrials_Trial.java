@@ -1,20 +1,10 @@
 package org.adligo.tests4j_tests.trials_api;
 
-import java.util.List;
-
 import org.adligo.tests4j.models.shared.coverage.I_PackageCoverage;
-import org.adligo.tests4j.models.shared.metadata.I_TestMetadata;
-import org.adligo.tests4j.models.shared.metadata.I_TrialMetadata;
-import org.adligo.tests4j.models.shared.metadata.I_TrialRunMetadata;
 import org.adligo.tests4j.models.shared.results.I_ApiTrialResult;
-import org.adligo.tests4j.models.shared.results.I_TrialFailure;
-import org.adligo.tests4j.models.shared.results.I_TrialResult;
-import org.adligo.tests4j.models.shared.trials.ApiTrial;
-import org.adligo.tests4j.models.shared.trials.IgnoreTest;
 import org.adligo.tests4j.models.shared.trials.PackageScope;
 import org.adligo.tests4j.models.shared.trials.Test;
 import org.adligo.tests4j_tests.base_trials.ApiCountingTrial;
-import org.adligo.tests4j_tests.trials_api.bad_mock_source_file_trials.NoSourceFileScopeAnnotationTrial;
 import org.adligo.tests4j_tests.trials_api.bad_mock_use_case_trials.AbstractTestTrial;
 import org.adligo.tests4j_tests.trials_api.bad_mock_use_case_trials.AfterTrialHasParamsTrial;
 import org.adligo.tests4j_tests.trials_api.bad_mock_use_case_trials.AfterTrialNotPublicTrial;
@@ -23,7 +13,6 @@ import org.adligo.tests4j_tests.trials_api.bad_mock_use_case_trials.BadConstruct
 import org.adligo.tests4j_tests.trials_api.bad_mock_use_case_trials.BeforeTrialHasParamsTrial;
 import org.adligo.tests4j_tests.trials_api.bad_mock_use_case_trials.BeforeTrialNotPublicTrial;
 import org.adligo.tests4j_tests.trials_api.bad_mock_use_case_trials.BeforeTrialNotStaticTrial;
-import org.adligo.tests4j_tests.trials_api.bad_mock_use_case_trials.CreateThreadInBeforeTests;
 import org.adligo.tests4j_tests.trials_api.bad_mock_use_case_trials.MultipleAfterTrialTrial;
 import org.adligo.tests4j_tests.trials_api.bad_mock_use_case_trials.MultipleBeforeTrialTrial;
 import org.adligo.tests4j_tests.trials_api.bad_mock_use_case_trials.NoTestsTrial;
@@ -34,7 +23,6 @@ import org.adligo.tests4j_tests.trials_api.bad_mock_use_case_trials.TestWithPara
 import org.adligo.tests4j_tests.trials_api.bad_mock_use_case_trials.UseCaseAnnotationNoNownTrial;
 import org.adligo.tests4j_tests.trials_api.bad_mock_use_case_trials.UseCaseAnnotationNoSystemTrial;
 import org.adligo.tests4j_tests.trials_api.bad_mock_use_case_trials.UseCaseAnnotationNoVerbTrial;
-import org.adligo.tests4j_tests.trials_api.common.ExpectedFailureRunner;
 
 @PackageScope (packageName = "org.adligo.tests4j")
 public class BadUseCaseTrials_Trial extends ApiCountingTrial {
@@ -131,11 +119,10 @@ public class BadUseCaseTrials_Trial extends ApiCountingTrial {
 
 	@Override
 	public void afterTrialTests(I_ApiTrialResult p) {
-		assertCounts(p);
+		super.afterTrialTests(p);
 		if (p.hasRecordedCoverage()) {
 			I_PackageCoverage coverage = p.getPackageCoverage();
-			//TODO this is not feeding correclty yet
-			assertGreaterThanOrEquals(0.0, coverage.getPercentageCoveredDouble());
+			assertGreaterThanOrEquals(10.0, coverage.getPercentageCoveredDouble());
 		}
 	}
 	

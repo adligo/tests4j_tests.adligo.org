@@ -1,26 +1,17 @@
 package org.adligo.tests4j_tests.jacoco.plugin.discovery.delegates;
 
-import java.io.Closeable;
-import java.io.FilterOutputStream;
-import java.io.Flushable;
-import java.io.OutputStream;
 import java.io.PrintStream;
 import java.io.Serializable;
-import java.lang.reflect.AnnotatedElement;
-import java.lang.reflect.GenericDeclaration;
-import java.lang.reflect.Type;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.adligo.tests4j.models.shared.common.I_System;
 import org.adligo.tests4j.models.shared.dependency.ClassAliasLocal;
-import org.adligo.tests4j.models.shared.dependency.I_ClassDependencies;
 import org.adligo.tests4j.models.shared.dependency.I_ClassDependenciesLocal;
 import org.adligo.tests4j.models.shared.trials.TrialDelegate;
 import org.adligo.tests4j.run.helpers.I_CachedClassBytesClassLoader;
+import org.adligo.tests4j_4jacoco.plugin.common.I_OrderedClassDependencies;
 import org.adligo.tests4j_4jacoco.plugin.discovery.OrderedClassDiscovery;
-import org.adligo.tests4j_tests.run.helpers.class_loading_mocks.MockException;
 import org.adligo.tests4j_tests.run.helpers.class_loading_mocks.MockI_GetAndSetLong;
 import org.adligo.tests4j_tests.run.helpers.class_loading_mocks.MockI_GetAndSetString;
 import org.adligo.tests4j_tests.run.helpers.class_loading_mocks.MockI_GetLong;
@@ -34,14 +25,11 @@ import org.adligo.tests4j_tests.run.helpers.class_loading_mocks.MockWithAbstract
 import org.adligo.tests4j_tests.run.helpers.class_loading_mocks.MockWithAbstractMethodReturn;
 import org.adligo.tests4j_tests.run.helpers.class_loading_mocks.MockWithArray;
 import org.adligo.tests4j_tests.run.helpers.class_loading_mocks.MockWithBidirectionalA;
-import org.adligo.tests4j_tests.run.helpers.class_loading_mocks.MockWithBidirectionalB;
 import org.adligo.tests4j_tests.run.helpers.class_loading_mocks.MockWithEverything;
 import org.adligo.tests4j_tests.run.helpers.class_loading_mocks.MockWithExtensionA;
 import org.adligo.tests4j_tests.run.helpers.class_loading_mocks.MockWithExtensionB;
 import org.adligo.tests4j_tests.run.helpers.class_loading_mocks.MockWithField;
 import org.adligo.tests4j_tests.run.helpers.class_loading_mocks.MockWithImportOnlyInMethod;
-import org.adligo.tests4j_tests.run.helpers.class_loading_mocks.MockWithMethodException;
-import org.adligo.tests4j_tests.run.helpers.class_loading_mocks.MockWithMethodExceptionBlock;
 import org.adligo.tests4j_tests.run.helpers.class_loading_mocks.MockWithMethodParams;
 import org.adligo.tests4j_tests.run.helpers.class_loading_mocks.MockWithMethodReturn;
 import org.adligo.tests4j_tests.run.helpers.class_loading_mocks.MockWithNothing;
@@ -49,8 +37,6 @@ import org.adligo.tests4j_tests.run.helpers.class_loading_mocks.MockWithRefMockW
 import org.adligo.tests4j_tests.run.helpers.class_loading_mocks.MockWithStaticField;
 import org.adligo.tests4j_tests.run.helpers.class_loading_mocks.MockWithStaticInitalizer;
 import org.adligo.tests4j_tests.run.helpers.class_loading_mocks.MockWithString;
-import org.adligo.tests4j_tests.run.helpers.class_loading_mocks.MockWithTriangleA;
-import org.adligo.tests4j_tests.run.helpers.class_loading_mocks.MockWithTriangleB;
 import org.adligo.tests4j_tests.run.helpers.class_loading_mocks.MockWithTriangleC;
 
 public class DAT_Assert_MockRefEverything extends TrialDelegate {
@@ -68,7 +54,8 @@ public class DAT_Assert_MockRefEverything extends TrialDelegate {
 		Class<?> clazz = MockWithRefMockWithEverything.class;
 		String className = clazz.getName();
 		assertFalse(ccbClassLoader.hasCache(className));
-		List<String> order = orderedClassDiscovery.findOrLoad(clazz);
+		I_OrderedClassDependencies ocd = orderedClassDiscovery.findOrLoad(clazz);
+		List<String> order = ocd.getOrder();
 		assertOrder(ccbClassLoader, className, order);
 		
 		assertReferences(orderedClassDiscovery, clazz);

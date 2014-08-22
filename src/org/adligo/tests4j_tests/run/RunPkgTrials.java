@@ -7,6 +7,8 @@ import org.adligo.tests4j.models.shared.system.I_Tests4J_TrialList;
 import org.adligo.tests4j.models.shared.system.Tests4J_Params;
 import org.adligo.tests4j.models.shared.trials.I_Trial;
 import org.adligo.tests4j.run.Tests4J;
+import org.adligo.tests4j.run.discovery.TrialQueueDecisionTree;
+import org.adligo.tests4j.run.helpers.Tests4J_Processor;
 import org.adligo.tests4j_4jacoco.plugin.CoveragePluginFactory;
 
 public class RunPkgTrials implements I_Tests4J_TrialList {
@@ -19,7 +21,8 @@ public class RunPkgTrials implements I_Tests4J_TrialList {
 		
 		//TieredJacocoPlugin covargePlugin =new TieredJacocoPlugin();
 		//params.setCoveragePluginFactoryClass(ScopedJacocoPluginFactory.class);
-		
+		params.setLogState(Tests4J_Processor.class, true);
+		params.setLogState(TrialQueueDecisionTree.class, true);
 		Tests4J.run(params);
 	}
 

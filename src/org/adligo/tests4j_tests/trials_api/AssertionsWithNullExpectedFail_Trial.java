@@ -2,7 +2,6 @@ package org.adligo.tests4j_tests.trials_api;
 
 import org.adligo.tests4j.models.shared.coverage.I_PackageCoverage;
 import org.adligo.tests4j.models.shared.results.I_ApiTrialResult;
-import org.adligo.tests4j.models.shared.trials.IgnoreTest;
 import org.adligo.tests4j.models.shared.trials.PackageScope;
 import org.adligo.tests4j.models.shared.trials.Test;
 import org.adligo.tests4j_tests.base_trials.ApiCountingTrial;
@@ -172,11 +171,10 @@ public class AssertionsWithNullExpectedFail_Trial extends ApiCountingTrial {
 	
 	@Override
 	public void afterTrialTests(I_ApiTrialResult p) {
-		assertCounts(p);
+		super.afterTrialTests(p);
 		if (p.hasRecordedCoverage()) {
 			I_PackageCoverage coverage = p.getPackageCoverage();
-			//TODO this should be something not zero
-			assertGreaterThanOrEquals(0.0, coverage.getPercentageCoveredDouble());
+			assertGreaterThanOrEquals(10.0, coverage.getPercentageCoveredDouble());
 		}
 	}
 

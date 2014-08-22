@@ -2,9 +2,7 @@ package org.adligo.tests4j_tests.run.discovery;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import org.adligo.tests4j.models.shared.metadata.I_MachineMetadata;
 import org.adligo.tests4j.models.shared.metadata.I_SourceInfoMetadata;
@@ -53,14 +51,18 @@ import org.adligo.tests4j.models.shared.trials.UseCaseTrial;
 import org.adligo.tests4j.run.discovery.AfterTrialAuditor;
 import org.adligo.tests4j.run.discovery.BeforeTrialAuditor;
 import org.adligo.tests4j.run.discovery.I_TrialDescription;
+import org.adligo.tests4j.run.discovery.I_TrialStateNameIdKey;
 import org.adligo.tests4j.run.discovery.PackageDiscovery;
 import org.adligo.tests4j.run.discovery.RelevantClassesWithTrialsCalculator;
 import org.adligo.tests4j.run.discovery.TestAuditor;
 import org.adligo.tests4j.run.discovery.TestDescription;
 import org.adligo.tests4j.run.discovery.Tests4J_ParamsReader;
 import org.adligo.tests4j.run.discovery.TrialDescription;
+import org.adligo.tests4j.run.discovery.TrialDescriptionProcessor;
+import org.adligo.tests4j.run.discovery.TrialQueueDecisionTree;
+import org.adligo.tests4j.run.discovery.TrialState;
+import org.adligo.tests4j.run.discovery.TrialStateNameIdKey;
 import org.adligo.tests4j.run.discovery.TrialTypeFinder;
-import org.adligo.tests4j.run.helpers.I_CachedClassBytesClassLoader;
 import org.adligo.tests4j_tests.base_trials.SourceFileCountingTrial;
 import org.adligo.tests4j_tests.run.discovery.package_discovery_inner_mocks.TwoNestedRunnables;
 
@@ -72,21 +74,30 @@ public class PackageDiscoveryTrial extends SourceFileCountingTrial {
 		PackageDiscovery cd = new PackageDiscovery("org.adligo.tests4j.run.discovery");
 		List<String> clazzNames = cd.getClassNames();
 		assertNotNull(clazzNames);
-		assertEquals(10, clazzNames.size());
+		assertEquals(15, clazzNames.size());
 		assertContains(clazzNames, AfterTrialAuditor.class.getName());
 		assertContains(clazzNames, BeforeTrialAuditor.class.getName());
 		
 		assertContains(clazzNames, I_TrialDescription.class.getName());
+		assertContains(clazzNames, I_TrialStateNameIdKey.class.getName());
 		
 		assertContains(clazzNames, PackageDiscovery.class.getName());
 
 		assertContains(clazzNames, RelevantClassesWithTrialsCalculator.class.getName());
 		
 		assertContains(clazzNames, TestAuditor.class.getName());
-		assertContains(clazzNames, Tests4J_ParamsReader.class.getName());
 		assertContains(clazzNames, TestDescription.class.getName());
 		
+		assertContains(clazzNames, Tests4J_ParamsReader.class.getName());
+		
+		
 		assertContains(clazzNames, TrialDescription.class.getName());
+		assertContains(clazzNames, TrialDescriptionProcessor.class.getName());
+		
+		assertContains(clazzNames, TrialQueueDecisionTree.class.getName());
+		assertContains(clazzNames, TrialState.class.getName());
+		assertContains(clazzNames, TrialStateNameIdKey.class.getName());
+		
 		assertContains(clazzNames, TrialTypeFinder.class.getName());
 		
 		List<PackageDiscovery>  subs = cd.getSubPackages();
@@ -219,11 +230,11 @@ public class PackageDiscoveryTrial extends SourceFileCountingTrial {
 
 	@Override
 	public int getAsserts() {
-		return 72;
+		return 77;
 	}
 
 	@Override
 	public int getUniqueAsserts() {
-		return 72;
+		return 77;
 	}
 }

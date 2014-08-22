@@ -3,6 +3,7 @@ package org.adligo.tests4j_tests.models.shared.common;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.adligo.tests4j.models.shared.system.I_Tests4J_Controls;
 import org.adligo.tests4j.models.shared.system.I_Tests4J_TrialList;
 import org.adligo.tests4j.models.shared.system.Tests4J_Params;
 import org.adligo.tests4j.models.shared.trials.I_Trial;
@@ -25,10 +26,11 @@ public class RunPkgTrials implements I_Tests4J_TrialList {
 		//params.setLogState(MultiProbeDataStore.class, true);
 		//params.setLogState(MultiProbesMap.class, true);
 		//params.setLogState(Tests4J_TrialsRunable.class, true);
-		//params.setLogState(Tests4J_Processor.class, true);
+		params.setLogState(Tests4J_Processor.class, true);
 		
 		params.setCoveragePluginFactoryClass(CoveragePluginFactory.class);
-		Tests4J.run(params);
+		I_Tests4J_Controls controls =  Tests4J.run(params);
+		//controls.waitForResults();
 	}
 
 	@Override

@@ -1,5 +1,6 @@
 package org.adligo.tests4j_tests.trials_api.common;
 
+import java.io.PrintStream;
 import java.util.List;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.atomic.AtomicLong;
@@ -61,6 +62,12 @@ public class SystemRunnerMock implements I_System {
 	@Override
 	public String getCurrentThreadName() {
 		return "SystemRunnerMock_" + DefaultSystem.DEFAULT_THREAD_NAME;
+	}
+
+	@Override
+	public PrintStream getOut() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

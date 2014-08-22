@@ -7,6 +7,7 @@ import org.adligo.tests4j.models.shared.system.I_Tests4J_TrialList;
 import org.adligo.tests4j.models.shared.system.Tests4J_Params;
 import org.adligo.tests4j.models.shared.trials.I_Trial;
 import org.adligo.tests4j.run.Tests4J;
+import org.adligo.tests4j_4jacoco.plugin.CoveragePluginFactory;
 import org.adligo.tests4j_4jacoco.plugin.discovery.OrderedClassDiscovery;
 import org.adligo.tests4j_4jacoco.plugin.instrumentation.ClassInstrumenter;
 
@@ -20,7 +21,8 @@ public class RunPkgTrials implements I_Tests4J_TrialList {
 		//params.setLogState(ReferenceTrackingMethodVisitor.class, true);
 		//params.setLogState(ClassDependenciesDiscovery.class, true);
 		//TieredJacocoPlugin covargePlugin =new TieredJacocoPlugin();
-		//params.setCoveragePluginFactoryClass(ScopedJacocoPluginFactory.class);
+		params.setCoveragePluginFactoryClass(CoveragePluginFactory.class);
+		
 		params.setLogState(OrderedClassDiscovery.class, true);
 		params.setLogState(ClassInstrumenter.class, true);
 		/*

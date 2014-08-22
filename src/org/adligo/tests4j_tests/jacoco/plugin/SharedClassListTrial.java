@@ -53,12 +53,12 @@ public class SharedClassListTrial extends SourceFileCountingTrial {
 
 	@Override
 	public int getAsserts() {
-		return 143;
+		return 145;
 	}
 
 	@Override
 	public int getUniqueAsserts() {
-		return 143;
+		return 145;
 	}
 
 }

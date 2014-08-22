@@ -1,7 +1,5 @@
 package org.adligo.tests4j_tests.jacoco.api_trials;
 
-import org.adligo.tests4j.models.shared.coverage.I_PackageCoverage;
-import org.adligo.tests4j.models.shared.results.I_ApiTrialResult;
 import org.adligo.tests4j.models.shared.trials.BeforeTrial;
 import org.adligo.tests4j.models.shared.trials.IgnoreTest;
 import org.adligo.tests4j.models.shared.trials.IgnoreTrial;
@@ -259,17 +257,6 @@ public class MultiRecordingTrial extends ApiCountingTrial {
 		assertEquals(new CoverageUnits(88), sfCover.getCoveredCoverageUnits());
 		assertEquals(new BigDecimal("99"), sfCover.getPercentageCovered());
 		*/
-	}
-	
-	@Override
-	public void afterTrialTests(I_ApiTrialResult p) {
-		assertCounts(p);
-		
-		if (p.hasRecordedCoverage()) {
-			I_PackageCoverage coverage = p.getPackageCoverage();
-			
-			assertGreaterThanOrEquals(0.0, coverage.getPercentageCoveredDouble());
-		}
 	}
 	
 

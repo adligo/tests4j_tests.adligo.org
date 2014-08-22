@@ -1,7 +1,5 @@
 package org.adligo.tests4j_tests;
 
-import java.io.File;
-import java.io.FileOutputStream;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
@@ -32,13 +30,13 @@ import org.adligo.tests4j_tests.base_trials.I_CountingTrial;
 public class RunAllTrials implements I_Tests4J_Listener {
 	static long start = System.currentTimeMillis();
 	static I_Tests4J_Log logger = new DefaultLog();
-	private static volatile List<String> trialsNotCompleted = new CopyOnWriteArrayList<String>();
-	private static ExecutorService trialsNotCompletedService = Executors.newSingleThreadExecutor();
+	//private static volatile List<String> trialsNotCompleted = new CopyOnWriteArrayList<String>();
+	//private static ExecutorService trialsNotCompletedService = Executors.newSingleThreadExecutor();
 	
 	
 	public static void main(String [] args) {
 		try {
-			//Tests4J_Params params = getTests(SimpleJacocoPluginFactory.class);
+		//Tests4J_Params params = getTests(SimpleJacocoPluginFactory.class);
 			
 			Tests4J_Params params = getTests();
 			params.setCoveragePluginFactoryClass(CoveragePluginFactory.class);
@@ -52,7 +50,7 @@ public class RunAllTrials implements I_Tests4J_Listener {
 			params.addAdditionalReportOutputStreams(biglog);
 			*/
 			//params.setRecommendedSetupThreadCount(1);
-			params.setRecommendedTrialThreadCount(1);
+			//params.setRecommendedTrialThreadCount(1);
 			
 			params.setLogState(TrialDisplay.class, false);
 			params.setLogState(TestDisplay.class, false);
@@ -62,6 +60,8 @@ public class RunAllTrials implements I_Tests4J_Listener {
 			
 			params.setLogState(TrialsProcessDisplay.class, false);
 			params.setLogState(TrialsProgressDisplay.class, true);
+			//params.setLogState(Tests4J_Processor.class, true);
+			//params.setLogState(TrialQueueDecisionTree.class, true);
 			//params.setLogState(MultiProbesMap.class, true);
 			
 			//params.setLogState(Tests4J_NotificationManager.class, true);
@@ -76,35 +76,7 @@ public class RunAllTrials implements I_Tests4J_Listener {
 			//params.setCoveragePlugin(new TieredJacocoPlugin());
 			//
 			 Tests4J.run(params, new RunAllTrials());
-			//I_Tests4J_Controls controls = 
-			 /*
-			try {
-				Thread.sleep(100);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			*/
-			//controls.cancel();
 			
-			//tsh.logAllThreadStates();
-			trialsNotCompletedService.submit(new Runnable() {
-				
-				@Override
-				public void run() {
-					while (true) {
-						if (trialsNotCompleted.size() >= 1) {
-							logger.log("The following trials have started but not completed");
-							logger.log(trialsNotCompleted.toString());
-						}
-						try {
-							Thread.sleep(1000);
-						} catch (InterruptedException x) {
-							
-						}
-					}
-				}
-			});
 		} catch (Throwable x) {
 			x.printStackTrace();
 		}
@@ -141,7 +113,7 @@ public class RunAllTrials implements I_Tests4J_Listener {
 		toRet.addTrials(new org.adligo.tests4j_tests.jacoco.plugin.RunPkgTrials());
 		
 		toRet.addTrials(new org.adligo.tests4j_tests.run.RunPkgTrials());
-		//toRet.addTrials(new org.adligo.tests4j_tests.trials_api.RunPkgTrials());
+		toRet.addTrials(new org.adligo.tests4j_tests.trials_api.RunPkgTrials());
 		
 		return toRet;
 	}
@@ -189,7 +161,6 @@ public class RunAllTrials implements I_Tests4J_Listener {
 
 	@Override
 	public void onStartingTrial(String trialName) {
-		trialsNotCompleted.add(trialName);
 	}
 
 	@Override
@@ -204,7 +175,6 @@ public class RunAllTrials implements I_Tests4J_Listener {
 
 	@Override
 	public synchronized void onTrialCompleted(I_TrialResult result) {
-		trialsNotCompleted.remove(result.getName());
 	}
 
 	@Override
