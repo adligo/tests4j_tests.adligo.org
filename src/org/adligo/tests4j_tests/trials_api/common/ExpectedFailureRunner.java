@@ -1,8 +1,9 @@
 package org.adligo.tests4j_tests.trials_api.common;
 
+import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 import org.adligo.tests4j.models.shared.metadata.I_TrialRunMetadata;
@@ -24,10 +25,10 @@ public class ExpectedFailureRunner implements I_Tests4J_Listener {
 	private I_TrialRunMetadata metadata;
 	
 	private int size = 0;
-	private final ArrayBlockingQueue<List<I_TrialResult>> block = new ArrayBlockingQueue<List<I_TrialResult>>(1);
 	private final CopyOnWriteArrayList<I_TrialResult> results = new CopyOnWriteArrayList<I_TrialResult>();
-	private final ArrayBlockingQueue<I_TrialRunMetadata> metaBlock = new ArrayBlockingQueue<>(1);
 	private SystemRunnerMock mockSystem = new SystemRunnerMock();
+	
+	public ExpectedFailureRunner() {}
 	
 	public void run(Class<? extends I_Trial> trial) {
 		List<Class<? extends I_Trial>> list = new ArrayList<Class<? extends I_Trial>>();
@@ -43,16 +44,12 @@ public class ExpectedFailureRunner implements I_Tests4J_Listener {
 		Tests4JRunnerMock mock = new Tests4JRunnerMock();
 		mock.setSystem(mockSystem);
 		
-		I_Tests4J_Controls controlls = mock.instanceRun(params, this);
+		final I_Tests4J_Controls controlls = mock.instanceRun(params, this);
 		if (!controlls.isRunning()) {
 			throw new RuntimeException("The trial run didn't start.");
 		}
-		try {
-			metadata = metaBlock.take();
-			block.take();
-		} catch (InterruptedException x) {
-			throw new RuntimeException(x);
-		}
+		controlls.waitForResults();
+		
 	}
 
 
@@ -69,17 +66,13 @@ public class ExpectedFailureRunner implements I_Tests4J_Listener {
 
 	@Override
 	public void onRunCompleted(I_TrialRunResult result) {
-		try {
-			block.put(results);
-		} catch (InterruptedException x) {
-			throw new RuntimeException(x);
-		}
+		
 	}
 
 
 	@Override
 	public synchronized void onMetadataCalculated(I_TrialRunMetadata p) {
-		metaBlock.add(p);
+		metadata = p;
 	}
 
 

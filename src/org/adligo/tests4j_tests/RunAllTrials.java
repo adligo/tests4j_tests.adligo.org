@@ -6,12 +6,14 @@ import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+import org.adligo.tests4j.models.shared.common.Tests4J_System;
 import org.adligo.tests4j.models.shared.metadata.I_TrialRunMetadata;
 import org.adligo.tests4j.models.shared.results.I_TrialResult;
 import org.adligo.tests4j.models.shared.results.I_TrialRunResult;
 import org.adligo.tests4j.models.shared.system.I_Tests4J_CoveragePluginParams;
 import org.adligo.tests4j.models.shared.system.I_Tests4J_Listener;
 import org.adligo.tests4j.models.shared.system.I_Tests4J_ProcessInfo;
+import org.adligo.tests4j.models.shared.system.Tests4J_DefaultProgressMonitor;
 import org.adligo.tests4j.models.shared.system.Tests4J_Params;
 import org.adligo.tests4j.models.shared.trials.I_Trial;
 import org.adligo.tests4j.run.Tests4J;
@@ -40,6 +42,9 @@ public class RunAllTrials implements I_Tests4J_Listener {
 			
 			Tests4J_Params params = getTests();
 			params.setCoveragePluginFactoryClass(CoveragePluginFactory.class);
+			Tests4J_DefaultProgressMonitor dpm = new Tests4J_DefaultProgressMonitor(Tests4J_System.SYSTEM);
+			dpm.setSleepTime(500);
+			params.setProgressMonitor(dpm);
 			setupCounts(params);
 			/*
 			File file = new File("biglog.log");

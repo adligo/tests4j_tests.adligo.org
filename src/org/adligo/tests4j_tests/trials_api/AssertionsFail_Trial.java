@@ -49,7 +49,7 @@ import org.adligo.tests4j_tests.trials_api.assert_fails_trials.AssertTrueFailsTr
 import org.adligo.tests4j_tests.trials_api.assert_fails_trials.AssertUniformFailsTrialRunner;
 import org.adligo.tests4j_tests.trials_api.assert_fails_trials.AssertUniformWithMessageFailsTrialRunner;
 
-@PackageScope (packageName = "org.adligo.tests4j.run")
+@PackageScope (packageName = "org.adligo.tests4j")
 @AdditionalInstrumentation (javaPackages="org.adligo.tests4j_tests.trials_api.assert_fails_trials")
 public class AssertionsFail_Trial extends ApiCountingTrial {
 

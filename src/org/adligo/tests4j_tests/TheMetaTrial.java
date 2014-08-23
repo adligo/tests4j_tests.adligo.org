@@ -29,7 +29,7 @@ public class TheMetaTrial  extends AbstractTrial implements I_MetaTrial {
 	public void afterMetadataCalculated(I_TrialRunMetadata metadata) throws Exception {
 		calculator = new RelevantClassesWithTrialsCalculator(metadata);
 		
-		assertGreaterThanOrEquals(30.2, calculator.getPct());
+		assertGreaterThanOrEquals(30.0, calculator.getPct());
 		//this assert is also for the child-packages;
 		assertGreaterThanOrEquals(100.0, calculator.getPct("org.adligo.tests4j.models.shared.asserts"));
 		assertGreaterThanOrEquals(100.0, calculator.getPct("org.adligo.tests4j.models.shared.asserts.common"));
@@ -77,12 +77,12 @@ public class TheMetaTrial  extends AbstractTrial implements I_MetaTrial {
 		// does include afterMetadataCalculated(I_TrialRunMetadata metadata)
 		// - 4 ignored tests in
 		// MultiRecordingTrial
-		assertGreaterThanOrEquals(514, results.getTestsPassed());
+		assertGreaterThanOrEquals(554, results.getTestsPassed());
 		
 		//does not include assertions from this class yet
 		//I think the single threaded count is off somewhere
-		assertGreaterThanOrEquals(3700,results.getAsserts());
-		assertGreaterThanOrEquals(2600,results.getUniqueAsserts());
+		assertGreaterThanOrEquals(27000,results.getAsserts());
+		assertGreaterThanOrEquals(8600,results.getUniqueAsserts());
 	}
 
 

@@ -10,7 +10,7 @@ import org.adligo.tests4j.models.shared.trials.I_Trial;
 import org.adligo.tests4j.run.Tests4J;
 import org.adligo.tests4j.run.helpers.Tests4J_Processor;
 import org.adligo.tests4j.run.helpers.Tests4J_ThreadFactory;
-import org.adligo.tests4j.run.helpers.Tests4J_TrialsRunable;
+import org.adligo.tests4j.run.helpers.Tests4J_TrialsRunnable;
 import org.adligo.tests4j_4jacoco.plugin.CoveragePluginFactory;
 import org.adligo.tests4j_4jacoco.plugin.data.multi.MultiProbeDataStore;
 import org.adligo.tests4j_4jacoco.plugin.data.multi.MultiProbesMap;

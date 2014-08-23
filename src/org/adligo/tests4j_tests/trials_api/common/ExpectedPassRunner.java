@@ -21,11 +21,12 @@ public class ExpectedPassRunner implements I_Tests4J_Listener {
 	SummaryReporter silentReporter = new SummaryReporter();
 	
 	private int size = 0;
-	private final ArrayBlockingQueue<List<I_TrialResult>> block = new ArrayBlockingQueue<List<I_TrialResult>>(1);
 	private final CopyOnWriteArrayList<I_TrialResult> results = new CopyOnWriteArrayList<I_TrialResult>();
-	private final ArrayBlockingQueue<I_TrialRunMetadata> metaBlock = new ArrayBlockingQueue<>(1);
 	private SystemRunnerMock mockSystem = new SystemRunnerMock();
 	
+	public ExpectedPassRunner() {
+		
+	}
 	
 	public void run(Class<? extends I_Trial> trial) {
 		List<Class<? extends I_Trial>> trials = new ArrayList<>();
@@ -48,12 +49,7 @@ public class ExpectedPassRunner implements I_Tests4J_Listener {
 		if (!controlls.isRunning()) {
 			throw new RuntimeException("The trial run didn't start.");
 		}
-		try {
-			metadata = metaBlock.take();
-			block.take();
-		} catch (InterruptedException x) {
-			throw new RuntimeException(x);
-		}
+		controlls.waitForResults();
 	}
 
 
@@ -72,17 +68,13 @@ public class ExpectedPassRunner implements I_Tests4J_Listener {
 
 	@Override
 	public void onRunCompleted(I_TrialRunResult result) {
-		try {
-			block.put(results);	
-		} catch (InterruptedException x) {
-			throw new RuntimeException(x);
-		}
+		
 	}
 
 
 	@Override
 	public synchronized void onMetadataCalculated(I_TrialRunMetadata p) {
-		metaBlock.add(p);
+		metadata = p;
 	}
 
 
