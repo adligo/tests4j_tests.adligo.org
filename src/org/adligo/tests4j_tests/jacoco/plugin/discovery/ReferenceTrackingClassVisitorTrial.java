@@ -4,7 +4,7 @@ import java.io.InputStream;
 import java.util.HashSet;
 import java.util.Set;
 
-import org.adligo.tests4j.models.shared.common.ClassMethods;
+import org.adligo.tests4j.models.shared.common.ClassRoutines;
 import org.adligo.tests4j.models.shared.trials.SourceFileScope;
 import org.adligo.tests4j.models.shared.trials.Test;
 import org.adligo.tests4j_4jacoco.plugin.discovery.ReferenceTrackingClassVisitor;
@@ -94,7 +94,7 @@ public class ReferenceTrackingClassVisitorTrial extends SourceFileCountingTrial 
 		Class<?> clazz = MockWithNothing.class;
 		String className = clazz.getName();
 		InputStream in= ReferenceTrackingClassVisitorTrial.class.getResourceAsStream(
-				ClassMethods.toResource(className));
+				ClassRoutines.toResource(className));
 		ClassReader classReader=new ClassReader(in);
 		
 		classReader.accept(rtcv, 0);
@@ -113,7 +113,7 @@ public class ReferenceTrackingClassVisitorTrial extends SourceFileCountingTrial 
 		String className = clazz.getName();
 		
 		InputStream in= ReferenceTrackingClassVisitorTrial.class.getResourceAsStream(
-				ClassMethods.toResource(className));
+				ClassRoutines.toResource(className));
 		ClassReader classReader=new ClassReader(in);
 		classReader.accept(rtcv, 0);
 		
@@ -132,7 +132,7 @@ public class ReferenceTrackingClassVisitorTrial extends SourceFileCountingTrial 
 		String className = clazz.getName();
 		
 		InputStream in= ReferenceTrackingClassVisitorTrial.class.getResourceAsStream(
-				ClassMethods.toResource(className));
+				ClassRoutines.toResource(className));
 		ClassReader classReader=new ClassReader(in);
 		classReader.accept(rtcv, 0);
 		
@@ -151,7 +151,7 @@ public class ReferenceTrackingClassVisitorTrial extends SourceFileCountingTrial 
 		String className = clazz.getName();
 		
 		InputStream in= ReferenceTrackingClassVisitorTrial.class.getResourceAsStream(
-				ClassMethods.toResource(className));
+				ClassRoutines.toResource(className));
 		ClassReader classReader=new ClassReader(in);
 		classReader.accept(rtcv, 0);
 		
@@ -169,7 +169,7 @@ public class ReferenceTrackingClassVisitorTrial extends SourceFileCountingTrial 
 		String className = clazz.getName();
 		
 		InputStream in= ReferenceTrackingClassVisitorTrial.class.getResourceAsStream(
-				ClassMethods.toResource(className));
+				ClassRoutines.toResource(className));
 		ClassReader classReader=new ClassReader(in);
 		classReader.accept(rtcv, 0);
 		
@@ -190,7 +190,7 @@ public class ReferenceTrackingClassVisitorTrial extends SourceFileCountingTrial 
 		String className = clazz.getName();
 		
 		InputStream in= ReferenceTrackingClassVisitorTrial.class.getResourceAsStream(
-				ClassMethods.toResource(className));
+				ClassRoutines.toResource(className));
 		ClassReader classReader=new ClassReader(in);
 		classReader.accept(rtcv, 0);
 		
@@ -210,7 +210,7 @@ public class ReferenceTrackingClassVisitorTrial extends SourceFileCountingTrial 
 		String className = clazz.getName();
 		
 		InputStream in= ReferenceTrackingClassVisitorTrial.class.getResourceAsStream(
-				ClassMethods.toResource(className));
+				ClassRoutines.toResource(className));
 		ClassReader classReader=new ClassReader(in);
 		classReader.accept(rtcv, 0);
 		
@@ -232,7 +232,7 @@ public class ReferenceTrackingClassVisitorTrial extends SourceFileCountingTrial 
 		String className = clazz.getName();
 		
 		InputStream in= ReferenceTrackingClassVisitorTrial.class.getResourceAsStream(
-				ClassMethods.toResource(className));
+				ClassRoutines.toResource(className));
 		ClassReader classReader=new ClassReader(in);
 		
 		classReader.accept(rtcv, 0);
@@ -252,7 +252,7 @@ public class ReferenceTrackingClassVisitorTrial extends SourceFileCountingTrial 
 		String className = clazz.getName();
 		
 		InputStream in= ReferenceTrackingClassVisitorTrial.class.getResourceAsStream(
-				ClassMethods.toResource(className));
+				ClassRoutines.toResource(className));
 		ClassReader classReader=new ClassReader(in);
 		classReader.accept(rtcv, 0);
 		
@@ -272,7 +272,7 @@ public class ReferenceTrackingClassVisitorTrial extends SourceFileCountingTrial 
 		String className = clazz.getName();
 		
 		InputStream in= ReferenceTrackingClassVisitorTrial.class.getResourceAsStream(
-				ClassMethods.toResource(className));
+				ClassRoutines.toResource(className));
 		ClassReader classReader=new ClassReader(in);
 		
 		classReader.accept(rtcv, 0);
@@ -302,7 +302,7 @@ public class ReferenceTrackingClassVisitorTrial extends SourceFileCountingTrial 
 		String className = clazz.getName();
 		
 		InputStream in= ReferenceTrackingClassVisitorTrial.class.getResourceAsStream(
-				ClassMethods.toResource(className));
+				ClassRoutines.toResource(className));
 		ClassReader classReader=new ClassReader(in);
 		
 		classReader.accept(rtcv, 0);
@@ -328,7 +328,7 @@ public class ReferenceTrackingClassVisitorTrial extends SourceFileCountingTrial 
 		String className = clazz.getName();
 		
 		InputStream in= ReferenceTrackingClassVisitorTrial.class.getResourceAsStream(
-				ClassMethods.toResource(className));
+				ClassRoutines.toResource(className));
 		ClassReader classReader=new ClassReader(in);
 		
 		classReader.accept(rtcv, 0);
@@ -354,7 +354,7 @@ public class ReferenceTrackingClassVisitorTrial extends SourceFileCountingTrial 
 		String className = clazz.getName();
 		
 		InputStream in= ReferenceTrackingClassVisitorTrial.class.getResourceAsStream(
-				ClassMethods.toResource(className));
+				ClassRoutines.toResource(className));
 		ClassReader classReader=new ClassReader(in);
 		
 		classReader.accept(rtcv, 0);
@@ -398,7 +398,7 @@ public class ReferenceTrackingClassVisitorTrial extends SourceFileCountingTrial 
 		
 		//it probably wouln't get to 100
 		InputStream in= ReferenceTrackingClassVisitorTrial.class.getResourceAsStream(
-				ClassMethods.toResource(className));
+				ClassRoutines.toResource(className));
 		ClassReader classReader = new ClassReader(in);
 		
 		classReader.accept(rtcv, 0);
@@ -421,7 +421,7 @@ public class ReferenceTrackingClassVisitorTrial extends SourceFileCountingTrial 
 		assertEquals(classNames.size(), expected.size());
 		
 		in= ReferenceTrackingClassVisitorTrial.class.getResourceAsStream(
-				ClassMethods.toResource(MockWithEverything.class.getName() + "$1"));
+				ClassRoutines.toResource(MockWithEverything.class.getName() + "$1"));
 		classReader = new ClassReader(in);
 		rtcv.reset();
 		classReader.accept(rtcv, 0);

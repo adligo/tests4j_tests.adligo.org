@@ -10,7 +10,7 @@ import java.util.Set;
 
 import org.adligo.tests4j.models.shared.asserts.common.ExpectedThrownData;
 import org.adligo.tests4j.models.shared.asserts.common.I_Thrower;
-import org.adligo.tests4j.models.shared.common.ClassMethods;
+import org.adligo.tests4j.models.shared.common.ClassRoutines;
 import org.adligo.tests4j.models.shared.trials.SourceFileScope;
 import org.adligo.tests4j.models.shared.trials.Test;
 import org.adligo.tests4j.run.helpers.CachedClassBytesClassLoader;
@@ -25,7 +25,7 @@ public class CachedClassBytesClassLoaderTrial extends SourceFileCountingTrial {
 	private static final String MOCK_PACKAGE_NAME = MockWithNothing.class.getPackage().getName();
 	
 	private static final String MOCK_WITH_NOTHING_NAME = MockWithNothing.class.getName();
-	private static final String MOCK_WITH_NOTHING_RESOURCE_NAME = ClassMethods.toResource(MOCK_WITH_NOTHING_NAME);
+	private static final String MOCK_WITH_NOTHING_RESOURCE_NAME = ClassRoutines.toResource(MOCK_WITH_NOTHING_NAME);
 
 	
 	@Test

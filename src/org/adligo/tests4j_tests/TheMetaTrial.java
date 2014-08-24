@@ -56,9 +56,9 @@ public class TheMetaTrial  extends AbstractTrial implements I_MetaTrial {
 			sb.append("'");
 			sb.append(System.lineSeparator());
 		}
-		assertEquals(sb.toString(), 111, metadata.getAllTrialsCount());
+		assertEquals(sb.toString(), 114, metadata.getAllTrialsCount());
 		
-		assertEquals(559,  metadata.getAllTestsCount());
+		assertEquals(569,  metadata.getAllTestsCount());
 	}
 
 	@Override
@@ -77,7 +77,7 @@ public class TheMetaTrial  extends AbstractTrial implements I_MetaTrial {
 		// does include afterMetadataCalculated(I_TrialRunMetadata metadata)
 		// - 4 ignored tests in
 		// MultiRecordingTrial
-		assertGreaterThanOrEquals(554, results.getTestsPassed());
+		assertGreaterThanOrEquals(560, results.getTestsPassed());
 		
 		//does not include assertions from this class yet
 		//I think the single threaded count is off somewhere

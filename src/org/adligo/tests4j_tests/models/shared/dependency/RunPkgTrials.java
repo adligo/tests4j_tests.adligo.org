@@ -31,7 +31,9 @@ public class RunPkgTrials implements I_Tests4J_TrialList {
 		List<Class<? extends I_Trial>> trials = new ArrayList<Class<? extends I_Trial>>();
 		
 		trials.add(ClassAliasTrial.class);
-	
+		trials.add(ClassMethodsMutantTrial.class);
+		trials.add(ClassMethodsTrial.class);
+		
 		trials.add(ClassReferencesLocalMutantTrial.class);
 		trials.add(ClassReferencesLocalTrial.class);
 		
@@ -40,6 +42,8 @@ public class RunPkgTrials implements I_Tests4J_TrialList {
 		
 		trials.add(DependencyMutantTrial.class);
 		trials.add(DependencyTrial.class);
+		
+		trials.add(MethodSignatureTrial.class);
 		
 		return trials;
 	}
