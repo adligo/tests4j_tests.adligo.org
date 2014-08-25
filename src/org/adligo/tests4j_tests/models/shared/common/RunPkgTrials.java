@@ -50,7 +50,7 @@ public class RunPkgTrials implements I_Tests4J_TrialList {
 		trials.add(StringRoutinesTrial.class);
 		trials.add(StackTraceBuilderTrial.class);
 		trials.add(Tests4J_SystemTrial.class);
-		trials.add(TrialTypeEnumTrial.class);
+		trials.add(TrialTypeTrial.class);
 		
 		return trials;
 	}

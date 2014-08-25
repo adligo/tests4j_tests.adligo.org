@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.adligo.tests4j.models.shared.dependency.I_ClassParents;
 import org.adligo.tests4j.models.shared.dependency.I_ClassParentsLocal;
-import org.adligo.tests4j.models.shared.xml.I_XML_Builder;
 
 public class ClassParentsLocalNullMock implements I_ClassParentsLocal {
 
@@ -26,11 +25,6 @@ public class ClassParentsLocalNullMock implements I_ClassParentsLocal {
 	@Override
 	public int compareTo(Object o) {
 		return 0;
-	}
-
-	@Override
-	public void toXml(I_XML_Builder builder) {
-		
 	}
 
 	@Override

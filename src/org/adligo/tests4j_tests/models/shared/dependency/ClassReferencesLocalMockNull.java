@@ -5,10 +5,10 @@ import java.util.Set;
 
 import org.adligo.tests4j.models.shared.dependency.I_ClassAlias;
 import org.adligo.tests4j.models.shared.dependency.I_ClassAliasLocal;
+import org.adligo.tests4j.models.shared.dependency.I_ClassDependenciesLocal;
+import org.adligo.tests4j.models.shared.dependency.I_ClassMethods;
 import org.adligo.tests4j.models.shared.dependency.I_ClassParents;
 import org.adligo.tests4j.models.shared.dependency.I_ClassParentsLocal;
-import org.adligo.tests4j.models.shared.dependency.I_ClassDependenciesLocal;
-import org.adligo.tests4j.models.shared.xml.I_XML_Builder;
 
 public class ClassReferencesLocalMockNull implements I_ClassDependenciesLocal {
 
@@ -63,11 +63,6 @@ public class ClassReferencesLocalMockNull implements I_ClassDependenciesLocal {
 	}
 
 	@Override
-	public void toXml(I_XML_Builder builder) {
-		
-	}
-
-	@Override
 	public List<I_ClassParentsLocal> getParentsLocal() {
 		return null;
 	}
@@ -84,6 +79,18 @@ public class ClassReferencesLocalMockNull implements I_ClassDependenciesLocal {
 
 	@Override
 	public Set<I_ClassParentsLocal> getDependenciesLocal() {
+		return null;
+	}
+
+	@Override
+	public boolean hasCalls() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public List<I_ClassMethods> getCalls() {
+		// TODO Auto-generated method stub
 		return null;
 	}
 

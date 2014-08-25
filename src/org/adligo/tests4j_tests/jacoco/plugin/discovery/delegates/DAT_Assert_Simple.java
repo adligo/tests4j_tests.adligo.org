@@ -190,11 +190,14 @@ public class DAT_Assert_Simple extends TrialDelegate {
 		assertEquals(Serializable.class.getName(), order.get(0));
 		assertEquals(Object.class.getName(), order.get(1));
 		
-		assertEquals(Throwable.class.getName(), order.get(2));
-		assertEquals(Exception.class.getName(), order.get(3));
+		assertEquals(Comparable.class.getName(), order.get(2));
+		assertEquals(Number.class.getName(), order.get(3));
+		assertEquals(Throwable.class.getName(), order.get(4));
+		assertEquals(Exception.class.getName(), order.get(5));
 		
-		assertEquals(className, order.get(4));
-		assertEquals(5, order.size());
+		assertEquals(Long.class.getName(), order.get(6));
+		assertEquals(className, order.get(7));
+		assertEquals(8, order.size());
 		
 		assertTrue(ccbClassLoader.hasCache(className));
 		
@@ -204,13 +207,23 @@ public class DAT_Assert_Simple extends TrialDelegate {
 		
 		I_ClassAlias alias = dep.getAlias();
 		assertEquals(Serializable.class.getName(), alias.getName());
-		assertEquals(3, dep.getReferences());
+		assertEquals(5, dep.getReferences());
 
 		dep =  it.next();
 		alias = dep.getAlias();
 		assertEquals(Object.class.getName(), alias.getName());
-		assertEquals(3, dep.getReferences());
+		assertEquals(5, dep.getReferences());
 
+		dep =  it.next();
+		alias = dep.getAlias();
+		assertEquals(Comparable.class.getName(), alias.getName());
+		assertEquals(2, dep.getReferences());
+		
+		dep =  it.next();
+		alias = dep.getAlias();
+		assertEquals(Number.class.getName(), alias.getName());
+		assertEquals(2, dep.getReferences());
+		
 		dep =  it.next();
 		alias = dep.getAlias();
 		assertEquals(Throwable.class.getName(), alias.getName());
@@ -220,17 +233,21 @@ public class DAT_Assert_Simple extends TrialDelegate {
 		alias = dep.getAlias();
 		assertEquals(Exception.class.getName(), alias.getName());
 		assertEquals(1, dep.getReferences());
-		assertEquals(4, deps.size());
+		assertEquals(7, deps.size());
 		
 		I_ClassDependencies cr =  orderedClassDiscovery.getReferences(new ClassAliasLocal(clazz));
 		assertMockExceptionRefs(className, cr);
 		
 		assertHasObjectCache();
+		assertHasCompareableCache();
+		assertHasNumberCache();
+		assertHasLongCache();
+		
 		assertHasThrowableCache();
 		assertHasExceptionCache();
 		assertHasMockExceptionCache();
 		Map<String,I_ClassDependenciesLocal> refsCache = trial.getRefsCache();
-		assertEquals(5, refsCache.size());
+		assertEquals(8, refsCache.size());
 	}
 	
 	public void assertHasObjectCache() {
@@ -455,10 +472,12 @@ public class DAT_Assert_Simple extends TrialDelegate {
 		Set<String> refsRefs = refs.getDependencyNames();
 		assertContains(refsRefs, Serializable.class.getName());
 		assertContains(refsRefs, Object.class.getName());
+		assertContains(refsRefs, Number.class.getName());
+		assertContains(refsRefs, Long.class.getName());
 		assertContains(refsRefs, Throwable.class.getName());
 		assertContains(refsRefs, Exception.class.getName());
 		assertContains(refsRefs, className);
-		assertEquals(5, refsRefs.size());
+		assertEquals(8, refsRefs.size());
 	}
 	
 	public void assertHasAllCache() {

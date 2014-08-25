@@ -399,12 +399,12 @@ public class DiscoveryApiTrial extends ApiCountingTrial implements I_DiscoveryAp
 
 	@Override
 	public int getAsserts() {
-		return 3987;
+		return 4132;
 	}
 
 	@Override
 	public int getUniqueAsserts() {
-		return 1876;
+		return 1943;
 	}
 	
 

@@ -74,7 +74,7 @@ public class ClassReferencesLocalMutantTrial extends SourceFileCountingTrial {
 		assertEquals("ClassDependenciesLocalMutant [name=java.lang.Class, parents=[java.io.Serializable], circularRefs=[java.lang.Object]]"
 				, ccrm.toString());
 		
-		ccrm.addReference(new ClassParentsLocal(Runnable.class));
+		ccrm.addDependency(new ClassParentsLocal(Runnable.class));
 		assertEquals("ClassDependenciesLocalMutant [name=java.lang.Class, parents=[java.io.Serializable], circularRefs=[java.lang.Object],"
 				+ " references=[java.lang.Runnable]]", ccrm.toString());
 	}

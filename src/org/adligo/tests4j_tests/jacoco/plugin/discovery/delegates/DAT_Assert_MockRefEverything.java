@@ -71,8 +71,8 @@ public class DAT_Assert_MockRefEverything extends TrialDelegate {
 		 
 		assertEquals(clazzName, order.get(counter++));
 		
-		assertEquals(58, counter);
-		assertEquals(58, order.size());
+		assertEquals(59, counter);
+		assertEquals(59, order.size());
 		assertTrue(ccbClassLoader.hasCache(clazzName));
 		
 		DAT_Assert_MockWithEverything ed = trial.getEverythingDelegate();
@@ -80,7 +80,7 @@ public class DAT_Assert_MockRefEverything extends TrialDelegate {
 		assertHasMockWithRefMockWithEverythingCache();
 		
 		Map<String,I_ClassDependenciesLocal> refsCache = trial.getRefsCache();
-		assertEquals(58, refsCache.size());
+		assertEquals(59, refsCache.size());
 	}
 	
 	
@@ -156,7 +156,7 @@ public class DAT_Assert_MockRefEverything extends TrialDelegate {
 		assertContains(refs, MockWithEverything.class.getName());
 		assertContains(refs, className);
 		
-		assertEquals(58, refs.size());
+		assertEquals(59, refs.size());
 	}
 	
 	

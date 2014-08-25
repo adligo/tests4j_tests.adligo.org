@@ -21,7 +21,7 @@ public class RunPkgTrials implements I_Tests4J_TrialList {
 		//params.setLogState(ReferenceTrackingMethodVisitor.class, true);
 		//params.setLogState(ClassDependenciesDiscovery.class, true);
 		//TieredJacocoPlugin covargePlugin =new TieredJacocoPlugin();
-		params.setCoveragePluginFactoryClass(CoveragePluginFactory.class);
+		//params.setCoveragePluginFactoryClass(CoveragePluginFactory.class);
 		
 		params.setLogState(OrderedClassDiscovery.class, true);
 		params.setLogState(ClassInstrumenter.class, true);

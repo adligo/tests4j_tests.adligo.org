@@ -36,6 +36,8 @@ public class ReferenceTrackingClassVisitorTrial extends SourceFileCountingTrial 
 	
 	public static final String CLASS = "Ljava/lang/Class;";
 	public static final String OBJ = "Ljava/lang/Object;";
+	public static final String NBR = "Ljava/lang/Number;";
+	public static final String LONG = "Ljava/lang/Long;";
 	public static final String MATH = "Ljava/lang/Math;";
 	public static final String STRING = "Ljava/lang/String;";
 	public static final String STRING_BUILDER = "Ljava/lang/StringBuilder;";

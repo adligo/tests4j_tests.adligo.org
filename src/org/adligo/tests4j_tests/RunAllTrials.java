@@ -26,6 +26,7 @@ import org.adligo.tests4j.shared.report.summary.TrialDisplay;
 import org.adligo.tests4j.shared.report.summary.TrialsProcessDisplay;
 import org.adligo.tests4j.shared.report.summary.TrialsProgressDisplay;
 import org.adligo.tests4j_4jacoco.plugin.CoveragePluginFactory;
+import org.adligo.tests4j_4jacoco.plugin.discovery.ReferenceTrackingClassVisitor;
 import org.adligo.tests4j_tests.base_trials.Counts;
 import org.adligo.tests4j_tests.base_trials.I_CountingTrial;
 
@@ -37,6 +38,7 @@ public class RunAllTrials implements I_Tests4J_Listener {
 	
 	
 	public static void main(String [] args) {
+		
 		try {
 		//Tests4J_Params params = getTests(SimpleJacocoPluginFactory.class);
 			
@@ -54,7 +56,8 @@ public class RunAllTrials implements I_Tests4J_Listener {
 			FileOutputStream biglog = new FileOutputStream(file);
 			params.addAdditionalReportOutputStreams(biglog);
 			*/
-			//params.setRecommendedSetupThreadCount(1);
+			//TODO there is a deadlock issue in setup currently 
+			params.setRecommendedSetupThreadCount(1);
 			//params.setRecommendedTrialThreadCount(1);
 			
 			params.setLogState(TrialDisplay.class, false);
@@ -69,7 +72,7 @@ public class RunAllTrials implements I_Tests4J_Listener {
 			//params.setLogState(TrialQueueDecisionTree.class, true);
 			//params.setLogState(MultiProbesMap.class, true);
 			
-			//params.setLogState(Tests4J_NotificationManager.class, true);
+			//params.setLogState(ReferenceTrackingClassVisitor.class, true);
 			//params.setLogState(ClassReferencesDiscovery.class, true);
 			//params.setLogState(TrialInstrumenter2.class, true);
 			//params.setLogState(ClassInstrumenter.class, true);
