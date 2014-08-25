@@ -1,13 +1,14 @@
 package org.adligo.tests4j_tests.jacoco.plugin.discovery;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.adligo.tests4j.models.shared.system.I_Tests4J_TrialList;
 import org.adligo.tests4j.models.shared.system.Tests4J_Params;
+import org.adligo.tests4j.models.shared.system.Tests4J_Selection;
 import org.adligo.tests4j.models.shared.trials.I_Trial;
 import org.adligo.tests4j.run.Tests4J;
-import org.adligo.tests4j_4jacoco.plugin.CoveragePluginFactory;
 import org.adligo.tests4j_4jacoco.plugin.discovery.OrderedClassDiscovery;
 import org.adligo.tests4j_4jacoco.plugin.instrumentation.ClassInstrumenter;
 
@@ -48,11 +49,12 @@ public class RunPkgTrials implements I_Tests4J_TrialList {
 						"test03_RefToMockWithEverything")));
 						test01_MockWithNothing
 		//test03_RefToMockWithEverything, test02_MockWithEverything
-		
+		*/
+		/*
 		params.setTests(Collections.singleton(
 				new Tests4J_Selection(
-						ReferenceTrackingClassVisitorTrial.class,
-						"test01_MockWithNothing")));
+						DiscoveryApiTrial.class,
+						"test3001_MockWithEverything")));
 		*/
 		//params.setTests(Collections.singleton("testReferenceCounting_80_MockWithEverything"));
 		Tests4J.run(params);

@@ -439,7 +439,7 @@ public class ReferenceTrackingClassVisitorTrial extends SourceFileCountingTrial 
 		left.removeAll(expected);
 		assertEquals(0, left.size());
 		
-		assertEquals(13, classNames.size());
+		assertEquals(12, classNames.size());
 		assertEquals(classNames.size(), expected.size());
 		
 	}
@@ -497,7 +497,6 @@ public class ReferenceTrackingClassVisitorTrial extends SourceFileCountingTrial 
 		
 		expected.add( MW_METHOD_EXCEPTION_BLOCK);
 		expected.add( MW_METHOD_RETURN);
-		expected.add( MW_NOTHING);
 		expected.add(MW_STATIC_FIELD);
 		return expected;
 	}
@@ -509,12 +508,12 @@ public class ReferenceTrackingClassVisitorTrial extends SourceFileCountingTrial 
 
 	@Override
 	public int getAsserts() {
-		return 113;
+		return 112;
 	}
 
 	@Override
 	public int getUniqueAsserts() {
-		return 110;
+		return 109;
 	}
 
 }

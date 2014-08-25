@@ -53,7 +53,7 @@ public class ClassAttributesTrial extends SourceFileCountingTrial {
 		ClassAttributesMutant cmm = new ClassAttributesMutant();
 		cmm.setClassName("className");
 		
-		MethodSignature ms = new MethodSignature("foo", null);
+		MethodSignature ms = new MethodSignature("foo", null, null);
 		cmm.addMethod(ms);
 		
 		ClassAttributes copy = new ClassAttributes(cmm);
@@ -65,7 +65,7 @@ public class ClassAttributesTrial extends SourceFileCountingTrial {
 		assertEquals(1, sigs.size());
 		
 		cmm.setClassName("2");
-		MethodSignature bar = new MethodSignature("bar", null);
+		MethodSignature bar = new MethodSignature("bar", null, null);
 		cmm.addMethod(bar);
 		cmm.addMethod(null);
 		
@@ -87,9 +87,9 @@ public class ClassAttributesTrial extends SourceFileCountingTrial {
 		cmm.setClassName("className");
 		assertEquals("ClassAttributes [className=className]", new ClassAttributes(cmm).toString());
 	
-		cmm.addMethod(new MethodSignature("foo", null));
-		cmm.addMethod(new MethodSignature("bar", null));
-		assertEquals("ClassAttributes [className=className, methods=[foo(), bar()]]", 
+		cmm.addMethod(new MethodSignature("foo", null, null));
+		cmm.addMethod(new MethodSignature("bar", null, null));
+		assertEquals("ClassAttributes [className=className, methods=[void bar(), void foo()]]", 
 				new ClassAttributes(cmm).toString());
 		
 	}

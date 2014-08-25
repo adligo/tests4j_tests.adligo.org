@@ -7,7 +7,7 @@ import org.adligo.tests4j.models.shared.trials.SourceFileScope;
 import org.adligo.tests4j.models.shared.trials.Test;
 import org.adligo.tests4j_tests.base_trials.SourceFileCountingTrial;
 
-@SourceFileScope (sourceClass=MethodSignature.class, minCoverage=87.0)
+@SourceFileScope (sourceClass=MethodSignature.class, minCoverage=85.0)
 public class MethodSignatureTrial extends SourceFileCountingTrial {
 
 	@Test
@@ -27,7 +27,7 @@ public class MethodSignatureTrial extends SourceFileCountingTrial {
 					
 					@Override
 					public void run() {
-						new MethodSignature("", null);
+						new MethodSignature("", null, null);
 					}
 				});
 		assertThrown(new ExpectedThrownData(new IllegalArgumentException(
@@ -36,7 +36,7 @@ public class MethodSignatureTrial extends SourceFileCountingTrial {
 					
 					@Override
 					public void run() {
-						new MethodSignature(null, null);
+						new MethodSignature(null, null, null);
 					}
 				});
 		
@@ -46,7 +46,7 @@ public class MethodSignatureTrial extends SourceFileCountingTrial {
 					
 					@Override
 					public void run() {
-						new MethodSignature("hmm", new String[] {null});
+						new MethodSignature("hmm", new String[] {null}, null);
 					}
 				});
 		assertThrown(new ExpectedThrownData(new IllegalArgumentException(
@@ -55,14 +55,14 @@ public class MethodSignatureTrial extends SourceFileCountingTrial {
 					
 					@Override
 					public void run() {
-						new MethodSignature("hmm", new String[] {""});
+						new MethodSignature("hmm", new String[] {""}, null);
 					}
 				});
 	}
 	
 	@Test
 	public void testCopyConstructorAndGetters() {
-		MethodSignature ms = new MethodSignature("foo", null);
+		MethodSignature ms = new MethodSignature("foo", null, null);
 		assertEquals("foo", ms.getMethodName());
 		assertEquals(0, ms.getParameters());
 		
@@ -71,29 +71,32 @@ public class MethodSignatureTrial extends SourceFileCountingTrial {
 		assertEquals(0, ms2.getParameters());
 		
 		String[] sa = new String[] {"1","2"};
-		MethodSignature msB = new MethodSignature("bar", sa);
+		MethodSignature msB = new MethodSignature("bar", sa, "hey");
 		assertEquals("bar", msB.getMethodName());
 		assertEquals("1", msB.getParameterClassName(0));
 		assertEquals("2", msB.getParameterClassName(1));
 		assertEquals(2, msB.getParameters());
+		assertEquals("hey", msB.getReturnClassName());
 		
 		MethodSignature msB2 = new MethodSignature(msB);
 		assertEquals("bar", msB2.getMethodName());
 		assertEquals("1", msB2.getParameterClassName(0));
 		assertEquals("2", msB2.getParameterClassName(1));
 		assertEquals(2, msB2.getParameters());
+		assertEquals("hey", msB2.getReturnClassName());
 	}
 	
 	@Test
 	public void testEqualsHashCode() {
-		MethodSignature a = new MethodSignature("foo", null);
-		MethodSignature b = new MethodSignature("bar", null);
+		MethodSignature a = new MethodSignature("foo", null, null);
+		MethodSignature b = new MethodSignature("bar", null, null);
 		String[] sa = new String[] {"1","2"};
-		MethodSignature c = new MethodSignature("foo", sa);
-		MethodSignature d = new MethodSignature("foo", null);
+		MethodSignature c = new MethodSignature("foo", sa, null);
+		MethodSignature d = new MethodSignature("foo", null, null);
 		String[] sae = new String[] {"1","3"};
-		MethodSignature e = new MethodSignature("foo", sae);
-		
+		MethodSignature e = new MethodSignature("foo", sae, null);
+		MethodSignature f = new MethodSignature("foo", null, "bar");
+		MethodSignature g = new MethodSignature("foo", sae, "bar");
 		assertEquals(a, a);
 		assertEquals(a.hashCode(), a.hashCode());
 		
@@ -108,16 +111,22 @@ public class MethodSignatureTrial extends SourceFileCountingTrial {
 		
 		assertNotEquals(c, e);
 		assertNotEquals(c.hashCode(), e.hashCode());
+		
+		assertNotEquals(e, f);
+		assertNotEquals(e.hashCode(), f.hashCode());
+		
+		assertNotEquals(e, g);
+		assertNotEquals(e.hashCode(), g.hashCode());
 	}
 	
 	@Test
 	public void testToString() {
 		String[] sa = new String[] {"1","2"};
-		MethodSignature c = new MethodSignature("foo", sa);
-		assertEquals("foo(1, 2)", c.toString());
+		MethodSignature c = new MethodSignature("foo", sa, null);
+		assertEquals("void foo(1, 2)", c.toString());
 		
-		MethodSignature d = new MethodSignature("foo", null);
-		assertEquals("foo()", d.toString());
+		MethodSignature d = new MethodSignature("foo", null, null);
+		assertEquals("void foo()", d.toString());
 	}
 	
 	@Override
@@ -127,12 +136,12 @@ public class MethodSignatureTrial extends SourceFileCountingTrial {
 
 	@Override
 	public int getAsserts() {
-		return 29;
+		return 35;
 	}
 
 	@Override
 	public int getUniqueAsserts() {
-		return 17;
+		return 20;
 	}
 
 }

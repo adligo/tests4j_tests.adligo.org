@@ -83,13 +83,13 @@ public class ClassDependenciesLocalMockNull implements I_ClassDependenciesLocal 
 	}
 
 	@Override
-	public boolean hasCalls() {
+	public boolean hasReferences() {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
-	public List<I_ClassAttributes> getCalls() {
+	public List<I_ClassAttributes> getReferences() {
 		// TODO Auto-generated method stub
 		return null;
 	}

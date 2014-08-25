@@ -4,9 +4,12 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 import org.adligo.tests4j.models.shared.dependency.ClassFilterMutant;
 import org.adligo.tests4j.models.shared.dependency.ClassAttributesMutant;
+import org.adligo.tests4j.models.shared.dependency.FieldSignature;
+import org.adligo.tests4j.models.shared.dependency.I_FieldSignature;
 import org.adligo.tests4j.models.shared.trials.SourceFileScope;
 import org.adligo.tests4j.models.shared.trials.Test;
 import org.adligo.tests4j_4jacoco.plugin.discovery.ReferenceTrackingMethodVisitor;
@@ -64,8 +67,12 @@ public class ReferenceTrackingMethodVisitorTrial extends SourceFileCountingTrial
 		names.clear();
 		rtcv.visitFieldInsn(Opcodes.AALOAD, ReferenceTrackingClassVisitorTrial.MW_NOTHING_BARE, "name", ReferenceTrackingClassVisitorTrial.MW_METHOD_RETURN);
 		assertTrue(names.containsKey(ReferenceTrackingClassVisitorTrial.MW_NOTHING));
-		assertTrue(names.containsKey(ReferenceTrackingClassVisitorTrial.MW_METHOD_RETURN));
-		assertEquals(2, names.size());
+		ClassAttributesMutant cam = names.get(ReferenceTrackingClassVisitorTrial.MW_NOTHING);
+		assertEquals(ReferenceTrackingClassVisitorTrial.MW_NOTHING, cam.getClassName());
+		Set<I_FieldSignature> fields = cam.getFields();
+		assertContains(fields, new FieldSignature("name", ReferenceTrackingClassVisitorTrial.MW_METHOD_RETURN));
+		assertEquals(1, fields.size());
+		assertEquals(1, names.size());
 	
 	
 		names.clear();
@@ -109,39 +116,47 @@ public class ReferenceTrackingMethodVisitorTrial extends SourceFileCountingTrial
 	}
 	
 	@Test
-	public void testCalls() throws Exception {
-		String [] params = ReferenceTrackingMethodVisitor.parseAsmMethodSig("()V");
+	public void testParseAsmMethodSigParams() throws Exception {
+		String [] params = ReferenceTrackingMethodVisitor.parseAsmMethodSigParams("()V");
 		assertNull(params);
 		
-		params = ReferenceTrackingMethodVisitor.parseAsmMethodSig("(Ljava/lang/Byte;)V");
+		params = ReferenceTrackingMethodVisitor.parseAsmMethodSigParams("(Ljava/lang/Byte;)V");
 		assertEquals("Ljava/lang/Byte;", params[0]);
 		assertEquals(1, params.length);
 		
-		params = ReferenceTrackingMethodVisitor.parseAsmMethodSig("(Lorg/adligo/tests4j/run/remote/"
+		params = ReferenceTrackingMethodVisitor.parseAsmMethodSigParams("(Lorg/adligo/tests4j/run/remote/"
 				+ "Tests4J_SocketServerRunner;Lorg/adligo/tests4j/run/remote/RemoteMessageReader;)V");
 		assertEquals("Lorg/adligo/tests4j/run/remote/Tests4J_SocketServerRunner;", params[0]);
 		assertEquals("Lorg/adligo/tests4j/run/remote/RemoteMessageReader;", params[1]);
 		assertEquals(2, params.length);
 		
-		params = ReferenceTrackingMethodVisitor.parseAsmMethodSig("([BLjava/lang/String;)V");
+		params = ReferenceTrackingMethodVisitor.parseAsmMethodSigParams("([BLjava/lang/String;)V");
 		assertEquals("[B", params[0]);
 		assertEquals("Ljava/lang/String;", params[1]);
 		assertEquals(2, params.length);
 	}
 	
+	@Test
+	public void testParseAsmMethodSigReturn() throws Exception {
+		String ret = ReferenceTrackingMethodVisitor.parseAsmMethodSigReturn("()V");
+		assertNull(ret);
+		
+		ret = ReferenceTrackingMethodVisitor.parseAsmMethodSigReturn("()Lorg/adligo/tests4j/run/remote/RemoteMessageReader;");
+		assertEquals("Lorg/adligo/tests4j/run/remote/RemoteMessageReader;", ret);
+	}
 	@Override
 	public int getTests() {
-		return 3;
+		return 4;
 	}
 
 	@Override
 	public int getAsserts() {
-		return 37;
+		return 41;
 	}
 
 	@Override
 	public int getUniqueAsserts() {
-		return 14;
+		return 18;
 	}
 
 }
