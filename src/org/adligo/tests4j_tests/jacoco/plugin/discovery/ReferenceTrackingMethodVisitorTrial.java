@@ -6,7 +6,7 @@ import java.util.HashSet;
 import java.util.Map;
 
 import org.adligo.tests4j.models.shared.dependency.ClassFilterMutant;
-import org.adligo.tests4j.models.shared.dependency.ClassMethodsMutant;
+import org.adligo.tests4j.models.shared.dependency.ClassAttributesMutant;
 import org.adligo.tests4j.models.shared.trials.SourceFileScope;
 import org.adligo.tests4j.models.shared.trials.Test;
 import org.adligo.tests4j_4jacoco.plugin.discovery.ReferenceTrackingMethodVisitor;
@@ -21,7 +21,7 @@ public class ReferenceTrackingMethodVisitorTrial extends SourceFileCountingTrial
 	private static final String REF_TRACK_METHOD = "Lorg/adligo/tests4j_4jacoco/plugin/discovery/ReferenceTrackingMethodVisitor;";
 	private static final String REF_TRACK_METHOD_TRIAL = "Lorg/adligo/tests4j_tests/jacoco/plugin/discovery/ReferenceTrackingMethodVisitorTrial;";
 	ReferenceTrackingMethodVisitor rtcv;
-	Map<String, ClassMethodsMutant> names = new HashMap<String, ClassMethodsMutant>();
+	Map<String, ClassAttributesMutant> names = new HashMap<String, ClassAttributesMutant>();
 	
 	public void beforeTests() {
 		if (rtcv == null) {

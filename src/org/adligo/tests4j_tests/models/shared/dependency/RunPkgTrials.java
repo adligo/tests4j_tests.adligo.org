@@ -31,11 +31,11 @@ public class RunPkgTrials implements I_Tests4J_TrialList {
 		List<Class<? extends I_Trial>> trials = new ArrayList<Class<? extends I_Trial>>();
 		
 		trials.add(ClassAliasTrial.class);
-		trials.add(ClassMethodsMutantTrial.class);
-		trials.add(ClassMethodsTrial.class);
+		trials.add(ClassAttributesMutantTrial.class);
+		trials.add(ClassAttributesTrial.class);
 		
-		trials.add(ClassReferencesLocalMutantTrial.class);
-		trials.add(ClassReferencesLocalTrial.class);
+		trials.add(ClassDependenciesLocalMutantTrial.class);
+		trials.add(ClassDependenciesLocalTrial.class);
 		
 		trials.add(ClassParentsLocalMutantTrial.class);
 		trials.add(ClassParentsLocalTrial.class);

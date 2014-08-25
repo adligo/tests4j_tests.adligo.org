@@ -6,11 +6,11 @@ import java.util.Set;
 import org.adligo.tests4j.models.shared.dependency.I_ClassAlias;
 import org.adligo.tests4j.models.shared.dependency.I_ClassAliasLocal;
 import org.adligo.tests4j.models.shared.dependency.I_ClassDependenciesLocal;
-import org.adligo.tests4j.models.shared.dependency.I_ClassMethods;
+import org.adligo.tests4j.models.shared.dependency.I_ClassAttributes;
 import org.adligo.tests4j.models.shared.dependency.I_ClassParents;
 import org.adligo.tests4j.models.shared.dependency.I_ClassParentsLocal;
 
-public class ClassReferencesLocalMockNull implements I_ClassDependenciesLocal {
+public class ClassDependenciesLocalMockNull implements I_ClassDependenciesLocal {
 
 	@Override
 	public boolean hasCircularDependencies() {
@@ -89,7 +89,7 @@ public class ClassReferencesLocalMockNull implements I_ClassDependenciesLocal {
 	}
 
 	@Override
-	public List<I_ClassMethods> getCalls() {
+	public List<I_ClassAttributes> getCalls() {
 		// TODO Auto-generated method stub
 		return null;
 	}

@@ -37,7 +37,7 @@ public class RunPkgTrials implements I_Tests4J_TrialList {
 	public List<Class<? extends I_Trial>> getTrials() {
 		List<Class<? extends I_Trial>> trials = new ArrayList<Class<? extends I_Trial>>();
 		
-		trials.add(ClassRoutinesTrial.class);
+		trials.add(ClassMethodsTrial.class);
 		trials.add(DefaultSystemTrial.class);
 		trials.add(I_ImmutableTrial.class);
 		trials.add(I_PlatformContainerTrial.class);
@@ -47,7 +47,7 @@ public class RunPkgTrials implements I_Tests4J_TrialList {
 		
 		trials.add(MethodBlockerTrial.class);
 		trials.add(PlatformTrial.class);
-		trials.add(StringRoutinesTrial.class);
+		trials.add(StringMethodsTrial.class);
 		trials.add(StackTraceBuilderTrial.class);
 		trials.add(Tests4J_SystemTrial.class);
 		trials.add(TrialTypeTrial.class);

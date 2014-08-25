@@ -4,16 +4,16 @@ import java.util.Set;
 
 import org.adligo.tests4j.models.shared.asserts.common.ExpectedThrownData;
 import org.adligo.tests4j.models.shared.asserts.common.I_Thrower;
-import org.adligo.tests4j.models.shared.dependency.ClassMethods;
-import org.adligo.tests4j.models.shared.dependency.ClassMethodsMutant;
+import org.adligo.tests4j.models.shared.dependency.ClassAttributes;
+import org.adligo.tests4j.models.shared.dependency.ClassAttributesMutant;
 import org.adligo.tests4j.models.shared.dependency.I_MethodSignature;
 import org.adligo.tests4j.models.shared.dependency.MethodSignature;
 import org.adligo.tests4j.models.shared.trials.SourceFileScope;
 import org.adligo.tests4j.models.shared.trials.Test;
 import org.adligo.tests4j_tests.base_trials.SourceFileCountingTrial;
 
-@SourceFileScope (sourceClass=ClassMethodsMutant.class, minCoverage=84.0)
-public class ClassMethodsTrial extends SourceFileCountingTrial {
+@SourceFileScope (sourceClass=ClassAttributesMutant.class, minCoverage=62.0)
+public class ClassAttributesTrial extends SourceFileCountingTrial {
 
 	@Test
 	public void testConstructorExceptions() {
@@ -22,41 +22,41 @@ public class ClassMethodsTrial extends SourceFileCountingTrial {
 					
 					@Override
 					public void run() {
-						ClassMethodsMutant ms = null;
-						new ClassMethods(ms);
+						ClassAttributesMutant ms = null;
+						new ClassAttributes(ms);
 					}
 				});
-		assertThrown(new ExpectedThrownData(new IllegalArgumentException(ClassMethods.REQUIRES_A_CLASS_NAME)),
+		assertThrown(new ExpectedThrownData(new IllegalArgumentException(ClassAttributes.REQUIRES_A_CLASS_NAME)),
 				new I_Thrower() {
 					
 					@Override
 					public void run() {
-						ClassMethodsMutant ms = new ClassMethodsMutant();
+						ClassAttributesMutant ms = new ClassAttributesMutant();
 						ms.setClassName(null);
-						new ClassMethods(ms);
+						new ClassAttributes(ms);
 					}
 				});
-		assertThrown(new ExpectedThrownData(new IllegalArgumentException(ClassMethods.REQUIRES_A_CLASS_NAME)),
+		assertThrown(new ExpectedThrownData(new IllegalArgumentException(ClassAttributes.REQUIRES_A_CLASS_NAME)),
 				new I_Thrower() {
 					
 					@Override
 					public void run() {
-						ClassMethodsMutant ms = new ClassMethodsMutant();
+						ClassAttributesMutant ms = new ClassAttributesMutant();
 						ms.setClassName("");
-						new ClassMethods(ms);
+						new ClassAttributes(ms);
 					}
 				});
 	}
 	
 	@Test
 	public void testCopyConstructorAndGetters() {
-		ClassMethodsMutant cmm = new ClassMethodsMutant();
+		ClassAttributesMutant cmm = new ClassAttributesMutant();
 		cmm.setClassName("className");
 		
 		MethodSignature ms = new MethodSignature("foo", null);
 		cmm.addMethod(ms);
 		
-		ClassMethods copy = new ClassMethods(cmm);
+		ClassAttributes copy = new ClassAttributes(cmm);
 		assertEquals("className", copy.getClassName());
 		
 		Set<I_MethodSignature> sigs = copy.getMethods();
@@ -69,7 +69,7 @@ public class ClassMethodsTrial extends SourceFileCountingTrial {
 		cmm.addMethod(bar);
 		cmm.addMethod(null);
 		
-		copy = new ClassMethods(cmm);
+		copy = new ClassAttributes(cmm);
 		assertEquals("2", copy.getClassName());
 		
 		sigs = copy.getMethods();
@@ -83,14 +83,14 @@ public class ClassMethodsTrial extends SourceFileCountingTrial {
 	
 	@Test
 	public void testToString() {
-		ClassMethodsMutant cmm = new ClassMethodsMutant();
+		ClassAttributesMutant cmm = new ClassAttributesMutant();
 		cmm.setClassName("className");
-		assertEquals("ClassMethods [className=className]", new ClassMethods(cmm).toString());
+		assertEquals("ClassAttributes [className=className]", new ClassAttributes(cmm).toString());
 	
 		cmm.addMethod(new MethodSignature("foo", null));
 		cmm.addMethod(new MethodSignature("bar", null));
-		assertEquals("ClassMethods [className=className, methods=[foo(), bar()]]", 
-				new ClassMethods(cmm).toString());
+		assertEquals("ClassAttributes [className=className, methods=[foo(), bar()]]", 
+				new ClassAttributes(cmm).toString());
 		
 	}
 	

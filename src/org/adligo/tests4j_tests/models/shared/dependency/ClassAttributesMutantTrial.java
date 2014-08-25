@@ -6,15 +6,15 @@ import java.util.Set;
 
 import org.adligo.tests4j.models.shared.asserts.common.ExpectedThrownData;
 import org.adligo.tests4j.models.shared.asserts.common.I_Thrower;
-import org.adligo.tests4j.models.shared.dependency.ClassMethodsMutant;
+import org.adligo.tests4j.models.shared.dependency.ClassAttributesMutant;
 import org.adligo.tests4j.models.shared.dependency.I_MethodSignature;
 import org.adligo.tests4j.models.shared.dependency.MethodSignature;
 import org.adligo.tests4j.models.shared.trials.SourceFileScope;
 import org.adligo.tests4j.models.shared.trials.Test;
 import org.adligo.tests4j_tests.base_trials.SourceFileCountingTrial;
 
-@SourceFileScope (sourceClass=ClassMethodsMutant.class, minCoverage=84.0)
-public class ClassMethodsMutantTrial extends SourceFileCountingTrial {
+@SourceFileScope (sourceClass=ClassAttributesMutant.class, minCoverage=62.0)
+public class ClassAttributesMutantTrial extends SourceFileCountingTrial {
 
 	@Test
 	public void testConstructorExceptions() {
@@ -23,15 +23,15 @@ public class ClassMethodsMutantTrial extends SourceFileCountingTrial {
 					
 					@Override
 					public void run() {
-						ClassMethodsMutant ms = null;
-						new ClassMethodsMutant(ms);
+						ClassAttributesMutant ms = null;
+						new ClassAttributesMutant(ms);
 					}
 				});
 	}
 	
 	@Test
 	public void testCopyConstructorAndGetters() {
-		ClassMethodsMutant cmm = new ClassMethodsMutant();
+		ClassAttributesMutant cmm = new ClassAttributesMutant();
 		cmm.setClassName("className");
 		assertEquals("className", cmm.getClassName());
 		
@@ -57,13 +57,13 @@ public class ClassMethodsMutantTrial extends SourceFileCountingTrial {
 	
 	@Test
 	public void testToString() {
-		ClassMethodsMutant cmm = new ClassMethodsMutant();
+		ClassAttributesMutant cmm = new ClassAttributesMutant();
 		cmm.setClassName("className");
-		assertEquals("ClassMethodsMutant [className=className]", cmm.toString());
+		assertEquals("ClassAttributesMutant [className=className]", cmm.toString());
 	
 		cmm.addMethod(new MethodSignature("foo", null));
 		cmm.addMethod(new MethodSignature("bar", null));
-		assertEquals("ClassMethodsMutant [className=className, methods=[foo(), bar()]]", cmm.toString());
+		assertEquals("ClassAttributesMutant [className=className, methods=[foo(), bar()]]", cmm.toString());
 		
 	}
 	
