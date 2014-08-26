@@ -40,7 +40,6 @@ public class ExpectedFailureRunner implements I_Tests4J_Listener {
 		Tests4J_Params params = new Tests4J_Params();
 		size = trials.size();
 		params.setTrials(trials);
-		
 		Tests4JRunnerMock mock = new Tests4JRunnerMock();
 		mock.setSystem(mockSystem);
 		

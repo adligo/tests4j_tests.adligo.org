@@ -1,9 +1,10 @@
-package org.adligo.tests4j_tests.models.shared.dependency;
+package org.adligo.tests4j_tests.models.shared.dependency_group;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import org.adligo.tests4j.models.shared.dependency.ClassParentsLocalMutant;
+import org.adligo.tests4j.models.shared.dependency_groups.JSE_1_7_Lang;
 import org.adligo.tests4j.models.shared.system.I_Tests4J_TrialList;
 import org.adligo.tests4j.models.shared.system.Tests4J_Params;
 import org.adligo.tests4j.models.shared.system.Tests4J_Selection;
@@ -30,22 +31,8 @@ public class RunPkgTrials implements I_Tests4J_TrialList {
 	public List<Class<? extends I_Trial>> getTrials() {
 		List<Class<? extends I_Trial>> trials = new ArrayList<Class<? extends I_Trial>>();
 		
-		trials.add(ClassAliasTrial.class);
-		trials.add(ClassAttributesMutantTrial.class);
-		trials.add(ClassAttributesTrial.class);
+		trials.add(JSE_1_7_Lang_Trial.class);
 		
-		trials.add(ClassDependenciesLocalMutantTrial.class);
-		trials.add(ClassDependenciesLocalTrial.class);
-		
-		trials.add(ClassParentsLocalMutantTrial.class);
-		trials.add(ClassParentsLocalTrial.class);
-		
-		trials.add(DependencyMutantTrial.class);
-		trials.add(DependencyTrial.class);
-		
-		trials.add(MethodSignatureTrial.class);
-		
-		trials.addAll(new org.adligo.tests4j_tests.models.shared.dependency_group.RunPkgTrials().getTrials());
 		return trials;
 	}
 }
