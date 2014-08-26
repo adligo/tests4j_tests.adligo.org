@@ -133,6 +133,11 @@ public class DiscoveryApiTrial extends ApiCountingTrial implements I_DiscoveryAp
 		simple.delegate003_MockException();
 	}
 	
+	@Test
+	public void test0004_MockWithCallToArithmeticExceptionConstructor() throws Exception {
+		simple.delegate004_MockWithCallToArithmeticException();
+	}
+	
 	/**
 	 * 1000 start linear assertions
 	 * @throws Exception
@@ -394,17 +399,17 @@ public class DiscoveryApiTrial extends ApiCountingTrial implements I_DiscoveryAp
 	
 	@Override
 	public int getTests() {
-		return 31;
+		return 32;
 	}
 
 	@Override
 	public int getAsserts() {
-		return 4132;
+		return 4165;
 	}
 
 	@Override
 	public int getUniqueAsserts() {
-		return 1943;
+		return 1964;
 	}
 	
 

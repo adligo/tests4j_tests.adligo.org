@@ -12,15 +12,21 @@ import java.util.Map;
 import java.util.Set;
 
 import org.adligo.tests4j.models.shared.dependency.ClassAliasLocal;
+import org.adligo.tests4j.models.shared.dependency.FieldSignature;
 import org.adligo.tests4j.models.shared.dependency.I_ClassAlias;
+import org.adligo.tests4j.models.shared.dependency.I_ClassAttributes;
 import org.adligo.tests4j.models.shared.dependency.I_ClassDependencies;
 import org.adligo.tests4j.models.shared.dependency.I_ClassDependenciesLocal;
 import org.adligo.tests4j.models.shared.dependency.I_Dependency;
+import org.adligo.tests4j.models.shared.dependency.I_FieldSignature;
+import org.adligo.tests4j.models.shared.dependency.I_MethodSignature;
+import org.adligo.tests4j.models.shared.dependency.MethodSignature;
 import org.adligo.tests4j.models.shared.trials.TrialDelegate;
 import org.adligo.tests4j.run.helpers.I_CachedClassBytesClassLoader;
 import org.adligo.tests4j_4jacoco.plugin.common.I_OrderedClassDependencies;
 import org.adligo.tests4j_4jacoco.plugin.discovery.OrderedClassDiscovery;
 import org.adligo.tests4j_tests.run.helpers.class_loading_mocks.MockException;
+import org.adligo.tests4j_tests.run.helpers.class_loading_mocks.MockWithCallToArithmeticException_Constructor;
 import org.adligo.tests4j_tests.run.helpers.class_loading_mocks.MockWithNothing;
 import org.adligo.tests4j_tests.run.helpers.class_loading_mocks.MockWithString;
 
@@ -250,6 +256,51 @@ public class DAT_Assert_Simple extends TrialDelegate {
 		assertEquals(8, refsCache.size());
 	}
 	
+	public void delegate004_MockWithCallToArithmeticException() throws Exception {
+		I_CachedClassBytesClassLoader ccbClassLoader = trial.getCcbClassLoader();
+		OrderedClassDiscovery orderedClassDiscovery = trial.getOrderedClassDiscovery();
+		
+		Class<?> clazz = MockWithCallToArithmeticException_Constructor.class;
+		String className = clazz.getName();
+		assertFalse(ccbClassLoader.hasCache(className));
+		I_OrderedClassDependencies ocd = orderedClassDiscovery.findOrLoad(clazz);
+		I_ClassDependenciesLocal cdl = ocd.getClassDependencies();
+		List<I_ClassAttributes> atribs = cdl.getReferences();
+		
+		assertNotNull(atribs);
+		I_ClassAttributes ref = atribs.get(0);
+		assertNotNull(ref);
+		assertEquals(String.class.getName(), ref.getClassName());
+		
+		ref = atribs.get(1);
+		assertNotNull(ref);
+		assertEquals(ArithmeticException.class.getName(), ref.getClassName());
+		Set<I_MethodSignature> methods = ref.getMethods();
+		assertNotNull(methods);
+		assertContains(methods, new MethodSignature("<init>", new String[] {String.class.getName()}, null));
+		assertEquals(MethodSignature.class.getName(), methods.iterator().next().getClass().getName());
+		assertEquals(1, methods.size());
+		
+		ref = atribs.get(2);
+		assertNotNull(ref);
+		assertEquals(Object.class.getName(), ref.getClassName());
+		methods = ref.getMethods();
+		assertNotNull(methods);
+		assertContains(methods, new MethodSignature("<init>", null, null));
+		assertEquals(MethodSignature.class.getName(), methods.iterator().next().getClass().getName());
+		assertEquals(1, methods.size());
+			
+		ref = atribs.get(3);
+		assertNotNull(ref);
+		assertEquals(MockWithCallToArithmeticException_Constructor.class.getName(), ref.getClassName());
+		Set<I_FieldSignature> fields = ref.getFields();
+		assertNotNull(fields);
+		assertContains(fields, new FieldSignature("x", ArithmeticException.class.getName()));
+		assertEquals(FieldSignature.class.getName(), fields.iterator().next().getClass().getName());
+		assertEquals(1, fields.size());
+		assertEquals(4, atribs.size());
+		
+	}
 	public void assertHasObjectCache() {
 		String className = Object.class.getName();
 		Map<String,I_ClassDependenciesLocal> refsCache = trial.getRefsCache();
