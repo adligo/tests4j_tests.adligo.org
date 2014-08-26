@@ -31,8 +31,14 @@ public class RunPkgTrials implements I_Tests4J_TrialList {
 	public List<Class<? extends I_Trial>> getTrials() {
 		List<Class<? extends I_Trial>> trials = new ArrayList<Class<? extends I_Trial>>();
 		
-		trials.add(JSE_1_7_Lang_Trial.class);
+		trials.add(JSE_1_7_IOTrial.class);
+		trials.add(JSE_1_7_LangAnnotTrial.class);
+		trials.add(JSE_1_7_LangTrial.class);
+		trials.add(JSE_1_7_LogTrial.class);
 		
+		trials.add(JSE_1_7_MathTrial.class);
+		trials.add(JSE_1_7_SqlTrial.class);
+		trials.add(JSE_1_7_UtilTrial.class);
 		return trials;
 	}
 }
