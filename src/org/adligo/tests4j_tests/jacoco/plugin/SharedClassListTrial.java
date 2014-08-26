@@ -13,6 +13,8 @@ import org.adligo.tests4j_tests.base_trials.SourceFileCountingTrial;
 @SourceFileScope (sourceClass=SharedClassList.class, minCoverage=92.0)
 public class SharedClassListTrial extends SourceFileCountingTrial {
 
+	private static final int CLASSES_IN_WHITELIST = 150;
+
 	@Test 
 	public void testSharedClassesOnlyInTests4J_ApprovedPackages() {
 		Set<String> allowedPackages = new HashSet<String>();
@@ -53,12 +55,12 @@ public class SharedClassListTrial extends SourceFileCountingTrial {
 
 	@Override
 	public int getAsserts() {
-		return 148;
+		return CLASSES_IN_WHITELIST;
 	}
 
 	@Override
 	public int getUniqueAsserts() {
-		return 148;
+		return CLASSES_IN_WHITELIST;
 	}
 
 }

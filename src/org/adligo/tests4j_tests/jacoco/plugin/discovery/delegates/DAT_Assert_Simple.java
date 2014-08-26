@@ -193,17 +193,16 @@ public class DAT_Assert_Simple extends TrialDelegate {
 		I_OrderedClassDependencies ocd = orderedClassDiscovery.findOrLoad(clazz);
 		List<String> order = ocd.getOrder();
 		assertNotNull(order);
-		assertEquals(Serializable.class.getName(), order.get(0));
-		assertEquals(Object.class.getName(), order.get(1));
+		int counter = 0;
+		assertEquals(Serializable.class.getName(), order.get(counter++));
+		assertEquals(Object.class.getName(), order.get(counter++));
 		
-		assertEquals(Comparable.class.getName(), order.get(2));
-		assertEquals(Number.class.getName(), order.get(3));
-		assertEquals(Throwable.class.getName(), order.get(4));
-		assertEquals(Exception.class.getName(), order.get(5));
-		
-		assertEquals(Long.class.getName(), order.get(6));
-		assertEquals(className, order.get(7));
-		assertEquals(8, order.size());
+		assertEquals(Throwable.class.getName(), order.get(counter++));
+		assertEquals(Exception.class.getName(), order.get(counter++));
+		//note no Comparable, Number Long here since the Serializable version id is a 
+		//primitive long, the classes aren't referenced
+		assertEquals(className, order.get(counter++));
+		assertEquals(counter, order.size());
 		
 		assertTrue(ccbClassLoader.hasCache(className));
 		
@@ -213,22 +212,12 @@ public class DAT_Assert_Simple extends TrialDelegate {
 		
 		I_ClassAlias alias = dep.getAlias();
 		assertEquals(Serializable.class.getName(), alias.getName());
-		assertEquals(5, dep.getReferences());
+		assertEquals(3, dep.getReferences());
 
 		dep =  it.next();
 		alias = dep.getAlias();
 		assertEquals(Object.class.getName(), alias.getName());
-		assertEquals(5, dep.getReferences());
-
-		dep =  it.next();
-		alias = dep.getAlias();
-		assertEquals(Comparable.class.getName(), alias.getName());
-		assertEquals(2, dep.getReferences());
-		
-		dep =  it.next();
-		alias = dep.getAlias();
-		assertEquals(Number.class.getName(), alias.getName());
-		assertEquals(2, dep.getReferences());
+		assertEquals(3, dep.getReferences());
 		
 		dep =  it.next();
 		alias = dep.getAlias();
@@ -239,21 +228,19 @@ public class DAT_Assert_Simple extends TrialDelegate {
 		alias = dep.getAlias();
 		assertEquals(Exception.class.getName(), alias.getName());
 		assertEquals(1, dep.getReferences());
-		assertEquals(7, deps.size());
+		assertEquals(4, deps.size());
 		
 		I_ClassDependencies cr =  orderedClassDiscovery.getReferences(new ClassAliasLocal(clazz));
-		assertMockExceptionRefs(className, cr);
-		
 		assertHasObjectCache();
-		assertHasCompareableCache();
-		assertHasNumberCache();
-		assertHasLongCache();
 		
 		assertHasThrowableCache();
 		assertHasExceptionCache();
 		assertHasMockExceptionCache();
+		assertMockExceptionRefs(className, cr);
+		
+
 		Map<String,I_ClassDependenciesLocal> refsCache = trial.getRefsCache();
-		assertEquals(8, refsCache.size());
+		assertEquals(5, refsCache.size());
 	}
 	
 	public void delegate004_MockWithCallToArithmeticException() throws Exception {
@@ -523,12 +510,10 @@ public class DAT_Assert_Simple extends TrialDelegate {
 		Set<String> refsRefs = refs.getDependencyNames();
 		assertContains(refsRefs, Serializable.class.getName());
 		assertContains(refsRefs, Object.class.getName());
-		assertContains(refsRefs, Number.class.getName());
-		assertContains(refsRefs, Long.class.getName());
 		assertContains(refsRefs, Throwable.class.getName());
 		assertContains(refsRefs, Exception.class.getName());
 		assertContains(refsRefs, className);
-		assertEquals(8, refsRefs.size());
+		assertEquals(5, refsRefs.size());
 	}
 	
 	public void assertHasAllCache() {

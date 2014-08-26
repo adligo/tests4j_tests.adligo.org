@@ -11,7 +11,7 @@ import org.adligo.tests4j.shared.report.summary.TestsProgressDisplay;
 import org.adligo.tests4j_tests.base_trials.SourceFileCountingTrial;
 import org.adligo.tests4j_tests.models.shared.system.mocks.Tests4J_LogMock;
 
-@SourceFileScope (sourceClass=AbstractProcessDisplay.class, minCoverage=36.0)
+@SourceFileScope (sourceClass=AbstractProcessDisplay.class, minCoverage=32.0)
 @AdditionalInstrumentation (javaPackages="org.adligo.tests4j_tests.shared.report.summary")
 public class AbstractProgressDisplayTrial extends SourceFileCountingTrial {
 	private Tests4J_LogMock log = new Tests4J_LogMock();

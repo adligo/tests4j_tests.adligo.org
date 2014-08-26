@@ -10,6 +10,7 @@ import org.adligo.tests4j.models.shared.trials.AdditionalInstrumentation;
 import org.adligo.tests4j.models.shared.trials.AfterTrial;
 import org.adligo.tests4j.models.shared.trials.BeforeTrial;
 import org.adligo.tests4j.models.shared.trials.SourceFileScope;
+import org.adligo.tests4j.models.shared.trials.SubProgress;
 import org.adligo.tests4j.models.shared.trials.Test;
 import org.adligo.tests4j.run.helpers.Tests4J_ThreadFactory;
 import org.adligo.tests4j.run.remote.io.UTF8_CharacterBuilder;
@@ -56,13 +57,15 @@ public class UTF8_CharacterBuilderWithThreadsTrial extends SourceFileCountingTri
 	 * set to 10 for a 10 sec or so runtime on a 
 	 * i7 quad 
 	 */
-	private static final long CAPTURE = 10; 
+	private static final long CAPTURE = 1000; 
 	private static final int charGroupCount = new Long(UTF8_Generator.SIX_BYTE_MAX_CODE_POINT_LONG/INCREMENT).intValue() + 1;
 	private static ArrayBlockingQueue<StartCapture> charGroups = 
 			new ArrayBlockingQueue<StartCapture>(charGroupCount );
 	private AtomicInteger finishedCharGroups = new AtomicInteger();
 	private int lastPct = 0;
+	private String currentTest = null;
 	private int pctIncrement = 20;
+	private double pct;
 	
 	@BeforeTrial
 	public static void beforeTrial() {
@@ -96,6 +99,7 @@ public class UTF8_CharacterBuilderWithThreadsTrial extends SourceFileCountingTri
 	
 	@Test 
 	public void testSiginifantCodePoints() throws Exception {
+		currentTest = "testSiginifantCodePoints";
 		assertEquals(128L, UTF8_Generator.ONE_BYTE_MAX_CODE_POINT_LONG);
 		assertEquals(2048L, UTF8_Generator.TWO_BYTE_MAX_CODE_POINT_LONG);
 		assertEquals(65536L, UTF8_Generator.THREE_BYTE_MAX_CODE_POINT_LONG);
@@ -107,6 +111,7 @@ public class UTF8_CharacterBuilderWithThreadsTrial extends SourceFileCountingTri
 	
 	@Test
 	public void testChars() throws Exception {
+		currentTest = "testChars";
 		for (int i = 0; i < threadCount; i++) {
 			exetutor.submit(new UTF8_CharacterBuilder_ChuckTester(charGroups,this));
 		}
@@ -121,15 +126,12 @@ public class UTF8_CharacterBuilderWithThreadsTrial extends SourceFileCountingTri
 	}
 
 	@Override
-	public synchronized void completedCharGroup() {
+	public void completedCharGroup() {
 		
 		double dc = (double) finishedCharGroups.addAndGet(1);
 		double max = (double) charGroupCount;
-		double pct = dc/max * 100;
-		if (lastPct + pctIncrement < pct) {
-			lastPct = lastPct + pctIncrement;
-			log(this.getClass().getName() +  " at " + ((int) pct) + "% " +charGroupCount);
-		}
+		pct = dc/max * 100;
+		
 	}
 
 	@Override
@@ -139,16 +141,24 @@ public class UTF8_CharacterBuilderWithThreadsTrial extends SourceFileCountingTri
 
 	@Override
 	public int getAsserts() {
-		return 12906;
+		return 1290006;
 	}
 
 	@Override
 	public int getUniqueAsserts() {
-		return 19;
+		return 137;
 	}
 	
 	@AfterTrial
 	public static void afterTrial() {
 		exetutor.shutdownNow();
+	}
+
+	@Override
+	public synchronized double getPctDone(String testName) {
+		if (currentTest.equals(testName)) {
+			return pct;
+		}
+		return super.getPctDone(testName);
 	}
 }

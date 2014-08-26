@@ -13,9 +13,23 @@ import org.adligo.tests4j_tests.base_trials.SourceFileCountingTrial;
 import org.adligo.tests4j_tests.models.shared.common.mocks.BaseMockClass;
 import org.adligo.tests4j_tests.models.shared.common.mocks.ChildMockClass;
 
-@SourceFileScope (sourceClass=ClassMethods.class, minCoverage=84.0)
+import com.sun.j3d.utils.scenegraph.io.state.com.sun.j3d.utils.geometry.PrimitiveState;
+
+@SourceFileScope (sourceClass=ClassMethods.class, minCoverage=85.0)
 public class ClassMethodsTrial extends SourceFileCountingTrial {
 
+	private static final String CLASS_METHODS_TYPE = "Lorg/adligo/tests4j/models/shared/common/ClassMethods;";
+
+	@Test
+	public void testCreateArrays() {
+		assertEquals("", ClassMethods.createArrayChars(0));
+		assertEquals("[", ClassMethods.createArrayChars(1));
+		assertEquals("[[", ClassMethods.createArrayChars(2));
+		assertEquals("[[[", ClassMethods.createArrayChars(3));
+		assertEquals("[[[[", ClassMethods.createArrayChars(4));
+		assertEquals("[[[[[", ClassMethods.createArrayChars(5));
+	}
+	
 	@Test
 	public void testIsSubType() {
 		assertTrue(ClassMethods.isSubType(ChildMockClass.class, BaseMockClass.class));
@@ -67,29 +81,32 @@ public class ClassMethodsTrial extends SourceFileCountingTrial {
 					}
 				});
 		assertEquals(ClassMethods.class.getName(),
-				ClassMethods.fromTypeDescription("Lorg/adligo/tests4j/models/shared/common/ClassMethods;"));
+				ClassMethods.fromTypeDescription(CLASS_METHODS_TYPE));
 		assertEquals(ClassMethodsTrial.class.getName(),
 				ClassMethods.fromTypeDescription("Lorg/adligo/tests4j_tests/models/shared/common/ClassMethodsTrial;"));
-		assertEquals(ClassMethods.class.getName(),
+		assertEquals("[" + ClassMethods.class.getName(),
 				ClassMethods.fromTypeDescription("[Lorg/adligo/tests4j/models/shared/common/ClassMethods;"));
-		assertEquals(ClassMethodsTrial.class.getName(),
+		assertEquals("[" + ClassMethodsTrial.class.getName(),
 				ClassMethods.fromTypeDescription("[Lorg/adligo/tests4j_tests/models/shared/common/ClassMethodsTrial;"));
+		assertEquals("[" + StackTraceElement.class.getName(),
+				ClassMethods.fromTypeDescription("[Ljava/lang/StackTraceElement;"));
 		
-		assertEquals(Byte.class.getName(),
+		
+		assertEquals("byte",
 				ClassMethods.fromTypeDescription("B"));
-		assertEquals(Character.class.getName(),
+		assertEquals("char",
 				ClassMethods.fromTypeDescription("C"));
-		assertEquals(Double.class.getName(),
+		assertEquals("double",
 				ClassMethods.fromTypeDescription("D"));
-		assertEquals(Float.class.getName(),
+		assertEquals("float",
 				ClassMethods.fromTypeDescription("F"));
-		assertEquals(Integer.class.getName(),
+		assertEquals("int",
 				ClassMethods.fromTypeDescription("I"));
-		assertEquals(Long.class.getName(),
+		assertEquals("long",
 				ClassMethods.fromTypeDescription("J"));
-		assertEquals(Short.class.getName(),
+		assertEquals("short",
 				ClassMethods.fromTypeDescription("S"));
-		assertEquals(Boolean.class.getName(),
+		assertEquals("boolean",
 				ClassMethods.fromTypeDescription("Z"));
 		
 		//there could be a lot of ways to make arrays of arrays;
@@ -102,30 +119,76 @@ public class ClassMethodsTrial extends SourceFileCountingTrial {
 
 	public void assertPrimitiveArrays(String prefix) {
 		//arrays
-		assertEquals(Byte.class.getName(),
+		assertEquals(prefix + "byte",
 				ClassMethods.fromTypeDescription(prefix +"B"));
-		assertEquals(Character.class.getName(),
+		assertEquals(prefix + "char",
 				ClassMethods.fromTypeDescription(prefix +"C"));
-		assertEquals(Double.class.getName(),
+		assertEquals(prefix + "double",
 				ClassMethods.fromTypeDescription(prefix +"D"));
-		assertEquals(Float.class.getName(),
+		assertEquals(prefix + "float",
 				ClassMethods.fromTypeDescription(prefix +"F"));
-		assertEquals(Integer.class.getName(),
+		assertEquals(prefix + "int",
 				ClassMethods.fromTypeDescription(prefix +"I"));
-		assertEquals(Long.class.getName(),
+		assertEquals(prefix + "long",
 				ClassMethods.fromTypeDescription(prefix +"J"));
-		assertEquals(Short.class.getName(),
+		assertEquals(prefix + "short",
 				ClassMethods.fromTypeDescription(prefix +"S"));
-		assertEquals(Boolean.class.getName(),
+		assertEquals(prefix + "boolean",
 				ClassMethods.fromTypeDescription(prefix +"Z"));
 	}
+	
+	@Test
+	public void testGetArrayType() {
+			assertGetArrayType("[");
+			assertGetArrayType("[[");
+			assertGetArrayType("[[[");
+			assertGetArrayType("[[[[");
+			assertGetArrayType("[[[[[");
+	}
+
+	public void assertGetArrayType(String prefix) {
+		assertEquals(CLASS_METHODS_TYPE,
+				ClassMethods.getArrayType(prefix + CLASS_METHODS_TYPE));
+		assertEquals(ClassMethods.BOOLEAN,
+				ClassMethods.getArrayType(prefix + ClassMethods.BOOLEAN));
+		assertEquals(ClassMethods.BYTE,
+				ClassMethods.getArrayType(prefix + ClassMethods.BYTE));
+		assertEquals(ClassMethods.class.getName(),
+				ClassMethods.getArrayType(prefix + ClassMethods.class.getName()));
+	}
+	
+	@Test
+	public void testCountArrays() {
+		assertGetArrays(0, "");
+		assertGetArrays(1, "[");
+		assertGetArrays(2, "[[");
+		assertGetArrays(3, "[[[");
+		assertGetArrays(4, "[[[[");
+		assertGetArrays(5, "[[[[[");
+	}
+	
+	public void assertGetArrays(int count, String prefix) {
+		assertEquals(count,
+				ClassMethods.getArrays(prefix + CLASS_METHODS_TYPE));
+		assertEquals(count,
+				ClassMethods.getArrays(prefix + ClassMethods.BOOLEAN));
+		assertEquals(count,
+				ClassMethods.getArrays(prefix + ClassMethods.BYTE));
+		assertEquals(count,
+				ClassMethods.getArrays(prefix + ClassMethods.class.getName()));
+	}
+	
+	
 	
 	@Test
 	public void testIsClassOrArray() {
 		assertTrue(ClassMethods.isClass('L'));
 		assertFalse(ClassMethods.isClass('['));
+		assertFalse(ClassMethods.isClass('B'));
+		
 		assertTrue(ClassMethods.isArray('['));
 		assertFalse(ClassMethods.isArray(']'));
+		assertFalse(ClassMethods.isArray('B'));
 	}
 	
 	@Test
@@ -139,21 +202,46 @@ public class ClassMethodsTrial extends SourceFileCountingTrial {
 		assertTrue(ClassMethods.isPrimitiveClassChar('J'));
 		assertTrue(ClassMethods.isPrimitiveClassChar('S'));
 		assertTrue(ClassMethods.isPrimitiveClassChar('Z'));
+		
+		assertFalse(ClassMethods.isPrimitiveClassChar('L'));
+		assertFalse(ClassMethods.isPrimitiveClassChar('['));
+	}
+	
+	@Test
+	public void testIsClass() {
+		assertTrue(ClassMethods.isClass('L'));
+		assertFalse(ClassMethods.isClass('C'));
+	}
+	
+	@Test
+	public void testGetPrimitive() {
+		assertEquals("byte", ClassMethods.getPrimitive('B'));
+		assertEquals("char",ClassMethods.getPrimitive('C'));
+		assertEquals("double", ClassMethods.getPrimitive('D'));
+		assertEquals("float", ClassMethods.getPrimitive('F'));
+		
+		assertEquals("int", ClassMethods.getPrimitive('I'));
+		assertEquals("long", ClassMethods.getPrimitive('J'));
+		assertEquals("short", ClassMethods.getPrimitive('S'));
+		assertEquals("boolean", ClassMethods.getPrimitive('Z'));
+		
+		assertNull(ClassMethods.getPrimitive('L'));
+		assertNull(ClassMethods.getPrimitive('['));
 	}
 	
 	@Override
 	public int getTests() {
-		return 6;
+		return 11;
 	}
 
 	@Override
 	public int getAsserts() {
-		return 75;
+		return 142;
 	}
 
 	@Override
 	public int getUniqueAsserts() {
-		return 24;
+		return 95;
 	}
 	
 }

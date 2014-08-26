@@ -9,11 +9,10 @@ import org.adligo.tests4j.models.shared.system.Tests4J_Params;
 import org.adligo.tests4j.models.shared.trials.I_Trial;
 import org.adligo.tests4j.run.Tests4J;
 import org.adligo.tests4j.run.helpers.Tests4J_Processor;
-import org.adligo.tests4j.run.helpers.Tests4J_ThreadFactory;
-import org.adligo.tests4j.run.helpers.Tests4J_TrialsRunnable;
 import org.adligo.tests4j_4jacoco.plugin.CoveragePluginFactory;
-import org.adligo.tests4j_4jacoco.plugin.data.multi.MultiProbeDataStore;
-import org.adligo.tests4j_4jacoco.plugin.data.multi.MultiProbesMap;
+import org.adligo.tests4j_4jacoco.plugin.discovery.InitialDependenciesDiscovery;
+import org.adligo.tests4j_4jacoco.plugin.instrumentation.ClassInstrumenter;
+import org.adligo.tests4j_4jacoco.plugin.instrumentation.TrialInstrumenter;
 
 public class RunPkgTrials implements I_Tests4J_TrialList {
 
@@ -21,11 +20,13 @@ public class RunPkgTrials implements I_Tests4J_TrialList {
 	public static void main(String [] args) {
 		Tests4J_Params params = new Tests4J_Params();
 		params.addTrials(new RunPkgTrials());
-		
+		params.setRecommendedSetupThreadCount(1);
 		//params.setLogState(Tests4J_ThreadFactory.class, true);
 		//params.setLogState(MultiProbeDataStore.class, true);
 		//params.setLogState(MultiProbesMap.class, true);
-		//params.setLogState(Tests4J_TrialsRunable.class, true);
+		//params.setLogState(TrialInstrumenter.class, true);
+		//params.setLogState(ClassInstrumenter.class, true);
+		//params.setLogState(InitialDependenciesDiscovery.class, true);
 		params.setLogState(Tests4J_Processor.class, true);
 		
 		params.setCoveragePluginFactoryClass(CoveragePluginFactory.class);

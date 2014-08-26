@@ -30,7 +30,9 @@ import org.adligo.tests4j.models.shared.trials.BeforeTrial;
 import org.adligo.tests4j.models.shared.trials.I_AbstractTrial;
 import org.adligo.tests4j.models.shared.trials.I_ApiTrial;
 import org.adligo.tests4j.models.shared.trials.I_MetaTrial;
+import org.adligo.tests4j.models.shared.trials.I_Progress;
 import org.adligo.tests4j.models.shared.trials.I_SourceFileTrial;
+import org.adligo.tests4j.models.shared.trials.I_SubProgress;
 import org.adligo.tests4j.models.shared.trials.I_Trial;
 import org.adligo.tests4j.models.shared.trials.I_TrialBindings;
 import org.adligo.tests4j.models.shared.trials.I_UseCaseTrial;
@@ -39,6 +41,7 @@ import org.adligo.tests4j.models.shared.trials.PackageScope;
 import org.adligo.tests4j.models.shared.trials.PlatformType;
 import org.adligo.tests4j.models.shared.trials.SourceFileScope;
 import org.adligo.tests4j.models.shared.trials.SourceFileTrial;
+import org.adligo.tests4j.models.shared.trials.SubProgress;
 import org.adligo.tests4j.models.shared.trials.TargetedPlatform;
 import org.adligo.tests4j.models.shared.trials.Test;
 import org.adligo.tests4j.models.shared.trials.TrialBindings;
@@ -68,6 +71,8 @@ import org.adligo.tests4j_tests.run.discovery.package_discovery_inner_mocks.TwoN
 
 @SourceFileScope (sourceClass=PackageDiscovery.class, minCoverage=51.0)
 public class PackageDiscoveryTrial extends SourceFileCountingTrial {
+
+	private static final int ASSERT_COUNT = 80;
 
 	@Test
 	public void testDiscoveryPackage() throws Exception {
@@ -162,7 +167,9 @@ public class PackageDiscoveryTrial extends SourceFileCountingTrial {
 		assertContains(classNames, I_Trial.class.getName());
 		assertContains(classNames, I_TrialBindings.class.getName());
 		assertContains(classNames, I_MetaTrial.class.getName());
+		assertContains(classNames, I_Progress.class.getName());
 		assertContains(classNames, I_SourceFileTrial.class.getName());
+		assertContains(classNames, I_SubProgress.class.getName());
 		assertContains(classNames, I_UseCaseTrial.class.getName());
 		
 		assertContains(classNames, IgnoreTest.class.getName());
@@ -172,6 +179,7 @@ public class PackageDiscoveryTrial extends SourceFileCountingTrial {
 		assertContains(classNames, PackageScope.class.getName());
 		assertContains(classNames, SourceFileScope.class.getName());
 		assertContains(classNames, SourceFileTrial.class.getName());
+		assertContains(classNames, SubProgress.class.getName());
 		assertContains(classNames, TargetedPlatform.class.getName());
 		assertContains(classNames, Test.class.getName());
 		
@@ -183,7 +191,7 @@ public class PackageDiscoveryTrial extends SourceFileCountingTrial {
 		assertContains(classNames, UseCaseScope.class.getName());
 		assertContains(classNames, UseCaseTrial.class.getName());
 		
-		assertEquals(28, classNames.size());
+		assertEquals(31, classNames.size());
 		List<PackageDiscovery> children =  cd.getSubPackages();
 		
 		
@@ -230,11 +238,11 @@ public class PackageDiscoveryTrial extends SourceFileCountingTrial {
 
 	@Override
 	public int getAsserts() {
-		return 77;
+		return ASSERT_COUNT;
 	}
 
 	@Override
 	public int getUniqueAsserts() {
-		return 77;
+		return ASSERT_COUNT;
 	}
 }

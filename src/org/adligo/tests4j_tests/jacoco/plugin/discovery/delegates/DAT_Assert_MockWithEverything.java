@@ -82,7 +82,7 @@ public class DAT_Assert_MockWithEverything extends TrialDelegate {
 		assertNotNull(order);
 		
 		assertOrder(order);
-		assertEquals(58, order.size());
+		assertEquals(57, order.size());
 		assertTrue(ccbClassLoader.hasCache(clazzName));
 		
 	}
@@ -98,20 +98,23 @@ public class DAT_Assert_MockWithEverything extends TrialDelegate {
 		
 		
 		assertEquals(MockWithNothing.class.getName(), order.get(counter++));
-		assertEquals(Number.class.getName(), order.get(counter++));
-		assertEquals(Long.class.getName(), order.get(counter++));
-		
 		assertEquals(String.class.getName(), order.get(counter++));
 		assertEquals(AutoCloseable.class.getName(), order.get(counter++));
 		assertEquals(Closeable.class.getName(), order.get(counter++));
 		assertEquals(Flushable.class.getName(), order.get(counter++));
 		assertEquals(Appendable.class.getName(), order.get(counter++));
 		
-		
+		assertEquals(Number.class.getName(), order.get(counter++));
 		assertEquals(OutputStream.class.getName(), order.get(counter++));
+		
+		assertEquals(Long.class.getName(), order.get(counter++));
+		
 		
 		
 		assertEquals(Throwable.class.getName(), order.get(counter++));
+		
+		
+		
 		
 		assertEquals(FilterOutputStream.class.getName(), order.get(counter++));
 		assertEquals(Exception.class.getName(), order.get(counter++));
@@ -149,7 +152,6 @@ public class DAT_Assert_MockWithEverything extends TrialDelegate {
 		assertEquals(MockWithMethodReturn.class.getName(), order.get(counter++));
 		
 		assertEquals(Class.class.getName(), order.get(counter++));
-		assertEquals(Double.class.getName(), order.get(counter++));
 		assertEquals(Math.class.getName(), order.get(counter++));
 		
 		assertEquals(StringBuilder.class.getName(), order.get(counter++));	
@@ -178,7 +180,7 @@ public class DAT_Assert_MockWithEverything extends TrialDelegate {
 		
 		assertEquals(clazzName, order.get(counter++));
 		assertEquals(clazzName + "$1", order.get(counter++));
-		assertEquals(58, counter);
+		assertEquals(57, counter);
 		return counter;
 	}
 	
@@ -190,7 +192,7 @@ public class DAT_Assert_MockWithEverything extends TrialDelegate {
 		assertHasMockWithEverythingCache();
 		
 		Map<String,I_ClassDependenciesLocal> refsCache = trial.getRefsCache();
-		assertEquals(58, refsCache.size());
+		assertEquals(57, refsCache.size());
 	}
 
 	public void assertHasMockWithEverythingCache() { 
@@ -274,6 +276,6 @@ public class DAT_Assert_MockWithEverything extends TrialDelegate {
 		assertContains(refs, className + "$1");
 		assertContains(refs, className);
 		
-		assertEquals(58, refs.size());
+		assertEquals(57, refs.size());
 	}
 }

@@ -80,7 +80,7 @@ public class GWT_2_6_LangTrial extends SourceFileCountingTrial {
 
 	@Override
 	public int getUniqueAsserts() {
-		return 68;
+		return 69;
 	}
 
 }

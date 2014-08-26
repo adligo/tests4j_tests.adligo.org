@@ -751,12 +751,9 @@ public class DAT_Assert_Linear_to_10 extends TrialDelegate {
 		assertEquals(Object.class.getName(), order.get(counter++));
 		assertEquals(Serializable.class.getName(), order.get(counter++));
 		
-		assertEquals(Comparable.class.getName(), order.get(counter++));
-		assertEquals(Number.class.getName(), order.get(counter++));
 		assertEquals(Throwable.class.getName(), order.get(counter++));
 		assertEquals(Exception.class.getName(), order.get(counter++));
 		
-		assertEquals(Long.class.getName(), order.get(counter++));
 		assertEquals(MockException.class.getName(), order.get(counter++));
 		assertEquals(MockWithNothing.class.getName(), order.get(counter++));
 		
@@ -769,23 +766,13 @@ public class DAT_Assert_Linear_to_10 extends TrialDelegate {
 		I_Dependency dep =  it.next();
 		I_ClassAlias alias = dep.getAlias();
 		assertEquals(Object.class.getName(), alias.getName());
-		assertEquals(7, dep.getReferences());
+		assertEquals(5, dep.getReferences());
 		
 		dep =  it.next();
 		alias = dep.getAlias();
 		assertEquals(Serializable.class.getName(), alias.getName());
-		assertEquals(6, dep.getReferences());
+		assertEquals(4, dep.getReferences());
 
-		dep =  it.next();
-		alias = dep.getAlias();
-		assertEquals(Comparable.class.getName(), alias.getName());
-		assertEquals(3, dep.getReferences());
-		
-		dep =  it.next();
-		alias = dep.getAlias();
-		assertEquals(Number.class.getName(), alias.getName());
-		assertEquals(3, dep.getReferences());
-		
 		dep =  it.next();
 		alias = dep.getAlias();
 		assertEquals(Throwable.class.getName(), alias.getName());
@@ -798,11 +785,6 @@ public class DAT_Assert_Linear_to_10 extends TrialDelegate {
 
 		dep =  it.next();
 		alias = dep.getAlias();
-		assertEquals(Long.class.getName(), alias.getName());
-		assertEquals(2, dep.getReferences());
-		
-		dep =  it.next();
-		alias = dep.getAlias();
 		assertEquals(MockException.class.getName(), alias.getName());
 		assertEquals(1, dep.getReferences());
 		
@@ -811,16 +793,13 @@ public class DAT_Assert_Linear_to_10 extends TrialDelegate {
 		assertEquals(MockWithNothing.class.getName(), alias.getName());
 		assertEquals(1, dep.getReferences());
 		
-		assertEquals(9, deps.size());
+		assertEquals(6, deps.size());
 		
 		I_ClassDependencies cr =  orderedClassDiscovery.getReferences(new ClassAliasLocal(clazz));
 		assertMockWithMethodExceptionRefs(className, cr);
 		
 		DAT_Assert_Simple simple =  trial.getSimple();
 		simple.assertHasObjectCache();
-		simple.assertHasCompareableCache();
-		simple.assertHasNumberCache();
-		simple.assertHasLongCache();
 		
 		simple.assertHasSerilizableCache();
 		simple.assertHasThrowableCache();
@@ -832,7 +811,7 @@ public class DAT_Assert_Linear_to_10 extends TrialDelegate {
 		assertHasMockWithMethodExceptionCache();
 		
 		Map<String,I_ClassDependenciesLocal> refsCache = trial.getRefsCache();
-		assertEquals(10, refsCache.size());
+		assertEquals(7, refsCache.size());
 	}
 	
 	public void assertHasMockWithMethodExceptionCache() {
@@ -855,11 +834,8 @@ public class DAT_Assert_Linear_to_10 extends TrialDelegate {
 		assertContains(refs, Throwable.class.getName());
 		assertContains(refs, Exception.class.getName());
 		assertContains(refs, Object.class.getName());
-		assertContains(refs, Comparable.class.getName());
-		assertContains(refs, Number.class.getName());
-		assertContains(refs, Long.class.getName());
 		assertContains(refs, className);
-		assertEquals(10, refs.size());
+		assertEquals(7, refs.size());
 	}
 
 	public void delegate009_MockWithMethodExceptionBlock() throws Exception {
@@ -877,13 +853,8 @@ public class DAT_Assert_Linear_to_10 extends TrialDelegate {
 		assertEquals(Object.class.getName(), order.get(counter++));
 		assertEquals(Serializable.class.getName(), order.get(counter++));
 		
-		assertEquals(Comparable.class.getName(), order.get(counter++));
-		assertEquals(Number.class.getName(), order.get(counter++));
 		assertEquals(Throwable.class.getName(), order.get(counter++));
 		assertEquals(Exception.class.getName(), order.get(counter++));
-		
-		assertEquals(Long.class.getName(), order.get(counter++));
-		
 		
 		assertEquals(MockException.class.getName(), order.get(counter++));
 		assertEquals(MockWithNothing.class.getName(), order.get(counter++));
@@ -900,22 +871,13 @@ public class DAT_Assert_Linear_to_10 extends TrialDelegate {
 		I_Dependency dep =  it.next();
 		I_ClassAlias alias = dep.getAlias();
 		assertEquals(Object.class.getName(), alias.getName());
-		assertEquals(8, dep.getReferences());
+		assertEquals(6, dep.getReferences());
 		
 		dep =  it.next();
 		alias = dep.getAlias();
 		assertEquals(Serializable.class.getName(), alias.getName());
-		assertEquals(7, dep.getReferences());
+		assertEquals(5, dep.getReferences());
 		
-		dep =  it.next();
-		alias = dep.getAlias();
-		assertEquals(Comparable.class.getName(), alias.getName());
-		assertEquals(4, dep.getReferences());
-		
-		dep =  it.next();
-		alias = dep.getAlias();
-		assertEquals(Number.class.getName(), alias.getName());
-		assertEquals(4, dep.getReferences());
 		
 		dep =  it.next();
 		alias = dep.getAlias();
@@ -927,11 +889,6 @@ public class DAT_Assert_Linear_to_10 extends TrialDelegate {
 		assertEquals(Exception.class.getName(), alias.getName());
 		assertEquals(3, dep.getReferences());
 
-		dep =  it.next();
-		alias = dep.getAlias();
-		assertEquals(Long.class.getName(), alias.getName());
-		assertEquals(3, dep.getReferences());
-		
 		dep =  it.next();
 		alias = dep.getAlias();
 		assertEquals(MockException.class.getName(), alias.getName());
@@ -947,16 +904,13 @@ public class DAT_Assert_Linear_to_10 extends TrialDelegate {
 		assertEquals(MockWithMethodException.class.getName(), alias.getName());
 		assertEquals(1, dep.getReferences());
 		
-		assertEquals(10, deps.size());
+		assertEquals(7, deps.size());
 		
 		I_ClassDependencies cr =  orderedClassDiscovery.getReferences(new ClassAliasLocal(clazz));
 		assertMockWithMethodExceptionBlockRefs(className, cr);
 		
 		DAT_Assert_Simple simple =  trial.getSimple();
 		simple.assertHasObjectCache();
-		simple.assertHasCompareableCache();
-		simple.assertHasNumberCache();
-		simple.assertHasLongCache();
 		
 		simple.assertHasThrowableCache();
 		simple.assertHasExceptionCache();
@@ -969,7 +923,7 @@ public class DAT_Assert_Linear_to_10 extends TrialDelegate {
 		
 		Map<String,I_ClassDependenciesLocal> refsCache = trial.getRefsCache();
 		//7?
-		assertEquals(11, refsCache.size());
+		assertEquals(8, refsCache.size());
 	}
 	
 	public void assertHasMockWithMethodExceptionBlockCache() {
@@ -989,15 +943,12 @@ public class DAT_Assert_Linear_to_10 extends TrialDelegate {
 		assertContains(refs, MockWithNothing.class.getName());
 		assertContains(refs, MockWithMethodException.class.getName());
 		assertContains(refs, MockException.class.getName());
-		assertContains(refs, Number.class.getName());
-		assertContains(refs, Comparable.class.getName());
-		assertContains(refs, Long.class.getName());
 		assertContains(refs, Exception.class.getName());
 		assertContains(refs, Serializable.class.getName());
 		assertContains(refs, Throwable.class.getName());
 		assertContains(refs, Object.class.getName());
 		assertContains(refs, className);
-		assertEquals(11, refs.size());
+		assertEquals(8, refs.size());
 	}
 
 	public void delegate010_MockWithAbstractMethodReturn() throws Exception {

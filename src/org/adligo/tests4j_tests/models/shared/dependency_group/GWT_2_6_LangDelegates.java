@@ -25,13 +25,13 @@ public class GWT_2_6_LangDelegates extends TrialDelegate {
 		
 		Set<I_MethodSignature> methods = attribs.getMethods();
 		assertContains(methods, new MethodSignature("append", 
-				new String[] {Character.class.getName()}, 
+				new String[] {"char"}, 
 				Appendable.class.getName()));
 		assertContains(methods, new MethodSignature("append", 
 				new String[] {CharSequence.class.getName()}, 
 				Appendable.class.getName()));
 		assertContains(methods, new MethodSignature("append", 
-				new String[] {CharSequence.class.getName(), Integer.class.getName(), Integer.class.getName()}, 
+				new String[] {CharSequence.class.getName(), "int", "int"}, 
 				Appendable.class.getName()));
 	}
 	
@@ -63,7 +63,7 @@ public class GWT_2_6_LangDelegates extends TrialDelegate {
 		assertContains(methods, new MethodSignature("<init>", 
 				new String[] {String.class.getName()}));
 		assertContains(methods, new MethodSignature("<init>", 
-				new String[] {Integer.class.getName()}));
+				new String[] {"int"}));
 		
 	}
 	
@@ -91,17 +91,17 @@ public class GWT_2_6_LangDelegates extends TrialDelegate {
 		Set<I_MethodSignature> methods = attribs.getMethods();
 		assertContains(methods, new MethodSignature("<init>"));
 		assertContains(methods, new MethodSignature("<init>", 
-				new String[] {Boolean.class.getName()}));
+				new String[] {"boolean"}));
 		assertContains(methods, new MethodSignature("<init>", 
-				new String[] {Character.class.getName()}));
+				new String[] {"char"}));
 		assertContains(methods, new MethodSignature("<init>", 
-				new String[] {Double.class.getName()}));
+				new String[] {"double"}));
 		assertContains(methods, new MethodSignature("<init>", 
-				new String[] {Float.class.getName()}));
+				new String[] {"float"}));
 		assertContains(methods, new MethodSignature("<init>", 
-				new String[] {Integer.class.getName()}));
+				new String[] {"int"}));
 		assertContains(methods, new MethodSignature("<init>", 
-				new String[] {Long.class.getName()}));
+				new String[] {"long"}));
 		assertContains(methods, new MethodSignature("<init>", 
 				new String[] {Object.class.getName()}));
 		assertEquals(8, methods.size());
@@ -124,36 +124,37 @@ public class GWT_2_6_LangDelegates extends TrialDelegate {
 		assertEquals(Boolean.class.getName(), attribs.getClassName());
 		Set<I_FieldSignature> fields = attribs.getFields();
 		assertNotNull(fields);
-		assertContains(fields, new FieldSignature("FALSE", Boolean.class.getName()));
-		assertContains(fields, new FieldSignature("TRUE", Boolean.class.getName()));
+		assertContains(fields, new FieldSignature("FALSE", "boolean"));
+		assertContains(fields, new FieldSignature("TRUE", "boolean"));
 		assertContains(fields, new FieldSignature("TYPE", Class.class.getName()));
 		assertEquals(3, fields.size());
 		
 		Set<I_MethodSignature> methods = attribs.getMethods();
 		assertContains(methods, new MethodSignature("<init>",
-				new String[]{Boolean.class.getName()}));
+				new String[]{"boolean"}));
 		assertContains(methods, new MethodSignature("<init>",
 				new String[]{String.class.getName()}));
 		assertContains(methods, new MethodSignature("compare",
-				new String[]{Boolean.class.getName(), Boolean.class.getName()},
+				new String[]{"boolean", "boolean"},
 				Integer.class.getName()));
 		assertContains(methods, new MethodSignature("parseBoolean",
 				new String[]{String.class.getName()},
-				Boolean.class.getName()));
+				"boolean"));
 		assertContains(methods, new MethodSignature("valueOf",
-				new String[]{Boolean.class.getName()},
+				new String[]{"boolean"},
 				Boolean.class.getName()));
 		assertContains(methods, new MethodSignature("valueOf",
 				new String[]{String.class.getName()},
 				Boolean.class.getName()));
 		assertContains(methods, new MethodSignature("booleanValue",
-				Boolean.class.getName()));
+				"boolean"));
 		assertContains(methods, new MethodSignature("compareTo",
 				new String[]{Boolean.class.getName()},
 				Integer.class.getName()));
-		assertContains(methods, new MethodSignature("compareTo",
-				new String[]{Boolean.class.getName()},
-				Integer.class.getName()));
+		//third lien
+		assertContains(methods, new MethodSignature("equals",
+				new String[]{Object.class.getName()},
+				"boolean"));
 		assertContains(methods, new MethodSignature("hashCode",
 				Integer.class.getName()));
 		assertContains(methods, new MethodSignature("toString",
