@@ -7,7 +7,7 @@ import org.adligo.tests4j.models.shared.trials.SourceFileScope;
 import org.adligo.tests4j.models.shared.trials.Test;
 import org.adligo.tests4j_tests.base_trials.SourceFileCountingTrial;
 
-@SourceFileScope (sourceClass=MethodSignature.class, minCoverage=85.0)
+@SourceFileScope (sourceClass=MethodSignature.class, minCoverage=83.0)
 public class MethodSignatureTrial extends SourceFileCountingTrial {
 
 	@Test
