@@ -39,6 +39,8 @@ public class RunPkgTrials implements I_Tests4J_TrialList {
 		trials.add(JSE_1_7_MathTrial.class);
 		trials.add(JSE_1_7_SqlTrial.class);
 		trials.add(JSE_1_7_UtilTrial.class);
+		
+		trials.add(GWT_2_6_LangTrial.class);
 		return trials;
 	}
 }
