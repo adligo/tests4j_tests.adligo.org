@@ -1,9 +1,10 @@
-package org.adligo.tests4j_tests.models.shared.dependency;
+package org.adligo.tests4j_tests.models.shared.dependency_groups.jse;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import org.adligo.tests4j.models.shared.dependency.ClassParentsLocalMutant;
+import org.adligo.tests4j.models.shared.dependency_groups.jse.JSE_1_7_Lang;
 import org.adligo.tests4j.models.shared.system.I_Tests4J_TrialList;
 import org.adligo.tests4j.models.shared.system.Tests4J_Params;
 import org.adligo.tests4j.models.shared.system.Tests4J_Selection;
@@ -30,20 +31,27 @@ public class RunPkgTrials implements I_Tests4J_TrialList {
 	public List<Class<? extends I_Trial>> getTrials() {
 		List<Class<? extends I_Trial>> trials = new ArrayList<Class<? extends I_Trial>>();
 		
-		trials.add(ClassAliasTrial.class);
-		trials.add(ClassAttributesMutantTrial.class);
-		trials.add(ClassAttributesTrial.class);
+		trials.add(JSE_1_6_LangTrial.class);
 		
-		trials.add(ClassDependenciesLocalMutantTrial.class);
-		trials.add(ClassDependenciesLocalTrial.class);
+		trials.add(JSE_1_7_IOTrial.class);
+		trials.add(JSE_1_7_LangAnnotTrial.class);
+		trials.add(JSE_1_7_LangTrial.class);
+		trials.add(JSE_1_7_LogTrial.class);
 		
-		trials.add(ClassParentsLocalMutantTrial.class);
-		trials.add(ClassParentsLocalTrial.class);
+		trials.add(JSE_1_7_MathTrial.class);
+		trials.add(JSE_1_7_SqlTrial.class);
+		trials.add(JSE_1_7_UtilTrial.class);
 		
-		trials.add(DependencyMutantTrial.class);
-		trials.add(DependencyTrial.class);
+		trials.add(JSE_1_8_LangTrial.class);
 		
-		trials.add(MethodSignatureTrial.class);
+		trials.add(JSE_IOTrial.class);
+		trials.add(JSE_LangAnnotTrial.class);
+		trials.add(JSE_LangTrial.class);
+		trials.add(JSE_LogTrial.class);
+		
+		trials.add(JSE_MathTrial.class);
+		trials.add(JSE_SqlTrial.class);
+		trials.add(JSE_UtilTrial.class);
 		
 		return trials;
 	}

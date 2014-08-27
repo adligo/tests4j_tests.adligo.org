@@ -1,8 +1,8 @@
-package org.adligo.tests4j_tests.models.shared.dependency_group;
+package org.adligo.tests4j_tests.models.shared.dependency_groups.gwt;
 
 import org.adligo.tests4j.models.shared.dependency.ClassAttributes;
 import org.adligo.tests4j.models.shared.dependency.ClassAttributesMutant;
-import org.adligo.tests4j.models.shared.dependency_groups.GWT_2_6_Lang;
+import org.adligo.tests4j.models.shared.dependency_groups.gwt.GWT_2_6_Lang;
 import org.adligo.tests4j.models.shared.trials.SourceFileScope;
 import org.adligo.tests4j.models.shared.trials.Test;
 import org.adligo.tests4j_tests.base_trials.SourceFileCountingTrial;

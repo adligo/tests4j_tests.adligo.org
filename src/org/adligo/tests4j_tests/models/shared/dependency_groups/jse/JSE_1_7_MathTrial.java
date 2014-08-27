@@ -1,7 +1,7 @@
-package org.adligo.tests4j_tests.models.shared.dependency_group;
+package org.adligo.tests4j_tests.models.shared.dependency_groups.jse;
 
-import org.adligo.tests4j.models.shared.dependency_groups.JSE_1_7_Lang;
-import org.adligo.tests4j.models.shared.dependency_groups.JSE_1_7_Math;
+import org.adligo.tests4j.models.shared.dependency_groups.jse.JSE_1_7_Lang;
+import org.adligo.tests4j.models.shared.dependency_groups.jse.JSE_1_7_Math;
 import org.adligo.tests4j.models.shared.trials.SourceFileScope;
 import org.adligo.tests4j.models.shared.trials.Test;
 import org.adligo.tests4j_tests.base_trials.SourceFileCountingTrial;
@@ -17,7 +17,6 @@ public class JSE_1_7_MathTrial extends SourceFileCountingTrial {
 		assertEquals("java.math.BigInteger",JSE_1_7_Math.BIG_INTEGER);
 		assertEquals("java.math.MathContext",JSE_1_7_Math.MATH_CONTEXT);
 		assertEquals("java.math.RoundingMode",JSE_1_7_Math.ROUNDING_MODE);
-		assertEquals(JSE_1_7_Math.class.getName(), JSE_1_7_Math.INSTANCE.getClass().getName());
 	}
 	@Override
 	public int getTests() {
@@ -26,12 +25,12 @@ public class JSE_1_7_MathTrial extends SourceFileCountingTrial {
 
 	@Override
 	public int getAsserts() {
-		return 6;
+		return 5;
 	}
 
 	@Override
 	public int getUniqueAsserts() {
-		return 6;
+		return 5;
 	}
 
 }

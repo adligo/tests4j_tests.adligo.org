@@ -1,6 +1,6 @@
-package org.adligo.tests4j_tests.models.shared.dependency_group;
+package org.adligo.tests4j_tests.models.shared.dependency_groups.jse;
 
-import org.adligo.tests4j.models.shared.dependency_groups.JSE_1_7_IO;
+import org.adligo.tests4j.models.shared.dependency_groups.jse.JSE_1_7_IO;
 import org.adligo.tests4j.models.shared.trials.SourceFileScope;
 import org.adligo.tests4j.models.shared.trials.Test;
 import org.adligo.tests4j_tests.base_trials.SourceFileCountingTrial;
@@ -91,7 +91,6 @@ public class JSE_1_7_IOTrial extends SourceFileCountingTrial {
 		assertEquals("java.io.UTFDataFormatException",JSE_1_7_IO.UTFDATA_FORMAT_EXCEPTION);
 		assertEquals("java.io.WriteAbortedException",JSE_1_7_IO.WRITE_ABORTED_EXCEPTION);
 		assertEquals("java.io.IOError",JSE_1_7_IO.IOERROR);
-		assertEquals(JSE_1_7_IO.class.getName(), JSE_1_7_IO.INSTANCE.getClass().getName());
 	}
 	@Override
 	public int getTests() {
@@ -100,12 +99,12 @@ public class JSE_1_7_IOTrial extends SourceFileCountingTrial {
 
 	@Override
 	public int getAsserts() {
-		return 81;
+		return 80;
 	}
 
 	@Override
 	public int getUniqueAsserts() {
-		return 81;
+		return 80;
 	}
 
 }

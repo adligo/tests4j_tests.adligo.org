@@ -1,6 +1,6 @@
-package org.adligo.tests4j_tests.models.shared.dependency_group;
+package org.adligo.tests4j_tests.models.shared.dependency_groups.jse;
 
-import org.adligo.tests4j.models.shared.dependency_groups.JSE_1_7_Util;
+import org.adligo.tests4j.models.shared.dependency_groups.jse.JSE_1_7_Util;
 import org.adligo.tests4j.models.shared.trials.SourceFileScope;
 import org.adligo.tests4j.models.shared.trials.Test;
 import org.adligo.tests4j_tests.base_trials.SourceFileCountingTrial;
@@ -110,7 +110,6 @@ public class JSE_1_7_UtilTrial extends SourceFileCountingTrial {
 		assertEquals("java.util.UnknownFormatConversionException",JSE_1_7_Util.UNKNOWN_FORMAT_CONVERSION_EXCEPTION);
 		assertEquals("java.util.UnknownFormatFlagsException",JSE_1_7_Util.UNKNOWN_FORMAT_FLAGS_EXCEPTION);
 		assertEquals("java.util.ServiceConfigurationError",JSE_1_7_Util.SERVICE_CONFIGURATION_ERROR);
-		assertEquals(JSE_1_7_Util.class.getName(), JSE_1_7_Util.INSTANCE.getClass().getName());
 	}
 	@Override
 	public int getTests() {
@@ -119,12 +118,12 @@ public class JSE_1_7_UtilTrial extends SourceFileCountingTrial {
 
 	@Override
 	public int getAsserts() {
-		return 100;
+		return 99;
 	}
 
 	@Override
 	public int getUniqueAsserts() {
-		return 100;
+		return 99;
 	}
 
 }

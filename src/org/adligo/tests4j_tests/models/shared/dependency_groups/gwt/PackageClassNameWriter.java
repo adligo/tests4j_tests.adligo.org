@@ -1,4 +1,4 @@
-package org.adligo.tests4j_tests.models.shared.dependency_group;
+package org.adligo.tests4j_tests.models.shared.dependency_groups.gwt;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;

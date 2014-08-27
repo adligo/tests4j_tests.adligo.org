@@ -72,7 +72,7 @@ import org.adligo.tests4j_tests.run.discovery.package_discovery_inner_mocks.TwoN
 @SourceFileScope (sourceClass=PackageDiscovery.class, minCoverage=51.0)
 public class PackageDiscoveryTrial extends SourceFileCountingTrial {
 
-	private static final int ASSERT_COUNT = 80;
+	private static final int ASSERT_COUNT = 81;
 
 	@Test
 	public void testDiscoveryPackage() throws Exception {
@@ -224,11 +224,12 @@ public class PackageDiscoveryTrial extends SourceFileCountingTrial {
 		for(PackageDiscovery i: children) {
 			childNames.add(i.getPackageName());
 		}
+		assertContains(childNames, "org.adligo.tests4j.gen");
 		assertContains(childNames, "org.adligo.tests4j.models");
 		assertContains(childNames, "org.adligo.tests4j.run");
 		assertContains(childNames, "org.adligo.tests4j.shared");
 		
-		assertEquals(3, children.size());
+		assertEquals(4, children.size());
 	}
 	
 	@Override

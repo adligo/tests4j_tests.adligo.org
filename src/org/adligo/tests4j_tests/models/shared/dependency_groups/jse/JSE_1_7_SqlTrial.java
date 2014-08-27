@@ -1,6 +1,6 @@
-package org.adligo.tests4j_tests.models.shared.dependency_group;
+package org.adligo.tests4j_tests.models.shared.dependency_groups.jse;
 
-import org.adligo.tests4j.models.shared.dependency_groups.JSE_1_7_Sql;
+import org.adligo.tests4j.models.shared.dependency_groups.jse.JSE_1_7_Sql;
 import org.adligo.tests4j.models.shared.trials.SourceFileScope;
 import org.adligo.tests4j.models.shared.trials.Test;
 import org.adligo.tests4j_tests.base_trials.SourceFileCountingTrial;
@@ -59,7 +59,6 @@ public class JSE_1_7_SqlTrial extends SourceFileCountingTrial {
 		assertEquals("java.sql.SQLTransientConnectionException",JSE_1_7_Sql.SQLTRANSIENT_CONNECTION_EXCEPTION);
 		assertEquals("java.sql.SQLTransientException",JSE_1_7_Sql.SQLTRANSIENT_EXCEPTION);
 		assertEquals("java.sql.SQLWarning",JSE_1_7_Sql.SQLWARNING);
-		assertEquals(JSE_1_7_Sql.class.getName(), JSE_1_7_Sql.INSTANCE.getClass().getName());
 	}
 	@Override
 	public int getTests() {
@@ -68,12 +67,12 @@ public class JSE_1_7_SqlTrial extends SourceFileCountingTrial {
 
 	@Override
 	public int getAsserts() {
-		return 49;
+		return 48;
 	}
 
 	@Override
 	public int getUniqueAsserts() {
-		return 49;
+		return 48;
 	}
 
 }

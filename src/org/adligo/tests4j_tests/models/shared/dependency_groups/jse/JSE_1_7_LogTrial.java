@@ -1,7 +1,7 @@
-package org.adligo.tests4j_tests.models.shared.dependency_group;
+package org.adligo.tests4j_tests.models.shared.dependency_groups.jse;
 
-import org.adligo.tests4j.models.shared.dependency_groups.JSE_1_7_Log;
-import org.adligo.tests4j.models.shared.dependency_groups.JSE_1_7_Math;
+import org.adligo.tests4j.models.shared.dependency_groups.jse.JSE_1_7_Log;
+import org.adligo.tests4j.models.shared.dependency_groups.jse.JSE_1_7_Math;
 import org.adligo.tests4j.models.shared.trials.SourceFileScope;
 import org.adligo.tests4j.models.shared.trials.Test;
 import org.adligo.tests4j_tests.base_trials.SourceFileCountingTrial;
@@ -28,7 +28,6 @@ public class JSE_1_7_LogTrial extends SourceFileCountingTrial {
 		assertEquals("java.util.logging.SocketHandler",JSE_1_7_Log.SOCKET_HANDLER);
 		assertEquals("java.util.logging.StreamHandler",JSE_1_7_Log.STREAM_HANDLER);
 		assertEquals("java.util.logging.XMLFormatter",JSE_1_7_Log.XMLFORMATTER);
-		assertEquals(JSE_1_7_Log.class.getName(), JSE_1_7_Log.INSTANCE.getClass().getName());
 	}
 	@Override
 	public int getTests() {
@@ -37,12 +36,12 @@ public class JSE_1_7_LogTrial extends SourceFileCountingTrial {
 
 	@Override
 	public int getAsserts() {
-		return 17;
+		return 16;
 	}
 
 	@Override
 	public int getUniqueAsserts() {
-		return 17;
+		return 16;
 	}
 
 }

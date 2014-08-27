@@ -1,6 +1,7 @@
-package org.adligo.tests4j_tests.models.shared.dependency_group;
+package org.adligo.tests4j_tests.models.shared.dependency_groups.jse;
 
-import org.adligo.tests4j.models.shared.dependency_groups.JSE_1_7_Lang;
+import org.adligo.tests4j.models.shared.dependency_groups.jse.JSE_1_6_Lang;
+import org.adligo.tests4j.models.shared.dependency_groups.jse.JSE_1_7_Lang;
 import org.adligo.tests4j.models.shared.trials.SourceFileScope;
 import org.adligo.tests4j.models.shared.trials.Test;
 import org.adligo.tests4j_tests.base_trials.SourceFileCountingTrial;
@@ -111,7 +112,11 @@ public class JSE_1_7_LangTrial extends SourceFileCountingTrial {
 		assertEquals("java.lang.UnsupportedClassVersionError",JSE_1_7_Lang.UNSUPPORTED_CLASS_VERSION_ERROR);
 		assertEquals("java.lang.VerifyError",JSE_1_7_Lang.VERIFY_ERROR);
 		assertEquals("java.lang.VirtualMachineError",JSE_1_7_Lang.VIRTUAL_MACHINE_ERROR);
-		assertEquals(JSE_1_7_Lang.class.getName(), JSE_1_7_Lang.INSTANCE.getClass().getName());
+		
+		assertEquals("java.lang.Deprecated", JSE_1_7_Lang.DEPRICATED);
+		assertEquals("java.lang.Override", JSE_1_7_Lang.OVERRIDE);		
+		assertEquals("java.lang.SuppressWarnings", JSE_1_7_Lang.SUPRESS_WARNINGS);
+		assertEquals("java.lang.SafeVarargs", JSE_1_7_Lang.SAFE_VARARGS);
 	}
 	@Override
 	public int getTests() {
@@ -120,12 +125,12 @@ public class JSE_1_7_LangTrial extends SourceFileCountingTrial {
 
 	@Override
 	public int getAsserts() {
-		return 100;
+		return 103;
 	}
 
 	@Override
 	public int getUniqueAsserts() {
-		return 100;
+		return 103;
 	}
 
 }
