@@ -17,50 +17,50 @@ public class GWT_2_6_LangTrial extends SourceFileCountingTrial {
 	}
 	@Test
 	public void testAppendable() {
-		ClassAttributesMutant cam = GWT_2_6_Lang.getAppendable();
-		delegates.delegateAppendable(ClassAttributesMutant.class, cam);
+		ClassAttributes cam = GWT_2_6_Lang.getAppendable();
+		delegates.delegateAppendable(ClassAttributesMutant.class, new ClassAttributesMutant(cam));
 		delegates.delegateAppendable(ClassAttributes.class, new ClassAttributes(cam));
 	}
 	
 	@Test
 	public void testArithmeticException() {
-		ClassAttributesMutant cam = GWT_2_6_Lang.getArithmeticException();
-		delegates.delegateArithmeticException(ClassAttributesMutant.class, cam);
+		ClassAttributes cam = GWT_2_6_Lang.getArithmeticException();
+		delegates.delegateArithmeticException(ClassAttributesMutant.class, new ClassAttributesMutant(cam));
 		delegates.delegateArithmeticException(ClassAttributes.class, new ClassAttributes(cam));
 	}
 	
 	@Test
 	public void testArrayIndexOutOfBoundsException() {
-		ClassAttributesMutant cam = GWT_2_6_Lang.getArrayIndexOutOfBounds();
-		delegates.delegateArrayIndexOutOfBoundsException(ClassAttributesMutant.class, cam);
+		ClassAttributes cam = GWT_2_6_Lang.getArrayIndexOutOfBoundsException();
+		delegates.delegateArrayIndexOutOfBoundsException(ClassAttributesMutant.class, new ClassAttributesMutant(cam));
 		delegates.delegateArrayIndexOutOfBoundsException(ClassAttributes.class, new ClassAttributes(cam));
 	}
 	
 	@Test
 	public void testArrayStoreException() {
-		ClassAttributesMutant cam = GWT_2_6_Lang.getArrayStoreException();
-		delegates.delegateArrayStoreException(ClassAttributesMutant.class, cam);
+		ClassAttributes cam = GWT_2_6_Lang.getArrayStoreException();
+		delegates.delegateArrayStoreException(ClassAttributesMutant.class, new ClassAttributesMutant(cam));
 		delegates.delegateArrayStoreException(ClassAttributes.class, new ClassAttributes(cam));
 	}
 	
 	@Test
 	public void testAssertionError() {
-		ClassAttributesMutant cam = GWT_2_6_Lang.getAssertionError();
-		delegates.delegateAssertionError(ClassAttributesMutant.class, cam);
+		ClassAttributes cam = GWT_2_6_Lang.getAssertionError();
+		delegates.delegateAssertionError(ClassAttributesMutant.class, new ClassAttributesMutant(cam));
 		delegates.delegateAssertionError(ClassAttributes.class, new ClassAttributes(cam));
 	}
 	
 	@Test
 	public void testAutoCloseable() {
-		ClassAttributesMutant cam = GWT_2_6_Lang.getAutoCloseable();
-		delegates.delegateAutoCloseable(ClassAttributesMutant.class, cam);
+		ClassAttributes cam = GWT_2_6_Lang.getAutoCloseable();
+		delegates.delegateAutoCloseable(ClassAttributesMutant.class, new ClassAttributesMutant(cam));
 		delegates.delegateAutoCloseable(ClassAttributes.class, new ClassAttributes(cam));
 	}
 	
 	@Test
 	public void testBoolean() {
-		ClassAttributesMutant cam = GWT_2_6_Lang.getBoolean();
-		delegates.delegateBoolean(ClassAttributesMutant.class, cam);
+		ClassAttributes cam = GWT_2_6_Lang.getBoolean();
+		delegates.delegateBoolean(ClassAttributesMutant.class, new ClassAttributesMutant(cam));
 		delegates.delegateBoolean(ClassAttributes.class, new ClassAttributes(cam));
 	}
 	
