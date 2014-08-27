@@ -11,6 +11,7 @@ import java.util.Set;
 import org.adligo.tests4j.models.shared.asserts.common.ExpectedThrownData;
 import org.adligo.tests4j.models.shared.asserts.common.I_Thrower;
 import org.adligo.tests4j.models.shared.common.ClassMethods;
+import org.adligo.tests4j.models.shared.trials.CircularDependencies;
 import org.adligo.tests4j.models.shared.trials.SourceFileScope;
 import org.adligo.tests4j.models.shared.trials.Test;
 import org.adligo.tests4j.run.helpers.CachedClassBytesClassLoader;
@@ -20,7 +21,8 @@ import org.adligo.tests4j_tests.run.helpers.class_loading_mocks.MockCachedClassB
 import org.adligo.tests4j_tests.run.helpers.class_loading_mocks.MockInputStream;
 import org.adligo.tests4j_tests.run.helpers.class_loading_mocks.MockWithNothing;
 
-@SourceFileScope (sourceClass=CachedClassBytesClassLoader.class, minCoverage=78.0)
+@SourceFileScope (sourceClass=CachedClassBytesClassLoader.class, 
+	minCoverage=78.0, allowedCircularDependencies=CircularDependencies.INNER_CLASSES_ONLY)
 public class CachedClassBytesClassLoaderTrial extends SourceFileCountingTrial {
 	private static final String MOCK_PACKAGE_NAME = MockWithNothing.class.getPackage().getName();
 	

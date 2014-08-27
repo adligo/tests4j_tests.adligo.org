@@ -2,13 +2,8 @@ package org.adligo.tests4j_tests;
 
 import org.adligo.tests4j.models.shared.system.Tests4J_Params;
 import org.adligo.tests4j.run.Tests4J;
-import org.adligo.tests4j.shared.report.summary.TestDisplay;
-import org.adligo.tests4j.shared.report.summary.TrialDisplay;
 import org.adligo.tests4j_4jacoco.plugin.CoveragePluginFactory;
-import org.adligo.tests4j_4jacoco.plugin.discovery.InitialDependenciesDiscovery;
-import org.adligo.tests4j_4jacoco.plugin.instrumentation.ClassInstrumenter;
-import org.adligo.tests4j_4jacoco.plugin.instrumentation.TrialInstrumenter;
-import org.adligo.tests4j_tests.trials_api.AssertionsFail_Trial;
+import org.adligo.tests4j_tests.trials_api.bad_mock_source_file_trials.NoTestsTrial;
 
 public class RunSingleTrial {
 
@@ -18,7 +13,7 @@ public class RunSingleTrial {
 		//params.addTrial(NoPackageScopeAnnotationTrial.class);
 		//params.addTrial(ReferenceTrackingClassVisitorTrial.class);
 		//params.addTrial(ReferenceTrackingMethodVisitorTrial.class);
-		params.addTrial(AssertionsFail_Trial.class);
+		params.addTrial(NoTestsTrial.class);
 		//params.addTrial(ReferenceTrackingClassVisitorTrial.class);
 		//params.addTrial(BadUseCaseTrials_Trial.class);
 		//params.addTest(new Tests4J_Selection(DiscoveryApiTrial.class, "test2003_MockWithTriangleA"));
@@ -35,7 +30,7 @@ public class RunSingleTrial {
 		//logging from jacoco
 		//params.addLoggingClass(AbstractPlugin.class);
 		//params.setLogState(Recorder.class, true);
-		params.setCoveragePluginFactoryClass(CoveragePluginFactory.class);
+		//params.setCoveragePluginFactoryClass(CoveragePluginFactory.class);
 		Tests4J.run(params);
 	}
 

@@ -11,6 +11,8 @@ import org.adligo.tests4j_tests.models.shared.i18n.I18N_Asserter;
 @SourceFileScope (sourceClass=Tests4J_ResultMessages.class)
 public class Tests4J_AssertionResultMessages_Trial extends SourceFileCountingTrial {
 
+	private static final int ASSERT_COUNT = 76;
+
 	@Test
 	public void testMessages() {
 		I_Tests4J_ResultMessages messages = Tests4J_EnglishConstants.ENGLISH.getResultMessages();
@@ -82,7 +84,9 @@ public class Tests4J_AssertionResultMessages_Trial extends SourceFileCountingTri
 				messages.getTrialTimedOut());
 		asserter.assertConstant("The code coverage should be above the expected value.",
 				messages.getCodeCoveragIsOff());
-
+		asserter.assertConstant("Source class has a circular dependency detected.",
+				messages.getSourceClassHasCircularDependency());
+		
 		asserter.assertConstantsMatchMethods(Tests4J_ResultMessages.class);
 	}
 
@@ -93,11 +97,11 @@ public class Tests4J_AssertionResultMessages_Trial extends SourceFileCountingTri
 
 	@Override
 	public int getAsserts() {
-		return 73;
+		return ASSERT_COUNT;
 	}
 
 	@Override
 	public int getUniqueAsserts() {
-		return 73;
+		return ASSERT_COUNT;
 	}
 }

@@ -68,7 +68,7 @@ public class TheMetaTrial  extends AbstractTrial implements I_MetaTrial {
 		if (results.hasCoverage()) {
 			double actual = results.getCoveragePercentage();
 			//assertGreaterThanOrEquals(60.0, actual);
-			assertGreaterThanOrEquals(53.0, actual);
+			assertGreaterThanOrEquals(60.0, actual);
 		}
 		//TODO
 		//assertEquals(1,results.getTrialsIgnored());
@@ -77,12 +77,12 @@ public class TheMetaTrial  extends AbstractTrial implements I_MetaTrial {
 		// does include afterMetadataCalculated(I_TrialRunMetadata metadata)
 		// - 4 ignored tests in
 		// MultiRecordingTrial
-		assertGreaterThanOrEquals(560, results.getTestsPassed());
+		assertGreaterThanOrEquals(601, results.getTestsPassed());
 		
 		//does not include assertions from this class yet
 		//I think the single threaded count is off somewhere
-		assertGreaterThanOrEquals(27000,results.getAsserts());
-		assertGreaterThanOrEquals(8600,results.getUniqueAsserts());
+		assertGreaterThanOrEquals(130000,results.getAsserts());
+		assertGreaterThanOrEquals(9600,results.getUniqueAsserts());
 	}
 
 
