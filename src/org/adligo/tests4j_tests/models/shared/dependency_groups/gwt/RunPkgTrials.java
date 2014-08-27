@@ -39,7 +39,7 @@ public class RunPkgTrials implements I_Tests4J_TrialList {
 		List<Class<? extends I_Trial>> trials = new ArrayList<Class<? extends I_Trial>>();
 		
 		
-		
+		trials.add(Appendable_2_6_ClassAttributeUseTrial.class);
 		
 		trials.add(GWT_2_6_LangTrial.class);
 		
