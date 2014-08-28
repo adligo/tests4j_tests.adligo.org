@@ -113,9 +113,9 @@ public class JSE_1_7_LangTrial extends SourceFileCountingTrial {
 		assertEquals("java.lang.VerifyError",JSE_1_7_Lang.VERIFY_ERROR);
 		assertEquals("java.lang.VirtualMachineError",JSE_1_7_Lang.VIRTUAL_MACHINE_ERROR);
 		
-		assertEquals("java.lang.Deprecated", JSE_1_7_Lang.DEPRICATED);
+		assertEquals("java.lang.Deprecated", JSE_1_7_Lang.DEPRECATED);
 		assertEquals("java.lang.Override", JSE_1_7_Lang.OVERRIDE);		
-		assertEquals("java.lang.SuppressWarnings", JSE_1_7_Lang.SUPRESS_WARNINGS);
+		assertEquals("java.lang.SuppressWarnings", JSE_1_7_Lang.SUPPRESS_WARNINGS);
 		assertEquals("java.lang.SafeVarargs", JSE_1_7_Lang.SAFE_VARARGS);
 	}
 	@Override

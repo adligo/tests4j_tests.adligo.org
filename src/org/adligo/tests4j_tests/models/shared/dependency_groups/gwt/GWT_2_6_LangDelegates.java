@@ -18,7 +18,7 @@ public class GWT_2_6_LangDelegates extends TrialDelegate {
 
 	public void delegateAppendable(Class<?> expectedInstanceClass, I_ClassAttributes attribs) {
 		assertEquals(expectedInstanceClass, attribs.getClass());
-		assertEquals(Appendable.class.getName(), attribs.getClassName());
+		assertEquals(Appendable.class.getName(), attribs.getName());
 		Set<I_FieldSignature> fields = attribs.getFields();
 		assertNotNull(fields);
 		assertEquals(0, fields.size());
@@ -37,7 +37,7 @@ public class GWT_2_6_LangDelegates extends TrialDelegate {
 	
 	public void delegateArithmeticException(Class<?> expectedInstanceClass, I_ClassAttributes attribs) {
 		assertEquals(expectedInstanceClass, attribs.getClass());
-		assertEquals(ArithmeticException.class.getName(), attribs.getClassName());
+		assertEquals(ArithmeticException.class.getName(), attribs.getName());
 		Set<I_FieldSignature> fields = attribs.getFields();
 		assertNotNull(fields);
 		assertEquals(0, fields.size());
@@ -53,7 +53,7 @@ public class GWT_2_6_LangDelegates extends TrialDelegate {
 	
 	public void delegateArrayIndexOutOfBoundsException(Class<?> expectedInstanceClass, I_ClassAttributes attribs) {
 		assertEquals(expectedInstanceClass, attribs.getClass());
-		assertEquals(ArrayIndexOutOfBoundsException.class.getName(), attribs.getClassName());
+		assertEquals(ArrayIndexOutOfBoundsException.class.getName(), attribs.getName());
 		Set<I_FieldSignature> fields = attribs.getFields();
 		assertNotNull(fields);
 		assertEquals(0, fields.size());
@@ -69,7 +69,7 @@ public class GWT_2_6_LangDelegates extends TrialDelegate {
 	
 	public void delegateArrayStoreException(Class<?> expectedInstanceClass, I_ClassAttributes attribs) {
 		assertEquals(expectedInstanceClass, attribs.getClass());
-		assertEquals(ArrayStoreException.class.getName(), attribs.getClassName());
+		assertEquals(ArrayStoreException.class.getName(), attribs.getName());
 		Set<I_FieldSignature> fields = attribs.getFields();
 		assertNotNull(fields);
 		assertEquals(0, fields.size());
@@ -83,7 +83,7 @@ public class GWT_2_6_LangDelegates extends TrialDelegate {
 	
 	public void delegateAssertionError(Class<?> expectedInstanceClass, I_ClassAttributes attribs) {
 		assertEquals(expectedInstanceClass, attribs.getClass());
-		assertEquals(AssertionError.class.getName(), attribs.getClassName());
+		assertEquals(AssertionError.class.getName(), attribs.getName());
 		Set<I_FieldSignature> fields = attribs.getFields();
 		assertNotNull(fields);
 		assertEquals(0, fields.size());
@@ -109,7 +109,7 @@ public class GWT_2_6_LangDelegates extends TrialDelegate {
 	
 	public void delegateAutoCloseable(Class<?> expectedInstanceClass, I_ClassAttributes attribs) {
 		assertEquals(expectedInstanceClass, attribs.getClass());
-		assertEquals(AutoCloseable.class.getName(), attribs.getClassName());
+		assertEquals(AutoCloseable.class.getName(), attribs.getName());
 		Set<I_FieldSignature> fields = attribs.getFields();
 		assertNotNull(fields);
 		assertEquals(0, fields.size());
@@ -121,7 +121,7 @@ public class GWT_2_6_LangDelegates extends TrialDelegate {
 	
 	public void delegateBoolean(Class<?> expectedInstanceClass, I_ClassAttributes attribs) {
 		assertEquals(expectedInstanceClass, attribs.getClass());
-		assertEquals(Boolean.class.getName(), attribs.getClassName());
+		assertEquals(Boolean.class.getName(), attribs.getName());
 		Set<I_FieldSignature> fields = attribs.getFields();
 		assertNotNull(fields);
 		assertContains(fields, new FieldSignature("FALSE", Boolean.class.getName()));

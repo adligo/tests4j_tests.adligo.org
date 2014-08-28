@@ -1,4 +1,4 @@
-package org.adligo.tests4j_tests.models.shared.dependency_groups.gwt;
+package org.adligo.tests4j_tests.models.shared.dependency_groups.gwt.v2_6.lang;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,13 +38,8 @@ public class RunPkgTrials implements I_Tests4J_TrialList {
 	public List<Class<? extends I_Trial>> getTrials() {
 		List<Class<? extends I_Trial>> trials = new ArrayList<Class<? extends I_Trial>>();
 		
+		trials.add(Object_2_6_UseTrial.class);
 		
-		trials.add(Appendable_2_6_ClassAttributeUseTrial.class);
-		
-		trials.add(GWT_2_6_LangTrial.class);
-		trials.addAll(
-				new org.adligo.tests4j_tests.models.shared.dependency_groups.gwt.v2_6.lang.RunPkgTrials()
-				.getTrials());
 		return trials;
 	}
 }

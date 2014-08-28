@@ -257,29 +257,29 @@ public class DAT_Assert_Simple extends TrialDelegate {
 		assertNotNull(atribs);
 		I_ClassAttributes ref = atribs.get(0);
 		assertNotNull(ref);
-		assertEquals(String.class.getName(), ref.getClassName());
+		assertEquals(String.class.getName(), ref.getName());
 		
 		ref = atribs.get(1);
 		assertNotNull(ref);
-		assertEquals(ArithmeticException.class.getName(), ref.getClassName());
+		assertEquals(Object.class.getName(), ref.getName());
 		Set<I_MethodSignature> methods = ref.getMethods();
-		assertNotNull(methods);
-		assertContains(methods, new MethodSignature("<init>", new String[] {String.class.getName()}, null));
+		assertContains(methods, new MethodSignature("<init>", null, null));
 		assertEquals(MethodSignature.class.getName(), methods.iterator().next().getClass().getName());
 		assertEquals(1, methods.size());
 		
 		ref = atribs.get(2);
 		assertNotNull(ref);
-		assertEquals(Object.class.getName(), ref.getClassName());
+		assertEquals(ArithmeticException.class.getName(), ref.getName());
 		methods = ref.getMethods();
 		assertNotNull(methods);
-		assertContains(methods, new MethodSignature("<init>", null, null));
+		assertContains(methods, new MethodSignature("<init>", new String[] {String.class.getName()}, null));
 		assertEquals(MethodSignature.class.getName(), methods.iterator().next().getClass().getName());
 		assertEquals(1, methods.size());
+		
 			
 		ref = atribs.get(3);
 		assertNotNull(ref);
-		assertEquals(MockWithCallToArithmeticException_Constructor.class.getName(), ref.getClassName());
+		assertEquals(MockWithCallToArithmeticException_Constructor.class.getName(), ref.getName());
 		Set<I_FieldSignature> fields = ref.getFields();
 		assertNotNull(fields);
 		assertContains(fields, new FieldSignature("x", ArithmeticException.class.getName()));

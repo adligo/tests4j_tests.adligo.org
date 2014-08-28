@@ -1,8 +1,16 @@
 package org.adligo.tests4j_tests.models.shared.dependency_groups.gwt;
 
+import java.util.Set;
+
+import org.adligo.tests4j.models.shared.common.ClassMethods;
 import org.adligo.tests4j.models.shared.dependency.ClassAttributes;
 import org.adligo.tests4j.models.shared.dependency.ClassAttributesMutant;
+import org.adligo.tests4j.models.shared.dependency.I_ClassAttributes;
+import org.adligo.tests4j.models.shared.dependency.I_FieldSignature;
+import org.adligo.tests4j.models.shared.dependency.I_MethodSignature;
+import org.adligo.tests4j.models.shared.dependency.MethodSignature;
 import org.adligo.tests4j.models.shared.dependency_groups.gwt.GWT_2_6_Lang;
+import org.adligo.tests4j.models.shared.dependency_groups.jse.JSE_Lang;
 import org.adligo.tests4j.models.shared.trials.SourceFileScope;
 import org.adligo.tests4j.models.shared.trials.Test;
 import org.adligo.tests4j_tests.base_trials.SourceFileCountingTrial;
@@ -65,22 +73,49 @@ public class GWT_2_6_LangTrial extends SourceFileCountingTrial {
 	}
 	
 	@Test
+	public void testObject() {
+		I_ClassAttributes result = GWT_2_6_Lang.getObject();
+		assertEquals("java.lang.Object", result.getName());
+		assertObjectMembers(result);
+	}
+	
+	public void assertObjectMembers(I_ClassAttributes result) {
+		Set<I_FieldSignature> fs = result.getFields();
+		assertNotNull(fs);
+		assertEquals(0, fs.size());
+		
+		Set<I_MethodSignature> ms = result.getMethods();
+		assertNotNull(ms);
+		assertContains(ms, new MethodSignature("equals", 
+			new String[] {JSE_Lang.OBJECT}, 
+			ClassMethods.BOOLEAN));
+		assertContains(ms, new MethodSignature("getClass", 
+			JSE_Lang.CLASS));
+		assertContains(ms, new MethodSignature("hashCode", 
+			ClassMethods.INT));
+		assertContains(ms, new MethodSignature("<init>"));
+		assertContains(ms, new MethodSignature("toString", 
+			JSE_Lang.STRING));
+		assertEquals(5, ms.size());
+	}
+	
+	@Test
 	public void testByte() {
 		
 	}
 	@Override
 	public int getTests() {
-		return 8;
+		return 9;
 	}
 
 	@Override
 	public int getAsserts() {
-		return 124;
+		return 134;
 	}
 
 	@Override
 	public int getUniqueAsserts() {
-		return 69;
+		return 79;
 	}
 
 }

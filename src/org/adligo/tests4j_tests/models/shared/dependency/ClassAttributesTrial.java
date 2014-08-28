@@ -32,7 +32,7 @@ public class ClassAttributesTrial extends SourceFileCountingTrial {
 					@Override
 					public void run() {
 						ClassAttributesMutant ms = new ClassAttributesMutant();
-						ms.setClassName(null);
+						ms.setName(null);
 						new ClassAttributes(ms);
 					}
 				});
@@ -42,7 +42,7 @@ public class ClassAttributesTrial extends SourceFileCountingTrial {
 					@Override
 					public void run() {
 						ClassAttributesMutant ms = new ClassAttributesMutant();
-						ms.setClassName("");
+						ms.setName("");
 						new ClassAttributes(ms);
 					}
 				});
@@ -51,26 +51,26 @@ public class ClassAttributesTrial extends SourceFileCountingTrial {
 	@Test
 	public void testCopyConstructorAndGetters() {
 		ClassAttributesMutant cmm = new ClassAttributesMutant();
-		cmm.setClassName("className");
+		cmm.setName("className");
 		
 		MethodSignature ms = new MethodSignature("foo", null, null);
 		cmm.addMethod(ms);
 		
 		ClassAttributes copy = new ClassAttributes(cmm);
-		assertEquals("className", copy.getClassName());
+		assertEquals("className", copy.getName());
 		
 		Set<I_MethodSignature> sigs = copy.getMethods();
 		assertEquals("java.util.Collections$UnmodifiableSet", sigs.getClass().getName());
 		assertContains(sigs, ms);
 		assertEquals(1, sigs.size());
 		
-		cmm.setClassName("2");
+		cmm.setName("2");
 		MethodSignature bar = new MethodSignature("bar", null, null);
 		cmm.addMethod(bar);
 		cmm.addMethod(null);
 		
 		copy = new ClassAttributes(cmm);
-		assertEquals("2", copy.getClassName());
+		assertEquals("2", copy.getName());
 		
 		sigs = copy.getMethods();
 		assertEquals("java.util.Collections$UnmodifiableSet", sigs.getClass().getName());
@@ -84,12 +84,12 @@ public class ClassAttributesTrial extends SourceFileCountingTrial {
 	@Test
 	public void testToString() {
 		ClassAttributesMutant cmm = new ClassAttributesMutant();
-		cmm.setClassName("className");
-		assertEquals("ClassAttributes [className=className]", new ClassAttributes(cmm).toString());
+		cmm.setName("className");
+		assertEquals("ClassAttributes [name=className]", new ClassAttributes(cmm).toString());
 	
 		cmm.addMethod(new MethodSignature("foo", null, null));
 		cmm.addMethod(new MethodSignature("bar", null, null));
-		assertEquals("ClassAttributes [className=className, methods=[void bar(), void foo()]]", 
+		assertEquals("ClassAttributes [name=className, methods=[void bar(), void foo()]]", 
 				new ClassAttributes(cmm).toString());
 		
 	}

@@ -1,6 +1,7 @@
 package org.adligo.tests4j_tests.models.shared.dependency_groups.jse;
 
 import org.adligo.tests4j.models.shared.dependency_groups.jse.JSE_Lang;
+import org.adligo.tests4j.models.shared.dependency_groups.jse.JSE_Lang;
 import org.adligo.tests4j.models.shared.trials.SourceFileScope;
 import org.adligo.tests4j.models.shared.trials.Test;
 import org.adligo.tests4j_tests.base_trials.SourceFileCountingTrial;
@@ -12,6 +13,7 @@ public class JSE_LangTrial extends SourceFileCountingTrial {
 	public void testConstants() {
 
 		assertEquals("java.lang.Appendable",JSE_Lang.APPENDABLE);
+		assertEquals("java.lang.AutoCloseable",JSE_Lang.AUTO_CLOSEABLE);
 		assertEquals("java.lang.CharSequence",JSE_Lang.CHAR_SEQUENCE);
 		assertEquals("java.lang.Cloneable",JSE_Lang.CLONEABLE);
 		assertEquals("java.lang.Comparable",JSE_Lang.COMPARABLE);
@@ -40,6 +42,7 @@ public class JSE_LangTrial extends SourceFileCountingTrial {
 		assertEquals("java.lang.Package",JSE_Lang.PACKAGE);
 		assertEquals("java.lang.Process",JSE_Lang.PROCESS);
 		assertEquals("java.lang.ProcessBuilder",JSE_Lang.PROCESS_BUILDER);
+		assertEquals("java.lang.ProcessBuilder$Redirect",JSE_Lang.PROCESS_BUILDER_REDIRECT);
 		assertEquals("java.lang.Runtime",JSE_Lang.RUNTIME);
 		assertEquals("java.lang.RuntimePermission",JSE_Lang.RUNTIME_PERMISSION);
 		assertEquals("java.lang.SecurityManager",JSE_Lang.SECURITY_MANAGER);
@@ -55,6 +58,8 @@ public class JSE_LangTrial extends SourceFileCountingTrial {
 		assertEquals("java.lang.ThreadLocal",JSE_Lang.THREAD_LOCAL);
 		assertEquals("java.lang.Throwable",JSE_Lang.THROWABLE);
 		assertEquals("java.lang.Void",JSE_Lang.VOID);
+		assertEquals("java.lang.Character$UnicodeScript",JSE_Lang.CHARACTER_UNICODE_SCRIPT);
+		assertEquals("java.lang.ProcessBuilder$Redirect$Type",JSE_Lang.PROCESS_BUILDER_REDIRECT_TYPE);
 		assertEquals("java.lang.Thread$State",JSE_Lang.THREAD_STATE);
 		assertEquals("java.lang.ArithmeticException",JSE_Lang.ARITHMETIC_EXCEPTION);
 		assertEquals("java.lang.ArrayIndexOutOfBoundsException",JSE_Lang.ARRAY_INDEX_OUT_OF_BOUNDS_EXCEPTION);
@@ -85,6 +90,7 @@ public class JSE_LangTrial extends SourceFileCountingTrial {
 		assertEquals("java.lang.UnsupportedOperationException",JSE_Lang.UNSUPPORTED_OPERATION_EXCEPTION);
 		assertEquals("java.lang.AbstractMethodError",JSE_Lang.ABSTRACT_METHOD_ERROR);
 		assertEquals("java.lang.AssertionError",JSE_Lang.ASSERTION_ERROR);
+		assertEquals("java.lang.BootstrapMethodError",JSE_Lang.BOOTSTRAP_METHOD_ERROR);
 		assertEquals("java.lang.ClassCircularityError",JSE_Lang.CLASS_CIRCULARITY_ERROR);
 		assertEquals("java.lang.ClassFormatError",JSE_Lang.CLASS_FORMAT_ERROR);
 		assertEquals("java.lang.Error",JSE_Lang.ERROR);
@@ -106,11 +112,118 @@ public class JSE_LangTrial extends SourceFileCountingTrial {
 		assertEquals("java.lang.VerifyError",JSE_Lang.VERIFY_ERROR);
 		assertEquals("java.lang.VirtualMachineError",JSE_Lang.VIRTUAL_MACHINE_ERROR);
 		
-		assertEquals("java.lang.Deprecated", JSE_Lang.DEPRICATED);
-		assertEquals("java.lang.Override", JSE_Lang.OVERRIDE);
-		assertEquals("java.lang.SuppressWarnings", JSE_Lang.SUPRESS_WARNINGS);
-	
+		assertEquals("java.lang.Deprecated",JSE_Lang.DEPRECATED);
+		assertEquals("java.lang.FunctionalInterface",JSE_Lang.FUNCTIONAL_INTERFACE);
+		assertEquals("java.lang.Override",JSE_Lang.OVERRIDE);
+		assertEquals("java.lang.SafeVarargs",JSE_Lang.SAFE_VARARGS);
+		assertEquals("java.lang.SuppressWarnings",JSE_Lang.SUPPRESS_WARNINGS);
 		assertEquals(JSE_Lang.class.getName(), JSE_Lang.INSTANCE.getClass().getName());
+		
+		assertEquals("APPENDABLE",JSE_Lang.INSTANCE.getConstantName("java.lang.Appendable"));
+		assertEquals("AUTO_CLOSEABLE",JSE_Lang.INSTANCE.getConstantName("java.lang.AutoCloseable"));
+		assertEquals("CHAR_SEQUENCE",JSE_Lang.INSTANCE.getConstantName("java.lang.CharSequence"));
+		assertEquals("CLONEABLE",JSE_Lang.INSTANCE.getConstantName("java.lang.Cloneable"));
+		assertEquals("COMPARABLE",JSE_Lang.INSTANCE.getConstantName("java.lang.Comparable"));
+		assertEquals("ITERABLE",JSE_Lang.INSTANCE.getConstantName("java.lang.Iterable"));
+		assertEquals("READABLE",JSE_Lang.INSTANCE.getConstantName("java.lang.Readable"));
+		assertEquals("RUNNABLE",JSE_Lang.INSTANCE.getConstantName("java.lang.Runnable"));
+		assertEquals("THREAD_UNCAUGHT_EXCEPTION_HANDLER",JSE_Lang.INSTANCE.getConstantName("java.lang.Thread$UncaughtExceptionHandler"));
+		assertEquals("BOOLEAN",JSE_Lang.INSTANCE.getConstantName("java.lang.Boolean"));
+		assertEquals("BYTE",JSE_Lang.INSTANCE.getConstantName("java.lang.Byte"));
+		assertEquals("CHARACTER",JSE_Lang.INSTANCE.getConstantName("java.lang.Character"));
+		assertEquals("CHARACTER_SUBSET",JSE_Lang.INSTANCE.getConstantName("java.lang.Character$Subset"));
+		assertEquals("CHARACTER_UNICODE_BLOCK",JSE_Lang.INSTANCE.getConstantName("java.lang.Character$UnicodeBlock"));
+		assertEquals("CLASS",JSE_Lang.INSTANCE.getConstantName("java.lang.Class"));
+		assertEquals("CLASS_LOADER",JSE_Lang.INSTANCE.getConstantName("java.lang.ClassLoader"));
+		assertEquals("CLASS_VALUE",JSE_Lang.INSTANCE.getConstantName("java.lang.ClassValue"));
+		assertEquals("COMPILER",JSE_Lang.INSTANCE.getConstantName("java.lang.Compiler"));
+		assertEquals("DOUBLE",JSE_Lang.INSTANCE.getConstantName("java.lang.Double"));
+		assertEquals("ENUM",JSE_Lang.INSTANCE.getConstantName("java.lang.Enum"));
+		assertEquals("FLOAT",JSE_Lang.INSTANCE.getConstantName("java.lang.Float"));
+		assertEquals("INHERITABLE_THREAD_LOCAL",JSE_Lang.INSTANCE.getConstantName("java.lang.InheritableThreadLocal"));
+		assertEquals("INTEGER",JSE_Lang.INSTANCE.getConstantName("java.lang.Integer"));
+		assertEquals("LONG",JSE_Lang.INSTANCE.getConstantName("java.lang.Long"));
+		assertEquals("MATH",JSE_Lang.INSTANCE.getConstantName("java.lang.Math"));
+		assertEquals("NUMBER",JSE_Lang.INSTANCE.getConstantName("java.lang.Number"));
+		assertEquals("OBJECT",JSE_Lang.INSTANCE.getConstantName("java.lang.Object"));
+		assertEquals("PACKAGE",JSE_Lang.INSTANCE.getConstantName("java.lang.Package"));
+		assertEquals("PROCESS",JSE_Lang.INSTANCE.getConstantName("java.lang.Process"));
+		assertEquals("PROCESS_BUILDER",JSE_Lang.INSTANCE.getConstantName("java.lang.ProcessBuilder"));
+		assertEquals("PROCESS_BUILDER_REDIRECT",JSE_Lang.INSTANCE.getConstantName("java.lang.ProcessBuilder$Redirect"));
+		assertEquals("RUNTIME",JSE_Lang.INSTANCE.getConstantName("java.lang.Runtime"));
+		assertEquals("RUNTIME_PERMISSION",JSE_Lang.INSTANCE.getConstantName("java.lang.RuntimePermission"));
+		assertEquals("SECURITY_MANAGER",JSE_Lang.INSTANCE.getConstantName("java.lang.SecurityManager"));
+		assertEquals("SHORT",JSE_Lang.INSTANCE.getConstantName("java.lang.Short"));
+		assertEquals("STACK_TRACE_ELEMENT",JSE_Lang.INSTANCE.getConstantName("java.lang.StackTraceElement"));
+		assertEquals("STRICT_MATH",JSE_Lang.INSTANCE.getConstantName("java.lang.StrictMath"));
+		assertEquals("STRING",JSE_Lang.INSTANCE.getConstantName("java.lang.String"));
+		assertEquals("STRING_BUFFER",JSE_Lang.INSTANCE.getConstantName("java.lang.StringBuffer"));
+		assertEquals("STRING_BUILDER",JSE_Lang.INSTANCE.getConstantName("java.lang.StringBuilder"));
+		assertEquals("SYSTEM",JSE_Lang.INSTANCE.getConstantName("java.lang.System"));
+		assertEquals("THREAD",JSE_Lang.INSTANCE.getConstantName("java.lang.Thread"));
+		assertEquals("THREAD_GROUP",JSE_Lang.INSTANCE.getConstantName("java.lang.ThreadGroup"));
+		assertEquals("THREAD_LOCAL",JSE_Lang.INSTANCE.getConstantName("java.lang.ThreadLocal"));
+		assertEquals("THROWABLE",JSE_Lang.INSTANCE.getConstantName("java.lang.Throwable"));
+		assertEquals("VOID",JSE_Lang.INSTANCE.getConstantName("java.lang.Void"));
+		assertEquals("CHARACTER_UNICODE_SCRIPT",JSE_Lang.INSTANCE.getConstantName("java.lang.Character$UnicodeScript"));
+		assertEquals("PROCESS_BUILDER_REDIRECT_TYPE",JSE_Lang.INSTANCE.getConstantName("java.lang.ProcessBuilder$Redirect$Type"));
+		assertEquals("THREAD_STATE",JSE_Lang.INSTANCE.getConstantName("java.lang.Thread$State"));
+		assertEquals("ARITHMETIC_EXCEPTION",JSE_Lang.INSTANCE.getConstantName("java.lang.ArithmeticException"));
+		assertEquals("ARRAY_INDEX_OUT_OF_BOUNDS_EXCEPTION",JSE_Lang.INSTANCE.getConstantName("java.lang.ArrayIndexOutOfBoundsException"));
+		assertEquals("ARRAY_STORE_EXCEPTION",JSE_Lang.INSTANCE.getConstantName("java.lang.ArrayStoreException"));
+		assertEquals("CLASS_CAST_EXCEPTION",JSE_Lang.INSTANCE.getConstantName("java.lang.ClassCastException"));
+		assertEquals("CLASS_NOT_FOUND_EXCEPTION",JSE_Lang.INSTANCE.getConstantName("java.lang.ClassNotFoundException"));
+		assertEquals("CLONE_NOT_SUPPORTED_EXCEPTION",JSE_Lang.INSTANCE.getConstantName("java.lang.CloneNotSupportedException"));
+		assertEquals("ENUM_CONSTANT_NOT_PRESENT_EXCEPTION",JSE_Lang.INSTANCE.getConstantName("java.lang.EnumConstantNotPresentException"));
+		assertEquals("EXCEPTION",JSE_Lang.INSTANCE.getConstantName("java.lang.Exception"));
+		assertEquals("ILLEGAL_ACCESS_EXCEPTION",JSE_Lang.INSTANCE.getConstantName("java.lang.IllegalAccessException"));
+		assertEquals("ILLEGAL_ARGUMENT_EXCEPTION",JSE_Lang.INSTANCE.getConstantName("java.lang.IllegalArgumentException"));
+		assertEquals("ILLEGAL_MONITOR_STATE_EXCEPTION",JSE_Lang.INSTANCE.getConstantName("java.lang.IllegalMonitorStateException"));
+		assertEquals("ILLEGAL_STATE_EXCEPTION",JSE_Lang.INSTANCE.getConstantName("java.lang.IllegalStateException"));
+		assertEquals("ILLEGAL_THREAD_STATE_EXCEPTION",JSE_Lang.INSTANCE.getConstantName("java.lang.IllegalThreadStateException"));
+		assertEquals("INDEX_OUT_OF_BOUNDS_EXCEPTION",JSE_Lang.INSTANCE.getConstantName("java.lang.IndexOutOfBoundsException"));
+		assertEquals("INSTANTIATION_EXCEPTION",JSE_Lang.INSTANCE.getConstantName("java.lang.InstantiationException"));
+		assertEquals("INTERRUPTED_EXCEPTION",JSE_Lang.INSTANCE.getConstantName("java.lang.InterruptedException"));
+		assertEquals("NEGATIVE_ARRAY_SIZE_EXCEPTION",JSE_Lang.INSTANCE.getConstantName("java.lang.NegativeArraySizeException"));
+		assertEquals("NO_SUCH_FIELD_EXCEPTION",JSE_Lang.INSTANCE.getConstantName("java.lang.NoSuchFieldException"));
+		assertEquals("NO_SUCH_METHOD_EXCEPTION",JSE_Lang.INSTANCE.getConstantName("java.lang.NoSuchMethodException"));
+		assertEquals("NULL_POINTER_EXCEPTION",JSE_Lang.INSTANCE.getConstantName("java.lang.NullPointerException"));
+		assertEquals("NUMBER_FORMAT_EXCEPTION",JSE_Lang.INSTANCE.getConstantName("java.lang.NumberFormatException"));
+		assertEquals("REFLECTIVE_OPERATION_EXCEPTION",JSE_Lang.INSTANCE.getConstantName("java.lang.ReflectiveOperationException"));
+		assertEquals("RUNTIME_EXCEPTION",JSE_Lang.INSTANCE.getConstantName("java.lang.RuntimeException"));
+		assertEquals("SECURITY_EXCEPTION",JSE_Lang.INSTANCE.getConstantName("java.lang.SecurityException"));
+		assertEquals("STRING_INDEX_OUT_OF_BOUNDS_EXCEPTION",JSE_Lang.INSTANCE.getConstantName("java.lang.StringIndexOutOfBoundsException"));
+		assertEquals("TYPE_NOT_PRESENT_EXCEPTION",JSE_Lang.INSTANCE.getConstantName("java.lang.TypeNotPresentException"));
+		assertEquals("UNSUPPORTED_OPERATION_EXCEPTION",JSE_Lang.INSTANCE.getConstantName("java.lang.UnsupportedOperationException"));
+		assertEquals("ABSTRACT_METHOD_ERROR",JSE_Lang.INSTANCE.getConstantName("java.lang.AbstractMethodError"));
+		assertEquals("ASSERTION_ERROR",JSE_Lang.INSTANCE.getConstantName("java.lang.AssertionError"));
+		assertEquals("BOOTSTRAP_METHOD_ERROR",JSE_Lang.INSTANCE.getConstantName("java.lang.BootstrapMethodError"));
+		assertEquals("CLASS_CIRCULARITY_ERROR",JSE_Lang.INSTANCE.getConstantName("java.lang.ClassCircularityError"));
+		assertEquals("CLASS_FORMAT_ERROR",JSE_Lang.INSTANCE.getConstantName("java.lang.ClassFormatError"));
+		assertEquals("ERROR",JSE_Lang.INSTANCE.getConstantName("java.lang.Error"));
+		assertEquals("EXCEPTION_IN_INITIALIZER_ERROR",JSE_Lang.INSTANCE.getConstantName("java.lang.ExceptionInInitializerError"));
+		assertEquals("ILLEGAL_ACCESS_ERROR",JSE_Lang.INSTANCE.getConstantName("java.lang.IllegalAccessError"));
+		assertEquals("INCOMPATIBLE_CLASS_CHANGE_ERROR",JSE_Lang.INSTANCE.getConstantName("java.lang.IncompatibleClassChangeError"));
+		assertEquals("INSTANTIATION_ERROR",JSE_Lang.INSTANCE.getConstantName("java.lang.InstantiationError"));
+		assertEquals("INTERNAL_ERROR",JSE_Lang.INSTANCE.getConstantName("java.lang.InternalError"));
+		assertEquals("LINKAGE_ERROR",JSE_Lang.INSTANCE.getConstantName("java.lang.LinkageError"));
+		assertEquals("NO_CLASS_DEF_FOUND_ERROR",JSE_Lang.INSTANCE.getConstantName("java.lang.NoClassDefFoundError"));
+		assertEquals("NO_SUCH_FIELD_ERROR",JSE_Lang.INSTANCE.getConstantName("java.lang.NoSuchFieldError"));
+		assertEquals("NO_SUCH_METHOD_ERROR",JSE_Lang.INSTANCE.getConstantName("java.lang.NoSuchMethodError"));
+		assertEquals("OUT_OF_MEMORY_ERROR",JSE_Lang.INSTANCE.getConstantName("java.lang.OutOfMemoryError"));
+		assertEquals("STACK_OVERFLOW_ERROR",JSE_Lang.INSTANCE.getConstantName("java.lang.StackOverflowError"));
+		assertEquals("THREAD_DEATH",JSE_Lang.INSTANCE.getConstantName("java.lang.ThreadDeath"));
+		assertEquals("UNKNOWN_ERROR",JSE_Lang.INSTANCE.getConstantName("java.lang.UnknownError"));
+		assertEquals("UNSATISFIED_LINK_ERROR",JSE_Lang.INSTANCE.getConstantName("java.lang.UnsatisfiedLinkError"));
+		assertEquals("UNSUPPORTED_CLASS_VERSION_ERROR",JSE_Lang.INSTANCE.getConstantName("java.lang.UnsupportedClassVersionError"));
+		assertEquals("VERIFY_ERROR",JSE_Lang.INSTANCE.getConstantName("java.lang.VerifyError"));
+		assertEquals("VIRTUAL_MACHINE_ERROR",JSE_Lang.INSTANCE.getConstantName("java.lang.VirtualMachineError"));
+		
+		assertEquals("DEPRECATED",JSE_Lang.INSTANCE.getConstantName("java.lang.Deprecated"));
+		assertEquals("FUNCTIONAL_INTERFACE",JSE_Lang.INSTANCE.getConstantName("java.lang.FunctionalInterface"));
+		assertEquals("OVERRIDE",JSE_Lang.INSTANCE.getConstantName("java.lang.Override"));
+		assertEquals("SAFE_VARARGS",JSE_Lang.INSTANCE.getConstantName("java.lang.SafeVarargs"));
+		assertEquals("SUPPRESS_WARNINGS",JSE_Lang.INSTANCE.getConstantName("java.lang.SuppressWarnings"));
 	}
 	@Override
 	public int getTests() {
@@ -119,12 +232,12 @@ public class JSE_LangTrial extends SourceFileCountingTrial {
 
 	@Override
 	public int getAsserts() {
-		return 98;
+		return 209;
 	}
 
 	@Override
 	public int getUniqueAsserts() {
-		return 98;
+		return 209;
 	}
 
 }

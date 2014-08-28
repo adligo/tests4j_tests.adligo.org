@@ -68,7 +68,7 @@ public class ReferenceTrackingMethodVisitorTrial extends SourceFileCountingTrial
 		rtcv.visitFieldInsn(Opcodes.AALOAD, ReferenceTrackingClassVisitorTrial.MW_NOTHING_BARE, "name", ReferenceTrackingClassVisitorTrial.MW_METHOD_RETURN);
 		assertTrue(names.containsKey(ReferenceTrackingClassVisitorTrial.MW_NOTHING));
 		ClassAttributesMutant cam = names.get(ReferenceTrackingClassVisitorTrial.MW_NOTHING);
-		assertEquals(ReferenceTrackingClassVisitorTrial.MW_NOTHING, cam.getClassName());
+		assertEquals(ReferenceTrackingClassVisitorTrial.MW_NOTHING, cam.getName());
 		Set<I_FieldSignature> fields = cam.getFields();
 		assertContains(fields, new FieldSignature("name", ReferenceTrackingClassVisitorTrial.MW_METHOD_RETURN));
 		assertEquals(1, fields.size());

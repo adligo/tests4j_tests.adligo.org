@@ -45,11 +45,15 @@ public class Appendable_2_6_ClassAttributeUseTrial extends SourceFileCountingTri
 		if (cRefs == null) {
 			return;
 		}
-		List<I_ClassAttributes> refs = cRefs.getReferences();
-		I_ClassAttributes example = GWT_2_6_Lang.getAppendable();
-		I_ClassAttributes ca = refs.get(0);
+		I_ClassAttributes ca = p.getSourceClassAttributes();
+		
 		assertNotNull(ca);
-		assertEquals(example.getClassName(), ca.getClassName());
+		assertEquals(Appendable_2_6_MockUse.class.getName(), ca.getName());
+		
+		I_ClassAttributes example = GWT_2_6_Lang.getAppendable();
+		ca = p.getAttributes(Appendable.class.getName());
+		assertEquals(example.getName(), ca.getName());
+		
 		Set<I_FieldSignature> exampleFields = example.getFields();
 		Set<I_FieldSignature> fields = ca.getFields();
 		for (I_FieldSignature sig: exampleFields) {

@@ -128,6 +128,7 @@ public class DAT_Assert_MockWithEverything extends TrialDelegate {
 		assertEquals(MockI_SetLong.class.getName(), order.get(counter++));
 		assertEquals(MockI_SetString.class.getName(), order.get(counter++));
 		
+		assertEquals(AnnotatedElement.class.getName(), order.get(counter++));
 		assertEquals(I_System.class.getName(), order.get(counter++));
 		
 		assertEquals(MockI_GetAndSetLong.class.getName(), order.get(counter++));
@@ -139,7 +140,6 @@ public class DAT_Assert_MockWithEverything extends TrialDelegate {
 		assertEquals(MockWithTriangleC.class.getName(), order.get(counter++));
 		
 		assertEquals("java.lang.AbstractStringBuilder", order.get(counter++));	
-		assertEquals(AnnotatedElement.class.getName(), order.get(counter++));
 		assertEquals(GenericDeclaration.class.getName(), order.get(counter++));
 		assertEquals(Type.class.getName(), order.get(counter++));
 		
