@@ -32,13 +32,24 @@ public class GWT_2_6_LangDelegates extends TrialDelegate {
 			JSE_Lang.CLASS));
 		assertContains(ms, new MethodSignature("hashCode", 
 			ClassMethods.INT));
-		assertContains(ms, new MethodSignature("<init>"));
 		assertContains(ms, new MethodSignature("toString", 
 			JSE_Lang.STRING));
 
 	}
 	
-
+	public void delegateStackTraceElementMemberAsserts(I_ClassAttributes result) {
+		delegateObjectMemberAsserts(result);
+		Set<I_MethodSignature> ms = result.getMethods();
+		assertContains(ms, new MethodSignature("getLineNumber", 
+			ClassMethods.INT));
+		assertContains(ms, new MethodSignature("getClassName", 
+			JSE_Lang.STRING));
+		assertContains(ms, new MethodSignature("getFileName", 
+			JSE_Lang.STRING));
+		assertContains(ms, new MethodSignature("getMethodName", 
+			JSE_Lang.STRING));
+	}
+	
 	public  void delegateThrowableMemberAsserts(I_ClassAttributes result) {
 		delegateObjectMemberAsserts(result);
 		Set<I_MethodSignature> ms = result.getMethods();
@@ -214,5 +225,43 @@ public class GWT_2_6_LangDelegates extends TrialDelegate {
 	
 	public void delegateAssertionErrorMemberAsserts(I_ClassAttributes result) {
 		delegateErrorMemberAsserts(result);
+	}
+	
+	public void delegateClassCastExceptionMemberAsserts(I_ClassAttributes result) {
+		delegateRuntimeExceptionMemberAsserts(result);
+	}
+	
+	public void delegateIllegalArgumentExceptionMemberAsserts(I_ClassAttributes result) {
+		delegateRuntimeExceptionMemberAsserts(result);
+	}
+	
+	public void delegateIllegalStateExceptionMemberAsserts(I_ClassAttributes result) {
+		delegateRuntimeExceptionMemberAsserts(result);
+	}
+	public void delegateNegativeArraySizeExceptionMemberAsserts(I_ClassAttributes result) {
+		delegateRuntimeExceptionMemberAsserts(result);
+	}
+	
+	public void delegateReflectiveOperationExceptionMemberAsserts(I_ClassAttributes result) {
+		delegateExceptionMemberAsserts(result);
+	}
+	
+	public void delegateNoSuchMethodExceptionMemberAsserts(I_ClassAttributes result) {
+		delegateReflectiveOperationExceptionMemberAsserts(result);
+	}
+
+	public void delegateNullPointerExceptionMemberAsserts(I_ClassAttributes result) {
+		delegateRuntimeExceptionMemberAsserts(result);
+	}
+
+	public void delegateNumberFormatExceptionMemberAsserts(I_ClassAttributes result) {
+		delegateIllegalArgumentExceptionMemberAsserts(result);
+	}
+
+	public void delegateStringIndexOutOfBoundsExceptionMemberAsserts(I_ClassAttributes result) {
+		delegateIndexOutOfBoundsExceptionMemberAsserts(result);
+	}
+	public void delegateUnsupportedOperationExceptionMemberAsserts(I_ClassAttributes result) {
+		delegateRuntimeExceptionMemberAsserts(result);
 	}
 }

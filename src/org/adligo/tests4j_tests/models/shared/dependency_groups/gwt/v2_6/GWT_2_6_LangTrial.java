@@ -49,13 +49,28 @@ public class GWT_2_6_LangTrial extends SourceFileCountingTrial {
 	public void testObject() {
 		I_ClassAttributes result = GWT_2_6_Lang.getObject();
 		assertEquals("java.lang.Object", result.getName());
+		
+		Set<I_MethodSignature> ms = result.getMethods();
+		assertNotNull(ms);
+		assertContains(ms, new MethodSignature("<init>"));
 		delegates.delegateObjectMemberAsserts(result);
 		Set<I_FieldSignature> fs = result.getFields();
 		assertEquals(0, fs.size());
-		Set<I_MethodSignature> ms = result.getMethods();
 		assertEquals(5, ms.size());
 	}
 	
+	@Test
+	public void testStackTraceElement() {
+		I_ClassAttributes result = GWT_2_6_Lang.getStackTraceElement();
+		assertEquals("java.lang.StackTraceElement", result.getName());
+		Set<I_FieldSignature> fs = result.getFields();
+		Set<I_MethodSignature> ms = result.getMethods();
+		assertContains(ms, new MethodSignature("<init>", 
+			new String[] {JSE_Lang.STRING, JSE_Lang.STRING, JSE_Lang.STRING, ClassMethods.INT}));
+		delegates.delegateStackTraceElementMemberAsserts(result);
+		assertEquals(0, fs.size());
+		assertEquals(10, ms.size());
+	}
 	
 	
 	@Test
@@ -217,22 +232,165 @@ public class GWT_2_6_LangTrial extends SourceFileCountingTrial {
 
 	
 	@Test
+	public void testClassCastException() {
+		I_ClassAttributes result = GWT_2_6_Lang.getClassCastException();
+		assertEquals("java.lang.ClassCastException", result.getName());
+		Set<I_FieldSignature> fs = result.getFields();
+		Set<I_MethodSignature> ms = result.getMethods();
+		assertContains(ms, new MethodSignature("<init>"));
+		assertContains(ms, new MethodSignature("<init>", 
+			new String[] {JSE_Lang.STRING}));
+		delegates.delegateClassCastExceptionMemberAsserts(result);
+		assertEquals(0, fs.size());
+		assertEquals(17, ms.size());
+	}
+	
+	
+	@Test
+	public void testIllegalArgumentException() {
+		I_ClassAttributes result = GWT_2_6_Lang.getIllegalArgumentException();
+		assertEquals("java.lang.IllegalArgumentException", result.getName());
+		Set<I_FieldSignature> fs = result.getFields();
+		Set<I_MethodSignature> ms = result.getMethods();
+		assertContains(ms, new MethodSignature("<init>"));
+		assertContains(ms, new MethodSignature("<init>", 
+			new String[] {JSE_Lang.STRING}));
+		assertContains(ms, new MethodSignature("<init>", 
+			new String[] {JSE_Lang.STRING, JSE_Lang.THROWABLE}));
+		assertContains(ms, new MethodSignature("<init>", 
+			new String[] {JSE_Lang.THROWABLE}));
+		delegates.delegateIllegalArgumentExceptionMemberAsserts(result);
+		assertEquals(0, fs.size());
+		assertEquals(19, ms.size());
+	}
+	
+	@Test
+	public void testIllegalStateException() {
+		I_ClassAttributes result = GWT_2_6_Lang.getIllegalStateException();
+		assertEquals("java.lang.IllegalStateException", result.getName());
+		Set<I_FieldSignature> fs = result.getFields();
+		Set<I_MethodSignature> ms = result.getMethods();
+		assertContains(ms, new MethodSignature("<init>"));
+		assertContains(ms, new MethodSignature("<init>", 
+			new String[] {JSE_Lang.STRING}));
+		assertContains(ms, new MethodSignature("<init>", 
+			new String[] {JSE_Lang.STRING, JSE_Lang.THROWABLE}));
+		assertContains(ms, new MethodSignature("<init>", 
+			new String[] {JSE_Lang.THROWABLE}));
+		delegates.delegateIllegalStateExceptionMemberAsserts(result);
+		assertEquals(0, fs.size());
+		assertEquals(19, ms.size());
+	}
+	
+	@Test
+	public void testNegativeArraySizeException() {
+		I_ClassAttributes result = GWT_2_6_Lang.getNegativeArraySizeException();
+		assertEquals("java.lang.NegativeArraySizeException", result.getName());
+		Set<I_FieldSignature> fs = result.getFields();
+		Set<I_MethodSignature> ms = result.getMethods();
+		assertContains(ms, new MethodSignature("<init>"));
+		assertContains(ms, new MethodSignature("<init>", 
+			new String[] {JSE_Lang.STRING}));
+		delegates.delegateNegativeArraySizeExceptionMemberAsserts(result);
+		assertEquals(0, fs.size());
+		assertEquals(17, ms.size());
+	}
+
+	
+	@Test
+	public void testNoSuchMethodException() {
+		I_ClassAttributes result = GWT_2_6_Lang.getNoSuchMethodException();
+		assertEquals("java.lang.NoSuchMethodException", result.getName());
+		Set<I_FieldSignature> fs = result.getFields();
+		Set<I_MethodSignature> ms = result.getMethods();
+		assertContains(ms, new MethodSignature("<init>"));
+		assertContains(ms, new MethodSignature("<init>", 
+			new String[] {JSE_Lang.STRING}));
+		delegates.delegateNoSuchMethodExceptionMemberAsserts(result);
+		assertEquals(0, fs.size());
+		assertEquals(17, ms.size());
+	}
+
+	@Test
+	public void testNullPointerException() {
+		I_ClassAttributes result = GWT_2_6_Lang.getNullPointerException();
+		assertEquals("java.lang.NullPointerException", result.getName());
+		Set<I_FieldSignature> fs = result.getFields();
+		Set<I_MethodSignature> ms = result.getMethods();
+		assertContains(ms, new MethodSignature("<init>"));
+		assertContains(ms, new MethodSignature("<init>", 
+			new String[] {JSE_Lang.STRING}));
+		delegates.delegateNullPointerExceptionMemberAsserts(result);
+		assertEquals(0, fs.size());
+		assertEquals(17, ms.size());
+	}
+
+	@Test
+	public void testNumberFormatException() {
+		I_ClassAttributes result = GWT_2_6_Lang.getNumberFormatException();
+		assertEquals("java.lang.NumberFormatException", result.getName());
+		Set<I_FieldSignature> fs = result.getFields();
+		Set<I_MethodSignature> ms = result.getMethods();
+		assertContains(ms, new MethodSignature("<init>"));
+		assertContains(ms, new MethodSignature("<init>", 
+			new String[] {JSE_Lang.STRING}));
+		delegates.delegateNumberFormatExceptionMemberAsserts(result);
+		assertEquals(0, fs.size());
+		assertEquals(17, ms.size());
+	}
+
+	@Test
+	public void testStringIndexOutOfBoundsException() {
+		I_ClassAttributes result = GWT_2_6_Lang.getStringIndexOutOfBoundsException();
+		assertEquals("java.lang.StringIndexOutOfBoundsException", result.getName());
+		Set<I_FieldSignature> fs = result.getFields();
+		Set<I_MethodSignature> ms = result.getMethods();
+		assertContains(ms, new MethodSignature("<init>"));
+		assertContains(ms, new MethodSignature("<init>", 
+			new String[] {ClassMethods.INT}));
+		assertContains(ms, new MethodSignature("<init>", 
+			new String[] {JSE_Lang.STRING}));
+		delegates.delegateStringIndexOutOfBoundsExceptionMemberAsserts(result);
+		assertEquals(0, fs.size());
+		assertEquals(18, ms.size());
+	}
+
+	@Test
+	public void testUnsupportedOperationException() {
+		I_ClassAttributes result = GWT_2_6_Lang.getUnsupportedOperationException();
+		assertEquals("java.lang.UnsupportedOperationException", result.getName());
+		Set<I_FieldSignature> fs = result.getFields();
+		Set<I_MethodSignature> ms = result.getMethods();
+		assertContains(ms, new MethodSignature("<init>"));
+		assertContains(ms, new MethodSignature("<init>", 
+			new String[] {JSE_Lang.STRING}));
+		assertContains(ms, new MethodSignature("<init>", 
+			new String[] {JSE_Lang.STRING, JSE_Lang.THROWABLE}));
+		assertContains(ms, new MethodSignature("<init>", 
+			new String[] {JSE_Lang.THROWABLE}));
+		delegates.delegateUnsupportedOperationExceptionMemberAsserts(result);
+		assertEquals(0, fs.size());
+		assertEquals(19, ms.size());
+	}
+
+	
+	@Test
 	public void testByte() {
 		
 	}
 	@Override
 	public int getTests() {
-		return 14;
+		return 24;
 	}
 
 	@Override
 	public int getAsserts() {
-		return 301;
+		return 521;
 	}
 
 	@Override
 	public int getUniqueAsserts() {
-		return 256;
+		return 475;
 	}
 
 }

@@ -32,6 +32,7 @@ public class RunPkgTrials implements I_Tests4J_TrialList {
 		trials.add(Appendable_2_6_UseTrial.class);
 		
 		trials.add(Object_2_6_UseTrial.class);
+		trials.add(StackTraceElement_2_6_UseTrial.class);
 		trials.add(Throwable_2_6_UseTrial.class);
 		trials.add(Exception_2_6_UseTrial.class);
 		trials.add(RuntimeException_2_6_UseTrial.class);
@@ -42,7 +43,17 @@ public class RunPkgTrials implements I_Tests4J_TrialList {
 		trials.add(ArrayStoreException_2_6_UseTrial.class);
 		trials.add(Error_2_6_UseTrial.class);
 		trials.add(AssertionError_2_6_UseTrial.class);
+		trials.add(ClassCastException_2_6_UseTrial.class);
+		trials.add(IllegalArgumentException_2_6_UseTrial.class);
 		
+		trials.add(IllegalStateException_2_6_UseTrial.class);
+		trials.add(NegativeArraySizeException_2_6_UseTrial.class);
+		
+		trials.add(NoSuchMethodException_2_6_UseTrial.class);
+		trials.add(NullPointerException_2_6_UseTrial.class);
+		trials.add(NumberFormatException_2_6_UseTrial.class);
+		trials.add(StringIndexOutOfBoundsException_2_6_UseTrial.class);
+		trials.add(UnsupportedOperationException_2_6_UseTrial.class);
 		return trials;
 	}
 }
