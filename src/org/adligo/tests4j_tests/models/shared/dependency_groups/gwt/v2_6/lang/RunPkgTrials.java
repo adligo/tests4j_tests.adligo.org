@@ -28,13 +28,20 @@ public class RunPkgTrials implements I_Tests4J_TrialList {
 	public List<Class<? extends I_Trial>> getTrials() {
 		List<Class<? extends I_Trial>> trials = new ArrayList<Class<? extends I_Trial>>();
 		
+		//in alpha dependency order
 		trials.add(Appendable_2_6_UseTrial.class);
 		
 		trials.add(Object_2_6_UseTrial.class);
 		trials.add(Throwable_2_6_UseTrial.class);
 		trials.add(Exception_2_6_UseTrial.class);
 		trials.add(RuntimeException_2_6_UseTrial.class);
+		trials.add(ArithmeticException_2_6_UseTrial.class);
 		
+		trials.add(IndexOutOfBoundsException_2_6_UseTrial.class);
+		trials.add(ArrayIndexOutOfBoundsException_2_6_UseTrial.class);
+		trials.add(ArrayStoreException_2_6_UseTrial.class);
+		trials.add(Error_2_6_UseTrial.class);
+		trials.add(AssertionError_2_6_UseTrial.class);
 		
 		return trials;
 	}

@@ -30,28 +30,7 @@ public class GWT_2_6_LangTrial extends SourceFileCountingTrial {
 		delegates.delegateAppendable(ClassAttributesMutant.class, new ClassAttributesMutant(cam));
 		delegates.delegateAppendable(ClassAttributes.class, new ClassAttributes(cam));
 	}
-	
-	@Test
-	public void testArrayIndexOutOfBoundsException() {
-		ClassAttributes cam = GWT_2_6_Lang.getArrayIndexOutOfBoundsException();
-		delegates.delegateArrayIndexOutOfBoundsException(ClassAttributesMutant.class, new ClassAttributesMutant(cam));
-		delegates.delegateArrayIndexOutOfBoundsException(ClassAttributes.class, new ClassAttributes(cam));
-	}
-	
-	@Test
-	public void testArrayStoreException() {
-		ClassAttributes cam = GWT_2_6_Lang.getArrayStoreException();
-		delegates.delegateArrayStoreException(ClassAttributesMutant.class, new ClassAttributesMutant(cam));
-		delegates.delegateArrayStoreException(ClassAttributes.class, new ClassAttributes(cam));
-	}
-	
-	@Test
-	public void testAssertionError() {
-		ClassAttributes cam = GWT_2_6_Lang.getAssertionError();
-		delegates.delegateAssertionError(ClassAttributesMutant.class, new ClassAttributesMutant(cam));
-		delegates.delegateAssertionError(ClassAttributes.class, new ClassAttributes(cam));
-	}
-	
+
 	@Test
 	public void testAutoCloseable() {
 		ClassAttributes cam = GWT_2_6_Lang.getAutoCloseable();
@@ -147,6 +126,95 @@ public class GWT_2_6_LangTrial extends SourceFileCountingTrial {
 		assertEquals(0, fs.size());
 		assertEquals(17, ms.size());
 	}
+
+	@Test
+	public void testIndexOutOfBoundsException() {
+		I_ClassAttributes result = GWT_2_6_Lang.getIndexOutOfBoundsException();
+		assertEquals("java.lang.IndexOutOfBoundsException", result.getName());
+		Set<I_FieldSignature> fs = result.getFields();
+		Set<I_MethodSignature> ms = result.getMethods();
+		assertContains(ms, new MethodSignature("<init>"));
+		assertContains(ms, new MethodSignature("<init>", 
+			new String[] {JSE_Lang.STRING}));
+		delegates.delegateIndexOutOfBoundsExceptionMemberAsserts(result);
+		assertEquals(0, fs.size());
+		assertEquals(17, ms.size());
+	}
+	
+	@Test
+	public void testArrayIndexOutOfBoundsException() {
+		I_ClassAttributes result = GWT_2_6_Lang.getArrayIndexOutOfBoundsException();
+		assertEquals("java.lang.ArrayIndexOutOfBoundsException", result.getName());
+		Set<I_FieldSignature> fs = result.getFields();
+		Set<I_MethodSignature> ms = result.getMethods();
+		assertContains(ms, new MethodSignature("<init>"));
+		assertContains(ms, new MethodSignature("<init>", 
+			new String[] {ClassMethods.INT}));
+		assertContains(ms, new MethodSignature("<init>", 
+			new String[] {JSE_Lang.STRING}));
+		delegates.delegateArrayIndexOutOfBoundsExceptionMemberAsserts(result);
+		assertEquals(0, fs.size());
+		assertEquals(18, ms.size());
+	}
+
+	@Test
+	public void testArrayStoreException() {
+		I_ClassAttributes result = GWT_2_6_Lang.getArrayStoreException();
+		assertEquals("java.lang.ArrayStoreException", result.getName());
+		Set<I_FieldSignature> fs = result.getFields();
+		Set<I_MethodSignature> ms = result.getMethods();
+		assertContains(ms, new MethodSignature("<init>"));
+		assertContains(ms, new MethodSignature("<init>", 
+			new String[] {JSE_Lang.STRING}));
+		delegates.delegateArrayStoreExceptionMemberAsserts(result);
+		assertEquals(0, fs.size());
+		assertEquals(17, ms.size());
+	}
+	
+	@Test
+	public void testError() {
+		I_ClassAttributes result = GWT_2_6_Lang.getError();
+		assertEquals("java.lang.Error", result.getName());
+		Set<I_FieldSignature> fs = result.getFields();
+		Set<I_MethodSignature> ms = result.getMethods();
+		assertContains(ms, new MethodSignature("<init>"));
+		assertContains(ms, new MethodSignature("<init>", 
+			new String[] {JSE_Lang.STRING}));
+		assertContains(ms, new MethodSignature("<init>", 
+			new String[] {JSE_Lang.STRING, JSE_Lang.THROWABLE}));
+		assertContains(ms, new MethodSignature("<init>", 
+			new String[] {JSE_Lang.THROWABLE}));
+		delegates.delegateErrorMemberAsserts(result);
+		assertEquals(0, fs.size());
+		assertEquals(19, ms.size());
+	}
+	
+	@Test
+	public void testAssertionError() {
+		I_ClassAttributes result = GWT_2_6_Lang.getAssertionError();
+		assertEquals("java.lang.AssertionError", result.getName());
+		Set<I_FieldSignature> fs = result.getFields();
+		Set<I_MethodSignature> ms = result.getMethods();
+		assertContains(ms, new MethodSignature("<init>"));
+		assertContains(ms, new MethodSignature("<init>", 
+			new String[] {ClassMethods.BOOLEAN}));
+		assertContains(ms, new MethodSignature("<init>", 
+			new String[] {ClassMethods.CHAR}));
+		assertContains(ms, new MethodSignature("<init>", 
+			new String[] {ClassMethods.DOUBLE}));
+		assertContains(ms, new MethodSignature("<init>", 
+			new String[] {ClassMethods.FLOAT}));
+		assertContains(ms, new MethodSignature("<init>", 
+			new String[] {ClassMethods.INT}));
+		assertContains(ms, new MethodSignature("<init>", 
+			new String[] {JSE_Lang.OBJECT}));
+		assertContains(ms, new MethodSignature("<init>", 
+			new String[] {ClassMethods.LONG}));
+		delegates.delegateAssertionErrorMemberAsserts(result);
+		assertEquals(0, fs.size());
+		assertEquals(23, ms.size());
+	}
+
 	
 	@Test
 	public void testByte() {
@@ -154,17 +222,17 @@ public class GWT_2_6_LangTrial extends SourceFileCountingTrial {
 	}
 	@Override
 	public int getTests() {
-		return 12;
+		return 14;
 	}
 
 	@Override
 	public int getAsserts() {
-		return 224;
+		return 301;
 	}
 
 	@Override
 	public int getUniqueAsserts() {
-		return 166;
+		return 256;
 	}
 
 }

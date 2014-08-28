@@ -68,7 +68,6 @@ public class GWT_2_6_LangDelegates extends TrialDelegate {
 			new String[] {"[java.lang.StackTraceElement"}));
 	}
 	
-
 	public void delegateExceptionMemberAsserts(I_ClassAttributes result) {
 		delegateThrowableMemberAsserts(result);
 	}
@@ -115,20 +114,7 @@ public class GWT_2_6_LangDelegates extends TrialDelegate {
 				new String[] {"int"}));
 		
 	}
-	
-	public void delegateArrayStoreException(Class<?> expectedInstanceClass, I_ClassAttributes attribs) {
-		assertEquals(expectedInstanceClass, attribs.getClass());
-		assertEquals(ArrayStoreException.class.getName(), attribs.getName());
-		Set<I_FieldSignature> fields = attribs.getFields();
-		assertNotNull(fields);
-		assertEquals(0, fields.size());
-		
-		Set<I_MethodSignature> methods = attribs.getMethods();
-		assertContains(methods, new MethodSignature("<init>"));
-		assertContains(methods, new MethodSignature("<init>", 
-				new String[] {String.class.getName()}));
-		
-	}
+
 	
 	public void delegateAssertionError(Class<?> expectedInstanceClass, I_ClassAttributes attribs) {
 		assertEquals(expectedInstanceClass, attribs.getClass());
@@ -208,5 +194,25 @@ public class GWT_2_6_LangDelegates extends TrialDelegate {
 				"int"));
 		assertContains(methods, new MethodSignature("toString",
 				String.class.getName()));
+	}
+	
+	public void delegateIndexOutOfBoundsExceptionMemberAsserts(I_ClassAttributes result) {
+		delegateRuntimeExceptionMemberAsserts(result);
+	}
+	
+	public void delegateArrayIndexOutOfBoundsExceptionMemberAsserts(I_ClassAttributes result) {
+		delegateIndexOutOfBoundsExceptionMemberAsserts(result);
+	}
+	
+	public void delegateArrayStoreExceptionMemberAsserts(I_ClassAttributes result) {
+		delegateRuntimeExceptionMemberAsserts(result);
+	}
+	
+	public void delegateErrorMemberAsserts(I_ClassAttributes result) {
+		delegateThrowableMemberAsserts(result);
+	}
+	
+	public void delegateAssertionErrorMemberAsserts(I_ClassAttributes result) {
+		delegateErrorMemberAsserts(result);
 	}
 }

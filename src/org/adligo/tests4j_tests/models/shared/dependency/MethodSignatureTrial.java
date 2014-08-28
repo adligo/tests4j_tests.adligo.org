@@ -149,6 +149,41 @@ public class MethodSignatureTrial extends SourceFileCountingTrial {
 				new String[] {JSE_Lang.STRING, JSE_Lang.THROWABLE, ClassMethods.BOOLEAN, ClassMethods.BOOLEAN}), it.next());
 		assertEquals(new MethodSignature("<init>", 
 				new String[] {JSE_Lang.THROWABLE}), it.next());
+		
+		sigs.clear();
+		sigs.add(new MethodSignature("<init>"));
+		sigs.add(new MethodSignature("<init>", 
+			new String[] {ClassMethods.BOOLEAN}));
+		sigs.add(new MethodSignature("<init>", 
+			new String[] {ClassMethods.CHAR}));
+		sigs.add(new MethodSignature("<init>", 
+			new String[] {ClassMethods.DOUBLE}));
+		sigs.add(new MethodSignature("<init>", 
+			new String[] {ClassMethods.FLOAT}));
+		sigs.add(new MethodSignature("<init>", 
+			new String[] {ClassMethods.INT}));
+		sigs.add(new MethodSignature("<init>", 
+			new String[] {JSE_Lang.OBJECT}));
+		sigs.add(new MethodSignature("<init>", 
+			new String[] {ClassMethods.LONG}));
+		
+		assertEquals(8, sigs.size());
+		it =  sigs.iterator();
+		assertEquals(new MethodSignature("<init>"), it.next());
+		assertEquals(new MethodSignature("<init>", 
+			new String[] {ClassMethods.BOOLEAN}), it.next());
+		assertEquals(new MethodSignature("<init>", 
+			new String[] {ClassMethods.CHAR}), it.next());
+		assertEquals(new MethodSignature("<init>", 
+			new String[] {ClassMethods.DOUBLE}), it.next());
+		assertEquals(new MethodSignature("<init>", 
+			new String[] {ClassMethods.FLOAT}), it.next());
+		assertEquals(new MethodSignature("<init>", 
+			new String[] {ClassMethods.INT}), it.next());
+		assertEquals(new MethodSignature("<init>", 
+			new String[] {JSE_Lang.OBJECT}), it.next());
+		assertEquals(new MethodSignature("<init>", 
+			new String[] {ClassMethods.LONG}), it.next());
 	}
 	@Test
 	public void testToString() {
@@ -167,12 +202,12 @@ public class MethodSignatureTrial extends SourceFileCountingTrial {
 
 	@Override
 	public int getAsserts() {
-		return 41;
+		return 50;
 	}
 
 	@Override
 	public int getUniqueAsserts() {
-		return 26;
+		return 34;
 	}
 
 }
