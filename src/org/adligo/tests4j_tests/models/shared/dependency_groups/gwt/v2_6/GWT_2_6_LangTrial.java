@@ -32,13 +32,6 @@ public class GWT_2_6_LangTrial extends SourceFileCountingTrial {
 	}
 	
 	@Test
-	public void testArithmeticException() {
-		ClassAttributes cam = GWT_2_6_Lang.getArithmeticException();
-		delegates.delegateArithmeticException(ClassAttributesMutant.class, new ClassAttributesMutant(cam));
-		delegates.delegateArithmeticException(ClassAttributes.class, new ClassAttributes(cam));
-	}
-	
-	@Test
 	public void testArrayIndexOutOfBoundsException() {
 		ClassAttributes cam = GWT_2_6_Lang.getArrayIndexOutOfBoundsException();
 		delegates.delegateArrayIndexOutOfBoundsException(ClassAttributesMutant.class, new ClassAttributesMutant(cam));
@@ -77,27 +70,82 @@ public class GWT_2_6_LangTrial extends SourceFileCountingTrial {
 	public void testObject() {
 		I_ClassAttributes result = GWT_2_6_Lang.getObject();
 		assertEquals("java.lang.Object", result.getName());
-		assertObjectMembers(this, result);
+		delegates.delegateObjectMemberAsserts(result);
+		Set<I_FieldSignature> fs = result.getFields();
+		assertEquals(0, fs.size());
+		Set<I_MethodSignature> ms = result.getMethods();
+		assertEquals(5, ms.size());
 	}
 	
-	public static void assertObjectMembers(I_Asserts trial, I_ClassAttributes result) {
+	
+	
+	@Test
+	public void testThrowable() {
+		I_ClassAttributes result = GWT_2_6_Lang.getThrowable();
+		assertEquals("java.lang.Throwable", result.getName());
 		Set<I_FieldSignature> fs = result.getFields();
-		trial.assertNotNull(fs);
-		trial.assertEquals(0, fs.size());
-		
 		Set<I_MethodSignature> ms = result.getMethods();
-		trial.assertNotNull(ms);
-		trial.assertContains(ms, new MethodSignature("equals", 
-			new String[] {JSE_Lang.OBJECT}, 
-			ClassMethods.BOOLEAN));
-		trial.assertContains(ms, new MethodSignature("getClass", 
-			JSE_Lang.CLASS));
-		trial.assertContains(ms, new MethodSignature("hashCode", 
-			ClassMethods.INT));
-		trial.assertContains(ms, new MethodSignature("<init>"));
-		trial.assertContains(ms, new MethodSignature("toString", 
-			JSE_Lang.STRING));
-		trial.assertEquals(5, ms.size());
+		assertContains(ms, new MethodSignature("<init>"));
+		assertContains(ms, new MethodSignature("<init>", 
+				new String[] {JSE_Lang.STRING, JSE_Lang.THROWABLE}));
+		assertContains(ms, new MethodSignature("<init>", 
+			new String[] {JSE_Lang.STRING}));
+		
+		assertContains(ms, new MethodSignature("<init>", 
+			new String[] {JSE_Lang.THROWABLE}));
+		delegates.delegateThrowableMemberAsserts(result);
+		assertEquals(0, fs.size());
+		assertEquals(19, ms.size());
+	}
+	
+	@Test
+	public void testException() {
+		I_ClassAttributes result = GWT_2_6_Lang.getException();
+		assertEquals("java.lang.Exception", result.getName());
+		Set<I_FieldSignature> fs = result.getFields();
+		Set<I_MethodSignature> ms = result.getMethods();
+		assertContains(ms, new MethodSignature("<init>"));
+		assertContains(ms, new MethodSignature("<init>", 
+			new String[] {JSE_Lang.STRING}));
+		assertContains(ms, new MethodSignature("<init>", 
+			new String[] {JSE_Lang.STRING, JSE_Lang.THROWABLE}));
+		assertContains(ms, new MethodSignature("<init>", 
+			new String[] {JSE_Lang.THROWABLE}));
+		delegates.delegateExceptionMemberAsserts(result);
+		assertEquals(0, fs.size());
+		assertEquals(19, ms.size());
+	}
+	
+	@Test
+	public void testRuntimeException() {
+		I_ClassAttributes result = GWT_2_6_Lang.getRuntimeException();
+		assertEquals("java.lang.RuntimeException", result.getName());
+		Set<I_FieldSignature> fs = result.getFields();
+		Set<I_MethodSignature> ms = result.getMethods();
+		assertContains(ms, new MethodSignature("<init>"));
+		assertContains(ms, new MethodSignature("<init>", 
+			new String[] {JSE_Lang.STRING}));
+		assertContains(ms, new MethodSignature("<init>", 
+			new String[] {JSE_Lang.STRING, JSE_Lang.THROWABLE}));
+		assertContains(ms, new MethodSignature("<init>", 
+			new String[] {JSE_Lang.THROWABLE}));
+		delegates.delegateRuntimeExceptionMemberAsserts(result);
+		assertEquals(0, fs.size());
+		assertEquals(19, ms.size());
+	}
+
+	@Test
+	public void testArithmeticException() {
+		I_ClassAttributes result = GWT_2_6_Lang.getArithmeticException();
+		assertEquals("java.lang.ArithmeticException", result.getName());
+		Set<I_FieldSignature> fs = result.getFields();
+		Set<I_MethodSignature> ms = result.getMethods();
+		assertContains(ms, new MethodSignature("<init>"));
+		assertContains(ms, new MethodSignature("<init>", 
+			new String[] {JSE_Lang.STRING}));
+		delegates.delegateArithmeticExceptionMemberAsserts(result);
+		assertEquals(0, fs.size());
+		assertEquals(17, ms.size());
 	}
 	
 	@Test
@@ -106,17 +154,17 @@ public class GWT_2_6_LangTrial extends SourceFileCountingTrial {
 	}
 	@Override
 	public int getTests() {
-		return 9;
+		return 12;
 	}
 
 	@Override
 	public int getAsserts() {
-		return 134;
+		return 224;
 	}
 
 	@Override
 	public int getUniqueAsserts() {
-		return 79;
+		return 166;
 	}
 
 }

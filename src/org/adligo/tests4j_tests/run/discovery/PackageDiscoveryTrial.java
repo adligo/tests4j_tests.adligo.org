@@ -44,6 +44,7 @@ import org.adligo.tests4j.models.shared.trials.PlatformType;
 import org.adligo.tests4j.models.shared.trials.SourceFileScope;
 import org.adligo.tests4j.models.shared.trials.SourceFileTrial;
 import org.adligo.tests4j.models.shared.trials.SubProgress;
+import org.adligo.tests4j.models.shared.trials.SuppressOutput;
 import org.adligo.tests4j.models.shared.trials.TargetedPlatform;
 import org.adligo.tests4j.models.shared.trials.Test;
 import org.adligo.tests4j.models.shared.trials.TrialBindings;
@@ -74,7 +75,7 @@ import org.adligo.tests4j_tests.run.discovery.package_discovery_inner_mocks.TwoN
 @SourceFileScope (sourceClass=PackageDiscovery.class, minCoverage=51.0)
 public class PackageDiscoveryTrial extends SourceFileCountingTrial {
 
-	private static final int ASSERT_COUNT = 83;
+	private static final int ASSERT_COUNT = 84;
 
 	@Test
 	public void testDiscoveryPackage() throws Exception {
@@ -183,6 +184,7 @@ public class PackageDiscoveryTrial extends SourceFileCountingTrial {
 		assertContains(classNames, SourceFileScope.class.getName());
 		assertContains(classNames, SourceFileTrial.class.getName());
 		assertContains(classNames, SubProgress.class.getName());
+		assertContains(classNames, SuppressOutput.class.getName());
 		assertContains(classNames, TargetedPlatform.class.getName());
 		assertContains(classNames, Test.class.getName());
 		
@@ -196,7 +198,7 @@ public class PackageDiscoveryTrial extends SourceFileCountingTrial {
 		assertContains(classNames, UseCaseScope.class.getName());
 		assertContains(classNames, UseCaseTrial.class.getName());
 		
-		assertEquals(33, classNames.size());
+		assertEquals(34, classNames.size());
 		List<PackageDiscovery> children =  cd.getSubPackages();
 		
 		

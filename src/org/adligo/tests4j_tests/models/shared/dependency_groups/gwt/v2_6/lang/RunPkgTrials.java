@@ -3,22 +3,11 @@ package org.adligo.tests4j_tests.models.shared.dependency_groups.gwt.v2_6.lang;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.adligo.tests4j.models.shared.dependency.ClassParentsLocalMutant;
-import org.adligo.tests4j.models.shared.dependency_groups.jse.JSE_1_7_Lang;
 import org.adligo.tests4j.models.shared.system.I_Tests4J_TrialList;
 import org.adligo.tests4j.models.shared.system.Tests4J_Params;
-import org.adligo.tests4j.models.shared.system.Tests4J_Selection;
 import org.adligo.tests4j.models.shared.trials.I_Trial;
 import org.adligo.tests4j.run.Tests4J;
 import org.adligo.tests4j_4jacoco.plugin.CoveragePluginFactory;
-import org.adligo.tests4j_tests.models.shared.dependency_groups.gwt.v2_6.GWT_2_6_LangTrial;
-import org.adligo.tests4j_tests.models.shared.dependency_groups.jse.JSE_IOTrial;
-import org.adligo.tests4j_tests.models.shared.dependency_groups.jse.JSE_LangAnnotTrial;
-import org.adligo.tests4j_tests.models.shared.dependency_groups.jse.JSE_LangTrial;
-import org.adligo.tests4j_tests.models.shared.dependency_groups.jse.JSE_LogTrial;
-import org.adligo.tests4j_tests.models.shared.dependency_groups.jse.JSE_MathTrial;
-import org.adligo.tests4j_tests.models.shared.dependency_groups.jse.JSE_SqlTrial;
-import org.adligo.tests4j_tests.models.shared.dependency_groups.jse.JSE_UtilTrial;
 
 public class RunPkgTrials implements I_Tests4J_TrialList {
 
@@ -39,9 +28,14 @@ public class RunPkgTrials implements I_Tests4J_TrialList {
 	public List<Class<? extends I_Trial>> getTrials() {
 		List<Class<? extends I_Trial>> trials = new ArrayList<Class<? extends I_Trial>>();
 		
-		trials.add(Object_2_6_UseTrial.class);
-		
 		trials.add(Appendable_2_6_UseTrial.class);
+		
+		trials.add(Object_2_6_UseTrial.class);
+		trials.add(Throwable_2_6_UseTrial.class);
+		trials.add(Exception_2_6_UseTrial.class);
+		trials.add(RuntimeException_2_6_UseTrial.class);
+		
+		
 		return trials;
 	}
 }
