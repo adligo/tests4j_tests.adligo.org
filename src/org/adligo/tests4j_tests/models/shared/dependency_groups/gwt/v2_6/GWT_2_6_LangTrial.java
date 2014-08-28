@@ -1,7 +1,8 @@
-package org.adligo.tests4j_tests.models.shared.dependency_groups.gwt;
+package org.adligo.tests4j_tests.models.shared.dependency_groups.gwt.v2_6;
 
 import java.util.Set;
 
+import org.adligo.tests4j.models.shared.asserts.common.I_Asserts;
 import org.adligo.tests4j.models.shared.common.ClassMethods;
 import org.adligo.tests4j.models.shared.dependency.ClassAttributes;
 import org.adligo.tests4j.models.shared.dependency.ClassAttributesMutant;
@@ -76,27 +77,27 @@ public class GWT_2_6_LangTrial extends SourceFileCountingTrial {
 	public void testObject() {
 		I_ClassAttributes result = GWT_2_6_Lang.getObject();
 		assertEquals("java.lang.Object", result.getName());
-		assertObjectMembers(result);
+		assertObjectMembers(this, result);
 	}
 	
-	public void assertObjectMembers(I_ClassAttributes result) {
+	public static void assertObjectMembers(I_Asserts trial, I_ClassAttributes result) {
 		Set<I_FieldSignature> fs = result.getFields();
-		assertNotNull(fs);
-		assertEquals(0, fs.size());
+		trial.assertNotNull(fs);
+		trial.assertEquals(0, fs.size());
 		
 		Set<I_MethodSignature> ms = result.getMethods();
-		assertNotNull(ms);
-		assertContains(ms, new MethodSignature("equals", 
+		trial.assertNotNull(ms);
+		trial.assertContains(ms, new MethodSignature("equals", 
 			new String[] {JSE_Lang.OBJECT}, 
 			ClassMethods.BOOLEAN));
-		assertContains(ms, new MethodSignature("getClass", 
+		trial.assertContains(ms, new MethodSignature("getClass", 
 			JSE_Lang.CLASS));
-		assertContains(ms, new MethodSignature("hashCode", 
+		trial.assertContains(ms, new MethodSignature("hashCode", 
 			ClassMethods.INT));
-		assertContains(ms, new MethodSignature("<init>"));
-		assertContains(ms, new MethodSignature("toString", 
+		trial.assertContains(ms, new MethodSignature("<init>"));
+		trial.assertContains(ms, new MethodSignature("toString", 
 			JSE_Lang.STRING));
-		assertEquals(5, ms.size());
+		trial.assertEquals(5, ms.size());
 	}
 	
 	@Test

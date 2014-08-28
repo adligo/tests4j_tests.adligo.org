@@ -11,6 +11,7 @@ import org.adligo.tests4j.models.shared.system.Tests4J_Selection;
 import org.adligo.tests4j.models.shared.trials.I_Trial;
 import org.adligo.tests4j.run.Tests4J;
 import org.adligo.tests4j_4jacoco.plugin.CoveragePluginFactory;
+import org.adligo.tests4j_tests.models.shared.dependency_groups.gwt.v2_6.GWT_2_6_LangTrial;
 import org.adligo.tests4j_tests.models.shared.dependency_groups.jse.JSE_IOTrial;
 import org.adligo.tests4j_tests.models.shared.dependency_groups.jse.JSE_LangAnnotTrial;
 import org.adligo.tests4j_tests.models.shared.dependency_groups.jse.JSE_LangTrial;
@@ -40,6 +41,7 @@ public class RunPkgTrials implements I_Tests4J_TrialList {
 		
 		trials.add(Object_2_6_UseTrial.class);
 		
+		trials.add(Appendable_2_6_UseTrial.class);
 		return trials;
 	}
 }

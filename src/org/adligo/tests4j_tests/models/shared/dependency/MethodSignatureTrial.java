@@ -1,8 +1,14 @@
 package org.adligo.tests4j_tests.models.shared.dependency;
 
+import java.util.Iterator;
+import java.util.Set;
+import java.util.TreeSet;
+
 import org.adligo.tests4j.models.shared.asserts.common.ExpectedThrownData;
 import org.adligo.tests4j.models.shared.asserts.common.I_Thrower;
+import org.adligo.tests4j.models.shared.common.ClassMethods;
 import org.adligo.tests4j.models.shared.dependency.MethodSignature;
+import org.adligo.tests4j.models.shared.dependency_groups.jse.JSE_Lang;
 import org.adligo.tests4j.models.shared.trials.SourceFileScope;
 import org.adligo.tests4j.models.shared.trials.Test;
 import org.adligo.tests4j_tests.base_trials.SourceFileCountingTrial;
@@ -120,6 +126,31 @@ public class MethodSignatureTrial extends SourceFileCountingTrial {
 	}
 	
 	@Test
+	public void testComparatorAlphaOrdering() {
+		Set<MethodSignature> sigs = new TreeSet<MethodSignature>();
+		sigs.add(new MethodSignature("<init>"));
+		sigs.add(new MethodSignature("<init>", 
+			new String[] {JSE_Lang.STRING}));
+		sigs.add(new MethodSignature("<init>", 
+			new String[] {JSE_Lang.STRING, JSE_Lang.THROWABLE}));
+		sigs.add(new MethodSignature("<init>", 
+			new String[] {JSE_Lang.STRING, JSE_Lang.THROWABLE, ClassMethods.BOOLEAN, ClassMethods.BOOLEAN}));
+		sigs.add(new MethodSignature("<init>", 
+			new String[] {JSE_Lang.THROWABLE}));
+		
+		assertEquals(5, sigs.size());
+		Iterator<MethodSignature> it =  sigs.iterator();
+		assertEquals(new MethodSignature("<init>"), it.next());
+		assertEquals(new MethodSignature("<init>", 
+				new String[] {JSE_Lang.STRING}), it.next());
+		assertEquals(new MethodSignature("<init>", 
+				new String[] {JSE_Lang.STRING, JSE_Lang.THROWABLE}), it.next());
+		assertEquals(new MethodSignature("<init>", 
+				new String[] {JSE_Lang.STRING, JSE_Lang.THROWABLE, ClassMethods.BOOLEAN, ClassMethods.BOOLEAN}), it.next());
+		assertEquals(new MethodSignature("<init>", 
+				new String[] {JSE_Lang.THROWABLE}), it.next());
+	}
+	@Test
 	public void testToString() {
 		String[] sa = new String[] {"1","2"};
 		MethodSignature c = new MethodSignature("foo", sa, null);
@@ -131,17 +162,17 @@ public class MethodSignatureTrial extends SourceFileCountingTrial {
 	
 	@Override
 	public int getTests() {
-		return 4;
+		return 5;
 	}
 
 	@Override
 	public int getAsserts() {
-		return 35;
+		return 41;
 	}
 
 	@Override
 	public int getUniqueAsserts() {
-		return 20;
+		return 26;
 	}
 
 }

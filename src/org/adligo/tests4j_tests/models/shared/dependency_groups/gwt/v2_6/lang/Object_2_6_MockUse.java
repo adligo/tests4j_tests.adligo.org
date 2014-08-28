@@ -6,10 +6,10 @@ public class Object_2_6_MockUse {
 	public Object obj = null;
 	public Object_2_6_MockUse() {
 		obj = new Object();
-		useObjectMethods(obj);
+		useObjectMembers(obj);
 	}
 	
-	public static void useObjectMethods(Object obj) {
+	public void useObjectMembers(Object obj) {
 		obj.equals(null);
 		obj.getClass();
 		obj.hashCode();

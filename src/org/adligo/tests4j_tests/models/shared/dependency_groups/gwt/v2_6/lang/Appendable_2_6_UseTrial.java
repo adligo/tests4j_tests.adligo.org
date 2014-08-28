@@ -1,7 +1,6 @@
-package org.adligo.tests4j_tests.models.shared.dependency_groups.gwt;
+package org.adligo.tests4j_tests.models.shared.dependency_groups.gwt.v2_6.lang;
 
 
-import java.util.List;
 import java.util.Set;
 
 import org.adligo.tests4j.models.shared.dependency.I_ClassAttributes;
@@ -15,20 +14,20 @@ import org.adligo.tests4j.models.shared.trials.Test;
 import org.adligo.tests4j_tests.base_trials.SourceFileCountingTrial;
 
 @SourceFileScope (sourceClass=Appendable_2_6_MockUse.class)
-public class Appendable_2_6_ClassAttributeUseTrial extends SourceFileCountingTrial 
+public class Appendable_2_6_UseTrial extends SourceFileCountingTrial 
   implements Appendable {
 
 	private int methodsCalled = 0;
 
-	public java.lang.Appendable append(char p0) {
+	public Appendable append(char p0) {
 		methodsCalled++;
 		return this;
 	}
-	public java.lang.Appendable append(java.lang.CharSequence p0, int p1, int p2) {
+	public Appendable append(java.lang.CharSequence p0, int p1, int p2) {
 		methodsCalled++;
 		return this;
 	}
-	public java.lang.Appendable append(java.lang.CharSequence p0) {
+	public Appendable append(java.lang.CharSequence p0) {
 		methodsCalled++;
 		return this;
 	}

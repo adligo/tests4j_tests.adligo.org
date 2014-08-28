@@ -1,4 +1,4 @@
-package org.adligo.tests4j_tests.models.shared.dependency_groups.gwt;
+package org.adligo.tests4j_tests.models.shared.dependency_groups.gwt.v2_6.lang;
 
 import java.lang.Appendable;
 
