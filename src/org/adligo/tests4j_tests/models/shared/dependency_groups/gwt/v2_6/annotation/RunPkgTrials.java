@@ -1,4 +1,4 @@
-package org.adligo.tests4j_tests.models.shared.dependency_groups.gwt.v2_6;
+package org.adligo.tests4j_tests.models.shared.dependency_groups.gwt.v2_6.annotation;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,23 +28,8 @@ public class RunPkgTrials implements I_Tests4J_TrialList {
 	public List<Class<? extends I_Trial>> getTrials() {
 		List<Class<? extends I_Trial>> trials = new ArrayList<Class<? extends I_Trial>>();
 		
-		trials.add(GWT_2_6_LangTrial.class);
-		trials.add(GWT_2_6_IOTrial.class);
-		trials.add(GWT_2_6_AnnotTrial.class);
-		trials.add(GWT_2_6_UtilTrial.class);
 		
-		trials.addAll(
-				new org.adligo.tests4j_tests.models.shared.dependency_groups.gwt.v2_6.annotation.RunPkgTrials()
-				.getTrials());
-		trials.addAll(
-				new org.adligo.tests4j_tests.models.shared.dependency_groups.gwt.v2_6.io.RunPkgTrials()
-				.getTrials());
-		trials.addAll(
-				new org.adligo.tests4j_tests.models.shared.dependency_groups.gwt.v2_6.lang.RunPkgTrials()
-				.getTrials());
-		trials.addAll(
-				new org.adligo.tests4j_tests.models.shared.dependency_groups.gwt.v2_6.util.RunPkgTrials()
-				.getTrials());
+		trials.add(IncompleteAnnotationException_2_6_UseTrial.class);
 		return trials;
 	}
 }
