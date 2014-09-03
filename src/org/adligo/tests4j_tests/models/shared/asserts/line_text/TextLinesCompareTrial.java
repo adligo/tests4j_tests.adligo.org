@@ -12,6 +12,7 @@ import org.adligo.tests4j.models.shared.asserts.line_text.TextLinesCompare;
 import org.adligo.tests4j.models.shared.en.Tests4J_LineDiffTextDisplayMessages;
 import org.adligo.tests4j.models.shared.trials.SourceFileScope;
 import org.adligo.tests4j.models.shared.trials.Test;
+import org.adligo.tests4j_tests.base_trials.I_CountType;
 import org.adligo.tests4j_tests.base_trials.SourceFileCountingTrial;
 
 @SourceFileScope (sourceClass=TextLinesCompare.class, minCoverage=90.0)
@@ -803,17 +804,26 @@ public class TextLinesCompareTrial extends SourceFileCountingTrial {
 	
 	
 	@Override
-	public int getTests() {
-		return 16;
+	public int getTests(I_CountType type) {
+		return super.getTests(type, 16);
+	}
+	
+	@Override
+	public int getAsserts(I_CountType type) {
+		if (type.isFromMetaWithCoverage()) {
+			//code coverage and circular dependencies
+			return super.getAsserts(type,406);
+		} else {
+			return super.getAsserts(type, 404);
+		}
 	}
 
 	@Override
-	public int getAsserts() {
-		return 404;
-	}
-
-	@Override
-	public int getUniqueAsserts() {
-		return 238;
+	public int getUniqueAsserts(I_CountType type) {
+		if (type.isFromMetaWithCoverage()) {
+			return super.getUniqueAsserts(type, 240);
+		} else {
+			return super.getUniqueAsserts(type, 238);
+		}
 	}
 }

@@ -13,6 +13,7 @@ import org.adligo.tests4j.models.shared.asserts.line_text.LineDiffMutant;
 import org.adligo.tests4j.models.shared.asserts.line_text.LineDiffType;
 import org.adligo.tests4j.models.shared.trials.SourceFileScope;
 import org.adligo.tests4j.models.shared.trials.Test;
+import org.adligo.tests4j_tests.base_trials.I_CountType;
 import org.adligo.tests4j_tests.base_trials.SourceFileCountingTrial;
 
 @SourceFileScope (sourceClass=LineDiffMutant.class, minCoverage=84.0)
@@ -217,17 +218,26 @@ public class LineDiffMutantTrial extends SourceFileCountingTrial {
 	
 	
 	@Override
-	public int getTests() {
-		return 5;
+	public int getTests(I_CountType type) {
+		return super.getTests(type, 5);
 	}
 
 	@Override
-	public int getAsserts() {
-		return 36;
+	public int getAsserts(I_CountType type) {
+		if (type.isFromMetaWithCoverage()) {
+			//code coverage and circular dependencies
+			return super.getAsserts(type,38);
+		} else {
+			return super.getAsserts(type, 36);
+		}
 	}
 
 	@Override
-	public int getUniqueAsserts() {
-		return 20;
+	public int getUniqueAsserts(I_CountType type) {
+		if (type.isFromMetaWithCoverage()) {
+			return super.getUniqueAsserts(type, 22);
+		} else {
+			return super.getUniqueAsserts(type, 20);
+		}
 	}
 }

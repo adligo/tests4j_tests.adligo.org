@@ -3,6 +3,7 @@ package org.adligo.tests4j_tests.models.shared.common;
 import org.adligo.tests4j.models.shared.common.Tests4J_System;
 import org.adligo.tests4j.models.shared.trials.SourceFileScope;
 import org.adligo.tests4j.models.shared.trials.Test;
+import org.adligo.tests4j_tests.base_trials.I_CountType;
 import org.adligo.tests4j_tests.base_trials.SourceFileCountingTrial;
 import org.adligo.tests4j_tests.models.shared.common.mocks.SystemSimpleMock;
 import org.adligo.tests4j_tests.models.shared.common.mocks.ThreadLocalSystemMock;
@@ -26,7 +27,7 @@ public class Tests4J_SystemTrial extends SourceFileCountingTrial {
 		assertEquals(9, MOCK.getLastSystemExit());
 		
 		MOCK.setNextLineSeperator("\t\r\n\t");
-		assertEquals("\t\r\n\t", Tests4J_System.getLineSeperator());
+		assertEquals("\t\r\n\t", Tests4J_System.lineSeperator());
 		
 		MOCK.setNextTime(0);
 		assertEquals(0L, Tests4J_System.getTime());
@@ -37,18 +38,26 @@ public class Tests4J_SystemTrial extends SourceFileCountingTrial {
 	}
 	
 	@Override
-	public int getTests() {
-		return 1;
+	public int getTests(I_CountType type) {
+		return super.getTests(type, 1);
 	}
 
 	@Override
-	public int getAsserts() {
-		return 4;
+	public int getAsserts(I_CountType type) {
+		if (type.isFromMetaWithCoverage()) {
+			//code coverage and circular dependencies
+			return super.getAsserts(type, 6);
+		} else {
+			return super.getAsserts(type, 4);
+		}
 	}
 
 	@Override
-	public int getUniqueAsserts() {
-		return 4;
+	public int getUniqueAsserts(I_CountType type) {
+		if (type.isFromMetaWithCoverage()) {
+			return super.getUniqueAsserts(type, 6);
+		} else {
+			return super.getUniqueAsserts(type, 4);
+		}
 	}
-
 }

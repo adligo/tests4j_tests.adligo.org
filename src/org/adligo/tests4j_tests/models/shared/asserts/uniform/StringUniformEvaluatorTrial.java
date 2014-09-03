@@ -9,6 +9,7 @@ import org.adligo.tests4j.models.shared.en.Tests4J_EnglishConstants;
 import org.adligo.tests4j.models.shared.i18n.I_Tests4J_ResultMessages;
 import org.adligo.tests4j.models.shared.trials.SourceFileScope;
 import org.adligo.tests4j.models.shared.trials.Test;
+import org.adligo.tests4j_tests.base_trials.I_CountType;
 import org.adligo.tests4j_tests.base_trials.SourceFileCountingTrial;
 
 @SourceFileScope (sourceClass=StringUniformEvaluator.class, minCoverage=88.0)
@@ -62,17 +63,26 @@ public class StringUniformEvaluatorTrial extends SourceFileCountingTrial {
 	
 
 	@Override
-	public int getTests() {
-		return 3;
+	public int getTests(I_CountType type) {
+		return super.getTests(type, 3);
 	}
 
 	@Override
-	public int getAsserts() {
-		return 13;
+	public int getAsserts(I_CountType type) {
+		if (type.isFromMetaWithCoverage()) {
+			//code coverage and circular dependencies
+			return super.getAsserts(type,15);
+		} else {
+			return super.getAsserts(type, 13);
+		}
 	}
 
 	@Override
-	public int getUniqueAsserts() {
-		return 9;
+	public int getUniqueAsserts(I_CountType type) {
+		if (type.isFromMetaWithCoverage()) {
+			return super.getUniqueAsserts(type, 11);
+		} else {
+			return super.getUniqueAsserts(type, 9);
+		}
 	}
 }

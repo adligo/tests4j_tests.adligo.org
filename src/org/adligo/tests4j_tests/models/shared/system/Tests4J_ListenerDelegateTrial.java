@@ -9,6 +9,7 @@ import org.adligo.tests4j.models.shared.system.Tests4J_ListenerDelegator;
 import org.adligo.tests4j.models.shared.trials.SourceFileScope;
 import org.adligo.tests4j.models.shared.trials.Test;
 import org.adligo.tests4j.shared.output.I_Tests4J_Log;
+import org.adligo.tests4j_tests.base_trials.I_CountType;
 import org.adligo.tests4j_tests.base_trials.SourceFileCountingTrial;
 import org.adligo.tests4j_tests.models.shared.system.mocks.Clumsey_Tests4J_Listener;
 import org.adligo.tests4j_tests.models.shared.system.mocks.Tracking_Tests4J_Listener;
@@ -156,23 +157,6 @@ public class Tests4J_ListenerDelegateTrial extends SourceFileCountingTrial imple
 		assertSame(atrm, mock.getLastTrialResult());
 		
 	}
-	
-	@Override
-	public int getTests() {
-		return 4;
-	}
-
-	@Override
-	public int getAsserts() {
-		return 49;
-	}
-
-	@Override
-	public int getUniqueAsserts() {
-		return 22;
-	}
-
-
 
 	@Override
 	public void onThrowable(Throwable p) {
@@ -194,5 +178,40 @@ public class Tests4J_ListenerDelegateTrial extends SourceFileCountingTrial imple
 	public boolean isLogEnabled(Class<?> clazz) {
 		// TODO Auto-generated method stub
 		return false;
+	}
+	
+	@Override
+	public int getTests(I_CountType type) {
+		return super.getTests(type, 4);
+	}
+
+	@Override
+	public int getAsserts(I_CountType type) {
+		int thisAsserts = 49;
+		//code coverage and circular dependencies +
+		//custom afterTrialTests
+		//+ see above
+		int thisAfterAsserts = 2;
+		if (type.isFromMetaWithCoverage()) {
+			return super.getAsserts(type, thisAsserts + thisAfterAsserts);
+		} else {
+			return super.getAsserts(type, thisAsserts);
+		}
+	}
+
+	@Override
+	public int getUniqueAsserts(I_CountType type) {
+		int thisUniqueAsserts = 22;
+		//code coverage and circular dependencies +
+		//custom afterTrialTests
+		//+ see above
+		int thisAfterUniqueAsserts = 2;
+		if (type.isFromMetaWithCoverage()) {
+			//code coverage and circular dependencies +
+			//custom afterTrialTests
+			return super.getUniqueAsserts(type, thisUniqueAsserts + thisAfterUniqueAsserts);
+		} else {
+			return super.getUniqueAsserts(type, thisUniqueAsserts);
+		}
 	}
 }

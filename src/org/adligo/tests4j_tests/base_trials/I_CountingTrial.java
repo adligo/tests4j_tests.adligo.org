@@ -1,5 +1,7 @@
 package org.adligo.tests4j_tests.base_trials;
 
+import org.adligo.tests4j.models.shared.trials.I_Trial;
+
 /**
  * This interface was added because I was
  * seeing random issues in the counts of things.
@@ -10,12 +12,8 @@ package org.adligo.tests4j_tests.base_trials;
  * @author scott
  *
  */
-public interface I_CountingTrial {
-	public int getTests();
-	public int getAsserts();
-	public int getUniqueAsserts();
-	
-	public int getATests();
-	public int getAAsserts(boolean coverage);
-	public int getAUniqueAsserts(boolean coverage);
+public interface I_CountingTrial extends I_Trial {
+	public int getTests(I_CountType type);
+	public int getAsserts(I_CountType type);
+	public int getUniqueAsserts(I_CountType type);
 }

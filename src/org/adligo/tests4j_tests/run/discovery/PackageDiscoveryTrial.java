@@ -37,6 +37,10 @@ import org.adligo.tests4j.models.shared.trials.I_SourceFileTrial;
 import org.adligo.tests4j.models.shared.trials.I_SubProgress;
 import org.adligo.tests4j.models.shared.trials.I_Trial;
 import org.adligo.tests4j.models.shared.trials.I_TrialBindings;
+import org.adligo.tests4j.models.shared.trials.I_TrialInputData;
+import org.adligo.tests4j.models.shared.trials.I_TrialParams;
+import org.adligo.tests4j.models.shared.trials.I_TrialParamsAware;
+import org.adligo.tests4j.models.shared.trials.I_TrialParamsQueue;
 import org.adligo.tests4j.models.shared.trials.I_UseCaseTrial;
 import org.adligo.tests4j.models.shared.trials.IgnoreTest;
 import org.adligo.tests4j.models.shared.trials.PackageScope;
@@ -58,6 +62,7 @@ import org.adligo.tests4j.run.discovery.AfterTrialAuditor;
 import org.adligo.tests4j.run.discovery.BeforeTrialAuditor;
 import org.adligo.tests4j.run.discovery.I_TrialDescription;
 import org.adligo.tests4j.run.discovery.I_TrialStateNameIdKey;
+import org.adligo.tests4j.run.discovery.NonTests4jMethodDiscovery;
 import org.adligo.tests4j.run.discovery.PackageDiscovery;
 import org.adligo.tests4j.run.discovery.RelevantClassesWithTrialsCalculator;
 import org.adligo.tests4j.run.discovery.TestAuditor;
@@ -69,26 +74,35 @@ import org.adligo.tests4j.run.discovery.TrialQueueDecisionTree;
 import org.adligo.tests4j.run.discovery.TrialState;
 import org.adligo.tests4j.run.discovery.TrialStateNameIdKey;
 import org.adligo.tests4j.run.discovery.TrialTypeFinder;
+import org.adligo.tests4j_4jacoco.plugin.CoveragePlugin;
+import org.adligo.tests4j_4jacoco.plugin.CoveragePluginFactory;
+import org.adligo.tests4j_4jacoco.plugin.CoveragePluginMemory;
+import org.adligo.tests4j_4jacoco.plugin.Recorder;
+import org.adligo.tests4j_4jacoco.plugin.SharedClassList;
+import org.adligo.tests4j_tests.base_trials.I_CountType;
 import org.adligo.tests4j_tests.base_trials.SourceFileCountingTrial;
 import org.adligo.tests4j_tests.run.discovery.package_discovery_inner_mocks.TwoNestedRunnables;
+
+import com.sun.xml.internal.bind.v2.runtime.unmarshaller.Receiver;
 
 @SourceFileScope (sourceClass=PackageDiscovery.class, minCoverage=51.0)
 public class PackageDiscoveryTrial extends SourceFileCountingTrial {
 
-	private static final int ASSERT_COUNT = 84;
+	private static final int ASSERT_COUNT = 103;
 
 	@Test
 	public void testDiscoveryPackage() throws Exception {
 		PackageDiscovery cd = new PackageDiscovery("org.adligo.tests4j.run.discovery");
 		List<String> clazzNames = cd.getClassNames();
 		assertNotNull(clazzNames);
-		assertEquals(15, clazzNames.size());
+		assertEquals(16, clazzNames.size());
 		assertContains(clazzNames, AfterTrialAuditor.class.getName());
 		assertContains(clazzNames, BeforeTrialAuditor.class.getName());
 		
 		assertContains(clazzNames, I_TrialDescription.class.getName());
 		assertContains(clazzNames, I_TrialStateNameIdKey.class.getName());
 		
+		assertContains(clazzNames, NonTests4jMethodDiscovery.class.getName());
 		assertContains(clazzNames, PackageDiscovery.class.getName());
 
 		assertContains(clazzNames, RelevantClassesWithTrialsCalculator.class.getName());
@@ -152,7 +166,7 @@ public class PackageDiscoveryTrial extends SourceFileCountingTrial {
 	}
 	
 	@Test
-	public void testModelsShared() throws Exception {
+	public void testModelsSharedTrials() throws Exception {
 		PackageDiscovery cd = new PackageDiscovery("org.adligo.tests4j.models.shared.trials");
 		List<String> classNames = cd.getClassNames();
 		assertContains(classNames, AllowedDependencies.class.getName());
@@ -170,6 +184,12 @@ public class PackageDiscoveryTrial extends SourceFileCountingTrial {
 		assertContains(classNames, I_CircularDependencies.class.getName());
 		assertContains(classNames, I_Trial.class.getName());
 		assertContains(classNames, I_TrialBindings.class.getName());
+		
+		assertContains(classNames, I_TrialInputData.class.getName());
+		assertContains(classNames, I_TrialParams.class.getName());
+		assertContains(classNames, I_TrialParamsAware.class.getName());
+		assertContains(classNames, I_TrialParamsQueue.class.getName());
+		
 		assertContains(classNames, I_MetaTrial.class.getName());
 		assertContains(classNames, I_Progress.class.getName());
 		assertContains(classNames, I_SourceFileTrial.class.getName());
@@ -198,7 +218,7 @@ public class PackageDiscoveryTrial extends SourceFileCountingTrial {
 		assertContains(classNames, UseCaseScope.class.getName());
 		assertContains(classNames, UseCaseTrial.class.getName());
 		
-		assertEquals(34, classNames.size());
+		assertEquals(39, classNames.size());
 		List<PackageDiscovery> children =  cd.getSubPackages();
 		
 		
@@ -239,18 +259,67 @@ public class PackageDiscoveryTrial extends SourceFileCountingTrial {
 		assertEquals(4, children.size());
 	}
 	
+	
+	@Test
+	public void testCoco() throws Exception {
+		PackageDiscovery cd = new PackageDiscovery("org.adligo.tests4j_4jacoco.plugin");
+		
+		List<String> classNames = cd.getClassNames();
+		assertContains(classNames, CoveragePlugin.class.getName());
+		assertContains(classNames, CoveragePluginFactory.class.getName());
+		assertContains(classNames, CoveragePluginMemory.class.getName());
+		assertContains(classNames, Recorder.class.getName());
+		assertContains(classNames, SharedClassList.class.getName());
+		assertEquals(5, classNames.size());
+		
+		
+		List<PackageDiscovery> children =  cd.getSubPackages();
+		List<String> childNames = new ArrayList<String>();
+		for(PackageDiscovery i: children) {
+			childNames.add(i.getPackageName());
+		}
+		assertContains(childNames, "org.adligo.tests4j_4jacoco.plugin.analysis");
+		assertContains(childNames, "org.adligo.tests4j_4jacoco.plugin.asm");
+		assertContains(childNames, "org.adligo.tests4j_4jacoco.plugin.common");
+		assertContains(childNames, "org.adligo.tests4j_4jacoco.plugin.data");
+		assertContains(childNames, "org.adligo.tests4j_4jacoco.plugin.discovery");
+		assertContains(childNames, "org.adligo.tests4j_4jacoco.plugin.instrumentation");
+		assertContains(childNames, "org.adligo.tests4j_4jacoco.plugin.runtime");
+		assertEquals(7, children.size());
+		
+	}
 	@Override
-	public int getTests() {
-		return 5;
+	public int getTests(I_CountType type) {
+		return super.getTests(type, 6);
 	}
 
 	@Override
-	public int getAsserts() {
-		return ASSERT_COUNT;
+	public int getAsserts(I_CountType type) {
+		int thisAsserts = ASSERT_COUNT;
+		//code coverage and circular dependencies +
+		//custom afterTrialTests
+		//+ see above
+		int thisAfterAsserts = 2;
+		if (type.isFromMetaWithCoverage()) {
+			return super.getAsserts(type, thisAsserts + thisAfterAsserts);
+		} else {
+			return super.getAsserts(type, thisAsserts);
+		}
 	}
 
 	@Override
-	public int getUniqueAsserts() {
-		return ASSERT_COUNT;
+	public int getUniqueAsserts(I_CountType type) {
+		int thisUniqueAsserts = ASSERT_COUNT;
+		//code coverage and circular dependencies +
+		//custom afterTrialTests
+		//+ see above
+		int thisAfterUniqueAsserts = 2;
+		if (type.isFromMetaWithCoverage()) {
+			//code coverage and circular dependencies +
+			//custom afterTrialTests
+			return super.getUniqueAsserts(type, thisUniqueAsserts + thisAfterUniqueAsserts);
+		} else {
+			return super.getUniqueAsserts(type, thisUniqueAsserts);
+		}
 	}
 }

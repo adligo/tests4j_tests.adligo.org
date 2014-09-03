@@ -3,7 +3,6 @@ package org.adligo.tests4j_tests;
 import org.adligo.tests4j.models.shared.system.Tests4J_Params;
 import org.adligo.tests4j.run.Tests4J;
 import org.adligo.tests4j_4jacoco.plugin.CoveragePluginFactory;
-import org.adligo.tests4j_tests.models.shared.dependency_groups.gwt.v2_6.lang.Appendable_2_6_UseTrial;
 
 public class RunSingleTrial {
 
@@ -13,7 +12,7 @@ public class RunSingleTrial {
 		//params.addTrial(NoPackageScopeAnnotationTrial.class);
 		//params.addTrial(ReferenceTrackingClassVisitorTrial.class);
 		//params.addTrial(ReferenceTrackingMethodVisitorTrial.class);
-		params.addTrial(Appendable_2_6_UseTrial.class);
+		//params.addTrial(Appendable_2_6_UseTrial.class);
 		//params.addTrial(ReferenceTrackingClassVisitorTrial.class);
 		//params.addTrial(BadUseCaseTrials_Trial.class);
 		//params.addTest(new Tests4J_Selection(DiscoveryApiTrial.class, "test2003_MockWithTriangleA"));

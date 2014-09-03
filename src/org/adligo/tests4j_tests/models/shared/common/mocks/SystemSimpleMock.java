@@ -27,7 +27,7 @@ public class SystemSimpleMock implements I_System {
 	}
 
 	@Override
-	public String getLineSeperator() {
+	public String lineSeperator() {
 		return nextLineSeperator;
 	}
 
@@ -56,6 +56,11 @@ public class SystemSimpleMock implements I_System {
 	public PrintStream getOut() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public String getJseVersion() {
+		return "";
 	}
 
 }

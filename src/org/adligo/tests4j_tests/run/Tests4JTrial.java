@@ -17,6 +17,7 @@ import org.adligo.tests4j.run.Tests4J;
 import org.adligo.tests4j.run.helpers.Tests4J_Controls;
 import org.adligo.tests4j.shared.output.DefaultLog;
 import org.adligo.tests4j.shared.output.I_Tests4J_Log;
+import org.adligo.tests4j_tests.base_trials.I_CountType;
 import org.adligo.tests4j_tests.base_trials.SourceFileCountingTrial;
 import org.adligo.tests4j_tests.run.helpers.MockTests4J_DelegateFactory;
 import org.adligo.tests4j_tests.run.mocks.MockTests4J;
@@ -221,20 +222,38 @@ public class Tests4JTrial extends SourceFileCountingTrial implements I_Tests4J_D
 		return controllsToSend;
 	}
 
-	
 	@Override
-	public int getTests() {
-		return 7;
+	public int getTests(I_CountType type) {
+		return super.getTests(type, 7);
 	}
 
 	@Override
-	public int getAsserts() {
-		return 44;
+	public int getAsserts(I_CountType type) {
+		int thisAsserts = 44;
+		//code coverage and circular dependencies +
+		//custom afterTrialTests
+		//+ see above
+		int thisAfterAsserts = 2;
+		if (type.isFromMetaWithCoverage()) {
+			return super.getAsserts(type, thisAsserts + thisAfterAsserts);
+		} else {
+			return super.getAsserts(type, thisAsserts);
+		}
 	}
 
 	@Override
-	public int getUniqueAsserts() {
-		return 41;
+	public int getUniqueAsserts(I_CountType type) {
+		int thisUniqueAsserts = 41;
+		//code coverage and circular dependencies +
+		//custom afterTrialTests
+		//+ see above
+		int thisAfterUniqueAsserts = 2;
+		if (type.isFromMetaWithCoverage()) {
+			//code coverage and circular dependencies +
+			//custom afterTrialTests
+			return super.getUniqueAsserts(type, thisUniqueAsserts + thisAfterUniqueAsserts);
+		} else {
+			return super.getUniqueAsserts(type, thisUniqueAsserts);
+		}
 	}
-
 }

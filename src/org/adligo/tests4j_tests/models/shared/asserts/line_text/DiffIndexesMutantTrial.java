@@ -3,6 +3,7 @@ package org.adligo.tests4j_tests.models.shared.asserts.line_text;
 import org.adligo.tests4j.models.shared.asserts.line_text.DiffIndexesMutant;
 import org.adligo.tests4j.models.shared.trials.SourceFileScope;
 import org.adligo.tests4j.models.shared.trials.Test;
+import org.adligo.tests4j_tests.base_trials.I_CountType;
 import org.adligo.tests4j_tests.base_trials.SourceFileCountingTrial;
 
 @SourceFileScope (sourceClass=DiffIndexesMutant.class, minCoverage=59.0)
@@ -131,17 +132,26 @@ public class DiffIndexesMutantTrial extends SourceFileCountingTrial {
 	}
 	
 	@Override
-	public int getTests() {
-		return 9;
+	public int getTests(I_CountType type) {
+		return super.getTests(type, 9);
 	}
 
 	@Override
-	public int getAsserts() {
-		return 52;
+	public int getAsserts(I_CountType type) {
+		if (type.isFromMetaWithCoverage()) {
+			//code coverage and circular dependencies
+			return super.getAsserts(type,54);
+		} else {
+			return super.getAsserts(type, 52);
+		}
 	}
 
 	@Override
-	public int getUniqueAsserts() {
-		return 30;
+	public int getUniqueAsserts(I_CountType type) {
+		if (type.isFromMetaWithCoverage()) {
+			return super.getUniqueAsserts(type, 32);
+		} else {
+			return super.getUniqueAsserts(type, 30);
+		}
 	}
 }

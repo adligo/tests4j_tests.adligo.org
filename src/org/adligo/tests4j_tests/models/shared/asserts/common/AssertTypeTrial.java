@@ -7,6 +7,7 @@ import org.adligo.tests4j.models.shared.coverage.I_SourceFileCoverage;
 import org.adligo.tests4j.models.shared.results.I_SourceFileTrialResult;
 import org.adligo.tests4j.models.shared.trials.SourceFileScope;
 import org.adligo.tests4j.models.shared.trials.Test;
+import org.adligo.tests4j_tests.base_trials.I_CountType;
 import org.adligo.tests4j_tests.base_trials.SourceFileCountingTrial;
 
 @SourceFileScope (sourceClass=AssertType.class, minCoverage=95.0)
@@ -108,20 +109,29 @@ public class AssertTypeTrial extends SourceFileCountingTrial {
 	}
 
 	@Override
-	public int getTests() {
-		return 6;
+	public int getTests(I_CountType type) {
+		return super.getTests(type, 6);
 	}
 
 	@Override
-	public int getAsserts() {
-		return 45;
+	public int getAsserts(I_CountType type) {
+		if (type.isFromMetaWithCoverage()) {
+			//code coverage and circular dependencies +
+			//custom afterTrialTests
+			return super.getAsserts(type,49);
+		} else {
+			return super.getAsserts(type, 45);
+		}
 	}
 
 	@Override
-	public int getUniqueAsserts() {
-		return 45;
+	public int getUniqueAsserts(I_CountType type) {
+		if (type.isFromMetaWithCoverage()) {
+			return super.getUniqueAsserts(type, 49);
+		}  else {
+			return super.getAsserts(type, 45);
+		}
 	}
-
 
 	@Override
 	public void afterTrialTests(I_SourceFileTrialResult p) {

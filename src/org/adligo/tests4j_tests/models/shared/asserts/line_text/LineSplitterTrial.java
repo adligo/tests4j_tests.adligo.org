@@ -5,6 +5,7 @@ import org.adligo.tests4j.models.shared.coverage.I_SourceFileCoverage;
 import org.adligo.tests4j.models.shared.results.I_SourceFileTrialResult;
 import org.adligo.tests4j.models.shared.trials.SourceFileScope;
 import org.adligo.tests4j.models.shared.trials.Test;
+import org.adligo.tests4j_tests.base_trials.I_CountType;
 import org.adligo.tests4j_tests.base_trials.SourceFileCountingTrial;
 
 @SourceFileScope (sourceClass=LineSplitter.class)
@@ -45,17 +46,26 @@ public class LineSplitterTrial extends SourceFileCountingTrial {
 	}
 	
 	@Override
-	public int getTests() {
-		return 1;
+	public int getTests(I_CountType type) {
+		return super.getTests(type, 1);
+	}
+	
+	@Override
+	public int getAsserts(I_CountType type) {
+		if (type.isFromMetaWithCoverage()) {
+			//code coverage and circular dependencies
+			return super.getAsserts(type,18);
+		} else {
+			return super.getAsserts(type, 16);
+		}
 	}
 
 	@Override
-	public int getAsserts() {
-		return 16;
-	}
-
-	@Override
-	public int getUniqueAsserts() {
-		return 2;
+	public int getUniqueAsserts(I_CountType type) {
+		if (type.isFromMetaWithCoverage()) {
+			return super.getUniqueAsserts(type, 4);
+		} else {
+			return super.getUniqueAsserts(type, 2);
+		}
 	}
 }

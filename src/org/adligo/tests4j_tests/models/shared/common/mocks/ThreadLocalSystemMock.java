@@ -7,6 +7,7 @@ import org.adligo.tests4j.models.shared.common.DefaultSystem;
 import org.adligo.tests4j.models.shared.common.DelegateSystem;
 import org.adligo.tests4j.models.shared.common.I_System;
 import org.adligo.tests4j.models.shared.common.Tests4J_System;
+import org.adligo.tests4j.run.helpers.JseSystem;
 
 /**
  * this class allows a single trial to 
@@ -24,8 +25,9 @@ import org.adligo.tests4j.models.shared.common.Tests4J_System;
  *
  */
 public class ThreadLocalSystemMock extends DelegateSystem implements I_System {
+	public static final String MOCK_THREAD_NAME = "mockThreadName";
 	private InheritableThreadLocal<I_System> ith = new InheritableThreadLocal<>();
-	private static final I_System DEFAULT = new DefaultSystem();
+	private static final I_System DEFAULT = new JseSystem();
 	private static final Set<String> callers = new CopyOnWriteArraySet<String>();
 	private static final ThreadLocalSystemMock INSTANCE = new ThreadLocalSystemMock();
 	
@@ -86,8 +88,13 @@ public class ThreadLocalSystemMock extends DelegateSystem implements I_System {
 	}
 
 	@Override
-	public String getLineSeperator() {
-		return getSystem().getLineSeperator();
+	public String lineSeperator() {
+		return getSystem().lineSeperator();
+	}
+
+	@Override
+	public String getCurrentThreadName() {
+		return MOCK_THREAD_NAME;
 	}
 
 }

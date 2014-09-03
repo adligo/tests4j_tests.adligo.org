@@ -7,6 +7,7 @@ import org.adligo.tests4j.models.shared.asserts.common.ExpectedThrownData;
 import org.adligo.tests4j.models.shared.asserts.common.I_Thrower;
 import org.adligo.tests4j.models.shared.trials.SourceFileScope;
 import org.adligo.tests4j.models.shared.trials.Test;
+import org.adligo.tests4j_tests.base_trials.I_CountType;
 import org.adligo.tests4j_tests.base_trials.SourceFileCountingTrial;
 
 @SourceFileScope (sourceClass=DoubleAssertCommand.class, minCoverage=80.0)
@@ -83,19 +84,33 @@ public class DoubleAssertCommandTrial extends SourceFileCountingTrial {
 		assertTrue(new DoubleAssertCommand("failureMessage", 
 				new CompareAssertionData<Double>(0.0, 0.01, AssertType.AssertGreaterThanOrEquals)).evaluate());
 	}
-	
+
 	@Override
-	public int getTests() {
-		return 4;
+	public int getTests(I_CountType type) {
+		return super.getTests(type, 4);
 	}
 
 	@Override
-	public int getAsserts() {
-		return 20;
+	public int getAsserts(I_CountType type) {
+		int thisAsserts = 20;
+		if (type.isFromMetaWithCoverage()) {
+			//code coverage and circular dependencies +
+			//custom afterTrialTests
+			return super.getAsserts(type, thisAsserts + 2);
+		} else {
+			return super.getAsserts(type, thisAsserts);
+		}
 	}
 
 	@Override
-	public int getUniqueAsserts() {
-		return 12;
+	public int getUniqueAsserts(I_CountType type) {
+		int thisUniqueAsserts = 12;
+		if (type.isFromMetaWithCoverage()) {
+			//code coverage and circular dependencies +
+			//custom afterTrialTests
+			return super.getUniqueAsserts(type, thisUniqueAsserts + 2);
+		}  else {
+			return super.getAsserts(type, thisUniqueAsserts);
+		}
 	}
 }

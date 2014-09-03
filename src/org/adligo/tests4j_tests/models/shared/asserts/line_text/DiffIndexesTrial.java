@@ -7,6 +7,7 @@ import org.adligo.tests4j.models.shared.asserts.line_text.I_DiffIndexes;
 import org.adligo.tests4j.models.shared.common.Tests4J_System;
 import org.adligo.tests4j.models.shared.trials.SourceFileScope;
 import org.adligo.tests4j.models.shared.trials.Test;
+import org.adligo.tests4j_tests.base_trials.I_CountType;
 import org.adligo.tests4j_tests.base_trials.SourceFileCountingTrial;
 
 @SourceFileScope (sourceClass=DiffIndexes.class, minCoverage=95.0)
@@ -102,7 +103,7 @@ public class DiffIndexesTrial extends SourceFileCountingTrial {
 		
 		assertThrown(new ExpectedThrownData(new IllegalArgumentException(
 				DiffIndexes.MATCH_ERROR_PART_ONE + 
-				Tests4J_System.SYSTEM.getLineSeperator() +
+				Tests4J_System.SYSTEM.lineSeperator() +
 				DiffIndexes.MATCH_L2R_DIFF_L2R_MATCH_R2L_DIFF_R2L)),
 				new I_Thrower() {
 					
@@ -114,7 +115,7 @@ public class DiffIndexesTrial extends SourceFileCountingTrial {
 		
 		assertThrown(new ExpectedThrownData(new IllegalArgumentException(
 				DiffIndexes.MATCH_ERROR_PART_ONE + 
-				Tests4J_System.SYSTEM.getLineSeperator() +
+				Tests4J_System.SYSTEM.lineSeperator() +
 				DiffIndexes.DIFF_L2R_MATCH_L2R_DIFF_R2L_MATCH_R2L)),
 				new I_Thrower() {
 					
@@ -283,24 +284,27 @@ public class DiffIndexesTrial extends SourceFileCountingTrial {
 		assertEquals(1, matches.length);
 		assertEquals("b", matches[0]);
 	}
-	
 
-	
-	
-	
-	
 	@Override
-	public int getTests() {
-		return 8;
+	public int getTests(I_CountType type) {
+		return super.getTests(type, 8);
+	}
+	@Override
+	public int getAsserts(I_CountType type) {
+		if (type.isFromMetaWithCoverage()) {
+			//code coverage and circular dependencies
+			return super.getAsserts(type,72);
+		} else {
+			return super.getAsserts(type, 70);
+		}
 	}
 
 	@Override
-	public int getAsserts() {
-		return 70;
-	}
-
-	@Override
-	public int getUniqueAsserts() {
-		return 47;
+	public int getUniqueAsserts(I_CountType type) {
+		if (type.isFromMetaWithCoverage()) {
+			return super.getUniqueAsserts(type, 49);
+		} else {
+			return super.getUniqueAsserts(type, 47);
+		}
 	}
 }

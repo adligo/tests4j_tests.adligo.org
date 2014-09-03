@@ -11,6 +11,7 @@ import org.adligo.tests4j.run.Tests4J;
 public class RunAllRemote {
 
 	public static void main(String [] args) {
+		/*
 		Tests4J_Params remoteParams = RunAllTrials.getTests();
 		
 		Tests4J_Params params = new Tests4J_Params();
@@ -25,7 +26,7 @@ public class RunAllRemote {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+		*/
 		
 	}
 	

@@ -7,6 +7,7 @@ import org.adligo.tests4j.models.shared.trials.Test;
 import org.adligo.tests4j.shared.report.summary.TestDisplay;
 import org.adligo.tests4j.shared.report.summary.TestFailedDisplay;
 import org.adligo.tests4j.shared.report.summary.ThreadDisplay;
+import org.adligo.tests4j_tests.base_trials.I_CountType;
 import org.adligo.tests4j_tests.base_trials.SourceFileCountingTrial;
 import org.adligo.tests4j_tests.models.shared.system.mocks.Tests4J_LogMock;
 
@@ -93,18 +94,38 @@ public class TestDisplayTrial extends SourceFileCountingTrial {
 	}
 	
 	@Override
-	public int getTests() {
-		return 5;
+	public int getTests(I_CountType type) {
+		return super.getTests(type, 5);
 	}
 
 	@Override
-	public int getAsserts() {
-		return 22;
+	public int getAsserts(I_CountType type) {
+		int thisAsserts = 22;
+		//code coverage and circular dependencies +
+		//custom afterTrialTests
+		//+ see above
+		int thisAfterAsserts = 2;
+		if (type.isFromMetaWithCoverage()) {
+			return super.getAsserts(type, thisAsserts + thisAfterAsserts);
+		} else {
+			return super.getAsserts(type, thisAsserts);
+		}
 	}
 
 	@Override
-	public int getUniqueAsserts() {
-		return 15;
+	public int getUniqueAsserts(I_CountType type) {
+		int thisUniqueAsserts = 15;
+		//code coverage and circular dependencies +
+		//custom afterTrialTests
+		//+ see above
+		int thisAfterUniqueAsserts = 2;
+		if (type.isFromMetaWithCoverage()) {
+			//code coverage and circular dependencies +
+			//custom afterTrialTests
+			return super.getUniqueAsserts(type, thisUniqueAsserts + thisAfterUniqueAsserts);
+		} else {
+			return super.getUniqueAsserts(type, thisUniqueAsserts);
+		}
 	}
 
 	

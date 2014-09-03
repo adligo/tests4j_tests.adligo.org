@@ -1,21 +1,17 @@
 package org.adligo.tests4j_tests;
 
 import java.math.BigDecimal;
-import java.util.List;
-import java.util.concurrent.CopyOnWriteArrayList;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 import org.adligo.tests4j.models.shared.common.Tests4J_System;
 import org.adligo.tests4j.models.shared.metadata.I_TrialRunMetadata;
 import org.adligo.tests4j.models.shared.results.I_TrialResult;
 import org.adligo.tests4j.models.shared.results.I_TrialRunResult;
-import org.adligo.tests4j.models.shared.system.I_Tests4J_CoveragePluginParams;
 import org.adligo.tests4j.models.shared.system.I_Tests4J_Listener;
+import org.adligo.tests4j.models.shared.system.I_Tests4J_Params;
 import org.adligo.tests4j.models.shared.system.I_Tests4J_ProcessInfo;
 import org.adligo.tests4j.models.shared.system.Tests4J_DefaultProgressMonitor;
 import org.adligo.tests4j.models.shared.system.Tests4J_Params;
-import org.adligo.tests4j.models.shared.trials.I_Trial;
+import org.adligo.tests4j.models.shared.trials.I_TrialParams;
 import org.adligo.tests4j.run.Tests4J;
 import org.adligo.tests4j.shared.output.DefaultLog;
 import org.adligo.tests4j.shared.output.I_Tests4J_Log;
@@ -26,15 +22,49 @@ import org.adligo.tests4j.shared.report.summary.TrialDisplay;
 import org.adligo.tests4j.shared.report.summary.TrialsProcessDisplay;
 import org.adligo.tests4j.shared.report.summary.TrialsProgressDisplay;
 import org.adligo.tests4j_4jacoco.plugin.CoveragePluginFactory;
-import org.adligo.tests4j_4jacoco.plugin.discovery.ReferenceTrackingClassVisitor;
-import org.adligo.tests4j_tests.base_trials.Counts;
-import org.adligo.tests4j_tests.base_trials.I_CountingTrial;
+import org.adligo.tests4j_tests.base_trials.I_CountingPackageTrials;
+import org.adligo.tests4j_tests.base_trials.SimpleMetaTrial;
+import org.adligo.tests4j_tests.base_trials.SimplePackageTrials;
+import org.adligo.tests4j_tests.jacoco.api_trials.A_CocoApiPkgTrials;
+import org.adligo.tests4j_tests.jacoco.plugin.A_CocoJavaVersionSpecificTrials;
+import org.adligo.tests4j_tests.jacoco.plugin.A_CocoPlugPkgTrials;
+import org.adligo.tests4j_tests.models.shared.asserts.A_AssertsPkgTrials;
+import org.adligo.tests4j_tests.models.shared.common.A_CmnPkgTrials;
+import org.adligo.tests4j_tests.models.shared.dependency.A_DepsPkgTrials;
+import org.adligo.tests4j_tests.models.shared.en.A_EnPkgTrials;
+import org.adligo.tests4j_tests.models.shared.metadata.A_MetaPkgTrials;
+import org.adligo.tests4j_tests.models.shared.results.A_ResultsPkgTrials;
+import org.adligo.tests4j_tests.models.shared.system.A_SysPkgTrials;
+import org.adligo.tests4j_tests.models.shared.xml.A_XmlPkgTrials;
+import org.adligo.tests4j_tests.run.A_RunPkgTrials;
+import org.adligo.tests4j_tests.shared.A_SharePkgTrials;
 
-public class RunAllTrials implements I_Tests4J_Listener {
+public class RunAllTrials  extends SimplePackageTrials 
+implements I_TrialParams<RunAllTrials>, I_CountingPackageTrials, I_Tests4J_Listener {
 	static long start = System.currentTimeMillis();
 	static I_Tests4J_Log logger = new DefaultLog();
 	//private static volatile List<String> trialsNotCompleted = new CopyOnWriteArrayList<String>();
 	//private static ExecutorService trialsNotCompletedService = Executors.newSingleThreadExecutor();
+	private A_EnPkgTrials en = new A_EnPkgTrials();
+	private A_CmnPkgTrials cmn = new A_CmnPkgTrials();
+	private A_XmlPkgTrials xml = new A_XmlPkgTrials();
+	private A_AssertsPkgTrials asserts = new A_AssertsPkgTrials();
+	private A_DepsPkgTrials deps = new A_DepsPkgTrials();
+	private A_MetaPkgTrials meta = new A_MetaPkgTrials();
+	
+	private A_ResultsPkgTrials results = new A_ResultsPkgTrials();
+	
+	private A_SysPkgTrials sys = new A_SysPkgTrials();
+	private A_SharePkgTrials share = new A_SharePkgTrials();
+	
+	private A_CocoApiPkgTrials cocoApi = new A_CocoApiPkgTrials();
+	private A_CocoPlugPkgTrials cocoPlug = new A_CocoPlugPkgTrials();
+	
+	private A_RunPkgTrials run = new A_RunPkgTrials();
+	
+	private A_JavaVersionSpecificTrials jv = new A_JavaVersionSpecificTrials();
+	private A_CocoJavaVersionSpecificTrials cocoJv = new A_CocoJavaVersionSpecificTrials();
+	
 	
 	
 	public static void main(String [] args) {
@@ -42,24 +72,21 @@ public class RunAllTrials implements I_Tests4J_Listener {
 		try {
 		//Tests4J_Params params = getTests(SimpleJacocoPluginFactory.class);
 			
-			Tests4J_Params params = getTests();
+			Tests4J_Params params = new Tests4J_Params();
 			params.setCoveragePluginFactoryClass(CoveragePluginFactory.class);
+			//params.setMetaTrialClass(TheMetaTrial.class);
+			params.setMetaTrialClass(SimpleMetaTrial.class);
+			
+			RunAllTrials me = new RunAllTrials();
+			me.setParams(params);
+			me.addTrials(params);
+			
+			params.addTrials(me);
+			params.setMetaTrialParams(me);
 			Tests4J_DefaultProgressMonitor dpm = new Tests4J_DefaultProgressMonitor(Tests4J_System.SYSTEM);
 			dpm.setSleepTime(500);
 			params.setProgressMonitor(dpm);
-			setupCounts(params);
-			/*
-			File file = new File("biglog.log");
-			if (file.exists()) {
-				file.delete();
-			}
-			FileOutputStream biglog = new FileOutputStream(file);
-			params.addAdditionalReportOutputStreams(biglog);
-			*/
-			//TODO there is a deadlock issue in setup currently 
-			params.setRecommendedSetupThreadCount(1);
-			//params.setRecommendedTrialThreadCount(1);
-			
+		
 			params.setLogState(TrialDisplay.class, false);
 			params.setLogState(TestDisplay.class, false);
 			//params.setLogState(ThreadDisplay.class, true);
@@ -79,7 +106,7 @@ public class RunAllTrials implements I_Tests4J_Listener {
 			//params.setLogState(ClassParentsDiscovery.class, true);
 			//params.setLogState(TrialInstrumenter.class, true);
 			
-			params.setMetaTrialClass(TheMetaTrial.class);
+			
 			//params.setThreadPoolSize(1);
 			//params.setCoveragePlugin(new TieredJacocoPlugin());
 			//
@@ -99,69 +126,65 @@ public class RunAllTrials implements I_Tests4J_Listener {
 	 * as dependant code is loaded first.
 	 * @return
 	 */
-	public static synchronized Tests4J_Params getTests() {
-		Tests4J_Params toRet = new Tests4J_Params();
+	public void addTrials(Tests4J_Params params) throws Exception {
+	
+		en.setParams(params);
+		en.addTrials();
+		add(en.getCountingTrials());
 		
-		toRet.addTrials(new org.adligo.tests4j_tests.models.shared.en.RunPkgTrials());
+		cmn.setParams(params);
+		cmn.addTrials();
+		add(cmn.getCountingTrials());
+	
+		xml.setParams(params);
+		xml.addTrials();
+		add(xml.getCountingTrials());
 		
-		toRet.addTrials(new org.adligo.tests4j_tests.models.shared.common.RunPkgTrials());
+		asserts.setParams(params);
+		asserts.addTrials();
+		add(asserts.getCountingTrials());
 		
-		toRet.addTrials(new org.adligo.tests4j_tests.models.shared.xml.RunPkgTrials());
+		deps.setParams(params);
+		deps.addTrials();
+		add(deps.getCountingTrials());
 		
-		toRet.addTrials(new org.adligo.tests4j_tests.models.shared.asserts.RunPkgTrials());
+		meta.setParams(params);
+		meta.addTrials();
+		add(meta.getCountingTrials());
 		
-		toRet.addTrials(new org.adligo.tests4j_tests.models.shared.dependency.RunPkgTrials());
-		toRet.addTrials(new org.adligo.tests4j_tests.models.shared.dependency_groups.gwt.v2_6.RunPkgTrials());
-		toRet.addTrials(new org.adligo.tests4j_tests.models.shared.dependency_groups.jse.RunPkgTrials());
+		results.setParams(params);
+		results.addTrials();
+		add(results.getCountingTrials());
 		
-		toRet.addTrials(new org.adligo.tests4j_tests.models.shared.metadata.RunPkgTrials());
+		sys.setParams(params);
+		sys.addTrials();
+		add(sys.getCountingTrials());
 		
-		toRet.addTrials(new org.adligo.tests4j_tests.models.shared.system.RunPkgTrials());
-		toRet.addTrials(new org.adligo.tests4j_tests.shared.RunPkgTrials());
+		share.setParams(params);
+		share.addTrials();
+		add(share.getCountingTrials());
 		
-		toRet.addTrials(new org.adligo.tests4j_tests.jacoco.api_trials.RunPkgTrials());
-		toRet.addTrials(new org.adligo.tests4j_tests.jacoco.plugin.RunPkgTrials());
+		cocoApi.setParams(params);
+		cocoApi.addTrials();
+		add(cocoApi.getCountingTrials());
 		
-		toRet.addTrials(new org.adligo.tests4j_tests.run.RunPkgTrials());
-		toRet.addTrials(new org.adligo.tests4j_tests.trials_api.RunPkgTrials());
+		cocoPlug.setParams(params);
+		cocoPlug.addTrials();
+		add(cocoPlug.getCountingTrials());
 		
-		return toRet;
+		run.setParams(params);
+		run.addTrials();
+		add(run.getCountingTrials());
+				
+		jv.setParams(params);
+		jv.addTrials();
+		add(jv.getCountingTrials());
+		
+		cocoJv.setParams(params);
+		cocoJv.addTrials();
+		add(cocoJv.getCountingTrials());
 	}
 
-	private static void setupCounts(Tests4J_Params params) {
-		
-		I_Tests4J_CoveragePluginParams coverageParams = params.getCoverageParams();
-		
-		List<Class<? extends I_Trial>> trials = params.getTrials();
-		Counts counts = new Counts();
-		for (Class<? extends I_Trial> trialClass: trials) {
-			try {
-				I_CountingTrial ct = (I_CountingTrial) trialClass.newInstance();
-				counts.setTests(counts.getTests() + ct.getTests());
-				counts.setAsserts(counts.getAsserts() + ct.getAsserts());
-				counts.setUniqueAsserts(counts.getUniqueAsserts() + ct.getUniqueAsserts());
-				
-				counts.setAfterTests(counts.getAfterTests() + ct.getATests());
-				counts.setAfterAsserts(counts.getAfterAsserts()  + 
-						ct.getAAsserts(coverageParams.isCanThreadLocalGroupRecord()));
-				counts.setAfterUniqueAsserts(counts.getAfterUniqueAsserts()  + 
-						ct.getAUniqueAsserts(coverageParams.isCanThreadLocalGroupRecord()));
-			} catch (InstantiationException | IllegalAccessException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			
-		}
-		//NOTE it is to difficult to copy data between classloaders
-		// so just print to the console here, and put the values in TheMetaTrial
-		System.out.println("Single threaded Counts are as follows" +
-				"\ntests " + counts.getTests() + 
-				"\nasserts " + counts.getAsserts() +
-				"\nuniqueAsserts " + counts.getUniqueAsserts() +
-				"\nafterTests " + counts.getAfterTests() +
-				"\nafterAsserts " + counts.getAfterAsserts() + 
-				"\nafterUniqueAsserts " + counts.getAfterUniqueAsserts());
-	}
 
 	@Override
 	public void onMetadataCalculated(I_TrialRunMetadata metadata) {
@@ -207,6 +230,11 @@ public class RunAllTrials implements I_Tests4J_Listener {
 	public void onProgress(I_Tests4J_ProcessInfo info) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public RunAllTrials getTrialParams() {
+		return this;
 	}
 
 

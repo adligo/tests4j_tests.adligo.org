@@ -4,6 +4,7 @@ import org.adligo.tests4j.models.shared.asserts.line_text.TextLines;
 import org.adligo.tests4j.models.shared.common.StackTraceBuilder;
 import org.adligo.tests4j.models.shared.trials.SourceFileScope;
 import org.adligo.tests4j.models.shared.trials.Test;
+import org.adligo.tests4j_tests.base_trials.I_CountType;
 import org.adligo.tests4j_tests.base_trials.SourceFileCountingTrial;
 
 @SourceFileScope (sourceClass=StackTraceBuilder.class, minCoverage=96.0)
@@ -67,17 +68,26 @@ public class StackTraceBuilderTrial extends SourceFileCountingTrial {
 	
 
 	@Override
-	public int getTests() {
-		return 2;
+	public int getTests(I_CountType type) {
+		return super.getTests(type, 2);
 	}
 
 	@Override
-	public int getAsserts() {
-		return 16;
+	public int getAsserts(I_CountType type) {
+		if (type.isFromMetaWithCoverage()) {
+			//code coverage and circular dependencies
+			return super.getAsserts(type,18);
+		} else {
+			return super.getAsserts(type, 16);
+		}
 	}
 
 	@Override
-	public int getUniqueAsserts() {
-		return 16;
+	public int getUniqueAsserts(I_CountType type) {
+		if (type.isFromMetaWithCoverage()) {
+			return super.getUniqueAsserts(type, 18);
+		} else {
+			return super.getUniqueAsserts(type, 16);
+		}
 	}
 }

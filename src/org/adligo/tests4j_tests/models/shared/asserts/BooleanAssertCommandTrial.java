@@ -6,6 +6,7 @@ import org.adligo.tests4j.models.shared.asserts.common.ExpectedThrownData;
 import org.adligo.tests4j.models.shared.asserts.common.I_Thrower;
 import org.adligo.tests4j.models.shared.trials.SourceFileScope;
 import org.adligo.tests4j.models.shared.trials.Test;
+import org.adligo.tests4j_tests.base_trials.I_CountType;
 import org.adligo.tests4j_tests.base_trials.SourceFileCountingTrial;
 import org.adligo.tests4j_tests.models.shared.asserts.mocks.ExtendedAssertCommand;
 
@@ -71,17 +72,31 @@ public class BooleanAssertCommandTrial extends SourceFileCountingTrial {
 	}
 
 	@Override
-	public int getTests() {
-		return 4;
+	public int getTests(I_CountType type) {
+		return super.getTests(type, 4);
 	}
 
 	@Override
-	public int getAsserts() {
-		return 22;
+	public int getAsserts(I_CountType type) {
+		int thisAsserts = 22;
+		if (type.isFromMetaWithCoverage()) {
+			//code coverage and circular dependencies +
+			//custom afterTrialTests
+			return super.getAsserts(type, thisAsserts + 2);
+		} else {
+			return super.getAsserts(type, thisAsserts);
+		}
 	}
 
 	@Override
-	public int getUniqueAsserts() {
-		return 11;
+	public int getUniqueAsserts(I_CountType type) {
+		int thisUniqueAsserts = 11;
+		if (type.isFromMetaWithCoverage()) {
+			//code coverage and circular dependencies +
+			//custom afterTrialTests
+			return super.getUniqueAsserts(type, thisUniqueAsserts + 2);
+		}  else {
+			return super.getAsserts(type, thisUniqueAsserts);
+		}
 	}
 }

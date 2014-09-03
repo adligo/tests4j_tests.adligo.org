@@ -14,6 +14,7 @@ import org.adligo.tests4j.models.shared.i18n.I_Tests4J_AssertionInputMessages;
 import org.adligo.tests4j.models.shared.i18n.I_Tests4J_ResultMessages;
 import org.adligo.tests4j.models.shared.trials.SourceFileScope;
 import org.adligo.tests4j.models.shared.trials.Test;
+import org.adligo.tests4j_tests.base_trials.I_CountType;
 import org.adligo.tests4j_tests.base_trials.SourceFileCountingTrial;
 
 @SourceFileScope (sourceClass=UniformThrownAssertCommand.class, minCoverage=77.0)
@@ -351,18 +352,31 @@ public class UniformThrownAssertCommandTrial extends SourceFileCountingTrial {
 		assertEquals(3, tad.getFailureThrowable());
 	}
 	
+
 	@Override
-	public int getTests() {
-		return 9;
+	public int getTests(I_CountType type) {
+		return super.getTests(type, 9);
 	}
 
 	@Override
-	public int getAsserts() {
-		return 76;
+	public int getAsserts(I_CountType type) {
+		int thisAsserts = 76;
+		if (type.isFromMetaWithCoverage()) {
+			//code coverage and circular dependencies +
+			//custom afterTrialTests
+			return super.getAsserts(type, thisAsserts + 2);
+		} else {
+			return super.getAsserts(type, thisAsserts);
+		}
 	}
 
 	@Override
-	public int getUniqueAsserts() {
-		return 57;
+	public int getUniqueAsserts(I_CountType type) {
+		int thisUniqueAsserts = 57;
+		if (type.isFromMetaWithCoverage()) {
+			return super.getUniqueAsserts(type, thisUniqueAsserts + 2);
+		}  else {
+			return super.getAsserts(type, thisUniqueAsserts);
+		}
 	}
 }

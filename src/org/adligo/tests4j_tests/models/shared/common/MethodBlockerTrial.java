@@ -12,6 +12,7 @@ import org.adligo.tests4j.models.shared.trials.AdditionalInstrumentation;
 import org.adligo.tests4j.models.shared.trials.BeforeTrial;
 import org.adligo.tests4j.models.shared.trials.SourceFileScope;
 import org.adligo.tests4j.models.shared.trials.Test;
+import org.adligo.tests4j_tests.base_trials.I_CountType;
 import org.adligo.tests4j_tests.base_trials.SourceFileCountingTrial;
 import org.adligo.tests4j_tests.models.shared.common.mocks.MockWithMethodBlocker;
 
@@ -184,17 +185,28 @@ public class MethodBlockerTrial extends SourceFileCountingTrial {
 	}
 	
 	@Override
-	public int getTests() {
-		return 3;
+	public int getTests(I_CountType type) {
+		return super.getTests(type, 3);
+	}
+
+
+	
+	@Override
+	public int getAsserts(I_CountType type) {
+		if (type.isFromMetaWithCoverage()) {
+			//code coverage and circular dependencies
+			return super.getAsserts(type,10);
+		} else {
+			return super.getAsserts(type, 8);
+		}
 	}
 
 	@Override
-	public int getAsserts() {
-		return 8;
-	}
-
-	@Override
-	public int getUniqueAsserts() {
-		return 8;
+	public int getUniqueAsserts(I_CountType type) {
+		if (type.isFromMetaWithCoverage()) {
+			return super.getUniqueAsserts(type, 10);
+		} else {
+			return super.getUniqueAsserts(type, 8);
+		}
 	}
 }

@@ -6,6 +6,7 @@ import org.adligo.tests4j.models.shared.trials.SourceFileScope;
 import org.adligo.tests4j.models.shared.trials.SourceFileTrial;
 import org.adligo.tests4j.models.shared.trials.Test;
 import org.adligo.tests4j.run.remote.io.Bits;
+import org.adligo.tests4j_tests.base_trials.I_CountType;
 import org.adligo.tests4j_tests.base_trials.SourceFileCountingTrial;
 
 @SourceFileScope (sourceClass=Bits.class)
@@ -37,6 +38,7 @@ public class BitsTrial extends SourceFileCountingTrial {
 	
 	@Override
 	public void afterTrialTests(I_SourceFileTrialResult p) {
+		super.afterTrialTests(p);
 		if (p.hasRecordedCoverage()) {
 			I_SourceFileCoverage coverage = p.getSourceFileCoverage();
 			assertGreaterThanOrEquals(100.00, coverage.getPercentageCoveredDouble());
@@ -44,18 +46,37 @@ public class BitsTrial extends SourceFileCountingTrial {
 	}
 	
 
-	@Override
-	public int getTests() {
-		return 2;
+	public int getTests(I_CountType type) {
+		return super.getTests(type, 2);
 	}
 
 	@Override
-	public int getAsserts() {
-		return 11;
+	public int getAsserts(I_CountType type) {
+		int thisAsserts = 11;
+		//code coverage and circular dependencies +
+		//custom afterTrialTests
+		//+ see above
+		int thisAfterAsserts = 3;
+		if (type.isFromMetaWithCoverage()) {
+			return super.getAsserts(type, thisAsserts + thisAfterAsserts);
+		} else {
+			return super.getAsserts(type, thisAsserts);
+		}
 	}
 
 	@Override
-	public int getUniqueAsserts() {
-		return 4;
+	public int getUniqueAsserts(I_CountType type) {
+		int thisUniqueAsserts = 6;
+		//code coverage and circular dependencies +
+		//custom afterTrialTests
+		//+ see above
+		int thisAfterUniqueAsserts = 3;
+		if (type.isFromMetaWithCoverage()) {
+			//code coverage and circular dependencies +
+			//custom afterTrialTests
+			return super.getUniqueAsserts(type, thisUniqueAsserts + thisAfterUniqueAsserts);
+		} else {
+			return super.getUniqueAsserts(type, thisUniqueAsserts);
+		}
 	}
 }
