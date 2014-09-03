@@ -12,6 +12,7 @@ import org.adligo.tests4j.models.shared.trials.I_Trial;
 import org.adligo.tests4j.models.shared.trials.PackageScope;
 import org.adligo.tests4j.models.shared.trials.Test;
 import org.adligo.tests4j_tests.base_trials.ApiCountingTrial;
+import org.adligo.tests4j_tests.base_trials.I_CountType;
 import org.adligo.tests4j_tests.trials_api.bad_mock_api_trials.AbstractTestTrial;
 import org.adligo.tests4j_tests.trials_api.bad_mock_api_trials.AfterTrialHasParamsTrial;
 import org.adligo.tests4j_tests.trials_api.bad_mock_api_trials.AfterTrialNotPublicTrial;
@@ -158,13 +159,13 @@ public class BadApiTrials_Trial extends ApiCountingTrial {
 	}
 	
 	@Override
-	public int getTests() {
-		return 	17;
+	public int getTests(I_CountType type) {
+		return super.getTests(type, 17);
 	}
 
 	@Override
-	public int getAsserts() {
-		return AbstractTestTrial.getAsserts() +
+	public int getAsserts(I_CountType type) {
+		int asserts = AbstractTestTrial.getAsserts() +
 				AfterTrialHasParamsTrial.getAsserts() +
 				AfterTrialNotPublicTrial.getAsserts() + 
 				AfterTrialNotStaticTrial.getAsserts()  +
@@ -181,10 +182,22 @@ public class BadApiTrials_Trial extends ApiCountingTrial {
 				StaticTestTrial.getAsserts()   +
 				TestWithParamsTrial.getAsserts()+
 				305;//305 is from testTrialRunOverlapPrevention
+		//overrode afterTrialTests above
+		if (type.isFromMetaWithCoverage()) {
+			return super.getAsserts(type, asserts + 1);
+		} else {
+			return super.getAsserts(type, asserts);
+		}
 	}
 
 	@Override
-	public int getUniqueAsserts() {
-		return 333;
+	public int getUniqueAsserts(I_CountType type) {
+		int uAsserts = 333;
+		//overrode afterTrialTests above
+		if (type.isFromMetaWithCoverage()) {
+			return super.getUniqueAsserts(type, uAsserts + 1);
+		} else {
+			return super.getUniqueAsserts(type, uAsserts);
+		}
 	}
 }

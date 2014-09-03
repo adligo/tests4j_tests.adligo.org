@@ -13,6 +13,7 @@ import org.adligo.tests4j.models.shared.trials.ApiTrial;
 import org.adligo.tests4j.models.shared.trials.PackageScope;
 import org.adligo.tests4j.models.shared.trials.Test;
 import org.adligo.tests4j_tests.base_trials.ApiCountingTrial;
+import org.adligo.tests4j_tests.base_trials.I_CountType;
 import org.adligo.tests4j_tests.trials_api.assert_fails_trials.AssertContainsFailsTrialRunner;
 import org.adligo.tests4j_tests.trials_api.assert_fails_trials.AssertContainsWithMessageFailsTrialRunner;
 import org.adligo.tests4j_tests.trials_api.assert_fails_trials.AssertEqualsStringFailsTrialRunner;
@@ -268,17 +269,29 @@ public class AssertionsPass_Trial extends ApiCountingTrial {
 	
 
 	@Override
-	public int getTests() {
-		return 13;
+	public int getTests(I_CountType type) {
+		return super.getTests(type, 13);
 	}
 
 	@Override
-	public int getAsserts() {
-		return 89;
+	public int getAsserts(I_CountType type) {
+		int asserts = 89;
+		//overrode afterTrialTests above
+		if (type.isFromMetaWithCoverage()) {
+			return super.getAsserts(type, asserts + 1);
+		} else {
+			return super.getAsserts(type, asserts);
+		}
 	}
 
 	@Override
-	public int getUniqueAsserts() {
-		return 57;
+	public int getUniqueAsserts(I_CountType type) {
+		int uAsserts = 57;
+		//overrode afterTrialTests above
+		if (type.isFromMetaWithCoverage()) {
+			return super.getUniqueAsserts(type, uAsserts + 1);
+		} else {
+			return super.getUniqueAsserts(type, uAsserts);
+		}
 	}
 }

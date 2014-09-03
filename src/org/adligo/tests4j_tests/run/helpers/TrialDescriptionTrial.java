@@ -6,17 +6,14 @@ import java.util.List;
 
 import org.adligo.tests4j.models.shared.coverage.I_PackageCoverage;
 import org.adligo.tests4j.models.shared.coverage.PackageCoverageMutant;
-import org.adligo.tests4j.models.shared.trials.I_AbstractTrial;
 import org.adligo.tests4j.models.shared.trials.SourceFileScope;
 import org.adligo.tests4j.models.shared.trials.Test;
 import org.adligo.tests4j.run.discovery.TrialDescription;
 import org.adligo.tests4j_tests.base_trials.I_CountType;
 import org.adligo.tests4j_tests.base_trials.SourceFileCountingTrial;
-import org.adligo.tests4j_tests.jacoco.plugin.data.common.ProbesMutantTrial;
-import org.adligo.tests4j_tests.models.shared.system.mocks.Tests4J_LogMock;
 import org.adligo.tests4j_tests.run.helpers.mocks.Tests4J_MemoryMock;
 
-@SourceFileScope (sourceClass=TrialDescription.class, minCoverage=37.0)
+@SourceFileScope (sourceClass=TrialDescription.class, minCoverage=33.0)
 public class TrialDescriptionTrial extends SourceFileCountingTrial {
 
 	@Test

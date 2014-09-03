@@ -5,6 +5,7 @@ import org.adligo.tests4j.models.shared.results.I_ApiTrialResult;
 import org.adligo.tests4j.models.shared.trials.PackageScope;
 import org.adligo.tests4j.models.shared.trials.Test;
 import org.adligo.tests4j_tests.base_trials.ApiCountingTrial;
+import org.adligo.tests4j_tests.base_trials.I_CountType;
 import org.adligo.tests4j_tests.trials_api.asserts_null_expected_trials.AssertContainsNullFailsTrialRunner;
 import org.adligo.tests4j_tests.trials_api.asserts_null_expected_trials.AssertContainsNullWithMessageFailsTrialRunner;
 import org.adligo.tests4j_tests.trials_api.asserts_null_expected_trials.AssertEqualsNullFailsTrialRunner;
@@ -179,13 +180,13 @@ public class AssertionsWithNullExpectedFail_Trial extends ApiCountingTrial {
 	}
 
 	@Override
-	public int getTests() {
-		return 26;
+	public int getTests(I_CountType type) {
+		return super.getTests(type, 26);
 	}
 
 	@Override
-	public int getAsserts() {
-		return AssertContainsNullFailsTrialRunner.getAsserts()+
+	public int getAsserts(I_CountType type) {
+		int asserts = AssertContainsNullFailsTrialRunner.getAsserts()+
 				AssertContainsNullWithMessageFailsTrialRunner.getAsserts()  +
 				AssertEqualsNullFailsTrialRunner.getAsserts() +
 				AssertEqualsNullWithMessageFailsTrialRunner.getAsserts() +
@@ -211,10 +212,21 @@ public class AssertionsWithNullExpectedFail_Trial extends ApiCountingTrial {
 				AssertThrownUniformNullThrowerWithMessageFailsTrialRunner.getAsserts() +
 				AssertUniformNullFailsTrialRunner.getAsserts()+ 
 				AssertUniformNullWithMessageFailsTrialRunner.getAsserts();
+		//overrode afterTrialTests above
+		if (type.isFromMetaWithCoverage()) {
+			return super.getAsserts(type, asserts + 1);
+		} else {
+			return super.getAsserts(type, asserts);
+		}
 	}
 
 	@Override
-	public int getUniqueAsserts() {
-		return 520;
+	public int getUniqueAsserts(I_CountType type) {
+		int uAsserts = 520;
+		if (type.isFromMetaWithCoverage()) {
+			return super.getUniqueAsserts(type, uAsserts + 1);
+		} else {
+			return super.getUniqueAsserts(type, uAsserts);
+		}
 	}
 }

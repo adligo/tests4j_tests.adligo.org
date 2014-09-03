@@ -39,4 +39,17 @@ public class Tests4J_MemoryMock implements I_Tests4J_Memory {
 		
 	}
 
+	@Override
+	public I_TrialResult pollFailureResults() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public int getFailureResultsSize() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+
 }

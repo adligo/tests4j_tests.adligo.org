@@ -38,6 +38,7 @@ import org.adligo.tests4j_tests.models.shared.system.A_SysPkgTrials;
 import org.adligo.tests4j_tests.models.shared.xml.A_XmlPkgTrials;
 import org.adligo.tests4j_tests.run.A_RunPkgTrials;
 import org.adligo.tests4j_tests.shared.A_SharePkgTrials;
+import org.adligo.tests4j_tests.trials_api.A_ApiPkgTrials;
 
 public class RunAllTrials  extends SimplePackageTrials 
 implements I_TrialParams<RunAllTrials>, I_CountingPackageTrials, I_Tests4J_Listener {
@@ -65,6 +66,7 @@ implements I_TrialParams<RunAllTrials>, I_CountingPackageTrials, I_Tests4J_Liste
 	private A_JavaVersionSpecificTrials jv = new A_JavaVersionSpecificTrials();
 	private A_CocoJavaVersionSpecificTrials cocoJv = new A_CocoJavaVersionSpecificTrials();
 	
+	private A_ApiPkgTrials api = new A_ApiPkgTrials();
 	
 	
 	public static void main(String [] args) {
@@ -183,6 +185,10 @@ implements I_TrialParams<RunAllTrials>, I_CountingPackageTrials, I_Tests4J_Liste
 		cocoJv.setParams(params);
 		cocoJv.addTrials();
 		add(cocoJv.getCountingTrials());
+		
+		api.setParams(params);
+		api.addTrials();
+		add(api.getCountingTrials());
 	}
 
 

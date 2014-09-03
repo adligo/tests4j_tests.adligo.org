@@ -6,6 +6,7 @@ import org.adligo.tests4j.models.shared.trials.AdditionalInstrumentation;
 import org.adligo.tests4j.models.shared.trials.PackageScope;
 import org.adligo.tests4j.models.shared.trials.Test;
 import org.adligo.tests4j_tests.base_trials.ApiCountingTrial;
+import org.adligo.tests4j_tests.base_trials.I_CountType;
 import org.adligo.tests4j_tests.trials_api.assert_fails_trials.AssertContainsFailsTrialRunner;
 import org.adligo.tests4j_tests.trials_api.assert_fails_trials.AssertContainsWithMessageFailsTrialRunner;
 import org.adligo.tests4j_tests.trials_api.assert_fails_trials.AssertEqualsFailsTrialRunner;
@@ -277,13 +278,13 @@ public class AssertionsFail_Trial extends ApiCountingTrial {
 	
 
 	@Override
-	public int getTests() {
-		return 42;
+	public int getTests(I_CountType type) {
+		return super.getTests(type, 42);
 	}
 
 	@Override
-	public int getAsserts() {
-		return AssertContainsFailsTrialRunner.getAsserts() +
+	public int getAsserts(I_CountType type) {
+		int asserts = AssertContainsFailsTrialRunner.getAsserts() +
 				AssertContainsWithMessageFailsTrialRunner.getAsserts() + 
 				AssertEqualsFailsTrialRunner.getAsserts() +
 				AssertEqualsWithMessageFailsTrialRunner.getAsserts() +
@@ -325,10 +326,21 @@ public class AssertionsFail_Trial extends ApiCountingTrial {
 				AssertTrueFailsMessageTrialRunner.getAsserts() +
 				AssertUniformFailsTrialRunner.getAsserts() + 
 				AssertUniformWithMessageFailsTrialRunner.getAsserts();
+		//overrode afterTrialTests above
+		if (type.isFromMetaWithCoverage()) {
+			return super.getAsserts(type, asserts + 1);
+		} else {
+			return super.getAsserts(type, asserts);
+		}
 	}
 
 	@Override
-	public int getUniqueAsserts() {
-		return 840;
+	public int getUniqueAsserts(I_CountType type) {
+		int uAsserts = 840;
+		if (type.isFromMetaWithCoverage()) {
+			return super.getUniqueAsserts(type, uAsserts + 1);
+		} else {
+			return super.getUniqueAsserts(type, uAsserts);
+		}
 	}
 }
