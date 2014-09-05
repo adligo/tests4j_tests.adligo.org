@@ -350,4 +350,10 @@ public class LineDiffTextDisplayTrial extends SourceFileCountingTrial implements
 			return super.getUniqueAsserts(type, thisUniqueAsserts);
 		}
 	}
+
+	@Override
+	public String getCurrentThreadName() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

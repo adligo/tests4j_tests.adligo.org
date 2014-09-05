@@ -31,6 +31,8 @@ public class ClassFilterMutantTrial extends SourceFileCountingTrial {
 	@Test
 	public void testGetsAndSets() throws Exception {
 		ClassFilterMutant cfm = new ClassFilterMutant();
+		cfm.setIgnoredPackageNames(Collections.singleton("java."));
+		
 		Set<String> pkgNames = cfm.getIgnoredPackageNames();
 		assertNotNull(pkgNames);
 		assertContains(pkgNames, "java.");
@@ -57,6 +59,7 @@ public class ClassFilterMutantTrial extends SourceFileCountingTrial {
 	public void testIsFilteredMethod() throws Exception {
 		ClassFilterMutant cfm = new ClassFilterMutant();
 		cfm.setIgnoredClassNames(Collections.singleton(MockWithNothing.class.getName()));
+		cfm.setIgnoredPackageNames(Collections.singleton("java."));
 		
 		assertTrue(cfm.isFiltered((Class<?>) null));
 		assertTrue(cfm.isFiltered(String.class));

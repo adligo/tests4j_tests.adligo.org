@@ -14,6 +14,8 @@ import org.adligo.tests4j_tests.models.shared.i18n.I18N_Asserter;
 @SourceFileScope (sourceClass=Tests4J_ReportMessages.class)
 public class Tests4J_ReportMessages_Trial extends SourceFileCountingTrial {
 
+	private static final int ASSERTS = 76;
+
 	@Test
 	public void testMessages() {
 		I_Tests4J_ReportMessages messages = Tests4J_EnglishConstants.ENGLISH.getReportMessages();
@@ -73,6 +75,8 @@ public class Tests4J_ReportMessages_Trial extends SourceFileCountingTrial {
 				messages.getNonMetaTrials());
 		asserter.assertConstant("trial descriptions", 
 				messages.getTrialDescriptionsInStatement());
+		asserter.assertConstant(" on thread <Z/> ", 
+				messages.getOnThreadZ());
 		
 		asserter.assertConstantsMatchMethods(Tests4J_ReportMessages.class);
 	}
@@ -84,7 +88,7 @@ public class Tests4J_ReportMessages_Trial extends SourceFileCountingTrial {
 
 	@Override
 	public int getAsserts(I_CountType type) {
-		int thisAsserts = 73;
+		int thisAsserts = ASSERTS;
 		//code coverage and circular dependencies +
 		//custom afterTrialTests
 		//+ see above
@@ -98,7 +102,7 @@ public class Tests4J_ReportMessages_Trial extends SourceFileCountingTrial {
 
 	@Override
 	public int getUniqueAsserts(I_CountType type) {
-		int thisUniqueAsserts = 73;
+		int thisUniqueAsserts = ASSERTS;
 		//code coverage and circular dependencies +
 		//custom afterTrialTests
 		//+ see above

@@ -39,6 +39,7 @@ implements I_TrialParams<A_RunDiscPkgTrials>, I_CountingPackageTrials {
 		
 		add(PackageDiscoveryTrial.class);
 		add(Tests4J_ParamReaderTrial.class);
+		add(TrialDescriptionTrial.class);
 	}
 
 	@Override

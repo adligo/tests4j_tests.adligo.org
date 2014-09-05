@@ -1,5 +1,6 @@
 package org.adligo.tests4j_tests.base_trials;
 
+import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -20,6 +21,12 @@ import org.adligo.tests4j.models.shared.trials.SourceFileTrial;
  *
  */
 public class SimplePackageTrials implements I_Tests4J_TrialList, I_CountingPackageTrials {
+	/**
+	 * the initial unmodified ERR stream for 
+	 * printing non captured output
+	 */
+	protected static final PrintStream ERR = System.err;
+	
 	private List<Class<? extends I_CountingTrial>> trials_ = new ArrayList<Class<? extends I_CountingTrial>>();
 	private Tests4J_Params params = new Tests4J_Params();
 	

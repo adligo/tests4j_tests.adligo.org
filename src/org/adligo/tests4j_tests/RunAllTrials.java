@@ -1,5 +1,6 @@
 package org.adligo.tests4j_tests;
 
+import java.io.PrintStream;
 import java.math.BigDecimal;
 
 import org.adligo.tests4j.models.shared.common.Tests4J_System;
@@ -26,7 +27,6 @@ import org.adligo.tests4j_tests.base_trials.I_CountingPackageTrials;
 import org.adligo.tests4j_tests.base_trials.SimpleMetaTrial;
 import org.adligo.tests4j_tests.base_trials.SimplePackageTrials;
 import org.adligo.tests4j_tests.jacoco.api_trials.A_CocoApiPkgTrials;
-import org.adligo.tests4j_tests.jacoco.plugin.A_CocoJavaVersionSpecificTrials;
 import org.adligo.tests4j_tests.jacoco.plugin.A_CocoPlugPkgTrials;
 import org.adligo.tests4j_tests.models.shared.asserts.A_AssertsPkgTrials;
 import org.adligo.tests4j_tests.models.shared.common.A_CmnPkgTrials;
@@ -39,9 +39,12 @@ import org.adligo.tests4j_tests.models.shared.xml.A_XmlPkgTrials;
 import org.adligo.tests4j_tests.run.A_RunPkgTrials;
 import org.adligo.tests4j_tests.shared.A_SharePkgTrials;
 import org.adligo.tests4j_tests.trials_api.A_ApiPkgTrials;
+import org.adligo.tests4j_v1_tests.A_JavaVersionSpecificTrials;
+import org.adligo.tests4j_v1_tests.jacoco.plugin.A_CocoJavaVersionSpecificTrials;
 
 public class RunAllTrials  extends SimplePackageTrials 
 implements I_TrialParams<RunAllTrials>, I_CountingPackageTrials, I_Tests4J_Listener {
+	
 	static long start = System.currentTimeMillis();
 	static I_Tests4J_Log logger = new DefaultLog();
 	//private static volatile List<String> trialsNotCompleted = new CopyOnWriteArrayList<String>();
@@ -70,21 +73,20 @@ implements I_TrialParams<RunAllTrials>, I_CountingPackageTrials, I_Tests4J_Liste
 	
 	
 	public static void main(String [] args) {
-		
 		try {
-		//Tests4J_Params params = getTests(SimpleJacocoPluginFactory.class);
-			
 			Tests4J_Params params = new Tests4J_Params();
 			params.setCoveragePluginFactoryClass(CoveragePluginFactory.class);
-			//params.setMetaTrialClass(TheMetaTrial.class);
-			params.setMetaTrialClass(SimpleMetaTrial.class);
-			
+			params.setMetaTrialClass(TheMetaTrial.class);
+			//params.setMetaTrialClass(SimpleMetaTrial.class);
 			RunAllTrials me = new RunAllTrials();
+			//params.setMetaTrialParams(me);
+			
+			params.setRecommendedSetupThreadCount(16);
 			me.setParams(params);
 			me.addTrials(params);
 			
 			params.addTrials(me);
-			params.setMetaTrialParams(me);
+			
 			Tests4J_DefaultProgressMonitor dpm = new Tests4J_DefaultProgressMonitor(Tests4J_System.SYSTEM);
 			dpm.setSleepTime(500);
 			params.setProgressMonitor(dpm);
@@ -112,10 +114,10 @@ implements I_TrialParams<RunAllTrials>, I_CountingPackageTrials, I_Tests4J_Liste
 			//params.setThreadPoolSize(1);
 			//params.setCoveragePlugin(new TieredJacocoPlugin());
 			//
-			 Tests4J.run(params, new RunAllTrials());
+			 Tests4J.run(params, me);
 			
 		} catch (Throwable x) {
-			x.printStackTrace();
+			x.printStackTrace(ERR);
 		}
 	}
 

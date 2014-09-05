@@ -13,12 +13,12 @@ import org.adligo.tests4j_tests.base_trials.I_CountingPackageTrials;
 import org.adligo.tests4j_tests.base_trials.SimpleMetaTrial;
 import org.adligo.tests4j_tests.base_trials.SimplePackageTrials;
 import org.adligo.tests4j_tests.jacoco.plugin.data.common.A_CocoDataCmnPkgTrials;
-import org.adligo.tests4j_tests.jacoco.plugin.data.coverage.A_CocoPlugCoverPkgTrials;
+import org.adligo.tests4j_tests.jacoco.plugin.data.inst.A_CocoPlugInstPkgTrials;
 
 public class A_CocoPlugPkgTrials extends SimplePackageTrials 
 implements I_TrialParams<A_CocoPlugPkgTrials>, I_CountingPackageTrials {
 	private A_CocoDataCmnPkgTrials dataCommon = new A_CocoDataCmnPkgTrials();
-	private A_CocoPlugCoverPkgTrials cover = new A_CocoPlugCoverPkgTrials();
+	private A_CocoPlugInstPkgTrials cover = new A_CocoPlugInstPkgTrials();
 	
 	public static void main(String [] args) {
 		try {

@@ -214,4 +214,10 @@ public class Tests4J_ListenerDelegateTrial extends SourceFileCountingTrial imple
 			return super.getUniqueAsserts(type, thisUniqueAsserts);
 		}
 	}
+
+	@Override
+	public String getCurrentThreadName() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

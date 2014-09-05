@@ -1,42 +1,48 @@
 package org.adligo.tests4j_tests;
 
 import org.adligo.tests4j.models.shared.system.Tests4J_Params;
+import org.adligo.tests4j.models.shared.trials.I_TrialParams;
 import org.adligo.tests4j.run.Tests4J;
 import org.adligo.tests4j_4jacoco.plugin.CoveragePluginFactory;
-import org.adligo.tests4j_4jacoco.plugin.data.coverage.LazyPackageCoverage;
-import org.adligo.tests4j_4jacoco.plugin.data.coverage.LazyPackageCoverageFactory;
-import org.adligo.tests4j_4jacoco.plugin.instrumentation.TrialInstrumenter;
-import org.adligo.tests4j_tests.trials_api.BadUseCaseTrials_Trial;
-import org.adligo.tests4j_tests.trials_api.bad_mock_use_case_trials.AfterTrialHasParamsTrial;
+import org.adligo.tests4j_tests.base_trials.I_CountingPackageTrials;
+import org.adligo.tests4j_tests.base_trials.SimpleMetaTrial;
+import org.adligo.tests4j_tests.base_trials.SimplePackageTrials;
+import org.adligo.tests4j_v1_tests.models.dependency_groups.gwt.v2_6.annotation.RetentionPolicy_2_6_UseTrial;
+import org.adligo.tests4j_v1_tests.models.dependency_groups.gwt.v2_6.annotation.Target_2_6_UseTrial;
 
-public class RunSingleTrial {
-
+public class RunSingleTrial extends SimplePackageTrials 
+implements I_TrialParams<RunSingleTrial>, I_CountingPackageTrials {
 	
 	public static void main(String [] args) {
-		Tests4J_Params params = new Tests4J_Params();
-		params.addTrial(BadUseCaseTrials_Trial.class);
-		//params.addTrial(ReferenceTrackingClassVisitorTrial.class);
-		//params.addTrial(ReferenceTrackingMethodVisitorTrial.class);
-		//params.addTrial(Appendable_2_6_UseTrial.class);
-		//params.addTrial(ReferenceTrackingClassVisitorTrial.class);
-		//params.addTrial(BadUseCaseTrials_Trial.class);
-		//params.addTest(new Tests4J_Selection(DiscoveryApiTrial.class, "test2003_MockWithTriangleA"));
-		
-		//params.setLogState(MultiProbesMap.class, true);
-		
-		//params.setLogState(TrialDisplay.class, false);
-		//params.setLogState(TestDisplay.class, true);
-		//params.setLogState(ClassInstrumenter.class, true);
-		params.setLogState(TrialInstrumenter.class, true);
-		params.setLogState(LazyPackageCoverage.class, true);
-		params.setLogState(LazyPackageCoverageFactory.class, true);
-		//params.setLogState(ReferenceTrackingClassVisitor.class, true);
-		
-		//logging from jacoco
-		//params.addLoggingClass(AbstractPlugin.class);
-		//params.setLogState(Recorder.class, true);
-		params.setCoveragePluginFactoryClass(CoveragePluginFactory.class);
-		Tests4J.run(params);
+		try {
+			Tests4J_Params params = new Tests4J_Params();
+			params.setCoveragePluginFactoryClass(CoveragePluginFactory.class);
+			params.setMetaTrialClass(SimpleMetaTrial.class);
+			
+			RunSingleTrial me = new RunSingleTrial();
+			me.setParams(params);
+			me.addTrials();
+			
+			params.setMetaTrialParams(me);
+			params.addTrials(me);
+			//params.setLogState(Tests4J_TrialsRunable.class, true);
+			//params.setLogState(MultiProbesMap.class, true);
+			//params.setLogState(InitialDependenciesDiscovery.class, true);
+			//params.setLogState(TrialInstrumenter.class, true);
+			
+			Tests4J.run(params);
+		} catch (Exception x) {
+			x.printStackTrace();
+		}
+	}
+
+	public void addTrials() throws Exception {
+		add(Target_2_6_UseTrial.class);
+	}
+	
+	@Override
+	public RunSingleTrial getTrialParams() {
+		return this;
 	}
 
 }

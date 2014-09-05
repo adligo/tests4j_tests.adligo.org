@@ -28,4 +28,9 @@ public class Tests4J_LogRunnerMock implements I_Tests4J_Log{
 		return null;
 	}
 
+	@Override
+	public String getCurrentThreadName() {
+		return " on thread " + this.getClass().getSimpleName() + " ";
+	}
+
 }

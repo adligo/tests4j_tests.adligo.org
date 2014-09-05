@@ -88,4 +88,9 @@ public class Tests4J_LogMock implements I_Tests4J_Log {
 	public String getLineSeperator() {
 		return lineSeperator;
 	}
+
+	@Override
+	public String getCurrentThreadName() {
+		return " on thread " + this.getClass().getSimpleName() + " ";
+	}
 }

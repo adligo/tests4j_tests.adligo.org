@@ -32,6 +32,7 @@ public class ClassFilterTrial extends SourceFileCountingTrial {
 	public void testCopyConstructor() throws Exception {
 		ClassFilterMutant cfm = new ClassFilterMutant();
 		
+		cfm.setIgnoredPackageNames(Collections.singleton("java."));
 		ClassFilter cf = new ClassFilter(cfm);
 		Set<String> pkgNames = cf.getIgnoredPackageNames();
 		assertNotNull(pkgNames);
@@ -60,12 +61,14 @@ public class ClassFilterTrial extends SourceFileCountingTrial {
 	
 	@Test
 	public void testIsFilteredMethod() throws Exception {
-		ClassFilter cfm = new ClassFilter();
+		ClassFilterMutant cfm = new ClassFilterMutant();
+		cfm.setIgnoredPackageNames(Collections.singleton("java."));
+		ClassFilter cf = new ClassFilter(cfm);
 		
-		assertTrue(cfm.isFiltered((Class<?>) null));
-		assertTrue(cfm.isFiltered(String.class));
-		assertFalse(cfm.isFiltered(MockWithNothing.class));
-		assertFalse(cfm.isFiltered(this.getClass()));
+		assertTrue(cf.isFiltered((Class<?>) null));
+		assertTrue(cf.isFiltered(String.class));
+		assertFalse(cf.isFiltered(MockWithNothing.class));
+		assertFalse(cf.isFiltered(this.getClass()));
 	}
 	
 	@Override

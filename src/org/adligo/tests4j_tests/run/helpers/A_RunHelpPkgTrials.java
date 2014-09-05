@@ -7,6 +7,7 @@ import org.adligo.tests4j_4jacoco.plugin.CoveragePluginFactory;
 import org.adligo.tests4j_tests.base_trials.I_CountingPackageTrials;
 import org.adligo.tests4j_tests.base_trials.SimpleMetaTrial;
 import org.adligo.tests4j_tests.base_trials.SimplePackageTrials;
+import org.adligo.tests4j_tests.run.discovery.TrialDescriptionTrial;
 
 public class A_RunHelpPkgTrials extends SimplePackageTrials 
 implements I_TrialParams<A_RunHelpPkgTrials>, I_CountingPackageTrials {
@@ -36,7 +37,6 @@ implements I_TrialParams<A_RunHelpPkgTrials>, I_CountingPackageTrials {
 	
 	public void addTrials() throws Exception {
 		add(CachedClassBytesClassLoaderTrial.class);
-		add(TrialDescriptionTrial.class);
 	}
 
 	@Override

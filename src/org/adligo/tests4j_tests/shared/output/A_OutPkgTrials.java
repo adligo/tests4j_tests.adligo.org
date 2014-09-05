@@ -35,6 +35,7 @@ implements I_TrialParams<A_OutPkgTrials>, I_CountingPackageTrials {
 
 	public void addTrials()  throws Exception {
 		add(ByteListOutputStreamTrial.class);
+		add(DefaultLogTrial.class);
 	}
 
 	@Override

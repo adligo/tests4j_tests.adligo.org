@@ -7,6 +7,7 @@ import org.adligo.tests4j.models.shared.trials.Test;
 import org.adligo.tests4j.run.discovery.Tests4J_ParamsReader;
 import org.adligo.tests4j_tests.base_trials.I_CountType;
 import org.adligo.tests4j_tests.base_trials.SourceFileCountingTrial;
+import org.adligo.tests4j_tests.models.shared.system.mocks.Tests4J_LogMock;
 import org.adligo.tests4j_tests.run.helpers.mock_trials.MockWithArrayTrial;
 import org.adligo.tests4j_tests.run.helpers.mock_trials.MockWithNothingTrial;
 import org.adligo.tests4j_tests.trials_api.common.SystemRunnerMock;
@@ -25,6 +26,7 @@ public class Tests4J_ParamReaderTrial extends SourceFileCountingTrial {
 		params.addTest(sel);
 		
 		Tests4J_ParamsReader t4jpr = new Tests4J_ParamsReader(ms, params);
+		t4jpr.read(new Tests4J_LogMock());
 		assertFalse(t4jpr.isRunnable());
 		Throwable runFailed = t4jpr.getRunFalseReason();
 		assertNotNull(runFailed);
