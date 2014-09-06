@@ -2,6 +2,7 @@ package org.adligo.tests4j_v1_tests.models.dependency_groups.gwt.v2_6;
 
 import java.util.Set;
 
+import org.adligo.tests4j.models.dependency_groups.jse.JSE_IO;
 import org.adligo.tests4j.models.dependency_groups.jse.JSE_Lang;
 import org.adligo.tests4j.models.dependency_groups.jse.JSE_Util;
 import org.adligo.tests4j.models.shared.common.ClassMethods;
@@ -76,7 +77,7 @@ public class GWT_2_6_LangDelegates extends TrialDelegate {
 			new String[] {JSE_Lang.THROWABLE}));
 		assertContains(ms, new MethodSignature("printStackTrace"));
 		assertContains(ms, new MethodSignature("printStackTrace", 
-			new String[] {"java.io.PrintStream"}));
+			new String[] {JSE_IO.PRINT_STREAM}));
 		assertContains(ms, new MethodSignature("setStackTrace", 
 			new String[] {"[java.lang.StackTraceElement"}));
 	}
@@ -1396,5 +1397,33 @@ public class GWT_2_6_LangDelegates extends TrialDelegate {
 		assertContains(ms, new MethodSignature("setLength", 
 			new String[] {ClassMethods.INT}));
 		assertContains(ms, new MethodSignature("trimToSize"));
+	}
+	
+	public void delegateSystemMemberAsserts(I_ClassAttributes result) {
+		Set<I_FieldSignature> fs = result.getFields();
+		assertContains(fs, new FieldSignature("err", JSE_IO.PRINT_STREAM));
+		assertContains(fs, new FieldSignature("out", JSE_IO.PRINT_STREAM));
+		Set<I_MethodSignature> ms = result.getMethods();
+		assertContains(ms, new MethodSignature("identityHashCode", 
+			new String[] {JSE_Lang.OBJECT}, 
+			ClassMethods.INT));
+		assertContains(ms, new MethodSignature("getProperty", 
+			new String[] {JSE_Lang.STRING, JSE_Lang.STRING}, 
+			JSE_Lang.STRING));
+		assertContains(ms, new MethodSignature("currentTimeMillis", 
+			ClassMethods.LONG));
+		assertContains(ms, new MethodSignature("arraycopy", 
+			new String[] {JSE_Lang.OBJECT, ClassMethods.INT, 
+				JSE_Lang.OBJECT, ClassMethods.INT, ClassMethods.INT}));
+
+		assertContains(ms, new MethodSignature("gc"));
+		assertContains(ms, new MethodSignature("setErr", 
+			new String[] {JSE_IO.PRINT_STREAM}));
+		assertContains(ms, new MethodSignature("setOut", 
+			new String[] {JSE_IO.PRINT_STREAM}));
+	}
+	public void delegateVoidMemberAsserts(I_ClassAttributes result) {
+		Set<I_FieldSignature> fs = result.getFields();
+		assertContains(fs, new FieldSignature("TYPE", JSE_Lang.CLASS));
 	}
 }

@@ -690,18 +690,40 @@ public class GWT_2_6_LangTrial extends SourceFileCountingTrial {
 		assertEquals(53, ms.size());
 	}
 
+	@Test
+	public void testSystem() {
+		I_ClassAttributes result = GWT_2_6_Lang.getSystem();
+		assertEquals("java.lang.System", result.getName());
+		Set<I_FieldSignature> fs = result.getFields();
+		Set<I_MethodSignature> ms = result.getMethods();
+		delegates.delegateSystemMemberAsserts(result);
+		assertEquals(2, fs.size());
+		assertEquals(7, ms.size());
+	}
+
+	@Test
+	public void testVoid() {
+		I_ClassAttributes result = GWT_2_6_Lang.getVoid();
+		assertEquals("java.lang.Void", result.getName());
+		Set<I_FieldSignature> fs = result.getFields();
+		Set<I_MethodSignature> ms = result.getMethods();
+		delegates.delegateVoidMemberAsserts(result);
+		assertEquals(1, fs.size());
+		assertEquals(0, ms.size());
+	}
+	
 	
 	/**keep at the bottom of the file
 	 * 
 	 */
 	@Override
 	public int getTests(I_CountType type) {
-		return super.getTests(type, 44);
+		return super.getTests(type, 46);
 	}
 
 	@Override
 	public int getAsserts(I_CountType type) {
-		int thisAsserts = 1086;
+		int thisAsserts = 1102;
 		if (type.isFromMetaWithCoverage()) {
 			//code coverage and circular dependencies +
 			//custom afterTrialTests
@@ -713,7 +735,7 @@ public class GWT_2_6_LangTrial extends SourceFileCountingTrial {
 
 	@Override
 	public int getUniqueAsserts(I_CountType type) {
-		int thisUniqueAsserts = 1017;
+		int thisUniqueAsserts = 1033;
 		if (type.isFromMetaWithCoverage()) {
 			//code coverage and circular dependencies +
 			//custom afterTrialTests

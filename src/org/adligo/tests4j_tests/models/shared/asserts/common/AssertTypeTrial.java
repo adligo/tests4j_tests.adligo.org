@@ -142,7 +142,7 @@ public class AssertTypeTrial extends SourceFileCountingTrial {
 			assertEquals(273, sfc.getCoverageUnits().get());
 			//if you see a error on this next line,
 			// there is a bug in code coverage,
-			// TODO I have seen it
+			// TODO I have seen it 20% chance?
 			assertEquals(269, sfc.getCoveredCoverageUnits().get());
 		}
 	}
