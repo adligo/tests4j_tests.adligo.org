@@ -1110,4 +1110,291 @@ public class GWT_2_6_LangDelegates extends TrialDelegate {
 			new String[] {ClassMethods.INT, ClassMethods.INT, 
 				"[" + ClassMethods.CHAR, ClassMethods.INT}));
 	}
+	
+	public void delegateStringBufferMemberAsserts(I_ClassAttributes result) {
+		delegateObjectMemberAsserts(result);
+		Set<I_MethodSignature> ms = result.getMethods();
+		assertContains(ms, new MethodSignature("charAt", 
+			new String[] {ClassMethods.INT}, 
+			ClassMethods.CHAR));
+		assertContains(ms, new MethodSignature("capacity", 
+			ClassMethods.INT));
+		assertContains(ms, new MethodSignature("indexOf", 
+			new String[] {JSE_Lang.STRING}, 
+			ClassMethods.INT));
+		assertContains(ms, new MethodSignature("indexOf", 
+			new String[] {JSE_Lang.STRING, ClassMethods.INT}, 
+			ClassMethods.INT));
+		assertContains(ms, new MethodSignature("lastIndexOf", 
+			new String[] {JSE_Lang.STRING}, 
+			ClassMethods.INT));
+		assertContains(ms, new MethodSignature("lastIndexOf", 
+			new String[] {JSE_Lang.STRING, ClassMethods.INT}, 
+			ClassMethods.INT));
+		assertContains(ms, new MethodSignature("length", 
+			ClassMethods.INT));
+
+		assertContains(ms, new MethodSignature("append", 
+			new String[] {ClassMethods.CHAR}, 
+			JSE_Lang.STRING_BUFFER));
+		assertContains(ms, new MethodSignature("append", 
+			new String[] {JSE_Lang.CHAR_SEQUENCE}, 
+			JSE_Lang.STRING_BUFFER));
+		assertContains(ms, new MethodSignature("append", 
+			new String[] {JSE_Lang.CHAR_SEQUENCE, ClassMethods.INT, ClassMethods.INT}, 
+			JSE_Lang.STRING_BUFFER));
+		assertContains(ms, new MethodSignature("subSequence", 
+			new String[] {ClassMethods.INT, ClassMethods.INT}, 
+			JSE_Lang.CHAR_SEQUENCE));
+		assertContains(ms, new MethodSignature("substring", 
+			new String[] {ClassMethods.INT}, 
+			JSE_Lang.STRING));
+		assertContains(ms, new MethodSignature("substring", 
+			new String[] {ClassMethods.INT, ClassMethods.INT}, 
+			JSE_Lang.STRING));
+		assertContains(ms, new MethodSignature("toString", 
+			JSE_Lang.STRING));
+		assertContains(ms, new MethodSignature("append", 
+			new String[] {"[" + ClassMethods.CHAR}, 
+			JSE_Lang.STRING_BUFFER));
+		assertContains(ms, new MethodSignature("append", 
+			new String[] {"[" + ClassMethods.CHAR, ClassMethods.INT, ClassMethods.INT}, 
+			JSE_Lang.STRING_BUFFER));
+		assertContains(ms, new MethodSignature("append", 
+			new String[] {ClassMethods.BOOLEAN}, 
+			JSE_Lang.STRING_BUFFER));
+		assertContains(ms, new MethodSignature("append", 
+			new String[] {ClassMethods.CHAR}, 
+			JSE_Lang.STRING_BUFFER));
+		assertContains(ms, new MethodSignature("append", 
+			new String[] {ClassMethods.DOUBLE}, 
+			JSE_Lang.STRING_BUFFER));
+		assertContains(ms, new MethodSignature("append", 
+			new String[] {ClassMethods.FLOAT}, 
+			JSE_Lang.STRING_BUFFER));
+		assertContains(ms, new MethodSignature("append", 
+			new String[] {ClassMethods.INT}, 
+			JSE_Lang.STRING_BUFFER));
+		assertContains(ms, new MethodSignature("append", 
+			new String[] {JSE_Lang.CHAR_SEQUENCE}, 
+			JSE_Lang.STRING_BUFFER));
+		assertContains(ms, new MethodSignature("append", 
+			new String[] {JSE_Lang.CHAR_SEQUENCE, ClassMethods.INT, ClassMethods.INT}, 
+			JSE_Lang.STRING_BUFFER));
+		assertContains(ms, new MethodSignature("append", 
+			new String[] {JSE_Lang.OBJECT}, 
+			JSE_Lang.STRING_BUFFER));
+		assertContains(ms, new MethodSignature("append", 
+			new String[] {JSE_Lang.STRING}, 
+			JSE_Lang.STRING_BUFFER));
+		assertContains(ms, new MethodSignature("append", 
+			new String[] {JSE_Lang.STRING_BUFFER}, 
+			JSE_Lang.STRING_BUFFER));
+		assertContains(ms, new MethodSignature("append", 
+			new String[] {ClassMethods.LONG}, 
+			JSE_Lang.STRING_BUFFER));
+		assertContains(ms, new MethodSignature("delete", 
+			new String[] {ClassMethods.INT, ClassMethods.INT}, 
+			JSE_Lang.STRING_BUFFER));
+		assertContains(ms, new MethodSignature("deleteCharAt", 
+			new String[] {ClassMethods.INT}, 
+			JSE_Lang.STRING_BUFFER));
+		assertContains(ms, new MethodSignature("insert", 
+			new String[] {ClassMethods.INT, "[" + ClassMethods.CHAR}, 
+			JSE_Lang.STRING_BUFFER));
+		assertContains(ms, new MethodSignature("insert", 
+			new String[] {ClassMethods.INT, "[" + ClassMethods.CHAR
+				, ClassMethods.INT, ClassMethods.INT}, 
+			JSE_Lang.STRING_BUFFER));
+		assertContains(ms, new MethodSignature("insert", 
+			new String[] {ClassMethods.INT, ClassMethods.BOOLEAN}, 
+			JSE_Lang.STRING_BUFFER));
+		assertContains(ms, new MethodSignature("insert", 
+			new String[] {ClassMethods.INT, ClassMethods.CHAR}, 
+			JSE_Lang.STRING_BUFFER));
+		assertContains(ms, new MethodSignature("insert", 
+			new String[] {ClassMethods.INT, ClassMethods.DOUBLE}, 
+			JSE_Lang.STRING_BUFFER));
+		assertContains(ms, new MethodSignature("insert", 
+			new String[] {ClassMethods.INT, ClassMethods.FLOAT}, 
+			JSE_Lang.STRING_BUFFER));
+		assertContains(ms, new MethodSignature("insert", 
+			new String[] {ClassMethods.INT, ClassMethods.INT}, 
+			JSE_Lang.STRING_BUFFER));
+		assertContains(ms, new MethodSignature("insert", 
+			new String[] {ClassMethods.INT, JSE_Lang.CHAR_SEQUENCE}, 
+			JSE_Lang.STRING_BUFFER));
+		assertContains(ms, new MethodSignature("insert", 
+			new String[] {ClassMethods.INT, JSE_Lang.CHAR_SEQUENCE, 
+				ClassMethods.INT, ClassMethods.INT}, 
+			JSE_Lang.STRING_BUFFER));
+		assertContains(ms, new MethodSignature("insert", 
+			new String[] {ClassMethods.INT, JSE_Lang.OBJECT}, 
+			JSE_Lang.STRING_BUFFER));
+		assertContains(ms, new MethodSignature("insert", 
+			new String[] {ClassMethods.INT, JSE_Lang.STRING}, 
+			JSE_Lang.STRING_BUFFER));
+		assertContains(ms, new MethodSignature("insert", 
+			new String[] {ClassMethods.INT, ClassMethods.LONG}, 
+			JSE_Lang.STRING_BUFFER));
+		assertContains(ms, new MethodSignature("replace", 
+			new String[] {ClassMethods.INT, ClassMethods.INT, JSE_Lang.STRING}, 
+			JSE_Lang.STRING_BUFFER));
+		assertContains(ms, new MethodSignature("reverse", 
+			JSE_Lang.STRING_BUFFER));
+		assertContains(ms, new MethodSignature("ensureCapacity", 
+			new String[] {ClassMethods.INT}));
+		assertContains(ms, new MethodSignature("getChars", 
+			new String[] {ClassMethods.INT, ClassMethods.INT, "[" 
+				+ ClassMethods.CHAR, ClassMethods.INT}));
+		assertContains(ms, new MethodSignature("setCharAt", 
+			new String[] {ClassMethods.INT, ClassMethods.CHAR}));
+		assertContains(ms, new MethodSignature("setLength", 
+			new String[] {ClassMethods.INT}));
+		assertContains(ms, new MethodSignature("trimToSize"));
+	}
+	
+	public void delegateStringBuilderMemberAsserts(I_ClassAttributes result) {
+		delegateObjectMemberAsserts(result);
+		Set<I_MethodSignature> ms = result.getMethods();
+		assertContains(ms, new MethodSignature("charAt", 
+			new String[] {ClassMethods.INT}, 
+			ClassMethods.CHAR));
+		assertContains(ms, new MethodSignature("capacity", 
+			ClassMethods.INT));
+		assertContains(ms, new MethodSignature("indexOf", 
+			new String[] {JSE_Lang.STRING}, 
+			ClassMethods.INT));
+		assertContains(ms, new MethodSignature("indexOf", 
+			new String[] {JSE_Lang.STRING, ClassMethods.INT}, 
+			ClassMethods.INT));
+		assertContains(ms, new MethodSignature("lastIndexOf", 
+			new String[] {JSE_Lang.STRING}, 
+			ClassMethods.INT));
+		assertContains(ms, new MethodSignature("lastIndexOf", 
+			new String[] {JSE_Lang.STRING, ClassMethods.INT}, 
+			ClassMethods.INT));
+		assertContains(ms, new MethodSignature("length", 
+			ClassMethods.INT));
+		assertContains(ms, new MethodSignature("append", 
+			new String[] {ClassMethods.CHAR}, 
+			JSE_Lang.STRING_BUILDER));
+		assertContains(ms, new MethodSignature("append", 
+			new String[] {JSE_Lang.CHAR_SEQUENCE}, 
+			JSE_Lang.STRING_BUILDER));
+		assertContains(ms, new MethodSignature("append", 
+			new String[] {JSE_Lang.CHAR_SEQUENCE, ClassMethods.INT, ClassMethods.INT}, 
+			JSE_Lang.STRING_BUILDER));
+		assertContains(ms, new MethodSignature("subSequence", 
+			new String[] {ClassMethods.INT, ClassMethods.INT}, 
+			JSE_Lang.CHAR_SEQUENCE));
+		assertContains(ms, new MethodSignature("substring", 
+			new String[] {ClassMethods.INT}, 
+			JSE_Lang.STRING));
+		assertContains(ms, new MethodSignature("substring", 
+			new String[] {ClassMethods.INT, ClassMethods.INT}, 
+			JSE_Lang.STRING));
+		assertContains(ms, new MethodSignature("toString", 
+			JSE_Lang.STRING));
+		assertContains(ms, new MethodSignature("append", 
+			new String[] {"[" + ClassMethods.CHAR}, 
+			JSE_Lang.STRING_BUILDER));
+		assertContains(ms, new MethodSignature("append", 
+			new String[] {"[" + ClassMethods.CHAR, ClassMethods.INT, ClassMethods.INT}, 
+			JSE_Lang.STRING_BUILDER));
+		assertContains(ms, new MethodSignature("append", 
+			new String[] {ClassMethods.BOOLEAN}, 
+			JSE_Lang.STRING_BUILDER));
+		assertContains(ms, new MethodSignature("append", 
+			new String[] {ClassMethods.CHAR}, 
+			JSE_Lang.STRING_BUILDER));
+		assertContains(ms, new MethodSignature("append", 
+			new String[] {ClassMethods.DOUBLE}, 
+			JSE_Lang.STRING_BUILDER));
+		assertContains(ms, new MethodSignature("append", 
+			new String[] {ClassMethods.FLOAT}, 
+			JSE_Lang.STRING_BUILDER));
+		assertContains(ms, new MethodSignature("append", 
+			new String[] {ClassMethods.INT}, 
+			JSE_Lang.STRING_BUILDER));
+		assertContains(ms, new MethodSignature("append", 
+			new String[] {JSE_Lang.CHAR_SEQUENCE}, 
+			JSE_Lang.STRING_BUILDER));
+		assertContains(ms, new MethodSignature("append", 
+			new String[] {JSE_Lang.CHAR_SEQUENCE, ClassMethods.INT, ClassMethods.INT}, 
+			JSE_Lang.STRING_BUILDER));
+		assertContains(ms, new MethodSignature("append", 
+			new String[] {JSE_Lang.OBJECT}, 
+			JSE_Lang.STRING_BUILDER));
+		assertContains(ms, new MethodSignature("append", 
+			new String[] {JSE_Lang.STRING}, 
+			JSE_Lang.STRING_BUILDER));
+		assertContains(ms, new MethodSignature("append", 
+			new String[] {JSE_Lang.STRING_BUFFER}, 
+			JSE_Lang.STRING_BUILDER));
+		assertContains(ms, new MethodSignature("append", 
+			new String[] {ClassMethods.LONG}, 
+			JSE_Lang.STRING_BUILDER));
+		assertContains(ms, new MethodSignature("appendCodePoint", 
+			new String[] {ClassMethods.INT}, 
+			JSE_Lang.STRING_BUILDER));
+		assertContains(ms, new MethodSignature("delete", 
+			new String[] {ClassMethods.INT, ClassMethods.INT}, 
+			JSE_Lang.STRING_BUILDER));
+		assertContains(ms, new MethodSignature("deleteCharAt", 
+			new String[] {ClassMethods.INT}, 
+			JSE_Lang.STRING_BUILDER));
+		assertContains(ms, new MethodSignature("insert", 
+			new String[] {ClassMethods.INT, "[" + ClassMethods.CHAR}, 
+			JSE_Lang.STRING_BUILDER));
+		assertContains(ms, new MethodSignature("insert", 
+			new String[] {ClassMethods.INT, "[" + ClassMethods.CHAR, ClassMethods.INT, ClassMethods.INT}, 
+			JSE_Lang.STRING_BUILDER));
+		assertContains(ms, new MethodSignature("insert", 
+			new String[] {ClassMethods.INT, ClassMethods.BOOLEAN}, 
+			JSE_Lang.STRING_BUILDER));
+		assertContains(ms, new MethodSignature("insert", 
+			new String[] {ClassMethods.INT, ClassMethods.CHAR}, 
+			JSE_Lang.STRING_BUILDER));
+		assertContains(ms, new MethodSignature("insert", 
+			new String[] {ClassMethods.INT, ClassMethods.DOUBLE}, 
+			JSE_Lang.STRING_BUILDER));
+		assertContains(ms, new MethodSignature("insert", 
+			new String[] {ClassMethods.INT, ClassMethods.FLOAT}, 
+			JSE_Lang.STRING_BUILDER));
+		assertContains(ms, new MethodSignature("insert", 
+			new String[] {ClassMethods.INT, ClassMethods.INT}, 
+			JSE_Lang.STRING_BUILDER));
+		assertContains(ms, new MethodSignature("insert", 
+			new String[] {ClassMethods.INT, JSE_Lang.CHAR_SEQUENCE}, 
+			JSE_Lang.STRING_BUILDER));
+		assertContains(ms, new MethodSignature("insert", 
+			new String[] {ClassMethods.INT, JSE_Lang.CHAR_SEQUENCE, 
+				ClassMethods.INT, ClassMethods.INT}, 
+			JSE_Lang.STRING_BUILDER));
+		assertContains(ms, new MethodSignature("insert", 
+			new String[] {ClassMethods.INT, JSE_Lang.OBJECT}, 
+			JSE_Lang.STRING_BUILDER));
+		assertContains(ms, new MethodSignature("insert", 
+			new String[] {ClassMethods.INT, JSE_Lang.STRING}, 
+			JSE_Lang.STRING_BUILDER));
+		assertContains(ms, new MethodSignature("insert", 
+			new String[] {ClassMethods.INT, ClassMethods.LONG}, 
+			JSE_Lang.STRING_BUILDER));
+		assertContains(ms, new MethodSignature("replace", 
+			new String[] {ClassMethods.INT, ClassMethods.INT, JSE_Lang.STRING}, 
+			JSE_Lang.STRING_BUILDER));
+		assertContains(ms, new MethodSignature("reverse", 
+			JSE_Lang.STRING_BUILDER));
+		assertContains(ms, new MethodSignature("ensureCapacity", 
+			new String[] {ClassMethods.INT}));
+		assertContains(ms, new MethodSignature("getChars", 
+			new String[] {ClassMethods.INT, ClassMethods.INT, 
+				"[" + ClassMethods.CHAR, ClassMethods.INT}));
+		assertContains(ms, new MethodSignature("setCharAt", 
+			new String[] {ClassMethods.INT, ClassMethods.CHAR}));
+		assertContains(ms, new MethodSignature("setLength", 
+			new String[] {ClassMethods.INT}));
+		assertContains(ms, new MethodSignature("trimToSize"));
+	}
 }

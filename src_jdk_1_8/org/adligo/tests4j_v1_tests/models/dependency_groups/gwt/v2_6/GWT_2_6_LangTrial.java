@@ -654,17 +654,54 @@ public class GWT_2_6_LangTrial extends SourceFileCountingTrial {
 	}
 
 	
+	@Test
+	public void testStringBuffer() {
+		I_ClassAttributes result = GWT_2_6_Lang.getStringBuffer();
+		assertEquals("java.lang.StringBuffer", result.getName());
+		Set<I_FieldSignature> fs = result.getFields();
+		Set<I_MethodSignature> ms = result.getMethods();
+		assertContains(ms, new MethodSignature("<init>"));
+		assertContains(ms, new MethodSignature("<init>", 
+			new String[] {ClassMethods.INT}));
+		assertContains(ms, new MethodSignature("<init>", 
+			new String[] {JSE_Lang.CHAR_SEQUENCE}));
+		assertContains(ms, new MethodSignature("<init>", 
+			new String[] {JSE_Lang.STRING}));
+		delegates.delegateStringBufferMemberAsserts(result);
+		assertEquals(0, fs.size());
+		assertEquals(52, ms.size());
+	}
+
+	@Test
+	public void testStringBuilder() {
+		I_ClassAttributes result = GWT_2_6_Lang.getStringBuilder();
+		assertEquals("java.lang.StringBuilder", result.getName());
+		Set<I_FieldSignature> fs = result.getFields();
+		Set<I_MethodSignature> ms = result.getMethods();
+		assertContains(ms, new MethodSignature("<init>"));
+		assertContains(ms, new MethodSignature("<init>", 
+			new String[] {ClassMethods.INT}));
+		assertContains(ms, new MethodSignature("<init>", 
+			new String[] {JSE_Lang.CHAR_SEQUENCE}));
+		assertContains(ms, new MethodSignature("<init>", 
+			new String[] {JSE_Lang.STRING}));
+		delegates.delegateStringBuilderMemberAsserts(result);
+		assertEquals(0, fs.size());
+		assertEquals(53, ms.size());
+	}
+
+	
 	/**keep at the bottom of the file
 	 * 
 	 */
 	@Override
 	public int getTests(I_CountType type) {
-		return super.getTests(type, 42);
+		return super.getTests(type, 44);
 	}
 
 	@Override
 	public int getAsserts(I_CountType type) {
-		int thisAsserts = 963;
+		int thisAsserts = 1086;
 		if (type.isFromMetaWithCoverage()) {
 			//code coverage and circular dependencies +
 			//custom afterTrialTests
@@ -676,7 +713,7 @@ public class GWT_2_6_LangTrial extends SourceFileCountingTrial {
 
 	@Override
 	public int getUniqueAsserts(I_CountType type) {
-		int thisUniqueAsserts = 902;
+		int thisUniqueAsserts = 1017;
 		if (type.isFromMetaWithCoverage()) {
 			//code coverage and circular dependencies +
 			//custom afterTrialTests

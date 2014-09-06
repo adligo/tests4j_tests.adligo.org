@@ -81,7 +81,8 @@ implements I_TrialParams<A_DGroups_GWT_2_6_LangPkgTrials>, I_CountingPackageTria
 		add(Short_2_6_UseTrial.class);
 		
 		add(String_2_6_UseTrial.class);
-		
+		add(StringBuffer_2_6_UseTrial.class);
+		add(StringBuilder_2_6_UseTrial.class);
 	}
 
 	@Override

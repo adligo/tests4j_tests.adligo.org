@@ -15,25 +15,25 @@ import org.adligo.tests4j.models.shared.trials.Test;
 import org.adligo.tests4j_tests.base_trials.I_CountType;
 import org.adligo.tests4j_tests.base_trials.SourceFileCountingTrial;
 
-@SourceFileScope (sourceClass=Enum_2_6_MockUse.class)
-public class Enum_2_6_UseTrial extends SourceFileCountingTrial {
+@SourceFileScope (sourceClass=StringBuffer_2_6_MockUse.class)
+public class StringBuffer_2_6_UseTrial extends SourceFileCountingTrial {
 
 	@Test
 	public void testMethods() throws Exception {
-		new Enum_2_6_MockUse();
-		assertTrue("The trial should be able to create aEnum_MockUse.",true);
+		new StringBuffer_2_6_MockUse();
+		assertTrue("The trial should be able to create aStringBuffer_MockUse.",true);
 	}
 
 
-	@Override
+@Override
 	public void afterTrialTests(I_SourceFileTrialResult p) {
 		super.afterTrialTests(p);
 		I_ClassAttributes refs = p.getSourceClassAttributes();
 		if (refs == null) {
 			return;
 		}
-		assertEquals(Enum_2_6_MockUse.class.getName(), refs.getName());
-		I_ClassAttributes result = p.getAttributes("java.lang.Enum");
+		assertEquals(StringBuffer_2_6_MockUse.class.getName(), refs.getName());
+		I_ClassAttributes result = p.getAttributes("java.lang.StringBuffer");
 		assertNotNull(result);
 		Set<I_FieldSignature> fields = new TreeSet<I_FieldSignature>();
 		fields.addAll(result.getFields());
@@ -41,19 +41,21 @@ public class Enum_2_6_UseTrial extends SourceFileCountingTrial {
 		methods.addAll(result.getMethods());
 
 		List<String> parents = new ArrayList<String>();
+		parents.add("java.lang.AbstractStringBuilder");
 		parents.add("java.lang.Object");
 		for (String pt: parents) {
 			I_ClassAttributes parentResult = p.getAttributes(pt);
-			assertNotNull(parentResult);
-			fields.addAll(parentResult.getFields());
-			for (I_MethodSignature ms: parentResult.getMethods()) {
-				if ( !"<init>".equals(ms.getMethodName())) {
-					methods.add(ms);
+			if (parentResult != null) {
+				fields.addAll(parentResult.getFields());
+				//keep parent initilization out
+				for (I_MethodSignature ms: parentResult.getMethods()) {
+					if ( !"<init>".equals(ms.getMethodName())) {
+						methods.add(ms);
+					}
 				}
 			}
 		}
-
-		I_ClassAttributes example = GWT_2_6_Lang.getEnum();
+		I_ClassAttributes example = GWT_2_6_Lang.getStringBuffer();
 		assertEquals(example.getName(), result.getName());
 		Set<I_FieldSignature> exampleFields = example.getFields();
 		for (I_FieldSignature sig: exampleFields) {
@@ -79,7 +81,7 @@ public class Enum_2_6_UseTrial extends SourceFileCountingTrial {
 		//code coverage and circular dependencies +
 		//custom afterTrialTests
 		//+ see above
-		int thisAfterAsserts = 17;
+		int thisAfterAsserts = 59;
 		if (type.isFromMetaWithCoverage()) {
 			return super.getAsserts(type, thisAsserts + thisAfterAsserts);
 		} else {
@@ -93,7 +95,7 @@ public class Enum_2_6_UseTrial extends SourceFileCountingTrial {
 		//code coverage and circular dependencies +
 		//custom afterTrialTests
 		//+ see above
-		int uAfterAsserts = 17;
+		int uAfterAsserts = 59;
 		if (type.isFromMetaWithCoverage()) {
 			return super.getAsserts(type, uAsserts + uAfterAsserts);
 		} else {

@@ -140,6 +140,9 @@ public class AssertTypeTrial extends SourceFileCountingTrial {
 			I_SourceFileCoverage sfc =  p.getSourceFileCoverage();
 			//assertEquals("org.adligo.tests4j.models.shared.asserts.common.AssertType",sfc.getClassName());
 			assertEquals(273, sfc.getCoverageUnits().get());
+			//if you see a error on this next line,
+			// there is a bug in code coverage,
+			// TODO I have seen it
 			assertEquals(269, sfc.getCoveredCoverageUnits().get());
 		}
 	}
