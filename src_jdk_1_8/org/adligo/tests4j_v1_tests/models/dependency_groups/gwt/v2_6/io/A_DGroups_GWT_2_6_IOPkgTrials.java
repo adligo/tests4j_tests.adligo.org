@@ -32,10 +32,14 @@ implements I_TrialParams<A_DGroups_GWT_2_6_IOPkgTrials>, I_CountingPackageTrials
 		}
 	}
 
-	
 	public void addTrials() throws Exception {
 		add(IOException_2_6_UseTrial.class);
 		add(UnsupportedEncodingException_2_6_UseTrial.class);
+		add(FilterOutputStream_2_6_UseTrial.class);
+		
+		add(OutputStream_2_6_UseTrial.class);
+		add(PrintStream_2_6_UseTrial.class);
+		add(Serializable_2_6_UseTrial.class);
 	}
 
 

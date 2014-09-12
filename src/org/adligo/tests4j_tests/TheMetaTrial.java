@@ -15,8 +15,8 @@ import org.adligo.tests4j.run.discovery.RelevantClassesWithTrialsCalculator;
 
 @TrialTypeAnnotation (type=TrialType.META_TRIAL_TYPE)
 public class TheMetaTrial  extends AbstractTrial implements I_MetaTrial {
-	private static final int TESTS = 1307;
-	private static final int TRIALS = 200;
+	private static final int TESTS = 1579;
+	private static final int TRIALS = 254;
 	private RelevantClassesWithTrialsCalculator calculator;
 	
 	//hmm package comparison data to include;
@@ -70,7 +70,7 @@ public class TheMetaTrial  extends AbstractTrial implements I_MetaTrial {
 		if (results.hasCoverage()) {
 			double actual = results.getCoveragePercentage();
 			//assertGreaterThanOrEquals(60.0, actual);
-			assertGreaterThanOrEquals(71.0, actual);
+			assertGreaterThanOrEquals(75.0, actual);
 		}
 		//TODO
 		//assertEquals(1,results.getTrialsIgnored());
@@ -80,8 +80,8 @@ public class TheMetaTrial  extends AbstractTrial implements I_MetaTrial {
 		
 		//does not include assertions from this class yet
 		//I think the single threaded count is off somewhere
-		assertGreaterThanOrEquals(1309000,results.getAsserts());
-		assertGreaterThanOrEquals(12600,results.getUniqueAsserts());
+		assertGreaterThanOrEquals(1313000,results.getAsserts());
+		assertGreaterThanOrEquals(16000,results.getUniqueAsserts());
 	}
 
 

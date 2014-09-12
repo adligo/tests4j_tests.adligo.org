@@ -1,7 +1,5 @@
 package org.adligo.tests4j_v1_tests.models.dependency_groups.jse;
 
-import org.adligo.tests4j.models.dependency_groups.jse.JSE_1_7_Math;
-import org.adligo.tests4j.models.dependency_groups.jse.JSE_LangAnnot;
 import org.adligo.tests4j.models.dependency_groups.jse.JSE_Log;
 import org.adligo.tests4j.models.shared.trials.SourceFileScope;
 import org.adligo.tests4j.models.shared.trials.Test;
@@ -18,7 +16,7 @@ public class JSE_LogTrial extends SourceFileCountingTrial {
 		assertEquals("java.util.logging.ConsoleHandler",JSE_Log.CONSOLE_HANDLER);
 		assertEquals("java.util.logging.ErrorManager",JSE_Log.ERROR_MANAGER);
 		assertEquals("java.util.logging.FileHandler",JSE_Log.FILE_HANDLER);
-		assertEquals("java.util.Formatter",JSE_Log.FORMATTER);
+		assertEquals("java.util.logging.Formatter",JSE_Log.FORMATTER);
 		assertEquals("java.util.logging.Handler",JSE_Log.HANDLER);
 		assertEquals("java.util.logging.Level",JSE_Log.LEVEL);
 		assertEquals("java.util.logging.Logger",JSE_Log.LOGGER);

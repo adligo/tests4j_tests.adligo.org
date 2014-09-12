@@ -17,7 +17,7 @@ public class JSE_1_7_LogTrial extends SourceFileCountingTrial {
 		assertEquals("java.util.logging.ConsoleHandler",JSE_1_7_Log.CONSOLE_HANDLER);
 		assertEquals("java.util.logging.ErrorManager",JSE_1_7_Log.ERROR_MANAGER);
 		assertEquals("java.util.logging.FileHandler",JSE_1_7_Log.FILE_HANDLER);
-		assertEquals("java.util.Formatter",JSE_1_7_Log.FORMATTER);
+		assertEquals("java.util.logging.Formatter",JSE_1_7_Log.FORMATTER);
 		assertEquals("java.util.logging.Handler",JSE_1_7_Log.HANDLER);
 		assertEquals("java.util.logging.Level",JSE_1_7_Log.LEVEL);
 		assertEquals("java.util.logging.Logger",JSE_1_7_Log.LOGGER);

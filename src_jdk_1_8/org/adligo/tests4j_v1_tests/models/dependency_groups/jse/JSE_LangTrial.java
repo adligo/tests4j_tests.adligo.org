@@ -1,6 +1,7 @@
 package org.adligo.tests4j_v1_tests.models.dependency_groups.jse;
 
 import org.adligo.tests4j.models.dependency_groups.jse.JSE_Lang;
+import org.adligo.tests4j.models.dependency_groups.jse.JSE_Lang;
 import org.adligo.tests4j.models.shared.trials.SourceFileScope;
 import org.adligo.tests4j.models.shared.trials.Test;
 import org.adligo.tests4j_tests.base_trials.I_CountType;
@@ -225,14 +226,118 @@ public class JSE_LangTrial extends SourceFileCountingTrial {
 		assertEquals("SAFE_VARARGS",JSE_Lang.INSTANCE.getConstantName("java.lang.SafeVarargs"));
 		assertEquals("SUPPRESS_WARNINGS",JSE_Lang.INSTANCE.getConstantName("java.lang.SuppressWarnings"));
 	}
+	
+	@Test 
+	public void testConstantLookup() {
+		assertEquals("java.lang",JSE_Lang.INSTANCE.getPackageName());
+		assertEquals("APPENDABLE",JSE_Lang.INSTANCE.getConstantName("java.lang.Appendable"));
+		assertEquals("AUTO_CLOSEABLE",JSE_Lang.INSTANCE.getConstantName("java.lang.AutoCloseable"));
+		assertEquals("CHAR_SEQUENCE",JSE_Lang.INSTANCE.getConstantName("java.lang.CharSequence"));
+		assertEquals("CLONEABLE",JSE_Lang.INSTANCE.getConstantName("java.lang.Cloneable"));
+		assertEquals("ITERABLE",JSE_Lang.INSTANCE.getConstantName("java.lang.Iterable"));
+		assertEquals("READABLE",JSE_Lang.INSTANCE.getConstantName("java.lang.Readable"));
+		assertEquals("RUNNABLE",JSE_Lang.INSTANCE.getConstantName("java.lang.Runnable"));
+		assertEquals("THREAD_UNCAUGHT_EXCEPTION_HANDLER",JSE_Lang.INSTANCE.getConstantName("java.lang.Thread$UncaughtExceptionHandler"));
+		assertEquals("BOOLEAN",JSE_Lang.INSTANCE.getConstantName("java.lang.Boolean"));
+		assertEquals("BYTE",JSE_Lang.INSTANCE.getConstantName("java.lang.Byte"));
+		assertEquals("CHARACTER",JSE_Lang.INSTANCE.getConstantName("java.lang.Character"));
+		assertEquals("CHARACTER_SUBSET",JSE_Lang.INSTANCE.getConstantName("java.lang.Character$Subset"));
+		assertEquals("CHARACTER_UNICODE_BLOCK",JSE_Lang.INSTANCE.getConstantName("java.lang.Character$UnicodeBlock"));
+		assertEquals("CLASS",JSE_Lang.INSTANCE.getConstantName("java.lang.Class"));
+		assertEquals("CLASS_LOADER",JSE_Lang.INSTANCE.getConstantName("java.lang.ClassLoader"));
+		assertEquals("CLASS_VALUE",JSE_Lang.INSTANCE.getConstantName("java.lang.ClassValue"));
+		assertEquals("COMPILER",JSE_Lang.INSTANCE.getConstantName("java.lang.Compiler"));
+		assertEquals("DOUBLE",JSE_Lang.INSTANCE.getConstantName("java.lang.Double"));
+		assertEquals("ENUM",JSE_Lang.INSTANCE.getConstantName("java.lang.Enum"));
+		assertEquals("FLOAT",JSE_Lang.INSTANCE.getConstantName("java.lang.Float"));
+		assertEquals("INHERITABLE_THREAD_LOCAL",JSE_Lang.INSTANCE.getConstantName("java.lang.InheritableThreadLocal"));
+		assertEquals("INTEGER",JSE_Lang.INSTANCE.getConstantName("java.lang.Integer"));
+		assertEquals("LONG",JSE_Lang.INSTANCE.getConstantName("java.lang.Long"));
+		assertEquals("MATH",JSE_Lang.INSTANCE.getConstantName("java.lang.Math"));
+		assertEquals("NUMBER",JSE_Lang.INSTANCE.getConstantName("java.lang.Number"));
+		assertEquals("OBJECT",JSE_Lang.INSTANCE.getConstantName("java.lang.Object"));
+		assertEquals("PACKAGE",JSE_Lang.INSTANCE.getConstantName("java.lang.Package"));
+		assertEquals("PROCESS",JSE_Lang.INSTANCE.getConstantName("java.lang.Process"));
+		assertEquals("PROCESS_BUILDER",JSE_Lang.INSTANCE.getConstantName("java.lang.ProcessBuilder"));
+		assertEquals("PROCESS_BUILDER_REDIRECT",JSE_Lang.INSTANCE.getConstantName("java.lang.ProcessBuilder$Redirect"));
+		assertEquals("RUNTIME",JSE_Lang.INSTANCE.getConstantName("java.lang.Runtime"));
+		assertEquals("RUNTIME_PERMISSION",JSE_Lang.INSTANCE.getConstantName("java.lang.RuntimePermission"));
+		assertEquals("SECURITY_MANAGER",JSE_Lang.INSTANCE.getConstantName("java.lang.SecurityManager"));
+		assertEquals("SHORT",JSE_Lang.INSTANCE.getConstantName("java.lang.Short"));
+		assertEquals("STACK_TRACE_ELEMENT",JSE_Lang.INSTANCE.getConstantName("java.lang.StackTraceElement"));
+		assertEquals("STRICT_MATH",JSE_Lang.INSTANCE.getConstantName("java.lang.StrictMath"));
+		assertEquals("STRING",JSE_Lang.INSTANCE.getConstantName("java.lang.String"));
+		assertEquals("STRING_BUILDER",JSE_Lang.INSTANCE.getConstantName("java.lang.StringBuilder"));
+		assertEquals("STRING_BUFFER",JSE_Lang.INSTANCE.getConstantName("java.lang.StringBuffer"));
+		assertEquals("SYSTEM",JSE_Lang.INSTANCE.getConstantName("java.lang.System"));
+		assertEquals("THREAD",JSE_Lang.INSTANCE.getConstantName("java.lang.Thread"));
+		assertEquals("THREAD_GROUP",JSE_Lang.INSTANCE.getConstantName("java.lang.ThreadGroup"));
+		assertEquals("THREAD_LOCAL",JSE_Lang.INSTANCE.getConstantName("java.lang.ThreadLocal"));
+		assertEquals("THROWABLE",JSE_Lang.INSTANCE.getConstantName("java.lang.Throwable"));
+		assertEquals("VOID",JSE_Lang.INSTANCE.getConstantName("java.lang.Void"));
+		assertEquals("CHARACTER_UNICODE_SCRIPT",JSE_Lang.INSTANCE.getConstantName("java.lang.Character$UnicodeScript"));
+		assertEquals("PROCESS_BUILDER_REDIRECT_TYPE",JSE_Lang.INSTANCE.getConstantName("java.lang.ProcessBuilder$Redirect$Type"));
+		assertEquals("THREAD_STATE",JSE_Lang.INSTANCE.getConstantName("java.lang.Thread$State"));
+		assertEquals("ARITHMETIC_EXCEPTION",JSE_Lang.INSTANCE.getConstantName("java.lang.ArithmeticException"));
+		assertEquals("ARRAY_INDEX_OUT_OF_BOUNDS_EXCEPTION",JSE_Lang.INSTANCE.getConstantName("java.lang.ArrayIndexOutOfBoundsException"));
+		assertEquals("ARRAY_STORE_EXCEPTION",JSE_Lang.INSTANCE.getConstantName("java.lang.ArrayStoreException"));
+		assertEquals("CLASS_CAST_EXCEPTION",JSE_Lang.INSTANCE.getConstantName("java.lang.ClassCastException"));
+		assertEquals("CLONE_NOT_SUPPORTED_EXCEPTION",JSE_Lang.INSTANCE.getConstantName("java.lang.CloneNotSupportedException"));
+		assertEquals("ENUM_CONSTANT_NOT_PRESENT_EXCEPTION",JSE_Lang.INSTANCE.getConstantName("java.lang.EnumConstantNotPresentException"));
+		assertEquals("EXCEPTION",JSE_Lang.INSTANCE.getConstantName("java.lang.Exception"));
+		assertEquals("ILLEGAL_ACCESS_EXCEPTION",JSE_Lang.INSTANCE.getConstantName("java.lang.IllegalAccessException"));
+		assertEquals("ILLEGAL_ARGUMENT_EXCEPTION",JSE_Lang.INSTANCE.getConstantName("java.lang.IllegalArgumentException"));
+		assertEquals("ILLEGAL_MONITOR_STATE_EXCEPTION",JSE_Lang.INSTANCE.getConstantName("java.lang.IllegalMonitorStateException"));
+		assertEquals("ILLEGAL_STATE_EXCEPTION",JSE_Lang.INSTANCE.getConstantName("java.lang.IllegalStateException"));
+		assertEquals("ILLEGAL_THREAD_STATE_EXCEPTION",JSE_Lang.INSTANCE.getConstantName("java.lang.IllegalThreadStateException"));
+		assertEquals("INSTANTIATION_EXCEPTION",JSE_Lang.INSTANCE.getConstantName("java.lang.InstantiationException"));
+		assertEquals("INTERRUPTED_EXCEPTION",JSE_Lang.INSTANCE.getConstantName("java.lang.InterruptedException"));
+		assertEquals("NEGATIVE_ARRAY_SIZE_EXCEPTION",JSE_Lang.INSTANCE.getConstantName("java.lang.NegativeArraySizeException"));
+		assertEquals("NO_SUCH_FIELD_EXCEPTION",JSE_Lang.INSTANCE.getConstantName("java.lang.NoSuchFieldException"));
+		assertEquals("NO_SUCH_METHOD_EXCEPTION",JSE_Lang.INSTANCE.getConstantName("java.lang.NoSuchMethodException"));
+		assertEquals("NULL_POINTER_EXCEPTION",JSE_Lang.INSTANCE.getConstantName("java.lang.NullPointerException"));
+		assertEquals("NUMBER_FORMAT_EXCEPTION",JSE_Lang.INSTANCE.getConstantName("java.lang.NumberFormatException"));
+		assertEquals("REFLECTIVE_OPERATION_EXCEPTION",JSE_Lang.INSTANCE.getConstantName("java.lang.ReflectiveOperationException"));
+		assertEquals("RUNTIME_EXCEPTION",JSE_Lang.INSTANCE.getConstantName("java.lang.RuntimeException"));
+		assertEquals("SECURITY_EXCEPTION",JSE_Lang.INSTANCE.getConstantName("java.lang.SecurityException"));
+		assertEquals("STRING_INDEX_OUT_OF_BOUNDS_EXCEPTION",JSE_Lang.INSTANCE.getConstantName("java.lang.StringIndexOutOfBoundsException"));
+		assertEquals("TYPE_NOT_PRESENT_EXCEPTION",JSE_Lang.INSTANCE.getConstantName("java.lang.TypeNotPresentException"));
+		assertEquals("UNSUPPORTED_OPERATION_EXCEPTION",JSE_Lang.INSTANCE.getConstantName("java.lang.UnsupportedOperationException"));
+		assertEquals("ABSTRACT_METHOD_ERROR",JSE_Lang.INSTANCE.getConstantName("java.lang.AbstractMethodError"));
+		assertEquals("ASSERTION_ERROR",JSE_Lang.INSTANCE.getConstantName("java.lang.AssertionError"));
+		assertEquals("BOOTSTRAP_METHOD_ERROR",JSE_Lang.INSTANCE.getConstantName("java.lang.BootstrapMethodError"));
+		assertEquals("CLASS_CIRCULARITY_ERROR",JSE_Lang.INSTANCE.getConstantName("java.lang.ClassCircularityError"));
+		assertEquals("CLASS_FORMAT_ERROR",JSE_Lang.INSTANCE.getConstantName("java.lang.ClassFormatError"));
+		assertEquals("ERROR",JSE_Lang.INSTANCE.getConstantName("java.lang.Error"));
+		assertEquals("EXCEPTION_IN_INITIALIZER_ERROR",JSE_Lang.INSTANCE.getConstantName("java.lang.ExceptionInInitializerError"));
+		assertEquals("ILLEGAL_ACCESS_ERROR",JSE_Lang.INSTANCE.getConstantName("java.lang.IllegalAccessError"));
+		assertEquals("INCOMPATIBLE_CLASS_CHANGE_ERROR",JSE_Lang.INSTANCE.getConstantName("java.lang.IncompatibleClassChangeError"));
+		assertEquals("INSTANTIATION_ERROR",JSE_Lang.INSTANCE.getConstantName("java.lang.InstantiationError"));
+		assertEquals("INTERNAL_ERROR",JSE_Lang.INSTANCE.getConstantName("java.lang.InternalError"));
+		assertEquals("LINKAGE_ERROR",JSE_Lang.INSTANCE.getConstantName("java.lang.LinkageError"));
+		assertEquals("NO_CLASS_DEF_FOUND_ERROR",JSE_Lang.INSTANCE.getConstantName("java.lang.NoClassDefFoundError"));
+		assertEquals("NO_SUCH_FIELD_ERROR",JSE_Lang.INSTANCE.getConstantName("java.lang.NoSuchFieldError"));
+		assertEquals("OUT_OF_MEMORY_ERROR",JSE_Lang.INSTANCE.getConstantName("java.lang.OutOfMemoryError"));
+		assertEquals("STACK_OVERFLOW_ERROR",JSE_Lang.INSTANCE.getConstantName("java.lang.StackOverflowError"));
+		assertEquals("THREAD_DEATH",JSE_Lang.INSTANCE.getConstantName("java.lang.ThreadDeath"));
+		assertEquals("UNKNOWN_ERROR",JSE_Lang.INSTANCE.getConstantName("java.lang.UnknownError"));
+		assertEquals("UNSATISFIED_LINK_ERROR",JSE_Lang.INSTANCE.getConstantName("java.lang.UnsatisfiedLinkError"));
+		assertEquals("UNSUPPORTED_CLASS_VERSION_ERROR",JSE_Lang.INSTANCE.getConstantName("java.lang.UnsupportedClassVersionError"));
+		assertEquals("VERIFY_ERROR",JSE_Lang.INSTANCE.getConstantName("java.lang.VerifyError"));
+		assertEquals("VIRTUAL_MACHINE_ERROR",JSE_Lang.INSTANCE.getConstantName("java.lang.VirtualMachineError"));
+		assertEquals("DEPRECATED",JSE_Lang.INSTANCE.getConstantName("java.lang.Deprecated"));
+		assertEquals("OVERRIDE",JSE_Lang.INSTANCE.getConstantName("java.lang.Override"));
+		assertEquals("SAFE_VARARGS",JSE_Lang.INSTANCE.getConstantName("java.lang.SafeVarargs"));
+		assertEquals("SUPPRESS_WARNINGS",JSE_Lang.INSTANCE.getConstantName("java.lang.SuppressWarnings"));
+	}
 	@Override
 	public int getTests(I_CountType type) {
-		return super.getTests(type, 1);
+		return super.getTests(type, 2);
 	}
 
 	@Override
 	public int getAsserts(I_CountType type) {
-		int thisAsserts = 209;
+		int thisAsserts = 309;
 		//code coverage and circular dependencies +
 		//custom afterTrialTests
 		//+ see above
@@ -246,7 +351,7 @@ public class JSE_LangTrial extends SourceFileCountingTrial {
 
 	@Override
 	public int getUniqueAsserts(I_CountType type) {
-		int thisUniqueAsserts = 209;
+		int thisUniqueAsserts = 309;
 		//code coverage and circular dependencies +
 		//custom afterTrialTests
 		//+ see above

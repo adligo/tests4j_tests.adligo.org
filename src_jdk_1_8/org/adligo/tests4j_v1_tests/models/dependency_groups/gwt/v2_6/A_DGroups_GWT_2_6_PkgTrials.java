@@ -4,22 +4,25 @@ import org.adligo.tests4j.models.shared.system.Tests4J_Params;
 import org.adligo.tests4j.models.shared.trials.I_TrialParams;
 import org.adligo.tests4j.run.Tests4J;
 import org.adligo.tests4j_4jacoco.plugin.CoveragePluginFactory;
-import org.adligo.tests4j_4jacoco.plugin.data.coverage.LazyPackageCoverage;
-import org.adligo.tests4j_4jacoco.plugin.data.coverage.LazyPackageCoverageFactory;
-import org.adligo.tests4j_4jacoco.plugin.instrumentation.TrialInstrumenter;
 import org.adligo.tests4j_tests.base_trials.I_CountingPackageTrials;
 import org.adligo.tests4j_tests.base_trials.SimpleMetaTrial;
 import org.adligo.tests4j_tests.base_trials.SimplePackageTrials;
 import org.adligo.tests4j_v1_tests.models.dependency_groups.gwt.v2_6.annotation.A_DGroup_GWT_2_6_AnnotPkgTrials;
 import org.adligo.tests4j_v1_tests.models.dependency_groups.gwt.v2_6.io.A_DGroups_GWT_2_6_IOPkgTrials;
 import org.adligo.tests4j_v1_tests.models.dependency_groups.gwt.v2_6.lang.A_DGroups_GWT_2_6_LangPkgTrials;
+import org.adligo.tests4j_v1_tests.models.dependency_groups.gwt.v2_6.math.A_DGroups_GWT_2_6_MathPkgTrials;
+import org.adligo.tests4j_v1_tests.models.dependency_groups.gwt.v2_6.sql.A_DGroups_GWT_2_6_SqlPkgTrials;
 import org.adligo.tests4j_v1_tests.models.dependency_groups.gwt.v2_6.util.A_DGroup_GWT_2_6_UtilPkgTrials;
 
 public class A_DGroups_GWT_2_6_PkgTrials extends SimplePackageTrials 
 implements I_TrialParams<A_DGroups_GWT_2_6_PkgTrials>, I_CountingPackageTrials {
 	private static final A_DGroups_GWT_2_6_LangPkgTrials lang = new A_DGroups_GWT_2_6_LangPkgTrials();
 	private static final A_DGroup_GWT_2_6_AnnotPkgTrials annot = new A_DGroup_GWT_2_6_AnnotPkgTrials();
+	private static final A_DGroups_GWT_2_6_MathPkgTrials math = new A_DGroups_GWT_2_6_MathPkgTrials();
+	
 	private static final A_DGroups_GWT_2_6_IOPkgTrials io = new A_DGroups_GWT_2_6_IOPkgTrials();
+	private static final A_DGroups_GWT_2_6_SqlPkgTrials sql = new A_DGroups_GWT_2_6_SqlPkgTrials();
+	
 	private static final A_DGroup_GWT_2_6_UtilPkgTrials util = new A_DGroup_GWT_2_6_UtilPkgTrials();
 	
 	public static void main(String [] args) {
@@ -47,16 +50,27 @@ implements I_TrialParams<A_DGroups_GWT_2_6_PkgTrials>, I_CountingPackageTrials {
 
 	public void addTrials() throws Exception {
 		add(GWT_2_6_LangTrial.class);
-		add(GWT_2_6_IOTrial.class);
 		add(GWT_2_6_AnnotTrial.class);
+		add(GWT_2_6_MathTrial.class);
+		
+		add(GWT_2_6_IOTrial.class);
+		add(GWT_2_6_SqlTrial.class);
+		
 		add(GWT_2_6_UtilTrial.class);
+		add(GWT_2_6_LogTrial.class);
 		
 		lang.addTrials();
 		add(lang.getCountingTrials());
 		annot.addTrials();
 		add(annot.getCountingTrials());
+		math.addTrials();
+		add(math.getCountingTrials());
+		
 		io.addTrials();
 		add(io.getCountingTrials());
+		sql.addTrials();
+		add(sql.getCountingTrials());
+		
 		util.addTrials();
 		add(util.getCountingTrials());
 	}
@@ -71,7 +85,9 @@ implements I_TrialParams<A_DGroups_GWT_2_6_PkgTrials>, I_CountingPackageTrials {
 		super.setParams(params);
 		lang.setParams(params);
 		annot.setParams(params);
+		math.setParams(params);
 		io.setParams(params);
+		sql.setParams(params);
 		util.setParams(params);
 	}
 }

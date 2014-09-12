@@ -37,6 +37,59 @@ implements I_TrialParams<A_DGroup_GWT_2_6_UtilPkgTrials>, I_CountingPackageTrial
 		add(MissingResourceException_2_6_UseTrial.class);
 		add(NoSuchElementException_2_6_UseTrial.class);
 		add(TooManyListenersException_2_6_UseTrial.class);
+		
+		add(Date_2_6_UseTrial.class);
+		add(AbstractCollection_2_6_UseTrial.class);
+		add(AbstractList_2_6_UseTrial.class);
+		add(AbstractMap_2_6_UseTrial.class);
+		add(AbstractQueue_2_6_UseTrial.class);
+		
+		add(AbstractSequentialList_2_6_UseTrial.class);
+		add(AbstractSet_2_6_UseTrial.class);
+		add(ArrayList_2_6_UseTrial.class);
+		add(Arrays_2_6_UseTrial.class);
+		
+		add(Collections_2_6_UseTrial.class);
+		add(Collection_2_6_UseTrial.class);
+		add(Comparator_2_6_UseTrial.class);
+		
+		add(EnumMap_2_6_UseTrial.class);
+		add(EnumSet_2_6_UseTrial.class);
+		
+		add(Enumeration_2_6_UseTrial.class);
+		add(EventListener_2_6_UseTrial.class);
+		add(EventObject_2_6_UseTrial.class);
+		add(HashMap_2_6_UseTrial.class);
+		
+		add(HashSet_2_6_UseTrial.class);
+		add(IdentityHashMap_2_6_UseTrial.class);
+		add(Iterator_2_6_UseTrial.class);
+		add(LinkedHashMap_2_6_UseTrial.class);
+		
+		add(LinkedHashSet_2_6_UseTrial.class);
+		add(LinkedList_2_6_UseTrial.class);
+		add(List_2_6_UseTrial.class);
+		add(ListIterator_2_6_UseTrial.class);
+		
+		add(Map_2_6_UseTrial.class);
+		add(MapEntry_2_6_UseTrial.class);
+		add(Objects_2_6_UseTrial.class);
+		
+		add(PriorityQueue_2_6_UseTrial.class);
+		add(Queue_2_6_UseTrial.class);
+		add(Random_2_6_UseTrial.class);
+		add(RandomAccess_2_6_UseTrial.class);
+		
+		add(Set_2_6_UseTrial.class);
+		add(SortedMap_2_6_UseTrial.class);
+		add(SortedSet_2_6_UseTrial.class);
+		
+		add(Vector_2_6_UseTrial.class);
+		
+		add(Stack_2_6_UseTrial.class);
+		
+		add(TreeMap_2_6_UseTrial.class);
+		add(TreeSet_2_6_UseTrial.class);
 	}
 
 	@Override
