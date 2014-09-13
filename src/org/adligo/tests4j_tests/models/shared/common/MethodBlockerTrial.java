@@ -2,6 +2,8 @@ package org.adligo.tests4j_tests.models.shared.common;
 
 import java.util.Collections;
 
+import org.adligo.tests4j.models.dependency_groups.adligo.AdligoGWT_DependencyGroup;
+import org.adligo.tests4j.models.dependency_groups.adligo.Tests4J_Common_DependencyGroup;
 import org.adligo.tests4j.models.shared.asserts.common.ExpectedThrownData;
 import org.adligo.tests4j.models.shared.asserts.common.I_Thrower;
 import org.adligo.tests4j.models.shared.common.MethodBlocker;
@@ -9,6 +11,7 @@ import org.adligo.tests4j.models.shared.en.Tests4J_EnglishConstants;
 import org.adligo.tests4j.models.shared.i18n.I_Tests4J_Constants;
 import org.adligo.tests4j.models.shared.system.Tests4J_Constants;
 import org.adligo.tests4j.models.shared.trials.AdditionalInstrumentation;
+import org.adligo.tests4j.models.shared.trials.AllowedDependencies;
 import org.adligo.tests4j.models.shared.trials.BeforeTrial;
 import org.adligo.tests4j.models.shared.trials.SourceFileScope;
 import org.adligo.tests4j.models.shared.trials.Test;
@@ -18,6 +21,9 @@ import org.adligo.tests4j_tests.models.shared.common.mocks.MockWithMethodBlocker
 
 @SourceFileScope (sourceClass=MethodBlocker.class, minCoverage=97.0)
 @AdditionalInstrumentation (javaPackages="org.adligo.tests4j_tests.models.shared.common.mocks")
+@AllowedDependencies (groups={
+		AdligoGWT_DependencyGroup.class, 
+		Tests4J_Common_DependencyGroup.class})
 public class MethodBlockerTrial extends SourceFileCountingTrial {
 	
 	

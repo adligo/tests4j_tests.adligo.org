@@ -462,7 +462,7 @@ public class GWT_2_6_UtilTrial extends SourceFileCountingTrial {
 
 	@Test
 	public void testEntry() {
-		I_ClassAttributes result = GWT_2_6_Util.getEntry();
+		I_ClassAttributes result = GWT_2_6_Util.getMapEntry();
 		assertEquals("java.util.Map$Entry", result.getName());
 		Set<I_FieldSignature> fs = result.getFields();
 		Set<I_MethodSignature> ms = result.getMethods();

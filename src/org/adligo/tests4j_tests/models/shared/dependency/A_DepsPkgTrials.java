@@ -44,10 +44,16 @@ implements I_MetaTrialParams<A_DepsPkgTrials>, I_CountingPackageTrials {
 		add(ClassParentsLocalMutantTrial.class);
 		add(ClassParentsLocalTrial.class);
 		
+		add(DependencyGroupBaseDelegateTrial.class);
+		add(DependencyGroupMutantTrial.class);
+		add(DependencyGroupTrial.class);
+		
 		add(DependencyMutantTrial.class);
 		add(DependencyTrial.class);
 		
 		add(MethodSignatureTrial.class);
+		
+		add(NameOnlyDependencyGroupTrial.class);
 	}
 
 	@Override

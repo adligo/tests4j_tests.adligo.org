@@ -86,7 +86,7 @@ implements I_MetaTrialParams<A_DGroups_GWT_2_6_LangPkgTrials>, I_CountingPackage
 		
 		add(System_2_6_UseTrial.class);
 		add(Void_2_6_UseTrial.class);
-		
+		add(Runnable_2_6_UseTrial.class);
 	}
 
 	@Override

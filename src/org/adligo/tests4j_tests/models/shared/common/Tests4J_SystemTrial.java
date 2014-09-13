@@ -1,6 +1,9 @@
 package org.adligo.tests4j_tests.models.shared.common;
 
+import org.adligo.tests4j.models.dependency_groups.adligo.AdligoGWT_DependencyGroup;
+import org.adligo.tests4j.models.dependency_groups.adligo.Tests4J_Common_DependencyGroup;
 import org.adligo.tests4j.models.shared.common.Tests4J_System;
+import org.adligo.tests4j.models.shared.trials.AllowedDependencies;
 import org.adligo.tests4j.models.shared.trials.SourceFileScope;
 import org.adligo.tests4j.models.shared.trials.Test;
 import org.adligo.tests4j_tests.base_trials.I_CountType;
@@ -9,6 +12,9 @@ import org.adligo.tests4j_tests.models.shared.common.mocks.SystemSimpleMock;
 import org.adligo.tests4j_tests.models.shared.common.mocks.ThreadLocalSystemMock;
 
 @SourceFileScope (sourceClass=Tests4J_System.class, minCoverage=50.0)
+@AllowedDependencies (groups={
+		AdligoGWT_DependencyGroup.class, 
+		Tests4J_Common_DependencyGroup.class})
 public class Tests4J_SystemTrial extends SourceFileCountingTrial {
 	private static final SystemSimpleMock MOCK = new SystemSimpleMock();
 	

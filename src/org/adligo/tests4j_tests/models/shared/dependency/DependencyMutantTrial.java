@@ -49,6 +49,8 @@ public class DependencyMutantTrial extends SourceFileCountingTrial {
 		DependencyMutant copy = new DependencyMutant(dm);
 		assertEquals(1, copy.getReferences());
 		assertEquals(ca, copy.getAlias());
+		
+		
 	}
 	
 	

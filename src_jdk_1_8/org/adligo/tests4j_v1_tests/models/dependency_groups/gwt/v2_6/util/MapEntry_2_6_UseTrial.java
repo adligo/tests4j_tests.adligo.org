@@ -62,7 +62,7 @@ public class MapEntry_2_6_UseTrial extends SourceFileCountingTrial
 		Set<I_MethodSignature> methods = new TreeSet<I_MethodSignature>();
 		methods.addAll(result.getMethods());
 
-		I_ClassAttributes example = GWT_2_6_Util.getEntry();
+		I_ClassAttributes example = GWT_2_6_Util.getMapEntry();
 		assertEquals(example.getName(), result.getName());
 		Set<I_FieldSignature> exampleFields = example.getFields();
 		for (I_FieldSignature sig: exampleFields) {

@@ -15,8 +15,8 @@ import org.adligo.tests4j.run.discovery.RelevantClassesWithTrialsCalculator;
 
 @TrialTypeAnnotation (type=TrialType.META_TRIAL_TYPE)
 public class TheMetaTrial  extends AbstractTrial implements I_MetaTrial {
-	private static final int TESTS = 1579;
-	private static final int TRIALS = 254;
+	private static final int TESTS = 1604;
+	private static final int TRIALS = 259;
 	private RelevantClassesWithTrialsCalculator calculator;
 	
 	//hmm package comparison data to include;
@@ -70,7 +70,7 @@ public class TheMetaTrial  extends AbstractTrial implements I_MetaTrial {
 		if (results.hasCoverage()) {
 			double actual = results.getCoveragePercentage();
 			//assertGreaterThanOrEquals(60.0, actual);
-			assertGreaterThanOrEquals(75.0, actual);
+			assertGreaterThanOrEquals(76.0, actual);
 		}
 		//TODO
 		//assertEquals(1,results.getTrialsIgnored());

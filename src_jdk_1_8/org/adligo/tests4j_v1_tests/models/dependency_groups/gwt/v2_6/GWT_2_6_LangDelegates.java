@@ -102,6 +102,11 @@ public class GWT_2_6_LangDelegates extends TrialDelegate {
 			JSE_Lang.APPENDABLE));
 	}
 	
+	public void delegateRunnableMemberAsserts(I_ClassAttributes result) {
+		Set<I_MethodSignature> ms = result.getMethods();
+		assertContains(ms, new MethodSignature("run"));
+	}
+	
 	public void delegateArithmeticExceptionMemberAsserts(I_ClassAttributes result) {
 		delegateRuntimeExceptionMemberAsserts(result);
 	}

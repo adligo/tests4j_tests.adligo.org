@@ -54,7 +54,7 @@ public class Class_2_6_UseTrial extends SourceFileCountingTrial {
 				}
 			}
 		}
-		I_ClassAttributes example = GWT_2_6_Lang.getClassAttributes();
+		I_ClassAttributes example = GWT_2_6_Lang.getClassAttributeMembers();
 		assertEquals(example.getName(), result.getName());
 		Set<I_FieldSignature> exampleFields = example.getFields();
 		for (I_FieldSignature sig: exampleFields) {

@@ -75,9 +75,9 @@ implements I_MetaTrialParams<RunAllTrials>, I_CountingPackageTrials, I_Tests4J_L
 			Tests4J_Params params = new Tests4J_Params();
 			params.setCoveragePluginFactoryClass(CoveragePluginFactory.class);
 			params.setMetaTrialClass(TheMetaTrial.class);
-			params.setMetaTrialClass(SimpleMetaTrial.class);
+			//params.setMetaTrialClass(SimpleMetaTrial.class);
 			RunAllTrials me = new RunAllTrials();
-			params.setMetaTrialParams(me);
+			//params.setMetaTrialParams(me);
 			
 			params.setRecommendedSetupThreadCount(16);
 			me.setParams(params);
