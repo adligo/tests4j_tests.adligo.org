@@ -1,7 +1,7 @@
 package org.adligo.tests4j_v1_tests;
 
 import org.adligo.tests4j.models.shared.system.Tests4J_Params;
-import org.adligo.tests4j.models.shared.trials.I_TrialParams;
+import org.adligo.tests4j.models.shared.trials.I_MetaTrialParams;
 import org.adligo.tests4j.run.Tests4J;
 import org.adligo.tests4j_4jacoco.plugin.CoveragePluginFactory;
 import org.adligo.tests4j_4jacoco.plugin.discovery.OrderedClassDiscovery;
@@ -9,12 +9,11 @@ import org.adligo.tests4j_4jacoco.plugin.instrumentation.ClassInstrumenter;
 import org.adligo.tests4j_tests.base_trials.I_CountingPackageTrials;
 import org.adligo.tests4j_tests.base_trials.SimpleMetaTrial;
 import org.adligo.tests4j_tests.base_trials.SimplePackageTrials;
-import org.adligo.tests4j_v1_tests.jacoco.plugin.discovery.A_8CocoDiscPkgTrials;
 import org.adligo.tests4j_v1_tests.models.dependency_groups.gwt.v2_6.A_DGroups_GWT_2_6_PkgTrials;
 import org.adligo.tests4j_v1_tests.models.dependency_groups.jse.A_DGroups_JSE_1_8_PkgTrials;
 
 public class A_JavaVersionSpecificTrials extends SimplePackageTrials 
-implements I_TrialParams<A_JavaVersionSpecificTrials>, I_CountingPackageTrials {
+implements I_MetaTrialParams<A_JavaVersionSpecificTrials>, I_CountingPackageTrials {
 	private A_DGroups_GWT_2_6_PkgTrials pkg = new A_DGroups_GWT_2_6_PkgTrials();
 	private A_DGroups_JSE_1_8_PkgTrials jse = new A_DGroups_JSE_1_8_PkgTrials();
 	

@@ -1,7 +1,7 @@
 package org.adligo.tests4j_v1_tests.models.dependency_groups.gwt.v2_6;
 
 import org.adligo.tests4j.models.shared.system.Tests4J_Params;
-import org.adligo.tests4j.models.shared.trials.I_TrialParams;
+import org.adligo.tests4j.models.shared.trials.I_MetaTrialParams;
 import org.adligo.tests4j.run.Tests4J;
 import org.adligo.tests4j_4jacoco.plugin.CoveragePluginFactory;
 import org.adligo.tests4j_tests.base_trials.I_CountingPackageTrials;
@@ -15,7 +15,7 @@ import org.adligo.tests4j_v1_tests.models.dependency_groups.gwt.v2_6.sql.A_DGrou
 import org.adligo.tests4j_v1_tests.models.dependency_groups.gwt.v2_6.util.A_DGroup_GWT_2_6_UtilPkgTrials;
 
 public class A_DGroups_GWT_2_6_PkgTrials extends SimplePackageTrials 
-implements I_TrialParams<A_DGroups_GWT_2_6_PkgTrials>, I_CountingPackageTrials {
+implements I_MetaTrialParams<A_DGroups_GWT_2_6_PkgTrials>, I_CountingPackageTrials {
 	private static final A_DGroups_GWT_2_6_LangPkgTrials lang = new A_DGroups_GWT_2_6_LangPkgTrials();
 	private static final A_DGroup_GWT_2_6_AnnotPkgTrials annot = new A_DGroup_GWT_2_6_AnnotPkgTrials();
 	private static final A_DGroups_GWT_2_6_MathPkgTrials math = new A_DGroups_GWT_2_6_MathPkgTrials();

@@ -1,6 +1,5 @@
 package org.adligo.tests4j_tests;
 
-import java.io.PrintStream;
 import java.math.BigDecimal;
 
 import org.adligo.tests4j.models.shared.common.Tests4J_System;
@@ -8,11 +7,10 @@ import org.adligo.tests4j.models.shared.metadata.I_TrialRunMetadata;
 import org.adligo.tests4j.models.shared.results.I_TrialResult;
 import org.adligo.tests4j.models.shared.results.I_TrialRunResult;
 import org.adligo.tests4j.models.shared.system.I_Tests4J_Listener;
-import org.adligo.tests4j.models.shared.system.I_Tests4J_Params;
 import org.adligo.tests4j.models.shared.system.I_Tests4J_ProcessInfo;
 import org.adligo.tests4j.models.shared.system.Tests4J_DefaultProgressMonitor;
 import org.adligo.tests4j.models.shared.system.Tests4J_Params;
-import org.adligo.tests4j.models.shared.trials.I_TrialParams;
+import org.adligo.tests4j.models.shared.trials.I_MetaTrialParams;
 import org.adligo.tests4j.run.Tests4J;
 import org.adligo.tests4j.shared.output.DefaultLog;
 import org.adligo.tests4j.shared.output.I_Tests4J_Log;
@@ -43,7 +41,7 @@ import org.adligo.tests4j_v1_tests.A_JavaVersionSpecificTrials;
 import org.adligo.tests4j_v1_tests.jacoco.plugin.A_CocoJavaVersionSpecificTrials;
 
 public class RunAllTrials  extends SimplePackageTrials 
-implements I_TrialParams<RunAllTrials>, I_CountingPackageTrials, I_Tests4J_Listener {
+implements I_MetaTrialParams<RunAllTrials>, I_CountingPackageTrials, I_Tests4J_Listener {
 	
 	static long start = System.currentTimeMillis();
 	static I_Tests4J_Log logger = new DefaultLog();
@@ -77,9 +75,9 @@ implements I_TrialParams<RunAllTrials>, I_CountingPackageTrials, I_Tests4J_Liste
 			Tests4J_Params params = new Tests4J_Params();
 			params.setCoveragePluginFactoryClass(CoveragePluginFactory.class);
 			params.setMetaTrialClass(TheMetaTrial.class);
-			//params.setMetaTrialClass(SimpleMetaTrial.class);
+			params.setMetaTrialClass(SimpleMetaTrial.class);
 			RunAllTrials me = new RunAllTrials();
-			//params.setMetaTrialParams(me);
+			params.setMetaTrialParams(me);
 			
 			params.setRecommendedSetupThreadCount(16);
 			me.setParams(params);

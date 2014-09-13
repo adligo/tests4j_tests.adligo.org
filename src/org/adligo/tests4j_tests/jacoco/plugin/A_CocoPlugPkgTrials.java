@@ -1,7 +1,7 @@
 package org.adligo.tests4j_tests.jacoco.plugin;
 
 import org.adligo.tests4j.models.shared.system.Tests4J_Params;
-import org.adligo.tests4j.models.shared.trials.I_TrialParams;
+import org.adligo.tests4j.models.shared.trials.I_MetaTrialParams;
 import org.adligo.tests4j.run.Tests4J;
 import org.adligo.tests4j.run.helpers.AfterSourceFileTrialTestsProcessor;
 import org.adligo.tests4j.shared.report.summary.TestDisplay;
@@ -16,7 +16,7 @@ import org.adligo.tests4j_tests.jacoco.plugin.data.common.A_CocoDataCmnPkgTrials
 import org.adligo.tests4j_tests.jacoco.plugin.data.inst.A_CocoPlugInstPkgTrials;
 
 public class A_CocoPlugPkgTrials extends SimplePackageTrials 
-implements I_TrialParams<A_CocoPlugPkgTrials>, I_CountingPackageTrials {
+implements I_MetaTrialParams<A_CocoPlugPkgTrials>, I_CountingPackageTrials {
 	private A_CocoDataCmnPkgTrials dataCommon = new A_CocoDataCmnPkgTrials();
 	private A_CocoPlugInstPkgTrials cover = new A_CocoPlugInstPkgTrials();
 	

@@ -32,15 +32,17 @@ import org.adligo.tests4j.models.shared.trials.I_AbstractTrial;
 import org.adligo.tests4j.models.shared.trials.I_ApiTrial;
 import org.adligo.tests4j.models.shared.trials.I_CircularDependencies;
 import org.adligo.tests4j.models.shared.trials.I_MetaTrial;
+import org.adligo.tests4j.models.shared.trials.I_MetaTrialInputData;
+import org.adligo.tests4j.models.shared.trials.I_MetaTrialParams;
+import org.adligo.tests4j.models.shared.trials.I_MetaTrialParamsAware;
 import org.adligo.tests4j.models.shared.trials.I_Progress;
 import org.adligo.tests4j.models.shared.trials.I_SourceFileTrial;
 import org.adligo.tests4j.models.shared.trials.I_SubProgress;
 import org.adligo.tests4j.models.shared.trials.I_Trial;
 import org.adligo.tests4j.models.shared.trials.I_TrialBindings;
-import org.adligo.tests4j.models.shared.trials.I_TrialInputData;
 import org.adligo.tests4j.models.shared.trials.I_TrialParams;
 import org.adligo.tests4j.models.shared.trials.I_TrialParamsAware;
-import org.adligo.tests4j.models.shared.trials.I_TrialParamsQueue;
+import org.adligo.tests4j.models.shared.trials.I_TrialParamsFactory;
 import org.adligo.tests4j.models.shared.trials.I_UseCaseTrial;
 import org.adligo.tests4j.models.shared.trials.IgnoreTest;
 import org.adligo.tests4j.models.shared.trials.PackageScope;
@@ -83,12 +85,10 @@ import org.adligo.tests4j_tests.base_trials.I_CountType;
 import org.adligo.tests4j_tests.base_trials.SourceFileCountingTrial;
 import org.adligo.tests4j_tests.run.discovery.package_discovery_inner_mocks.TwoNestedRunnables;
 
-import com.sun.xml.internal.bind.v2.runtime.unmarshaller.Receiver;
-
 @SourceFileScope (sourceClass=PackageDiscovery.class, minCoverage=51.0)
 public class PackageDiscoveryTrial extends SourceFileCountingTrial {
 
-	private static final int ASSERT_COUNT = 103;
+	private static final int ASSERT_COUNT = 105;
 
 	@Test
 	public void testDiscoveryPackage() throws Exception {
@@ -185,10 +185,13 @@ public class PackageDiscoveryTrial extends SourceFileCountingTrial {
 		assertContains(classNames, I_Trial.class.getName());
 		assertContains(classNames, I_TrialBindings.class.getName());
 		
-		assertContains(classNames, I_TrialInputData.class.getName());
+		assertContains(classNames, I_MetaTrialInputData.class.getName());
+		assertContains(classNames, I_MetaTrialParams.class.getName());
+		assertContains(classNames, I_MetaTrialParamsAware.class.getName());
+		
 		assertContains(classNames, I_TrialParams.class.getName());
 		assertContains(classNames, I_TrialParamsAware.class.getName());
-		assertContains(classNames, I_TrialParamsQueue.class.getName());
+		assertContains(classNames, I_TrialParamsFactory.class.getName());
 		
 		assertContains(classNames, I_MetaTrial.class.getName());
 		assertContains(classNames, I_Progress.class.getName());
@@ -218,7 +221,7 @@ public class PackageDiscoveryTrial extends SourceFileCountingTrial {
 		assertContains(classNames, UseCaseScope.class.getName());
 		assertContains(classNames, UseCaseTrial.class.getName());
 		
-		assertEquals(39, classNames.size());
+		assertEquals(41, classNames.size());
 		List<PackageDiscovery> children =  cd.getSubPackages();
 		
 		

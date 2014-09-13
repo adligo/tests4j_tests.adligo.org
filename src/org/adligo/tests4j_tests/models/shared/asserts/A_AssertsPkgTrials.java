@@ -1,7 +1,7 @@
 package org.adligo.tests4j_tests.models.shared.asserts;
 
 import org.adligo.tests4j.models.shared.system.Tests4J_Params;
-import org.adligo.tests4j.models.shared.trials.I_TrialParams;
+import org.adligo.tests4j.models.shared.trials.I_MetaTrialParams;
 import org.adligo.tests4j.run.Tests4J;
 import org.adligo.tests4j.shared.report.summary.TestDisplay;
 import org.adligo.tests4j.shared.report.summary.TrialDisplay;
@@ -16,7 +16,7 @@ import org.adligo.tests4j_tests.models.shared.asserts.line_text.A_AssertsLtRunPk
 import org.adligo.tests4j_tests.models.shared.asserts.uniform.A_AssertsUniPkgTrials;
 
 public class A_AssertsPkgTrials  extends SimplePackageTrials 
-implements I_TrialParams<A_AssertsPkgTrials>, I_CountingPackageTrials {
+implements I_MetaTrialParams<A_AssertsPkgTrials>, I_CountingPackageTrials {
 	A_AssertsCmPkgTrials cmtTrials = new A_AssertsCmPkgTrials();
 	A_AssertsLtRunPkgTrials lineTrials = new A_AssertsLtRunPkgTrials();
 	A_AssertsUniPkgTrials uniTrials = new A_AssertsUniPkgTrials();

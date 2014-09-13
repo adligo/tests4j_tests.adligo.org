@@ -2,13 +2,13 @@ package org.adligo.tests4j_tests.base_trials;
 
 import org.adligo.tests4j.models.shared.metadata.I_TrialRunMetadata;
 import org.adligo.tests4j.models.shared.results.I_TrialRunResult;
-import org.adligo.tests4j.models.shared.trials.I_TrialInputData;
-import org.adligo.tests4j.models.shared.trials.I_TrialParams;
-import org.adligo.tests4j.models.shared.trials.I_TrialParamsAware;
+import org.adligo.tests4j.models.shared.trials.I_MetaTrialInputData;
+import org.adligo.tests4j.models.shared.trials.I_MetaTrialParams;
+import org.adligo.tests4j.models.shared.trials.I_MetaTrialParamsAware;
 import org.adligo.tests4j.models.shared.trials.MetaTrial;
 import org.adligo.tests4j.shared.output.I_Tests4J_Log;
 
-public class SimpleMetaTrial extends MetaTrial implements I_TrialParamsAware<I_CountingPackageTrials> {
+public class SimpleMetaTrial extends MetaTrial implements I_MetaTrialParamsAware<I_CountingPackageTrials> {
 	private I_CountingPackageTrials countingPkg_;
 	
 	public SimpleMetaTrial() {
@@ -63,8 +63,8 @@ public class SimpleMetaTrial extends MetaTrial implements I_TrialParamsAware<I_C
 	}
 
 	@Override
-	public void setTrialParams(I_TrialParams<? extends I_TrialInputData> p) {
-		countingPkg_ = (I_CountingPackageTrials) p.getTrialParams();
+	public void setTrialParams(I_MetaTrialParams<I_CountingPackageTrials> p) {
+		countingPkg_ = p.getTrialParams();
 	}
 
 }
