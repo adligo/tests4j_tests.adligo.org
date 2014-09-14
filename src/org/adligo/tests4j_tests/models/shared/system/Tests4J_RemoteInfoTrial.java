@@ -4,7 +4,7 @@ import org.adligo.tests4j.models.shared.asserts.common.ExpectedThrownData;
 import org.adligo.tests4j.models.shared.asserts.common.I_Thrower;
 import org.adligo.tests4j.models.shared.en.Tests4J_EnglishConstants;
 import org.adligo.tests4j.models.shared.en.Tests4J_ParamsReaderMessages;
-import org.adligo.tests4j.models.shared.i18n.I_Tests4J_ParamReaderMessages;
+import org.adligo.tests4j.models.shared.i18n.I_Tests4J_ParamsReaderMessages;
 import org.adligo.tests4j.models.shared.system.Tests4J_RemoteInfo;
 import org.adligo.tests4j.models.shared.trials.SourceFileScope;
 import org.adligo.tests4j.models.shared.trials.Test;
@@ -18,7 +18,7 @@ public class Tests4J_RemoteInfoTrial extends SourceFileCountingTrial {
 	
 	@Test
 	public void testConstructorExceptions() {
-		I_Tests4J_ParamReaderMessages messages = Tests4J_EnglishConstants.ENGLISH.getParamReaderMessages();
+		I_Tests4J_ParamsReaderMessages messages = Tests4J_EnglishConstants.ENGLISH.getParamReaderMessages();
 		
 		assertThrown(new ExpectedThrownData(new IllegalArgumentException(
 				messages.getHostRequired())), 

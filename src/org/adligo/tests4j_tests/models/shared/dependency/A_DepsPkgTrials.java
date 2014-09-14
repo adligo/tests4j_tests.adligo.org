@@ -1,5 +1,6 @@
 package org.adligo.tests4j_tests.models.shared.dependency;
 
+import org.adligo.tests4j.models.shared.dependency.DependencyGroupAggregate;
 import org.adligo.tests4j.models.shared.system.Tests4J_Params;
 import org.adligo.tests4j.models.shared.trials.I_MetaTrialParams;
 import org.adligo.tests4j.run.Tests4J;
@@ -47,6 +48,7 @@ implements I_MetaTrialParams<A_DepsPkgTrials>, I_CountingPackageTrials {
 		add(DependencyGroupBaseDelegateTrial.class);
 		add(DependencyGroupMutantTrial.class);
 		add(DependencyGroupTrial.class);
+		add(DependencyGroupAggregateTrial.class);
 		
 		add(DependencyMutantTrial.class);
 		add(DependencyTrial.class);

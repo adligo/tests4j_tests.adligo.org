@@ -3,11 +3,10 @@ package org.adligo.tests4j_tests.models.shared.common;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.adligo.tests4j.models.dependency_groups.adligo.AdligoGWT_DependencyGroup;
-import org.adligo.tests4j.models.dependency_groups.adligo.Tests4J_Common_DependencyGroup;
 import org.adligo.tests4j.models.shared.asserts.common.ExpectedThrownData;
 import org.adligo.tests4j.models.shared.asserts.common.I_Thrower;
 import org.adligo.tests4j.models.shared.common.ClassMethods;
+import org.adligo.tests4j.models.shared.dependency_groups.adligo.Tests4J_Common_DependencyGroup;
 import org.adligo.tests4j.models.shared.trials.AllowedDependencies;
 import org.adligo.tests4j.models.shared.trials.SourceFileScope;
 import org.adligo.tests4j.models.shared.trials.Test;
@@ -17,9 +16,7 @@ import org.adligo.tests4j_tests.models.shared.common.mocks.BaseMockClass;
 import org.adligo.tests4j_tests.models.shared.common.mocks.ChildMockClass;
 
 @SourceFileScope (sourceClass=ClassMethods.class, minCoverage=85.0)
-@AllowedDependencies (groups={
-		AdligoGWT_DependencyGroup.class, 
-		Tests4J_Common_DependencyGroup.class})
+@AllowedDependencies (groups=Tests4J_Common_DependencyGroup.class)
 public class ClassMethodsTrial extends SourceFileCountingTrial {
 
 	private static final String CLASS_METHODS_TYPE = "Lorg/adligo/tests4j/models/shared/common/ClassMethods;";
@@ -242,7 +239,7 @@ public class ClassMethodsTrial extends SourceFileCountingTrial {
 	public int getAsserts(I_CountType type) {
 		if (type.isFromMetaWithCoverage()) {
 			//code coverage and circular dependencies
-			return super.getAsserts(type,144);
+			return super.getAsserts(type,145);
 		} else {
 			return super.getAsserts(type, 142);
 		}
@@ -251,7 +248,7 @@ public class ClassMethodsTrial extends SourceFileCountingTrial {
 	@Override
 	public int getUniqueAsserts(I_CountType type) {
 		if (type.isFromMetaWithCoverage()) {
-			return super.getUniqueAsserts(type, 97);
+			return super.getUniqueAsserts(type, 98);
 		} else {
 			return super.getUniqueAsserts(type, 95);
 		}

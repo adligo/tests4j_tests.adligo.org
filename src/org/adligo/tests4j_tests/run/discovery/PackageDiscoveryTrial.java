@@ -61,6 +61,7 @@ import org.adligo.tests4j.models.shared.trials.TrialTypeAnnotation;
 import org.adligo.tests4j.models.shared.trials.UseCaseScope;
 import org.adligo.tests4j.models.shared.trials.UseCaseTrial;
 import org.adligo.tests4j.run.discovery.AfterTrialAuditor;
+import org.adligo.tests4j.run.discovery.AllowedDependenciesAuditor;
 import org.adligo.tests4j.run.discovery.BeforeTrialAuditor;
 import org.adligo.tests4j.run.discovery.I_TrialDescription;
 import org.adligo.tests4j.run.discovery.I_TrialStateNameIdKey;
@@ -88,15 +89,17 @@ import org.adligo.tests4j_tests.run.discovery.package_discovery_inner_mocks.TwoN
 @SourceFileScope (sourceClass=PackageDiscovery.class, minCoverage=51.0)
 public class PackageDiscoveryTrial extends SourceFileCountingTrial {
 
-	private static final int ASSERT_COUNT = 105;
+	private static final int ASSERT_COUNT = 106;
 
 	@Test
 	public void testDiscoveryPackage() throws Exception {
 		PackageDiscovery cd = new PackageDiscovery("org.adligo.tests4j.run.discovery");
 		List<String> clazzNames = cd.getClassNames();
 		assertNotNull(clazzNames);
-		assertEquals(16, clazzNames.size());
+		assertEquals(17, clazzNames.size());
 		assertContains(clazzNames, AfterTrialAuditor.class.getName());
+		assertContains(clazzNames, AllowedDependenciesAuditor.class.getName());
+		
 		assertContains(clazzNames, BeforeTrialAuditor.class.getName());
 		
 		assertContains(clazzNames, I_TrialDescription.class.getName());

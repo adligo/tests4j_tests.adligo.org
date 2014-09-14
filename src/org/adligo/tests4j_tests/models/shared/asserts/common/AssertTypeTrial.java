@@ -15,7 +15,7 @@ public class AssertTypeTrial extends SourceFileCountingTrial {
 
 	@Test
 	public void testSingleTypes() {
-		assertEquals(14, AssertType.values().length);
+		assertEquals(15, AssertType.values().length);
 		assertEquals(0, AssertType.AssertTrue.getId());
 		assertEquals(1, AssertType.AssertFalse.getId());
 		assertEquals(2, AssertType.AssertNull.getId());
@@ -33,6 +33,7 @@ public class AssertTypeTrial extends SourceFileCountingTrial {
 		assertEquals(11, AssertType.AssertNotUniform.getId());
 		assertEquals(12, AssertType.AssertContains.getId());
 		assertEquals(13, AssertType.AssertGreaterThanOrEquals.getId());
+		assertEquals(14, AssertType.AssertDependency.getId());
 		
 	}
 	
@@ -115,21 +116,23 @@ public class AssertTypeTrial extends SourceFileCountingTrial {
 
 	@Override
 	public int getAsserts(I_CountType type) {
+		int asserts = 46;
 		if (type.isFromMetaWithCoverage()) {
 			//code coverage and circular dependencies +
 			//custom afterTrialTests
-			return super.getAsserts(type,49);
+			return super.getAsserts(type,asserts + 4);
 		} else {
-			return super.getAsserts(type, 45);
+			return super.getAsserts(type, asserts);
 		}
 	}
 
 	@Override
 	public int getUniqueAsserts(I_CountType type) {
+		int asserts = 46;
 		if (type.isFromMetaWithCoverage()) {
-			return super.getUniqueAsserts(type, 49);
+			return super.getUniqueAsserts(type, asserts + 4);
 		}  else {
-			return super.getAsserts(type, 45);
+			return super.getAsserts(type, asserts);
 		}
 	}
 
@@ -139,11 +142,11 @@ public class AssertTypeTrial extends SourceFileCountingTrial {
 		if (p.hasRecordedCoverage()) {
 			I_SourceFileCoverage sfc =  p.getSourceFileCoverage();
 			//assertEquals("org.adligo.tests4j.models.shared.asserts.common.AssertType",sfc.getClassName());
-			assertEquals(273, sfc.getCoverageUnits().get());
+			assertEquals(285, sfc.getCoverageUnits().get());
 			//if you see a error on this next line,
 			// there is a bug in code coverage,
 			// TODO I have seen it 20% chance?
-			assertEquals(269, sfc.getCoveredCoverageUnits().get());
+			assertEquals(281, sfc.getCoveredCoverageUnits().get());
 		}
 	}
 	

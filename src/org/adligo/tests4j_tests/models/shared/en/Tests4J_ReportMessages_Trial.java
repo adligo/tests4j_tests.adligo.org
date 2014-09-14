@@ -3,7 +3,7 @@ package org.adligo.tests4j_tests.models.shared.en;
 import org.adligo.tests4j.models.shared.en.Tests4J_EnglishConstants;
 import org.adligo.tests4j.models.shared.en.Tests4J_ParamsReaderMessages;
 import org.adligo.tests4j.models.shared.en.Tests4J_ReportMessages;
-import org.adligo.tests4j.models.shared.i18n.I_Tests4J_ParamReaderMessages;
+import org.adligo.tests4j.models.shared.i18n.I_Tests4J_ParamsReaderMessages;
 import org.adligo.tests4j.models.shared.i18n.I_Tests4J_ReportMessages;
 import org.adligo.tests4j.models.shared.trials.SourceFileScope;
 import org.adligo.tests4j.models.shared.trials.Test;

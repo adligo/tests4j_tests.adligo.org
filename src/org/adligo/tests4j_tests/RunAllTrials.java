@@ -26,6 +26,7 @@ import org.adligo.tests4j_tests.base_trials.SimpleMetaTrial;
 import org.adligo.tests4j_tests.base_trials.SimplePackageTrials;
 import org.adligo.tests4j_tests.jacoco.api_trials.A_CocoApiPkgTrials;
 import org.adligo.tests4j_tests.jacoco.plugin.A_CocoPlugPkgTrials;
+import org.adligo.tests4j_tests.models.dependency_groups.A_DependencyGroups_PkgTrials;
 import org.adligo.tests4j_tests.models.shared.asserts.A_AssertsPkgTrials;
 import org.adligo.tests4j_tests.models.shared.common.A_CmnPkgTrials;
 import org.adligo.tests4j_tests.models.shared.dependency.A_DepsPkgTrials;
@@ -49,6 +50,7 @@ implements I_MetaTrialParams<RunAllTrials>, I_CountingPackageTrials, I_Tests4J_L
 	//private static ExecutorService trialsNotCompletedService = Executors.newSingleThreadExecutor();
 	private A_EnPkgTrials en = new A_EnPkgTrials();
 	private A_CmnPkgTrials cmn = new A_CmnPkgTrials();
+	private A_DependencyGroups_PkgTrials dg = new A_DependencyGroups_PkgTrials();
 	private A_XmlPkgTrials xml = new A_XmlPkgTrials();
 	private A_AssertsPkgTrials asserts = new A_AssertsPkgTrials();
 	private A_DepsPkgTrials deps = new A_DepsPkgTrials();
@@ -74,10 +76,10 @@ implements I_MetaTrialParams<RunAllTrials>, I_CountingPackageTrials, I_Tests4J_L
 		try {
 			Tests4J_Params params = new Tests4J_Params();
 			params.setCoveragePluginFactoryClass(CoveragePluginFactory.class);
-			params.setMetaTrialClass(TheMetaTrial.class);
-			//params.setMetaTrialClass(SimpleMetaTrial.class);
+			//params.setMetaTrialClass(TheMetaTrial.class);
+			params.setMetaTrialClass(SimpleMetaTrial.class);
 			RunAllTrials me = new RunAllTrials();
-			//params.setMetaTrialParams(me);
+			params.setMetaTrialParams(me);
 			
 			params.setRecommendedSetupThreadCount(16);
 			me.setParams(params);
@@ -149,6 +151,10 @@ implements I_MetaTrialParams<RunAllTrials>, I_CountingPackageTrials, I_Tests4J_L
 		deps.setParams(params);
 		deps.addTrials();
 		add(deps.getCountingTrials());
+		
+		dg.setParams(params);
+		dg.addTrials();
+		add(dg.getCountingTrials());
 		
 		meta.setParams(params);
 		meta.addTrials();

@@ -2,7 +2,7 @@ package org.adligo.tests4j_tests.models.shared.en;
 
 import org.adligo.tests4j.models.shared.en.Tests4J_EnglishConstants;
 import org.adligo.tests4j.models.shared.en.Tests4J_ParamsReaderMessages;
-import org.adligo.tests4j.models.shared.i18n.I_Tests4J_ParamReaderMessages;
+import org.adligo.tests4j.models.shared.i18n.I_Tests4J_ParamsReaderMessages;
 import org.adligo.tests4j.models.shared.trials.SourceFileScope;
 import org.adligo.tests4j.models.shared.trials.Test;
 import org.adligo.tests4j_tests.base_trials.I_CountType;
@@ -14,7 +14,7 @@ public class Tests4J_ParamsReaderMessages_Trial extends SourceFileCountingTrial 
 
 	@Test
 	public void testMessages() {
-		I_Tests4J_ParamReaderMessages messages = Tests4J_EnglishConstants.ENGLISH.getParamReaderMessages();
+		I_Tests4J_ParamsReaderMessages messages = Tests4J_EnglishConstants.ENGLISH.getParamReaderMessages();
 		I18N_Asserter asserter = new I18N_Asserter(this);
 		asserter.assertConstant("A auth code, or auth code default is required.", 
 				messages.getAuthCodeOrAuthCodeDefaultRequired());

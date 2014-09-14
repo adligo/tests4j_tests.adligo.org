@@ -1,8 +1,7 @@
 package org.adligo.tests4j_tests.models.shared.common;
 
-import org.adligo.tests4j.models.dependency_groups.adligo.AdligoGWT_DependencyGroup;
-import org.adligo.tests4j.models.dependency_groups.adligo.Tests4J_Common_DependencyGroup;
 import org.adligo.tests4j.models.shared.common.Tests4J_System;
+import org.adligo.tests4j.models.shared.dependency_groups.adligo.Tests4J_Common_DependencyGroup;
 import org.adligo.tests4j.models.shared.trials.AllowedDependencies;
 import org.adligo.tests4j.models.shared.trials.SourceFileScope;
 import org.adligo.tests4j.models.shared.trials.Test;
@@ -12,9 +11,7 @@ import org.adligo.tests4j_tests.models.shared.common.mocks.SystemSimpleMock;
 import org.adligo.tests4j_tests.models.shared.common.mocks.ThreadLocalSystemMock;
 
 @SourceFileScope (sourceClass=Tests4J_System.class, minCoverage=50.0)
-@AllowedDependencies (groups={
-		AdligoGWT_DependencyGroup.class, 
-		Tests4J_Common_DependencyGroup.class})
+@AllowedDependencies (groups=Tests4J_Common_DependencyGroup.class)
 public class Tests4J_SystemTrial extends SourceFileCountingTrial {
 	private static final SystemSimpleMock MOCK = new SystemSimpleMock();
 	
@@ -52,7 +49,7 @@ public class Tests4J_SystemTrial extends SourceFileCountingTrial {
 	public int getAsserts(I_CountType type) {
 		if (type.isFromMetaWithCoverage()) {
 			//code coverage and circular dependencies
-			return super.getAsserts(type, 6);
+			return super.getAsserts(type, 7);
 		} else {
 			return super.getAsserts(type, 4);
 		}
@@ -61,7 +58,7 @@ public class Tests4J_SystemTrial extends SourceFileCountingTrial {
 	@Override
 	public int getUniqueAsserts(I_CountType type) {
 		if (type.isFromMetaWithCoverage()) {
-			return super.getUniqueAsserts(type, 6);
+			return super.getUniqueAsserts(type, 7);
 		} else {
 			return super.getUniqueAsserts(type, 4);
 		}

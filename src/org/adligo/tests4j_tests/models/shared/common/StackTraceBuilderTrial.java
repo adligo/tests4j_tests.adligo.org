@@ -1,9 +1,8 @@
 package org.adligo.tests4j_tests.models.shared.common;
 
-import org.adligo.tests4j.models.dependency_groups.adligo.AdligoGWT_DependencyGroup;
-import org.adligo.tests4j.models.dependency_groups.adligo.Tests4J_Common_DependencyGroup;
 import org.adligo.tests4j.models.shared.asserts.line_text.TextLines;
 import org.adligo.tests4j.models.shared.common.StackTraceBuilder;
+import org.adligo.tests4j.models.shared.dependency_groups.adligo.Tests4J_Common_DependencyGroup;
 import org.adligo.tests4j.models.shared.trials.AllowedDependencies;
 import org.adligo.tests4j.models.shared.trials.SourceFileScope;
 import org.adligo.tests4j.models.shared.trials.Test;
@@ -11,9 +10,7 @@ import org.adligo.tests4j_tests.base_trials.I_CountType;
 import org.adligo.tests4j_tests.base_trials.SourceFileCountingTrial;
 
 @SourceFileScope (sourceClass=StackTraceBuilder.class, minCoverage=96.0)
-@AllowedDependencies (groups={
-		AdligoGWT_DependencyGroup.class, 
-		Tests4J_Common_DependencyGroup.class})
+@AllowedDependencies (groups=Tests4J_Common_DependencyGroup.class)
 public class StackTraceBuilderTrial extends SourceFileCountingTrial {
 
 	@Test
@@ -82,7 +79,7 @@ public class StackTraceBuilderTrial extends SourceFileCountingTrial {
 	public int getAsserts(I_CountType type) {
 		if (type.isFromMetaWithCoverage()) {
 			//code coverage and circular dependencies
-			return super.getAsserts(type,18);
+			return super.getAsserts(type,19);
 		} else {
 			return super.getAsserts(type, 16);
 		}
@@ -91,7 +88,7 @@ public class StackTraceBuilderTrial extends SourceFileCountingTrial {
 	@Override
 	public int getUniqueAsserts(I_CountType type) {
 		if (type.isFromMetaWithCoverage()) {
-			return super.getUniqueAsserts(type, 18);
+			return super.getUniqueAsserts(type, 19);
 		} else {
 			return super.getUniqueAsserts(type, 16);
 		}
