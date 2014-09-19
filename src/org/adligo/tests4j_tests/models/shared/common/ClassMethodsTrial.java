@@ -38,6 +38,12 @@ public class ClassMethodsTrial extends SourceFileCountingTrial {
 	}
 
 	@Test
+	public void testGetSimpleName() {
+		assertEquals("ChildMockClass", ClassMethods.getSimpleName(ChildMockClass.class));
+		assertEquals("ClassMethodsTrial", ClassMethods.getSimpleName(this));
+	}
+	
+	@Test
 	public void testToNames() {
 		
 		List<String> names = ClassMethods.toNames(null);
@@ -232,25 +238,25 @@ public class ClassMethodsTrial extends SourceFileCountingTrial {
 	
 	@Override
 	public int getTests(I_CountType type) {
-		return super.getTests(type, 11);
+		return super.getTests(type, 12);
 	}
 	
 	@Override
 	public int getAsserts(I_CountType type) {
 		if (type.isFromMetaWithCoverage()) {
 			//code coverage and circular dependencies
-			return super.getAsserts(type,145);
+			return super.getAsserts(type,147);
 		} else {
-			return super.getAsserts(type, 142);
+			return super.getAsserts(type, 144);
 		}
 	}
 
 	@Override
 	public int getUniqueAsserts(I_CountType type) {
 		if (type.isFromMetaWithCoverage()) {
-			return super.getUniqueAsserts(type, 98);
+			return super.getUniqueAsserts(type, 100);
 		} else {
-			return super.getUniqueAsserts(type, 95);
+			return super.getUniqueAsserts(type, 97);
 		}
 	}
 }

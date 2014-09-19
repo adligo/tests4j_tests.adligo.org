@@ -5,14 +5,17 @@ import org.adligo.tests4j.models.shared.trials.AllowedDependencies;
 import org.adligo.tests4j.models.shared.trials.SourceFileScope;
 import org.adligo.tests4j.models.shared.trials.SourceFileTrial;
 import org.adligo.tests4j.models.shared.trials.Test;
+import org.adligo.tests4j.models.shared.trials.TrialRecursion;
 
-@SourceFileScope (sourceClass=BadMethod.class)
+@SourceFileScope (sourceClass=BadMethodCallMock.class)
 @AllowedDependencies (groups=GWT_DependencyGroup.class)
+@TrialRecursion
 public class CalledBadMethod_SourceFileTrial extends SourceFileTrial {
-	private BadMethod bm_;
+	public BadMethodCallMock bm_;
 	
 	@Test
 	public void test() {
-		bm_ = new BadMethod();
+		bm_ = new BadMethodCallMock();
+		assertNotNull(bm_);
 	}
 }

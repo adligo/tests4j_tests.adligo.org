@@ -1,7 +1,5 @@
 package org.adligo.tests4j_tests.trials_api.common;
 
-import java.lang.reflect.Method;
-import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
@@ -10,6 +8,7 @@ import org.adligo.tests4j.models.shared.metadata.I_TrialRunMetadata;
 import org.adligo.tests4j.models.shared.results.I_TrialResult;
 import org.adligo.tests4j.models.shared.results.I_TrialRunResult;
 import org.adligo.tests4j.models.shared.system.I_Tests4J_Controls;
+import org.adligo.tests4j.models.shared.system.I_Tests4J_CoveragePluginFactory;
 import org.adligo.tests4j.models.shared.system.I_Tests4J_Listener;
 import org.adligo.tests4j.models.shared.system.I_Tests4J_ProcessInfo;
 import org.adligo.tests4j.models.shared.system.Tests4J_Params;
@@ -27,6 +26,7 @@ public class ExpectedFailureRunner implements I_Tests4J_Listener {
 	private int size = 0;
 	private final CopyOnWriteArrayList<I_TrialResult> results = new CopyOnWriteArrayList<I_TrialResult>();
 	private SystemRunnerMock mockSystem = new SystemRunnerMock();
+	private Class<? extends I_Tests4J_CoveragePluginFactory> coveragPluginFactory_ = null;
 	
 	public ExpectedFailureRunner() {}
 	
@@ -40,6 +40,9 @@ public class ExpectedFailureRunner implements I_Tests4J_Listener {
 		Tests4J_Params params = new Tests4J_Params();
 		size = trials.size();
 		params.setTrials(trials);
+		if (coveragPluginFactory_ != null) {
+			params.setCoveragePluginFactoryClass(coveragPluginFactory_);
+		}
 		Tests4JRunnerMock mock = new Tests4JRunnerMock();
 		mock.setSystem(mockSystem);
 		
@@ -116,6 +119,14 @@ public class ExpectedFailureRunner implements I_Tests4J_Listener {
 	public void onProgress(I_Tests4J_ProcessInfo info) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	public Class<? extends I_Tests4J_CoveragePluginFactory> getCoveragPluginFactory() {
+		return coveragPluginFactory_;
+	}
+
+	public void setCoveragPluginFactory(Class<? extends I_Tests4J_CoveragePluginFactory> coveragPluginFactory) {
+		this.coveragPluginFactory_ = coveragPluginFactory;
 	}
 
 }

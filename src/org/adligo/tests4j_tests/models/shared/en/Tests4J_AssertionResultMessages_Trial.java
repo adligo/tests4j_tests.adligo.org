@@ -12,7 +12,7 @@ import org.adligo.tests4j_tests.models.shared.i18n.I18N_Asserter;
 @SourceFileScope (sourceClass=Tests4J_ResultMessages.class)
 public class Tests4J_AssertionResultMessages_Trial extends SourceFileCountingTrial {
 
-	private static final int ASSERT_COUNT = 76;
+	private static final int ASSERT_COUNT = 79;
 
 	@Test
 	public void testMessages() {
@@ -87,6 +87,8 @@ public class Tests4J_AssertionResultMessages_Trial extends SourceFileCountingTri
 				messages.getCodeCoveragIsOff());
 		asserter.assertConstant("Source class has a circular dependency detected.",
 				messages.getSourceClassHasCircularDependency());
+		asserter.assertConstant("Called method or field outside of @AllowedDependencies.",
+				messages.getCalledMethodOrFieldsOutsideOfAllowedDepenencies());
 		
 		asserter.assertConstantsMatchMethods(Tests4J_ResultMessages.class);
 	}

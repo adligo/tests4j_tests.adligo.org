@@ -1,10 +1,10 @@
 package org.adligo.tests4j_tests.jacoco.api_trials.dependency_trials;
 
-public class BadMethod {
+public class BadMethodCallMock {
 
 	public long nanoTime;
 	
-	public BadMethod() {
+	public BadMethodCallMock() {
 		nanoTime = System.nanoTime();
 	}
 }
