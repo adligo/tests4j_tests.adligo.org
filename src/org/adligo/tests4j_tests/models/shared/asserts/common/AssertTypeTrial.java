@@ -10,12 +10,12 @@ import org.adligo.tests4j.models.shared.trials.Test;
 import org.adligo.tests4j_tests.base_trials.I_CountType;
 import org.adligo.tests4j_tests.base_trials.SourceFileCountingTrial;
 //TODO look at minCoverage should be 95.0
-@SourceFileScope (sourceClass=AssertType.class, minCoverage=8.0)
+@SourceFileScope (sourceClass=AssertType.class, minCoverage=7.0)
 public class AssertTypeTrial extends SourceFileCountingTrial {
 
 	@Test
 	public void testSingleTypes() {
-		assertEquals(15, AssertType.values().length);
+		assertEquals(16, AssertType.values().length);
 		assertEquals(0, AssertType.AssertTrue.getId());
 		assertEquals(1, AssertType.AssertFalse.getId());
 		assertEquals(2, AssertType.AssertNull.getId());
@@ -34,7 +34,7 @@ public class AssertTypeTrial extends SourceFileCountingTrial {
 		assertEquals(12, AssertType.AssertContains.getId());
 		assertEquals(13, AssertType.AssertGreaterThanOrEquals.getId());
 		assertEquals(14, AssertType.AssertDependency.getId());
-		
+		assertEquals(15, AssertType.AssertCircularDependency.getId());
 	}
 	
 
@@ -116,7 +116,7 @@ public class AssertTypeTrial extends SourceFileCountingTrial {
 
 	@Override
 	public int getAsserts(I_CountType type) {
-		int asserts = 46;
+		int asserts = 47;
 		if (type.isFromMetaWithCoverage()) {
 			//code coverage and circular dependencies +
 			//custom afterTrialTests
@@ -128,7 +128,7 @@ public class AssertTypeTrial extends SourceFileCountingTrial {
 
 	@Override
 	public int getUniqueAsserts(I_CountType type) {
-		int asserts = 46;
+		int asserts = 47;
 		if (type.isFromMetaWithCoverage()) {
 			return super.getUniqueAsserts(type, asserts + 4);
 		}  else {
@@ -142,11 +142,11 @@ public class AssertTypeTrial extends SourceFileCountingTrial {
 		if (p.hasRecordedCoverage()) {
 			I_SourceFileCoverage sfc =  p.getSourceFileCoverage();
 			//assertEquals("org.adligo.tests4j.models.shared.asserts.common.AssertType",sfc.getClassName());
-			assertEquals(285, sfc.getCoverageUnits().get());
+			assertEquals(297, sfc.getCoverageUnits().get());
 			//if you see a error on this next line,
 			// there is a bug in code coverage,
 			// TODO I have seen it 20% chance?
-			assertEquals(281, sfc.getCoveredCoverageUnits().get());
+			assertEquals(293, sfc.getCoveredCoverageUnits().get());
 		}
 	}
 	

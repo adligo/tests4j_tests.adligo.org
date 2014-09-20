@@ -8,6 +8,7 @@ import org.adligo.tests4j.models.shared.dependency.ClassParentsLocal;
 import org.adligo.tests4j.models.shared.dependency.ClassParentsLocalMutant;
 import org.adligo.tests4j.models.shared.dependency.I_ClassParents;
 import org.adligo.tests4j.models.shared.dependency.I_ClassParentsLocal;
+import org.adligo.tests4j.models.shared.trials.CircularDependencies;
 import org.adligo.tests4j.models.shared.trials.SourceFileScope;
 import org.adligo.tests4j.models.shared.trials.Test;
 import org.adligo.tests4j_tests.base_trials.I_CountType;
@@ -18,7 +19,8 @@ import org.adligo.tests4j_tests.run.helpers.class_loading_mocks.MockI_SetLong;
 import org.adligo.tests4j_tests.run.helpers.class_loading_mocks.MockWithExtensionA;
 import org.adligo.tests4j_tests.run.helpers.class_loading_mocks.MockWithNothing;
 
-@SourceFileScope (sourceClass=ClassParentsLocal.class, minCoverage=80.0)
+@SourceFileScope (sourceClass=ClassParentsLocal.class, minCoverage=80.0,
+	allowedCircularDependencies=CircularDependencies.AllowInPackage)
 public class ClassParentsLocalTrial extends SourceFileCountingTrial {
 	
 	

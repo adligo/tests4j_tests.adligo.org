@@ -1,6 +1,7 @@
 package org.adligo.tests4j_tests.models.shared.common;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.adligo.tests4j.models.shared.asserts.common.ExpectedThrownData;
@@ -15,7 +16,7 @@ import org.adligo.tests4j_tests.base_trials.SourceFileCountingTrial;
 import org.adligo.tests4j_tests.models.shared.common.mocks.BaseMockClass;
 import org.adligo.tests4j_tests.models.shared.common.mocks.ChildMockClass;
 
-@SourceFileScope (sourceClass=ClassMethods.class, minCoverage=85.0)
+@SourceFileScope (sourceClass=ClassMethods.class, minCoverage=87.0)
 @AllowedDependencies (groups=Tests4J_Common_DependencyGroup.class)
 public class ClassMethodsTrial extends SourceFileCountingTrial {
 
@@ -236,27 +237,56 @@ public class ClassMethodsTrial extends SourceFileCountingTrial {
 		assertNull(ClassMethods.getPrimitive('['));
 	}
 	
+	@Test
+	public void testGetSourceFileName() {
+		List<String> umList = Collections.unmodifiableList(new ArrayList<String>());
+		assertEquals("java.util.Collections", 
+				ClassMethods.getSourceClassName(
+						umList.getClass().getName()
+				));
+		assertEquals("java.util.Collections", 
+				ClassMethods.getSourceClassName(
+					Collections.class.getName()
+				));
+	}
+	
+	@Test
+	public void testPackageName() {
+		List<String> umList = Collections.unmodifiableList(new ArrayList<String>());
+		
+		assertEquals("java.util", 
+				ClassMethods.getPackageName(
+						umList.getClass().getName()
+				));
+		assertEquals("java.util", 
+				ClassMethods.getPackageName(
+					Collections.class.getName()
+				));
+	}
+	
 	@Override
 	public int getTests(I_CountType type) {
-		return super.getTests(type, 12);
+		return super.getTests(type, 14);
 	}
 	
 	@Override
 	public int getAsserts(I_CountType type) {
+		int tests = 148;
 		if (type.isFromMetaWithCoverage()) {
 			//code coverage and circular dependencies
-			return super.getAsserts(type,147);
+			return super.getAsserts(type,tests + 3);
 		} else {
-			return super.getAsserts(type, 144);
+			return super.getAsserts(type, tests);
 		}
 	}
 
 	@Override
 	public int getUniqueAsserts(I_CountType type) {
+		int utests = 99;
 		if (type.isFromMetaWithCoverage()) {
-			return super.getUniqueAsserts(type, 100);
+			return super.getUniqueAsserts(type, utests + 3);
 		} else {
-			return super.getUniqueAsserts(type, 97);
+			return super.getUniqueAsserts(type, utests);
 		}
 	}
 }

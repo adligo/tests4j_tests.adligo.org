@@ -1,23 +1,21 @@
 package org.adligo.tests4j_tests.jacoco.api_trials.dependency_trials;
 
-import org.adligo.tests4j.models.shared.dependency_groups.gwt.GWT_DependencyGroup;
-import org.adligo.tests4j.models.shared.trials.AllowedDependencies;
 import org.adligo.tests4j.models.shared.trials.SourceFileScope;
 import org.adligo.tests4j.models.shared.trials.SourceFileTrial;
 import org.adligo.tests4j.models.shared.trials.Test;
 import org.adligo.tests4j.models.shared.trials.TrialRecursion;
+import org.adligo.tests4j_tests.run.helpers.class_loading_mocks.MockWithTriangleA;
 
-@SourceFileScope (sourceClass=BadMethodCallMock.class)
-@AllowedDependencies (groups=GWT_DependencyGroup.class)
+@SourceFileScope (sourceClass=MockWithTriangleA.class)//not no cirucular dependency type setting
 @TrialRecursion
-public class CalledBadMethod_SourceFileTrial extends SourceFileTrial {
+public class CircularDependencyFailure_SourceFileTrial extends SourceFileTrial {
 	public static final String TEST_METHOD_NAME = "test";
 	
-	public BadMethodCallMock bm_;
+	public MockWithTriangleA bm_;
 	
 	@Test
 	public void test() {
-		bm_ = new BadMethodCallMock();
+		bm_ = new MockWithTriangleA();
 		assertNotNull(bm_);
 	}
 }

@@ -9,17 +9,17 @@ import org.adligo.tests4j.models.shared.asserts.common.I_AssertCommand;
 import org.adligo.tests4j.models.shared.asserts.common.I_AssertCompareFailure;
 import org.adligo.tests4j.models.shared.asserts.common.I_AssertThrownFailure;
 import org.adligo.tests4j.models.shared.asserts.common.I_TestFailure;
+import org.adligo.tests4j.models.shared.asserts.common.I_AssertListener;
 import org.adligo.tests4j.models.shared.asserts.common.I_ThrowableInfo;
 import org.adligo.tests4j.models.shared.asserts.common.I_Thrower;
 import org.adligo.tests4j.models.shared.asserts.line_text.TextLines;
-import org.adligo.tests4j.models.shared.system.I_Tests4J_AssertListener;
 import org.adligo.tests4j.models.shared.trials.SourceFileScope;
 import org.adligo.tests4j.models.shared.trials.Test;
 import org.adligo.tests4j_tests.base_trials.I_CountType;
 import org.adligo.tests4j_tests.base_trials.SourceFileCountingTrial;
 
 @SourceFileScope (sourceClass=AssertionProcessor.class, minCoverage=80.0)
-public class AssertionProcessorTrial extends SourceFileCountingTrial implements I_Tests4J_AssertListener, I_Thrower {
+public class AssertionProcessorTrial extends SourceFileCountingTrial implements I_AssertListener, I_Thrower {
 	private I_AssertCommand lastAssertCommand;
 	private I_TestFailure lastTestFailure;
 	private RuntimeException throwable;

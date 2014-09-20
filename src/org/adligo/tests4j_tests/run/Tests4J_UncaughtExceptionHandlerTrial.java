@@ -4,6 +4,7 @@ import org.adligo.tests4j.models.shared.asserts.common.ExpectedThrownData;
 import org.adligo.tests4j.models.shared.asserts.common.I_Thrower;
 import org.adligo.tests4j.models.shared.trials.AdditionalInstrumentation;
 import org.adligo.tests4j.models.shared.trials.AfterTrial;
+import org.adligo.tests4j.models.shared.trials.CircularDependencies;
 import org.adligo.tests4j.models.shared.trials.SourceFileScope;
 import org.adligo.tests4j.models.shared.trials.Test;
 import org.adligo.tests4j.shared.output.DefaultLog;
@@ -14,7 +15,8 @@ import org.adligo.tests4j_tests.run.mocks.BadMockTests4J_UncaughtExceptionHandle
 import org.adligo.tests4j_tests.run.mocks.MockTests4J_UncaughtExceptionHandler;
 
 //yet another minCoverage mystery why is cc 47 and not 70
-@SourceFileScope (sourceClass=Tests4J_UncaughtExceptionHandlerTrial.class, minCoverage=46.0)
+@SourceFileScope (sourceClass=Tests4J_UncaughtExceptionHandlerTrial.class, minCoverage=46.0,
+	allowedCircularDependencies=CircularDependencies.AllowInnerOuterClasses)
 @AdditionalInstrumentation (javaPackages="org.adligo.tests4j_tests.run.mocks")
 public class Tests4J_UncaughtExceptionHandlerTrial extends SourceFileCountingTrial implements I_Tests4J_Log {
 	private String lastLog;

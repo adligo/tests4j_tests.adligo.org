@@ -11,12 +11,14 @@ import org.adligo.tests4j.models.shared.dependency.I_MethodSignature;
 import org.adligo.tests4j.models.shared.dependency_groups.gwt.v2_6.GWT_2_6_Util;
 import org.adligo.tests4j.models.shared.dependency_groups.jse.JSE_Util;
 import org.adligo.tests4j.models.shared.results.I_SourceFileTrialResult;
+import org.adligo.tests4j.models.shared.trials.CircularDependencies;
 import org.adligo.tests4j.models.shared.trials.SourceFileScope;
 import org.adligo.tests4j.models.shared.trials.Test;
 import org.adligo.tests4j_tests.base_trials.I_CountType;
 import org.adligo.tests4j_tests.base_trials.SourceFileCountingTrial;
 
-@SourceFileScope (sourceClass=Arrays_2_6_MockUse.class)
+@SourceFileScope (sourceClass=Arrays_2_6_MockUse.class,
+	allowedCircularDependencies=CircularDependencies.AllowInnerOuterClasses)
 public class Arrays_2_6_UseTrial extends SourceFileCountingTrial {
 
 	@Test
