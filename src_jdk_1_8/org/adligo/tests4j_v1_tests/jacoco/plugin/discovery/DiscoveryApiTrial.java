@@ -5,7 +5,6 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 
-import org.adligo.tests4j.models.shared.common.CacheControl;
 import org.adligo.tests4j.models.shared.dependency.ClassDependenciesLocal;
 import org.adligo.tests4j.models.shared.dependency.ClassFilter;
 import org.adligo.tests4j.models.shared.dependency.ClassFilterMutant;
@@ -17,6 +16,7 @@ import org.adligo.tests4j.models.shared.dependency.I_ClassParentsLocal;
 import org.adligo.tests4j.models.shared.trials.PackageScope;
 import org.adligo.tests4j.models.shared.trials.Test;
 import org.adligo.tests4j.run.helpers.CachedClassBytesClassLoader;
+import org.adligo.tests4j.shared.common.CacheControl;
 import org.adligo.tests4j_4jacoco.plugin.discovery.CircularDependenciesDiscovery;
 import org.adligo.tests4j_4jacoco.plugin.discovery.ClassParentsCache;
 import org.adligo.tests4j_4jacoco.plugin.discovery.ClassParentsDiscovery;

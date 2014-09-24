@@ -2,9 +2,6 @@ package org.adligo.tests4j_tests.trials_api.assert_fails_trials;
 
 import java.util.List;
 
-import org.adligo.tests4j.models.shared.asserts.common.I_Asserts;
-import org.adligo.tests4j.models.shared.asserts.common.I_TestFailure;
-import org.adligo.tests4j.models.shared.asserts.line_text.TextLines;
 import org.adligo.tests4j.models.shared.metadata.I_TestMetadata;
 import org.adligo.tests4j.models.shared.metadata.I_TrialMetadata;
 import org.adligo.tests4j.models.shared.metadata.I_TrialRunMetadata;
@@ -12,6 +9,9 @@ import org.adligo.tests4j.models.shared.results.I_TestResult;
 import org.adligo.tests4j.models.shared.results.I_TrialFailure;
 import org.adligo.tests4j.models.shared.results.I_TrialResult;
 import org.adligo.tests4j.models.shared.results.TestResult;
+import org.adligo.tests4j.shared.asserts.common.I_Asserts;
+import org.adligo.tests4j.shared.asserts.common.I_TestFailure;
+import org.adligo.tests4j.shared.asserts.line_text.TextLines;
 import org.adligo.tests4j_tests.trials_api.common.ExpectedFailureRunner;
 import org.adligo.tests4j_tests.trials_api.common.SystemRunnerMock;
 
@@ -76,7 +76,7 @@ public class AssertNullWithMessageFailsTrialRunner {
 		
 		String failedLocation = testFailure.getFailureDetail();
 		TextLines lines = new TextLines(failedLocation);
-		asserts.assertEquals("\torg.adligo.tests4j.models.shared.asserts.AssertionFailureLocation", lines.getLine(0));
+		asserts.assertEquals("\torg.adligo.tests4j.shared.asserts.AssertionFailureLocation", lines.getLine(0));
 		asserts.assertEquals("\tat org.adligo.tests4j_tests.trials_api.assert_fails_trials.AssertNullWithMessageFailsTrial.testAssertNullWithMessage(AssertNullWithMessageFailsTrial.java:16)", lines.getLine(1));
 		
 		SystemRunnerMock tracker =  runner.getMockSystem();

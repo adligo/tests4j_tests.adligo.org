@@ -2,13 +2,13 @@ package org.adligo.tests4j_tests.shared.report.summary;
 
 import java.util.List;
 
-import org.adligo.tests4j.models.shared.en.Tests4J_EnglishConstants;
-import org.adligo.tests4j.models.shared.i18n.I_Tests4J_ReportMessages;
 import org.adligo.tests4j.models.shared.results.BaseTrialResultMutant;
 import org.adligo.tests4j.models.shared.results.I_TrialResult;
 import org.adligo.tests4j.models.shared.results.TestResultMutant;
 import org.adligo.tests4j.models.shared.trials.SourceFileScope;
 import org.adligo.tests4j.models.shared.trials.Test;
+import org.adligo.tests4j.shared.en.Tests4J_EnglishConstants;
+import org.adligo.tests4j.shared.i18n.I_Tests4J_ReportMessages;
 import org.adligo.tests4j.shared.report.summary.ThreadDisplay;
 import org.adligo.tests4j.shared.report.summary.TrialDisplay;
 import org.adligo.tests4j.shared.report.summary.TrialFailedDisplay;

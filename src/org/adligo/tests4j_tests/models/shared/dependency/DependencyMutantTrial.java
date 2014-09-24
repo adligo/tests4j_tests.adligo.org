@@ -4,13 +4,13 @@ import java.util.Iterator;
 import java.util.Set;
 import java.util.TreeSet;
 
-import org.adligo.tests4j.models.shared.asserts.common.ExpectedThrownData;
-import org.adligo.tests4j.models.shared.asserts.common.I_Thrower;
 import org.adligo.tests4j.models.shared.dependency.ClassAlias;
 import org.adligo.tests4j.models.shared.dependency.DependencyMutant;
 import org.adligo.tests4j.models.shared.dependency.I_Dependency;
 import org.adligo.tests4j.models.shared.trials.SourceFileScope;
 import org.adligo.tests4j.models.shared.trials.Test;
+import org.adligo.tests4j.shared.asserts.common.ExpectedThrownData;
+import org.adligo.tests4j.shared.asserts.common.I_Thrower;
 import org.adligo.tests4j_tests.base_trials.I_CountType;
 import org.adligo.tests4j_tests.base_trials.SourceFileCountingTrial;
 import org.adligo.tests4j_tests.run.helpers.class_loading_mocks.MockException;

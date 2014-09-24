@@ -3,9 +3,9 @@ package org.adligo.tests4j_tests.jacoco.plugin.data.coverage;
 import java.util.Collections;
 import java.util.List;
 
-import org.adligo.tests4j.models.shared.i18n.I_Tests4J_Constants;
 import org.adligo.tests4j.models.shared.trials.SourceFileScope;
 import org.adligo.tests4j.models.shared.trials.Test;
+import org.adligo.tests4j.shared.i18n.I_Tests4J_Constants;
 import org.adligo.tests4j_4jacoco.plugin.data.coverage.LazyPackageCoverageFactory;
 import org.adligo.tests4j_tests.base_trials.I_CountType;
 import org.adligo.tests4j_tests.base_trials.SourceFileCountingTrial;
@@ -15,7 +15,7 @@ public class LazyPackageCoverageFactoryTrial extends SourceFileCountingTrial {
 
 	@Test
 	public void testGetClasses() {
-		List<String> list = LazyPackageCoverageFactory.getClasses("org.adligo.tests4j.models.shared.i18n", 
+		List<String> list = LazyPackageCoverageFactory.getClasses("org.adligo.tests4j.shared.i18n", 
 				Collections.singleton(I_Tests4J_Constants.class.getName()));
 		assertNotNull(list);
 		assertContains(list, I_Tests4J_Constants.class.getName());

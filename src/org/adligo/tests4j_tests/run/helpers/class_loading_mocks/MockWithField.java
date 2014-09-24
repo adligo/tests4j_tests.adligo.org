@@ -1,6 +1,6 @@
 package org.adligo.tests4j_tests.run.helpers.class_loading_mocks;
 
-import org.adligo.tests4j.models.shared.common.I_System;
+import org.adligo.tests4j.shared.common.I_System;
 
 /**
  * this class should only 

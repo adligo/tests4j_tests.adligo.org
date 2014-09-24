@@ -6,12 +6,12 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-import org.adligo.tests4j.models.shared.common.DefaultSystem;
-import org.adligo.tests4j.models.shared.common.DelegateSystem;
-import org.adligo.tests4j.models.shared.common.I_System;
 import org.adligo.tests4j.models.shared.trials.SourceFileScope;
 import org.adligo.tests4j.models.shared.trials.Test;
 import org.adligo.tests4j.run.helpers.JseSystem;
+import org.adligo.tests4j.shared.common.DefaultSystem;
+import org.adligo.tests4j.shared.common.DelegateSystem;
+import org.adligo.tests4j.shared.common.I_System;
 import org.adligo.tests4j.shared.output.DefaultLog;
 import org.adligo.tests4j_tests.base_trials.I_CountType;
 import org.adligo.tests4j_tests.base_trials.SourceFileCountingTrial;

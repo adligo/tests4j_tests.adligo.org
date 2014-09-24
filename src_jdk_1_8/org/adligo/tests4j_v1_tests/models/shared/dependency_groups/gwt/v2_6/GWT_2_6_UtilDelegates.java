@@ -2,7 +2,6 @@ package org.adligo.tests4j_v1_tests.models.shared.dependency_groups.gwt.v2_6;
 
 import java.util.Set;
 
-import org.adligo.tests4j.models.shared.common.ClassMethods;
 import org.adligo.tests4j.models.shared.dependency.FieldSignature;
 import org.adligo.tests4j.models.shared.dependency.I_ClassAttributes;
 import org.adligo.tests4j.models.shared.dependency.I_FieldSignature;
@@ -11,6 +10,7 @@ import org.adligo.tests4j.models.shared.dependency.MethodSignature;
 import org.adligo.tests4j.models.shared.dependency_groups.jse.JSE_Lang;
 import org.adligo.tests4j.models.shared.dependency_groups.jse.JSE_Util;
 import org.adligo.tests4j.models.shared.trials.I_Trial;
+import org.adligo.tests4j.shared.common.ClassMethods;
 
 public class GWT_2_6_UtilDelegates extends GWT_2_6_LangDelegates {
 

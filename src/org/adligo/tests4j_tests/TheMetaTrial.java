@@ -5,7 +5,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
-import org.adligo.tests4j.models.shared.common.TrialType;
 import org.adligo.tests4j.models.shared.coverage.I_PackageCoverage;
 import org.adligo.tests4j.models.shared.metadata.I_TrialMetadata;
 import org.adligo.tests4j.models.shared.metadata.I_TrialRunMetadata;
@@ -14,12 +13,13 @@ import org.adligo.tests4j.models.shared.trials.AbstractTrial;
 import org.adligo.tests4j.models.shared.trials.I_MetaTrial;
 import org.adligo.tests4j.models.shared.trials.TrialTypeAnnotation;
 import org.adligo.tests4j.run.discovery.ClassesWithSourceFileTrialsCalculator;
+import org.adligo.tests4j.shared.common.TrialType;
 import org.adligo.tests4j.shared.output.I_Tests4J_Log;
 
 @TrialTypeAnnotation (type=TrialType.META_TRIAL_TYPE)
 public class TheMetaTrial  extends AbstractTrial implements I_MetaTrial {
-	private static final int TESTS = 1706;
-	private static final int TRIALS = 284;
+	private static final int TESTS = 1829;
+	private static final int TRIALS = 325;
 	private ClassesWithSourceFileTrialsCalculator calculator_;
 	private I_TrialRunResult results_;
 	private I_Tests4J_Log log_;
@@ -68,21 +68,21 @@ public class TheMetaTrial  extends AbstractTrial implements I_MetaTrial {
 	}
 
 	public void assertCoverageMatrix() {
-		assertCoverageMatrix("org.adligo.tests4j.models.shared.i18n",
+		assertCoverageMatrix("org.adligo.tests4j.shared.i18n",
 				100.0, 100.0);
-		assertCoverageMatrix("org.adligo.tests4j.models.shared.en",
+		assertCoverageMatrix("org.adligo.tests4j.shared.en",
 				100.0, 100.0);
-		assertCoverageMatrix("org.adligo.tests4j.models.shared.common",
-				60.0, 83.0);
-		assertCoverageMatrix("org.adligo.tests4j.models.shared.xml",
+		assertCoverageMatrix("org.adligo.tests4j.shared.common",
+				100.0, 83.0);
+		assertCoverageMatrix("org.adligo.tests4j.shared.xml",
 				100.0, 92.0);
-		assertCoverageMatrix("org.adligo.tests4j.models.shared.asserts.common",
-				13.0, 86.0);
-		assertCoverageMatrix("org.adligo.tests4j.models.shared.asserts.line_text",
+		assertCoverageMatrix("org.adligo.tests4j.shared.asserts.common",
+				100.0, 86.0);
+		assertCoverageMatrix("org.adligo.tests4j.shared.asserts.line_text",
 				60.0, 88.0);
-		assertCoverageMatrix("org.adligo.tests4j.models.shared.asserts.uniform",
+		assertCoverageMatrix("org.adligo.tests4j.shared.asserts.uniform",
 				40.0, 93.0);
-		assertCoverageMatrix("org.adligo.tests4j.models.shared.asserts",
+		assertCoverageMatrix("org.adligo.tests4j.shared.asserts",
 				100.0, 83.0);
 		/*
 		if (results.hasCoverage()) {

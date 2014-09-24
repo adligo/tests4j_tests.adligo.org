@@ -5,8 +5,8 @@ import java.util.List;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.atomic.AtomicLong;
 
-import org.adligo.tests4j.models.shared.common.DefaultSystem;
-import org.adligo.tests4j.models.shared.common.I_System;
+import org.adligo.tests4j.shared.common.DefaultSystem;
+import org.adligo.tests4j.shared.common.I_System;
 
 
 /**

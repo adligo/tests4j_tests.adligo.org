@@ -2,7 +2,6 @@ package org.adligo.tests4j_tests;
 
 import java.math.BigDecimal;
 
-import org.adligo.tests4j.models.shared.common.Tests4J_System;
 import org.adligo.tests4j.models.shared.metadata.I_TrialRunMetadata;
 import org.adligo.tests4j.models.shared.results.I_TrialResult;
 import org.adligo.tests4j.models.shared.results.I_TrialRunResult;
@@ -12,6 +11,7 @@ import org.adligo.tests4j.models.shared.system.Tests4J_DefaultProgressMonitor;
 import org.adligo.tests4j.models.shared.system.Tests4J_Params;
 import org.adligo.tests4j.models.shared.trials.I_MetaTrialParams;
 import org.adligo.tests4j.run.Tests4J;
+import org.adligo.tests4j.shared.common.Tests4J_System;
 import org.adligo.tests4j.shared.output.DefaultLog;
 import org.adligo.tests4j.shared.output.I_Tests4J_Log;
 import org.adligo.tests4j.shared.report.summary.SetupProcessDisplay;
@@ -26,17 +26,12 @@ import org.adligo.tests4j_tests.base_trials.SimplePackageTrials;
 import org.adligo.tests4j_tests.jacoco.api_trials.A_CocoApiPkgTrials;
 import org.adligo.tests4j_tests.jacoco.plugin.A_CocoPlugPkgTrials;
 import org.adligo.tests4j_tests.models.dependency_groups.A_DependencyGroups_PkgTrials;
-import org.adligo.tests4j_tests.models.shared.asserts.A_AssertsPkgTrials;
-import org.adligo.tests4j_tests.models.shared.common.A_CmnPkgTrials;
 import org.adligo.tests4j_tests.models.shared.coverage.A_CoveragePkgTrials;
 import org.adligo.tests4j_tests.models.shared.dependency.A_DepsPkgTrials;
-import org.adligo.tests4j_tests.models.shared.en.A_EnPkgTrials;
-import org.adligo.tests4j_tests.models.shared.i18n.A_I18nPkgTrials;
 import org.adligo.tests4j_tests.models.shared.metadata.A_MetaPkgTrials;
 import org.adligo.tests4j_tests.models.shared.results.A_ResultsPkgTrials;
 import org.adligo.tests4j_tests.models.shared.system.A_SysPkgTrials;
 import org.adligo.tests4j_tests.models.shared.trials.A_TrialsPkgTrials;
-import org.adligo.tests4j_tests.models.shared.xml.A_XmlPkgTrials;
 import org.adligo.tests4j_tests.run.A_RunPkgTrials;
 import org.adligo.tests4j_tests.shared.A_SharePkgTrials;
 import org.adligo.tests4j_tests.trials_api.A_ApiPkgTrials;
@@ -50,16 +45,10 @@ implements I_MetaTrialParams<RunAllTrials>, I_CountingPackageTrials, I_Tests4J_L
 	static I_Tests4J_Log logger = new DefaultLog();
 	//private static volatile List<String> trialsNotCompleted = new CopyOnWriteArrayList<String>();
 	//private static ExecutorService trialsNotCompletedService = Executors.newSingleThreadExecutor();
-	private A_EnPkgTrials en = new A_EnPkgTrials();
-	private A_CmnPkgTrials cmn = new A_CmnPkgTrials();
 	private A_DependencyGroups_PkgTrials dg = new A_DependencyGroups_PkgTrials();
 	private A_TrialsPkgTrials trials = new A_TrialsPkgTrials();
-	private A_XmlPkgTrials xml = new A_XmlPkgTrials();
 	
-	
-	private A_AssertsPkgTrials asserts = new A_AssertsPkgTrials();
 	private A_CoveragePkgTrials covers = new A_CoveragePkgTrials();
-	private A_I18nPkgTrials i18n = new A_I18nPkgTrials();
 	
 	private A_DepsPkgTrials deps = new A_DepsPkgTrials();
 	private A_MetaPkgTrials meta = new A_MetaPkgTrials();
@@ -140,30 +129,9 @@ implements I_MetaTrialParams<RunAllTrials>, I_CountingPackageTrials, I_Tests4J_L
 	 */
 	public void addTrials(Tests4J_Params params) throws Exception {
 	
-		
-		i18n.setParams(params);
-		i18n.addTrials();
-		add(i18n.getCountingTrials());
-		
-		en.setParams(params);
-		en.addTrials();
-		add(en.getCountingTrials());
-		
-		cmn.setParams(params);
-		cmn.addTrials();
-		add(cmn.getCountingTrials());
-	
 		trials.setParams(params);
 		trials.addTrials();
 		add(trials.getCountingTrials());
-		
-		xml.setParams(params);
-		xml.addTrials();
-		add(xml.getCountingTrials());
-		
-		asserts.setParams(params);
-		asserts.addTrials();
-		add(asserts.getCountingTrials());
 		
 		deps.setParams(params);
 		deps.addTrials();

@@ -4,9 +4,9 @@ import java.io.InputStream;
 import java.util.HashSet;
 import java.util.Set;
 
-import org.adligo.tests4j.models.shared.common.ClassMethods;
 import org.adligo.tests4j.models.shared.trials.SourceFileScope;
 import org.adligo.tests4j.models.shared.trials.Test;
+import org.adligo.tests4j.shared.common.ClassMethods;
 import org.adligo.tests4j_4jacoco.plugin.discovery.ReferenceTrackingClassVisitor;
 import org.adligo.tests4j_4jacoco.plugin.discovery.ReferenceTrackingMethodVisitor;
 import org.adligo.tests4j_4jacoco.plugin.instrumentation.map.MapInstrConstants;
@@ -44,7 +44,7 @@ public class ReferenceTrackingClassVisitorTrial extends SourceFileCountingTrial 
 	public static final String STRING_BUILDER = "Ljava/lang/StringBuilder;";
 	public static final String SYSTEM = "Ljava/lang/System;";
 	
-	public static final String I_SYSTEM = "Lorg/adligo/tests4j/models/shared/common/I_System;";
+	public static final String I_SYSTEM = "Lorg/adligo/tests4j/shared/common/I_System;";
 	public static final String M_EXCEPTION = "Lorg/adligo/tests4j_tests/run/helpers/class_loading_mocks/MockException;";
 	public static final String M_EXCEPTION_BARE = "org/adligo/tests4j_tests/run/helpers/class_loading_mocks/MockException";
 	

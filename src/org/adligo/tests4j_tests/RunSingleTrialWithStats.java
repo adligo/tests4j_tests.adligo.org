@@ -7,10 +7,10 @@ import org.adligo.tests4j_4jacoco.plugin.CoveragePluginFactory;
 import org.adligo.tests4j_tests.base_trials.I_CountingPackageTrials;
 import org.adligo.tests4j_tests.base_trials.SimpleMetaTrial;
 import org.adligo.tests4j_tests.base_trials.SimplePackageTrials;
-import org.adligo.tests4j_tests.models.shared.common.ClassMethodsTrial;
-import org.adligo.tests4j_tests.models.shared.common.DefaultSystemTrial;
-import org.adligo.tests4j_tests.models.shared.common.I_ImmutableTrial;
-import org.adligo.tests4j_tests.models.shared.common.I_PlatformContainerTrial;
+import org.adligo.tests4j_tests.shared.common.ClassMethodsTrial;
+import org.adligo.tests4j_tests.shared.common.DefaultSystemTrial;
+import org.adligo.tests4j_tests.shared.common.I_ImmutableTrial;
+import org.adligo.tests4j_tests.shared.common.I_PlatformContainerTrial;
 import org.adligo.tests4j_v1_tests.models.shared.dependency_groups.gwt.v2_6.annotation.Target_2_6_UseTrial;
 
 public class RunSingleTrialWithStats extends SimplePackageTrials 

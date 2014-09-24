@@ -5,7 +5,7 @@ import org.adligo.tests4j.models.shared.metadata.TestMetadata;
 import org.adligo.tests4j.models.shared.metadata.TestMetadataMutant;
 import org.adligo.tests4j.models.shared.trials.SourceFileScope;
 import org.adligo.tests4j.models.shared.trials.Test;
-import org.adligo.tests4j.models.shared.xml.XML_Builder;
+import org.adligo.tests4j.shared.xml.XML_Builder;
 import org.adligo.tests4j_tests.base_trials.I_CountType;
 import org.adligo.tests4j_tests.base_trials.SourceFileCountingTrial;
 

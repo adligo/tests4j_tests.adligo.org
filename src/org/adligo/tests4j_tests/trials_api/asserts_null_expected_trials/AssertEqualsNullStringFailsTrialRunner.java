@@ -2,11 +2,6 @@ package org.adligo.tests4j_tests.trials_api.asserts_null_expected_trials;
 
 import java.util.List;
 
-import org.adligo.tests4j.models.shared.asserts.common.I_Asserts;
-import org.adligo.tests4j.models.shared.asserts.common.I_TestFailure;
-import org.adligo.tests4j.models.shared.asserts.line_text.TextLines;
-import org.adligo.tests4j.models.shared.en.Tests4J_EnglishConstants;
-import org.adligo.tests4j.models.shared.i18n.I_Tests4J_AssertionInputMessages;
 import org.adligo.tests4j.models.shared.metadata.I_TestMetadata;
 import org.adligo.tests4j.models.shared.metadata.I_TrialMetadata;
 import org.adligo.tests4j.models.shared.metadata.I_TrialRunMetadata;
@@ -15,6 +10,11 @@ import org.adligo.tests4j.models.shared.results.I_TrialFailure;
 import org.adligo.tests4j.models.shared.results.I_TrialResult;
 import org.adligo.tests4j.models.shared.results.TestResult;
 import org.adligo.tests4j.models.shared.trials.PackageScope;
+import org.adligo.tests4j.shared.asserts.common.I_Asserts;
+import org.adligo.tests4j.shared.asserts.common.I_TestFailure;
+import org.adligo.tests4j.shared.asserts.line_text.TextLines;
+import org.adligo.tests4j.shared.en.Tests4J_EnglishConstants;
+import org.adligo.tests4j.shared.i18n.I_Tests4J_AssertionInputMessages;
 import org.adligo.tests4j_tests.trials_api.common.ExpectedFailureRunner;
 import org.adligo.tests4j_tests.trials_api.common.SystemRunnerMock;
 
@@ -80,7 +80,7 @@ public class AssertEqualsNullStringFailsTrialRunner  {
 		
 		String failedLocation = testFailure.getFailureDetail();
 		TextLines lines = new TextLines(failedLocation);
-		asserts.assertEquals("\torg.adligo.tests4j.models.shared.asserts.AssertionFailureLocation", lines.getLine(0));
+		asserts.assertEquals("\torg.adligo.tests4j.shared.asserts.AssertionFailureLocation", lines.getLine(0));
 		asserts.assertEquals("\tat org.adligo.tests4j_tests.trials_api.asserts_null_expected_trials.AssertEqualsNullStringFailsTrial.testAssertEqualsNullFails(AssertEqualsNullStringFailsTrial.java:14)", lines.getLine(1));
 		
 		SystemRunnerMock tracker =  runner.getMockSystem();

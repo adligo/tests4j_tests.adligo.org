@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-import org.adligo.tests4j.models.shared.common.ClassMethods;
-import org.adligo.tests4j.models.shared.common.I_CacheControl;
 import org.adligo.tests4j.models.shared.dependency.DependencyGroupAggregate;
 import org.adligo.tests4j.models.shared.dependency.FieldSignature;
 import org.adligo.tests4j.models.shared.dependency.I_ClassAttributes;
@@ -22,6 +20,8 @@ import org.adligo.tests4j.models.shared.dependency_groups.jse.JSE_IO;
 import org.adligo.tests4j.models.shared.dependency_groups.jse.JSE_Lang;
 import org.adligo.tests4j.models.shared.trials.SourceFileScope;
 import org.adligo.tests4j.models.shared.trials.Test;
+import org.adligo.tests4j.shared.common.ClassMethods;
+import org.adligo.tests4j.shared.common.I_CacheControl;
 import org.adligo.tests4j_tests.base_trials.I_CountType;
 import org.adligo.tests4j_tests.base_trials.SourceFileCountingTrial;
 
