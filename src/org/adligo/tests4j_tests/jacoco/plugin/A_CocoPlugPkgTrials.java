@@ -13,12 +13,15 @@ import org.adligo.tests4j_tests.base_trials.I_CountingPackageTrials;
 import org.adligo.tests4j_tests.base_trials.SimpleMetaTrial;
 import org.adligo.tests4j_tests.base_trials.SimplePackageTrials;
 import org.adligo.tests4j_tests.jacoco.plugin.data.common.A_CocoDataCmnPkgTrials;
+import org.adligo.tests4j_tests.jacoco.plugin.data.coverage.A_CocoCoveragePkgTrials;
 import org.adligo.tests4j_tests.jacoco.plugin.data.inst.A_CocoPlugInstPkgTrials;
 
 public class A_CocoPlugPkgTrials extends SimplePackageTrials 
 implements I_MetaTrialParams<A_CocoPlugPkgTrials>, I_CountingPackageTrials {
 	private A_CocoDataCmnPkgTrials dataCommon = new A_CocoDataCmnPkgTrials();
-	private A_CocoPlugInstPkgTrials cover = new A_CocoPlugInstPkgTrials();
+	private A_CocoPlugInstPkgTrials instr = new A_CocoPlugInstPkgTrials();
+	private A_CocoCoveragePkgTrials cover = new A_CocoCoveragePkgTrials();
+	
 	
 	public static void main(String [] args) {
 		try {
@@ -57,6 +60,8 @@ implements I_MetaTrialParams<A_CocoPlugPkgTrials>, I_CountingPackageTrials {
 		add(dataCommon.getCountingTrials());
 		cover.addTrials();
 		add(cover.getCountingTrials());
+		instr.addTrials();
+		add(instr.getCountingTrials());
 	}
 
 	@Override
@@ -70,5 +75,6 @@ implements I_MetaTrialParams<A_CocoPlugPkgTrials>, I_CountingPackageTrials {
 		
 		dataCommon.setParams(params);
 		cover.setParams(params);
+		instr.setParams(params);
 	}
 }

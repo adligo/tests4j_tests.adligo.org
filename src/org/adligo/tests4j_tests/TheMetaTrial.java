@@ -18,8 +18,8 @@ import org.adligo.tests4j.shared.output.I_Tests4J_Log;
 
 @TrialTypeAnnotation (type=TrialType.META_TRIAL_TYPE)
 public class TheMetaTrial  extends AbstractTrial implements I_MetaTrial {
-	private static final int TESTS = 1702;
-	private static final int TRIALS = 283;
+	private static final int TESTS = 1706;
+	private static final int TRIALS = 284;
 	private ClassesWithSourceFileTrialsCalculator calculator_;
 	private I_TrialRunResult results_;
 	private I_Tests4J_Log log_;
