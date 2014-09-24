@@ -41,7 +41,7 @@ public class ClassMethodsTrial extends SourceFileCountingTrial {
 	@Test
 	public void testGetSimpleName() {
 		assertEquals("ChildMockClass", ClassMethods.getSimpleName(ChildMockClass.class));
-		assertEquals("ClassMethodsTrial", ClassMethods.getSimpleName(this));
+		assertEquals("ClassMethodsTrial", ClassMethods.getSimpleName(this.getClass()));
 	}
 	
 	@Test

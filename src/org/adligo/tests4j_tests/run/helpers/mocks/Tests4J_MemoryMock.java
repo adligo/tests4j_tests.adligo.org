@@ -1,6 +1,7 @@
 package org.adligo.tests4j_tests.run.helpers.mocks;
 
 import org.adligo.tests4j.models.shared.asserts.uniform.I_EvaluatorLookup;
+import org.adligo.tests4j.models.shared.dependency.I_DependencyGroup;
 import org.adligo.tests4j.models.shared.results.I_TrialResult;
 import org.adligo.tests4j.models.shared.system.I_Tests4J_CoveragePlugin;
 import org.adligo.tests4j.run.common.I_Tests4J_Memory;
@@ -49,6 +50,18 @@ public class Tests4J_MemoryMock implements I_Tests4J_Memory {
 	public int getFailureResultsSize() {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+
+	@Override
+	public I_DependencyGroup getDependencyGroup(Class<?> c) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void putIfAbsent(Class<?> c, I_DependencyGroup group) {
+		// TODO Auto-generated method stub
+		
 	}
 
 

@@ -15,7 +15,7 @@ import org.adligo.tests4j_tests.run.mocks.BadMockTests4J_UncaughtExceptionHandle
 import org.adligo.tests4j_tests.run.mocks.MockTests4J_UncaughtExceptionHandler;
 
 //yet another minCoverage mystery why is cc 47 and not 70
-@SourceFileScope (sourceClass=Tests4J_UncaughtExceptionHandlerTrial.class, minCoverage=46.0,
+@SourceFileScope (sourceClass=Tests4J_UncaughtExceptionHandlerTrial.class, minCoverage=45.0,
 	allowedCircularDependencies=CircularDependencies.AllowInnerOuterClasses)
 @AdditionalInstrumentation (javaPackages="org.adligo.tests4j_tests.run.mocks")
 public class Tests4J_UncaughtExceptionHandlerTrial extends SourceFileCountingTrial implements I_Tests4J_Log {

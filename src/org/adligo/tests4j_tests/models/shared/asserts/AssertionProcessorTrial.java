@@ -13,12 +13,15 @@ import org.adligo.tests4j.models.shared.asserts.common.I_AssertListener;
 import org.adligo.tests4j.models.shared.asserts.common.I_ThrowableInfo;
 import org.adligo.tests4j.models.shared.asserts.common.I_Thrower;
 import org.adligo.tests4j.models.shared.asserts.line_text.TextLines;
+import org.adligo.tests4j.models.shared.dependency_groups.adligo.Tests4J_Asserts_DependencyGroup;
+import org.adligo.tests4j.models.shared.trials.AllowedDependencies;
 import org.adligo.tests4j.models.shared.trials.SourceFileScope;
 import org.adligo.tests4j.models.shared.trials.Test;
 import org.adligo.tests4j_tests.base_trials.I_CountType;
 import org.adligo.tests4j_tests.base_trials.SourceFileCountingTrial;
 
 @SourceFileScope (sourceClass=AssertionProcessor.class, minCoverage=80.0)
+@AllowedDependencies (groups=Tests4J_Asserts_DependencyGroup.class)
 public class AssertionProcessorTrial extends SourceFileCountingTrial implements I_AssertListener, I_Thrower {
 	private I_AssertCommand lastAssertCommand;
 	private I_TestFailure lastTestFailure;
@@ -52,7 +55,7 @@ public class AssertionProcessorTrial extends SourceFileCountingTrial implements 
 		TextLines lines = new TextLines(lastTestFailure.getFailureDetail(), true);
 		assertUniform("	org.adligo.tests4j.models.shared.asserts.AssertionFailureLocation", lines.getLine(0));
 		assertUniform("\tat org.adligo.tests4j_tests.models.shared.asserts."
-				+ "AssertionProcessorTrial.testSimple(AssertionProcessorTrial.java:48)", lines.getLine(1));
+				+ "AssertionProcessorTrial.testSimple(AssertionProcessorTrial.java:51)", lines.getLine(1));
 		
 		assertTrue(lastTestFailure instanceof I_AssertCompareFailure);
 		I_AssertCompareFailure acf = (I_AssertCompareFailure) lastTestFailure;
@@ -78,7 +81,7 @@ public class AssertionProcessorTrial extends SourceFileCountingTrial implements 
 		TextLines lines = new TextLines(lastTestFailure.getFailureDetail(), true);
 		assertUniform("\torg.adligo.tests4j.models.shared.asserts.AssertionFailureLocation",lines.getLine(0));
 		assertUniform("\tat org.adligo.tests4j_tests.models.shared.asserts."
-				+ "AssertionProcessorTrial.testThrown(AssertionProcessorTrial.java:73)",lines.getLine(1));
+				+ "AssertionProcessorTrial.testThrown(AssertionProcessorTrial.java:76)",lines.getLine(1));
 		
 		assertEquals(AssertType.AssertThrown, lastTestFailure.getAssertType());
 		assertTrue(lastTestFailure instanceof I_AssertThrownFailure);
@@ -103,7 +106,7 @@ public class AssertionProcessorTrial extends SourceFileCountingTrial implements 
 		assertEquals("\tjava.lang.RuntimeException", lines.getLine(0));
 		assertEquals("\tat org.adligo.tests4j_tests.models.shared.asserts."
 				+ "AssertionProcessorTrial.testThrown("
-				+ "AssertionProcessorTrial.java:72)", lines.getLine(1));
+				+ "AssertionProcessorTrial.java:75)", lines.getLine(1));
 		assertNull(actual.getCause());
 		
 		
@@ -146,7 +149,7 @@ public class AssertionProcessorTrial extends SourceFileCountingTrial implements 
 		if (type.isFromMetaWithCoverage()) {
 			//code coverage and circular dependencies +
 			//custom afterTrialTests
-			return super.getAsserts(type, thisAsserts + 2);
+			return super.getAsserts(type, thisAsserts + 3);
 		} else {
 			return super.getAsserts(type, thisAsserts);
 		}
@@ -158,7 +161,7 @@ public class AssertionProcessorTrial extends SourceFileCountingTrial implements 
 		if (type.isFromMetaWithCoverage()) {
 			//code coverage and circular dependencies +
 			//custom afterTrialTests
-			return super.getUniqueAsserts(type, thisUniqueAsserts + 2);
+			return super.getUniqueAsserts(type, thisUniqueAsserts + 3);
 		}  else {
 			return super.getAsserts(type, thisUniqueAsserts);
 		}

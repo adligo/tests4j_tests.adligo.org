@@ -23,7 +23,7 @@ import org.adligo.tests4j_tests.run.helpers.class_loading_mocks.MockInputStream;
 import org.adligo.tests4j_tests.run.helpers.class_loading_mocks.MockWithNothing;
 
 @SourceFileScope (sourceClass=CachedClassBytesClassLoader.class, 
-	minCoverage=77.0, allowedCircularDependencies=CircularDependencies.AllowInnerOuterClasses)
+	minCoverage=76.0, allowedCircularDependencies=CircularDependencies.AllowInnerOuterClasses)
 public class CachedClassBytesClassLoaderTrial extends SourceFileCountingTrial {
 	private static final String MOCK_PACKAGE_NAME = MockWithNothing.class.getPackage().getName();
 	

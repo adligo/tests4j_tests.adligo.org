@@ -8,7 +8,7 @@ import org.adligo.tests4j.models.shared.trials.Test;
 import org.adligo.tests4j_tests.base_trials.I_CountType;
 import org.adligo.tests4j_tests.base_trials.SourceFileCountingTrial;
 
-@SourceFileScope (sourceClass=TrialType.class, minCoverage=95.0)
+@SourceFileScope (sourceClass=TrialType.class, minCoverage=94.0)
 @AllowedDependencies (groups=Tests4J_Common_DependencyGroup.class)
 public class TrialTypeTrial extends SourceFileCountingTrial {
 

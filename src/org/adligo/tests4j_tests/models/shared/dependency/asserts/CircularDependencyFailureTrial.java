@@ -14,7 +14,7 @@ import org.adligo.tests4j.models.shared.trials.Test;
 import org.adligo.tests4j_tests.base_trials.I_CountType;
 import org.adligo.tests4j_tests.base_trials.SourceFileCountingTrial;
 
-@SourceFileScope (sourceClass=CircularDependencyFailureMutant.class, minCoverage=65.0)
+@SourceFileScope (sourceClass=CircularDependencyFailureMutant.class, minCoverage=64.0)
 public class CircularDependencyFailureTrial extends SourceFileCountingTrial {
 
 	@Test

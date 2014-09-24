@@ -4,12 +4,15 @@ import org.adligo.tests4j.models.shared.asserts.line_text.DiffIndexes;
 import org.adligo.tests4j.models.shared.asserts.line_text.DiffIndexesPair;
 import org.adligo.tests4j.models.shared.asserts.line_text.I_DiffIndexes;
 import org.adligo.tests4j.models.shared.asserts.line_text.I_DiffIndexesPair;
+import org.adligo.tests4j.models.shared.dependency_groups.adligo.Tests4J_AssertsLineText_DependencyGroup;
+import org.adligo.tests4j.models.shared.trials.AllowedDependencies;
 import org.adligo.tests4j.models.shared.trials.SourceFileScope;
 import org.adligo.tests4j.models.shared.trials.Test;
 import org.adligo.tests4j_tests.base_trials.I_CountType;
 import org.adligo.tests4j_tests.base_trials.SourceFileCountingTrial;
 
 @SourceFileScope (sourceClass=DiffIndexesPair.class, minCoverage=75.0)
+@AllowedDependencies (groups=Tests4J_AssertsLineText_DependencyGroup.class)
 public class DiffIndexesPairTrial extends SourceFileCountingTrial {
 
 	
@@ -981,20 +984,22 @@ public class DiffIndexesPairTrial extends SourceFileCountingTrial {
 
 	@Override
 	public int getAsserts(I_CountType type) {
+		int asserts = 440;
 		if (type.isFromMetaWithCoverage()) {
 			//code coverage and circular dependencies
-			return super.getAsserts(type,442);
+			return super.getAsserts(type, asserts + 3);
 		} else {
-			return super.getAsserts(type, 440);
+			return super.getAsserts(type, asserts);
 		}
 	}
 
 	@Override
 	public int getUniqueAsserts(I_CountType type) {
+		int uasserts = 276;
 		if (type.isFromMetaWithCoverage()) {
-			return super.getUniqueAsserts(type, 278);
+			return super.getUniqueAsserts(type, uasserts + 3);
 		} else {
-			return super.getUniqueAsserts(type, 276);
+			return super.getUniqueAsserts(type, uasserts);
 		}
 	}
 }

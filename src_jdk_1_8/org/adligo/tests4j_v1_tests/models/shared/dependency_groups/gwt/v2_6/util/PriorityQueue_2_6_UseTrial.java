@@ -15,7 +15,7 @@ import org.adligo.tests4j.models.shared.trials.Test;
 import org.adligo.tests4j_tests.base_trials.I_CountType;
 import org.adligo.tests4j_tests.base_trials.SourceFileCountingTrial;
 
-@SourceFileScope (sourceClass=PriorityQueue_2_6_MockUse.class, minCoverage=99.0)
+@SourceFileScope (sourceClass=PriorityQueue_2_6_MockUse.class, minCoverage=98.0)
 public class PriorityQueue_2_6_UseTrial extends SourceFileCountingTrial {
 
 	@Test

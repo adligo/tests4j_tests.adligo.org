@@ -75,4 +75,9 @@ public class SystemRunnerMock implements I_System {
 		return "";
 	}
 
+	@Override
+	public boolean isMainSystem() {
+		return false;
+	}
+
 }

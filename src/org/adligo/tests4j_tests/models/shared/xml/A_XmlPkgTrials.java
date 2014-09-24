@@ -34,6 +34,10 @@ implements I_MetaTrialParams<A_XmlPkgTrials>, I_CountingPackageTrials {
 	}
 
 	public void addTrials() throws Exception {
+		add(I_XML_ConsumerTrial.class);
+		add(I_XML_BuilderTrial.class);
+		add(I_XML_ProducerTrial.class);
+		
 		add(XML_BuilderTrial.class);
 		add(XML_CharsTrial.class);
 		add(XML_ParserTrial.class);

@@ -3,12 +3,15 @@ package org.adligo.tests4j_tests.models.shared.asserts.common;
 import org.adligo.tests4j.models.shared.asserts.common.ExpectedThrownData;
 import org.adligo.tests4j.models.shared.asserts.common.I_ExpectedThrownData;
 import org.adligo.tests4j.models.shared.asserts.common.I_Thrower;
+import org.adligo.tests4j.models.shared.dependency_groups.adligo.Tests4J_AssertsCommon_DependencyGroup;
+import org.adligo.tests4j.models.shared.trials.AllowedDependencies;
 import org.adligo.tests4j.models.shared.trials.SourceFileScope;
 import org.adligo.tests4j.models.shared.trials.Test;
 import org.adligo.tests4j_tests.base_trials.I_CountType;
 import org.adligo.tests4j_tests.base_trials.SourceFileCountingTrial;
 
 @SourceFileScope (sourceClass=ExpectedThrownData.class, minCoverage=70.0)
+@AllowedDependencies (groups=Tests4J_AssertsCommon_DependencyGroup.class)
 public class ExpectedThrownDataTrial extends SourceFileCountingTrial {
 
 	@Test
@@ -155,20 +158,22 @@ public class ExpectedThrownDataTrial extends SourceFileCountingTrial {
 
 	@Override
 	public int getAsserts(I_CountType type) {
+		int asserts = 44;
 		if (type.isFromMetaWithCoverage()) {
 			//code coverage and circular dependencies
-			return super.getAsserts(type,46);
+			return super.getAsserts(type,asserts + 3);
 		} else {
-			return super.getAsserts(type, 44);
+			return super.getAsserts(type, asserts);
 		}
 	}
 
 	@Override
 	public int getUniqueAsserts(I_CountType type) {
+		int uasserts = 20;
 		if (type.isFromMetaWithCoverage()) {
-			return super.getUniqueAsserts(type, 22);
+			return super.getUniqueAsserts(type, uasserts + 3);
 		} else {
-			return super.getUniqueAsserts(type, 20);
+			return super.getUniqueAsserts(type, uasserts);
 		}
 	}
 }

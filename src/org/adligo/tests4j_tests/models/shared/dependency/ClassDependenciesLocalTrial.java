@@ -14,7 +14,7 @@ import org.adligo.tests4j.models.shared.trials.Test;
 import org.adligo.tests4j_tests.base_trials.I_CountType;
 import org.adligo.tests4j_tests.base_trials.SourceFileCountingTrial;
 
-@SourceFileScope (sourceClass=ClassDependenciesLocalMutant.class, minCoverage=26.0)
+@SourceFileScope (sourceClass=ClassDependenciesLocalMutant.class, minCoverage=25.0)
 public class ClassDependenciesLocalTrial extends SourceFileCountingTrial {
 
 	@Test

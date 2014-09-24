@@ -4,13 +4,16 @@ import org.adligo.tests4j.models.shared.asserts.AbstractAssertCommand;
 import org.adligo.tests4j.models.shared.asserts.common.AssertType;
 import org.adligo.tests4j.models.shared.asserts.common.ExpectedThrownData;
 import org.adligo.tests4j.models.shared.asserts.common.I_Thrower;
+import org.adligo.tests4j.models.shared.dependency_groups.adligo.Tests4J_Asserts_DependencyGroup;
+import org.adligo.tests4j.models.shared.trials.AllowedDependencies;
 import org.adligo.tests4j.models.shared.trials.SourceFileScope;
 import org.adligo.tests4j.models.shared.trials.Test;
 import org.adligo.tests4j_tests.base_trials.I_CountType;
 import org.adligo.tests4j_tests.base_trials.SourceFileCountingTrial;
 import org.adligo.tests4j_tests.models.shared.asserts.mocks.ExtendedAssertCommand;
 
-@SourceFileScope (sourceClass=AbstractAssertCommand.class, minCoverage=78.0)
+@SourceFileScope (sourceClass=AbstractAssertCommand.class, minCoverage=77.0)
+@AllowedDependencies (groups=Tests4J_Asserts_DependencyGroup.class)
 public class AbstractAssertCommandTrial extends SourceFileCountingTrial {
 
 	@Test
@@ -87,7 +90,7 @@ public class AbstractAssertCommandTrial extends SourceFileCountingTrial {
 		if (type.isFromMetaWithCoverage()) {
 			//code coverage and circular dependencies +
 			//custom afterTrialTests
-			return super.getAsserts(type, thisAsserts + 2);
+			return super.getAsserts(type, thisAsserts + 3);
 		} else {
 			return super.getAsserts(type, thisAsserts);
 		}
@@ -99,7 +102,7 @@ public class AbstractAssertCommandTrial extends SourceFileCountingTrial {
 		if (type.isFromMetaWithCoverage()) {
 			//code coverage and circular dependencies +
 			//custom afterTrialTests
-			return super.getUniqueAsserts(type, thisUniqueAsserts + 2);
+			return super.getUniqueAsserts(type, thisUniqueAsserts + 3);
 		}  else {
 			return super.getAsserts(type, thisUniqueAsserts);
 		}

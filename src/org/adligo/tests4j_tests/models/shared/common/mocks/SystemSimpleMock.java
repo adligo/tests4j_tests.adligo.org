@@ -10,6 +10,7 @@ public class SystemSimpleMock implements I_System {
 	private int lastSystemExit;
 	private long nextTime;
 	private String nextLineSeperator;
+	private boolean nextMainSystem = false;
 	
 	@Override
 	public void println(String p) {
@@ -61,6 +62,11 @@ public class SystemSimpleMock implements I_System {
 	@Override
 	public String getJseVersion() {
 		return "";
+	}
+
+	@Override
+	public boolean isMainSystem() {
+		return nextMainSystem;
 	}
 
 }

@@ -3,22 +3,26 @@ package org.adligo.tests4j_tests;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 
 import org.adligo.tests4j.models.shared.common.TrialType;
+import org.adligo.tests4j.models.shared.coverage.I_PackageCoverage;
 import org.adligo.tests4j.models.shared.metadata.I_TrialMetadata;
 import org.adligo.tests4j.models.shared.metadata.I_TrialRunMetadata;
 import org.adligo.tests4j.models.shared.results.I_TrialRunResult;
 import org.adligo.tests4j.models.shared.trials.AbstractTrial;
 import org.adligo.tests4j.models.shared.trials.I_MetaTrial;
 import org.adligo.tests4j.models.shared.trials.TrialTypeAnnotation;
-import org.adligo.tests4j.run.discovery.RelevantClassesWithTrialsCalculator;
+import org.adligo.tests4j.run.discovery.ClassesWithSourceFileTrialsCalculator;
+import org.adligo.tests4j.shared.output.I_Tests4J_Log;
 
 @TrialTypeAnnotation (type=TrialType.META_TRIAL_TYPE)
 public class TheMetaTrial  extends AbstractTrial implements I_MetaTrial {
-	private static final int TESTS = 1657;
-	private static final int TRIALS = 270;
-	private RelevantClassesWithTrialsCalculator calculator;
-	
+	private static final int TESTS = 1702;
+	private static final int TRIALS = 283;
+	private ClassesWithSourceFileTrialsCalculator calculator_;
+	private I_TrialRunResult results_;
+	private I_Tests4J_Log log_;
 	//hmm package comparison data to include;
 	// passing tests
 	// relevant classes with trials %
@@ -29,17 +33,17 @@ public class TheMetaTrial  extends AbstractTrial implements I_MetaTrial {
 
 	@Override
 	public void afterMetadataCalculated(I_TrialRunMetadata metadata) throws Exception {
-		calculator = new RelevantClassesWithTrialsCalculator(metadata);
+		calculator_ = new ClassesWithSourceFileTrialsCalculator(metadata);
 		
-		assertGreaterThanOrEquals(30.0, calculator.getPct());
-		//this assert is also for the child-packages;
-		assertGreaterThanOrEquals(100.0, calculator.getPct("org.adligo.tests4j.models.shared.asserts"));
-		assertGreaterThanOrEquals(100.0, calculator.getPct("org.adligo.tests4j.models.shared.asserts.common"));
-		assertGreaterThanOrEquals(100.0, calculator.getPct("org.adligo.tests4j.models.shared.asserts.line_text"));
-		assertGreaterThanOrEquals(100.0, calculator.getPct("org.adligo.tests4j.models.shared.common"));
-		assertGreaterThanOrEquals(100.0, calculator.getPct("org.adligo.tests4j.models.shared.en"));
-		assertGreaterThanOrEquals(100.0, calculator.getPct("org.adligo.tests4j.models.shared.metadata"));
-		assertGreaterThanOrEquals(100.0, calculator.getPct("org.adligo.tests4j.models.shared.xml"));
+		log_ = super.getLog();
+		if (calculator_.getPctWithTrialsDouble() <= 28.0) {
+			Set<String> classes = calculator_.getClassesWithOutTrials();
+			log_.log("The following source files do NOT have a associated SourceFileTrial.");
+			for (String className: classes) {
+				log_.log(className);
+			}
+		}
+		assertGreaterThanOrEquals(28.0, calculator_.getPctWithTrialsDouble());
 		
 		// includes this
 		List<? extends I_TrialMetadata> trialMetadata = metadata.getAllTrialMetadata();
@@ -63,8 +67,90 @@ public class TheMetaTrial  extends AbstractTrial implements I_MetaTrial {
 		assertEquals(TESTS,  metadata.getAllTestsCount());
 	}
 
+	public void assertCoverageMatrix() {
+		assertCoverageMatrix("org.adligo.tests4j.models.shared.i18n",
+				100.0, 100.0);
+		assertCoverageMatrix("org.adligo.tests4j.models.shared.en",
+				100.0, 100.0);
+		assertCoverageMatrix("org.adligo.tests4j.models.shared.common",
+				60.0, 83.0);
+		assertCoverageMatrix("org.adligo.tests4j.models.shared.xml",
+				100.0, 92.0);
+		assertCoverageMatrix("org.adligo.tests4j.models.shared.asserts.common",
+				13.0, 86.0);
+		assertCoverageMatrix("org.adligo.tests4j.models.shared.asserts.line_text",
+				60.0, 88.0);
+		assertCoverageMatrix("org.adligo.tests4j.models.shared.asserts.uniform",
+				40.0, 93.0);
+		assertCoverageMatrix("org.adligo.tests4j.models.shared.asserts",
+				100.0, 83.0);
+		/*
+		if (results.hasCoverage()) {
+			results.getCoverage();
+			assertGreaterThanOrEquals(100.0, );
+		}
+		assertGreaterThanOrEquals(100.0, calculator.getPctWithTrials("org.adligo.tests4j.models.shared.en"));
+		assertGreaterThanOrEquals(100.0, calculator.getPctWithTrials("org.adligo.tests4j.models.shared.asserts"));
+		assertGreaterThanOrEquals(100.0, calculator.getPctWithTrials("org.adligo.tests4j.models.shared.asserts.common"));
+		assertGreaterThanOrEquals(100.0, calculator.getPctWithTrials("org.adligo.tests4j.models.shared.asserts.line_text"));
+		assertGreaterThanOrEquals(100.0, calculator.getPctWithTrials("org.adligo.tests4j.models.shared.common"));
+		
+		assertGreaterThanOrEquals(100.0, calculator.getPctWithTrials("org.adligo.tests4j.models.shared.metadata"));
+		assertGreaterThanOrEquals(100.0, calculator.getPctWithTrials("org.adligo.tests4j.models.shared.xml"));
+		*/
+	}
+
+	private void assertCoverageMatrix(String pkgName, double minPctSourceTrials, double minPctCoverage) {
+		double pctWithTrials = calculator_.getPctWithTrialsDouble(pkgName);
+		if (pctWithTrials < minPctSourceTrials) {
+			
+			StringBuilder sb = new StringBuilder("The following package;" + System.lineSeparator() + 
+					pkgName + System.lineSeparator() + 
+					" is missing the following source file trials " + 
+					System.lineSeparator());
+			Set<String> sfns = calculator_.getClassesWithOutTrials(pkgName);
+			for (String sfn: sfns) {
+				sb.append(sfn);
+				sb.append(System.lineSeparator());
+			}
+			assertGreaterThanOrEquals(sb.toString(), minPctSourceTrials, 
+					pctWithTrials);
+				
+		}
+		
+		if (results_.hasCoverage()) {
+			I_PackageCoverage cover =  getCoverage(pkgName, results_.getCoverage());
+			assertNotNull("The following package didn't have code coverage and should;" +
+					System.lineSeparator() + pkgName,
+					cover);
+			assertGreaterThanOrEquals("The following package didn't have enough code coverage;" +
+				System.lineSeparator() + pkgName, minPctCoverage, cover.getPercentageCoveredDouble());
+			
+			
+		}
+	}
+	
+	
+	private I_PackageCoverage getCoverage(String packageName, List<I_PackageCoverage> coverages) {
+		for (I_PackageCoverage pc: coverages) {
+			if (packageName.equals(pc.getPackageName())) {
+				return pc;
+			}
+		}
+		for (I_PackageCoverage pc: coverages) {
+			if (packageName.contains(pc.getPackageName())) {
+				return getCoverage(packageName, pc.getChildPackageCoverage());
+			} 
+		}
+		return null;
+	}
+	
 	@Override
 	public void afterNonMetaTrialsRun(I_TrialRunResult results) throws Exception {
+		//this assert is also for the child-packages;
+		results_ = results;
+		assertCoverageMatrix();
+		
 		//allow to run with out coverage plugin,
 		//you may want to require this for your project.
 		if (results.hasCoverage()) {
@@ -74,7 +160,7 @@ public class TheMetaTrial  extends AbstractTrial implements I_MetaTrial {
 			// it was at 76% ug, then I added some tests 
 			// and it dropped to 62% hmm
 			assertGreaterThanOrEquals(63.0, actual);
-		}
+		}	
 		//TODO
 		//assertEquals(1,results.getTrialsIgnored());
 		assertEquals(0,results.getTestsIgnored());

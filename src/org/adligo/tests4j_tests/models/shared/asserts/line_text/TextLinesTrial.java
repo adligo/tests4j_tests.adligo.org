@@ -1,12 +1,15 @@
 package org.adligo.tests4j_tests.models.shared.asserts.line_text;
 
 import org.adligo.tests4j.models.shared.asserts.line_text.TextLines;
+import org.adligo.tests4j.models.shared.dependency_groups.adligo.Tests4J_AssertsLineText_DependencyGroup;
+import org.adligo.tests4j.models.shared.trials.AllowedDependencies;
 import org.adligo.tests4j.models.shared.trials.SourceFileScope;
 import org.adligo.tests4j.models.shared.trials.Test;
 import org.adligo.tests4j_tests.base_trials.I_CountType;
 import org.adligo.tests4j_tests.base_trials.SourceFileCountingTrial;
 
 @SourceFileScope (sourceClass=TextLines.class,minCoverage=97.0)
+@AllowedDependencies (groups=Tests4J_AssertsLineText_DependencyGroup.class)
 public class TextLinesTrial extends SourceFileCountingTrial {
 
 	
@@ -89,20 +92,22 @@ public class TextLinesTrial extends SourceFileCountingTrial {
 	
 	@Override
 	public int getAsserts(I_CountType type) {
+		int asserts = 30;
 		if (type.isFromMetaWithCoverage()) {
 			//code coverage and circular dependencies
-			return super.getAsserts(type,32);
+			return super.getAsserts(type, asserts + 3);
 		} else {
-			return super.getAsserts(type, 30);
+			return super.getAsserts(type, asserts);
 		}
 	}
 
 	@Override
 	public int getUniqueAsserts(I_CountType type) {
+		int uasserts = 17;
 		if (type.isFromMetaWithCoverage()) {
-			return super.getUniqueAsserts(type, 19);
+			return super.getUniqueAsserts(type, uasserts + 3);
 		} else {
-			return super.getUniqueAsserts(type, 17);
+			return super.getUniqueAsserts(type, uasserts);
 		}
 	}
 }

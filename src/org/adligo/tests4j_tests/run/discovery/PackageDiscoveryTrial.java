@@ -40,6 +40,7 @@ import org.adligo.tests4j.models.shared.trials.I_SourceFileTrial;
 import org.adligo.tests4j.models.shared.trials.I_SubProgress;
 import org.adligo.tests4j.models.shared.trials.I_Trial;
 import org.adligo.tests4j.models.shared.trials.I_TrialBindings;
+import org.adligo.tests4j.models.shared.trials.I_TrialParamValue;
 import org.adligo.tests4j.models.shared.trials.I_TrialParams;
 import org.adligo.tests4j.models.shared.trials.I_TrialParamsAware;
 import org.adligo.tests4j.models.shared.trials.I_TrialParamsFactory;
@@ -55,6 +56,10 @@ import org.adligo.tests4j.models.shared.trials.TargetedPlatform;
 import org.adligo.tests4j.models.shared.trials.Test;
 import org.adligo.tests4j.models.shared.trials.TrialBindings;
 import org.adligo.tests4j.models.shared.trials.TrialDelegate;
+import org.adligo.tests4j.models.shared.trials.TrialParamValue;
+import org.adligo.tests4j.models.shared.trials.TrialParamValue_XML_Consumer;
+import org.adligo.tests4j.models.shared.trials.TrialParams;
+import org.adligo.tests4j.models.shared.trials.TrialParamsMutant;
 import org.adligo.tests4j.models.shared.trials.TrialRecursion;
 import org.adligo.tests4j.models.shared.trials.TrialTimeout;
 import org.adligo.tests4j.models.shared.trials.TrialTypeAnnotation;
@@ -67,7 +72,7 @@ import org.adligo.tests4j.run.discovery.I_TrialDescription;
 import org.adligo.tests4j.run.discovery.I_TrialStateNameIdKey;
 import org.adligo.tests4j.run.discovery.NonTests4jMethodDiscovery;
 import org.adligo.tests4j.run.discovery.PackageDiscovery;
-import org.adligo.tests4j.run.discovery.RelevantClassesWithTrialsCalculator;
+import org.adligo.tests4j.run.discovery.ClassesWithSourceFileTrialsCalculator;
 import org.adligo.tests4j.run.discovery.TestAuditor;
 import org.adligo.tests4j.run.discovery.TestDescription;
 import org.adligo.tests4j.run.discovery.Tests4J_ParamsReader;
@@ -86,10 +91,10 @@ import org.adligo.tests4j_tests.base_trials.I_CountType;
 import org.adligo.tests4j_tests.base_trials.SourceFileCountingTrial;
 import org.adligo.tests4j_tests.run.discovery.package_discovery_inner_mocks.TwoNestedRunnables;
 
-@SourceFileScope (sourceClass=PackageDiscovery.class, minCoverage=51.0)
+@SourceFileScope (sourceClass=PackageDiscovery.class, minCoverage=50.0)
 public class PackageDiscoveryTrial extends SourceFileCountingTrial {
 
-	private static final int ASSERT_COUNT = 106;
+	private static final int ASSERT_COUNT = 111;
 
 	@Test
 	public void testDiscoveryPackage() throws Exception {
@@ -108,7 +113,7 @@ public class PackageDiscoveryTrial extends SourceFileCountingTrial {
 		assertContains(clazzNames, NonTests4jMethodDiscovery.class.getName());
 		assertContains(clazzNames, PackageDiscovery.class.getName());
 
-		assertContains(clazzNames, RelevantClassesWithTrialsCalculator.class.getName());
+		assertContains(clazzNames, ClassesWithSourceFileTrialsCalculator.class.getName());
 		
 		assertContains(clazzNames, TestAuditor.class.getName());
 		assertContains(clazzNames, TestDescription.class.getName());
@@ -193,6 +198,7 @@ public class PackageDiscoveryTrial extends SourceFileCountingTrial {
 		assertContains(classNames, I_MetaTrialParamsAware.class.getName());
 		
 		assertContains(classNames, I_TrialParams.class.getName());
+		assertContains(classNames, I_TrialParamValue.class.getName());
 		assertContains(classNames, I_TrialParamsAware.class.getName());
 		assertContains(classNames, I_TrialParamsFactory.class.getName());
 		
@@ -219,12 +225,17 @@ public class PackageDiscoveryTrial extends SourceFileCountingTrial {
 		
 		assertContains(classNames, TrialTimeout.class.getName());
 		assertContains(classNames, TrialTypeAnnotation.class.getName());
+		
+		assertContains(classNames, TrialParams.class.getName());
+		assertContains(classNames, TrialParamsMutant.class.getName());
+		assertContains(classNames, TrialParamValue.class.getName());
+		assertContains(classNames, TrialParamValue_XML_Consumer.class.getName());
 		assertContains(classNames, TrialRecursion.class.getName());
 		
 		assertContains(classNames, UseCaseScope.class.getName());
 		assertContains(classNames, UseCaseTrial.class.getName());
 		
-		assertEquals(41, classNames.size());
+		assertEquals(46, classNames.size());
 		List<PackageDiscovery> children =  cd.getSubPackages();
 		
 		

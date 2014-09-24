@@ -16,7 +16,7 @@ import org.adligo.tests4j.models.shared.trials.Test;
 import org.adligo.tests4j_tests.base_trials.I_CountType;
 import org.adligo.tests4j_tests.base_trials.SourceFileCountingTrial;
 
-@SourceFileScope (sourceClass=GWT_2_6_Math.class)
+@SourceFileScope (sourceClass=GWT_2_6_Math.class, minCoverage=99.0)
 public class GWT_2_6_MathTrial extends SourceFileCountingTrial {
 
 	private GWT_2_6_MathDelegates delegates;
