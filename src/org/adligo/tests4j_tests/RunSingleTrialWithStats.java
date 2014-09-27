@@ -1,12 +1,13 @@
 package org.adligo.tests4j_tests;
 
-import org.adligo.tests4j.models.shared.system.Tests4J_Params;
 import org.adligo.tests4j.models.shared.trials.I_MetaTrialParams;
 import org.adligo.tests4j.run.Tests4J;
+import org.adligo.tests4j.system.shared.Tests4J_Params;
 import org.adligo.tests4j_4jacoco.plugin.CoveragePluginFactory;
 import org.adligo.tests4j_tests.base_trials.I_CountingPackageTrials;
 import org.adligo.tests4j_tests.base_trials.SimpleMetaTrial;
 import org.adligo.tests4j_tests.base_trials.SimplePackageTrials;
+import org.adligo.tests4j_tests.shared.asserts.common.I_AssertCommandTrial;
 import org.adligo.tests4j_tests.shared.common.ClassMethodsTrial;
 import org.adligo.tests4j_tests.shared.common.DefaultSystemTrial;
 import org.adligo.tests4j_tests.shared.common.I_ImmutableTrial;
@@ -42,7 +43,7 @@ implements I_MetaTrialParams<RunSingleTrialWithStats>, I_CountingPackageTrials {
 	public void addTrials() throws Exception {
 		//add(ClassMethodsTrial.class);
 		//add(DefaultSystemTrial.class);
-		add(I_PlatformContainerTrial.class);
+		add(I_AssertCommandTrial.class);
 	}
 	
 	@Override

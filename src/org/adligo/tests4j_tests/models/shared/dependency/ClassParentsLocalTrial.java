@@ -6,11 +6,13 @@ import org.adligo.tests4j.models.shared.dependency.ClassParentsLocal;
 import org.adligo.tests4j.models.shared.dependency.ClassParentsLocalMutant;
 import org.adligo.tests4j.models.shared.dependency.I_ClassParents;
 import org.adligo.tests4j.models.shared.dependency.I_ClassParentsLocal;
-import org.adligo.tests4j.models.shared.trials.CircularDependencies;
+import org.adligo.tests4j.models.shared.dependency_groups.adligo.Tests4J_Dependency_DependencyGroup;
 import org.adligo.tests4j.models.shared.trials.SourceFileScope;
 import org.adligo.tests4j.models.shared.trials.Test;
 import org.adligo.tests4j.shared.asserts.common.ExpectedThrownData;
 import org.adligo.tests4j.shared.asserts.common.I_Thrower;
+import org.adligo.tests4j.shared.asserts.dependency.AllowedDependencies;
+import org.adligo.tests4j.shared.asserts.dependency.CircularDependencies;
 import org.adligo.tests4j_tests.base_trials.I_CountType;
 import org.adligo.tests4j_tests.base_trials.SourceFileCountingTrial;
 import org.adligo.tests4j_tests.run.helpers.class_loading_mocks.MockI_GetAndSetLong;
@@ -21,6 +23,7 @@ import org.adligo.tests4j_tests.run.helpers.class_loading_mocks.MockWithNothing;
 
 @SourceFileScope (sourceClass=ClassParentsLocal.class, minCoverage=80.0,
 	allowedCircularDependencies=CircularDependencies.AllowInPackage)
+@AllowedDependencies (groups=Tests4J_Dependency_DependencyGroup.class)
 public class ClassParentsLocalTrial extends SourceFileCountingTrial {
 	
 	
@@ -245,7 +248,7 @@ public class ClassParentsLocalTrial extends SourceFileCountingTrial {
 		//code coverage and circular dependencies +
 		//custom afterTrialTests
 		//+ see above
-		int thisAfterAsserts = 2;
+		int thisAfterAsserts = 3;
 		if (type.isFromMetaWithCoverage()) {
 			return super.getAsserts(type, thisAsserts + thisAfterAsserts);
 		} else {
@@ -259,7 +262,7 @@ public class ClassParentsLocalTrial extends SourceFileCountingTrial {
 		//code coverage and circular dependencies +
 		//custom afterTrialTests
 		//+ see above
-		int thisAfterUniqueAsserts = 2;
+		int thisAfterUniqueAsserts = 3;
 		if (type.isFromMetaWithCoverage()) {
 			//code coverage and circular dependencies +
 			//custom afterTrialTests

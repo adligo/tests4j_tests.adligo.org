@@ -1,20 +1,20 @@
 package org.adligo.tests4j_v1_tests.models.shared.dependency_groups.jse.v1_8;
 
-import org.adligo.tests4j.models.shared.system.Tests4J_Params;
 import org.adligo.tests4j.models.shared.trials.I_MetaTrialParams;
 import org.adligo.tests4j.run.Tests4J;
+import org.adligo.tests4j.system.shared.Tests4J_Params;
 import org.adligo.tests4j_4jacoco.plugin.CoveragePluginFactory;
 import org.adligo.tests4j_tests.base_trials.I_CountingPackageTrials;
 import org.adligo.tests4j_tests.base_trials.SimpleMetaTrial;
 import org.adligo.tests4j_tests.base_trials.SimplePackageTrials;
-import org.adligo.tests4j_v1_tests.models.shared.dependency_groups.jse.v1_6.JSE_1_6_LangTrial;
-import org.adligo.tests4j_v1_tests.models.shared.dependency_groups.jse.v1_7.JSE_1_7_IOTrial;
-import org.adligo.tests4j_v1_tests.models.shared.dependency_groups.jse.v1_7.JSE_1_7_LangAnnotTrial;
-import org.adligo.tests4j_v1_tests.models.shared.dependency_groups.jse.v1_7.JSE_1_7_LangTrial;
-import org.adligo.tests4j_v1_tests.models.shared.dependency_groups.jse.v1_7.JSE_1_7_LogTrial;
-import org.adligo.tests4j_v1_tests.models.shared.dependency_groups.jse.v1_7.JSE_1_7_MathTrial;
-import org.adligo.tests4j_v1_tests.models.shared.dependency_groups.jse.v1_7.JSE_1_7_SqlTrial;
-import org.adligo.tests4j_v1_tests.models.shared.dependency_groups.jse.v1_7.JSE_1_7_UtilTrial;
+import org.adligo.tests4j_v1_tests.models.shared.dependency_groups.jse.v1_6.I_JSE_1_6_LangTrial;
+import org.adligo.tests4j_v1_tests.models.shared.dependency_groups.jse.v1_7.I_JSE_1_7_IOTrial;
+import org.adligo.tests4j_v1_tests.models.shared.dependency_groups.jse.v1_7.I_JSE_1_7_LangAnnotTrial;
+import org.adligo.tests4j_v1_tests.models.shared.dependency_groups.jse.v1_7.I_JSE_1_7_LangTrial;
+import org.adligo.tests4j_v1_tests.models.shared.dependency_groups.jse.v1_7.I_JSE_1_7_LogTrial;
+import org.adligo.tests4j_v1_tests.models.shared.dependency_groups.jse.v1_7.I_JSE_1_7_MathTrial;
+import org.adligo.tests4j_v1_tests.models.shared.dependency_groups.jse.v1_7.I_JSE_1_7_SqlTrial;
+import org.adligo.tests4j_v1_tests.models.shared.dependency_groups.jse.v1_7.I_JSE_1_7_UtilTrial;
 
 public class A_DGroups_JSE_1_8_PkgTrials extends SimplePackageTrials 
 implements I_MetaTrialParams<A_DGroups_JSE_1_8_PkgTrials>, I_CountingPackageTrials {

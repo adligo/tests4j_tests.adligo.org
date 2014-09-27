@@ -2,8 +2,6 @@ package org.adligo.tests4j_tests.jacoco.api_trials.dependency_trials;
 
 import java.util.List;
 
-import org.adligo.tests4j.models.shared.dependency.MethodSignature;
-import org.adligo.tests4j.models.shared.dependency.asserts.AllowedDependencyFailure;
 import org.adligo.tests4j.models.shared.metadata.I_TestMetadata;
 import org.adligo.tests4j.models.shared.metadata.I_TrialMetadata;
 import org.adligo.tests4j.models.shared.metadata.I_TrialRunMetadata;
@@ -15,6 +13,8 @@ import org.adligo.tests4j.models.shared.trials.I_SourceFileTrial;
 import org.adligo.tests4j.shared.asserts.common.AssertType;
 import org.adligo.tests4j.shared.asserts.common.I_Asserts;
 import org.adligo.tests4j.shared.asserts.common.I_TestFailure;
+import org.adligo.tests4j.shared.asserts.dependency.AllowedDependencyFailure;
+import org.adligo.tests4j.shared.asserts.dependency.MethodSignature;
 import org.adligo.tests4j.shared.common.ClassMethods;
 import org.adligo.tests4j.shared.en.Tests4J_EnglishConstants;
 import org.adligo.tests4j.shared.i18n.I_Tests4J_ResultMessages;

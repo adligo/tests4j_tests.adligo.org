@@ -24,13 +24,10 @@ import org.adligo.tests4j.models.shared.metadata.UseCaseMetadata;
 import org.adligo.tests4j.models.shared.trials.AbstractTrial;
 import org.adligo.tests4j.models.shared.trials.AdditionalInstrumentation;
 import org.adligo.tests4j.models.shared.trials.AfterTrial;
-import org.adligo.tests4j.models.shared.trials.AllowedDependencies;
 import org.adligo.tests4j.models.shared.trials.ApiTrial;
 import org.adligo.tests4j.models.shared.trials.BeforeTrial;
-import org.adligo.tests4j.models.shared.trials.CircularDependencies;
 import org.adligo.tests4j.models.shared.trials.I_AbstractTrial;
 import org.adligo.tests4j.models.shared.trials.I_ApiTrial;
-import org.adligo.tests4j.models.shared.trials.I_CircularDependencies;
 import org.adligo.tests4j.models.shared.trials.I_MetaTrial;
 import org.adligo.tests4j.models.shared.trials.I_MetaTrialInputData;
 import org.adligo.tests4j.models.shared.trials.I_MetaTrialParams;
@@ -82,6 +79,9 @@ import org.adligo.tests4j.run.discovery.TrialQueueDecisionTree;
 import org.adligo.tests4j.run.discovery.TrialState;
 import org.adligo.tests4j.run.discovery.TrialStateNameIdKey;
 import org.adligo.tests4j.run.discovery.TrialTypeFinder;
+import org.adligo.tests4j.shared.asserts.dependency.AllowedDependencies;
+import org.adligo.tests4j.shared.asserts.dependency.CircularDependencies;
+import org.adligo.tests4j.shared.asserts.dependency.I_CircularDependencies;
 import org.adligo.tests4j_4jacoco.plugin.CoveragePlugin;
 import org.adligo.tests4j_4jacoco.plugin.CoveragePluginFactory;
 import org.adligo.tests4j_4jacoco.plugin.CoveragePluginMemory;
@@ -94,7 +94,7 @@ import org.adligo.tests4j_tests.run.discovery.package_discovery_inner_mocks.TwoN
 @SourceFileScope (sourceClass=PackageDiscovery.class, minCoverage=50.0)
 public class PackageDiscoveryTrial extends SourceFileCountingTrial {
 
-	private static final int ASSERT_COUNT = 111;
+	private static final int ASSERT_COUNT = 109;
 
 	@Test
 	public void testDiscoveryPackage() throws Exception {
@@ -177,19 +177,16 @@ public class PackageDiscoveryTrial extends SourceFileCountingTrial {
 	public void testModelsSharedTrials() throws Exception {
 		PackageDiscovery cd = new PackageDiscovery("org.adligo.tests4j.models.shared.trials");
 		List<String> classNames = cd.getClassNames();
-		assertContains(classNames, AllowedDependencies.class.getName());
 		assertContains(classNames, AdditionalInstrumentation.class.getName());
 		assertContains(classNames, AbstractTrial.class.getName());
 		assertContains(classNames, AfterTrial.class.getName());
 		assertContains(classNames, ApiTrial.class.getName());
 		
 		assertContains(classNames, BeforeTrial.class.getName());
-		assertContains(classNames, CircularDependencies.class.getName());
 		
 		
 		assertContains(classNames, I_AbstractTrial.class.getName());
 		assertContains(classNames, I_ApiTrial.class.getName());
-		assertContains(classNames, I_CircularDependencies.class.getName());
 		assertContains(classNames, I_Trial.class.getName());
 		assertContains(classNames, I_TrialBindings.class.getName());
 		
@@ -235,7 +232,7 @@ public class PackageDiscoveryTrial extends SourceFileCountingTrial {
 		assertContains(classNames, UseCaseScope.class.getName());
 		assertContains(classNames, UseCaseTrial.class.getName());
 		
-		assertEquals(46, classNames.size());
+		assertEquals(43, classNames.size());
 		List<PackageDiscovery> children =  cd.getSubPackages();
 		
 		
@@ -272,8 +269,9 @@ public class PackageDiscoveryTrial extends SourceFileCountingTrial {
 		assertContains(childNames, "org.adligo.tests4j.models");
 		assertContains(childNames, "org.adligo.tests4j.run");
 		assertContains(childNames, "org.adligo.tests4j.shared");
+		assertContains(childNames, "org.adligo.tests4j.system");
 		
-		assertEquals(4, children.size());
+		assertEquals(5, children.size());
 	}
 	
 	

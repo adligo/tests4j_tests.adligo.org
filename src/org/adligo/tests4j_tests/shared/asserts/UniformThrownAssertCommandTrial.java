@@ -1,7 +1,6 @@
 package org.adligo.tests4j_tests.shared.asserts;
 
 import org.adligo.tests4j.models.shared.dependency_groups.adligo.Tests4J_Asserts_DependencyGroup;
-import org.adligo.tests4j.models.shared.trials.AllowedDependencies;
 import org.adligo.tests4j.models.shared.trials.SourceFileScope;
 import org.adligo.tests4j.models.shared.trials.Test;
 import org.adligo.tests4j.shared.asserts.UniformThrownAssertCommand;
@@ -11,6 +10,7 @@ import org.adligo.tests4j.shared.asserts.common.I_ExpectedThrownData;
 import org.adligo.tests4j.shared.asserts.common.I_Thrower;
 import org.adligo.tests4j.shared.asserts.common.I_ThrownAssertionData;
 import org.adligo.tests4j.shared.asserts.common.ThrownAssertionData;
+import org.adligo.tests4j.shared.asserts.dependency.AllowedDependencies;
 import org.adligo.tests4j.shared.asserts.uniform.I_Evaluation;
 import org.adligo.tests4j.shared.asserts.uniform.UniformThrownAssertionEvaluator;
 import org.adligo.tests4j.shared.en.Tests4J_EnglishConstants;

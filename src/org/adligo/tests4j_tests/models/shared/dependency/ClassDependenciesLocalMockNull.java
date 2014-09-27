@@ -3,12 +3,12 @@ package org.adligo.tests4j_tests.models.shared.dependency;
 import java.util.List;
 import java.util.Set;
 
-import org.adligo.tests4j.models.shared.dependency.I_ClassAlias;
-import org.adligo.tests4j.models.shared.dependency.I_ClassAliasLocal;
 import org.adligo.tests4j.models.shared.dependency.I_ClassDependenciesLocal;
-import org.adligo.tests4j.models.shared.dependency.I_ClassAttributes;
 import org.adligo.tests4j.models.shared.dependency.I_ClassParents;
 import org.adligo.tests4j.models.shared.dependency.I_ClassParentsLocal;
+import org.adligo.tests4j.shared.asserts.dependency.I_ClassAlias;
+import org.adligo.tests4j.shared.asserts.dependency.I_ClassAliasLocal;
+import org.adligo.tests4j.shared.asserts.dependency.I_ClassAttributes;
 
 public class ClassDependenciesLocalMockNull implements I_ClassDependenciesLocal {
 

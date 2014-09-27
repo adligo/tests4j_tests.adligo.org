@@ -1,10 +1,10 @@
 package org.adligo.tests4j_tests.run.discovery;
 
-import org.adligo.tests4j.models.shared.system.Tests4J_Params;
-import org.adligo.tests4j.models.shared.system.Tests4J_Selection;
 import org.adligo.tests4j.models.shared.trials.SourceFileScope;
 import org.adligo.tests4j.models.shared.trials.Test;
 import org.adligo.tests4j.run.discovery.Tests4J_ParamsReader;
+import org.adligo.tests4j.system.shared.Tests4J_Params;
+import org.adligo.tests4j.system.shared.Tests4J_Selection;
 import org.adligo.tests4j_tests.base_trials.I_CountType;
 import org.adligo.tests4j_tests.base_trials.SourceFileCountingTrial;
 import org.adligo.tests4j_tests.models.shared.system.mocks.Tests4J_LogMock;

@@ -2,16 +2,16 @@ package org.adligo.tests4j_v1_tests.models.shared.dependency_groups.gwt.v2_6;
 
 import java.util.Set;
 
-import org.adligo.tests4j.models.shared.dependency.I_ClassAttributes;
-import org.adligo.tests4j.models.shared.dependency.I_FieldSignature;
-import org.adligo.tests4j.models.shared.dependency.I_MethodSignature;
-import org.adligo.tests4j.models.shared.dependency.MethodSignature;
 import org.adligo.tests4j.models.shared.dependency_groups.gwt.v2_6.GWT_2_6_IO;
 import org.adligo.tests4j.models.shared.dependency_groups.gwt.v2_6.GWT_2_6_Util;
 import org.adligo.tests4j.models.shared.dependency_groups.jse.JSE_Lang;
 import org.adligo.tests4j.models.shared.dependency_groups.jse.JSE_Util;
 import org.adligo.tests4j.models.shared.trials.SourceFileScope;
 import org.adligo.tests4j.models.shared.trials.Test;
+import org.adligo.tests4j.shared.asserts.dependency.I_ClassAttributes;
+import org.adligo.tests4j.shared.asserts.dependency.I_FieldSignature;
+import org.adligo.tests4j.shared.asserts.dependency.I_MethodSignature;
+import org.adligo.tests4j.shared.asserts.dependency.MethodSignature;
 import org.adligo.tests4j.shared.common.ClassMethods;
 import org.adligo.tests4j_tests.base_trials.I_CountType;
 import org.adligo.tests4j_tests.base_trials.SourceFileCountingTrial;

@@ -17,7 +17,7 @@ import org.adligo.tests4j.shared.asserts.line_text.TextLinesCompareResult;
 import org.adligo.tests4j.shared.en.Tests4J_EnglishConstants;
 import org.adligo.tests4j.shared.i18n.I_Tests4J_LineDiffTextDisplayMessages;
 import org.adligo.tests4j.shared.output.I_Tests4J_Log;
-import org.adligo.tests4j.shared.report.summary.LineDiffTextDisplay;
+import org.adligo.tests4j.system.shared.report.summary.LineDiffTextDisplay;
 import org.adligo.tests4j_tests.base_trials.I_CountType;
 import org.adligo.tests4j_tests.base_trials.SourceFileCountingTrial;
 

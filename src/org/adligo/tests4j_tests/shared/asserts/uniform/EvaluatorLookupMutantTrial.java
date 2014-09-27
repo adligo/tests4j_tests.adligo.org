@@ -3,9 +3,9 @@ package org.adligo.tests4j_tests.shared.asserts.uniform;
 import java.util.Map;
 
 import org.adligo.tests4j.models.shared.dependency_groups.adligo.Tests4J_AssertsUniform_DependencyGroup;
-import org.adligo.tests4j.models.shared.trials.AllowedDependencies;
 import org.adligo.tests4j.models.shared.trials.SourceFileScope;
 import org.adligo.tests4j.models.shared.trials.Test;
+import org.adligo.tests4j.shared.asserts.dependency.AllowedDependencies;
 import org.adligo.tests4j.shared.asserts.uniform.EvaluatorLookupMutant;
 import org.adligo.tests4j.shared.asserts.uniform.I_UniformAssertionEvaluator;
 import org.adligo.tests4j.shared.asserts.uniform.I_UniformThrownAssertionEvaluator;

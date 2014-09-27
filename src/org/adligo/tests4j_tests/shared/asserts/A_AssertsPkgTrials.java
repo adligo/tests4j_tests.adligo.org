@@ -1,10 +1,10 @@
 package org.adligo.tests4j_tests.shared.asserts;
 
-import org.adligo.tests4j.models.shared.system.Tests4J_Params;
 import org.adligo.tests4j.models.shared.trials.I_MetaTrialParams;
 import org.adligo.tests4j.run.Tests4J;
-import org.adligo.tests4j.shared.report.summary.TestDisplay;
-import org.adligo.tests4j.shared.report.summary.TrialDisplay;
+import org.adligo.tests4j.system.shared.Tests4J_Params;
+import org.adligo.tests4j.system.shared.report.summary.TestDisplay;
+import org.adligo.tests4j.system.shared.report.summary.TrialDisplay;
 import org.adligo.tests4j_4jacoco.plugin.CoveragePluginFactory;
 import org.adligo.tests4j_4jacoco.plugin.discovery.OrderedClassDiscovery;
 import org.adligo.tests4j_4jacoco.plugin.instrumentation.ClassInstrumenter;
@@ -12,14 +12,17 @@ import org.adligo.tests4j_tests.base_trials.I_CountingPackageTrials;
 import org.adligo.tests4j_tests.base_trials.SimpleMetaTrial;
 import org.adligo.tests4j_tests.base_trials.SimplePackageTrials;
 import org.adligo.tests4j_tests.shared.asserts.common.A_AssertsCmPkgTrials;
+import org.adligo.tests4j_tests.shared.asserts.dependency.A_AssertsDepPkgTrials;
 import org.adligo.tests4j_tests.shared.asserts.line_text.A_AssertsLtRunPkgTrials;
 import org.adligo.tests4j_tests.shared.asserts.uniform.A_AssertsUniPkgTrials;
 
 public class A_AssertsPkgTrials  extends SimplePackageTrials 
 implements I_MetaTrialParams<A_AssertsPkgTrials>, I_CountingPackageTrials {
-	A_AssertsCmPkgTrials cmtTrials = new A_AssertsCmPkgTrials();
-	A_AssertsLtRunPkgTrials lineTrials = new A_AssertsLtRunPkgTrials();
-	A_AssertsUniPkgTrials uniTrials = new A_AssertsUniPkgTrials();
+	private A_AssertsCmPkgTrials cmtTrials = new A_AssertsCmPkgTrials();
+	private A_AssertsDepPkgTrials depTrials = new A_AssertsDepPkgTrials();
+	private A_AssertsLtRunPkgTrials lineTrials = new A_AssertsLtRunPkgTrials();
+	private A_AssertsUniPkgTrials uniTrials = new A_AssertsUniPkgTrials();
+	
 	
 	public static void main(String [] args) {
 		try {
@@ -51,11 +54,15 @@ implements I_MetaTrialParams<A_AssertsPkgTrials>, I_CountingPackageTrials {
 
 	public void addTrials() throws Exception {
 		cmtTrials.addTrials();
-		lineTrials.addTrials();
-		uniTrials.addTrials();
-		
 		add(cmtTrials.getCountingTrials());
+		
+		depTrials.addTrials();
+		add(depTrials.getCountingTrials());
+		
+		lineTrials.addTrials();
 		add(lineTrials.getCountingTrials());
+		
+		uniTrials.addTrials();
 		add(uniTrials.getCountingTrials());
 		
 		add(AbstractAssertCommandTrial.class);
@@ -84,6 +91,7 @@ implements I_MetaTrialParams<A_AssertsPkgTrials>, I_CountingPackageTrials {
 	public void setParams(Tests4J_Params params) {
 		super.setParams(params);
 		cmtTrials.setParams(params);
+		depTrials.setParams(params);
 		lineTrials.setParams(params);
 		uniTrials.setParams(params);
 	}

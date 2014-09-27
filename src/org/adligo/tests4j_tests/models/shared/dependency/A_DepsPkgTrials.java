@@ -1,17 +1,31 @@
 package org.adligo.tests4j_tests.models.shared.dependency;
 
-import org.adligo.tests4j.models.shared.system.Tests4J_Params;
 import org.adligo.tests4j.models.shared.trials.I_MetaTrialParams;
 import org.adligo.tests4j.run.Tests4J;
+import org.adligo.tests4j.system.shared.Tests4J_Params;
 import org.adligo.tests4j_4jacoco.plugin.CoveragePluginFactory;
 import org.adligo.tests4j_tests.base_trials.I_CountingPackageTrials;
 import org.adligo.tests4j_tests.base_trials.SimpleMetaTrial;
 import org.adligo.tests4j_tests.base_trials.SimplePackageTrials;
-import org.adligo.tests4j_tests.models.shared.dependency.asserts.A_DepsAssertsPkgTrials;
+import org.adligo.tests4j_tests.shared.asserts.dependency.ClassAttributesMutantTrial;
+import org.adligo.tests4j_tests.shared.asserts.dependency.ClassAttributesTrial;
+import org.adligo.tests4j_tests.shared.asserts.dependency.DependencyGroupAggregateTrial;
+import org.adligo.tests4j_tests.shared.asserts.dependency.DependencyGroupBaseDelegateTrial;
+import org.adligo.tests4j_tests.shared.asserts.dependency.DependencyGroupMutantTrial;
+import org.adligo.tests4j_tests.shared.asserts.dependency.DependencyGroupTrial;
+import org.adligo.tests4j_tests.shared.asserts.dependency.DependencyMutantTrial;
+import org.adligo.tests4j_tests.shared.asserts.dependency.DependencyTrial;
+import org.adligo.tests4j_tests.shared.asserts.dependency.FieldSignatureTrial;
+import org.adligo.tests4j_tests.shared.asserts.dependency.I_ClassAttributesTrial;
+import org.adligo.tests4j_tests.shared.asserts.dependency.I_DependencyGroupTrial;
+import org.adligo.tests4j_tests.shared.asserts.dependency.I_DependencyTrial;
+import org.adligo.tests4j_tests.shared.asserts.dependency.I_FieldSignatureTrial;
+import org.adligo.tests4j_tests.shared.asserts.dependency.I_MethodSignatureTrial;
+import org.adligo.tests4j_tests.shared.asserts.dependency.MethodSignatureTrial;
+import org.adligo.tests4j_tests.shared.asserts.dependency.NameOnlyDependencyGroupTrial;
 
 public class A_DepsPkgTrials extends SimplePackageTrials 
 implements I_MetaTrialParams<A_DepsPkgTrials>, I_CountingPackageTrials {
-	A_DepsAssertsPkgTrials assertTrials = new A_DepsAssertsPkgTrials();
 	
 	
 	public static void main(String [] args) {
@@ -36,12 +50,20 @@ implements I_MetaTrialParams<A_DepsPkgTrials>, I_CountingPackageTrials {
 	}
 
 	public void addTrials() throws Exception {
-		assertTrials.addTrials();
-		add(assertTrials.getCountingTrials());
 		
-		add(ClassAliasTrial.class);
-		add(ClassAttributesMutantTrial.class);
-		add(ClassAttributesTrial.class);
+		//in dependency order
+		
+		add(I_ClassDependenciesTrial.class);
+		add(I_ClassDependenciesLocalTrial.class);
+		add(I_ClassDependenciesCacheTrial.class);
+		
+		add(I_ClassFilterTrial.class);
+		add(I_ClassFilterModelTrial.class);
+		
+		add(I_ClassParentsTrial.class);
+		add(I_ClassParentsLocalTrial.class);
+		add(I_ClassParentsCacheTrial.class);
+		
 		
 		add(ClassDependenciesLocalMutantTrial.class);
 		add(ClassDependenciesLocalTrial.class);
@@ -49,17 +71,6 @@ implements I_MetaTrialParams<A_DepsPkgTrials>, I_CountingPackageTrials {
 		add(ClassParentsLocalMutantTrial.class);
 		add(ClassParentsLocalTrial.class);
 		
-		add(DependencyGroupBaseDelegateTrial.class);
-		add(DependencyGroupMutantTrial.class);
-		add(DependencyGroupTrial.class);
-		add(DependencyGroupAggregateTrial.class);
-		
-		add(DependencyMutantTrial.class);
-		add(DependencyTrial.class);
-		
-		add(MethodSignatureTrial.class);
-		
-		add(NameOnlyDependencyGroupTrial.class);
 	}
 
 	@Override
@@ -69,7 +80,6 @@ implements I_MetaTrialParams<A_DepsPkgTrials>, I_CountingPackageTrials {
 
 	@Override
 	public void setParams(Tests4J_Params params) {
-		assertTrials.setParams(params);
 		super.setParams(params);
 	}
 }

@@ -1,7 +1,7 @@
 package org.adligo.tests4j_tests;
 
-import org.adligo.tests4j.models.shared.system.Tests4J_Params;
 import org.adligo.tests4j.run.Tests4J;
+import org.adligo.tests4j.system.shared.Tests4J_Params;
 import org.adligo.tests4j_4jacoco.plugin.CoveragePluginFactory;
 import org.adligo.tests4j_tests.base_trials.SimpleMetaTrial;
 import org.adligo.tests4j_tests.jacoco.api_trials.dependency_trials.CalledBadMethod_SourceFileTrial;
