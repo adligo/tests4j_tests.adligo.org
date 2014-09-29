@@ -1,6 +1,6 @@
 package org.adligo.tests4j_tests.base_trials;
 
-import org.adligo.tests4j.models.shared.trials.I_Trial;
+import org.adligo.tests4j.system.shared.trials.I_Trial;
 
 /**
  * This interface was added because I was

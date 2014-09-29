@@ -3,9 +3,6 @@ package org.adligo.tests4j_tests.shared.asserts.line_text;
 import java.util.Iterator;
 import java.util.TreeSet;
 
-import org.adligo.tests4j.models.shared.dependency_groups.adligo.Tests4J_AssertsLineText_DependencyGroup;
-import org.adligo.tests4j.models.shared.trials.SourceFileScope;
-import org.adligo.tests4j.models.shared.trials.Test;
 import org.adligo.tests4j.shared.asserts.common.ExpectedThrownData;
 import org.adligo.tests4j.shared.asserts.common.I_Thrower;
 import org.adligo.tests4j.shared.asserts.dependency.AllowedDependencies;
@@ -16,8 +13,11 @@ import org.adligo.tests4j.shared.asserts.line_text.I_LineDiff;
 import org.adligo.tests4j.shared.asserts.line_text.LineDiff;
 import org.adligo.tests4j.shared.asserts.line_text.LineDiffMutant;
 import org.adligo.tests4j.shared.asserts.line_text.LineDiffType;
+import org.adligo.tests4j.system.shared.trials.SourceFileScope;
+import org.adligo.tests4j.system.shared.trials.Test;
 import org.adligo.tests4j_tests.base_trials.I_CountType;
 import org.adligo.tests4j_tests.base_trials.SourceFileCountingTrial;
+import org.adligo.tests4j_tests.dependency_groups.Tests4J_AssertsLineText_DependencyGroup;
 
 @SourceFileScope (sourceClass=LineDiff.class)
 @AllowedDependencies (groups=Tests4J_AssertsLineText_DependencyGroup.class)

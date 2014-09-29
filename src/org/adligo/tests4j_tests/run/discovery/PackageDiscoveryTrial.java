@@ -21,47 +21,6 @@ import org.adligo.tests4j.models.shared.metadata.TrialMetadataMutant;
 import org.adligo.tests4j.models.shared.metadata.TrialRunMetadata;
 import org.adligo.tests4j.models.shared.metadata.TrialRunMetadataMutant;
 import org.adligo.tests4j.models.shared.metadata.UseCaseMetadata;
-import org.adligo.tests4j.models.shared.trials.AbstractTrial;
-import org.adligo.tests4j.models.shared.trials.AdditionalInstrumentation;
-import org.adligo.tests4j.models.shared.trials.AfterTrial;
-import org.adligo.tests4j.models.shared.trials.ApiTrial;
-import org.adligo.tests4j.models.shared.trials.BeforeTrial;
-import org.adligo.tests4j.models.shared.trials.I_AbstractTrial;
-import org.adligo.tests4j.models.shared.trials.I_ApiTrial;
-import org.adligo.tests4j.models.shared.trials.I_MetaTrial;
-import org.adligo.tests4j.models.shared.trials.I_MetaTrialInputData;
-import org.adligo.tests4j.models.shared.trials.I_MetaTrialParams;
-import org.adligo.tests4j.models.shared.trials.I_MetaTrialParamsAware;
-import org.adligo.tests4j.models.shared.trials.I_Progress;
-import org.adligo.tests4j.models.shared.trials.I_SourceFileTrial;
-import org.adligo.tests4j.models.shared.trials.I_SubProgress;
-import org.adligo.tests4j.models.shared.trials.I_Trial;
-import org.adligo.tests4j.models.shared.trials.I_TrialBindings;
-import org.adligo.tests4j.models.shared.trials.I_TrialParamValue;
-import org.adligo.tests4j.models.shared.trials.I_TrialParams;
-import org.adligo.tests4j.models.shared.trials.I_TrialParamsAware;
-import org.adligo.tests4j.models.shared.trials.I_TrialParamsFactory;
-import org.adligo.tests4j.models.shared.trials.I_UseCaseTrial;
-import org.adligo.tests4j.models.shared.trials.IgnoreTest;
-import org.adligo.tests4j.models.shared.trials.PackageScope;
-import org.adligo.tests4j.models.shared.trials.PlatformType;
-import org.adligo.tests4j.models.shared.trials.SourceFileScope;
-import org.adligo.tests4j.models.shared.trials.SourceFileTrial;
-import org.adligo.tests4j.models.shared.trials.SubProgress;
-import org.adligo.tests4j.models.shared.trials.SuppressOutput;
-import org.adligo.tests4j.models.shared.trials.TargetedPlatform;
-import org.adligo.tests4j.models.shared.trials.Test;
-import org.adligo.tests4j.models.shared.trials.TrialBindings;
-import org.adligo.tests4j.models.shared.trials.TrialDelegate;
-import org.adligo.tests4j.models.shared.trials.TrialParamValue;
-import org.adligo.tests4j.models.shared.trials.TrialParamValue_XML_Consumer;
-import org.adligo.tests4j.models.shared.trials.TrialParams;
-import org.adligo.tests4j.models.shared.trials.TrialParamsMutant;
-import org.adligo.tests4j.models.shared.trials.TrialRecursion;
-import org.adligo.tests4j.models.shared.trials.TrialTimeout;
-import org.adligo.tests4j.models.shared.trials.TrialTypeAnnotation;
-import org.adligo.tests4j.models.shared.trials.UseCaseScope;
-import org.adligo.tests4j.models.shared.trials.UseCaseTrial;
 import org.adligo.tests4j.run.discovery.AfterTrialAuditor;
 import org.adligo.tests4j.run.discovery.AllowedDependenciesAuditor;
 import org.adligo.tests4j.run.discovery.BeforeTrialAuditor;
@@ -82,6 +41,47 @@ import org.adligo.tests4j.run.discovery.TrialTypeFinder;
 import org.adligo.tests4j.shared.asserts.dependency.AllowedDependencies;
 import org.adligo.tests4j.shared.asserts.dependency.CircularDependencies;
 import org.adligo.tests4j.shared.asserts.dependency.I_CircularDependencies;
+import org.adligo.tests4j.system.shared.trials.AbstractTrial;
+import org.adligo.tests4j.system.shared.trials.AdditionalInstrumentation;
+import org.adligo.tests4j.system.shared.trials.AfterTrial;
+import org.adligo.tests4j.system.shared.trials.ApiTrial;
+import org.adligo.tests4j.system.shared.trials.BeforeTrial;
+import org.adligo.tests4j.system.shared.trials.I_AbstractTrial;
+import org.adligo.tests4j.system.shared.trials.I_ApiTrial;
+import org.adligo.tests4j.system.shared.trials.I_MetaTrial;
+import org.adligo.tests4j.system.shared.trials.I_MetaTrialInputData;
+import org.adligo.tests4j.system.shared.trials.I_MetaTrialParams;
+import org.adligo.tests4j.system.shared.trials.I_MetaTrialParamsAware;
+import org.adligo.tests4j.system.shared.trials.I_Progress;
+import org.adligo.tests4j.system.shared.trials.I_SourceFileTrial;
+import org.adligo.tests4j.system.shared.trials.I_SubProgress;
+import org.adligo.tests4j.system.shared.trials.I_Trial;
+import org.adligo.tests4j.system.shared.trials.I_TrialBindings;
+import org.adligo.tests4j.system.shared.trials.I_TrialParamValue;
+import org.adligo.tests4j.system.shared.trials.I_TrialParams;
+import org.adligo.tests4j.system.shared.trials.I_TrialParamsAware;
+import org.adligo.tests4j.system.shared.trials.I_TrialParamsFactory;
+import org.adligo.tests4j.system.shared.trials.I_UseCaseTrial;
+import org.adligo.tests4j.system.shared.trials.IgnoreTest;
+import org.adligo.tests4j.system.shared.trials.PackageScope;
+import org.adligo.tests4j.system.shared.trials.PlatformType;
+import org.adligo.tests4j.system.shared.trials.SourceFileScope;
+import org.adligo.tests4j.system.shared.trials.SourceFileTrial;
+import org.adligo.tests4j.system.shared.trials.SubProgress;
+import org.adligo.tests4j.system.shared.trials.SuppressOutput;
+import org.adligo.tests4j.system.shared.trials.TargetedPlatform;
+import org.adligo.tests4j.system.shared.trials.Test;
+import org.adligo.tests4j.system.shared.trials.TrialBindings;
+import org.adligo.tests4j.system.shared.trials.TrialDelegate;
+import org.adligo.tests4j.system.shared.trials.TrialParamValue;
+import org.adligo.tests4j.system.shared.trials.TrialParamValue_XML_Consumer;
+import org.adligo.tests4j.system.shared.trials.TrialParams;
+import org.adligo.tests4j.system.shared.trials.TrialParamsMutant;
+import org.adligo.tests4j.system.shared.trials.TrialRecursion;
+import org.adligo.tests4j.system.shared.trials.TrialTimeout;
+import org.adligo.tests4j.system.shared.trials.TrialTypeAnnotation;
+import org.adligo.tests4j.system.shared.trials.UseCaseScope;
+import org.adligo.tests4j.system.shared.trials.UseCaseTrial;
 import org.adligo.tests4j_4jacoco.plugin.CoveragePlugin;
 import org.adligo.tests4j_4jacoco.plugin.CoveragePluginFactory;
 import org.adligo.tests4j_4jacoco.plugin.CoveragePluginMemory;
@@ -94,7 +94,7 @@ import org.adligo.tests4j_tests.run.discovery.package_discovery_inner_mocks.TwoN
 @SourceFileScope (sourceClass=PackageDiscovery.class, minCoverage=50.0)
 public class PackageDiscoveryTrial extends SourceFileCountingTrial {
 
-	private static final int ASSERT_COUNT = 109;
+	private static final int ASSERT_COUNT = 108;
 
 	@Test
 	public void testDiscoveryPackage() throws Exception {
@@ -175,7 +175,7 @@ public class PackageDiscoveryTrial extends SourceFileCountingTrial {
 	
 	@Test
 	public void testModelsSharedTrials() throws Exception {
-		PackageDiscovery cd = new PackageDiscovery("org.adligo.tests4j.models.shared.trials");
+		PackageDiscovery cd = new PackageDiscovery("org.adligo.tests4j.system.shared.trials");
 		List<String> classNames = cd.getClassNames();
 		assertContains(classNames, AdditionalInstrumentation.class.getName());
 		assertContains(classNames, AbstractTrial.class.getName());
@@ -265,13 +265,12 @@ public class PackageDiscoveryTrial extends SourceFileCountingTrial {
 		for(PackageDiscovery i: children) {
 			childNames.add(i.getPackageName());
 		}
-		assertContains(childNames, "org.adligo.tests4j.gen");
 		assertContains(childNames, "org.adligo.tests4j.models");
 		assertContains(childNames, "org.adligo.tests4j.run");
 		assertContains(childNames, "org.adligo.tests4j.shared");
 		assertContains(childNames, "org.adligo.tests4j.system");
 		
-		assertEquals(5, children.size());
+		assertEquals(4, children.size());
 	}
 	
 	

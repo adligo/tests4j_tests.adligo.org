@@ -1,16 +1,16 @@
 package org.adligo.tests4j_tests.shared.asserts;
 
-import org.adligo.tests4j.models.shared.dependency_groups.adligo.Tests4J_Asserts_DependencyGroup;
-import org.adligo.tests4j.models.shared.trials.SourceFileScope;
-import org.adligo.tests4j.models.shared.trials.Test;
 import org.adligo.tests4j.shared.asserts.DoubleAssertCommand;
 import org.adligo.tests4j.shared.asserts.common.AssertType;
 import org.adligo.tests4j.shared.asserts.common.CompareAssertionData;
 import org.adligo.tests4j.shared.asserts.common.ExpectedThrownData;
 import org.adligo.tests4j.shared.asserts.common.I_Thrower;
 import org.adligo.tests4j.shared.asserts.dependency.AllowedDependencies;
+import org.adligo.tests4j.system.shared.trials.SourceFileScope;
+import org.adligo.tests4j.system.shared.trials.Test;
 import org.adligo.tests4j_tests.base_trials.I_CountType;
 import org.adligo.tests4j_tests.base_trials.SourceFileCountingTrial;
+import org.adligo.tests4j_tests.dependency_groups.Tests4J_Asserts_DependencyGroup;
 
 @SourceFileScope (sourceClass=DoubleAssertCommand.class, minCoverage=80.0)
 @AllowedDependencies (groups=Tests4J_Asserts_DependencyGroup.class)

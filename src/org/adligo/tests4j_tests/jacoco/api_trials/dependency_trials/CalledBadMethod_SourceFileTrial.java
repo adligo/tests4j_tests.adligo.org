@@ -1,11 +1,11 @@
 package org.adligo.tests4j_tests.jacoco.api_trials.dependency_trials;
 
 import org.adligo.tests4j.models.shared.dependency_groups.gwt.GWT_DependencyGroup;
-import org.adligo.tests4j.models.shared.trials.SourceFileScope;
-import org.adligo.tests4j.models.shared.trials.SourceFileTrial;
-import org.adligo.tests4j.models.shared.trials.Test;
-import org.adligo.tests4j.models.shared.trials.TrialRecursion;
 import org.adligo.tests4j.shared.asserts.dependency.AllowedDependencies;
+import org.adligo.tests4j.system.shared.trials.SourceFileScope;
+import org.adligo.tests4j.system.shared.trials.SourceFileTrial;
+import org.adligo.tests4j.system.shared.trials.Test;
+import org.adligo.tests4j.system.shared.trials.TrialRecursion;
 
 @SourceFileScope (sourceClass=BadMethodCallMock.class)
 @AllowedDependencies (groups=GWT_DependencyGroup.class)

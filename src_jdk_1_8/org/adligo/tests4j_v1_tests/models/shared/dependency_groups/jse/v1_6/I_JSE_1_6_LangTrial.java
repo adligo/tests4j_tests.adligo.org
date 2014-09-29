@@ -1,12 +1,12 @@
 package org.adligo.tests4j_v1_tests.models.shared.dependency_groups.jse.v1_6;
 
-import org.adligo.tests4j.models.shared.dependency_groups.adligo.Tests4J_JSE_v1_6_DependencyGroup;
 import org.adligo.tests4j.models.shared.dependency_groups.jse.v1_6.I_JSE_1_6_Lang;
-import org.adligo.tests4j.models.shared.trials.SourceFileScope;
-import org.adligo.tests4j.models.shared.trials.Test;
 import org.adligo.tests4j.shared.asserts.dependency.AllowedDependencies;
+import org.adligo.tests4j.system.shared.trials.SourceFileScope;
+import org.adligo.tests4j.system.shared.trials.Test;
 import org.adligo.tests4j_tests.base_trials.I_CountType;
 import org.adligo.tests4j_tests.base_trials.SourceFileCountingTrial;
+import org.adligo.tests4j_tests.dependency_groups.Tests4J_JSE_v1_6_DependencyGroup;
 
 @SourceFileScope (sourceClass=I_JSE_1_6_Lang.class)
 @AllowedDependencies (groups=Tests4J_JSE_v1_6_DependencyGroup.class)

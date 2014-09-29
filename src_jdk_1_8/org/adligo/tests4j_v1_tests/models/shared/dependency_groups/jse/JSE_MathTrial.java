@@ -1,14 +1,16 @@
 package org.adligo.tests4j_v1_tests.models.shared.dependency_groups.jse;
 
-import org.adligo.tests4j.models.shared.dependency_groups.jse.JSE_Log;
 import org.adligo.tests4j.models.shared.dependency_groups.jse.JSE_Math;
 import org.adligo.tests4j.models.shared.dependency_groups.jse.v1_7.I_JSE_1_7_Lang;
-import org.adligo.tests4j.models.shared.trials.SourceFileScope;
-import org.adligo.tests4j.models.shared.trials.Test;
+import org.adligo.tests4j.shared.asserts.dependency.AllowedDependencies;
+import org.adligo.tests4j.system.shared.trials.SourceFileScope;
+import org.adligo.tests4j.system.shared.trials.Test;
 import org.adligo.tests4j_tests.base_trials.I_CountType;
 import org.adligo.tests4j_tests.base_trials.SourceFileCountingTrial;
+import org.adligo.tests4j_tests.dependency_groups.Tests4J_JSE_DependencyGroup;
 
 @SourceFileScope (sourceClass=JSE_Math.class)
+@AllowedDependencies (groups=Tests4J_JSE_DependencyGroup.class)
 public class JSE_MathTrial extends SourceFileCountingTrial {
 
 	@Test
@@ -32,7 +34,7 @@ public class JSE_MathTrial extends SourceFileCountingTrial {
 		//code coverage and circular dependencies +
 		//custom afterTrialTests
 		//+ see above
-		int thisAfterAsserts = 2;
+		int thisAfterAsserts = 3;
 		if (type.isFromMetaWithCoverage()) {
 			return super.getAsserts(type, thisAsserts + thisAfterAsserts);
 		} else {
@@ -46,7 +48,7 @@ public class JSE_MathTrial extends SourceFileCountingTrial {
 		//code coverage and circular dependencies +
 		//custom afterTrialTests
 		//+ see above
-		int thisAfterUniqueAsserts = 2;
+		int thisAfterUniqueAsserts = 3;
 		if (type.isFromMetaWithCoverage()) {
 			//code coverage and circular dependencies +
 			//custom afterTrialTests

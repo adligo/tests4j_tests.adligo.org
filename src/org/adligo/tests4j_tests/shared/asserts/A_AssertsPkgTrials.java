@@ -1,10 +1,10 @@
 package org.adligo.tests4j_tests.shared.asserts;
 
-import org.adligo.tests4j.models.shared.trials.I_MetaTrialParams;
 import org.adligo.tests4j.run.Tests4J;
 import org.adligo.tests4j.system.shared.Tests4J_Params;
 import org.adligo.tests4j.system.shared.report.summary.TestDisplay;
 import org.adligo.tests4j.system.shared.report.summary.TrialDisplay;
+import org.adligo.tests4j.system.shared.trials.I_MetaTrialParams;
 import org.adligo.tests4j_4jacoco.plugin.CoveragePluginFactory;
 import org.adligo.tests4j_4jacoco.plugin.discovery.OrderedClassDiscovery;
 import org.adligo.tests4j_4jacoco.plugin.instrumentation.ClassInstrumenter;

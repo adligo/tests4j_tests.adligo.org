@@ -7,11 +7,11 @@ import java.util.Set;
 
 import org.adligo.tests4j.models.shared.coverage.I_PackageCoverage;
 import org.adligo.tests4j.models.shared.results.I_ApiTrialResult;
-import org.adligo.tests4j.models.shared.trials.ApiTrial;
-import org.adligo.tests4j.models.shared.trials.PackageScope;
-import org.adligo.tests4j.models.shared.trials.Test;
 import org.adligo.tests4j.shared.asserts.common.ExpectedThrownData;
 import org.adligo.tests4j.shared.asserts.common.I_Thrower;
+import org.adligo.tests4j.system.shared.trials.ApiTrial;
+import org.adligo.tests4j.system.shared.trials.PackageScope;
+import org.adligo.tests4j.system.shared.trials.Test;
 import org.adligo.tests4j_tests.base_trials.ApiCountingTrial;
 import org.adligo.tests4j_tests.base_trials.I_CountType;
 import org.adligo.tests4j_tests.trials_api.assert_fails_trials.AssertContainsFailsTrialRunner;

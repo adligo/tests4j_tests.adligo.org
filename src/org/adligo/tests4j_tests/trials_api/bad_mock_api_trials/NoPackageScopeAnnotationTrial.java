@@ -7,9 +7,9 @@ import org.adligo.tests4j.models.shared.metadata.I_TrialMetadata;
 import org.adligo.tests4j.models.shared.metadata.I_TrialRunMetadata;
 import org.adligo.tests4j.models.shared.results.I_TrialFailure;
 import org.adligo.tests4j.models.shared.results.I_TrialResult;
-import org.adligo.tests4j.models.shared.trials.ApiTrial;
-import org.adligo.tests4j.models.shared.trials.TrialRecursion;
 import org.adligo.tests4j.shared.asserts.common.I_Asserts;
+import org.adligo.tests4j.system.shared.trials.ApiTrial;
+import org.adligo.tests4j.system.shared.trials.TrialRecursion;
 import org.adligo.tests4j_tests.trials_api.common.ExpectedFailureRunner;
 import org.adligo.tests4j_tests.trials_api.common.SystemRunnerMock;
 

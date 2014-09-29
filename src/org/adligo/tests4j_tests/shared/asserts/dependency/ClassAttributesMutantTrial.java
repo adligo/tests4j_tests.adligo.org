@@ -4,18 +4,18 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-import org.adligo.tests4j.models.shared.dependency_groups.adligo.Tests4J_AssertsDependency_DependencyGroup;
-import org.adligo.tests4j.models.shared.dependency_groups.adligo.Tests4J_Dependency_DependencyGroup;
-import org.adligo.tests4j.models.shared.trials.SourceFileScope;
-import org.adligo.tests4j.models.shared.trials.Test;
 import org.adligo.tests4j.shared.asserts.common.ExpectedThrownData;
 import org.adligo.tests4j.shared.asserts.common.I_Thrower;
 import org.adligo.tests4j.shared.asserts.dependency.AllowedDependencies;
 import org.adligo.tests4j.shared.asserts.dependency.ClassAttributesMutant;
 import org.adligo.tests4j.shared.asserts.dependency.I_MethodSignature;
 import org.adligo.tests4j.shared.asserts.dependency.MethodSignature;
+import org.adligo.tests4j.system.shared.trials.SourceFileScope;
+import org.adligo.tests4j.system.shared.trials.Test;
 import org.adligo.tests4j_tests.base_trials.I_CountType;
 import org.adligo.tests4j_tests.base_trials.SourceFileCountingTrial;
+import org.adligo.tests4j_tests.dependency_groups.Tests4J_AssertsDependency_DependencyGroup;
+import org.adligo.tests4j_tests.dependency_groups.Tests4J_Dependency_DependencyGroup;
 
 @SourceFileScope (sourceClass=ClassAttributesMutant.class, minCoverage=62.0)
 @AllowedDependencies (groups=Tests4J_AssertsDependency_DependencyGroup.class)

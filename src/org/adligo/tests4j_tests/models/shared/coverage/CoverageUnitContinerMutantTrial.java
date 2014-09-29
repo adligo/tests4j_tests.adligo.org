@@ -5,14 +5,14 @@ import java.math.BigDecimal;
 import org.adligo.tests4j.models.shared.coverage.CoverageUnitContinerMutant;
 import org.adligo.tests4j.models.shared.coverage.CoverageUnits;
 import org.adligo.tests4j.models.shared.coverage.I_CoverageUnits;
-import org.adligo.tests4j.models.shared.dependency_groups.adligo.Tests4J_Coverage_DependencyGroup;
-import org.adligo.tests4j.models.shared.trials.SourceFileScope;
-import org.adligo.tests4j.models.shared.trials.Test;
 import org.adligo.tests4j.shared.asserts.common.ExpectedThrownData;
 import org.adligo.tests4j.shared.asserts.common.I_Thrower;
 import org.adligo.tests4j.shared.asserts.dependency.AllowedDependencies;
+import org.adligo.tests4j.system.shared.trials.SourceFileScope;
+import org.adligo.tests4j.system.shared.trials.Test;
 import org.adligo.tests4j_tests.base_trials.I_CountType;
 import org.adligo.tests4j_tests.base_trials.SourceFileCountingTrial;
+import org.adligo.tests4j_tests.dependency_groups.Tests4J_Coverage_DependencyGroup;
 
 @SourceFileScope (sourceClass=CoverageUnitContinerMutant.class, minCoverage=70.0)
 @AllowedDependencies (groups=Tests4J_Coverage_DependencyGroup.class)

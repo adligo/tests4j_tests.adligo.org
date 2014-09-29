@@ -71,12 +71,12 @@ import java.util.logging.LogManager;
 import java.util.logging.LogRecord;
 import java.util.logging.Logger;
 
-import org.adligo.tests4j.models.shared.dependency_groups.adligo.AdligoGWT_DependencyGroup;
 import org.adligo.tests4j.models.shared.dependency_groups.gwt.GWT_DependencyGroup;
-import org.adligo.tests4j.models.shared.trials.SourceFileScope;
-import org.adligo.tests4j.models.shared.trials.Test;
+import org.adligo.tests4j.system.shared.trials.SourceFileScope;
+import org.adligo.tests4j.system.shared.trials.Test;
 import org.adligo.tests4j_tests.base_trials.I_CountType;
 import org.adligo.tests4j_tests.base_trials.SourceFileCountingTrial;
+import org.adligo.tests4j_tests.dependency_groups.AdligoGWT_DependencyGroup;
 
 @SourceFileScope (sourceClass=AdligoGWT_DependencyGroup.class)
 public class AdligoGWT_DependencyGroupTrial extends SourceFileCountingTrial {

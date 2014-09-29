@@ -9,12 +9,12 @@ import org.adligo.tests4j.models.shared.results.I_TestResult;
 import org.adligo.tests4j.models.shared.results.I_TrialFailure;
 import org.adligo.tests4j.models.shared.results.I_TrialResult;
 import org.adligo.tests4j.models.shared.results.TestResult;
-import org.adligo.tests4j.models.shared.trials.PackageScope;
 import org.adligo.tests4j.shared.asserts.common.I_Asserts;
 import org.adligo.tests4j.shared.asserts.common.I_TestFailure;
 import org.adligo.tests4j.shared.asserts.line_text.TextLines;
 import org.adligo.tests4j.shared.en.Tests4J_EnglishConstants;
 import org.adligo.tests4j.shared.i18n.I_Tests4J_AssertionInputMessages;
+import org.adligo.tests4j.system.shared.trials.PackageScope;
 import org.adligo.tests4j_tests.trials_api.common.ExpectedFailureRunner;
 import org.adligo.tests4j_tests.trials_api.common.SystemRunnerMock;
 

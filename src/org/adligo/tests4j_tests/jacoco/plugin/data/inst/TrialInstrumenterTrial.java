@@ -1,14 +1,14 @@
 package org.adligo.tests4j_tests.jacoco.plugin.data.inst;
 
-import org.adligo.tests4j.models.shared.trials.SourceFileScope;
-import org.adligo.tests4j.models.shared.trials.Test;
 import org.adligo.tests4j.system.shared.I_Tests4J_CoverageTrialInstrumentation;
+import org.adligo.tests4j.system.shared.trials.SourceFileScope;
+import org.adligo.tests4j.system.shared.trials.Test;
 import org.adligo.tests4j_4jacoco.plugin.instrumentation.TrialInstrumenter;
 import org.adligo.tests4j_4jacoco.plugin.instrumentation.TrialInstrumenterSharedMemory;
 import org.adligo.tests4j_tests.base_trials.I_CountType;
 import org.adligo.tests4j_tests.base_trials.SourceFileCountingTrial;
-import org.adligo.tests4j_tests.models.shared.system.mocks.Tests4J_LogMock;
 import org.adligo.tests4j_tests.run.helpers.mock_trials.MockWithNothingTrial;
+import org.adligo.tests4j_tests.system.shared.mocks.Tests4J_LogMock;
 
 @SourceFileScope (sourceClass=TrialInstrumenter.class, minCoverage=1.0)
 public class TrialInstrumenterTrial extends SourceFileCountingTrial {

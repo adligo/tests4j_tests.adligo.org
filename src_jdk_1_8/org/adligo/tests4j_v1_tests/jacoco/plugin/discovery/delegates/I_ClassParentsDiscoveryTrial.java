@@ -5,10 +5,10 @@ import java.util.Map;
 import org.adligo.tests4j.models.shared.dependency.ClassFilter;
 import org.adligo.tests4j.models.shared.dependency.I_ClassFilter;
 import org.adligo.tests4j.models.shared.dependency.I_ClassParentsLocal;
-import org.adligo.tests4j.models.shared.trials.I_Trial;
 import org.adligo.tests4j.run.helpers.CachedClassBytesClassLoader;
+import org.adligo.tests4j.system.shared.trials.I_Trial;
 import org.adligo.tests4j_4jacoco.plugin.discovery.I_ClassParentsDiscovery;
-import org.adligo.tests4j_tests.models.shared.system.mocks.Tests4J_LogMock;
+import org.adligo.tests4j_tests.system.shared.mocks.Tests4J_LogMock;
 
 public interface I_ClassParentsDiscoveryTrial extends I_Trial {
 

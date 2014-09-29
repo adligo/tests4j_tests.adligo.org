@@ -72,12 +72,15 @@ import java.util.logging.LogRecord;
 import java.util.logging.Logger;
 
 import org.adligo.tests4j.models.shared.dependency_groups.gwt.GWT_Classes;
-import org.adligo.tests4j.models.shared.trials.SourceFileScope;
-import org.adligo.tests4j.models.shared.trials.Test;
+import org.adligo.tests4j.shared.asserts.dependency.AllowedDependencies;
+import org.adligo.tests4j.system.shared.trials.SourceFileScope;
+import org.adligo.tests4j.system.shared.trials.Test;
 import org.adligo.tests4j_tests.base_trials.I_CountType;
 import org.adligo.tests4j_tests.base_trials.SourceFileCountingTrial;
+import org.adligo.tests4j_tests.dependency_groups.Tests4J_GWT_DependencyGroup;
 
 @SourceFileScope (sourceClass=GWT_Classes.class,minCoverage=90.0)
+@AllowedDependencies (groups=Tests4J_GWT_DependencyGroup.class)
 public class GWT_ClassesTrial extends SourceFileCountingTrial {
 
 	@Test
@@ -252,7 +255,7 @@ public class GWT_ClassesTrial extends SourceFileCountingTrial {
 		if (type.isFromMetaWithCoverage()) {
 			//code coverage and circular dependencies +
 			//custom afterTrialTests
-			return super.getAsserts(type, thisAsserts + 2);
+			return super.getAsserts(type, thisAsserts + 3);
 		} else {
 			return super.getAsserts(type, thisAsserts);
 		}
@@ -264,7 +267,7 @@ public class GWT_ClassesTrial extends SourceFileCountingTrial {
 		if (type.isFromMetaWithCoverage()) {
 			//code coverage and circular dependencies +
 			//custom afterTrialTests
-			return super.getUniqueAsserts(type, thisUniqueAsserts + 2);
+			return super.getUniqueAsserts(type, thisUniqueAsserts + 3);
 		}  else {
 			return super.getUniqueAsserts(type, thisUniqueAsserts);
 		}

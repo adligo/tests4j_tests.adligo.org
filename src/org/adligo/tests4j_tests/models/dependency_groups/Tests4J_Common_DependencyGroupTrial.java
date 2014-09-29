@@ -62,9 +62,6 @@ import java.util.TreeMap;
 import java.util.TreeSet;
 import java.util.Vector;
 
-import org.adligo.tests4j.models.shared.dependency_groups.adligo.Tests4J_Common_DependencyGroup;
-import org.adligo.tests4j.models.shared.trials.SourceFileScope;
-import org.adligo.tests4j.models.shared.trials.Test;
 import org.adligo.tests4j.shared.asserts.dependency.DependencyGroupBaseDelegate;
 import org.adligo.tests4j.shared.common.CacheControl;
 import org.adligo.tests4j.shared.common.ClassMethods;
@@ -85,8 +82,11 @@ import org.adligo.tests4j.shared.common.StringMethods;
 import org.adligo.tests4j.shared.common.SystemWithPrintStreamDelegate;
 import org.adligo.tests4j.shared.common.Tests4J_System;
 import org.adligo.tests4j.shared.common.TrialType;
+import org.adligo.tests4j.system.shared.trials.SourceFileScope;
+import org.adligo.tests4j.system.shared.trials.Test;
 import org.adligo.tests4j_tests.base_trials.I_CountType;
 import org.adligo.tests4j_tests.base_trials.SourceFileCountingTrial;
+import org.adligo.tests4j_tests.dependency_groups.Tests4J_Common_DependencyGroup;
 
 @SourceFileScope (sourceClass=Tests4J_Common_DependencyGroup.class)
 public class Tests4J_Common_DependencyGroupTrial extends SourceFileCountingTrial {

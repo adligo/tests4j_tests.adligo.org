@@ -3,8 +3,8 @@ package org.adligo.tests4j_tests;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintWriter;
 
-import org.adligo.tests4j.models.shared.trials.SourceFileTrial;
-import org.adligo.tests4j_tests.models.shared.system.Tests4J_ParamsTrial;
+import org.adligo.tests4j.system.shared.trials.SourceFileTrial;
+import org.adligo.tests4j_tests.system.shared.Tests4J_ParamsTrial;
 import org.objectweb.asm.ClassWriter;
 import org.objectweb.asm.Opcodes;
 import org.objectweb.asm.Type;

@@ -1,7 +1,7 @@
 package org.adligo.tests4j_tests.base_trials;
 
 import org.adligo.tests4j.models.shared.results.I_SourceFileTrialResult;
-import org.adligo.tests4j.models.shared.trials.SourceFileTrial;
+import org.adligo.tests4j.system.shared.trials.SourceFileTrial;
 
 public abstract class SourceFileCountingTrial extends SourceFileTrial implements I_CountingTrial {
 	

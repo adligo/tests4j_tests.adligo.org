@@ -1,9 +1,9 @@
 package org.adligo.tests4j_tests.jacoco.api_trials.dependency_trials;
 
-import org.adligo.tests4j.models.shared.trials.SourceFileScope;
-import org.adligo.tests4j.models.shared.trials.SourceFileTrial;
-import org.adligo.tests4j.models.shared.trials.Test;
-import org.adligo.tests4j.models.shared.trials.TrialRecursion;
+import org.adligo.tests4j.system.shared.trials.SourceFileScope;
+import org.adligo.tests4j.system.shared.trials.SourceFileTrial;
+import org.adligo.tests4j.system.shared.trials.Test;
+import org.adligo.tests4j.system.shared.trials.TrialRecursion;
 import org.adligo.tests4j_tests.run.helpers.class_loading_mocks.MockWithTriangleA;
 
 @SourceFileScope (sourceClass=MockWithTriangleA.class)//not no cirucular dependency type setting

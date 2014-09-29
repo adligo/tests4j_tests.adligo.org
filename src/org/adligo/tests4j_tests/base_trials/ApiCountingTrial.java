@@ -1,7 +1,7 @@
 package org.adligo.tests4j_tests.base_trials;
 
 import org.adligo.tests4j.models.shared.results.I_ApiTrialResult;
-import org.adligo.tests4j.models.shared.trials.ApiTrial;
+import org.adligo.tests4j.system.shared.trials.ApiTrial;
 
 public abstract class ApiCountingTrial extends ApiTrial implements I_CountingTrial {
 	

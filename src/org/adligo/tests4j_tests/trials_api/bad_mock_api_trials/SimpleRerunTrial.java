@@ -1,11 +1,11 @@
 package org.adligo.tests4j_tests.trials_api.bad_mock_api_trials;
 
-import org.adligo.tests4j.models.shared.trials.ApiTrial;
-import org.adligo.tests4j.models.shared.trials.BeforeTrial;
-import org.adligo.tests4j.models.shared.trials.PackageScope;
-import org.adligo.tests4j.models.shared.trials.Test;
-import org.adligo.tests4j.models.shared.trials.TrialRecursion;
 import org.adligo.tests4j.shared.asserts.common.I_Asserts;
+import org.adligo.tests4j.system.shared.trials.ApiTrial;
+import org.adligo.tests4j.system.shared.trials.BeforeTrial;
+import org.adligo.tests4j.system.shared.trials.PackageScope;
+import org.adligo.tests4j.system.shared.trials.Test;
+import org.adligo.tests4j.system.shared.trials.TrialRecursion;
 
 /**
  * this trial is run 50 times in a mock test run

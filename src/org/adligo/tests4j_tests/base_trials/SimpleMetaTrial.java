@@ -2,11 +2,11 @@ package org.adligo.tests4j_tests.base_trials;
 
 import org.adligo.tests4j.models.shared.metadata.I_TrialRunMetadata;
 import org.adligo.tests4j.models.shared.results.I_TrialRunResult;
-import org.adligo.tests4j.models.shared.trials.I_MetaTrialInputData;
-import org.adligo.tests4j.models.shared.trials.I_MetaTrialParams;
-import org.adligo.tests4j.models.shared.trials.I_MetaTrialParamsAware;
-import org.adligo.tests4j.models.shared.trials.MetaTrial;
 import org.adligo.tests4j.shared.output.I_Tests4J_Log;
+import org.adligo.tests4j.system.shared.trials.I_MetaTrialInputData;
+import org.adligo.tests4j.system.shared.trials.I_MetaTrialParams;
+import org.adligo.tests4j.system.shared.trials.I_MetaTrialParamsAware;
+import org.adligo.tests4j.system.shared.trials.MetaTrial;
 
 public class SimpleMetaTrial extends MetaTrial implements I_MetaTrialParamsAware<I_CountingPackageTrials> {
 	private I_CountingPackageTrials countingPkg_;

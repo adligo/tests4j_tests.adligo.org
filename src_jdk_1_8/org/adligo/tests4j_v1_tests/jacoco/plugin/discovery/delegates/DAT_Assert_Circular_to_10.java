@@ -7,11 +7,11 @@ import java.util.Set;
 
 import org.adligo.tests4j.models.shared.dependency.I_ClassDependencies;
 import org.adligo.tests4j.models.shared.dependency.I_ClassDependenciesLocal;
-import org.adligo.tests4j.models.shared.trials.TrialDelegate;
 import org.adligo.tests4j.run.helpers.I_CachedClassBytesClassLoader;
 import org.adligo.tests4j.shared.asserts.dependency.ClassAliasLocal;
 import org.adligo.tests4j.shared.asserts.dependency.I_ClassAlias;
 import org.adligo.tests4j.shared.asserts.dependency.I_Dependency;
+import org.adligo.tests4j.system.shared.trials.TrialDelegate;
 import org.adligo.tests4j_4jacoco.plugin.common.I_OrderedClassDependencies;
 import org.adligo.tests4j_4jacoco.plugin.discovery.OrderedClassDiscovery;
 import org.adligo.tests4j_tests.run.helpers.class_loading_mocks.MockWithBidirectionalA;

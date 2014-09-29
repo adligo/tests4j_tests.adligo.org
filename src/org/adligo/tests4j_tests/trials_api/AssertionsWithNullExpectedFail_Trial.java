@@ -2,8 +2,8 @@ package org.adligo.tests4j_tests.trials_api;
 
 import org.adligo.tests4j.models.shared.coverage.I_PackageCoverage;
 import org.adligo.tests4j.models.shared.results.I_ApiTrialResult;
-import org.adligo.tests4j.models.shared.trials.PackageScope;
-import org.adligo.tests4j.models.shared.trials.Test;
+import org.adligo.tests4j.system.shared.trials.PackageScope;
+import org.adligo.tests4j.system.shared.trials.Test;
 import org.adligo.tests4j_tests.base_trials.ApiCountingTrial;
 import org.adligo.tests4j_tests.base_trials.I_CountType;
 import org.adligo.tests4j_tests.trials_api.asserts_null_expected_trials.AssertContainsNullFailsTrialRunner;

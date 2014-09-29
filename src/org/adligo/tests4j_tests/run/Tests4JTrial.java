@@ -2,8 +2,6 @@ package org.adligo.tests4j_tests.run;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 
-import org.adligo.tests4j.models.shared.trials.SourceFileScope;
-import org.adligo.tests4j.models.shared.trials.Test;
 import org.adligo.tests4j.run.Tests4J;
 import org.adligo.tests4j.run.helpers.Tests4J_Controls;
 import org.adligo.tests4j.shared.asserts.dependency.CircularDependencies;
@@ -18,6 +16,8 @@ import org.adligo.tests4j.system.shared.I_Tests4J_DelegateFactory;
 import org.adligo.tests4j.system.shared.I_Tests4J_Listener;
 import org.adligo.tests4j.system.shared.I_Tests4J_Params;
 import org.adligo.tests4j.system.shared.Tests4J_Params;
+import org.adligo.tests4j.system.shared.trials.SourceFileScope;
+import org.adligo.tests4j.system.shared.trials.Test;
 import org.adligo.tests4j_tests.base_trials.I_CountType;
 import org.adligo.tests4j_tests.base_trials.SourceFileCountingTrial;
 import org.adligo.tests4j_tests.run.helpers.MockTests4J_DelegateFactory;

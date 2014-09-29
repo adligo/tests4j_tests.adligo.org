@@ -4,14 +4,17 @@ import java.util.HashSet;
 import java.util.Set;
 
 import org.adligo.tests4j.models.shared.results.TestResultMutant;
-import org.adligo.tests4j.models.shared.trials.SourceFileScope;
-import org.adligo.tests4j.models.shared.trials.Test;
 import org.adligo.tests4j.shared.asserts.common.AssertType;
 import org.adligo.tests4j.shared.asserts.common.TestFailureMutant;
+import org.adligo.tests4j.shared.asserts.dependency.AllowedDependencies;
+import org.adligo.tests4j.system.shared.trials.SourceFileScope;
+import org.adligo.tests4j.system.shared.trials.Test;
 import org.adligo.tests4j_tests.base_trials.I_CountType;
 import org.adligo.tests4j_tests.base_trials.SourceFileCountingTrial;
+import org.adligo.tests4j_tests.dependency_groups.Tests4J_Results_DependencyGroup;
 
 @SourceFileScope (sourceClass=TestResultMutant.class, minCoverage=98.0)
+@AllowedDependencies (groups=Tests4J_Results_DependencyGroup.class)
 public class TestResultMutantTrial extends SourceFileCountingTrial {
 
 	@Test
@@ -128,7 +131,7 @@ public class TestResultMutantTrial extends SourceFileCountingTrial {
 		//code coverage and circular dependencies +
 		//custom afterTrialTests
 		//+ see above
-		int thisAfterAsserts = 2;
+		int thisAfterAsserts = 3;
 		if (type.isFromMetaWithCoverage()) {
 			return super.getAsserts(type, thisAsserts + thisAfterAsserts);
 		} else {
@@ -142,7 +145,7 @@ public class TestResultMutantTrial extends SourceFileCountingTrial {
 		//code coverage and circular dependencies +
 		//custom afterTrialTests
 		//+ see above
-		int thisAfterUniqueAsserts = 2;
+		int thisAfterUniqueAsserts = 3;
 		if (type.isFromMetaWithCoverage()) {
 			//code coverage and circular dependencies +
 			//custom afterTrialTests

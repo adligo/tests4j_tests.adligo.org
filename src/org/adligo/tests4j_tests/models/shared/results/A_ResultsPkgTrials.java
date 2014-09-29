@@ -1,8 +1,8 @@
 package org.adligo.tests4j_tests.models.shared.results;
 
-import org.adligo.tests4j.models.shared.trials.I_MetaTrialParams;
 import org.adligo.tests4j.run.Tests4J;
 import org.adligo.tests4j.system.shared.Tests4J_Params;
+import org.adligo.tests4j.system.shared.trials.I_MetaTrialParams;
 import org.adligo.tests4j_4jacoco.plugin.CoveragePluginFactory;
 import org.adligo.tests4j_tests.base_trials.I_CountingPackageTrials;
 import org.adligo.tests4j_tests.base_trials.SimpleMetaTrial;
@@ -34,8 +34,34 @@ implements I_MetaTrialParams<A_ResultsPkgTrials>, I_CountingPackageTrials {
 	}
 
 	public void addTrials() throws Exception {
+		super.add(I_ApiTrialResultTrial.class);
+		super.add(I_DurationTrial.class);
+		super.add(I_SourceFileTrialResultTrial.class);
+		super.add(I_TestResultTrial.class);
+		super.add(I_TrialFailureTrial.class);
+		super.add(I_TrialResultTrial.class);
+		super.add(I_TrialRunResultTrial.class);
+		super.add(I_UseCaseTrialResultTrial.class);
+		
 		super.add(TestResultMutantTrial.class);
 		super.add(TestResultTrial.class);
+		
+		super.add(BaseTrialResultMutantTrial.class);
+		super.add(BaseTrialResultTrial.class);
+		
+		super.add(ApiTrialResultMutantTrial.class);
+		super.add(ApiTrialResultTrial.class);
+		
+		super.add(SourceFileTrialResultMutantTrial.class);
+		super.add(SourceFileTrialResultTrial.class);
+		
+		super.add(TrialFailureTrial.class);
+		
+		super.add(TrialRunResultMutantTrial.class);
+		super.add(TrialRunResultTrial.class);
+		
+		super.add(UseCaseTrialResultMutantTrial.class);
+		super.add(UseCaseTrialResultTrial.class);
 	}
 
 	@Override

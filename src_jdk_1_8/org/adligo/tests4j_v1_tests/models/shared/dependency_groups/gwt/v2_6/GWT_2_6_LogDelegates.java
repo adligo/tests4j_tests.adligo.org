@@ -5,13 +5,13 @@ import java.util.Set;
 import org.adligo.tests4j.models.shared.dependency_groups.jse.JSE_Lang;
 import org.adligo.tests4j.models.shared.dependency_groups.jse.JSE_Log;
 import org.adligo.tests4j.models.shared.dependency_groups.jse.JSE_Util;
-import org.adligo.tests4j.models.shared.trials.I_Trial;
 import org.adligo.tests4j.shared.asserts.dependency.FieldSignature;
 import org.adligo.tests4j.shared.asserts.dependency.I_ClassAttributes;
 import org.adligo.tests4j.shared.asserts.dependency.I_FieldSignature;
 import org.adligo.tests4j.shared.asserts.dependency.I_MethodSignature;
 import org.adligo.tests4j.shared.asserts.dependency.MethodSignature;
 import org.adligo.tests4j.shared.common.ClassMethods;
+import org.adligo.tests4j.system.shared.trials.I_Trial;
 
 public class GWT_2_6_LogDelegates extends GWT_2_6_LangDelegates {
 
@@ -77,7 +77,7 @@ public class GWT_2_6_LogDelegates extends GWT_2_6_LangDelegates {
 	
 	public void delegateLogManagerMemberAsserts(I_ClassAttributes result) {
 		delegateObjectMemberAsserts(result);
-		Set<I_FieldSignature> fs = result.getFields();
+		
 		Set<I_MethodSignature> ms = result.getMethods();
 		assertContains(ms, new MethodSignature("addLogger", 
 			new String[] {JSE_Log.LOGGER}, 
@@ -119,7 +119,6 @@ public class GWT_2_6_LogDelegates extends GWT_2_6_LangDelegates {
 	
 	public void delegateLoggerMemberAsserts(I_ClassAttributes result) {
 		delegateObjectMemberAsserts(result);
-		Set<I_FieldSignature> fs = result.getFields();
 		
 		Set<I_MethodSignature> ms = result.getMethods();
 		assertContains(ms, new MethodSignature("getHandlers", 

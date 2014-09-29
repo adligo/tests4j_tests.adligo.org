@@ -4,9 +4,9 @@ import java.io.InputStream;
 import java.util.HashSet;
 import java.util.Set;
 
-import org.adligo.tests4j.models.shared.trials.SourceFileScope;
-import org.adligo.tests4j.models.shared.trials.Test;
 import org.adligo.tests4j.shared.common.ClassMethods;
+import org.adligo.tests4j.system.shared.trials.SourceFileScope;
+import org.adligo.tests4j.system.shared.trials.Test;
 import org.adligo.tests4j_4jacoco.plugin.discovery.ReferenceTrackingClassVisitor;
 import org.adligo.tests4j_4jacoco.plugin.discovery.ReferenceTrackingMethodVisitor;
 import org.adligo.tests4j_4jacoco.plugin.instrumentation.map.MapInstrConstants;

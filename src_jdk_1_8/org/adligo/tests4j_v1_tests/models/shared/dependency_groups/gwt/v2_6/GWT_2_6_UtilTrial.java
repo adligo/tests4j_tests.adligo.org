@@ -2,22 +2,24 @@ package org.adligo.tests4j_v1_tests.models.shared.dependency_groups.gwt.v2_6;
 
 import java.util.Set;
 
-import org.adligo.tests4j.models.shared.dependency_groups.gwt.v2_6.GWT_2_6_IO;
 import org.adligo.tests4j.models.shared.dependency_groups.gwt.v2_6.GWT_2_6_Util;
 import org.adligo.tests4j.models.shared.dependency_groups.jse.JSE_Lang;
 import org.adligo.tests4j.models.shared.dependency_groups.jse.JSE_Util;
-import org.adligo.tests4j.models.shared.trials.SourceFileScope;
-import org.adligo.tests4j.models.shared.trials.Test;
+import org.adligo.tests4j.shared.asserts.dependency.AllowedDependencies;
 import org.adligo.tests4j.shared.asserts.dependency.I_ClassAttributes;
 import org.adligo.tests4j.shared.asserts.dependency.I_FieldSignature;
 import org.adligo.tests4j.shared.asserts.dependency.I_MethodSignature;
 import org.adligo.tests4j.shared.asserts.dependency.MethodSignature;
 import org.adligo.tests4j.shared.common.ClassMethods;
+import org.adligo.tests4j.system.shared.trials.SourceFileScope;
+import org.adligo.tests4j.system.shared.trials.Test;
 import org.adligo.tests4j_tests.base_trials.I_CountType;
 import org.adligo.tests4j_tests.base_trials.SourceFileCountingTrial;
+import org.adligo.tests4j_tests.dependency_groups.Tests4J_GWT_v2_6_DependencyGroup;
 
 //try to keep coverage above 10 for the 0.1 release
 @SourceFileScope (sourceClass=GWT_2_6_Util.class, minCoverage=92.0)
+@AllowedDependencies (groups=Tests4J_GWT_v2_6_DependencyGroup.class)
 public class GWT_2_6_UtilTrial extends SourceFileCountingTrial {
 	private GWT_2_6_UtilDelegates delegates;
 	
@@ -653,7 +655,7 @@ public class GWT_2_6_UtilTrial extends SourceFileCountingTrial {
 		if (type.isFromMetaWithCoverage()) {
 			//code coverage and circular dependencies +
 			//custom afterTrialTests
-			return super.getAsserts(type, thisAsserts + 2);
+			return super.getAsserts(type, thisAsserts + 3);
 		} else {
 			return super.getAsserts(type, thisAsserts);
 		}
@@ -665,7 +667,7 @@ public class GWT_2_6_UtilTrial extends SourceFileCountingTrial {
 		if (type.isFromMetaWithCoverage()) {
 			//code coverage and circular dependencies +
 			//custom afterTrialTests
-			return super.getUniqueAsserts(type, thisUniqueAsserts + 2);
+			return super.getUniqueAsserts(type, thisUniqueAsserts + 3);
 		}  else {
 			return super.getUniqueAsserts(type, thisUniqueAsserts);
 		}

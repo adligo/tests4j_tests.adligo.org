@@ -4,17 +4,17 @@ import java.util.Iterator;
 import java.util.Set;
 import java.util.TreeSet;
 
-import org.adligo.tests4j.models.shared.dependency_groups.adligo.Tests4J_AssertsDependency_DependencyGroup;
 import org.adligo.tests4j.models.shared.dependency_groups.jse.JSE_Lang;
-import org.adligo.tests4j.models.shared.trials.SourceFileScope;
-import org.adligo.tests4j.models.shared.trials.Test;
 import org.adligo.tests4j.shared.asserts.common.ExpectedThrownData;
 import org.adligo.tests4j.shared.asserts.common.I_Thrower;
 import org.adligo.tests4j.shared.asserts.dependency.AllowedDependencies;
 import org.adligo.tests4j.shared.asserts.dependency.MethodSignature;
 import org.adligo.tests4j.shared.common.ClassMethods;
+import org.adligo.tests4j.system.shared.trials.SourceFileScope;
+import org.adligo.tests4j.system.shared.trials.Test;
 import org.adligo.tests4j_tests.base_trials.I_CountType;
 import org.adligo.tests4j_tests.base_trials.SourceFileCountingTrial;
+import org.adligo.tests4j_tests.dependency_groups.Tests4J_AssertsDependency_DependencyGroup;
 
 @SourceFileScope (sourceClass=MethodSignature.class, minCoverage=81.0)
 @AllowedDependencies (groups=Tests4J_AssertsDependency_DependencyGroup.class)

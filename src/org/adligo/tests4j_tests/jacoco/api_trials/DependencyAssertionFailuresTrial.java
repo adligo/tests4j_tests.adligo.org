@@ -1,8 +1,8 @@
 package org.adligo.tests4j_tests.jacoco.api_trials;
 
-import org.adligo.tests4j.models.shared.trials.AdditionalInstrumentation;
-import org.adligo.tests4j.models.shared.trials.PackageScope;
-import org.adligo.tests4j.models.shared.trials.Test;
+import org.adligo.tests4j.system.shared.trials.AdditionalInstrumentation;
+import org.adligo.tests4j.system.shared.trials.PackageScope;
+import org.adligo.tests4j.system.shared.trials.Test;
 import org.adligo.tests4j_tests.base_trials.ApiCountingTrial;
 import org.adligo.tests4j_tests.base_trials.I_CountType;
 import org.adligo.tests4j_tests.jacoco.api_trials.dependency_trials.CalledBadMethod_SourceFileTrialRunner;

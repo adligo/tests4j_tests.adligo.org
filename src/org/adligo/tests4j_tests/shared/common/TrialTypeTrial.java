@@ -1,12 +1,12 @@
 package org.adligo.tests4j_tests.shared.common;
 
-import org.adligo.tests4j.models.shared.dependency_groups.adligo.Tests4J_Common_DependencyGroup;
-import org.adligo.tests4j.models.shared.trials.SourceFileScope;
-import org.adligo.tests4j.models.shared.trials.Test;
 import org.adligo.tests4j.shared.asserts.dependency.AllowedDependencies;
 import org.adligo.tests4j.shared.common.TrialType;
+import org.adligo.tests4j.system.shared.trials.SourceFileScope;
+import org.adligo.tests4j.system.shared.trials.Test;
 import org.adligo.tests4j_tests.base_trials.I_CountType;
 import org.adligo.tests4j_tests.base_trials.SourceFileCountingTrial;
+import org.adligo.tests4j_tests.dependency_groups.Tests4J_Common_DependencyGroup;
 
 @SourceFileScope (sourceClass=TrialType.class, minCoverage=94.0)
 @AllowedDependencies (groups=Tests4J_Common_DependencyGroup.class)
