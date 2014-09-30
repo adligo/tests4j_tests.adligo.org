@@ -3,8 +3,8 @@ package org.adligo.tests4j_tests.system.shared.mocks;
 import org.adligo.tests4j.models.shared.metadata.I_TrialRunMetadata;
 import org.adligo.tests4j.models.shared.results.I_TrialResult;
 import org.adligo.tests4j.models.shared.results.I_TrialRunResult;
-import org.adligo.tests4j.system.shared.I_Tests4J_Listener;
-import org.adligo.tests4j.system.shared.I_Tests4J_ProcessInfo;
+import org.adligo.tests4j.system.shared.api.I_Tests4J_Listener;
+import org.adligo.tests4j.system.shared.api.I_Tests4J_ProcessInfo;
 
 public class Clumsey_Tests4J_Listener implements I_Tests4J_Listener {
 

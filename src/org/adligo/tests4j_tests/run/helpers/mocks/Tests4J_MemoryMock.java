@@ -5,7 +5,7 @@ import org.adligo.tests4j.run.common.I_Tests4J_Memory;
 import org.adligo.tests4j.shared.asserts.dependency.I_DependencyGroup;
 import org.adligo.tests4j.shared.asserts.uniform.I_EvaluatorLookup;
 import org.adligo.tests4j.shared.output.I_Tests4J_Log;
-import org.adligo.tests4j.system.shared.I_Tests4J_CoveragePlugin;
+import org.adligo.tests4j.system.shared.api.I_Tests4J_CoveragePlugin;
 import org.adligo.tests4j_tests.system.shared.mocks.Tests4J_LogMock;
 
 public class Tests4J_MemoryMock implements I_Tests4J_Memory {

@@ -8,7 +8,7 @@ import org.adligo.tests4j.models.shared.results.I_TrialFailure;
 import org.adligo.tests4j.models.shared.results.I_TrialResult;
 import org.adligo.tests4j.shared.asserts.common.I_Asserts;
 import org.adligo.tests4j.shared.en.Tests4J_EnglishConstants;
-import org.adligo.tests4j.shared.i18n.I_Tests4J_AnnotationErrors;
+import org.adligo.tests4j.shared.i18n.I_Tests4J_AnnotationMessages;
 import org.adligo.tests4j.system.shared.trials.Test;
 import org.adligo.tests4j.system.shared.trials.TrialRecursion;
 import org.adligo.tests4j.system.shared.trials.UseCaseScope;
@@ -58,7 +58,7 @@ public class StaticTestTrial extends UseCaseTrial {
 		asserts.assertEquals(1, failures.size());
 		I_TrialFailure failure = failures.get(0);
 		
-		I_Tests4J_AnnotationErrors messages =  Tests4J_EnglishConstants.ENGLISH.getAnnotationErrors();
+		I_Tests4J_AnnotationMessages messages =  Tests4J_EnglishConstants.ENGLISH.getAnnotationMessages();
 		asserts.assertEquals(messages.getIsStatic(), failure.getMessage());
 		asserts.assertEquals(
 				"org.adligo.tests4j_tests.trials_api.bad_mock_use_case_trials.StaticTestTrial.testFoo was not annotated correctly.", 

@@ -26,8 +26,9 @@ import org.adligo.tests4j.models.shared.results.UseCaseTrialResult;
 import org.adligo.tests4j.models.shared.results.UseCaseTrialResultMutant;
 
 public class Tests4J_Results_DependencyGroup extends Tests4J_DependencyGroup {
-
-	public Tests4J_Results_DependencyGroup() {
+	public static final Tests4J_Results_DependencyGroup INSTANCE = new Tests4J_Results_DependencyGroup();
+	
+	private Tests4J_Results_DependencyGroup() {
 		Set<String> names = new HashSet<String>();
 		
 		add(names, ApiTrialResult.class);
@@ -57,11 +58,9 @@ public class Tests4J_Results_DependencyGroup extends Tests4J_DependencyGroup {
 		add(names, UseCaseTrialResult.class);
 		add(names, UseCaseTrialResultMutant.class);
 		
-		Tests4J_Coverage_DependencyGroup dg = new Tests4J_Coverage_DependencyGroup();
-		names.addAll(dg.getClassNames());
+		names.addAll(Tests4J_Coverage_DependencyGroup.INSTANCE.getClassNames());
 		
-		Tests4J_Dependency_DependencyGroup dg2 = new Tests4J_Dependency_DependencyGroup();
-		names.addAll(dg2.getClassNames());
+		names.addAll(Tests4J_Dependency_DependencyGroup.INSTANCE.getClassNames());
 		
 		setupDelegates(names);
 	}

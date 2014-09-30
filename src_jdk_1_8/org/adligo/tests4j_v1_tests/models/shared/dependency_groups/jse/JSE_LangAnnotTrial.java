@@ -8,7 +8,7 @@ import org.adligo.tests4j_tests.base_trials.I_CountType;
 import org.adligo.tests4j_tests.base_trials.SourceFileCountingTrial;
 import org.adligo.tests4j_tests.dependency_groups.Tests4J_JSE_DependencyGroup;
 
-@SourceFileScope (sourceClass=JSE_LangAnnot.class)
+@SourceFileScope (sourceClass=JSE_LangAnnot.class,minCoverage=91.0)
 @AllowedDependencies (groups=Tests4J_JSE_DependencyGroup.class)
 public class JSE_LangAnnotTrial extends SourceFileCountingTrial {
 

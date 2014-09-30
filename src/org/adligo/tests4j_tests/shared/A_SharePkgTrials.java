@@ -1,7 +1,7 @@
 package org.adligo.tests4j_tests.shared;
 
-import org.adligo.tests4j.run.Tests4J;
-import org.adligo.tests4j.system.shared.Tests4J_Params;
+import org.adligo.tests4j.run.api.Tests4J;
+import org.adligo.tests4j.system.shared.api.Tests4J_Params;
 import org.adligo.tests4j.system.shared.trials.I_MetaTrialParams;
 import org.adligo.tests4j_4jacoco.plugin.CoveragePluginFactory;
 import org.adligo.tests4j_tests.base_trials.I_CountingPackageTrials;
@@ -12,8 +12,8 @@ import org.adligo.tests4j_tests.shared.common.A_CmnPkgTrials;
 import org.adligo.tests4j_tests.shared.en.A_EnPkgTrials;
 import org.adligo.tests4j_tests.shared.i18n.A_I18nPkgTrials;
 import org.adligo.tests4j_tests.shared.output.A_OutPkgTrials;
-import org.adligo.tests4j_tests.shared.report.summary.A_SummPkgTrials;
 import org.adligo.tests4j_tests.shared.xml.A_XmlPkgTrials;
+import org.adligo.tests4j_tests.system.shared.report.summary.A_SummPkgTrials;
 
 public class A_SharePkgTrials extends SimplePackageTrials 
 implements I_MetaTrialParams<A_SharePkgTrials>, I_CountingPackageTrials {
@@ -25,7 +25,6 @@ implements I_MetaTrialParams<A_SharePkgTrials>, I_CountingPackageTrials {
 	
 	private A_AssertsPkgTrials asserts = new A_AssertsPkgTrials();
 	private A_OutPkgTrials out = new A_OutPkgTrials();
-	private A_SummPkgTrials sum = new A_SummPkgTrials();
 	
 	public static void main(String [] args) {
 		try {
@@ -67,8 +66,6 @@ implements I_MetaTrialParams<A_SharePkgTrials>, I_CountingPackageTrials {
 		out.addTrials();
 		add(out.getCountingTrials());
 		
-		sum.addTrials();
-		add(sum.getCountingTrials());
 	}
 
 	@Override
@@ -86,6 +83,5 @@ implements I_MetaTrialParams<A_SharePkgTrials>, I_CountingPackageTrials {
 		asserts.setParams(params);
 		
 		out.setParams(params);
-		sum.setParams(params);
 	}
 }

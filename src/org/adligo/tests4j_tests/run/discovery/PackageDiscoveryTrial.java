@@ -24,11 +24,12 @@ import org.adligo.tests4j.models.shared.metadata.UseCaseMetadata;
 import org.adligo.tests4j.run.discovery.AfterTrialAuditor;
 import org.adligo.tests4j.run.discovery.AllowedDependenciesAuditor;
 import org.adligo.tests4j.run.discovery.BeforeTrialAuditor;
+import org.adligo.tests4j.run.discovery.ClassesWithSourceFileTrialsCalculator;
 import org.adligo.tests4j.run.discovery.I_TrialDescription;
 import org.adligo.tests4j.run.discovery.I_TrialStateNameIdKey;
+import org.adligo.tests4j.run.discovery.MemoryWarning;
 import org.adligo.tests4j.run.discovery.NonTests4jMethodDiscovery;
 import org.adligo.tests4j.run.discovery.PackageDiscovery;
-import org.adligo.tests4j.run.discovery.ClassesWithSourceFileTrialsCalculator;
 import org.adligo.tests4j.run.discovery.TestAuditor;
 import org.adligo.tests4j.run.discovery.TestDescription;
 import org.adligo.tests4j.run.discovery.Tests4J_ParamsReader;
@@ -38,9 +39,6 @@ import org.adligo.tests4j.run.discovery.TrialQueueDecisionTree;
 import org.adligo.tests4j.run.discovery.TrialState;
 import org.adligo.tests4j.run.discovery.TrialStateNameIdKey;
 import org.adligo.tests4j.run.discovery.TrialTypeFinder;
-import org.adligo.tests4j.shared.asserts.dependency.AllowedDependencies;
-import org.adligo.tests4j.shared.asserts.dependency.CircularDependencies;
-import org.adligo.tests4j.shared.asserts.dependency.I_CircularDependencies;
 import org.adligo.tests4j.system.shared.trials.AbstractTrial;
 import org.adligo.tests4j.system.shared.trials.AdditionalInstrumentation;
 import org.adligo.tests4j.system.shared.trials.AfterTrial;
@@ -94,14 +92,14 @@ import org.adligo.tests4j_tests.run.discovery.package_discovery_inner_mocks.TwoN
 @SourceFileScope (sourceClass=PackageDiscovery.class, minCoverage=50.0)
 public class PackageDiscoveryTrial extends SourceFileCountingTrial {
 
-	private static final int ASSERT_COUNT = 108;
+	private static final int ASSERT_COUNT = 109;
 
 	@Test
 	public void testDiscoveryPackage() throws Exception {
 		PackageDiscovery cd = new PackageDiscovery("org.adligo.tests4j.run.discovery");
 		List<String> clazzNames = cd.getClassNames();
 		assertNotNull(clazzNames);
-		assertEquals(17, clazzNames.size());
+		assertEquals(18, clazzNames.size());
 		assertContains(clazzNames, AfterTrialAuditor.class.getName());
 		assertContains(clazzNames, AllowedDependenciesAuditor.class.getName());
 		
@@ -110,6 +108,7 @@ public class PackageDiscoveryTrial extends SourceFileCountingTrial {
 		assertContains(clazzNames, I_TrialDescription.class.getName());
 		assertContains(clazzNames, I_TrialStateNameIdKey.class.getName());
 		
+		assertContains(clazzNames, MemoryWarning.class.getName());
 		assertContains(clazzNames, NonTests4jMethodDiscovery.class.getName());
 		assertContains(clazzNames, PackageDiscovery.class.getName());
 

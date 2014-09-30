@@ -42,8 +42,9 @@ import org.adligo.tests4j.shared.asserts.common.ThrownAssertionData;
 import org.adligo.tests4j.shared.asserts.common.ThrownAssertionDataMutant;
 
 public class Tests4J_AssertsCommon_DependencyGroup extends Tests4J_DependencyGroup {
-
-	public Tests4J_AssertsCommon_DependencyGroup() {
+	public static final Tests4J_AssertsCommon_DependencyGroup INSTANCE = new Tests4J_AssertsCommon_DependencyGroup();
+	
+	private Tests4J_AssertsCommon_DependencyGroup() {
 		Set<String> names = new HashSet<String>();
 		
 		add(names, AssertCompareFailure.class);
@@ -93,8 +94,7 @@ public class Tests4J_AssertsCommon_DependencyGroup extends Tests4J_DependencyGro
 		add(names, ThrownAssertionData.class);
 		add(names, ThrownAssertionDataMutant.class);
 		
-		Tests4J_XML_DependencyGroup dg = new Tests4J_XML_DependencyGroup();
-		names.addAll(dg.getClassNames());
+		names.addAll(Tests4J_XML_DependencyGroup.INSTANCE.getClassNames());
 		
 		setupDelegates(names);
 	}

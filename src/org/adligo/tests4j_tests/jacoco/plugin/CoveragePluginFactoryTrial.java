@@ -1,8 +1,8 @@
 package org.adligo.tests4j_tests.jacoco.plugin;
 
 import org.adligo.tests4j.shared.output.DefaultLog;
-import org.adligo.tests4j.system.shared.I_Tests4J_CoveragePlugin;
-import org.adligo.tests4j.system.shared.Tests4J_CoveragePluginParams;
+import org.adligo.tests4j.system.shared.api.I_Tests4J_CoveragePlugin;
+import org.adligo.tests4j.system.shared.api.Tests4J_CoveragePluginParams;
 import org.adligo.tests4j.system.shared.trials.SourceFileScope;
 import org.adligo.tests4j.system.shared.trials.Test;
 import org.adligo.tests4j_4jacoco.plugin.CoveragePlugin;

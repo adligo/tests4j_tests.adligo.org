@@ -3,7 +3,7 @@ package org.adligo.tests4j_tests.shared.en;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.adligo.tests4j.shared.en.Tests4J_AnnotationErrors;
+import org.adligo.tests4j.shared.en.Tests4J_AnnotationMessages;
 import org.adligo.tests4j.shared.en.Tests4J_AssertionInputMessages;
 import org.adligo.tests4j.shared.en.Tests4J_EclipseErrors;
 import org.adligo.tests4j.shared.en.Tests4J_EnglishConstants;
@@ -56,8 +56,8 @@ public class Tests4J_EnglishConstants_Trial extends SourceFileCountingTrial {
 	public void testGetters() {
 		I_Tests4J_Constants messages = Tests4J_EnglishConstants.ENGLISH;
 		
-		assertEquals(Tests4J_AnnotationErrors.class.getName(),  
-				messages.getAnnotationErrors().getClass().getName());
+		assertEquals(Tests4J_AnnotationMessages.class.getName(),  
+				messages.getAnnotationMessages().getClass().getName());
 		assertEquals(Tests4J_AssertionInputMessages.class.getName(),  
 				messages.getAssertionInputMessages().getClass().getName());
 		assertEquals(Tests4J_ResultMessages.class.getName(),  

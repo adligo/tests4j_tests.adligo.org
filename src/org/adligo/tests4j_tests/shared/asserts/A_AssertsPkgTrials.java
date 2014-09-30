@@ -1,7 +1,7 @@
 package org.adligo.tests4j_tests.shared.asserts;
 
-import org.adligo.tests4j.run.Tests4J;
-import org.adligo.tests4j.system.shared.Tests4J_Params;
+import org.adligo.tests4j.run.api.Tests4J;
+import org.adligo.tests4j.system.shared.api.Tests4J_Params;
 import org.adligo.tests4j.system.shared.report.summary.TestDisplay;
 import org.adligo.tests4j.system.shared.report.summary.TrialDisplay;
 import org.adligo.tests4j.system.shared.trials.I_MetaTrialParams;

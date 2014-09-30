@@ -15,8 +15,9 @@ import org.adligo.tests4j.shared.output.PrintStreamOutputBuffer;
 import org.adligo.tests4j.shared.output.SafeOutputStreamBuffer;
 
 public class Tests4J_Output_DependencyGroup extends Tests4J_DependencyGroup {
-
-	public Tests4J_Output_DependencyGroup() {
+	public static final Tests4J_Output_DependencyGroup INSTANCE = new Tests4J_Output_DependencyGroup();
+	
+	private Tests4J_Output_DependencyGroup() {
 		Set<String> names = new HashSet<String>();
 		
 		add(names, ByteListOutputStream.class);
@@ -34,8 +35,7 @@ public class Tests4J_Output_DependencyGroup extends Tests4J_DependencyGroup {
 		add(names, PrintStreamOutputBuffer.class);
 		add(names, SafeOutputStreamBuffer.class);
 		
-		Tests4J_Common_DependencyGroup dg = new Tests4J_Common_DependencyGroup();
-		names.addAll(dg.getClassNames());
+		names.addAll(Tests4J_Common_DependencyGroup.INSTANCE.getClassNames());
 		
 		setupDelegates(names);
 	}

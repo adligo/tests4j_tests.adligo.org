@@ -6,7 +6,7 @@ import org.adligo.tests4j.shared.asserts.common.ExpectedThrownData;
 import org.adligo.tests4j.shared.asserts.common.I_Thrower;
 import org.adligo.tests4j.shared.asserts.dependency.AllowedDependencies;
 import org.adligo.tests4j.shared.en.Tests4J_EnglishConstants;
-import org.adligo.tests4j.shared.i18n.I_Tests4J_AnnotationErrors;
+import org.adligo.tests4j.shared.i18n.I_Tests4J_AnnotationMessages;
 import org.adligo.tests4j.shared.xml.XML_Builder;
 import org.adligo.tests4j.system.shared.trials.SourceFileScope;
 import org.adligo.tests4j.system.shared.trials.Test;
@@ -21,7 +21,7 @@ public class UseCaseMetadataTrial extends SourceFileCountingTrial {
 	
 	@Test
 	public void testConstructorExceptions() throws Exception {
-		I_Tests4J_AnnotationErrors messages =  Tests4J_EnglishConstants.ENGLISH.getAnnotationErrors();
+		I_Tests4J_AnnotationMessages messages =  Tests4J_EnglishConstants.ENGLISH.getAnnotationMessages();
 		 
 		assertThrown(new ExpectedThrownData(new IllegalArgumentException(
 				messages.getUseCaseScopeEmptyNown())), 

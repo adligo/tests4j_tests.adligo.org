@@ -39,8 +39,9 @@ import org.adligo.tests4j.shared.asserts.dependency.MethodSignature;
 import org.adligo.tests4j.shared.asserts.dependency.NameOnlyDependencyGroup;
 
 public class Tests4J_Dependency_DependencyGroup extends Tests4J_DependencyGroup {
-
-	public Tests4J_Dependency_DependencyGroup() {
+	public static final Tests4J_Dependency_DependencyGroup INSTANCE = new Tests4J_Dependency_DependencyGroup();
+	
+	private Tests4J_Dependency_DependencyGroup() {
 		Set<String> names = new HashSet<String>();
 		
 		
@@ -60,12 +61,9 @@ public class Tests4J_Dependency_DependencyGroup extends Tests4J_DependencyGroup 
 		add(names, I_ClassParentsCache.class);
 		add(names, I_ClassParentsLocal.class);
 		
+		names.addAll(Tests4J_Common_DependencyGroup.INSTANCE.getClassNames());
 		
-		Tests4J_Common_DependencyGroup dg = new Tests4J_Common_DependencyGroup();
-		names.addAll(dg.getClassNames());
-		
-		Tests4J_AssertsDependency_DependencyGroup ad = new Tests4J_AssertsDependency_DependencyGroup();
-		names.addAll(ad.getClassNames());
+		names.addAll(Tests4J_AssertsDependency_DependencyGroup.INSTANCE.getClassNames());
 		
 		setupDelegates(names);
 	}

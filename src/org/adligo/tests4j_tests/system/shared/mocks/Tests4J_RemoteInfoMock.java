@@ -1,7 +1,7 @@
 package org.adligo.tests4j_tests.system.shared.mocks;
 
 import org.adligo.tests4j.shared.xml.I_XML_Builder;
-import org.adligo.tests4j.system.shared.I_Tests4J_RemoteInfo;
+import org.adligo.tests4j.system.shared.api.I_Tests4J_RemoteInfo;
 
 /** a mock capable of throwing a
  * throwable from one of it's get* methods.

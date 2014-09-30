@@ -45,7 +45,6 @@ public class I_JSE_1_7_SqlTrial extends SourceFileCountingTrial {
 		assertEquals("java.sql.Timestamp",I_JSE_1_7_Sql.TIMESTAMP);
 		assertEquals("java.sql.Types",I_JSE_1_7_Sql.TYPES);
 		assertEquals("java.sql.ClientInfoStatus",I_JSE_1_7_Sql.CLIENT_INFO_STATUS);
-		assertEquals("java.sql.PseudoColumnUsage",I_JSE_1_7_Sql.PSEUDO_COLUMN_USAGE);
 		assertEquals("java.sql.RowIdLifetime",I_JSE_1_7_Sql.ROW_ID_LIFETIME);
 		assertEquals("java.sql.BatchUpdateException",I_JSE_1_7_Sql.BATCH_UPDATE_EXCEPTION);
 		assertEquals("java.sql.DataTruncation",I_JSE_1_7_Sql.DATA_TRUNCATION);
@@ -63,6 +62,8 @@ public class I_JSE_1_7_SqlTrial extends SourceFileCountingTrial {
 		assertEquals("java.sql.SQLTransientConnectionException",I_JSE_1_7_Sql.SQLTRANSIENT_CONNECTION_EXCEPTION);
 		assertEquals("java.sql.SQLTransientException",I_JSE_1_7_Sql.SQLTRANSIENT_EXCEPTION);
 		assertEquals("java.sql.SQLWarning",I_JSE_1_7_Sql.SQLWARNING);
+		
+		assertEquals("java.sql.PseudoColumnUsage",I_JSE_1_7_Sql.PSEUDO_COLUMN_USAGE);
 	}
 	@Override
 	public int getTests(I_CountType type) {

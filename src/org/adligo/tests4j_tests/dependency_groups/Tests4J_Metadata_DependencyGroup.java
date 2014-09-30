@@ -22,8 +22,9 @@ import org.adligo.tests4j.models.shared.metadata.TrialRunMetadataMutant;
 import org.adligo.tests4j.models.shared.metadata.UseCaseMetadata;
 
 public class Tests4J_Metadata_DependencyGroup extends Tests4J_DependencyGroup {
-
-	public Tests4J_Metadata_DependencyGroup() {
+	public static final Tests4J_Metadata_DependencyGroup INSTANCE = new Tests4J_Metadata_DependencyGroup();
+	
+	private Tests4J_Metadata_DependencyGroup() {
 		Set<String> names = new HashSet<String>();
 		add(names, I_MachineMetadata.class);
 		add(names, I_SourceInfoMetadata.class);
@@ -48,9 +49,7 @@ public class Tests4J_Metadata_DependencyGroup extends Tests4J_DependencyGroup {
 		
 		add(names, UseCaseMetadata.class);
 		
-		
-		Tests4J_XML_DependencyGroup dg = new Tests4J_XML_DependencyGroup();
-		names.addAll(dg.getClassNames());
+		names.addAll(Tests4J_XML_DependencyGroup.INSTANCE.getClassNames());
 		
 		setupDelegates(names);
 	}

@@ -106,7 +106,7 @@ public class BadSourceFileTrials_Trial extends ApiCountingTrial {
 		super.afterTrialTests(p);
 		if (p.hasRecordedCoverage()) {
 			I_PackageCoverage coverage = p.getPackageCoverage();
-			assertGreaterThanOrEquals(10.0, coverage.getPercentageCoveredDouble());
+			assertGreaterThanOrEquals(8.0, coverage.getPercentageCoveredDouble());
 		}
 	}
 	

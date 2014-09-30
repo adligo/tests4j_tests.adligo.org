@@ -8,7 +8,7 @@ import org.adligo.tests4j_tests.base_trials.I_CountType;
 import org.adligo.tests4j_tests.base_trials.SourceFileCountingTrial;
 import org.adligo.tests4j_tests.dependency_groups.Tests4J_JSE_DependencyGroup;
 
-@SourceFileScope (sourceClass=JSE_IO.class)
+@SourceFileScope (sourceClass=JSE_IO.class,minCoverage=97)
 @AllowedDependencies (groups=Tests4J_JSE_DependencyGroup.class)
 public class JSE_IOTrial extends SourceFileCountingTrial {
 
@@ -81,7 +81,7 @@ public class JSE_IOTrial extends SourceFileCountingTrial {
 		assertEquals("java.io.CharConversionException",JSE_IO.CHAR_CONVERSION_EXCEPTION);
 		assertEquals("java.io.EOFException",JSE_IO.EOFEXCEPTION);
 		assertEquals("java.io.FileNotFoundException",JSE_IO.FILE_NOT_FOUND_EXCEPTION);
-		assertEquals("java.lang.InterruptedException",JSE_IO.INTERRUPTED_EXCEPTION);
+		assertEquals("java.io.InterruptedIOException",JSE_IO.INTERRUPTED_IO_EXCEPTION);
 		assertEquals("java.io.InvalidClassException",JSE_IO.INVALID_CLASS_EXCEPTION);
 		assertEquals("java.io.InvalidObjectException",JSE_IO.INVALID_OBJECT_EXCEPTION);
 		assertEquals("java.io.IOException",JSE_IO.IOEXCEPTION);

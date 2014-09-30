@@ -11,8 +11,9 @@ import org.adligo.tests4j.shared.xml.XML_Chars;
 import org.adligo.tests4j.shared.xml.XML_Parser;
 
 public class Tests4J_XML_DependencyGroup extends Tests4J_DependencyGroup {
-
-	public Tests4J_XML_DependencyGroup() {
+	public static final Tests4J_XML_DependencyGroup INSTANCE = new Tests4J_XML_DependencyGroup();
+	
+	private Tests4J_XML_DependencyGroup() {
 		Set<String> names = new HashSet<String>();
 		
 		add(names, I_XML_Builder.class);
@@ -23,8 +24,7 @@ public class Tests4J_XML_DependencyGroup extends Tests4J_DependencyGroup {
 		add(names, XML_Chars.class);
 		add(names, XML_Parser.class);
 		
-		Tests4J_Common_DependencyGroup dg = new Tests4J_Common_DependencyGroup();
-		names.addAll(dg.getClassNames());
+		names.addAll(Tests4J_Common_DependencyGroup.INSTANCE.getClassNames());
 		
 		setupDelegates(names);
 	}

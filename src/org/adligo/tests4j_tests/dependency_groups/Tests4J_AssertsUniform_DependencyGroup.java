@@ -18,8 +18,9 @@ import org.adligo.tests4j.shared.asserts.uniform.ThrowableUniformEvaluator;
 import org.adligo.tests4j.shared.asserts.uniform.UniformThrownAssertionEvaluator;
 
 public class Tests4J_AssertsUniform_DependencyGroup extends Tests4J_DependencyGroup {
-
-	public Tests4J_AssertsUniform_DependencyGroup() {
+	public static final Tests4J_AssertsUniform_DependencyGroup INSTANCE = new Tests4J_AssertsUniform_DependencyGroup();
+	
+	private Tests4J_AssertsUniform_DependencyGroup() {
 		Set<String> names = new HashSet<String>();
 		
 		add(names, Evaluation.class);
@@ -39,8 +40,7 @@ public class Tests4J_AssertsUniform_DependencyGroup extends Tests4J_DependencyGr
 		add(names, ThrowableUniformEvaluator.class);
 		add(names, UniformThrownAssertionEvaluator.class);
 		
-		Tests4J_AssertsLineText_DependencyGroup dg = new Tests4J_AssertsLineText_DependencyGroup();
-		names.addAll(dg.getClassNames());
+		names.addAll(Tests4J_AssertsLineText_DependencyGroup.INSTANCE.getClassNames());
 		
 		setupDelegates(names);
 	}

@@ -23,8 +23,9 @@ import org.adligo.tests4j.models.shared.coverage.SourceFileCoverageDelegator;
 import org.adligo.tests4j.models.shared.coverage.SourceFileCoverageMutant;
 
 public class Tests4J_Coverage_DependencyGroup extends Tests4J_DependencyGroup {
-
-	public Tests4J_Coverage_DependencyGroup() {
+	public static final Tests4J_Coverage_DependencyGroup INSTANCE = new Tests4J_Coverage_DependencyGroup();
+	
+	private Tests4J_Coverage_DependencyGroup() {
 		Set<String> names = new HashSet<String>();
 		
 		add(names, CoverageUnitContinerMutant.class);
@@ -50,8 +51,7 @@ public class Tests4J_Coverage_DependencyGroup extends Tests4J_DependencyGroup {
 		add(names, SourceFileCoverageMutant.class);
 		
 		
-		Tests4J_XML_DependencyGroup dg = new Tests4J_XML_DependencyGroup();
-		names.addAll(dg.getClassNames());
+		names.addAll(Tests4J_XML_DependencyGroup.INSTANCE.getClassNames());
 		
 		setupDelegates(names);
 	}

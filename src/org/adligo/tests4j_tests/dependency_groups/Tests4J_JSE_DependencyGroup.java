@@ -3,7 +3,7 @@ package org.adligo.tests4j_tests.dependency_groups;
 import java.util.HashSet;
 import java.util.Set;
 
-import org.adligo.tests4j.models.shared.dependency_groups.jse.I_PackageConstantLookup;
+import org.adligo.tests4j.models.shared.dependency.I_PackageConstantLookup;
 import org.adligo.tests4j.models.shared.dependency_groups.jse.JSE_IO;
 import org.adligo.tests4j.models.shared.dependency_groups.jse.JSE_Lang;
 import org.adligo.tests4j.models.shared.dependency_groups.jse.JSE_LangAnnot;
@@ -13,8 +13,9 @@ import org.adligo.tests4j.models.shared.dependency_groups.jse.JSE_Sql;
 import org.adligo.tests4j.models.shared.dependency_groups.jse.JSE_Util;
 
 public class Tests4J_JSE_DependencyGroup extends Tests4J_DependencyGroup {
-
-	public Tests4J_JSE_DependencyGroup() {
+	public static final Tests4J_JSE_DependencyGroup INSTANCE = new Tests4J_JSE_DependencyGroup();
+	
+	private Tests4J_JSE_DependencyGroup() {
 		Set<String> names = new HashSet<String>();
 		
 		add(names, I_PackageConstantLookup.class);
@@ -27,8 +28,7 @@ public class Tests4J_JSE_DependencyGroup extends Tests4J_DependencyGroup {
 		add(names, JSE_Sql.class);
 		add(names, JSE_Util.class);
 		
-		Tests4J_JSE_v1_8_DependencyGroup dg = new Tests4J_JSE_v1_8_DependencyGroup();
-		names.addAll(dg.getClassNames());
+		names.addAll(Tests4J_JSE_v1_8_DependencyGroup.INSTANCE.getClassNames());
 		
 		super.setupDelegates(names);
 	}

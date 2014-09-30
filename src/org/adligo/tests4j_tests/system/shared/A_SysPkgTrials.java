@@ -1,17 +1,21 @@
 package org.adligo.tests4j_tests.system.shared;
 
-import org.adligo.tests4j.run.Tests4J;
-import org.adligo.tests4j.system.shared.Tests4J_Params;
-import org.adligo.tests4j.system.shared.Tests4J_TrialProgress;
+import org.adligo.tests4j.run.api.Tests4J;
+import org.adligo.tests4j.system.shared.api.Tests4J_Params;
 import org.adligo.tests4j.system.shared.trials.I_MetaTrialParams;
 import org.adligo.tests4j_4jacoco.plugin.CoveragePluginFactory;
 import org.adligo.tests4j_tests.base_trials.I_CountingPackageTrials;
 import org.adligo.tests4j_tests.base_trials.SimpleMetaTrial;
 import org.adligo.tests4j_tests.base_trials.SimplePackageTrials;
+import org.adligo.tests4j_tests.system.shared.api.A_SysApiPkgTrials;
+import org.adligo.tests4j_tests.system.shared.report.summary.A_SummPkgTrials;
+import org.adligo.tests4j_tests.system.shared.trials.A_TrialsPkgTrials;
 
 public class A_SysPkgTrials extends SimplePackageTrials 
 implements I_MetaTrialParams<A_SysPkgTrials>, I_CountingPackageTrials {
-
+	private A_SysApiPkgTrials api = new A_SysApiPkgTrials();
+	private A_TrialsPkgTrials trials = new A_TrialsPkgTrials();
+	private A_SummPkgTrials summary = new A_SummPkgTrials();
 	
 	public static void main(String [] args) {
 		try {
@@ -35,57 +39,26 @@ implements I_MetaTrialParams<A_SysPkgTrials>, I_CountingPackageTrials {
 	}
 
 	public void addTrials() throws Exception {
+		trials.addTrials();
+		add(trials.getCountingTrials());
 		
-		add(I_Tests4J_ControlsTrial.class);
-		add(I_Tests4J_CoveragePluginFactoryTrial.class);
-		add(I_Tests4J_CoveragePluginParamsTrial.class);
+		api.addTrials();
+		add(api.getCountingTrials());
 		
-		add(I_Tests4J_CoveragePluginTrial.class);
-		add(I_Tests4J_CoverageRecorderTrial.class);
-		
-		add(I_Tests4J_CoverageTrialInstrumentationTrial.class);
-		add(I_Tests4J_DelegateFactoryTrial.class);
-		add(I_Tests4J_DelegateTrial.class);
-		
-		add(I_Tests4J_DelegateTrial.class);
-		add(I_Tests4J_DelegateFactoryTrial.class);
-		
-		add(I_Tests4J_ListenerTrial.class);
-		
-		add(I_Tests4J_ParamsTrial.class);
-		add(I_Tests4J_ProcessInfoTrial.class);
-		add(I_Tests4J_ProgressMonitorTrial.class);
-		
-		add(I_Tests4J_RemoteInfoTrial.class);
-		add(I_Tests4J_RunnableTrial.class);
-		
-		add(I_Tests4J_SelectionTrial.class);
-		add(I_Tests4J_SourceInfoParamsTrial.class);
-		add(I_Tests4J_TestFinishedListenerTrial.class);
-		add(I_Tests4J_TrialListTrial.class);
-		add(I_Tests4J_TrialProgressTrial.class);
-		
-		add(Tests4J_SelectionTrial.class);
-		add(Tests4J_SourceInfoParamsTrial.class);
-		add(Tests4J_SourceInfoParamsDelegateTrial.class);
-		
-		add(Tests4J_RemoteInfoTrial.class);
-		
-		add(Tests4J_CoveragePluginParamsTrial.class);
-		add(Tests4J_CoverageTrialInstrumentationTrial.class);
-		add(Tests4J_DefaultProgressMonitorTrial.class);
-		add(Tests4J_DelegateCoveragePluginTrial.class);
-		
-		add(Tests4J_DelegateProgressMonitorTrial.class);
-		
-		add(Tests4J_ParamsTrial.class);
-		add(Tests4J_ListenerDelegateTrial.class);
-		
-		add(Tests4J_TrialProgressTrial.class);
+		summary.addTrials();
+		add(summary.getCountingTrials());
 	}
 
 	@Override
 	public A_SysPkgTrials getTrialParams() {
 		return this;
+	}
+
+	@Override
+	public void setParams(Tests4J_Params params) {
+		super.setParams(params);
+		trials.setParams(params);
+		api.setParams(params);
+		summary.setParams(params);
 	}
 }

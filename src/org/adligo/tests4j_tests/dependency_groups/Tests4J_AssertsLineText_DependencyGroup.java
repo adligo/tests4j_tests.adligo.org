@@ -21,8 +21,9 @@ import org.adligo.tests4j.shared.asserts.line_text.TextLinesCompare;
 import org.adligo.tests4j.shared.asserts.line_text.TextLinesCompareResult;
 
 public class Tests4J_AssertsLineText_DependencyGroup extends Tests4J_DependencyGroup {
-
-	public Tests4J_AssertsLineText_DependencyGroup() {
+	public static final Tests4J_AssertsLineText_DependencyGroup INSTANCE = new Tests4J_AssertsLineText_DependencyGroup();
+	
+	private Tests4J_AssertsLineText_DependencyGroup() {
 		Set<String> names = new HashSet<String>();
 		
 		add(names, DiffIndexes.class);
@@ -48,8 +49,7 @@ public class Tests4J_AssertsLineText_DependencyGroup extends Tests4J_DependencyG
 		add(names, TextLinesCompare.class);
 		add(names, TextLinesCompareResult.class);
 		
-		Tests4J_AssertsCommon_DependencyGroup dg = new Tests4J_AssertsCommon_DependencyGroup();
-		names.addAll(dg.getClassNames());
+		names.addAll(Tests4J_AssertsCommon_DependencyGroup.INSTANCE.getClassNames());
 		
 		setupDelegates(names);
 	}

@@ -1,14 +1,8 @@
 package org.adligo.tests4j_tests.dependency_groups;
 
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
-import org.adligo.tests4j.shared.asserts.dependency.DependencyGroupAggregate;
-import org.adligo.tests4j.shared.asserts.dependency.DependencyGroupBaseDelegate;
-import org.adligo.tests4j.shared.asserts.dependency.I_DependencyGroup;
-import org.adligo.tests4j.shared.asserts.dependency.NameOnlyDependencyGroup;
 import org.adligo.tests4j.shared.common.CacheControl;
 import org.adligo.tests4j.shared.common.ClassMethods;
 import org.adligo.tests4j.shared.common.DefaultSystem;
@@ -32,8 +26,9 @@ import org.adligo.tests4j.shared.common.Tests4J_System;
 import org.adligo.tests4j.shared.common.TrialType;
 
 public class Tests4J_Common_DependencyGroup extends Tests4J_DependencyGroup {
-
-	public Tests4J_Common_DependencyGroup() {
+	public static final Tests4J_Common_DependencyGroup INSTANCE = new Tests4J_Common_DependencyGroup();
+	
+	private Tests4J_Common_DependencyGroup() {
 		Set<String> names = new HashSet<String>();
 		
 		add(names, CacheControl.class);
@@ -66,8 +61,7 @@ public class Tests4J_Common_DependencyGroup extends Tests4J_DependencyGroup {
 		add(names, Tests4J_System.class);
 		add(names, TrialType.class);
 		
-		Tests4J_EN_DependencyGroup dg = new Tests4J_EN_DependencyGroup();
-		names.addAll(dg.getClassNames());
+		names.addAll(Tests4J_EN_DependencyGroup.INSTANCE.getClassNames());
 		
 		setupDelegates(names);
 	}

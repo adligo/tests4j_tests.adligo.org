@@ -1,6 +1,6 @@
 package org.adligo.tests4j_tests.jacoco.plugin.data.inst;
 
-import org.adligo.tests4j.system.shared.I_Tests4J_CoverageTrialInstrumentation;
+import org.adligo.tests4j.system.shared.api.I_Tests4J_CoverageTrialInstrumentation;
 import org.adligo.tests4j.system.shared.trials.SourceFileScope;
 import org.adligo.tests4j.system.shared.trials.Test;
 import org.adligo.tests4j_4jacoco.plugin.instrumentation.TrialInstrumenter;

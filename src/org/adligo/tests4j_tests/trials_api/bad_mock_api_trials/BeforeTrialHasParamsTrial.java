@@ -9,7 +9,7 @@ import org.adligo.tests4j.models.shared.results.I_TrialFailure;
 import org.adligo.tests4j.models.shared.results.I_TrialResult;
 import org.adligo.tests4j.shared.asserts.common.I_Asserts;
 import org.adligo.tests4j.shared.en.Tests4J_EnglishConstants;
-import org.adligo.tests4j.shared.i18n.I_Tests4J_AnnotationErrors;
+import org.adligo.tests4j.shared.i18n.I_Tests4J_AnnotationMessages;
 import org.adligo.tests4j.system.shared.trials.ApiTrial;
 import org.adligo.tests4j.system.shared.trials.BeforeTrial;
 import org.adligo.tests4j.system.shared.trials.PackageScope;
@@ -79,7 +79,7 @@ public class BeforeTrialHasParamsTrial extends ApiTrial {
 		asserts.assertEquals(1, failures.size());
 		I_TrialFailure failure = failures.get(0);
 		
-		I_Tests4J_AnnotationErrors messages =  Tests4J_EnglishConstants.ENGLISH.getAnnotationErrors();
+		I_Tests4J_AnnotationMessages messages =  Tests4J_EnglishConstants.ENGLISH.getAnnotationMessages();
 		asserts.assertEquals(messages.getBeforeTrialHasParams(), failure.getMessage());
 		asserts.assertEquals(
 				"org.adligo.tests4j_tests.trials_api.bad_mock_api_trials.BeforeTrialHasParamsTrial was not annotated correctly.", 

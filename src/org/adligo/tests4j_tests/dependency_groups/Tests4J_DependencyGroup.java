@@ -16,8 +16,11 @@ import org.adligo.tests4j.shared.asserts.dependency.NameOnlyDependencyGroup;
  *
  */
 public class Tests4J_DependencyGroup extends DependencyGroupBaseDelegate {
-
-	public void setupDelegates(Set<String> names) {
+	public static final Tests4J_DependencyGroup INSTANCE = new Tests4J_DependencyGroup();
+	
+	protected Tests4J_DependencyGroup() {}
+	
+	protected void setupDelegates(Set<String> names) {
 		List<I_DependencyGroup> groups = new ArrayList<I_DependencyGroup>();
 		groups.add(new NameOnlyDependencyGroup(names));
 		groups.add(new AdligoGWT_DependencyGroup());

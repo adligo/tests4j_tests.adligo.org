@@ -4,7 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import org.adligo.tests4j.shared.common.Tests4J_Constants;
-import org.adligo.tests4j.shared.en.Tests4J_AnnotationErrors;
+import org.adligo.tests4j.shared.en.Tests4J_AnnotationMessages;
 import org.adligo.tests4j.shared.en.Tests4J_AssertionInputMessages;
 import org.adligo.tests4j.shared.en.Tests4J_EclipseErrors;
 import org.adligo.tests4j.shared.en.Tests4J_EnglishConstants;
@@ -14,11 +14,12 @@ import org.adligo.tests4j.shared.en.Tests4J_ReportMessages;
 import org.adligo.tests4j.shared.en.Tests4J_ResultMessages;
 
 public class Tests4J_EN_DependencyGroup extends Tests4J_DependencyGroup {
-
-	public Tests4J_EN_DependencyGroup() {
+	public static final Tests4J_EN_DependencyGroup INSTANCE = new Tests4J_EN_DependencyGroup();
+	
+	private Tests4J_EN_DependencyGroup() {
 		Set<String> names = new HashSet<String>();
 		
-		add(names, Tests4J_AnnotationErrors.class);
+		add(names, Tests4J_AnnotationMessages.class);
 		add(names, Tests4J_AssertionInputMessages.class);
 		add(names, Tests4J_Constants.class);
 		add(names, Tests4J_EnglishConstants.class);
@@ -28,8 +29,7 @@ public class Tests4J_EN_DependencyGroup extends Tests4J_DependencyGroup {
 		add(names, Tests4J_ReportMessages.class);
 		add(names, Tests4J_ResultMessages.class);
 		
-		Tests4J_I18N_DependencyGroup dg = new Tests4J_I18N_DependencyGroup();
-		names.addAll(dg.getClassNames());
+		names.addAll(Tests4J_I18N_DependencyGroup.INSTANCE.getClassNames());
 		
 		setupDelegates(names);
 	}

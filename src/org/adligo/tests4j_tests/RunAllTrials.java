@@ -5,14 +5,14 @@ import java.math.BigDecimal;
 import org.adligo.tests4j.models.shared.metadata.I_TrialRunMetadata;
 import org.adligo.tests4j.models.shared.results.I_TrialResult;
 import org.adligo.tests4j.models.shared.results.I_TrialRunResult;
-import org.adligo.tests4j.run.Tests4J;
+import org.adligo.tests4j.run.api.Tests4J;
 import org.adligo.tests4j.shared.common.Tests4J_System;
 import org.adligo.tests4j.shared.output.DefaultLog;
 import org.adligo.tests4j.shared.output.I_Tests4J_Log;
-import org.adligo.tests4j.system.shared.I_Tests4J_Listener;
-import org.adligo.tests4j.system.shared.I_Tests4J_ProcessInfo;
-import org.adligo.tests4j.system.shared.Tests4J_DefaultProgressMonitor;
-import org.adligo.tests4j.system.shared.Tests4J_Params;
+import org.adligo.tests4j.system.shared.api.I_Tests4J_Listener;
+import org.adligo.tests4j.system.shared.api.I_Tests4J_ProcessInfo;
+import org.adligo.tests4j.system.shared.api.Tests4J_DefaultProgressMonitor;
+import org.adligo.tests4j.system.shared.api.Tests4J_Params;
 import org.adligo.tests4j.system.shared.report.summary.SetupProcessDisplay;
 import org.adligo.tests4j.system.shared.report.summary.SetupProgressDisplay;
 import org.adligo.tests4j.system.shared.report.summary.TestDisplay;
@@ -22,15 +22,15 @@ import org.adligo.tests4j.system.shared.report.summary.TrialsProgressDisplay;
 import org.adligo.tests4j.system.shared.trials.I_MetaTrialParams;
 import org.adligo.tests4j_4jacoco.plugin.CoveragePluginFactory;
 import org.adligo.tests4j_tests.base_trials.I_CountingPackageTrials;
+import org.adligo.tests4j_tests.base_trials.SimpleMetaTrial;
 import org.adligo.tests4j_tests.base_trials.SimplePackageTrials;
 import org.adligo.tests4j_tests.jacoco.api_trials.A_CocoApiPkgTrials;
 import org.adligo.tests4j_tests.jacoco.plugin.A_CocoPlugPkgTrials;
-import org.adligo.tests4j_tests.models.dependency_groups.A_DependencyGroups_PkgTrials;
+import org.adligo.tests4j_tests.models.A_ModelsPkgTrials;
 import org.adligo.tests4j_tests.models.shared.coverage.A_CoveragePkgTrials;
 import org.adligo.tests4j_tests.models.shared.dependency.A_DepsPkgTrials;
 import org.adligo.tests4j_tests.models.shared.metadata.A_MetaPkgTrials;
 import org.adligo.tests4j_tests.models.shared.results.A_ResultsPkgTrials;
-import org.adligo.tests4j_tests.models.shared.trials.A_TrialsPkgTrials;
 import org.adligo.tests4j_tests.run.A_RunPkgTrials;
 import org.adligo.tests4j_tests.shared.A_SharePkgTrials;
 import org.adligo.tests4j_tests.system.shared.A_SysPkgTrials;
@@ -45,15 +45,7 @@ implements I_MetaTrialParams<RunAllTrials>, I_CountingPackageTrials, I_Tests4J_L
 	static I_Tests4J_Log logger = new DefaultLog();
 	//private static volatile List<String> trialsNotCompleted = new CopyOnWriteArrayList<String>();
 	//private static ExecutorService trialsNotCompletedService = Executors.newSingleThreadExecutor();
-	private A_DependencyGroups_PkgTrials dg = new A_DependencyGroups_PkgTrials();
-	private A_TrialsPkgTrials trials = new A_TrialsPkgTrials();
-	
-	private A_CoveragePkgTrials covers = new A_CoveragePkgTrials();
-	
-	private A_DepsPkgTrials deps = new A_DepsPkgTrials();
-	private A_MetaPkgTrials meta = new A_MetaPkgTrials();
-	
-	private A_ResultsPkgTrials results = new A_ResultsPkgTrials();
+	private A_ModelsPkgTrials models = new A_ModelsPkgTrials();
 	
 	private A_SysPkgTrials sys = new A_SysPkgTrials();
 	private A_SharePkgTrials share = new A_SharePkgTrials();
@@ -129,50 +121,30 @@ implements I_MetaTrialParams<RunAllTrials>, I_CountingPackageTrials, I_Tests4J_L
 	 */
 	public void addTrials(Tests4J_Params params) throws Exception {
 	
-		trials.setParams(params);
-		trials.addTrials();
-		add(trials.getCountingTrials());
+		share.setParams(params);
+		share.addTrials();
+		add(share.getCountingTrials());
 		
-		deps.setParams(params);
-		deps.addTrials();
-		add(deps.getCountingTrials());
-		
-		dg.setParams(params);
-		dg.addTrials();
-		add(dg.getCountingTrials());
-		
-		meta.setParams(params);
-		meta.addTrials();
-		add(meta.getCountingTrials());
-		
-		results.setParams(params);
-		results.addTrials();
-		add(results.getCountingTrials());
+		models.setParams(params);
+		models.addTrials();
+		add(models.getCountingTrials());
 		
 		sys.setParams(params);
 		sys.addTrials();
 		add(sys.getCountingTrials());
 		
-		share.setParams(params);
-		share.addTrials();
-		add(share.getCountingTrials());
+		run.setParams(params);
+		run.addTrials();
+		add(run.getCountingTrials());
 		
-		covers.setParams(params);
-		covers.addTrials();
-		add(covers.getCountingTrials());
-		
-		cocoApi.setParams(params);
-		cocoApi.addTrials();
-		add(cocoApi.getCountingTrials());
+		api.setParams(params);
+		api.addTrials();
+		add(api.getCountingTrials());
 		
 		cocoPlug.setParams(params);
 		cocoPlug.addTrials();
 		add(cocoPlug.getCountingTrials());
-		
-		run.setParams(params);
-		run.addTrials();
-		add(run.getCountingTrials());
-				
+			
 		jv.setParams(params);
 		jv.addTrials();
 		add(jv.getCountingTrials());
@@ -181,9 +153,9 @@ implements I_MetaTrialParams<RunAllTrials>, I_CountingPackageTrials, I_Tests4J_L
 		cocoJv.addTrials();
 		add(cocoJv.getCountingTrials());
 		
-		api.setParams(params);
-		api.addTrials();
-		add(api.getCountingTrials());
+		cocoApi.setParams(params);
+		cocoApi.addTrials();
+		add(cocoApi.getCountingTrials());
 	}
 
 

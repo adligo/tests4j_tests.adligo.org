@@ -17,8 +17,9 @@ import org.adligo.tests4j.shared.asserts.UniformAssertCommand;
 import org.adligo.tests4j.shared.asserts.UniformThrownAssertCommand;
 
 public class Tests4J_Asserts_DependencyGroup extends Tests4J_DependencyGroup {
-
-	public Tests4J_Asserts_DependencyGroup() {
+	public static final Tests4J_Asserts_DependencyGroup INSTANCE = new Tests4J_Asserts_DependencyGroup();
+	
+	private Tests4J_Asserts_DependencyGroup() {
 		Set<String> names = new HashSet<String>();
 		
 		add(names, AbstractAssertCommand.class);
@@ -40,8 +41,7 @@ public class Tests4J_Asserts_DependencyGroup extends Tests4J_DependencyGroup {
 		add(names, UniformAssertCommand.class);
 		add(names, UniformThrownAssertCommand.class);
 		
-		Tests4J_AssertsUniform_DependencyGroup dg = new Tests4J_AssertsUniform_DependencyGroup();
-		names.addAll(dg.getClassNames());
+		names.addAll(Tests4J_AssertsUniform_DependencyGroup.INSTANCE.getClassNames());
 		
 		setupDelegates(names);
 	}
