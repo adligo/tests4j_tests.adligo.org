@@ -2,8 +2,8 @@ package org.adligo.tests4j_tests.shared.asserts.uniform;
 
 import org.adligo.tests4j.shared.asserts.common.AssertType;
 import org.adligo.tests4j.shared.asserts.common.CompareAssertionData;
-import org.adligo.tests4j.shared.asserts.dependency.AllowedDependencies;
 import org.adligo.tests4j.shared.asserts.line_text.I_TextLinesCompareResult;
+import org.adligo.tests4j.shared.asserts.reference.AllowedReferences;
 import org.adligo.tests4j.shared.asserts.uniform.I_Evaluation;
 import org.adligo.tests4j.shared.asserts.uniform.StringUniformEvaluator;
 import org.adligo.tests4j.shared.en.Tests4J_EnglishConstants;
@@ -12,10 +12,10 @@ import org.adligo.tests4j.system.shared.trials.SourceFileScope;
 import org.adligo.tests4j.system.shared.trials.Test;
 import org.adligo.tests4j_tests.base_trials.I_CountType;
 import org.adligo.tests4j_tests.base_trials.SourceFileCountingTrial;
-import org.adligo.tests4j_tests.dependency_groups.Tests4J_AssertsUniform_DependencyGroup;
+import org.adligo.tests4j_tests.references_groups.Tests4J_AssertsUniform_GwtReferenceGroup;
 
 @SourceFileScope (sourceClass=StringUniformEvaluator.class, minCoverage=88.0)
-@AllowedDependencies (groups=Tests4J_AssertsUniform_DependencyGroup.class)
+@AllowedReferences (groups=Tests4J_AssertsUniform_GwtReferenceGroup.class)
 public class StringUniformEvaluatorTrial extends SourceFileCountingTrial {
 
 	@Test
@@ -67,7 +67,7 @@ public class StringUniformEvaluatorTrial extends SourceFileCountingTrial {
 
 	@Override
 	public int getTests(I_CountType type) {
-		return super.getTests(type, 3);
+		return super.getTests(type, 3, true);
 	}
 
 	@Override

@@ -2,16 +2,18 @@ package org.adligo.tests4j_tests.shared.output;
 
 import java.io.IOException;
 
+import org.adligo.tests4j.shared.asserts.reference.AllowedReferences;
 import org.adligo.tests4j.shared.output.ByteListOutputStream;
 import org.adligo.tests4j.system.shared.trials.SourceFileScope;
 import org.adligo.tests4j.system.shared.trials.Test;
 import org.adligo.tests4j_tests.base_trials.I_CountType;
 import org.adligo.tests4j_tests.base_trials.SourceFileCountingTrial;
+import org.adligo.tests4j_tests.references_groups.Tests4J_Output_GwtReferenceGroup;
 
 @SourceFileScope(sourceClass=ByteListOutputStream.class)
+@AllowedReferences (groups=Tests4J_Output_GwtReferenceGroup.class)
 public class ByteListOutputStreamTrial extends SourceFileCountingTrial {
 	
-	@SuppressWarnings("unused")
 	@Test(timeout=600000)
 	public void test10BytesTo2ByteChunksize() throws IOException {
 		ByteListOutputStream blos = new ByteListOutputStream(2);
@@ -44,7 +46,7 @@ public class ByteListOutputStreamTrial extends SourceFileCountingTrial {
 	
 	@Override
 	public int getTests(I_CountType type) {
-		return super.getTests(type, 2);
+		return super.getTests(type, 2, true);
 	}
 
 	@Override
@@ -53,7 +55,7 @@ public class ByteListOutputStreamTrial extends SourceFileCountingTrial {
 		//code coverage and circular dependencies +
 		//custom afterTrialTests
 		//+ see above
-		int thisAfterAsserts = 2;
+		int thisAfterAsserts = 3;
 		if (type.isFromMetaWithCoverage()) {
 			return super.getAsserts(type, thisAsserts + thisAfterAsserts);
 		} else {
@@ -67,7 +69,7 @@ public class ByteListOutputStreamTrial extends SourceFileCountingTrial {
 		//code coverage and circular dependencies +
 		//custom afterTrialTests
 		//+ see above
-		int thisAfterUniqueAsserts = 2;
+		int thisAfterUniqueAsserts = 3;
 		if (type.isFromMetaWithCoverage()) {
 			//code coverage and circular dependencies +
 			//custom afterTrialTests

@@ -13,9 +13,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.adligo.tests4j.models.shared.dependency.I_ClassDependenciesLocal;
+import org.adligo.tests4j.models.shared.association.I_ClassAssociationsLocal;
 import org.adligo.tests4j.run.helpers.I_CachedClassBytesClassLoader;
-import org.adligo.tests4j.shared.asserts.dependency.ClassAliasLocal;
+import org.adligo.tests4j.shared.asserts.reference.ClassAliasLocal;
 import org.adligo.tests4j.shared.common.I_System;
 import org.adligo.tests4j.system.shared.trials.TrialDelegate;
 import org.adligo.tests4j_4jacoco.plugin.common.I_OrderedClassDependencies;
@@ -187,11 +187,11 @@ public class DAT_Assert_MockWithEverything extends TrialDelegate {
 
 	private void assertReferences(OrderedClassDiscovery orderedClassDiscovery, Class<?> clazz) {
 		String clazzName = clazz.getName();
-		I_ClassDependenciesLocal cr =  orderedClassDiscovery.getReferences(new ClassAliasLocal(clazz));
+		I_ClassAssociationsLocal cr =  orderedClassDiscovery.getReferences(new ClassAliasLocal(clazz));
 		assertRefs(clazzName, cr);
 		assertHasMockWithEverythingCache();
 		
-		Map<String,I_ClassDependenciesLocal> refsCache = trial.getRefsCache();
+		Map<String,I_ClassAssociationsLocal> refsCache = trial.getRefsCache();
 		assertEquals(57, refsCache.size());
 	}
 
@@ -212,14 +212,14 @@ public class DAT_Assert_MockWithEverything extends TrialDelegate {
 		c10.assertHasAllCache();
 		
 		String className = MockWithEverything.class.getName();
-		Map<String,I_ClassDependenciesLocal> refsCache = trial.getRefsCache();
-		I_ClassDependenciesLocal crefs =  refsCache.get(className);
+		Map<String,I_ClassAssociationsLocal> refsCache = trial.getRefsCache();
+		I_ClassAssociationsLocal crefs =  refsCache.get(className);
 		
 		
 		assertRefs(className, crefs);
 	}
 
-	private void assertRefs(String className, I_ClassDependenciesLocal crefs) {
+	private void assertRefs(String className, I_ClassAssociationsLocal crefs) {
 		
 		assertNotNull(crefs);
 		assertEquals(className, crefs.getName());

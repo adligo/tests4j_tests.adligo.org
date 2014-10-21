@@ -5,12 +5,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.adligo.tests4j.models.shared.dependency.I_ClassDependencies;
-import org.adligo.tests4j.models.shared.dependency.I_ClassDependenciesLocal;
+import org.adligo.tests4j.models.shared.association.I_ClassAssociations;
+import org.adligo.tests4j.models.shared.association.I_ClassAssociationsLocal;
 import org.adligo.tests4j.run.helpers.I_CachedClassBytesClassLoader;
-import org.adligo.tests4j.shared.asserts.dependency.ClassAliasLocal;
-import org.adligo.tests4j.shared.asserts.dependency.I_ClassAlias;
-import org.adligo.tests4j.shared.asserts.dependency.I_Dependency;
+import org.adligo.tests4j.shared.asserts.reference.ClassAliasLocal;
+import org.adligo.tests4j.shared.asserts.reference.I_ClassAlias;
+import org.adligo.tests4j.shared.asserts.reference.I_Dependency;
 import org.adligo.tests4j.system.shared.trials.TrialDelegate;
 import org.adligo.tests4j_4jacoco.plugin.common.I_OrderedClassDependencies;
 import org.adligo.tests4j_4jacoco.plugin.discovery.OrderedClassDiscovery;
@@ -48,7 +48,7 @@ public class DAT_Assert_Circular_to_10 extends TrialDelegate {
 		
 		assertBiToDeps(orderedClassDiscovery, className);
 		
-		I_ClassDependencies cr =  orderedClassDiscovery.getReferences(new ClassAliasLocal(clazz));
+		I_ClassAssociations cr =  orderedClassDiscovery.getReferences(new ClassAliasLocal(clazz));
 		assertBiARefs(className, cr);
 		
 		DAT_Assert_Simple simple = trial.getSimple();
@@ -57,7 +57,7 @@ public class DAT_Assert_Circular_to_10 extends TrialDelegate {
 		assertHasMockWithBidirectionalACache();
 		assertHasMockWithBidirectionalBCache();
 		
-		Map<String,I_ClassDependenciesLocal> refsCache = trial.getRefsCache();
+		Map<String,I_ClassAssociationsLocal> refsCache = trial.getRefsCache();
 		assertEquals(3, refsCache.size());
 	}
 
@@ -86,14 +86,14 @@ public class DAT_Assert_Circular_to_10 extends TrialDelegate {
 
 	public void assertHasMockWithBidirectionalACache() {
 		String className = MockWithBidirectionalA.class.getName();
-		Map<String,I_ClassDependenciesLocal> refsCache = trial.getRefsCache();
+		Map<String,I_ClassAssociationsLocal> refsCache = trial.getRefsCache();
 		
-		I_ClassDependencies crefs =  refsCache.get(className);
+		I_ClassAssociations crefs =  refsCache.get(className);
 		assertBiARefs(className, crefs);
 	}
 
 
-	private void assertBiARefs(String className, I_ClassDependencies crefs) {
+	private void assertBiARefs(String className, I_ClassAssociations crefs) {
 		
 		assertNotNull(crefs);
 		assertEquals(className, crefs.getName());
@@ -131,7 +131,7 @@ public class DAT_Assert_Circular_to_10 extends TrialDelegate {
 		
 		assertBiToDeps(orderedClassDiscovery, className);
 		
-		I_ClassDependencies cr =  orderedClassDiscovery.getReferences(new ClassAliasLocal(clazz));
+		I_ClassAssociations cr =  orderedClassDiscovery.getReferences(new ClassAliasLocal(clazz));
 		assertBiBRefs(className, cr);
 		
 		DAT_Assert_Simple simple = trial.getSimple();
@@ -140,20 +140,20 @@ public class DAT_Assert_Circular_to_10 extends TrialDelegate {
 		assertHasMockWithBidirectionalBCache();
 		assertHasMockWithBidirectionalACache();
 		
-		Map<String,I_ClassDependenciesLocal> refsCache = trial.getRefsCache();
+		Map<String,I_ClassAssociationsLocal> refsCache = trial.getRefsCache();
 		assertEquals(3, refsCache.size());
 	
 	}
 
 	public void assertHasMockWithBidirectionalBCache() {
 		String className = MockWithBidirectionalB.class.getName();
-		Map<String,I_ClassDependenciesLocal> refsCache = trial.getRefsCache();
-		I_ClassDependencies crefs =  refsCache.get(className);
+		Map<String,I_ClassAssociationsLocal> refsCache = trial.getRefsCache();
+		I_ClassAssociations crefs =  refsCache.get(className);
 		assertBiBRefs(className, crefs);
 	}
 	
 
-	private void assertBiBRefs(String clazzName, I_ClassDependencies cr) {
+	private void assertBiBRefs(String clazzName, I_ClassAssociations cr) {
 		assertNotNull(cr);
 		assertEquals(clazzName, cr.getName());
 		assertTrue(cr.hasCircularDependencies());
@@ -190,7 +190,7 @@ public class DAT_Assert_Circular_to_10 extends TrialDelegate {
 		
 		assertTriangleToDeps(orderedClassDiscovery, className);
 		
-		I_ClassDependencies cr =  orderedClassDiscovery.getReferences(new ClassAliasLocal(clazz));
+		I_ClassAssociations cr =  orderedClassDiscovery.getReferences(new ClassAliasLocal(clazz));
 		assertTriARefs(className, cr);
 		
 		DAT_Assert_Simple simple = trial.getSimple();
@@ -200,18 +200,18 @@ public class DAT_Assert_Circular_to_10 extends TrialDelegate {
 		assertHasMockWithTriangleBCache();
 		assertHasMockWithTriangleCCache();
 		
-		Map<String,I_ClassDependenciesLocal> refsCache = trial.getRefsCache();
+		Map<String,I_ClassAssociationsLocal> refsCache = trial.getRefsCache();
 		assertEquals(4, refsCache.size());
 	}
 	
 	public void assertHasMockWithTriangleACache() {
 		String className = MockWithTriangleA.class.getName();
-		Map<String,I_ClassDependenciesLocal> refsCache = trial.getRefsCache();
-		I_ClassDependencies crefs =  refsCache.get(className);
+		Map<String,I_ClassAssociationsLocal> refsCache = trial.getRefsCache();
+		I_ClassAssociations crefs =  refsCache.get(className);
 		assertTriARefs(className, crefs);
 	}
 	
-	private void assertTriARefs(String clazzName, I_ClassDependencies cr) {
+	private void assertTriARefs(String clazzName, I_ClassAssociations cr) {
 		assertNotNull(cr);
 		assertEquals(clazzName, cr.getName());
 		assertTrue(cr.hasCircularDependencies());
@@ -276,7 +276,7 @@ public class DAT_Assert_Circular_to_10 extends TrialDelegate {
 		
 		assertTriangleToDeps(orderedClassDiscovery, className);
 		
-		I_ClassDependencies cr =  orderedClassDiscovery.getReferences(new ClassAliasLocal(clazz));
+		I_ClassAssociations cr =  orderedClassDiscovery.getReferences(new ClassAliasLocal(clazz));
 		assertTriaBRefs(className, cr);
 		
 		DAT_Assert_Simple simple = trial.getSimple();
@@ -286,7 +286,7 @@ public class DAT_Assert_Circular_to_10 extends TrialDelegate {
 		assertHasMockWithTriangleBCache();
 		assertHasMockWithTriangleCCache();
 		
-		Map<String,I_ClassDependenciesLocal> refsCache = trial.getRefsCache();
+		Map<String,I_ClassAssociationsLocal> refsCache = trial.getRefsCache();
 		assertEquals(4, refsCache.size());
 	}
 
@@ -295,12 +295,12 @@ public class DAT_Assert_Circular_to_10 extends TrialDelegate {
 	
 	public void assertHasMockWithTriangleBCache() {
 		String className = MockWithTriangleB.class.getName();
-		Map<String,I_ClassDependenciesLocal> refsCache = trial.getRefsCache();
-		I_ClassDependencies crefs =  refsCache.get(className);
+		Map<String,I_ClassAssociationsLocal> refsCache = trial.getRefsCache();
+		I_ClassAssociations crefs =  refsCache.get(className);
 		assertTriaBRefs(className, crefs);
 	}
 	
-	private void assertTriaBRefs(String clazzName, I_ClassDependencies cr) {
+	private void assertTriaBRefs(String clazzName, I_ClassAssociations cr) {
 		assertNotNull(cr);
 		assertEquals(clazzName, cr.getName());
 		Set<String> circles = cr.getCircularDependenciesNames();
@@ -338,7 +338,7 @@ public class DAT_Assert_Circular_to_10 extends TrialDelegate {
 		
 		assertTriangleToDeps(orderedClassDiscovery, className);
 		
-		I_ClassDependencies cr =  orderedClassDiscovery.getReferences(new ClassAliasLocal(clazz));
+		I_ClassAssociations cr =  orderedClassDiscovery.getReferences(new ClassAliasLocal(clazz));
 		assertTriCRefs(className, cr);
 		
 		DAT_Assert_Simple simple = trial.getSimple();
@@ -348,20 +348,20 @@ public class DAT_Assert_Circular_to_10 extends TrialDelegate {
 		assertHasMockWithTriangleBCache();
 		assertHasMockWithTriangleCCache();
 		
-		Map<String,I_ClassDependenciesLocal> refsCache = trial.getRefsCache();
+		Map<String,I_ClassAssociationsLocal> refsCache = trial.getRefsCache();
 		assertEquals(4, refsCache.size());
 	}
 	
 	public void assertHasMockWithTriangleCCache() {
 		String className = MockWithTriangleC.class.getName();
-		Map<String,I_ClassDependenciesLocal> refsCache = trial.getRefsCache();
-		I_ClassDependencies crefs =  refsCache.get(className);
+		Map<String,I_ClassAssociationsLocal> refsCache = trial.getRefsCache();
+		I_ClassAssociations crefs =  refsCache.get(className);
 
 		assertTriCRefs(className, crefs);
 	}
 
 
-	private void assertTriCRefs(String className, I_ClassDependencies crefs) {
+	private void assertTriCRefs(String className, I_ClassAssociations crefs) {
 		assertNotNull(crefs);
 		assertEquals(className, crefs.getName());
 		Set<String> circles = crefs.getCircularDependenciesNames();

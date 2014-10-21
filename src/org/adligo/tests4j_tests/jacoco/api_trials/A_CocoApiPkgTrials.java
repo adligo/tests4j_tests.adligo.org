@@ -46,6 +46,7 @@ implements I_MetaTrialParams<A_CocoApiPkgTrials>, I_CountingPackageTrials {
 
 	public void addTrials() throws Exception {
 		add(DependencyAssertionFailuresTrial.class);
+		add(ReferenceAssertionFailuresTrial.class);
 	}
 
 	@Override

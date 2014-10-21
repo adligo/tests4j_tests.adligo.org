@@ -5,7 +5,7 @@ import java.util.List;
 import org.adligo.tests4j.models.shared.results.BaseTrialResultMutant;
 import org.adligo.tests4j.models.shared.results.I_TrialResult;
 import org.adligo.tests4j.models.shared.results.TestResultMutant;
-import org.adligo.tests4j.shared.asserts.dependency.AllowedDependencies;
+import org.adligo.tests4j.shared.asserts.reference.AllowedReferences;
 import org.adligo.tests4j.shared.en.Tests4J_EnglishConstants;
 import org.adligo.tests4j.shared.i18n.I_Tests4J_ReportMessages;
 import org.adligo.tests4j.system.shared.report.summary.ThreadDisplay;
@@ -15,11 +15,11 @@ import org.adligo.tests4j.system.shared.trials.SourceFileScope;
 import org.adligo.tests4j.system.shared.trials.Test;
 import org.adligo.tests4j_tests.base_trials.I_CountType;
 import org.adligo.tests4j_tests.base_trials.SourceFileCountingTrial;
-import org.adligo.tests4j_tests.dependency_groups.Tests4J_SystemSummary_DependencyGroup;
+import org.adligo.tests4j_tests.references_groups.Tests4J_SystemSummary_GwtReferenceGroup;
 import org.adligo.tests4j_tests.system.shared.mocks.Tests4J_LogMock;
 
 @SourceFileScope (sourceClass=TrialDisplay.class, minCoverage=89.0)
-@AllowedDependencies (groups=Tests4J_SystemSummary_DependencyGroup.class)
+@AllowedReferences (groups=Tests4J_SystemSummary_GwtReferenceGroup.class)
 public class TrialDisplayTrial extends SourceFileCountingTrial {
 	private Tests4J_LogMock log = new Tests4J_LogMock();
 	private ThreadDisplay threadDisplay = new ThreadDisplay(log);
@@ -170,7 +170,7 @@ public class TrialDisplayTrial extends SourceFileCountingTrial {
 	
 	@Override
 	public int getTests(I_CountType type) {
-		return super.getTests(type, 6);
+		return super.getTests(type, 6, true);
 	}
 
 	@Override

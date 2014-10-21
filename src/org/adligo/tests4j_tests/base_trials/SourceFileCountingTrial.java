@@ -60,4 +60,21 @@ public abstract class SourceFileCountingTrial extends SourceFileTrial implements
 			return atTests;
 		}
 	}
+	
+	public int getTests(I_CountType type, int atTests, boolean hasAllowedRefs) {
+		if (type.isFromMetaWithCoverage()) {
+			//minCoverage, dependencies, references, super.afterTrialTests, + @Tests
+			if (hasAllowedRefs) {
+				return atTests + 4;
+			} 
+			//minCoverage, dependencies, super.afterTrialTests, + @Tests
+			return atTests + 3;
+		} else if (type.hasFinishedAfterTrialTests()) {
+			//super.afterTrialTests, @Tests
+			return atTests + 1;
+		} else {
+			//@Tests
+			return atTests;
+		}
+	}
 }

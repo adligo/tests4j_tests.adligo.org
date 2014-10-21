@@ -38,6 +38,8 @@ implements I_MetaTrialParams<A_CocoJavaVersionSpecificTrials>, I_CountingPackage
 		}
 	}
 
+	public A_CocoJavaVersionSpecificTrials() {}
+	
 	public void addTrials() throws Exception {
 		discovery.addTrials();
 		add(discovery.getCountingTrials());

@@ -1,5 +1,6 @@
 package org.adligo.tests4j_tests.shared.en;
 
+import org.adligo.tests4j.shared.asserts.reference.AllowedReferences;
 import org.adligo.tests4j.shared.en.Tests4J_EnglishConstants;
 import org.adligo.tests4j.shared.en.Tests4J_LineDiffTextDisplayMessages;
 import org.adligo.tests4j.shared.i18n.I_Tests4J_LineDiffTextDisplayMessages;
@@ -7,9 +8,11 @@ import org.adligo.tests4j.system.shared.trials.SourceFileScope;
 import org.adligo.tests4j.system.shared.trials.Test;
 import org.adligo.tests4j_tests.base_trials.I_CountType;
 import org.adligo.tests4j_tests.base_trials.SourceFileCountingTrial;
+import org.adligo.tests4j_tests.references_groups.Tests4J_EN_GwtReferenceGroup;
 import org.adligo.tests4j_tests.shared.i18n.I18N_Asserter;
 
 @SourceFileScope (sourceClass=Tests4J_LineDiffTextDisplayMessages.class)
+@AllowedReferences (groups=Tests4J_EN_GwtReferenceGroup.class)
 public class Tests4J_LineDiffTextDisplayMessages_Trial extends SourceFileCountingTrial {
 
 	@Test
@@ -32,7 +35,7 @@ public class Tests4J_LineDiffTextDisplayMessages_Trial extends SourceFileCountin
 
 	@Override
 	public int getTests(I_CountType type) {
-		return super.getTests(type, 1);
+		return super.getTests(type, 1, true);
 	}
 
 	@Override
@@ -41,7 +44,7 @@ public class Tests4J_LineDiffTextDisplayMessages_Trial extends SourceFileCountin
 		//code coverage and circular dependencies +
 		//custom afterTrialTests
 		//+ see above
-		int thisAfterAsserts = 2;
+		int thisAfterAsserts = 3;
 		if (type.isFromMetaWithCoverage()) {
 			return super.getAsserts(type, thisAsserts + thisAfterAsserts);
 		} else {
@@ -55,7 +58,7 @@ public class Tests4J_LineDiffTextDisplayMessages_Trial extends SourceFileCountin
 		//code coverage and circular dependencies +
 		//custom afterTrialTests
 		//+ see above
-		int thisAfterUniqueAsserts = 2;
+		int thisAfterUniqueAsserts = 3;
 		if (type.isFromMetaWithCoverage()) {
 			//code coverage and circular dependencies +
 			//custom afterTrialTests

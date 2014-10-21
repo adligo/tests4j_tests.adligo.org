@@ -12,14 +12,14 @@ import org.adligo.tests4j_tests.base_trials.I_CountingPackageTrials;
 import org.adligo.tests4j_tests.base_trials.SimpleMetaTrial;
 import org.adligo.tests4j_tests.base_trials.SimplePackageTrials;
 import org.adligo.tests4j_tests.shared.asserts.common.A_AssertsCmPkgTrials;
-import org.adligo.tests4j_tests.shared.asserts.dependency.A_AssertsDepPkgTrials;
 import org.adligo.tests4j_tests.shared.asserts.line_text.A_AssertsLtRunPkgTrials;
+import org.adligo.tests4j_tests.shared.asserts.reference.A_AssertsRefPkgTrials;
 import org.adligo.tests4j_tests.shared.asserts.uniform.A_AssertsUniPkgTrials;
 
 public class A_AssertsPkgTrials  extends SimplePackageTrials 
 implements I_MetaTrialParams<A_AssertsPkgTrials>, I_CountingPackageTrials {
 	private A_AssertsCmPkgTrials cmtTrials = new A_AssertsCmPkgTrials();
-	private A_AssertsDepPkgTrials depTrials = new A_AssertsDepPkgTrials();
+	private A_AssertsRefPkgTrials refTrials = new A_AssertsRefPkgTrials();
 	private A_AssertsLtRunPkgTrials lineTrials = new A_AssertsLtRunPkgTrials();
 	private A_AssertsUniPkgTrials uniTrials = new A_AssertsUniPkgTrials();
 	
@@ -56,8 +56,8 @@ implements I_MetaTrialParams<A_AssertsPkgTrials>, I_CountingPackageTrials {
 		cmtTrials.addTrials();
 		add(cmtTrials.getCountingTrials());
 		
-		depTrials.addTrials();
-		add(depTrials.getCountingTrials());
+		refTrials.addTrials();
+		add(refTrials.getCountingTrials());
 		
 		lineTrials.addTrials();
 		add(lineTrials.getCountingTrials());
@@ -68,8 +68,10 @@ implements I_MetaTrialParams<A_AssertsPkgTrials>, I_CountingPackageTrials {
 		add(AbstractAssertCommandTrial.class);
 		add(AbstractCompareAssertCommandTrial.class);
 		add(AssertionFailureLocationTrial.class);
+		
 		add(AssertionProcessorTrial.class);
 		add(BooleanAssertCommandTrial.class);
+		
 		add(ContainsAssertCommandTrial.class);
 		add(DoubleAssertCommandTrial.class);
 		add(IdenticalAssertCommandTrial.class);
@@ -78,7 +80,7 @@ implements I_MetaTrialParams<A_AssertsPkgTrials>, I_CountingPackageTrials {
 		add(ThrownAssertCommandTrial.class);
 		add(UniformAssertCommandTrial.class);
 		add(UniformThrownAssertCommandTrial.class);
-		
+	
 	}
 
 	@Override
@@ -91,7 +93,7 @@ implements I_MetaTrialParams<A_AssertsPkgTrials>, I_CountingPackageTrials {
 	public void setParams(Tests4J_Params params) {
 		super.setParams(params);
 		cmtTrials.setParams(params);
-		depTrials.setParams(params);
+		refTrials.setParams(params);
 		lineTrials.setParams(params);
 		uniTrials.setParams(params);
 	}

@@ -1,7 +1,8 @@
 package org.adligo.tests4j_tests.system.shared.report.summary;
 
 import org.adligo.tests4j.models.shared.results.BaseTrialResultMutant;
-import org.adligo.tests4j.shared.asserts.dependency.AllowedDependencies;
+import org.adligo.tests4j.shared.asserts.reference.AllowedReferences;
+import org.adligo.tests4j.shared.asserts.reference.CircularDependencies;
 import org.adligo.tests4j.shared.en.Tests4J_EnglishConstants;
 import org.adligo.tests4j.shared.i18n.I_Tests4J_ReportMessages;
 import org.adligo.tests4j.system.shared.report.summary.TrialFailedDetailDisplay;
@@ -9,11 +10,12 @@ import org.adligo.tests4j.system.shared.trials.SourceFileScope;
 import org.adligo.tests4j.system.shared.trials.Test;
 import org.adligo.tests4j_tests.base_trials.I_CountType;
 import org.adligo.tests4j_tests.base_trials.SourceFileCountingTrial;
-import org.adligo.tests4j_tests.dependency_groups.Tests4J_SystemSummary_DependencyGroup;
+import org.adligo.tests4j_tests.references_groups.Tests4J_SystemSummary_GwtReferenceGroup;
 import org.adligo.tests4j_tests.system.shared.mocks.Tests4J_LogMock;
 
-@SourceFileScope (sourceClass=TrialFailedDetailDisplay.class, minCoverage=5.0)
-@AllowedDependencies (groups=Tests4J_SystemSummary_DependencyGroup.class)
+@SourceFileScope (sourceClass=TrialFailedDetailDisplay.class, minCoverage=4.0,
+		allowedCircularDependencies=CircularDependencies.AllowInnerOuterClasses)
+@AllowedReferences (groups=Tests4J_SystemSummary_GwtReferenceGroup.class)
 public class TrialFailedDetailDisplayTrial extends SourceFileCountingTrial {
 	private Tests4J_LogMock log = new Tests4J_LogMock();
 	
@@ -59,7 +61,7 @@ public class TrialFailedDetailDisplayTrial extends SourceFileCountingTrial {
 	
 	@Override
 	public int getTests(I_CountType type) {
-		return super.getTests(type, 2);
+		return super.getTests(type, 2, true);
 	}
 
 	@Override

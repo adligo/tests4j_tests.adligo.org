@@ -1,16 +1,17 @@
 package org.adligo.tests4j_tests.shared.asserts.uniform;
 
-import org.adligo.tests4j.shared.asserts.dependency.AllowedDependencies;
+import org.adligo.tests4j.shared.asserts.reference.AllowedReferences;
 import org.adligo.tests4j.shared.asserts.uniform.Evaluation;
 import org.adligo.tests4j.shared.asserts.uniform.EvaluationMutant;
 import org.adligo.tests4j.system.shared.trials.SourceFileScope;
 import org.adligo.tests4j.system.shared.trials.Test;
 import org.adligo.tests4j_tests.base_trials.I_CountType;
 import org.adligo.tests4j_tests.base_trials.SourceFileCountingTrial;
-import org.adligo.tests4j_tests.dependency_groups.Tests4J_AssertsUniform_DependencyGroup;
+import org.adligo.tests4j_tests.references_groups.Tests4J_AssertsUniform_GwtReferenceGroup;
+import org.adligo.tests4j_tests.references_groups.Tests4J_AssertsUniform_ReferenceGroup;
 
 @SourceFileScope (sourceClass=Evaluation.class, minCoverage=95.0)
-@AllowedDependencies (groups=Tests4J_AssertsUniform_DependencyGroup.class)
+@AllowedReferences (groups=Tests4J_AssertsUniform_GwtReferenceGroup.class)
 public class EvaluationTrial extends SourceFileCountingTrial {
 
 
@@ -51,7 +52,7 @@ public class EvaluationTrial extends SourceFileCountingTrial {
 
 	@Override
 	public int getTests(I_CountType type) {
-		return super.getTests(type, 2);
+		return super.getTests(type, 2, true);
 	}
 
 

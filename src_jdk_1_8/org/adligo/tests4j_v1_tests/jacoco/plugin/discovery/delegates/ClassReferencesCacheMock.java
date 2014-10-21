@@ -3,19 +3,19 @@ package org.adligo.tests4j_v1_tests.jacoco.plugin.discovery.delegates;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.adligo.tests4j.models.shared.dependency.I_ClassDependenciesCache;
-import org.adligo.tests4j.models.shared.dependency.I_ClassDependenciesLocal;
+import org.adligo.tests4j.models.shared.association.I_ClassAssociationsCache;
+import org.adligo.tests4j.models.shared.association.I_ClassAssociationsLocal;
 
-public class ClassReferencesCacheMock implements I_ClassDependenciesCache {
-	private Map<String, I_ClassDependenciesLocal> refs  = new HashMap<String, I_ClassDependenciesLocal>();
+public class ClassReferencesCacheMock implements I_ClassAssociationsCache {
+	private Map<String, I_ClassAssociationsLocal> refs  = new HashMap<String, I_ClassAssociationsLocal>();
 	
 	@Override
-	public void putDependenciesIfAbsent(I_ClassDependenciesLocal p) {
+	public void putDependenciesIfAbsent(I_ClassAssociationsLocal p) {
 		refs.put(p.getName(), p);
 	}
 
 	@Override
-	public I_ClassDependenciesLocal getDependencies(String name) {
+	public I_ClassAssociationsLocal getDependencies(String name) {
 		return refs.get(name);
 	}
 	

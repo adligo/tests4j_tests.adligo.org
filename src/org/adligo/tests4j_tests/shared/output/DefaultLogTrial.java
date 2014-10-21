@@ -7,6 +7,7 @@ import java.util.Map;
 import java.util.Set;
 
 import org.adligo.tests4j.run.helpers.JseSystem;
+import org.adligo.tests4j.shared.asserts.reference.AllowedReferences;
 import org.adligo.tests4j.shared.common.DefaultSystem;
 import org.adligo.tests4j.shared.common.DelegateSystem;
 import org.adligo.tests4j.shared.common.I_System;
@@ -15,8 +16,10 @@ import org.adligo.tests4j.system.shared.trials.SourceFileScope;
 import org.adligo.tests4j.system.shared.trials.Test;
 import org.adligo.tests4j_tests.base_trials.I_CountType;
 import org.adligo.tests4j_tests.base_trials.SourceFileCountingTrial;
+import org.adligo.tests4j_tests.references_groups.Tests4J_Output_GwtReferenceGroup;
 
 @SourceFileScope (sourceClass=DefaultLog.class, minCoverage=47.0)
+@AllowedReferences (groups=Tests4J_Output_GwtReferenceGroup.class)
 public class DefaultLogTrial extends SourceFileCountingTrial implements I_System {
 
 	@Test
@@ -86,7 +89,7 @@ public class DefaultLogTrial extends SourceFileCountingTrial implements I_System
 
 	@Override
 	public int getTests(I_CountType type) {
-		return super.getTests(type, 2);
+		return super.getTests(type, 2, true);
 	}
 
 	@Override
@@ -95,7 +98,7 @@ public class DefaultLogTrial extends SourceFileCountingTrial implements I_System
 		//code coverage and circular dependencies +
 		//custom afterTrialTests
 		//+ see above
-		int thisAfterAsserts = 2;
+		int thisAfterAsserts = 3;
 		if (type.isFromMetaWithCoverage()) {
 			return super.getAsserts(type, thisAsserts + thisAfterAsserts);
 		} else {
@@ -109,7 +112,7 @@ public class DefaultLogTrial extends SourceFileCountingTrial implements I_System
 		//code coverage and circular dependencies +
 		//custom afterTrialTests
 		//+ see above
-		int thisAfterUniqueAsserts = 2;
+		int thisAfterUniqueAsserts = 3;
 		if (type.isFromMetaWithCoverage()) {
 			//code coverage and circular dependencies +
 			//custom afterTrialTests
@@ -124,4 +127,5 @@ public class DefaultLogTrial extends SourceFileCountingTrial implements I_System
 		// TODO Auto-generated method stub
 		return false;
 	}
+
 }

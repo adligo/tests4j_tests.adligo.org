@@ -5,11 +5,11 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 
-import org.adligo.tests4j.models.shared.dependency.ClassFilter;
-import org.adligo.tests4j.models.shared.dependency.ClassFilterMutant;
-import org.adligo.tests4j.models.shared.dependency.ClassParentsLocal;
-import org.adligo.tests4j.models.shared.dependency.I_ClassParentsCache;
-import org.adligo.tests4j.models.shared.dependency.I_ClassParentsLocal;
+import org.adligo.tests4j.models.shared.association.ClassFilter;
+import org.adligo.tests4j.models.shared.association.ClassFilterMutant;
+import org.adligo.tests4j.models.shared.association.ClassParentsLocal;
+import org.adligo.tests4j.models.shared.association.I_ClassParentsCache;
+import org.adligo.tests4j.models.shared.association.I_ClassParentsLocal;
 import org.adligo.tests4j.run.helpers.CachedClassBytesClassLoader;
 import org.adligo.tests4j.shared.common.CacheControl;
 import org.adligo.tests4j.system.shared.trials.IgnoreTest;

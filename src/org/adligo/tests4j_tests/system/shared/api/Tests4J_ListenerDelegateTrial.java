@@ -5,16 +5,19 @@ import org.adligo.tests4j.models.shared.results.ApiTrialResultMutant;
 import org.adligo.tests4j.models.shared.results.TrialRunResultMutant;
 import org.adligo.tests4j.shared.asserts.common.ExpectedThrownData;
 import org.adligo.tests4j.shared.asserts.common.I_Thrower;
+import org.adligo.tests4j.shared.asserts.reference.AllowedReferences;
 import org.adligo.tests4j.shared.output.I_Tests4J_Log;
 import org.adligo.tests4j.system.shared.api.Tests4J_ListenerDelegator;
 import org.adligo.tests4j.system.shared.trials.SourceFileScope;
 import org.adligo.tests4j.system.shared.trials.Test;
 import org.adligo.tests4j_tests.base_trials.I_CountType;
 import org.adligo.tests4j_tests.base_trials.SourceFileCountingTrial;
+import org.adligo.tests4j_tests.references_groups.Tests4J_SystemApi_GwtReferenceGroup;
 import org.adligo.tests4j_tests.system.shared.mocks.Clumsey_Tests4J_Listener;
 import org.adligo.tests4j_tests.system.shared.mocks.Tracking_Tests4J_Listener;
 
 @SourceFileScope (sourceClass=Tests4J_ListenerDelegator.class, minCoverage=78.0)
+@AllowedReferences (groups=Tests4J_SystemApi_GwtReferenceGroup.class)
 public class Tests4J_ListenerDelegateTrial extends SourceFileCountingTrial implements I_Tests4J_Log {
 	private Throwable thrown;
 	
@@ -182,7 +185,7 @@ public class Tests4J_ListenerDelegateTrial extends SourceFileCountingTrial imple
 	
 	@Override
 	public int getTests(I_CountType type) {
-		return super.getTests(type, 4);
+		return super.getTests(type, 4, true);
 	}
 
 	@Override
@@ -191,7 +194,7 @@ public class Tests4J_ListenerDelegateTrial extends SourceFileCountingTrial imple
 		//code coverage and circular dependencies +
 		//custom afterTrialTests
 		//+ see above
-		int thisAfterAsserts = 2;
+		int thisAfterAsserts = 3;
 		if (type.isFromMetaWithCoverage()) {
 			return super.getAsserts(type, thisAsserts + thisAfterAsserts);
 		} else {
@@ -205,7 +208,7 @@ public class Tests4J_ListenerDelegateTrial extends SourceFileCountingTrial imple
 		//code coverage and circular dependencies +
 		//custom afterTrialTests
 		//+ see above
-		int thisAfterUniqueAsserts = 2;
+		int thisAfterUniqueAsserts = 3;
 		if (type.isFromMetaWithCoverage()) {
 			//code coverage and circular dependencies +
 			//custom afterTrialTests

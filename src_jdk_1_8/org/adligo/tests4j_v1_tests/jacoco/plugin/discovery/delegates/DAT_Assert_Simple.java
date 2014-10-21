@@ -6,22 +6,27 @@ import java.io.Flushable;
 import java.io.OutputStream;
 import java.io.PrintStream;
 import java.io.Serializable;
+import java.lang.annotation.Annotation;
+import java.lang.reflect.AnnotatedElement;
+import java.lang.reflect.GenericDeclaration;
+import java.lang.reflect.Type;
+import java.lang.reflect.TypeVariable;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.adligo.tests4j.models.shared.dependency.I_ClassDependencies;
-import org.adligo.tests4j.models.shared.dependency.I_ClassDependenciesLocal;
+import org.adligo.tests4j.models.shared.association.I_ClassAssociations;
+import org.adligo.tests4j.models.shared.association.I_ClassAssociationsLocal;
 import org.adligo.tests4j.run.helpers.I_CachedClassBytesClassLoader;
-import org.adligo.tests4j.shared.asserts.dependency.ClassAliasLocal;
-import org.adligo.tests4j.shared.asserts.dependency.FieldSignature;
-import org.adligo.tests4j.shared.asserts.dependency.I_ClassAlias;
-import org.adligo.tests4j.shared.asserts.dependency.I_ClassAttributes;
-import org.adligo.tests4j.shared.asserts.dependency.I_Dependency;
-import org.adligo.tests4j.shared.asserts.dependency.I_FieldSignature;
-import org.adligo.tests4j.shared.asserts.dependency.I_MethodSignature;
-import org.adligo.tests4j.shared.asserts.dependency.MethodSignature;
+import org.adligo.tests4j.shared.asserts.reference.ClassAliasLocal;
+import org.adligo.tests4j.shared.asserts.reference.FieldSignature;
+import org.adligo.tests4j.shared.asserts.reference.I_ClassAlias;
+import org.adligo.tests4j.shared.asserts.reference.I_ClassAttributes;
+import org.adligo.tests4j.shared.asserts.reference.I_Dependency;
+import org.adligo.tests4j.shared.asserts.reference.I_FieldSignature;
+import org.adligo.tests4j.shared.asserts.reference.I_MethodSignature;
+import org.adligo.tests4j.shared.asserts.reference.MethodSignature;
 import org.adligo.tests4j.system.shared.trials.TrialDelegate;
 import org.adligo.tests4j_4jacoco.plugin.common.I_OrderedClassDependencies;
 import org.adligo.tests4j_4jacoco.plugin.discovery.OrderedClassDiscovery;
@@ -64,23 +69,23 @@ public class DAT_Assert_Simple extends TrialDelegate {
 		assertEquals(1, dep.getReferences());
 		assertEquals(1, deps.size());
 		
-		I_ClassDependencies cr =  orderedClassDiscovery.getReferences(new ClassAliasLocal(clazz));
+		I_ClassAssociations cr =  orderedClassDiscovery.getReferences(new ClassAliasLocal(clazz));
 		assertMockWithNothingRefs(className, cr);
 		assertHasObjectCache();
 		assertHasMockWithNothingCache();
-		Map<String,I_ClassDependenciesLocal> refsCache = trial.getRefsCache();
+		Map<String,I_ClassAssociationsLocal> refsCache = trial.getRefsCache();
 		assertEquals(2, refsCache.size());
 	}
 
 	public void assertHasMockWithNothingCache() {
 		String className = MockWithNothing.class.getName();
-		Map<String,I_ClassDependenciesLocal> refsCache = trial.getRefsCache();
-		I_ClassDependencies refs =  refsCache.get(className);
+		Map<String,I_ClassAssociationsLocal> refsCache = trial.getRefsCache();
+		I_ClassAssociations refs =  refsCache.get(className);
 		assertMockWithNothingRefs(className, refs);
 	}
 
 	private void assertMockWithNothingRefs(String className,
-			I_ClassDependencies refs) {
+			I_ClassAssociations refs) {
 		assertNotNull(refs);
 		assertEquals(className, refs.getName());
 		assertFalse(refs.hasCircularDependencies());
@@ -144,7 +149,7 @@ public class DAT_Assert_Simple extends TrialDelegate {
 		assertEquals(5, deps.size());
 		
 		
-		I_ClassDependencies cr =  orderedClassDiscovery.getReferences(new ClassAliasLocal(clazz));
+		I_ClassAssociations cr =  orderedClassDiscovery.getReferences(new ClassAliasLocal(clazz));
 		assertMockWithStringRefs(className, cr);
 		
 		assertHasObjectCache();
@@ -155,19 +160,19 @@ public class DAT_Assert_Simple extends TrialDelegate {
 		assertHasStringCache();
 		
 		assertHasMockWithStringCache();
-		Map<String,I_ClassDependenciesLocal> refsCache = trial.getRefsCache();
+		Map<String,I_ClassAssociationsLocal> refsCache = trial.getRefsCache();
 		assertEquals(6, refsCache.size());
 	}
 	
 	public void assertHasMockWithStringCache() {
 		String className = MockWithString.class.getName();
-		Map<String,I_ClassDependenciesLocal> refsCache = trial.getRefsCache();
-		I_ClassDependencies refs =  refsCache.get(className);
+		Map<String,I_ClassAssociationsLocal> refsCache = trial.getRefsCache();
+		I_ClassAssociations refs =  refsCache.get(className);
 		assertMockWithStringRefs(className, refs);
 	}
 
 	private void assertMockWithStringRefs(String className,
-			I_ClassDependencies refs) {
+			I_ClassAssociations refs) {
 		assertNotNull(refs);
 		assertEquals(className, refs.getName());
 		assertFalse(refs.hasCircularDependencies());
@@ -230,7 +235,7 @@ public class DAT_Assert_Simple extends TrialDelegate {
 		assertEquals(1, dep.getReferences());
 		assertEquals(4, deps.size());
 		
-		I_ClassDependencies cr =  orderedClassDiscovery.getReferences(new ClassAliasLocal(clazz));
+		I_ClassAssociations cr =  orderedClassDiscovery.getReferences(new ClassAliasLocal(clazz));
 		assertHasObjectCache();
 		
 		assertHasThrowableCache();
@@ -239,7 +244,7 @@ public class DAT_Assert_Simple extends TrialDelegate {
 		assertMockExceptionRefs(className, cr);
 		
 
-		Map<String,I_ClassDependenciesLocal> refsCache = trial.getRefsCache();
+		Map<String,I_ClassAssociationsLocal> refsCache = trial.getRefsCache();
 		assertEquals(5, refsCache.size());
 	}
 	
@@ -251,7 +256,7 @@ public class DAT_Assert_Simple extends TrialDelegate {
 		String className = clazz.getName();
 		assertFalse(ccbClassLoader.hasCache(className));
 		I_OrderedClassDependencies ocd = orderedClassDiscovery.findOrLoad(clazz);
-		I_ClassDependenciesLocal cdl = ocd.getClassDependencies();
+		I_ClassAssociationsLocal cdl = ocd.getClassDependencies();
 		List<I_ClassAttributes> atribs = cdl.getReferences();
 		
 		assertNotNull(atribs);
@@ -290,55 +295,126 @@ public class DAT_Assert_Simple extends TrialDelegate {
 	}
 	public void assertHasObjectCache() {
 		String className = Object.class.getName();
-		Map<String,I_ClassDependenciesLocal> refsCache = trial.getRefsCache();
-		I_ClassDependencies refs =  refsCache.get(className);
+		Map<String,I_ClassAssociationsLocal> refsCache = trial.getRefsCache();
+		I_ClassAssociations refs =  refsCache.get(className);
 		assertSimple(className, refs);
 	}
 
 	public void assertHasAutoCloseableCache() {
 		String className = AutoCloseable.class.getName();
-		Map<String,I_ClassDependenciesLocal> refsCache = trial.getRefsCache();
-		I_ClassDependencies refs =  refsCache.get(className);
+		Map<String,I_ClassAssociationsLocal> refsCache = trial.getRefsCache();
+		I_ClassAssociations refs =  refsCache.get(className);
 		assertSimple(className, refs);
 	}
 	
 	public void assertHasSerilizableCache() {
 		String className = Serializable.class.getName();
-		Map<String,I_ClassDependenciesLocal> refsCache = trial.getRefsCache();
-		I_ClassDependencies refs =  refsCache.get(className);
+		Map<String,I_ClassAssociationsLocal> refsCache = trial.getRefsCache();
+		I_ClassAssociations refs =  refsCache.get(className);
 		assertSimple(className, refs);
 	}
 	
 	public void assertHasCompareableCache() {
 		String className = Comparable.class.getName();
-		Map<String,I_ClassDependenciesLocal> refsCache = trial.getRefsCache();
-		I_ClassDependencies refs =  refsCache.get(className);
+		Map<String,I_ClassAssociationsLocal> refsCache = trial.getRefsCache();
+		I_ClassAssociations refs =  refsCache.get(className);
 		assertSimple(className, refs);
+	}
+	
+	public void assertHasTypeCache() {
+		String className = Type.class.getName();
+		Map<String,I_ClassAssociationsLocal> refsCache = trial.getRefsCache();
+		I_ClassAssociations refs =  refsCache.get(className);
+		assertSimple(className, refs);
+	}
+	
+	public void assertHasGenericDeclarationCache() {
+		String className = GenericDeclaration.class.getName();
+		Map<String,I_ClassAssociationsLocal> refsCache = trial.getRefsCache();
+		I_ClassAssociations refs =  refsCache.get(className);
+		
+		assertNotNull(refs);
+		assertEquals(className, refs.getName());
+		assertTrue(refs.hasCircularDependencies());
+		
+		Set<String> refsRefs = refs.getDependencyNames();
+		assertContains(refsRefs, TypeVariable.class.getName());
+		assertEquals(1, refsRefs.size());
+	}
+	
+	public void assertHasAnnotatedElementCache() {
+		String className = AnnotatedElement.class.getName();
+		Map<String,I_ClassAssociationsLocal> refsCache = trial.getRefsCache();
+		I_ClassAssociations refs =  refsCache.get(className);
+		
+		assertNotNull(refs);
+		assertEquals(className, refs.getName());
+		
+		Set<String> refsRefs = refs.getDependencyNames();
+		assertContains(refsRefs, Annotation.class.getName());
+		assertContains(refsRefs, Class.class.getName());
+		assertEquals(2, refsRefs.size());
+		
+		assertTrue(refs.hasCircularDependencies());
+		
+	}
+	
+	public void assertHasTypeVariableCache() {
+		String className = TypeVariable.class.getName();
+		Map<String,I_ClassAssociationsLocal> refsCache = trial.getRefsCache();
+		I_ClassAssociations refs =  refsCache.get(className);
+		
+		assertNotNull(refs);
+		assertEquals(className, refs.getName());
+		assertTrue(refs.hasCircularDependencies());
+		
+		Set<String> refsRefs = refs.getDependencyNames();
+		assertContains(refsRefs, Type.class.getName());
+		assertContains(refsRefs, String.class.getName());
+		assertContains(refsRefs, GenericDeclaration.class.getName());
+		assertEquals(3, refsRefs.size());
+	}
+	
+	public void assertHasClassCache() {
+		String className = Class.class.getName();
+		Map<String,I_ClassAssociationsLocal> refsCache = trial.getRefsCache();
+		I_ClassAssociations refs =  refsCache.get(className);
+		
+		assertNotNull(refs);
+		assertEquals(className, refs.getName());
+		assertTrue(refs.hasCircularDependencies());
+		
+		Set<String> refsRefs = refs.getDependencyNames();
+		assertContains(refsRefs, Type.class.getName());
+		assertContains(refsRefs, String.class.getName());
+		assertContains(refsRefs, GenericDeclaration.class.getName());
+		assertContains(refsRefs, AnnotatedElement.class.getName());
+		assertEquals(4, refsRefs.size());
 	}
 	
 	public void assertHasCharSequenceCache() {
 		String className = Comparable.class.getName();
-		Map<String,I_ClassDependenciesLocal> refsCache = trial.getRefsCache();
-		I_ClassDependencies refs =  refsCache.get(className);
+		Map<String,I_ClassAssociationsLocal> refsCache = trial.getRefsCache();
+		I_ClassAssociations refs =  refsCache.get(className);
 		assertSimple(className, refs);
 	}
 	
 	public void assertHasAppendableCache() {
 		String className = Appendable.class.getName();
-		Map<String,I_ClassDependenciesLocal> refsCache = trial.getRefsCache();
-		I_ClassDependencies refs =  refsCache.get(className);
+		Map<String,I_ClassAssociationsLocal> refsCache = trial.getRefsCache();
+		I_ClassAssociations refs =  refsCache.get(className);
 		assertSimple(className, refs);
 	}
 	
 	public void assertHasFlushableCache() {
 		String className = Flushable.class.getName();
-		Map<String,I_ClassDependenciesLocal> refsCache = trial.getRefsCache();
-		I_ClassDependencies refs =  refsCache.get(className);
+		Map<String,I_ClassAssociationsLocal> refsCache = trial.getRefsCache();
+		I_ClassAssociations refs =  refsCache.get(className);
 		assertSimple(className, refs);
 	}
 	
 	private void assertSimple(String className,
-			I_ClassDependencies refs) {
+			I_ClassAssociations refs) {
 		assertNotNull(refs);
 		assertEquals(className, refs.getName());
 		assertFalse(refs.hasCircularDependencies());
@@ -349,8 +425,8 @@ public class DAT_Assert_Simple extends TrialDelegate {
 	
 	public void assertHasCloseableCache() {
 		String className = Closeable.class.getName();
-		Map<String,I_ClassDependenciesLocal> refsCache = trial.getRefsCache();
-		I_ClassDependencies refs =  refsCache.get(className);
+		Map<String,I_ClassAssociationsLocal> refsCache = trial.getRefsCache();
+		I_ClassAssociations refs =  refsCache.get(className);
 		assertNotNull(refs);
 		assertEquals(className, refs.getName());
 		assertFalse(refs.hasCircularDependencies());
@@ -362,8 +438,8 @@ public class DAT_Assert_Simple extends TrialDelegate {
 	
 	public void assertHasOutputStreamCache() {
 		String className = OutputStream.class.getName();
-		Map<String,I_ClassDependenciesLocal> refsCache = trial.getRefsCache();
-		I_ClassDependencies refs =  refsCache.get(className);
+		Map<String,I_ClassAssociationsLocal> refsCache = trial.getRefsCache();
+		I_ClassAssociations refs =  refsCache.get(className);
 		assertNotNull(refs);
 		assertEquals(className, refs.getName());
 		assertFalse(refs.hasCircularDependencies());
@@ -378,8 +454,8 @@ public class DAT_Assert_Simple extends TrialDelegate {
 	
 	public void assertHasFilterOutputStreamCache() {
 		String className = FilterOutputStream.class.getName();
-		Map<String,I_ClassDependenciesLocal> refsCache = trial.getRefsCache();
-		I_ClassDependencies refs =  refsCache.get(className);
+		Map<String,I_ClassAssociationsLocal> refsCache = trial.getRefsCache();
+		I_ClassAssociations refs =  refsCache.get(className);
 		assertNotNull(refs);
 		assertEquals(className, refs.getName());
 		assertFalse(refs.hasCircularDependencies());
@@ -395,8 +471,8 @@ public class DAT_Assert_Simple extends TrialDelegate {
 	
 	public void assertHasPrintStreamCache() {
 		String className = PrintStream.class.getName();
-		Map<String,I_ClassDependenciesLocal> refsCache = trial.getRefsCache();
-		I_ClassDependencies refs =  refsCache.get(className);
+		Map<String,I_ClassAssociationsLocal> refsCache = trial.getRefsCache();
+		I_ClassAssociations refs =  refsCache.get(className);
 		assertNotNull(refs);
 		assertEquals(className, refs.getName());
 		assertFalse(refs.hasCircularDependencies());
@@ -414,8 +490,8 @@ public class DAT_Assert_Simple extends TrialDelegate {
 	
 	public void assertHasThrowableCache() {
 		String className = Throwable.class.getName();
-		Map<String,I_ClassDependenciesLocal> refsCache = trial.getRefsCache();
-		I_ClassDependencies refs =  refsCache.get(className);
+		Map<String,I_ClassAssociationsLocal> refsCache = trial.getRefsCache();
+		I_ClassAssociations refs =  refsCache.get(className);
 		
 		assertNotNull(refs);
 		assertEquals(className, refs.getName());
@@ -431,8 +507,8 @@ public class DAT_Assert_Simple extends TrialDelegate {
 	
 	public void assertHasExceptionCache() {
 		String className = Exception.class.getName();
-		Map<String,I_ClassDependenciesLocal> refsCache = trial.getRefsCache();
-		I_ClassDependencies refs =  refsCache.get(className);
+		Map<String,I_ClassAssociationsLocal> refsCache = trial.getRefsCache();
+		I_ClassAssociations refs =  refsCache.get(className);
 		
 		assertNotNull(refs);
 		assertEquals(className, refs.getName());
@@ -447,8 +523,8 @@ public class DAT_Assert_Simple extends TrialDelegate {
 	
 	public void assertHasNumberCache() {
 		String className = Number.class.getName();
-		Map<String,I_ClassDependenciesLocal> refsCache = trial.getRefsCache();
-		I_ClassDependencies refs =  refsCache.get(className);
+		Map<String,I_ClassAssociationsLocal> refsCache = trial.getRefsCache();
+		I_ClassAssociations refs =  refsCache.get(className);
 		
 		assertNotNull(refs);
 		assertEquals(className, refs.getName());
@@ -462,8 +538,8 @@ public class DAT_Assert_Simple extends TrialDelegate {
 	
 	public void assertHasLongCache() {
 		String className = Long.class.getName();
-		Map<String,I_ClassDependenciesLocal> refsCache = trial.getRefsCache();
-		I_ClassDependencies refs =  refsCache.get(className);
+		Map<String,I_ClassAssociationsLocal> refsCache = trial.getRefsCache();
+		I_ClassAssociations refs =  refsCache.get(className);
 		
 		assertNotNull(refs);
 		assertEquals(className, refs.getName());
@@ -479,8 +555,8 @@ public class DAT_Assert_Simple extends TrialDelegate {
 	
 	public void assertHasStringCache() {
 		String className = String.class.getName();
-		Map<String,I_ClassDependenciesLocal> refsCache = trial.getRefsCache();
-		I_ClassDependencies refs =  refsCache.get(className);
+		Map<String,I_ClassAssociationsLocal> refsCache = trial.getRefsCache();
+		I_ClassAssociations refs =  refsCache.get(className);
 		
 		assertNotNull(refs);
 		assertEquals(className, refs.getName());
@@ -496,13 +572,13 @@ public class DAT_Assert_Simple extends TrialDelegate {
 	
 	public void assertHasMockExceptionCache() {
 		String className = MockException.class.getName();
-		Map<String,I_ClassDependenciesLocal> refsCache = trial.getRefsCache();
-		I_ClassDependencies refs =  refsCache.get(className);
+		Map<String,I_ClassAssociationsLocal> refsCache = trial.getRefsCache();
+		I_ClassAssociations refs =  refsCache.get(className);
 		assertMockExceptionRefs(className, refs);
 	}
 
 	private void assertMockExceptionRefs(String className,
-			I_ClassDependencies refs) {
+			I_ClassAssociations refs) {
 		assertNotNull(refs);
 		assertEquals(className, refs.getName());
 		assertFalse(refs.hasCircularDependencies());

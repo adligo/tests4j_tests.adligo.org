@@ -2,7 +2,7 @@ package org.adligo.tests4j_tests.run.api;
 
 import org.adligo.tests4j.shared.asserts.common.ExpectedThrownData;
 import org.adligo.tests4j.shared.asserts.common.I_Thrower;
-import org.adligo.tests4j.shared.asserts.dependency.CircularDependencies;
+import org.adligo.tests4j.shared.asserts.reference.CircularDependencies;
 import org.adligo.tests4j.shared.output.DefaultLog;
 import org.adligo.tests4j.shared.output.I_Tests4J_Log;
 import org.adligo.tests4j.system.shared.trials.AdditionalInstrumentation;

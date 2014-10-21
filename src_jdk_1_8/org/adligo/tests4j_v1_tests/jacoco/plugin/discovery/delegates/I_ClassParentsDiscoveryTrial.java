@@ -2,9 +2,9 @@ package org.adligo.tests4j_v1_tests.jacoco.plugin.discovery.delegates;
 
 import java.util.Map;
 
-import org.adligo.tests4j.models.shared.dependency.ClassFilter;
-import org.adligo.tests4j.models.shared.dependency.I_ClassFilter;
-import org.adligo.tests4j.models.shared.dependency.I_ClassParentsLocal;
+import org.adligo.tests4j.models.shared.association.ClassFilter;
+import org.adligo.tests4j.models.shared.association.I_ClassFilter;
+import org.adligo.tests4j.models.shared.association.I_ClassParentsLocal;
 import org.adligo.tests4j.run.helpers.CachedClassBytesClassLoader;
 import org.adligo.tests4j.system.shared.trials.I_Trial;
 import org.adligo.tests4j_4jacoco.plugin.discovery.I_ClassParentsDiscovery;

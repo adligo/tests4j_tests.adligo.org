@@ -103,7 +103,7 @@ public class ReferenceTrackingClassVisitorTrial extends SourceFileCountingTrial 
 		classReader.accept(rtcv, 0);
 		assertEquals(className, rtcv.getClassName());
 		
-		Set<String> classNames =  rtcv.getClassReferences();
+		Set<String> classNames =  rtcv.getClassReferenceNames();
 		
 		assertContains(classNames, OBJ);
 		assertContains(classNames, MW_NOTHING);
@@ -122,7 +122,7 @@ public class ReferenceTrackingClassVisitorTrial extends SourceFileCountingTrial 
 		
 		assertEquals(className,  rtcv.getClassName());
 		
-		Set<String> classNames =  rtcv.getClassReferences();
+		Set<String> classNames =  rtcv.getClassReferenceNames();
 		assertContains(classNames, OBJ);
 		assertContains(classNames, MW_METHOD_RETURN);
 		assertContains(classNames, MW_NOTHING);
@@ -141,7 +141,7 @@ public class ReferenceTrackingClassVisitorTrial extends SourceFileCountingTrial 
 		
 		assertEquals(className,  rtcv.getClassName());
 		
-		Set<String> classNames =  rtcv.getClassReferences();
+		Set<String> classNames =  rtcv.getClassReferenceNames();
 		assertContains(classNames, OBJ);
 		assertContains(classNames, MW_FIELD);
 		assertContains(classNames, I_SYSTEM);
@@ -160,7 +160,7 @@ public class ReferenceTrackingClassVisitorTrial extends SourceFileCountingTrial 
 		
 		assertEquals(className,  rtcv.getClassName());
 		
-		Set<String> classNames =  rtcv.getClassReferences();
+		Set<String> classNames =  rtcv.getClassReferenceNames();
 		assertContains(classNames, OBJ);
 		assertContains(classNames, MW_METHOD_PARAMS);
 		assertEquals(2, classNames.size());
@@ -178,12 +178,13 @@ public class ReferenceTrackingClassVisitorTrial extends SourceFileCountingTrial 
 		
 		assertEquals(className,  rtcv.getClassName());
 		
-		Set<String> classNames =  rtcv.getClassReferences();
+		Set<String> classNames =  rtcv.getClassReferenceNames();
 		
 		assertContains(classNames, OBJ);
+		assertContains(classNames, STRING);
 		assertContains(classNames, MW_IMPORT_ONLY_IN_METHOD);
 		assertContains(classNames, I_SYSTEM);
-		assertEquals(3, classNames.size());
+		assertEquals(4, classNames.size());
 	}
 	
 	
@@ -199,7 +200,7 @@ public class ReferenceTrackingClassVisitorTrial extends SourceFileCountingTrial 
 		
 		assertEquals(className,  rtcv.getClassName());
 		
-		Set<String> classNames =  rtcv.getClassReferences();
+		Set<String> classNames =  rtcv.getClassReferenceNames();
 		
 		assertContains(classNames, OBJ);
 		assertContains(classNames, MW_STATIC_FIELD);
@@ -219,7 +220,7 @@ public class ReferenceTrackingClassVisitorTrial extends SourceFileCountingTrial 
 		
 		assertEquals(className,  rtcv.getClassName());
 		
-		Set<String> classNames =  rtcv.getClassReferences();
+		Set<String> classNames =  rtcv.getClassReferenceNames();
 		
 		assertContains(classNames, OBJ);
 		assertContains(classNames, MW_STATIC_INIT);
@@ -242,7 +243,7 @@ public class ReferenceTrackingClassVisitorTrial extends SourceFileCountingTrial 
 		
 		assertEquals(className,  rtcv.getClassName());
 		
-		Set<String> classNames =  rtcv.getClassReferences();
+		Set<String> classNames =  rtcv.getClassReferenceNames();
 		assertContains(classNames, OBJ);
 		assertContains(classNames, MW_ARRAY);
 		assertContains(classNames, "[" + MW_NOTHING);
@@ -261,7 +262,7 @@ public class ReferenceTrackingClassVisitorTrial extends SourceFileCountingTrial 
 		
 		assertEquals(className,  rtcv.getClassName());
 		
-		Set<String> classNames =  rtcv.getClassReferences();
+		Set<String> classNames =  rtcv.getClassReferenceNames();
 		
 		assertContains(classNames, OBJ);
 		assertContains(classNames, MW_METHOD_EXCEPTION);
@@ -282,7 +283,7 @@ public class ReferenceTrackingClassVisitorTrial extends SourceFileCountingTrial 
 		
 		assertEquals(className,  rtcv.getClassName());
 		
-		Set<String> classNames =  rtcv.getClassReferences();
+		Set<String> classNames =  rtcv.getClassReferenceNames();
 		
 		assertContains(classNames, OBJ);
 		assertContains(classNames, MW_METHOD_EXCEPTION_BLOCK);
@@ -312,7 +313,7 @@ public class ReferenceTrackingClassVisitorTrial extends SourceFileCountingTrial 
 		
 		assertEquals(className,  rtcv.getClassName());
 		
-		Set<String> classNames =  rtcv.getClassReferences();
+		Set<String> classNames =  rtcv.getClassReferenceNames();
 		assertContains(classNames, OBJ);
 		assertContains(classNames, MW_ABS_METHOD_RETURN);
 		assertEquals(2, classNames.size());
@@ -338,7 +339,7 @@ public class ReferenceTrackingClassVisitorTrial extends SourceFileCountingTrial 
 		
 		assertEquals(className,  rtcv.getClassName());
 		
-		Set<String> classNames =  rtcv.getClassReferences();
+		Set<String> classNames =  rtcv.getClassReferenceNames();
 		assertContains(classNames, OBJ);
 		assertContains(classNames, MW_ABS_METHOD_PARAM);
 		assertEquals(2, classNames.size());
@@ -364,7 +365,7 @@ public class ReferenceTrackingClassVisitorTrial extends SourceFileCountingTrial 
 		
 		assertEquals(className,  rtcv.getClassName());
 		
-		Set<String> classNames =  rtcv.getClassReferences();
+		Set<String> classNames =  rtcv.getClassReferenceNames();
 		assertContains(classNames, OBJ);
 		assertContains(classNames, MW_ABS_METHOD_EXCEPTION);
 		assertEquals(2, classNames.size());
@@ -389,7 +390,7 @@ public class ReferenceTrackingClassVisitorTrial extends SourceFileCountingTrial 
 		
 		
 		assertEquals("MockMock",  rtcv.getClassName());
-		Set<String> crefs = rtcv.getClassReferences();
+		Set<String> crefs = rtcv.getClassReferenceNames();
 		assertContains(crefs, OBJ);
 		assertEquals(1, crefs.size());
 	}
@@ -408,7 +409,7 @@ public class ReferenceTrackingClassVisitorTrial extends SourceFileCountingTrial 
 		
 		assertEquals(className, rtcv.getClassName());
 		
-		Set<String> classNames =  rtcv.getClassReferences();
+		Set<String> classNames =  rtcv.getClassReferenceNames();
 		
 		Set<String> expected = getEverything();
 		for (String e: expected) {
@@ -430,7 +431,7 @@ public class ReferenceTrackingClassVisitorTrial extends SourceFileCountingTrial 
 		classReader.accept(rtcv, 0);
 		
 		assertEquals(MockWithEverything.class.getName() + "$1", rtcv.getClassName());
-		classNames =  rtcv.getClassReferences();
+		classNames =  rtcv.getClassReferenceNames();
 		
 		expected = getEverything_1();
 		for (String e: expected) {
@@ -509,7 +510,7 @@ public class ReferenceTrackingClassVisitorTrial extends SourceFileCountingTrial 
 
 	@Override
 	public int getAsserts(I_CountType type) {
-		int thisAsserts = 112;
+		int thisAsserts = 113;
 		if (type.isFromMetaWithCoverage()) {
 			//code coverage and circular dependencies +
 			//custom afterTrialTests
@@ -521,7 +522,7 @@ public class ReferenceTrackingClassVisitorTrial extends SourceFileCountingTrial 
 
 	@Override
 	public int getUniqueAsserts(I_CountType type) {
-		int thisUniqueAsserts = 109;
+		int thisUniqueAsserts = 110;
 		if (type.isFromMetaWithCoverage()) {
 			//code coverage and circular dependencies +
 			//custom afterTrialTests

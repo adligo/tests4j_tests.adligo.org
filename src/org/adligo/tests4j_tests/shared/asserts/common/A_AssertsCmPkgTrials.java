@@ -7,6 +7,7 @@ import org.adligo.tests4j_4jacoco.plugin.CoveragePluginFactory;
 import org.adligo.tests4j_tests.base_trials.I_CountingPackageTrials;
 import org.adligo.tests4j_tests.base_trials.SimpleMetaTrial;
 import org.adligo.tests4j_tests.base_trials.SimplePackageTrials;
+import org.adligo.tests4j_tests.shared.common.AssertionFailedExceptionTrial;
 
 public class A_AssertsCmPkgTrials extends SimplePackageTrials 
 	implements I_MetaTrialParams<A_AssertsCmPkgTrials>, I_CountingPackageTrials {
@@ -59,6 +60,7 @@ public class A_AssertsCmPkgTrials extends SimplePackageTrials
 		add(I_ThrownAssertionDataTrial.class);
 		
 		add(AssertTypeTrial.class);
+		add(AssertionFailedExceptionTrial.class);
 		add(CompareAssertionDataTrial.class);
 		add(ExpectedThrownDataTrial.class);
 		add(ThrownAssertionDataMutantTrial.class);

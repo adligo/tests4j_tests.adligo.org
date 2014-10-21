@@ -18,8 +18,8 @@ import org.adligo.tests4j.system.shared.trials.TrialTypeAnnotation;
 
 @TrialTypeAnnotation (type=TrialType.META_TRIAL_TYPE)
 public class TheMetaTrial  extends AbstractTrial implements I_MetaTrial {
-	private static final int TESTS = 2365;
-	private static final int TRIALS = 499;
+	private static final int TESTS = 2755;
+	private static final int TRIALS = 509;
 	private ClassesWithSourceFileTrialsCalculator calculator_;
 	private I_TrialRunResult results_;
 	private I_Tests4J_Log log_;
@@ -73,12 +73,12 @@ public class TheMetaTrial  extends AbstractTrial implements I_MetaTrial {
 		assertCoverageMatrix("org.adligo.tests4j.shared.en",
 				100.0, 100.0);
 		assertCoverageMatrix("org.adligo.tests4j.shared.common",
-				100.0, 83.0);
+				100.0, 80.0);
 		assertCoverageMatrix("org.adligo.tests4j.shared.xml",
 				100.0, 92.0);
 		assertCoverageMatrix("org.adligo.tests4j.shared.asserts.common",
 				100.0, 85.0);
-		assertCoverageMatrix("org.adligo.tests4j.shared.asserts.dependency",
+		assertCoverageMatrix("org.adligo.tests4j.shared.asserts.reference",
 				100.0, 47.0);
 		assertCoverageMatrix("org.adligo.tests4j.shared.asserts.line_text",
 				60.0, 88.0);
@@ -89,20 +89,18 @@ public class TheMetaTrial  extends AbstractTrial implements I_MetaTrial {
 				100.0, 83.0);
 		assertCoverageMatrix("org.adligo.tests4j.shared.output",
 				100.0, 66.0);
-		assertCoverageMatrix("org.adligo.tests4j.models.shared.dependency_groups.jse.v1_6",
+		assertCoverageMatrix("org.adligo.tests4j.models.shared.reference_groups.jse.v1_6",
 				100.0, 96.0);
-		assertCoverageMatrix("org.adligo.tests4j.models.shared.dependency_groups.jse.v1_7",
+		assertCoverageMatrix("org.adligo.tests4j.models.shared.reference_groups.jse.v1_7",
 				100.0, 100.0);
-		assertCoverageMatrix("org.adligo.tests4j.models.shared.dependency_groups.jse.v1_8",
+		assertCoverageMatrix("org.adligo.tests4j.models.shared.reference_groups.jse.v1_8",
 				100.0, 100.0);
-		assertCoverageMatrix("org.adligo.tests4j.models.shared.dependency_groups.jse",
+		assertCoverageMatrix("org.adligo.tests4j.models.shared.reference_groups.jse",
 				100.0, 98.0);
 		
-		assertCoverageMatrix("org.adligo.tests4j.models.shared.dependency",
-				100.0, 47.0);
-		assertCoverageMatrix("org.adligo.tests4j.models.shared.dependency_groups.gwt.v2_6",
+		assertCoverageMatrix("org.adligo.tests4j.models.shared.reference_groups.gwt.v2_6",
 				100.0, 99.0);
-		assertCoverageMatrix("org.adligo.tests4j.models.shared.dependency_groups.gwt",
+		assertCoverageMatrix("org.adligo.tests4j.models.shared.reference_groups.gwt",
 				100.0, 98.0);
 		assertCoverageMatrix("org.adligo.tests4j.models.shared.metadata",
 				100.0, 70.0);
@@ -116,21 +114,8 @@ public class TheMetaTrial  extends AbstractTrial implements I_MetaTrial {
 		assertCoverageMatrix("org.adligo.tests4j.system.shared.api",
 				100.0, 50.0);
 		assertCoverageMatrix("org.adligo.tests4j.system.shared.report.summary",
-				100.0, 79.0);
-		/*
-		if (results.hasCoverage()) {
-			results.getCoverage();
-			assertGreaterThanOrEquals(100.0, );
-		}
-		assertGreaterThanOrEquals(100.0, calculator.getPctWithTrials("org.adligo.tests4j.models.shared.en"));
-		assertGreaterThanOrEquals(100.0, calculator.getPctWithTrials("org.adligo.tests4j.models.shared.asserts"));
-		assertGreaterThanOrEquals(100.0, calculator.getPctWithTrials("org.adligo.tests4j.models.shared.asserts.common"));
-		assertGreaterThanOrEquals(100.0, calculator.getPctWithTrials("org.adligo.tests4j.models.shared.asserts.line_text"));
-		assertGreaterThanOrEquals(100.0, calculator.getPctWithTrials("org.adligo.tests4j.models.shared.common"));
-		
-		assertGreaterThanOrEquals(100.0, calculator.getPctWithTrials("org.adligo.tests4j.models.shared.metadata"));
-		assertGreaterThanOrEquals(100.0, calculator.getPctWithTrials("org.adligo.tests4j.models.shared.xml"));
-		*/
+				100.0, 73.0);
+
 	}
 
 	private void assertCoverageMatrix(String pkgName, double minPctSourceTrials, double minPctCoverage) {

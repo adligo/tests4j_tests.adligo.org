@@ -2,8 +2,8 @@ package org.adligo.tests4j_v1_tests.jacoco.plugin.discovery.delegates;
 
 import java.util.List;
 
-import org.adligo.tests4j.models.shared.dependency.I_ClassParents;
-import org.adligo.tests4j.models.shared.dependency.I_ClassParentsLocal;
+import org.adligo.tests4j.models.shared.association.I_ClassParents;
+import org.adligo.tests4j.models.shared.association.I_ClassParentsLocal;
 import org.adligo.tests4j.run.helpers.I_CachedClassBytesClassLoader;
 import org.adligo.tests4j.system.shared.trials.TrialDelegate;
 import org.adligo.tests4j_4jacoco.plugin.discovery.I_ClassParentsDiscovery;

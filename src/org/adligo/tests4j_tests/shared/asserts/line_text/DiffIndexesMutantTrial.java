@@ -1,15 +1,15 @@
 package org.adligo.tests4j_tests.shared.asserts.line_text;
 
-import org.adligo.tests4j.shared.asserts.dependency.AllowedDependencies;
 import org.adligo.tests4j.shared.asserts.line_text.DiffIndexesMutant;
+import org.adligo.tests4j.shared.asserts.reference.AllowedReferences;
 import org.adligo.tests4j.system.shared.trials.SourceFileScope;
 import org.adligo.tests4j.system.shared.trials.Test;
 import org.adligo.tests4j_tests.base_trials.I_CountType;
 import org.adligo.tests4j_tests.base_trials.SourceFileCountingTrial;
-import org.adligo.tests4j_tests.dependency_groups.Tests4J_AssertsLineText_DependencyGroup;
+import org.adligo.tests4j_tests.references_groups.Tests4J_AssertsLineText_GwtReferenceGroup;
 
 @SourceFileScope (sourceClass=DiffIndexesMutant.class, minCoverage=59.0)
-@AllowedDependencies (groups=Tests4J_AssertsLineText_DependencyGroup.class)
+@AllowedReferences (groups=Tests4J_AssertsLineText_GwtReferenceGroup.class)
 public class DiffIndexesMutantTrial extends SourceFileCountingTrial {
 
 	@Test
@@ -136,7 +136,7 @@ public class DiffIndexesMutantTrial extends SourceFileCountingTrial {
 	
 	@Override
 	public int getTests(I_CountType type) {
-		return super.getTests(type, 9);
+		return super.getTests(type, 9, true);
 	}
 
 	@Override

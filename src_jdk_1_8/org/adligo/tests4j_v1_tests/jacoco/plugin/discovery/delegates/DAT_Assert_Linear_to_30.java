@@ -6,11 +6,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.adligo.tests4j.models.shared.dependency.I_ClassDependenciesLocal;
+import org.adligo.tests4j.models.shared.association.I_ClassAssociationsLocal;
 import org.adligo.tests4j.run.helpers.I_CachedClassBytesClassLoader;
-import org.adligo.tests4j.shared.asserts.dependency.ClassAliasLocal;
-import org.adligo.tests4j.shared.asserts.dependency.I_ClassAlias;
-import org.adligo.tests4j.shared.asserts.dependency.I_Dependency;
+import org.adligo.tests4j.shared.asserts.reference.ClassAliasLocal;
+import org.adligo.tests4j.shared.asserts.reference.I_ClassAlias;
+import org.adligo.tests4j.shared.asserts.reference.I_Dependency;
 import org.adligo.tests4j.system.shared.trials.TrialDelegate;
 import org.adligo.tests4j_4jacoco.plugin.common.I_OrderedClassDependencies;
 import org.adligo.tests4j_4jacoco.plugin.discovery.OrderedClassDiscovery;
@@ -142,7 +142,7 @@ public class DAT_Assert_Linear_to_30 extends TrialDelegate {
 		assertEquals(1, dep.getReferences());
 		
 		assertEquals(14, deps.size());
-		I_ClassDependenciesLocal cr =  orderedClassDiscovery.getReferences(new ClassAliasLocal(clazz));
+		I_ClassAssociationsLocal cr =  orderedClassDiscovery.getReferences(new ClassAliasLocal(clazz));
 		assertMockI_OtherStringAndLongCacheRefs(className, cr);
 		
 		DAT_Assert_Simple simple = trial.getSimple();
@@ -168,20 +168,20 @@ public class DAT_Assert_Linear_to_30 extends TrialDelegate {
 		to20.assertHasMockI_StringAndLongCache();
 		assertHasMockI_OtherStringAndLongCache();
 		
-		Map<String,I_ClassDependenciesLocal> refsCache = trial.getRefsCache();
+		Map<String,I_ClassAssociationsLocal> refsCache = trial.getRefsCache();
 		assertEquals(15, refsCache.size());
 	}
 	
 	public void assertHasMockI_OtherStringAndLongCache() {
 		String className = MockI_OtherStringAndLong.class.getName();
-		Map<String,I_ClassDependenciesLocal> refsCache = trial.getRefsCache();
-		I_ClassDependenciesLocal crefs =  refsCache.get(className);
+		Map<String,I_ClassAssociationsLocal> refsCache = trial.getRefsCache();
+		I_ClassAssociationsLocal crefs =  refsCache.get(className);
 		assertMockI_OtherStringAndLongCacheRefs(className, crefs);
 	}
 
 
 	private void assertMockI_OtherStringAndLongCacheRefs(String className,
-			I_ClassDependenciesLocal crefs) {
+			I_ClassAssociationsLocal crefs) {
 		assertNotNull(crefs);
 		assertEquals(className, crefs.getName());
 		assertFalse(crefs.hasCircularDependencies());

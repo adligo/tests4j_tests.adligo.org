@@ -5,7 +5,6 @@ import java.util.TreeSet;
 
 import org.adligo.tests4j.shared.asserts.common.ExpectedThrownData;
 import org.adligo.tests4j.shared.asserts.common.I_Thrower;
-import org.adligo.tests4j.shared.asserts.dependency.AllowedDependencies;
 import org.adligo.tests4j.shared.asserts.line_text.DiffIndexes;
 import org.adligo.tests4j.shared.asserts.line_text.DiffIndexesPair;
 import org.adligo.tests4j.shared.asserts.line_text.I_DiffIndexesPair;
@@ -13,14 +12,15 @@ import org.adligo.tests4j.shared.asserts.line_text.I_LineDiff;
 import org.adligo.tests4j.shared.asserts.line_text.LineDiff;
 import org.adligo.tests4j.shared.asserts.line_text.LineDiffMutant;
 import org.adligo.tests4j.shared.asserts.line_text.LineDiffType;
+import org.adligo.tests4j.shared.asserts.reference.AllowedReferences;
 import org.adligo.tests4j.system.shared.trials.SourceFileScope;
 import org.adligo.tests4j.system.shared.trials.Test;
 import org.adligo.tests4j_tests.base_trials.I_CountType;
 import org.adligo.tests4j_tests.base_trials.SourceFileCountingTrial;
-import org.adligo.tests4j_tests.dependency_groups.Tests4J_AssertsLineText_DependencyGroup;
+import org.adligo.tests4j_tests.references_groups.Tests4J_AssertsLineText_GwtReferenceGroup;
 
 @SourceFileScope (sourceClass=LineDiff.class)
-@AllowedDependencies (groups=Tests4J_AssertsLineText_DependencyGroup.class)
+@AllowedReferences (groups=Tests4J_AssertsLineText_GwtReferenceGroup.class)
 public class LineDiffTrial extends SourceFileCountingTrial {
 
 	@Test
@@ -168,7 +168,7 @@ public class LineDiffTrial extends SourceFileCountingTrial {
 	
 	@Override
 	public int getTests(I_CountType type) {
-		return super.getTests(type, 4);
+		return super.getTests(type, 4, true);
 	}
 
 	@Override

@@ -3,8 +3,7 @@ package org.adligo.tests4j_tests;
 import org.adligo.tests4j.run.api.Tests4J;
 import org.adligo.tests4j.system.shared.api.Tests4J_Params;
 import org.adligo.tests4j_4jacoco.plugin.CoveragePluginFactory;
-import org.adligo.tests4j_tests.base_trials.SimpleMetaTrial;
-import org.adligo.tests4j_tests.jacoco.api_trials.dependency_trials.CalledBadMethod_SourceFileTrial;
+import org.adligo.tests4j_tests.shared.asserts.AssertionProcessorTrial;
 
 public class RunSingleTrial {
 	
@@ -13,7 +12,7 @@ public class RunSingleTrial {
 			Tests4J_Params params = new Tests4J_Params();
 			params.setCoveragePluginFactoryClass(CoveragePluginFactory.class);
 			
-			params.addTrial(CalledBadMethod_SourceFileTrial.class);
+			params.addTrial(AssertionProcessorTrial.class);
 		
 			//params.setLogState(Tests4J_TrialsRunable.class, true);
 			//params.setLogState(MultiProbesMap.class, true);

@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import org.adligo.tests4j.shared.asserts.dependency.CircularDependencies;
+import org.adligo.tests4j.shared.asserts.reference.CircularDependencies;
 import org.adligo.tests4j.system.shared.api.I_Tests4J_TrialList;
 import org.adligo.tests4j.system.shared.api.Tests4J_Params;
 import org.adligo.tests4j.system.shared.trials.I_Trial;

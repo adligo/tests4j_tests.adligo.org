@@ -4,7 +4,7 @@ import java.util.Collections;
 
 import org.adligo.tests4j.shared.asserts.common.ExpectedThrownData;
 import org.adligo.tests4j.shared.asserts.common.I_Thrower;
-import org.adligo.tests4j.shared.asserts.dependency.AllowedDependencies;
+import org.adligo.tests4j.shared.asserts.reference.AllowedReferences;
 import org.adligo.tests4j.shared.common.MethodBlocker;
 import org.adligo.tests4j.shared.common.Tests4J_Constants;
 import org.adligo.tests4j.shared.en.Tests4J_EnglishConstants;
@@ -14,12 +14,12 @@ import org.adligo.tests4j.system.shared.trials.SourceFileScope;
 import org.adligo.tests4j.system.shared.trials.Test;
 import org.adligo.tests4j_tests.base_trials.I_CountType;
 import org.adligo.tests4j_tests.base_trials.SourceFileCountingTrial;
-import org.adligo.tests4j_tests.dependency_groups.Tests4J_Common_DependencyGroup;
+import org.adligo.tests4j_tests.references_groups.Tests4J_Common_ReferenceGroup;
 import org.adligo.tests4j_tests.shared.common.mocks.MockWithMethodBlocker;
 
 @SourceFileScope (sourceClass=MethodBlocker.class, minCoverage=97.0)
 @AdditionalInstrumentation (javaPackages="org.adligo.tests4j_tests.shared.common.mocks")
-@AllowedDependencies (groups=Tests4J_Common_DependencyGroup.class)
+@AllowedReferences (groups=Tests4J_Common_ReferenceGroup.class)
 public class MethodBlockerTrial extends SourceFileCountingTrial {
 	
 	
@@ -188,7 +188,7 @@ public class MethodBlockerTrial extends SourceFileCountingTrial {
 	
 	@Override
 	public int getTests(I_CountType type) {
-		return super.getTests(type, 3);
+		return super.getTests(type, 3, true);
 	}
 
 

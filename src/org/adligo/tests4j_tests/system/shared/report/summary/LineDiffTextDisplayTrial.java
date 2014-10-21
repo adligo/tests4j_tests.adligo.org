@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import org.adligo.tests4j.shared.asserts.dependency.AllowedDependencies;
 import org.adligo.tests4j.shared.asserts.line_text.DiffIndexes;
 import org.adligo.tests4j.shared.asserts.line_text.DiffIndexesPair;
 import org.adligo.tests4j.shared.asserts.line_text.I_TextLinesCompareResult;
@@ -13,6 +12,7 @@ import org.adligo.tests4j.shared.asserts.line_text.LineDiffType;
 import org.adligo.tests4j.shared.asserts.line_text.TextLines;
 import org.adligo.tests4j.shared.asserts.line_text.TextLinesCompare;
 import org.adligo.tests4j.shared.asserts.line_text.TextLinesCompareResult;
+import org.adligo.tests4j.shared.asserts.reference.AllowedReferences;
 import org.adligo.tests4j.shared.en.Tests4J_EnglishConstants;
 import org.adligo.tests4j.shared.i18n.I_Tests4J_LineDiffTextDisplayMessages;
 import org.adligo.tests4j.shared.output.I_Tests4J_Log;
@@ -21,10 +21,10 @@ import org.adligo.tests4j.system.shared.trials.SourceFileScope;
 import org.adligo.tests4j.system.shared.trials.Test;
 import org.adligo.tests4j_tests.base_trials.I_CountType;
 import org.adligo.tests4j_tests.base_trials.SourceFileCountingTrial;
-import org.adligo.tests4j_tests.dependency_groups.Tests4J_SystemSummary_DependencyGroup;
+import org.adligo.tests4j_tests.references_groups.Tests4J_SystemSummary_GwtReferenceGroup;
 
 @SourceFileScope (sourceClass=LineDiffTextDisplay.class, minCoverage=90.0)
-@AllowedDependencies (groups=Tests4J_SystemSummary_DependencyGroup.class)
+@AllowedReferences (groups=Tests4J_SystemSummary_GwtReferenceGroup.class)
 public class LineDiffTextDisplayTrial extends SourceFileCountingTrial implements  I_Tests4J_Log {
 	private List<String> output = new ArrayList<String>();
 	private LineDiffTextDisplay dislay = new LineDiffTextDisplay();
@@ -321,7 +321,7 @@ public class LineDiffTextDisplayTrial extends SourceFileCountingTrial implements
 	
 	@Override
 	public int getTests(I_CountType type) {
-		return super.getTests(type, 15);
+		return super.getTests(type, 15, true);
 	}
 
 	@Override

@@ -3,8 +3,8 @@ package org.adligo.tests4j_tests.run.discovery;
 import java.util.Collections;
 import java.util.Set;
 
-import org.adligo.tests4j.models.shared.dependency.ClassFilter;
-import org.adligo.tests4j.models.shared.dependency.ClassFilterMutant;
+import org.adligo.tests4j.models.shared.association.ClassFilter;
+import org.adligo.tests4j.models.shared.association.ClassFilterMutant;
 import org.adligo.tests4j.shared.asserts.common.ExpectedThrownData;
 import org.adligo.tests4j.shared.asserts.common.I_Thrower;
 import org.adligo.tests4j.system.shared.trials.SourceFileScope;

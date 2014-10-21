@@ -1,17 +1,17 @@
 package org.adligo.tests4j_tests.shared.common;
 
-import org.adligo.tests4j.shared.asserts.dependency.AllowedDependencies;
+import org.adligo.tests4j.shared.asserts.reference.AllowedReferences;
 import org.adligo.tests4j.shared.common.Tests4J_System;
 import org.adligo.tests4j.system.shared.trials.SourceFileScope;
 import org.adligo.tests4j.system.shared.trials.Test;
 import org.adligo.tests4j_tests.base_trials.I_CountType;
 import org.adligo.tests4j_tests.base_trials.SourceFileCountingTrial;
-import org.adligo.tests4j_tests.dependency_groups.Tests4J_Common_DependencyGroup;
+import org.adligo.tests4j_tests.references_groups.Tests4J_Common_ReferenceGroup;
 import org.adligo.tests4j_tests.shared.common.mocks.SystemSimpleMock;
 import org.adligo.tests4j_tests.shared.common.mocks.ThreadLocalSystemMock;
 
 @SourceFileScope (sourceClass=Tests4J_System.class, minCoverage=50.0)
-@AllowedDependencies (groups=Tests4J_Common_DependencyGroup.class)
+@AllowedReferences (groups=Tests4J_Common_ReferenceGroup.class)
 public class Tests4J_SystemTrial extends SourceFileCountingTrial {
 	private static final SystemSimpleMock MOCK = new SystemSimpleMock();
 	
@@ -42,7 +42,7 @@ public class Tests4J_SystemTrial extends SourceFileCountingTrial {
 	
 	@Override
 	public int getTests(I_CountType type) {
-		return super.getTests(type, 1);
+		return super.getTests(type, 1, true);
 	}
 
 	@Override

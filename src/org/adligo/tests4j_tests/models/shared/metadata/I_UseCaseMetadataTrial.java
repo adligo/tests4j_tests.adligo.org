@@ -1,19 +1,19 @@
 package org.adligo.tests4j_tests.models.shared.metadata;
 
 import org.adligo.tests4j.models.shared.metadata.I_UseCaseMetadata;
-import org.adligo.tests4j.shared.asserts.dependency.AllowedDependencies;
+import org.adligo.tests4j.shared.asserts.reference.AllowedReferences;
 import org.adligo.tests4j.system.shared.trials.SourceFileScope;
 import org.adligo.tests4j_tests.base_trials.I_CountType;
 import org.adligo.tests4j_tests.base_trials.SourceFileCountingTrial;
-import org.adligo.tests4j_tests.dependency_groups.Tests4J_Metadata_DependencyGroup;
+import org.adligo.tests4j_tests.references_groups.Tests4J_Metadata_GwtReferenceGroup;
 
 @SourceFileScope (sourceClass=I_UseCaseMetadata.class)
-@AllowedDependencies (groups=Tests4J_Metadata_DependencyGroup.class)
+@AllowedReferences (groups=Tests4J_Metadata_GwtReferenceGroup.class)
 public class I_UseCaseMetadataTrial extends SourceFileCountingTrial {
 
 	@Override
 	public int getTests(I_CountType type) {
-		return super.getTests(type, 0);
+		return super.getTests(type, 0, true);
 	}
 	@Override
 	public int getAsserts(I_CountType type) {

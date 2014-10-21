@@ -6,10 +6,10 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-import org.adligo.tests4j.models.shared.dependency.ClassFilterMutant;
-import org.adligo.tests4j.shared.asserts.dependency.ClassAttributesMutant;
-import org.adligo.tests4j.shared.asserts.dependency.FieldSignature;
-import org.adligo.tests4j.shared.asserts.dependency.I_FieldSignature;
+import org.adligo.tests4j.models.shared.association.ClassFilterMutant;
+import org.adligo.tests4j.shared.asserts.reference.ClassAttributesMutant;
+import org.adligo.tests4j.shared.asserts.reference.FieldSignature;
+import org.adligo.tests4j.shared.asserts.reference.I_FieldSignature;
 import org.adligo.tests4j.system.shared.trials.SourceFileScope;
 import org.adligo.tests4j.system.shared.trials.Test;
 import org.adligo.tests4j_4jacoco.plugin.discovery.ReferenceTrackingMethodVisitor;

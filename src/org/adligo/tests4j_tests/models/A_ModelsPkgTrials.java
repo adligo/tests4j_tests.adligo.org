@@ -7,15 +7,15 @@ import org.adligo.tests4j_4jacoco.plugin.CoveragePluginFactory;
 import org.adligo.tests4j_tests.base_trials.I_CountingPackageTrials;
 import org.adligo.tests4j_tests.base_trials.SimpleMetaTrial;
 import org.adligo.tests4j_tests.base_trials.SimplePackageTrials;
+import org.adligo.tests4j_tests.models.shared.association.A_AssociationPkgTrials;
 import org.adligo.tests4j_tests.models.shared.coverage.A_CoveragePkgTrials;
-import org.adligo.tests4j_tests.models.shared.dependency.A_DepsPkgTrials;
 import org.adligo.tests4j_tests.models.shared.metadata.A_MetaPkgTrials;
 import org.adligo.tests4j_tests.models.shared.results.A_ResultsPkgTrials;
 
 public class A_ModelsPkgTrials extends SimplePackageTrials 
 implements I_MetaTrialParams<A_ModelsPkgTrials>, I_CountingPackageTrials {
 	private static A_CoveragePkgTrials cover = new A_CoveragePkgTrials();
-	private static A_DepsPkgTrials deps = new A_DepsPkgTrials();
+	private static A_AssociationPkgTrials deps = new A_AssociationPkgTrials();
 	private static A_MetaPkgTrials meta = new A_MetaPkgTrials();
 	private static A_ResultsPkgTrials results = new A_ResultsPkgTrials();
 	

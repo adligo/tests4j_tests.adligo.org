@@ -6,12 +6,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.adligo.tests4j.models.shared.dependency.I_ClassDependencies;
-import org.adligo.tests4j.models.shared.dependency.I_ClassDependenciesLocal;
+import org.adligo.tests4j.models.shared.association.I_ClassAssociations;
+import org.adligo.tests4j.models.shared.association.I_ClassAssociationsLocal;
 import org.adligo.tests4j.run.helpers.I_CachedClassBytesClassLoader;
-import org.adligo.tests4j.shared.asserts.dependency.ClassAliasLocal;
-import org.adligo.tests4j.shared.asserts.dependency.I_ClassAlias;
-import org.adligo.tests4j.shared.asserts.dependency.I_Dependency;
+import org.adligo.tests4j.shared.asserts.reference.ClassAliasLocal;
+import org.adligo.tests4j.shared.asserts.reference.I_ClassAlias;
+import org.adligo.tests4j.shared.asserts.reference.I_Dependency;
 import org.adligo.tests4j.system.shared.trials.TrialDelegate;
 import org.adligo.tests4j_4jacoco.plugin.common.I_OrderedClassDependencies;
 import org.adligo.tests4j_4jacoco.plugin.discovery.OrderedClassDiscovery;
@@ -64,7 +64,7 @@ public class DAT_Assert_Linear_to_20 extends TrialDelegate {
 		assertEquals(1, dep.getReferences());
 		
 		assertEquals(2, deps.size());
-		I_ClassDependencies cr =  orderedClassDiscovery.getReferences(new ClassAliasLocal(clazz));
+		I_ClassAssociations cr =  orderedClassDiscovery.getReferences(new ClassAliasLocal(clazz));
 		assertMockWithAbstractMethodParamRefs(className, cr);
 		
 		DAT_Assert_Simple simple =  trial.getSimple();
@@ -73,19 +73,19 @@ public class DAT_Assert_Linear_to_20 extends TrialDelegate {
 		
 		assertHasMockWithAbstractMethodParamCache();
 		
-		Map<String,I_ClassDependenciesLocal> refsCache = trial.getRefsCache();
+		Map<String,I_ClassAssociationsLocal> refsCache = trial.getRefsCache();
 		assertEquals(3, refsCache.size());
 	}
 
 	public void assertHasMockWithAbstractMethodParamCache() {
 		String className = MockWithAbstractMethodParam.class.getName();
-		Map<String,I_ClassDependenciesLocal> refsCache = trial.getRefsCache();
-		I_ClassDependencies crefs =  refsCache.get(className);
+		Map<String,I_ClassAssociationsLocal> refsCache = trial.getRefsCache();
+		I_ClassAssociations crefs =  refsCache.get(className);
 		assertMockWithAbstractMethodParamRefs(className, crefs);
 	}
 	
 	private void assertMockWithAbstractMethodParamRefs(String clazzName,
-			I_ClassDependencies cr) {
+			I_ClassAssociations cr) {
 		assertNotNull(cr);
 		assertEquals(clazzName, cr.getName());
 		assertFalse(cr.hasCircularDependencies());
@@ -133,7 +133,7 @@ public class DAT_Assert_Linear_to_20 extends TrialDelegate {
 		
 		assertEquals(2, deps.size());
 		
-		I_ClassDependencies cr =  orderedClassDiscovery.getReferences(new ClassAliasLocal(clazz));
+		I_ClassAssociations cr =  orderedClassDiscovery.getReferences(new ClassAliasLocal(clazz));
 		assertMockWithExtensionARefs(className, cr);
 		
 		DAT_Assert_Simple simple =  trial.getSimple();
@@ -142,20 +142,20 @@ public class DAT_Assert_Linear_to_20 extends TrialDelegate {
 		
 		assertHasMockWithExtensionACache();
 		
-		Map<String,I_ClassDependenciesLocal> refsCache = trial.getRefsCache();
+		Map<String,I_ClassAssociationsLocal> refsCache = trial.getRefsCache();
 		assertEquals(3, refsCache.size());
 	}
 	
 	
 	public void assertHasMockWithExtensionACache() {
 		String className = MockWithExtensionA.class.getName();
-		Map<String,I_ClassDependenciesLocal> refsCache = trial.getRefsCache();
-		I_ClassDependencies crefs =  refsCache.get(className);
+		Map<String,I_ClassAssociationsLocal> refsCache = trial.getRefsCache();
+		I_ClassAssociations crefs =  refsCache.get(className);
 		assertMockWithExtensionARefs(className, crefs);
 	}
 
 	private void assertMockWithExtensionARefs(String className,
-			I_ClassDependencies crefs) {
+			I_ClassAssociations crefs) {
 		assertNotNull(crefs);
 		assertEquals(className, crefs.getName());
 		assertFalse(crefs.hasCircularDependencies());
@@ -206,7 +206,7 @@ public class DAT_Assert_Linear_to_20 extends TrialDelegate {
 		assertEquals(3, deps.size());
 		
 		
-		I_ClassDependencies cr =  orderedClassDiscovery.getReferences(new ClassAliasLocal(clazz));
+		I_ClassAssociations cr =  orderedClassDiscovery.getReferences(new ClassAliasLocal(clazz));
 		assertMockWithExtensionBRefs(className, cr);
 		
 		DAT_Assert_Simple simple =  trial.getSimple();
@@ -216,19 +216,19 @@ public class DAT_Assert_Linear_to_20 extends TrialDelegate {
 		assertHasMockWithExtensionACache();
 		assertHasMockWithExtensionBCache();
 		
-		Map<String,I_ClassDependenciesLocal> refsCache = trial.getRefsCache();
+		Map<String,I_ClassAssociationsLocal> refsCache = trial.getRefsCache();
 		assertEquals(4, refsCache.size());
 	}
 	
 	public void assertHasMockWithExtensionBCache() {
 		String className = MockWithExtensionB.class.getName();
-		Map<String,I_ClassDependenciesLocal> refsCache = trial.getRefsCache();
-		I_ClassDependenciesLocal crefs =  refsCache.get(className);
+		Map<String,I_ClassAssociationsLocal> refsCache = trial.getRefsCache();
+		I_ClassAssociationsLocal crefs =  refsCache.get(className);
 		assertMockWithExtensionBRefs(className, crefs);
 	}
 
 	private void assertMockWithExtensionBRefs(String className,
-			I_ClassDependencies crefs) {
+			I_ClassAssociations crefs) {
 		assertNotNull(crefs);
 		assertEquals(className, crefs.getName());
 		assertFalse(crefs.hasCircularDependencies());
@@ -296,7 +296,7 @@ public class DAT_Assert_Linear_to_20 extends TrialDelegate {
 		assertEquals(1, dep.getReferences());
 		assertEquals(5, deps.size());
 		
-		I_ClassDependenciesLocal cr =  orderedClassDiscovery.getReferences(new ClassAliasLocal(clazz));
+		I_ClassAssociationsLocal cr =  orderedClassDiscovery.getReferences(new ClassAliasLocal(clazz));
 		assertMockI_GetLongRefs(className, cr);
 		
 		DAT_Assert_Simple simple = trial.getSimple();
@@ -307,19 +307,19 @@ public class DAT_Assert_Linear_to_20 extends TrialDelegate {
 		simple.assertHasLongCache();
 		assertHasMockI_GetLongCache();
 		
-		Map<String,I_ClassDependenciesLocal> refsCache = trial.getRefsCache();
+		Map<String,I_ClassAssociationsLocal> refsCache = trial.getRefsCache();
 		assertEquals(6, refsCache.size());
 	}	
 
 	public void assertHasMockI_GetLongCache() {
 		String className = MockI_GetLong.class.getName();
-		Map<String,I_ClassDependenciesLocal> refsCache = trial.getRefsCache();
-		I_ClassDependenciesLocal crefs =  refsCache.get(className);
+		Map<String,I_ClassAssociationsLocal> refsCache = trial.getRefsCache();
+		I_ClassAssociationsLocal crefs =  refsCache.get(className);
 		assertMockI_GetLongRefs(className, crefs);
 	}
 	
 
-	private void assertMockI_GetLongRefs(String clazzName, I_ClassDependenciesLocal cr) {
+	private void assertMockI_GetLongRefs(String clazzName, I_ClassAssociationsLocal cr) {
 		assertNotNull(cr);
 		assertEquals(clazzName, cr.getName());
 		assertFalse(cr.hasCircularDependencies());
@@ -387,7 +387,7 @@ public class DAT_Assert_Linear_to_20 extends TrialDelegate {
 			
 		assertEquals(5, deps.size());
 		
-		I_ClassDependenciesLocal cr =  orderedClassDiscovery.getReferences(new ClassAliasLocal(clazz));
+		I_ClassAssociationsLocal cr =  orderedClassDiscovery.getReferences(new ClassAliasLocal(clazz));
 		assertMockI_SetLongRefs(className, cr);;
 		
 		DAT_Assert_Simple simple = trial.getSimple();
@@ -398,19 +398,19 @@ public class DAT_Assert_Linear_to_20 extends TrialDelegate {
 		simple.assertHasLongCache();
 		assertHasMockI_SetLongCache();
 		
-		Map<String,I_ClassDependenciesLocal> refsCache = trial.getRefsCache();
+		Map<String,I_ClassAssociationsLocal> refsCache = trial.getRefsCache();
 		assertEquals(6, refsCache.size());
 	}
 	
 	public void assertHasMockI_SetLongCache() {
 		String className = MockI_SetLong.class.getName();
-		Map<String,I_ClassDependenciesLocal> refsCache = trial.getRefsCache();
-		I_ClassDependenciesLocal crefs =  refsCache.get(className);
+		Map<String,I_ClassAssociationsLocal> refsCache = trial.getRefsCache();
+		I_ClassAssociationsLocal crefs =  refsCache.get(className);
 		assertMockI_SetLongRefs(className, crefs);
 	}
 
 	private void assertMockI_SetLongRefs(String className,
-			I_ClassDependenciesLocal crefs) {
+			I_ClassAssociationsLocal crefs) {
 		assertNotNull(crefs);
 		assertEquals(className, crefs.getName());
 		assertFalse(crefs.hasCircularDependencies());
@@ -478,7 +478,7 @@ public class DAT_Assert_Linear_to_20 extends TrialDelegate {
 		
 		assertEquals(5, deps.size());
 		
-		I_ClassDependenciesLocal cr =  orderedClassDiscovery.getReferences(new ClassAliasLocal(clazz));
+		I_ClassAssociationsLocal cr =  orderedClassDiscovery.getReferences(new ClassAliasLocal(clazz));
 		assertMockI_GetStringRefs(className, cr);
 		
 		
@@ -491,20 +491,20 @@ public class DAT_Assert_Linear_to_20 extends TrialDelegate {
 		simple.assertHasStringCache();
 		
 		assertHasMockI_GetStringCache();
-		Map<String,I_ClassDependenciesLocal> refsCache = trial.getRefsCache();
+		Map<String,I_ClassAssociationsLocal> refsCache = trial.getRefsCache();
 		assertEquals(6, refsCache.size());
 	}
 	
 
 	public void assertHasMockI_GetStringCache() {
 		String className = MockI_GetString.class.getName();
-		Map<String,I_ClassDependenciesLocal> refsCache = trial.getRefsCache();
-		I_ClassDependenciesLocal crefs =  refsCache.get(className);
+		Map<String,I_ClassAssociationsLocal> refsCache = trial.getRefsCache();
+		I_ClassAssociationsLocal crefs =  refsCache.get(className);
 		assertMockI_GetStringRefs(className, crefs);
 	}
 
 	private void assertMockI_GetStringRefs(String className,
-			I_ClassDependenciesLocal crefs) {
+			I_ClassAssociationsLocal crefs) {
 		assertNotNull(crefs);
 		assertEquals(className, crefs.getName());
 		assertFalse(crefs.hasCircularDependencies());
@@ -572,7 +572,7 @@ public class DAT_Assert_Linear_to_20 extends TrialDelegate {
 		
 		assertEquals(5, deps.size());
 		
-		I_ClassDependenciesLocal cr =  orderedClassDiscovery.getReferences(new ClassAliasLocal(clazz));
+		I_ClassAssociationsLocal cr =  orderedClassDiscovery.getReferences(new ClassAliasLocal(clazz));
 		assertMockI_SetStringRefs(className, cr);
 		
 		DAT_Assert_Simple simple = trial.getSimple();
@@ -584,19 +584,19 @@ public class DAT_Assert_Linear_to_20 extends TrialDelegate {
 		
 		assertHasMockI_SetStringCache();
 		
-		Map<String,I_ClassDependenciesLocal> refsCache = trial.getRefsCache();
+		Map<String,I_ClassAssociationsLocal> refsCache = trial.getRefsCache();
 		assertEquals(6, refsCache.size());
 	}
 	
 	public void assertHasMockI_SetStringCache() {
 		String className = MockI_SetString.class.getName();
-		Map<String,I_ClassDependenciesLocal> refsCache = trial.getRefsCache();
-		I_ClassDependenciesLocal crefs =  refsCache.get(className);
+		Map<String,I_ClassAssociationsLocal> refsCache = trial.getRefsCache();
+		I_ClassAssociationsLocal crefs =  refsCache.get(className);
 		assertMockI_SetStringRefs(className, crefs);
 	}
 
 	private void assertMockI_SetStringRefs(String className,
-			I_ClassDependenciesLocal crefs) {
+			I_ClassAssociationsLocal crefs) {
 		assertNotNull(crefs);
 		assertEquals(className, crefs.getName());
 		assertFalse(crefs.hasCircularDependencies());
@@ -678,7 +678,7 @@ public class DAT_Assert_Linear_to_20 extends TrialDelegate {
 		
 		assertEquals(7, deps.size());
 		
-		I_ClassDependenciesLocal cr =  orderedClassDiscovery.getReferences(new ClassAliasLocal(clazz));
+		I_ClassAssociationsLocal cr =  orderedClassDiscovery.getReferences(new ClassAliasLocal(clazz));
 		assertMockI_GetAndSetLongRefs(className, cr);
 		
 		DAT_Assert_Simple simple = trial.getSimple();
@@ -692,19 +692,19 @@ public class DAT_Assert_Linear_to_20 extends TrialDelegate {
 		assertHasMockI_SetLongCache();
 		assertHasMockI_GetAndSetLongCache();
 		
-		Map<String,I_ClassDependenciesLocal> refsCache = trial.getRefsCache();
+		Map<String,I_ClassAssociationsLocal> refsCache = trial.getRefsCache();
 		assertEquals(8, refsCache.size());
 	}
 	
 	public void assertHasMockI_GetAndSetLongCache() {
 		String className = MockI_GetAndSetLong.class.getName();
-		Map<String,I_ClassDependenciesLocal> refsCache = trial.getRefsCache();
-		I_ClassDependenciesLocal crefs =  refsCache.get(className);
+		Map<String,I_ClassAssociationsLocal> refsCache = trial.getRefsCache();
+		I_ClassAssociationsLocal crefs =  refsCache.get(className);
 		assertMockI_GetAndSetLongRefs(className, crefs);
 	}
 
 	private void assertMockI_GetAndSetLongRefs(String className,
-			I_ClassDependenciesLocal crefs) {
+			I_ClassAssociationsLocal crefs) {
 		assertNotNull(crefs);
 		assertEquals(className, crefs.getName());
 		assertFalse(crefs.hasCircularDependencies());
@@ -792,7 +792,7 @@ public class DAT_Assert_Linear_to_20 extends TrialDelegate {
 		
 		assertEquals(7, deps.size());
 		
-		I_ClassDependenciesLocal cr =  orderedClassDiscovery.getReferences(new ClassAliasLocal(clazz));
+		I_ClassAssociationsLocal cr =  orderedClassDiscovery.getReferences(new ClassAliasLocal(clazz));
 		assertMockI_GetAndSetStringRefs(className, cr);
 
 		DAT_Assert_Simple simple = trial.getSimple();
@@ -807,19 +807,19 @@ public class DAT_Assert_Linear_to_20 extends TrialDelegate {
 		assertHasMockI_SetStringCache();
 		assertHasMockI_GetAndSetStringCache();
 		
-		Map<String,I_ClassDependenciesLocal> refsCache = trial.getRefsCache();
+		Map<String,I_ClassAssociationsLocal> refsCache = trial.getRefsCache();
 		assertEquals(8, refsCache.size());
 	}
 	
 	public void assertHasMockI_GetAndSetStringCache() {
 		String className = MockI_GetAndSetString.class.getName();
-		Map<String,I_ClassDependenciesLocal> refsCache = trial.getRefsCache();
-		I_ClassDependenciesLocal crefs =  refsCache.get(className);
+		Map<String,I_ClassAssociationsLocal> refsCache = trial.getRefsCache();
+		I_ClassAssociationsLocal crefs =  refsCache.get(className);
 		assertMockI_GetAndSetStringRefs(className, crefs);
 	}
 
 	private void assertMockI_GetAndSetStringRefs(String className,
-			I_ClassDependenciesLocal crefs) {
+			I_ClassAssociationsLocal crefs) {
 		assertNotNull(crefs);
 		assertEquals(className, crefs.getName());
 		assertFalse(crefs.hasCircularDependencies());
@@ -945,7 +945,7 @@ public class DAT_Assert_Linear_to_20 extends TrialDelegate {
 		
 		assertEquals(13, deps.size());
 		
-		I_ClassDependenciesLocal cr =  orderedClassDiscovery.getReferences(new ClassAliasLocal(clazz));
+		I_ClassAssociationsLocal cr =  orderedClassDiscovery.getReferences(new ClassAliasLocal(clazz));
 		assertMockI_StringAndLongRefs(className, cr);
 		
 		DAT_Assert_Simple simple = trial.getSimple();
@@ -968,19 +968,19 @@ public class DAT_Assert_Linear_to_20 extends TrialDelegate {
 		
 		assertHasMockI_StringAndLongCache();
 		
-		Map<String,I_ClassDependenciesLocal> refsCache = trial.getRefsCache();
+		Map<String,I_ClassAssociationsLocal> refsCache = trial.getRefsCache();
 		assertEquals(14, refsCache.size());
 	}
 	
 	public void assertHasMockI_StringAndLongCache() {
 		String className = MockI_StringAndLong.class.getName();
-		Map<String,I_ClassDependenciesLocal> refsCache = trial.getRefsCache();
-		I_ClassDependenciesLocal crefs =  refsCache.get(className);
+		Map<String,I_ClassAssociationsLocal> refsCache = trial.getRefsCache();
+		I_ClassAssociationsLocal crefs =  refsCache.get(className);
 		assertMockI_StringAndLongRefs(className, crefs);
 	}
 
 	private void assertMockI_StringAndLongRefs(String className,
-			I_ClassDependenciesLocal crefs) {
+			I_ClassAssociationsLocal crefs) {
 		assertNotNull(crefs);
 		assertEquals(className, crefs.getName());
 		assertFalse(crefs.hasCircularDependencies());

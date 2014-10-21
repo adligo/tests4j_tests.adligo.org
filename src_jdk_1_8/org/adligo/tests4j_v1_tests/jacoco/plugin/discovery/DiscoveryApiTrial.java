@@ -5,14 +5,14 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 
-import org.adligo.tests4j.models.shared.dependency.ClassDependenciesLocal;
-import org.adligo.tests4j.models.shared.dependency.ClassFilter;
-import org.adligo.tests4j.models.shared.dependency.ClassFilterMutant;
-import org.adligo.tests4j.models.shared.dependency.I_ClassDependenciesCache;
-import org.adligo.tests4j.models.shared.dependency.I_ClassDependenciesLocal;
-import org.adligo.tests4j.models.shared.dependency.I_ClassFilter;
-import org.adligo.tests4j.models.shared.dependency.I_ClassParentsCache;
-import org.adligo.tests4j.models.shared.dependency.I_ClassParentsLocal;
+import org.adligo.tests4j.models.shared.association.ClassAssociationsLocal;
+import org.adligo.tests4j.models.shared.association.ClassFilter;
+import org.adligo.tests4j.models.shared.association.ClassFilterMutant;
+import org.adligo.tests4j.models.shared.association.I_ClassAssociationsCache;
+import org.adligo.tests4j.models.shared.association.I_ClassAssociationsLocal;
+import org.adligo.tests4j.models.shared.association.I_ClassFilter;
+import org.adligo.tests4j.models.shared.association.I_ClassParentsCache;
+import org.adligo.tests4j.models.shared.association.I_ClassParentsLocal;
 import org.adligo.tests4j.run.helpers.CachedClassBytesClassLoader;
 import org.adligo.tests4j.shared.common.CacheControl;
 import org.adligo.tests4j.system.shared.trials.PackageScope;
@@ -39,13 +39,13 @@ import org.adligo.tests4j_v1_tests.jacoco.plugin.discovery.delegates.I_Discovery
 import org.objectweb.asm.Opcodes;
 
 @PackageScope (packageName="org.adligo.tests4j_4jacoco.plugin.discovery")
-public class DiscoveryApiTrial extends ApiCountingTrial implements I_DiscoveryApiTrial, I_ClassDependenciesCache {
+public class DiscoveryApiTrial extends ApiCountingTrial implements I_DiscoveryApiTrial, I_ClassAssociationsCache {
 	private CachedClassBytesClassLoader ccbClassLoader;
 	private OrderedClassDiscovery orderedClassDiscovery;
 	private ClassReferencesCacheMock initialRefCache = new ClassReferencesCacheMock();
 	private ClassReferencesCacheMock preCircleRefCache = new ClassReferencesCacheMock();
 	
-	private Map<String,I_ClassDependenciesLocal> refsCache = new HashMap<String, I_ClassDependenciesLocal>();
+	private Map<String,I_ClassAssociationsLocal> refsCache = new HashMap<String, I_ClassAssociationsLocal>();
 	private final ClassFilter classFilter;
 	private Tests4J_LogMock logMock = new Tests4J_LogMock();
 	private final I_ClassFilter primitiveClassFilter;
@@ -150,52 +150,51 @@ public class DiscoveryApiTrial extends ApiCountingTrial implements I_DiscoveryAp
 	public void test1001_MockWithMethodReturn() throws Exception {
 		linear_to10.delegate001_MockWithMethodReturn();
 	}
-	
-	@Test
-	public void test1002_MockWithFeild() throws Exception {
-		linear_to10.delegate002_MockWithFeild();
-	}
 
 	@Test
-	public void test1003_MockWithMethodParams() throws Exception {
-		linear_to10.delegate003_MockWithMethodParams();
+	public void test1002_MockWithMethodParams() throws Exception {
+		linear_to10.delegate002_MockWithMethodParams();
 	}
 	
 	@Test
-	public void test1004_MockWithImportOnlyInMethod() throws Exception {
-		linear_to10.delegate004_MockWithImportOnlyInMethod();
+	public void test1003_MockWithImportOnlyInMethod() throws Exception {
+		linear_to10.delegate003_MockWithImportOnlyInMethod();
 	}
 	
 	@Test
-	public void test1005_MockWithStaticFeild() throws Exception {
-		linear_to10.delegate005_MockWithStaticFeild();
+	public void test1004_MockWithStaticFeild() throws Exception {
+		linear_to10.delegate004_MockWithStaticFeild();
 	}
 	
 	@Test
-	public void test1006_MockWithStaticInitalizer() throws Exception {
-		linear_to10.delegate006_MockWithStaticInitalizer();
+	public void test1005_MockWithStaticInitalizer() throws Exception {
+		linear_to10.delegate005_MockWithStaticInitalizer();
 	}
 	
 	@Test
-	public void test1007_MockWithArray() throws Exception {
-		linear_to10.delegate007_MockWithArray();
+	public void test1006_MockWithArray() throws Exception {
+		linear_to10.delegate006_MockWithArray();
 	}
 	
 	@Test
-	public void test1008_MockWithMethodException() throws Exception {
-		linear_to10.delegate008_MockWithMethodException();
+	public void test1007_MockWithMethodException() throws Exception {
+		linear_to10.delegate0007_MockWithMethodException();
 	}
 	
 	@Test
-	public void test1009_MockWithMethodExceptionBlock() throws Exception {
-		linear_to10.delegate009_MockWithMethodExceptionBlock();
+	public void test1008_MockWithMethodExceptionBlock() throws Exception {
+		linear_to10.delegate008_MockWithMethodExceptionBlock();
 	}
 	
 	@Test
-	public void test1010_MockWithAbstractMethodReturn() throws Exception {
-		linear_to10.delegate010_MockWithAbstractMethodReturn();
+	public void test1009_MockWithAbstractMethodReturn() throws Exception {
+		linear_to10.delegate009_MockWithAbstractMethodReturn();
 	}
 	
+	@Test
+	public void test1010_MockWithFeild() throws Exception {
+		linear_to10.delegate010_MockWithField();
+	}
 	@Test
 	public void test1011_MockWithAbstractMethodParam() throws Exception {
 		linear_to20.delegate011_MockWithAbstractMethodParam();
@@ -211,6 +210,7 @@ public class DiscoveryApiTrial extends ApiCountingTrial implements I_DiscoveryAp
 	public void test1013_MockWithExtensionB() throws Exception {
 		linear_to20.delegate013_MockWithExtensionB();
 	}
+	
 	
 	/**
 	 * sushi anyone?
@@ -255,7 +255,6 @@ public class DiscoveryApiTrial extends ApiCountingTrial implements I_DiscoveryAp
 	public void test1021_MockI_OtherStringAndLong() throws Exception {
 		linear_to30.delegate021_MockI_OtherStringAndLong();
 	}
-	
 	/**
 	 * 2000's are circular reference tests
 	 * @throws Exception
@@ -352,18 +351,18 @@ public class DiscoveryApiTrial extends ApiCountingTrial implements I_DiscoveryAp
 		return primitiveClassFilter;
 	}
 	
-	public void putDependenciesIfAbsent(I_ClassDependenciesLocal p) {
-		assertEquals(ClassDependenciesLocal.class.getName(), p.getClass().getName());
+	public void putDependenciesIfAbsent(I_ClassAssociationsLocal p) {
+		assertEquals(ClassAssociationsLocal.class.getName(), p.getClass().getName());
 		if (!refsCache.containsKey(p.getName())) {
 			refsCache.put(p.getName(), p);
 		}
 	}
 	
-	public I_ClassDependenciesLocal getDependencies(String name) {
+	public I_ClassAssociationsLocal getDependencies(String name) {
 		return refsCache.get(name);
 	}
 
-	public Map<String, I_ClassDependenciesLocal> getRefsCache() {
+	public Map<String, I_ClassAssociationsLocal> getRefsCache() {
 		return refsCache;
 	}
 
@@ -394,10 +393,10 @@ public class DiscoveryApiTrial extends ApiCountingTrial implements I_DiscoveryAp
 	public I_ClassParentsLocal getParents(String name) {
 		return null;
 	}
-	public I_ClassDependenciesCache getInitialReferencesCache() {
+	public I_ClassAssociationsCache getInitialReferencesCache() {
 		return initialRefCache;
 	}
-	public I_ClassDependenciesCache getPreCirclesReferencesCache() {
+	public I_ClassAssociationsCache getPreCirclesReferencesCache() {
 		return preCircleRefCache;
 	}
 

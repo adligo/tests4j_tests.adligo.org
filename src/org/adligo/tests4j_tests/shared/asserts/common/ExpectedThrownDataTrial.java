@@ -3,15 +3,16 @@ package org.adligo.tests4j_tests.shared.asserts.common;
 import org.adligo.tests4j.shared.asserts.common.ExpectedThrownData;
 import org.adligo.tests4j.shared.asserts.common.I_ExpectedThrownData;
 import org.adligo.tests4j.shared.asserts.common.I_Thrower;
-import org.adligo.tests4j.shared.asserts.dependency.AllowedDependencies;
+import org.adligo.tests4j.shared.asserts.reference.AllowedReferences;
 import org.adligo.tests4j.system.shared.trials.SourceFileScope;
 import org.adligo.tests4j.system.shared.trials.Test;
 import org.adligo.tests4j_tests.base_trials.I_CountType;
 import org.adligo.tests4j_tests.base_trials.SourceFileCountingTrial;
-import org.adligo.tests4j_tests.dependency_groups.Tests4J_AssertsCommon_DependencyGroup;
+import org.adligo.tests4j_tests.references_groups.Tests4J_AssertsCommon_GwtReferenceGroup;
+import org.adligo.tests4j_tests.references_groups.Tests4J_AssertsCommon_ReferenceGroup;
 
 @SourceFileScope (sourceClass=ExpectedThrownData.class, minCoverage=70.0)
-@AllowedDependencies (groups=Tests4J_AssertsCommon_DependencyGroup.class)
+@AllowedReferences (groups=Tests4J_AssertsCommon_GwtReferenceGroup.class)
 public class ExpectedThrownDataTrial extends SourceFileCountingTrial {
 
 	@Test
@@ -153,7 +154,7 @@ public class ExpectedThrownDataTrial extends SourceFileCountingTrial {
 	
 	@Override
 	public int getTests(I_CountType type) {
-		return super.getTests(type, 3);
+		return super.getTests(type, 3, true);
 	}
 
 	@Override

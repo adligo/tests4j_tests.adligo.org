@@ -27,8 +27,8 @@ import org.adligo.tests4j_tests.base_trials.SimplePackageTrials;
 import org.adligo.tests4j_tests.jacoco.api_trials.A_CocoApiPkgTrials;
 import org.adligo.tests4j_tests.jacoco.plugin.A_CocoPlugPkgTrials;
 import org.adligo.tests4j_tests.models.A_ModelsPkgTrials;
+import org.adligo.tests4j_tests.models.shared.association.A_AssociationPkgTrials;
 import org.adligo.tests4j_tests.models.shared.coverage.A_CoveragePkgTrials;
-import org.adligo.tests4j_tests.models.shared.dependency.A_DepsPkgTrials;
 import org.adligo.tests4j_tests.models.shared.metadata.A_MetaPkgTrials;
 import org.adligo.tests4j_tests.models.shared.results.A_ResultsPkgTrials;
 import org.adligo.tests4j_tests.run.A_RunPkgTrials;
@@ -56,7 +56,6 @@ implements I_MetaTrialParams<RunAllTrials>, I_CountingPackageTrials, I_Tests4J_L
 	private A_RunPkgTrials run = new A_RunPkgTrials();
 	
 	private A_JavaVersionSpecificTrials jv = new A_JavaVersionSpecificTrials();
-	private A_CocoJavaVersionSpecificTrials cocoJv = new A_CocoJavaVersionSpecificTrials();
 	
 	private A_ApiPkgTrials api = new A_ApiPkgTrials();
 	
@@ -149,9 +148,6 @@ implements I_MetaTrialParams<RunAllTrials>, I_CountingPackageTrials, I_Tests4J_L
 		jv.addTrials();
 		add(jv.getCountingTrials());
 		
-		cocoJv.setParams(params);
-		cocoJv.addTrials();
-		add(cocoJv.getCountingTrials());
 		
 		cocoApi.setParams(params);
 		cocoApi.addTrials();

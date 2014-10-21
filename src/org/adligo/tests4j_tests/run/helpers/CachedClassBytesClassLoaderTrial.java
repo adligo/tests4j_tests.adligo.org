@@ -11,7 +11,7 @@ import java.util.Set;
 import org.adligo.tests4j.run.helpers.CachedClassBytesClassLoader;
 import org.adligo.tests4j.shared.asserts.common.ExpectedThrownData;
 import org.adligo.tests4j.shared.asserts.common.I_Thrower;
-import org.adligo.tests4j.shared.asserts.dependency.CircularDependencies;
+import org.adligo.tests4j.shared.asserts.reference.CircularDependencies;
 import org.adligo.tests4j.shared.common.ClassMethods;
 import org.adligo.tests4j.system.shared.trials.SourceFileScope;
 import org.adligo.tests4j.system.shared.trials.Test;
