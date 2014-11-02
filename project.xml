@@ -5,7 +5,7 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" >
     <pns:stages>
         <pns:stage name="jar" >
-            <tns:param key="srcDirs" value="src,src_jdk_1_8" />
+            <tns:param key="srcDirs" value="src_jdk_1_8,src" />
         </pns:stage>
         <pns:stage name="test" />
         <pns:stage name="publish" />
