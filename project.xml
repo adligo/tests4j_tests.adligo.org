@@ -1,15 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<tns:fabricate_project xmlns:tns="http://www.adligo.org/fabricate/xml/io/project" 
-    xmlns:tns1="http://www.adligo.org/fabricate/xml/io/library" 
+<pns:fabricate_project xmlns:pns="http://www.adligo.org/fabricate/xml/io/project" 
+    xmlns:lns="http://www.adligo.org/fabricate/xml/io/library" 
+    xmlns:tns="http://www.adligo.org/fabricate/xml/io/tasks" 
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" >
-    <tns:stages>
-        <tns:stage name="jar" />
-        <tns:stage name="test" />
-        <tns:stage name="publish" />
-    </tns:stages>
-    <tns1:dependencies>
-        <tns1:library>jacoco</tns1:library>
-        <tns1:project>tests4j.adligo.org</tns1:project>
-        <tns1:project>tests4j_4jacoco.adligo.org</tns1:project>
-    </tns1:dependencies>
- </tns:fabricate_project>
+    <pns:stages>
+        <pns:stage name="jar" >
+            <tns:param key="srcDirs" value="src,src_jdk_1_8" />
+        </pns:stage>
+        <pns:stage name="test" />
+        <pns:stage name="publish" />
+    </pns:stages>
+    <lns:dependencies>
+        <lns:library>jacoco</tns1:library>
+        <lns:project>tests4j.adligo.org</tns1:project>
+        <lns:project>tests4j_4jacoco.adligo.org</tns1:project>
+    </lns:dependencies>
+ </pns:fabricate_project>
