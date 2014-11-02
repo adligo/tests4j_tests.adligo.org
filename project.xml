@@ -11,8 +11,8 @@
         <pns:stage name="publish" />
     </pns:stages>
     <lns:dependencies>
-        <lns:library>jacoco</tns1:library>
-        <lns:project>tests4j.adligo.org</tns1:project>
-        <lns:project>tests4j_4jacoco.adligo.org</tns1:project>
+        <lns:library>jacoco</lns:library>
+        <lns:project>tests4j.adligo.org</lns:project>
+        <lns:project>tests4j_4jacoco.adligo.org</lns:project>
     </lns:dependencies>
  </pns:fabricate_project>
