@@ -1,13 +1,13 @@
 package org.adligo.tests4j_tests.system.shared.api;
 
 import org.adligo.tests4j.shared.asserts.reference.AllowedReferences;
-import org.adligo.tests4j.system.shared.api.I_Tests4J_ProgressMonitor;
+import org.adligo.tests4j.system.shared.api.I_Tests4J_ProgressParams;
 import org.adligo.tests4j.system.shared.trials.SourceFileScope;
 import org.adligo.tests4j_tests.base_trials.I_CountType;
 import org.adligo.tests4j_tests.base_trials.SourceFileCountingTrial;
 import org.adligo.tests4j_tests.references_groups.Tests4J_SystemApi_GwtReferenceGroup;
 
-@SourceFileScope (sourceClass=I_Tests4J_ProgressMonitor.class)
+@SourceFileScope (sourceClass=I_Tests4J_ProgressParams.class)
 @AllowedReferences (groups=Tests4J_SystemApi_GwtReferenceGroup.class)
 public class I_Tests4J_ProgressMonitorTrial extends SourceFileCountingTrial {
 

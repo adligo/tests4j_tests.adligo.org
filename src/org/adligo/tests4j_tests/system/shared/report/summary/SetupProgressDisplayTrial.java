@@ -1,6 +1,6 @@
 package org.adligo.tests4j_tests.system.shared.report.summary;
 
-import org.adligo.tests4j.run.helpers.Tests4J_ProcessInfo;
+import org.adligo.tests4j.models.shared.results.PhaseStateMutant;
 import org.adligo.tests4j.shared.asserts.reference.AllowedReferences;
 import org.adligo.tests4j.shared.en.Tests4J_EnglishConstants;
 import org.adligo.tests4j.shared.i18n.I_Tests4J_ReportMessages;
@@ -27,8 +27,8 @@ public class SetupProgressDisplayTrial extends SourceFileCountingTrial {
 	
 	@Test
 	public void testProgressReportLogOff() {
-		Tests4J_ProcessInfo info = new Tests4J_ProcessInfo("setup", 0, 100);
-		info.addDone();
+	  PhaseStateMutant info = new PhaseStateMutant();
+    info.setProcessName("setup");
 		reporter.onProgress(log, info);
 		assertEquals(0, log.getLogMessagesSize());
 		assertEquals(0, log.getExceptionsSize());
@@ -40,11 +40,9 @@ public class SetupProgressDisplayTrial extends SourceFileCountingTrial {
 	@Test
 	public void testProgressReportPartDone() {
 		log.setState(SetupProgressDisplay.class, true);
-		Tests4J_ProcessInfo info = new Tests4J_ProcessInfo("setup", 0, 98);
-		for (int i = 0; i < 17; i++) {
-			info.addDone();
-		}
-		
+		PhaseStateMutant info = new PhaseStateMutant();
+    info.setProcessName("setup");
+    info.setPercentDone(17.342);
 		reporter.onProgress(log, info);
 		
 		assertEquals(1, log.getLogMessagesSize());
@@ -62,8 +60,10 @@ public class SetupProgressDisplayTrial extends SourceFileCountingTrial {
 
 		
 		log.setState(SetupProgressDisplay.class, true);
-		Tests4J_ProcessInfo info = new Tests4J_ProcessInfo("setup", 0, 1);
-		info.addDone();
+		PhaseStateMutant info = new PhaseStateMutant();
+    info.setProcessName("setup");
+    info.setPercentDone(100.0);
+    info.setHasFinishedAll(true);
 		reporter.onProgress(log, info);
 		
 		assertEquals(1, log.getLogMessagesSize());

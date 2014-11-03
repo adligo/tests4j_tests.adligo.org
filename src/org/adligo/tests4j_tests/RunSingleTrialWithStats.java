@@ -1,16 +1,13 @@
 package org.adligo.tests4j_tests;
 
-import java.util.Collections;
-
 import org.adligo.tests4j.run.api.Tests4J;
 import org.adligo.tests4j.system.shared.api.Tests4J_Params;
-import org.adligo.tests4j.system.shared.api.Tests4J_Selection;
 import org.adligo.tests4j.system.shared.trials.I_MetaTrialParams;
 import org.adligo.tests4j_4jacoco.plugin.CoveragePluginFactory;
 import org.adligo.tests4j_tests.base_trials.I_CountingPackageTrials;
 import org.adligo.tests4j_tests.base_trials.SimpleMetaTrial;
 import org.adligo.tests4j_tests.base_trials.SimplePackageTrials;
-import org.adligo.tests4j_v1_tests.jacoco.plugin.discovery.DiscoveryApiTrial;
+import org.adligo.tests4j_tests.trials_api.BadApiTrials_Trial;
 
 public class RunSingleTrialWithStats extends SimplePackageTrials 
 implements I_MetaTrialParams<RunSingleTrialWithStats>, I_CountingPackageTrials {
@@ -42,7 +39,7 @@ implements I_MetaTrialParams<RunSingleTrialWithStats>, I_CountingPackageTrials {
 		//add(ClassMethodsTrial.class);
 		//add(DefaultSystemTrial.class);
 		//add(AbstractAssertCommandTrial.class);
-		add(DiscoveryApiTrial.class);
+		add(BadApiTrials_Trial.class);
 	}
 	
 	@Override

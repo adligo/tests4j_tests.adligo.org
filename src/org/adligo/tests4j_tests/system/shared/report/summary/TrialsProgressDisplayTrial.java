@@ -1,6 +1,7 @@
 package org.adligo.tests4j_tests.system.shared.report.summary;
 
-import org.adligo.tests4j.run.helpers.Tests4J_ProcessInfo;
+import org.adligo.tests4j.models.shared.results.PhaseStateMutant;
+import org.adligo.tests4j.run.helpers.Tests4J_PhaseOverseer;
 import org.adligo.tests4j.shared.asserts.reference.AllowedReferences;
 import org.adligo.tests4j.shared.en.Tests4J_EnglishConstants;
 import org.adligo.tests4j.shared.i18n.I_Tests4J_ReportMessages;
@@ -16,62 +17,65 @@ import org.adligo.tests4j_tests.system.shared.mocks.Tests4J_LogMock;
 @SourceFileScope (sourceClass=TrialsProgressDisplay.class)
 @AllowedReferences (groups=Tests4J_SystemSummary_GwtReferenceGroup.class)
 public class TrialsProgressDisplayTrial extends SourceFileCountingTrial {
-	private Tests4J_LogMock log = new Tests4J_LogMock();
-	private TrialsProgressDisplay reporter = new TrialsProgressDisplay();
+	private Tests4J_LogMock log_ = new Tests4J_LogMock();
+	private TrialsProgressDisplay reporter_;
 	
 	@Override
 	public void beforeTests() {
-		log.clear();
-		log.clearStates();
+		log_.clear();
+		log_.clearStates();
+		reporter_ = new TrialsProgressDisplay();
 	}
 
 	
 	@Test
 	public void testProgressReportLogOff() {
-		Tests4J_ProcessInfo info = new Tests4J_ProcessInfo("setup", 0, 100);
-		info.addDone();
-		reporter.onProgress(log, info);
-		assertEquals(0, log.getLogMessagesSize());
-		assertEquals(0, log.getExceptionsSize());
-		assertEquals(0, log.getStatesSize());
+	  PhaseStateMutant info = new PhaseStateMutant();
+    info.setProcessName("trials");
+    info.setPercentDone(100.0);
+		reporter_.onProgress(log_, info);
+		assertEquals(0, log_.getLogMessagesSize());
+		assertEquals(0, log_.getExceptionsSize());
+		assertEquals(0, log_.getStatesSize());
 		
 	}
 	
 	
 	@Test
 	public void testProgressReportPartDone() {
-		log.setState(TrialsProgressDisplay.class, true);
-		Tests4J_ProcessInfo info = new Tests4J_ProcessInfo("trials", 0, 99);
-		for (int i = 0; i < 17; i++) {
-			info.addDone();
-		}
-		reporter.onProgress(log, info);
+		log_.setState(TrialsProgressDisplay.class, true);
+		PhaseStateMutant info = new PhaseStateMutant();
+    info.setProcessName("trials");
+    info.setPercentDone(17.17);
+		reporter_.onProgress(log_, info);
 		
-		assertEquals(1, log.getLogMessagesSize());
+		assertEquals(1, log_.getLogMessagesSize());
 		I_Tests4J_ReportMessages messages = Tests4J_EnglishConstants.ENGLISH.getReportMessages();
 		assertEquals("Tests4J: trials 17.17" + messages.getPctComplete(),
-				log.getLogMessage(0));
-		assertEquals(0, log.getExceptionsSize());
-		assertEquals(1, log.getStatesSize());
-		assertTrue(log.isLogEnabled(TrialsProgressDisplay.class));
+				log_.getLogMessage(0));
+		assertEquals(0, log_.getExceptionsSize());
+		assertEquals(1, log_.getStatesSize());
+		assertTrue(log_.isLogEnabled(TrialsProgressDisplay.class));
 		
 	}
 	
 	@Test
 	public void testProgressReportDone() {
 
-		log.setState(TrialsProgressDisplay.class, true);
-		Tests4J_ProcessInfo info = new Tests4J_ProcessInfo("trials", 0, 1);
-		info.addDone();
-		reporter.onProgress(log, info);
+		log_.setState(TrialsProgressDisplay.class, true);
+		PhaseStateMutant info = new PhaseStateMutant();
+    info.setProcessName("trials");
+    info.setPercentDone(100.0);
+    info.setHasFinishedAll(true);
+		reporter_.onProgress(log_, info);
 		
-		assertEquals(1, log.getLogMessagesSize());
+		assertEquals(1, log_.getLogMessagesSize());
 		I_Tests4J_ReportMessages messages = Tests4J_EnglishConstants.ENGLISH.getReportMessages();
-		assertEquals("Tests4J: trials " + messages.getDoneEOS() + log.getLineSeperator(),
-				log.getLogMessage(0));
-		assertEquals(0, log.getExceptionsSize());
-		assertEquals(1, log.getStatesSize());
-		assertTrue(log.isLogEnabled(TrialsProgressDisplay.class));
+		assertEquals("Tests4J: trials " + messages.getDoneEOS() + log_.getLineSeperator(),
+				log_.getLogMessage(0));
+		assertEquals(0, log_.getExceptionsSize());
+		assertEquals(1, log_.getStatesSize());
+		assertTrue(log_.isLogEnabled(TrialsProgressDisplay.class));
 		
 	}
 	

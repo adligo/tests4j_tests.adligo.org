@@ -45,6 +45,7 @@ public class A_CmnPkgTrials extends SimplePackageTrials
 		add(I_ImmutableTrial.class);
 		add(I_PlatformContainerTrial.class);
 		add(I_PlatformTrial.class);
+		add(I_TimeTrial.class);
 		add(I_SystemTrial.class);
 		add(I_TrialTypeTrial.class);
 		

@@ -1,6 +1,8 @@
 package org.adligo.tests4j_tests.system.shared.report.summary;
 
-import org.adligo.tests4j.run.helpers.Tests4J_ProcessInfo;
+import org.adligo.tests4j.models.shared.results.PhaseStateMutant;
+import org.adligo.tests4j.run.helpers.Tests4J_PhaseInfoParamsMutant;
+import org.adligo.tests4j.run.helpers.Tests4J_PhaseOverseer;
 import org.adligo.tests4j.shared.asserts.reference.AllowedReferences;
 import org.adligo.tests4j.shared.en.Tests4J_EnglishConstants;
 import org.adligo.tests4j.shared.i18n.I_Tests4J_ReportMessages;
@@ -29,8 +31,14 @@ public class AbstractProgressDisplayTrial extends SourceFileCountingTrial {
 	
 	@Test
 	public void testProgressReportLogOff() {
-		Tests4J_ProcessInfo info = new Tests4J_ProcessInfo("setup", 0, 100);
-		info.addDone();
+	  Tests4J_PhaseInfoParamsMutant infoParams = new Tests4J_PhaseInfoParamsMutant();
+	  infoParams.setProcessName("setup");
+	  infoParams.setCount(100);
+	  infoParams.setThreadCount(0);
+		PhaseStateMutant info = new PhaseStateMutant();
+		info.setProcessName("setup");
+		info.setThreadCount(0);
+		info.setCount(100);
 		reporter.onProgress(log, info);
 		
 		assertEquals(0, log.getLogMessagesSize());
@@ -44,10 +52,12 @@ public class AbstractProgressDisplayTrial extends SourceFileCountingTrial {
 	public void testProgressReportPartDone() {
 		
 		log.setState(MockProgressDisplay.class, true);
-		Tests4J_ProcessInfo info = new Tests4J_ProcessInfo("setup", 0, 98);
-		for (int i = 0; i < 17; i++) {
-			info.addDone();
-		}
+		PhaseStateMutant info = new PhaseStateMutant();
+    info.setProcessName("setup");
+    info.setThreadCount(0);
+    info.setCount(98);
+		info.setDoneCount(17);
+		info.setPercentDone(17.34);
 		reporter.onProgress(log, info);
 		
 		assertEquals(1, log.getLogMessagesSize());
@@ -65,8 +75,13 @@ public class AbstractProgressDisplayTrial extends SourceFileCountingTrial {
 
 		
 		log.setState(MockProgressDisplay.class, true);
-		Tests4J_ProcessInfo info = new Tests4J_ProcessInfo("setup", 1, 1);
-		info.addDone();
+		PhaseStateMutant info = new PhaseStateMutant();
+    info.setProcessName("setup");
+    info.setThreadCount(1);
+    info.setCount(1);
+    info.setDoneCount(1);
+    info.setPercentDone(100.0);
+    info.setHasFinishedAll(true);
 		reporter.onProgress(log, info);
 		
 		assertEquals(1, log.getLogMessagesSize());

@@ -1,6 +1,7 @@
 package org.adligo.tests4j_tests.system.shared.report.summary;
 
-import org.adligo.tests4j.run.helpers.Tests4J_ProcessInfo;
+import org.adligo.tests4j.models.shared.results.PhaseStateMutant;
+import org.adligo.tests4j.run.helpers.Tests4J_PhaseOverseer;
 import org.adligo.tests4j.shared.asserts.reference.AllowedReferences;
 import org.adligo.tests4j.shared.en.Tests4J_EnglishConstants;
 import org.adligo.tests4j.shared.i18n.I_Tests4J_ReportMessages;
@@ -27,8 +28,11 @@ public class RemoteProgressDisplayTrial extends SourceFileCountingTrial {
 	
 	@Test
 	public void testProgressReportLogOff() {
-		Tests4J_ProcessInfo info = new Tests4J_ProcessInfo("setup", 0, 100);
-		info.addDone();
+	  PhaseStateMutant info = new PhaseStateMutant();
+    info.setProcessName("setup");
+    info.setThreadCount(1);
+    info.setCount(100);
+    info.setDoneCount(1);
 		reporter.onProgress(log, info);
 		assertEquals(0, log.getLogMessagesSize());
 		assertEquals(0, log.getExceptionsSize());
@@ -40,10 +44,9 @@ public class RemoteProgressDisplayTrial extends SourceFileCountingTrial {
 	@Test
 	public void testProgressReportPartDone() {
 		log.setState(RemoteProgressDisplay.class, true);
-		Tests4J_ProcessInfo info = new Tests4J_ProcessInfo("setup", 0, 98);
-		for (int i = 0; i < 17; i++) {
-			info.addDone();
-		}
+		PhaseStateMutant info = new PhaseStateMutant();
+    info.setProcessName("setup");
+    info.setPercentDone(17.341);
 		reporter.onProgress(log, info);
 		
 		assertEquals(1, log.getLogMessagesSize());
@@ -62,10 +65,12 @@ public class RemoteProgressDisplayTrial extends SourceFileCountingTrial {
 		
 		log.setState(RemoteProgressDisplay.class, true);
 		
-		Tests4J_ProcessInfo info = new Tests4J_ProcessInfo("setup", 0, 1);
-		info.addDone();
-		reporter.onProgress(log, info);
-		
+		PhaseStateMutant info = new PhaseStateMutant();
+    info.setProcessName("setup");
+    info.setPercentDone(100.0);
+    info.setHasFinishedAll(true);
+    reporter.onProgress(log, info);
+    
 		assertEquals(1, log.getLogMessagesSize());
 		I_Tests4J_ReportMessages messages = Tests4J_EnglishConstants.ENGLISH.getReportMessages();
 		assertEquals("Tests4J: setup " + messages.getDoneEOS() + log.getLineSeperator(),

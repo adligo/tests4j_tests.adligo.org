@@ -9,12 +9,15 @@ import org.adligo.tests4j.models.shared.results.BaseTrialResult;
 import org.adligo.tests4j.models.shared.results.BaseTrialResultMutant;
 import org.adligo.tests4j.models.shared.results.I_ApiTrialResult;
 import org.adligo.tests4j.models.shared.results.I_Duration;
+import org.adligo.tests4j.models.shared.results.I_PhaseState;
 import org.adligo.tests4j.models.shared.results.I_SourceFileTrialResult;
 import org.adligo.tests4j.models.shared.results.I_TestResult;
 import org.adligo.tests4j.models.shared.results.I_TrialFailure;
 import org.adligo.tests4j.models.shared.results.I_TrialResult;
 import org.adligo.tests4j.models.shared.results.I_TrialRunResult;
 import org.adligo.tests4j.models.shared.results.I_UseCaseTrialResult;
+import org.adligo.tests4j.models.shared.results.PhaseState;
+import org.adligo.tests4j.models.shared.results.PhaseStateMutant;
 import org.adligo.tests4j.models.shared.results.SourceFileTrialResult;
 import org.adligo.tests4j.models.shared.results.SourceFileTrialResultMutant;
 import org.adligo.tests4j.models.shared.results.TestResult;
@@ -44,6 +47,7 @@ public class Tests4J_Results_ReferenceGroup extends Tests4J_ReferenceGroupGwt {
 		add(names, I_TrialResult.class);
 		add(names, I_TrialRunResult.class);
 		add(names, I_UseCaseTrialResult.class);
+		add(names, I_PhaseState.class);
 		
 		add(names, SourceFileTrialResult.class);
 		add(names, SourceFileTrialResultMutant.class);
@@ -57,6 +61,9 @@ public class Tests4J_Results_ReferenceGroup extends Tests4J_ReferenceGroupGwt {
 		
 		add(names, UseCaseTrialResult.class);
 		add(names, UseCaseTrialResultMutant.class);
+		
+		add(names, PhaseStateMutant.class);
+		add(names, PhaseState.class);
 		
 		names.addAll(Tests4J_Metadata_ReferenceGroup.INSTANCE.getClassNames());
 		names.addAll(Tests4J_Coverage_ReferenceGroup.INSTANCE.getClassNames());

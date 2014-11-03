@@ -9,6 +9,7 @@ import org.adligo.tests4j.models.shared.metadata.I_TrialRunMetadata;
 import org.adligo.tests4j.models.shared.results.I_ApiTrialResult;
 import org.adligo.tests4j.models.shared.results.I_TrialResult;
 import org.adligo.tests4j.system.shared.trials.I_Trial;
+import org.adligo.tests4j.system.shared.trials.IgnoreTest;
 import org.adligo.tests4j.system.shared.trials.PackageScope;
 import org.adligo.tests4j.system.shared.trials.Test;
 import org.adligo.tests4j_tests.base_trials.ApiCountingTrial;
@@ -116,6 +117,7 @@ public class BadApiTrials_Trial extends ApiCountingTrial {
 	}
 	
 	@Test
+	@IgnoreTest
 	public void testTrialRunOverlapPrevention() throws Exception {
 		ExpectedPassRunner runner = new ExpectedPassRunner();
 		List<Class<? extends I_Trial>> trials = new ArrayList<>();
@@ -180,8 +182,8 @@ public class BadApiTrials_Trial extends ApiCountingTrial {
 				NoPackageScopeAnnotationTrial.getAsserts()+
 				ProtectedTestTrial.getAsserts()+
 				StaticTestTrial.getAsserts()   +
-				TestWithParamsTrial.getAsserts()+
-				305;//305 is from testTrialRunOverlapPrevention
+				TestWithParamsTrial.getAsserts();
+		    //+ 305;//305 is from testTrialRunOverlapPrevention
 		//overrode afterTrialTests above
 		if (type.isFromMetaWithCoverage()) {
 			return super.getAsserts(type, asserts + 1);
@@ -192,7 +194,7 @@ public class BadApiTrials_Trial extends ApiCountingTrial {
 
 	@Override
 	public int getUniqueAsserts(I_CountType type) {
-		int uAsserts = 333;
+		int uAsserts = 225; //was 333
 		//overrode afterTrialTests above
 		if (type.isFromMetaWithCoverage()) {
 			return super.getUniqueAsserts(type, uAsserts + 1);

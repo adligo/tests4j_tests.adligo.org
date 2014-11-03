@@ -18,8 +18,8 @@ import org.adligo.tests4j.system.shared.trials.TrialTypeAnnotation;
 
 @TrialTypeAnnotation (type=TrialType.META_TRIAL_TYPE)
 public class TheMetaTrial  extends AbstractTrial implements I_MetaTrial {
-	private static final int TESTS = 2755;
-	private static final int TRIALS = 509;
+	private static final int TESTS = 2774;
+	private static final int TRIALS = 513;
 	private ClassesWithSourceFileTrialsCalculator calculator_;
 	private I_TrialRunResult results_;
 	private I_Tests4J_Log log_;
@@ -183,7 +183,8 @@ public class TheMetaTrial  extends AbstractTrial implements I_MetaTrial {
 		//assertEquals(1,results.getTrialsIgnored());
 		assertEquals(0,results.getTestsIgnored());
 		assertGreaterThanOrEquals(TRIALS - 1, results.getTrialsPassed());
-		assertGreaterThanOrEquals(TESTS - 2, results.getTestsPassed());
+		//usually -2, ignored one test
+		assertGreaterThanOrEquals(TESTS - 3, results.getTestsPassed());
 		
 		//does not include assertions from this class yet
 		//I think the single threaded count is off somewhere

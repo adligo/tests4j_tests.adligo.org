@@ -42,6 +42,7 @@ implements I_MetaTrialParams<A_ResultsPkgTrials>, I_CountingPackageTrials {
 		super.add(I_TrialResultTrial.class);
 		super.add(I_TrialRunResultTrial.class);
 		super.add(I_UseCaseTrialResultTrial.class);
+		super.add(I_PhaseStateTrial.class);
 		
 		super.add(TestResultMutantTrial.class);
 		super.add(TestResultTrial.class);
@@ -62,6 +63,9 @@ implements I_MetaTrialParams<A_ResultsPkgTrials>, I_CountingPackageTrials {
 		
 		super.add(UseCaseTrialResultMutantTrial.class);
 		super.add(UseCaseTrialResultTrial.class);
+		
+		super.add(PhaseStateMutantTrial.class);
+		super.add(PhaseStateTrial.class);
 	}
 
 	@Override

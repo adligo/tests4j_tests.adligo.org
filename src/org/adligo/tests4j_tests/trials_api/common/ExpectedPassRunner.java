@@ -6,12 +6,12 @@ import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 import org.adligo.tests4j.models.shared.metadata.I_TrialRunMetadata;
+import org.adligo.tests4j.models.shared.results.I_PhaseState;
 import org.adligo.tests4j.models.shared.results.I_TrialResult;
 import org.adligo.tests4j.models.shared.results.I_TrialRunResult;
 import org.adligo.tests4j.run.api.Tests4J;
 import org.adligo.tests4j.system.shared.api.I_Tests4J_Controls;
 import org.adligo.tests4j.system.shared.api.I_Tests4J_Listener;
-import org.adligo.tests4j.system.shared.api.I_Tests4J_ProcessInfo;
 import org.adligo.tests4j.system.shared.api.Tests4J_Params;
 import org.adligo.tests4j.system.shared.report.summary.SummaryReporter;
 import org.adligo.tests4j.system.shared.trials.I_Trial;
@@ -107,13 +107,13 @@ public class ExpectedPassRunner implements I_Tests4J_Listener {
 	}
 
 	@Override
-	public void onProccessStateChange(I_Tests4J_ProcessInfo info) {
+	public void onProccessStateChange(I_PhaseState info) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void onProgress(I_Tests4J_ProcessInfo info) {
+	public void onProgress(I_PhaseState info) {
 		// TODO Auto-generated method stub
 		
 	}

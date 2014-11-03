@@ -3,6 +3,7 @@ package org.adligo.tests4j_tests.references_groups;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.adligo.tests4j.models.shared.results.I_PhaseState;
 import org.adligo.tests4j.system.shared.api.I_Tests4J_Controls;
 import org.adligo.tests4j.system.shared.api.I_Tests4J_CoveragePlugin;
 import org.adligo.tests4j.system.shared.api.I_Tests4J_CoveragePluginFactory;
@@ -13,8 +14,7 @@ import org.adligo.tests4j.system.shared.api.I_Tests4J_Delegate;
 import org.adligo.tests4j.system.shared.api.I_Tests4J_DelegateFactory;
 import org.adligo.tests4j.system.shared.api.I_Tests4J_Listener;
 import org.adligo.tests4j.system.shared.api.I_Tests4J_Params;
-import org.adligo.tests4j.system.shared.api.I_Tests4J_ProcessInfo;
-import org.adligo.tests4j.system.shared.api.I_Tests4J_ProgressMonitor;
+import org.adligo.tests4j.system.shared.api.I_Tests4J_ProgressParams;
 import org.adligo.tests4j.system.shared.api.I_Tests4J_RemoteInfo;
 import org.adligo.tests4j.system.shared.api.I_Tests4J_Runnable;
 import org.adligo.tests4j.system.shared.api.I_Tests4J_Selection;
@@ -24,7 +24,7 @@ import org.adligo.tests4j.system.shared.api.I_Tests4J_TrialList;
 import org.adligo.tests4j.system.shared.api.I_Tests4J_TrialProgress;
 import org.adligo.tests4j.system.shared.api.Tests4J_CoveragePluginParams;
 import org.adligo.tests4j.system.shared.api.Tests4J_CoverageTrialInstrumentation;
-import org.adligo.tests4j.system.shared.api.Tests4J_DefaultProgressMonitor;
+import org.adligo.tests4j.system.shared.api.Tests4J_DefaultProgressParams;
 import org.adligo.tests4j.system.shared.api.Tests4J_DelegateCoveragePlugin;
 import org.adligo.tests4j.system.shared.api.Tests4J_DelegateProgressMonitor;
 import org.adligo.tests4j.system.shared.api.Tests4J_ListenerDelegator;
@@ -57,8 +57,8 @@ public class Tests4J_SystemApi_ReferenceGroup extends Tests4J_ReferenceGroup {
 		
 		add(names, I_Tests4J_Listener.class);
 		add(names, I_Tests4J_Params.class);
-		add(names, I_Tests4J_ProcessInfo.class);
-		add(names, I_Tests4J_ProgressMonitor.class);
+		add(names, I_PhaseState.class);
+		add(names, I_Tests4J_ProgressParams.class);
 		
 		add(names, I_Tests4J_RemoteInfo.class);
 		add(names, I_Tests4J_Runnable.class);
@@ -72,7 +72,7 @@ public class Tests4J_SystemApi_ReferenceGroup extends Tests4J_ReferenceGroup {
 		
 		add(names, Tests4J_CoveragePluginParams.class);
 		add(names, Tests4J_CoverageTrialInstrumentation.class);
-		add(names, Tests4J_DefaultProgressMonitor.class);
+		add(names, Tests4J_DefaultProgressParams.class);
 		add(names, Tests4J_DelegateCoveragePlugin.class);
 		
 		add(names, Tests4J_DelegateProgressMonitor.class);

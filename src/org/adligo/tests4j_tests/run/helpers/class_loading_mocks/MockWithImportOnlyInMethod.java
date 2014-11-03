@@ -1,12 +1,11 @@
 package org.adligo.tests4j_tests.run.helpers.class_loading_mocks;
 
-import org.adligo.tests4j.shared.common.I_System;
 
 
 public class MockWithImportOnlyInMethod {
 
 	public void foo(Object p) {
-	  I_System sys = (I_System) p;
+	  I_FieldMock sys = (I_FieldMock) p;
 	  sys.println("hey");
 	}
 }

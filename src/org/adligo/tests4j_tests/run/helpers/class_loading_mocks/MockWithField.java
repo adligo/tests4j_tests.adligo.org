@@ -1,6 +1,5 @@
 package org.adligo.tests4j_tests.run.helpers.class_loading_mocks;
 
-import org.adligo.tests4j.shared.common.I_System;
 
 /**
  * this class should only 
@@ -9,6 +8,6 @@ import org.adligo.tests4j.shared.common.I_System;
  *
  */
 public class MockWithField {
-	private I_System sys;
+	private I_FieldMock sys;
 	
 }

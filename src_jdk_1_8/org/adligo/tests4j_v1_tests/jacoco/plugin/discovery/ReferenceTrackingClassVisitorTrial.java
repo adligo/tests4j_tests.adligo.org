@@ -44,7 +44,7 @@ public class ReferenceTrackingClassVisitorTrial extends SourceFileCountingTrial 
 	public static final String STRING_BUILDER = "Ljava/lang/StringBuilder;";
 	public static final String SYSTEM = "Ljava/lang/System;";
 	
-	public static final String I_SYSTEM = "Lorg/adligo/tests4j/shared/common/I_System;";
+	public static final String I_FIELD_MOCK = "Lorg/adligo/tests4j_tests/run/helpers/class_loading_mocks/I_FieldMock;";
 	public static final String M_EXCEPTION = "Lorg/adligo/tests4j_tests/run/helpers/class_loading_mocks/MockException;";
 	public static final String M_EXCEPTION_BARE = "org/adligo/tests4j_tests/run/helpers/class_loading_mocks/MockException";
 	
@@ -144,7 +144,7 @@ public class ReferenceTrackingClassVisitorTrial extends SourceFileCountingTrial 
 		Set<String> classNames =  rtcv.getClassReferenceNames();
 		assertContains(classNames, OBJ);
 		assertContains(classNames, MW_FIELD);
-		assertContains(classNames, I_SYSTEM);
+		assertContains(classNames, I_FIELD_MOCK);
 		assertEquals(3, classNames.size());
 	}
 	
@@ -183,7 +183,7 @@ public class ReferenceTrackingClassVisitorTrial extends SourceFileCountingTrial 
 		assertContains(classNames, OBJ);
 		assertContains(classNames, STRING);
 		assertContains(classNames, MW_IMPORT_ONLY_IN_METHOD);
-		assertContains(classNames, I_SYSTEM);
+		assertContains(classNames, I_FIELD_MOCK);
 		assertEquals(4, classNames.size());
 	}
 	

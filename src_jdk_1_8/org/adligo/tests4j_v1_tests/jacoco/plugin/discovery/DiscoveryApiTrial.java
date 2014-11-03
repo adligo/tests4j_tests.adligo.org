@@ -407,12 +407,12 @@ public class DiscoveryApiTrial extends ApiCountingTrial implements I_DiscoveryAp
 
 	@Override
 	public int getAsserts(I_CountType type) {
-		return super.getAsserts(type, 4019);
+		return super.getAsserts(type, 3768);
 	}
 
 	@Override
 	public int getUniqueAsserts(I_CountType type) {
-		return super.getUniqueAsserts(type, 1896);
+		return super.getUniqueAsserts(type, 1756);
 	}
 
 }

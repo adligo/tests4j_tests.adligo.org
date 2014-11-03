@@ -4,10 +4,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.adligo.tests4j.models.shared.metadata.I_TrialRunMetadata;
+import org.adligo.tests4j.models.shared.results.I_PhaseState;
 import org.adligo.tests4j.models.shared.results.I_TrialResult;
 import org.adligo.tests4j.models.shared.results.I_TrialRunResult;
 import org.adligo.tests4j.system.shared.api.I_Tests4J_Listener;
-import org.adligo.tests4j.system.shared.api.I_Tests4J_ProcessInfo;
 
 public class Tracking_Tests4J_Listener implements I_Tests4J_Listener {
 	private I_TrialRunMetadata lastMetadata;
@@ -17,8 +17,8 @@ public class Tracking_Tests4J_Listener implements I_Tests4J_Listener {
 	private I_TrialResult lastTestResult;
 	private I_TrialResult lastTrialResult;
 	private I_TrialRunResult lastResult;
-	private I_Tests4J_ProcessInfo lastInfo;
-	private I_Tests4J_ProcessInfo lastProgress;
+	private I_PhaseState lastInfo;
+	private I_PhaseState lastProgress;
 	@Override
 	public void onMetadataCalculated(I_TrialRunMetadata metadata) {
 		lastMetadata = metadata;
@@ -100,12 +100,12 @@ public class Tracking_Tests4J_Listener implements I_Tests4J_Listener {
 
 
 	@Override
-	public void onProccessStateChange(I_Tests4J_ProcessInfo info) {
+	public void onProccessStateChange(I_PhaseState info) {
 		lastInfo = info;
 	}
 
 	@Override
-	public void onProgress(I_Tests4J_ProcessInfo info) {
+	public void onProgress(I_PhaseState info) {
 		lastProgress = info;
 	}
 
