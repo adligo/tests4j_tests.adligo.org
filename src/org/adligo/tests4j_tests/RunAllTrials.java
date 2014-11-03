@@ -1,12 +1,11 @@
 package org.adligo.tests4j_tests;
 
-import java.math.BigDecimal;
-
 import org.adligo.tests4j.models.shared.metadata.I_TrialRunMetadata;
 import org.adligo.tests4j.models.shared.results.I_PhaseState;
 import org.adligo.tests4j.models.shared.results.I_TrialResult;
 import org.adligo.tests4j.models.shared.results.I_TrialRunResult;
 import org.adligo.tests4j.run.api.Tests4J;
+import org.adligo.tests4j.run.helpers.Tests4J_Processor;
 import org.adligo.tests4j.shared.common.Tests4J_System;
 import org.adligo.tests4j.shared.output.DefaultLog;
 import org.adligo.tests4j.shared.output.I_Tests4J_Log;
@@ -27,16 +26,13 @@ import org.adligo.tests4j_tests.base_trials.SimplePackageTrials;
 import org.adligo.tests4j_tests.jacoco.api_trials.A_CocoApiPkgTrials;
 import org.adligo.tests4j_tests.jacoco.plugin.A_CocoPlugPkgTrials;
 import org.adligo.tests4j_tests.models.A_ModelsPkgTrials;
-import org.adligo.tests4j_tests.models.shared.association.A_AssociationPkgTrials;
-import org.adligo.tests4j_tests.models.shared.coverage.A_CoveragePkgTrials;
-import org.adligo.tests4j_tests.models.shared.metadata.A_MetaPkgTrials;
-import org.adligo.tests4j_tests.models.shared.results.A_ResultsPkgTrials;
 import org.adligo.tests4j_tests.run.A_RunPkgTrials;
 import org.adligo.tests4j_tests.shared.A_SharePkgTrials;
 import org.adligo.tests4j_tests.system.shared.A_SysPkgTrials;
 import org.adligo.tests4j_tests.trials_api.A_ApiPkgTrials;
 import org.adligo.tests4j_v1_tests.A_JavaVersionSpecificTrials;
-import org.adligo.tests4j_v1_tests.jacoco.plugin.A_CocoJavaVersionSpecificTrials;
+
+import java.math.BigDecimal;
 
 public class RunAllTrials  extends SimplePackageTrials 
 implements I_MetaTrialParams<RunAllTrials>, I_CountingPackageTrials, I_Tests4J_Listener {
@@ -87,7 +83,7 @@ implements I_MetaTrialParams<RunAllTrials>, I_CountingPackageTrials, I_Tests4J_L
 			
 			params.setLogState(TrialsProcessDisplay.class, false);
 			params.setLogState(TrialsProgressDisplay.class, true);
-			//params.setLogState(Tests4J_Processor.class, true);
+			params.setLogState(Tests4J_Processor.class, true);
 			//params.setLogState(TrialQueueDecisionTree.class, true);
 			//params.setLogState(MultiProbesMap.class, true);
 			

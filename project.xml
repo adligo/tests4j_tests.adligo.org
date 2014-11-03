@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pns:fabricate_project xmlns:pns="http://www.adligo.org/fabricate/xml/io/project" 
+    xmlns:lns="http://www.adligo.org/fabricate/xml/io/library" 
+    xmlns:tns="http://www.adligo.org/fabricate/xml/io/tasks" 
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" >
+    <pns:stages>
+        <pns:stage name="jar" >
+            <tns:param key="srcDirs" value="src_jdk_1_8,src" />
+        </pns:stage>
+        <pns:stage name="test" />
+        <pns:stage name="publish" />
+    </pns:stages>
+    <lns:dependencies>
+        <lns:library>jacoco</lns:library>
+        <lns:project>tests4j.adligo.org</lns:project>
+        <lns:project>tests4j_4jacoco.adligo.org</lns:project>
+    </lns:dependencies>
+ </pns:fabricate_project>
