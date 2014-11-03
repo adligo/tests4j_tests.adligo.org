@@ -5,7 +5,6 @@ import org.adligo.tests4j.system.shared.trials.PackageScope;
 import org.adligo.tests4j.system.shared.trials.Test;
 import org.adligo.tests4j_tests.base_trials.ApiCountingTrial;
 import org.adligo.tests4j_tests.base_trials.I_CountType;
-import org.adligo.tests4j_tests.jacoco.api_trials.reference_trials.CalledBadMethod_SourceFileTrialRunner;
 import org.adligo.tests4j_tests.jacoco.api_trials.reference_trials.CircularDependencyFailure_InPkgWhenOnlyInnerAllowed_SourceFileTrialRunner;
 import org.adligo.tests4j_tests.jacoco.api_trials.reference_trials.CircularDependencyFailure_SourceFileTrialRunner;
 
@@ -43,7 +42,7 @@ public class DependencyAssertionFailuresTrial extends ApiCountingTrial {
 
 	@Override
 	public int getUniqueAsserts(I_CountType type) {
-		int thisUniqueAsserts = 65;
+		int thisUniqueAsserts = 66;
 		return super.getUniqueAsserts(type, thisUniqueAsserts);
 	}
 }

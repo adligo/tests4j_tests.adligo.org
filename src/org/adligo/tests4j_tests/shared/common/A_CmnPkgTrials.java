@@ -61,7 +61,6 @@ public class A_CmnPkgTrials extends SimplePackageTrials
 		
 		add(Tests4J_ConstantsTrial.class);
 		add(Tests4J_ConstantsWrapperTrial.class);
-		add(Tests4J_SystemTrial.class);
 		add(TrialTypeTrial.class);
 	}
 	

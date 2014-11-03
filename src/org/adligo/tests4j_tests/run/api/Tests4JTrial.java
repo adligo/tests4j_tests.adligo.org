@@ -1,11 +1,9 @@
 package org.adligo.tests4j_tests.run.api;
 
-import java.util.concurrent.atomic.AtomicBoolean;
-
 import org.adligo.tests4j.run.api.Tests4J;
+import org.adligo.tests4j.run.helpers.JseSystem;
 import org.adligo.tests4j.run.helpers.Tests4J_Controls;
 import org.adligo.tests4j.shared.common.DefaultSystem;
-import org.adligo.tests4j.shared.common.DelegateSystem;
 import org.adligo.tests4j.shared.common.I_System;
 import org.adligo.tests4j.system.shared.api.I_Tests4J_Controls;
 import org.adligo.tests4j.system.shared.api.I_Tests4J_Delegate;
@@ -20,6 +18,8 @@ import org.adligo.tests4j_tests.base_trials.SourceFileCountingTrial;
 import org.adligo.tests4j_tests.run.api.mocks.MockTests4J;
 import org.adligo.tests4j_tests.run.api.mocks.MockTests4J_Listener;
 import org.adligo.tests4j_tests.run.helpers.MockTests4J_DelegateFactory;
+
+import java.util.concurrent.atomic.AtomicBoolean;
 
 @SourceFileScope (sourceClass=Tests4J.class, minCoverage= 75.0)
 public class Tests4JTrial extends SourceFileCountingTrial implements I_Tests4J_Delegate {
@@ -121,7 +121,7 @@ public class Tests4JTrial extends SourceFileCountingTrial implements I_Tests4J_D
 		assertSame(controllsToSend, controlls);
 		assertFalse(ran.get());
 		
-		assertEquals(DelegateSystem.class.getName(), factory.getLastSystem().getClass().getName());
+		assertEquals(JseSystem.class.getName(), factory.getLastSystem().getClass().getName());
 		assertSame(params, lastSetupParams);
 		assertSame(listener, lastSetupListener);
 	}

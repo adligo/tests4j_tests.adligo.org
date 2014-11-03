@@ -6,6 +6,7 @@ import java.util.Set;
 import org.adligo.tests4j.models.shared.metadata.I_TestMetadata;
 import org.adligo.tests4j.models.shared.metadata.I_TrialMetadata;
 import org.adligo.tests4j.models.shared.metadata.I_TrialRunMetadata;
+import org.adligo.tests4j.models.shared.metadata.TrialRunMetadata;
 import org.adligo.tests4j.models.shared.results.I_TestResult;
 import org.adligo.tests4j.models.shared.results.I_TrialFailure;
 import org.adligo.tests4j.models.shared.results.I_TrialResult;
@@ -32,6 +33,7 @@ public class CircularDependencyFailure_InPkgWhenOnlyInnerAllowed_SourceFileTrial
 		
 		I_TrialRunMetadata metadata = runner.getMetadata();
 		asserts.assertNotNull(metadata);
+		asserts.assertEquals(TrialRunMetadata.class.getName(), metadata.getClass().getName());
 		List<? extends I_TrialMetadata> trialsMetadata = metadata.getAllTrialMetadata();
 		asserts.assertNotNull(trialsMetadata);
 		asserts.assertEquals("java.util.Collections$UnmodifiableRandomAccessList", 
@@ -165,6 +167,6 @@ public class CircularDependencyFailure_InPkgWhenOnlyInnerAllowed_SourceFileTrial
 	}
 	
 	public static int getAsserts() {
-		return 60;
+		return 61;
 	}
 }

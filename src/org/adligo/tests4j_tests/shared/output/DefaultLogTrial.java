@@ -1,11 +1,5 @@
 package org.adligo.tests4j_tests.shared.output;
 
-import java.io.PrintStream;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
-
 import org.adligo.tests4j.run.helpers.JseSystem;
 import org.adligo.tests4j.shared.asserts.reference.AllowedReferences;
 import org.adligo.tests4j.shared.common.DefaultSystem;
@@ -18,6 +12,12 @@ import org.adligo.tests4j_tests.base_trials.I_CountType;
 import org.adligo.tests4j_tests.base_trials.SourceFileCountingTrial;
 import org.adligo.tests4j_tests.references_groups.Tests4J_Output_GwtReferenceGroup;
 
+import java.io.PrintStream;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
+
 @SourceFileScope (sourceClass=DefaultLog.class, minCoverage=47.0)
 @AllowedReferences (groups=Tests4J_Output_GwtReferenceGroup.class)
 public class DefaultLogTrial extends SourceFileCountingTrial implements I_System {
@@ -27,12 +27,10 @@ public class DefaultLogTrial extends SourceFileCountingTrial implements I_System
 		DefaultLogMock d = new DefaultLogMock();
 		I_System sys = d.getSystem();
 		assertNotNull(sys);
-		assertEquals(DelegateSystem.class.getName(), sys.getClass().getName());
+		assertEquals(DefaultSystem.class.getName(), sys.getClass().getName());
 		Set<String> defaultLoggers = new HashSet<String>();
 		defaultLoggers.add(DefaultSystem.class.getName());
 		defaultLoggers.add(JseSystem.class.getName());
-		assertContains(defaultLoggers, ((DelegateSystem) sys).getDelegate()
-				.getClass().getName());
 		assertFalse(d.isLogEnabled(this.getClass()));
 	}
 	
@@ -94,7 +92,7 @@ public class DefaultLogTrial extends SourceFileCountingTrial implements I_System
 
 	@Override
 	public int getAsserts(I_CountType type) {
-		int thisAsserts = 5;
+		int thisAsserts = 4;
 		//code coverage and circular dependencies +
 		//custom afterTrialTests
 		//+ see above
@@ -108,7 +106,7 @@ public class DefaultLogTrial extends SourceFileCountingTrial implements I_System
 
 	@Override
 	public int getUniqueAsserts(I_CountType type) {
-		int thisUniqueAsserts = 5;
+		int thisUniqueAsserts = 4;
 		//code coverage and circular dependencies +
 		//custom afterTrialTests
 		//+ see above

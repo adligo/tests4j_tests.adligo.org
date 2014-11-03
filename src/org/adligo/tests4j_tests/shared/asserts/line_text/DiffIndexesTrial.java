@@ -5,7 +5,8 @@ import org.adligo.tests4j.shared.asserts.common.I_Thrower;
 import org.adligo.tests4j.shared.asserts.line_text.DiffIndexes;
 import org.adligo.tests4j.shared.asserts.line_text.I_DiffIndexes;
 import org.adligo.tests4j.shared.asserts.reference.AllowedReferences;
-import org.adligo.tests4j.shared.common.Tests4J_System;
+import org.adligo.tests4j.shared.common.DefaultSystem;
+import org.adligo.tests4j.shared.common.I_System;
 import org.adligo.tests4j.system.shared.trials.SourceFileScope;
 import org.adligo.tests4j.system.shared.trials.Test;
 import org.adligo.tests4j_tests.base_trials.I_CountType;
@@ -15,7 +16,8 @@ import org.adligo.tests4j_tests.references_groups.Tests4J_AssertsLineText_GwtRef
 @SourceFileScope (sourceClass=DiffIndexes.class, minCoverage=95.0)
 @AllowedReferences (groups=Tests4J_AssertsLineText_GwtReferenceGroup.class)
 public class DiffIndexesTrial extends SourceFileCountingTrial {
-
+  private static final I_System SYS = new DefaultSystem();
+  
 	@Test
 	public void testConstructorExceptions() {
 		assertThrown(new ExpectedThrownData(new IllegalArgumentException(
@@ -106,7 +108,7 @@ public class DiffIndexesTrial extends SourceFileCountingTrial {
 		
 		assertThrown(new ExpectedThrownData(new IllegalArgumentException(
 				DiffIndexes.MATCH_ERROR_PART_ONE + 
-				Tests4J_System.SYSTEM.lineSeperator() +
+				SYS.lineSeperator() +
 				DiffIndexes.MATCH_L2R_DIFF_L2R_MATCH_R2L_DIFF_R2L)),
 				new I_Thrower() {
 					
@@ -118,7 +120,7 @@ public class DiffIndexesTrial extends SourceFileCountingTrial {
 		
 		assertThrown(new ExpectedThrownData(new IllegalArgumentException(
 				DiffIndexes.MATCH_ERROR_PART_ONE + 
-				Tests4J_System.SYSTEM.lineSeperator() +
+				SYS.lineSeperator() +
 				DiffIndexes.DIFF_L2R_MATCH_L2R_DIFF_R2L_MATCH_R2L)),
 				new I_Thrower() {
 					

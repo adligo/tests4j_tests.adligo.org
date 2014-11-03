@@ -21,7 +21,7 @@ import org.adligo.tests4j.system.shared.trials.I_Trial;
  *
  */
 public class ExpectedFailureRunner implements I_Tests4J_Listener {
-	private I_TrialRunMetadata metadata;
+	private volatile I_TrialRunMetadata metadata;
 	
 	private int size = 0;
 	private final CopyOnWriteArrayList<I_TrialResult> results = new CopyOnWriteArrayList<I_TrialResult>();

@@ -1,6 +1,7 @@
 package org.adligo.tests4j_tests.system.shared.report.summary;
 
 import org.adligo.tests4j.shared.asserts.reference.AllowedReferences;
+import org.adligo.tests4j.shared.common.DefaultSystem;
 import org.adligo.tests4j.shared.en.Tests4J_EnglishConstants;
 import org.adligo.tests4j.shared.i18n.I_Tests4J_ReportMessages;
 import org.adligo.tests4j.system.shared.report.summary.TestDisplay;
@@ -17,7 +18,8 @@ import org.adligo.tests4j_tests.system.shared.mocks.Tests4J_LogMock;
 @AllowedReferences (groups=Tests4J_SystemSummary_GwtReferenceGroup.class)
 public class TestDisplayTrial extends SourceFileCountingTrial {
 	private Tests4J_LogMock log = new Tests4J_LogMock();
-	private TestDisplay reporter = new TestDisplay(log, new ThreadDisplay(log));
+	private TestDisplay reporter = new TestDisplay(log, 
+	    new ThreadDisplay(log, new DefaultSystem()));
 	
 	@Override
 	public void beforeTests() {

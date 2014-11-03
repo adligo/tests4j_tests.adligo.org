@@ -1,8 +1,5 @@
 package org.adligo.tests4j_tests.references_groups;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import org.adligo.tests4j.shared.common.CacheControl;
 import org.adligo.tests4j.shared.common.ClassMethods;
 import org.adligo.tests4j.shared.common.DefaultSystem;
@@ -22,8 +19,10 @@ import org.adligo.tests4j.shared.common.StringMethods;
 import org.adligo.tests4j.shared.common.SystemWithPrintStreamDelegate;
 import org.adligo.tests4j.shared.common.Tests4J_Constants;
 import org.adligo.tests4j.shared.common.Tests4J_ConstantsWrapper;
-import org.adligo.tests4j.shared.common.Tests4J_System;
 import org.adligo.tests4j.shared.common.TrialType;
+
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * @diagram_sync with PackageDependencies.class on 10/1/1014
@@ -63,7 +62,6 @@ public class Tests4J_Common_ReferenceGroup extends Tests4J_ReferenceGroup {
 		
 		add(names, Tests4J_Constants.class);
 		add(names, Tests4J_ConstantsWrapper.class);
-		add(names, Tests4J_System.class);
 		add(names, TrialType.class);
 		
 		names.addAll(Tests4J_EN_ReferenceGroup.INSTANCE.getClassNames());
