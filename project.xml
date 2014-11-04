@@ -15,5 +15,6 @@
         <lns:library>mockito</lns:library>
         <lns:project>tests4j.adligo.org</lns:project>
         <lns:project>tests4j_4jacoco.adligo.org</lns:project>
+        
     </lns:dependencies>
  </pns:fabricate_project>

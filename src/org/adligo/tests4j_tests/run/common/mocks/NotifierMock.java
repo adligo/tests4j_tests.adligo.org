@@ -54,6 +54,7 @@ public class NotifierMock implements I_Notifier {
   @Override
   public void interrupt() {
     methodCalls_.add("interrupt()");
+    throw new InterruptedThreadExceptionMock();
   }
 
   @Override
