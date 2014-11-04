@@ -2,10 +2,10 @@ package org.adligo.tests4j_tests.run.common.mocks;
 
 import java.util.concurrent.ArrayBlockingQueue;
 
-public class MockThread extends Thread {
+public class ThreadMock extends Thread {
   private final ArrayBlockingQueue<Boolean> interrupted_ = new ArrayBlockingQueue<Boolean>(1);
   
-  public MockThread(Runnable r) {
+  public ThreadMock(Runnable r) {
     super(r);
   }
   

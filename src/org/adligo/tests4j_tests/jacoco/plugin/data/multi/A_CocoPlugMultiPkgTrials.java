@@ -36,6 +36,7 @@ implements I_MetaTrialParams<A_CocoPlugMultiPkgTrials>, I_CountingPackageTrials 
 
 	public void addTrials() throws Exception {
 		add(HolderTrial.class);
+		//add(ConcurrentQualifiedMapTrial.class);
 	}
 
 	@Override

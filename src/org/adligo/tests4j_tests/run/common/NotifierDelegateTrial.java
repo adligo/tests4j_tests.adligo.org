@@ -9,8 +9,8 @@ import org.adligo.tests4j.system.shared.trials.Test;
 import org.adligo.tests4j_tests.base_trials.I_CountType;
 import org.adligo.tests4j_tests.base_trials.SourceFileCountingTrial;
 import org.adligo.tests4j_tests.references_groups.Tests4J_RunCommon_ReferenceGroup;
-import org.adligo.tests4j_tests.run.common.mocks.MockThread;
-import org.adligo.tests4j_tests.run.common.mocks.MockThreadFactory;
+import org.adligo.tests4j_tests.run.common.mocks.ThreadMock;
+import org.adligo.tests4j_tests.run.common.mocks.ThreadFactoryMock;
 
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.ExecutorService;
@@ -35,8 +35,8 @@ public class NotifierDelegateTrial extends SourceFileCountingTrial {
   private static final ArrayBlockingQueue<Integer> COMPLETED_NOTIFYS = new ArrayBlockingQueue<Integer>(10);
 
   private static final ExecutorService SERVICE = Executors.newFixedThreadPool(
-      2, new MockThreadFactory());
-  private volatile MockThread notificationThread_;
+      2, new ThreadFactoryMock());
+  private volatile ThreadMock notificationThread_;
   
   @Test 
   public void testNullDelegate() throws Exception {
@@ -89,7 +89,7 @@ public class NotifierDelegateTrial extends SourceFileCountingTrial {
       
       @Override
       public void run() {
-        notificationThread_ = (MockThread) Thread.currentThread();
+        notificationThread_ = (ThreadMock) Thread.currentThread();
         try {
           Integer step = WAITS.take();
           while (step != null) {
