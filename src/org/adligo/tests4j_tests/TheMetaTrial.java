@@ -117,6 +117,9 @@ public class TheMetaTrial  extends AbstractTrial implements I_MetaTrial {
 				100.0, 73.0);
 		assertCoverageMatrix("org.adligo.tests4j.run.common",
         100.0, 100.0);
+		
+		assertCoverageMatrix("org.adligo.tests4j_4jacoco.plugin.data.multi",
+        22.0, 57.0);
 	}
 
 	private void assertCoverageMatrix(String pkgName, double minPctSourceTrials, double minPctCoverage) {
