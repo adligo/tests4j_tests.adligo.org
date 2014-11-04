@@ -3,6 +3,10 @@ package org.adligo.tests4j_tests.references_groups;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.adligo.tests4j.models.shared.reference_groups.jse.JSE_Lang;
+import org.adligo.tests4j.models.shared.reference_groups.jse.JSE_LangAnnot;
+import org.adligo.tests4j.models.shared.reference_groups.jse.JSE_Math;
+import org.adligo.tests4j.models.shared.reference_groups.jse.JSE_Util;
 import org.adligo.tests4j.shared.i18n.I_Tests4J_AnnotationMessages;
 import org.adligo.tests4j.shared.i18n.I_Tests4J_AssertionInputMessages;
 import org.adligo.tests4j.shared.i18n.I_Tests4J_Constants;
@@ -24,6 +28,12 @@ public class Tests4J_I18N_ReferenceGroup extends Tests4J_ReferenceGroup {
 	private Tests4J_I18N_ReferenceGroup() {
 		Set<String> names = new HashSet<String>();
 		
+		names.addAll(JSE_Lang.CLASS_NAMES);
+    names.addAll(JSE_Util.CLASS_NAMES);
+    names.addAll(JSE_Math.CLASS_NAMES);
+    names.addAll(JSE_LangAnnot.CLASS_NAMES);
+    //DO NOT ALLOW SQL or Logging!
+    
 		add(names, I_Tests4J_AnnotationMessages.class);
 		add(names, I_Tests4J_AssertionInputMessages.class);
 		add(names, I_Tests4J_Constants.class);

@@ -1,8 +1,5 @@
 package org.adligo.tests4j_tests.references_groups;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import org.adligo.tests4j.models.shared.results.ApiTrialResult;
 import org.adligo.tests4j.models.shared.results.ApiTrialResultMutant;
 import org.adligo.tests4j.models.shared.results.BaseTrialResult;
@@ -28,7 +25,10 @@ import org.adligo.tests4j.models.shared.results.TrialRunResultMutant;
 import org.adligo.tests4j.models.shared.results.UseCaseTrialResult;
 import org.adligo.tests4j.models.shared.results.UseCaseTrialResultMutant;
 
-public class Tests4J_Results_ReferenceGroup extends Tests4J_ReferenceGroupGwt {
+import java.util.HashSet;
+import java.util.Set;
+
+public class Tests4J_Results_ReferenceGroup extends Tests4J_ReferenceGroup {
 	public static final Tests4J_Results_ReferenceGroup INSTANCE = new Tests4J_Results_ReferenceGroup();
 	
 	private Tests4J_Results_ReferenceGroup() {

@@ -1,5 +1,6 @@
 package org.adligo.tests4j_tests.references_groups;
 
+import org.adligo.tests4j.shared.common.ArrayUtils;
 import org.adligo.tests4j.shared.common.CacheControl;
 import org.adligo.tests4j.shared.common.ClassMethods;
 import org.adligo.tests4j.shared.common.DefaultSystem;
@@ -35,6 +36,7 @@ public class Tests4J_Common_ReferenceGroup extends Tests4J_ReferenceGroup {
 	private Tests4J_Common_ReferenceGroup() {
 		Set<String> names = new HashSet<String>();
 		
+		add(names, ArrayUtils.class);
 		add(names, CacheControl.class);
 		add(names, ClassMethods.class);
 		

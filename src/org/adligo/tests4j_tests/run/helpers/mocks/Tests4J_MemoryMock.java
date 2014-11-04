@@ -1,14 +1,14 @@
 package org.adligo.tests4j_tests.run.helpers.mocks;
 
 import org.adligo.tests4j.models.shared.results.I_TrialResult;
-import org.adligo.tests4j.run.common.I_Tests4J_Memory;
+import org.adligo.tests4j.run.common.I_Memory;
 import org.adligo.tests4j.shared.asserts.reference.I_ReferenceGroup;
 import org.adligo.tests4j.shared.asserts.uniform.I_EvaluatorLookup;
 import org.adligo.tests4j.shared.output.I_Tests4J_Log;
 import org.adligo.tests4j.system.shared.api.I_Tests4J_CoveragePlugin;
 import org.adligo.tests4j_tests.system.shared.mocks.Tests4J_LogMock;
 
-public class Tests4J_MemoryMock implements I_Tests4J_Memory {
+public class Tests4J_MemoryMock implements I_Memory {
 	Tests4J_LogMock log = new Tests4J_LogMock();
 	
 	@Override

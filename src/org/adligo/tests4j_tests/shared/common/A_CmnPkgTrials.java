@@ -36,6 +36,7 @@ public class A_CmnPkgTrials extends SimplePackageTrials
 	}
 
 	public void addTrials() throws Exception {
+	  add(ArrayUtilsTrial.class);
 		add(CacheControlTrial.class);
 		add(ClassMethodsTrial.class);
 		add(DefaultSystemTrial.class);

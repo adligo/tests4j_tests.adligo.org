@@ -1,8 +1,5 @@
 package org.adligo.tests4j_tests.references_groups;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import org.adligo.tests4j.shared.output.ByteListOutputStream;
 import org.adligo.tests4j.shared.output.DefaultLog;
 import org.adligo.tests4j.shared.output.DelegatingLog;
@@ -14,12 +11,15 @@ import org.adligo.tests4j.shared.output.ListDelegateOutputBuffer;
 import org.adligo.tests4j.shared.output.PrintStreamOutputBuffer;
 import org.adligo.tests4j.shared.output.SafeOutputStreamBuffer;
 
+import java.util.HashSet;
+import java.util.Set;
+
 /**
  * @diagram_sync with PackageDependencies.class on 10/1/1014
  * @author scott
  *
  */
-public class Tests4J_Output_ReferenceGroup extends Tests4J_ReferenceGroupGwt {
+public class Tests4J_Output_ReferenceGroup extends Tests4J_ReferenceGroup {
 	public static final Tests4J_Output_ReferenceGroup INSTANCE = new Tests4J_Output_ReferenceGroup();
 	
 	private Tests4J_Output_ReferenceGroup() {

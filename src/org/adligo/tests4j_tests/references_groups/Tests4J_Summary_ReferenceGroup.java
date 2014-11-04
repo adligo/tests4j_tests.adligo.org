@@ -28,10 +28,10 @@ import org.adligo.tests4j.system.shared.report.summary.TrialsProgressDisplay;
  * @author scott
  *
  */
-public class Tests4J_SystemSummary_ReferenceGroup extends Tests4J_ReferenceGroup {
-	public static final Tests4J_SystemSummary_ReferenceGroup INSTANCE = new Tests4J_SystemSummary_ReferenceGroup();
+public class Tests4J_Summary_ReferenceGroup extends Tests4J_ReferenceGroup {
+	public static final Tests4J_Summary_ReferenceGroup INSTANCE = new Tests4J_Summary_ReferenceGroup();
 	
-	private Tests4J_SystemSummary_ReferenceGroup() {
+	private Tests4J_Summary_ReferenceGroup() {
 		Set<String> names = new HashSet<String>();
 		
 		add(names, AbstractProcessDisplay.class);

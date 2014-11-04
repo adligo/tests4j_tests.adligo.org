@@ -21,10 +21,10 @@ import org.adligo.tests4j.system.shared.trials.SourceFileScope;
 import org.adligo.tests4j.system.shared.trials.Test;
 import org.adligo.tests4j_tests.base_trials.I_CountType;
 import org.adligo.tests4j_tests.base_trials.SourceFileCountingTrial;
-import org.adligo.tests4j_tests.references_groups.Tests4J_SystemSummary_GwtReferenceGroup;
+import org.adligo.tests4j_tests.references_groups.Tests4J_Summary_GwtReferenceGroup;
 
 @SourceFileScope (sourceClass=LineDiffTextDisplay.class, minCoverage=90.0)
-@AllowedReferences (groups=Tests4J_SystemSummary_GwtReferenceGroup.class)
+@AllowedReferences (groups=Tests4J_Summary_GwtReferenceGroup.class)
 public class LineDiffTextDisplayTrial extends SourceFileCountingTrial implements  I_Tests4J_Log {
 	private List<String> output = new ArrayList<String>();
 	private LineDiffTextDisplay dislay = new LineDiffTextDisplay();
