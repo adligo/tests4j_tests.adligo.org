@@ -1,19 +1,23 @@
-package org.adligo.tests4j_tests.jacoco.plugin.data.common;
+package org.adligo.tests4j_tests.models.shared.coverage;
 
+import org.adligo.tests4j.models.shared.coverage.Probes;
+import org.adligo.tests4j.models.shared.coverage.ProbesMutant;
 import org.adligo.tests4j.shared.asserts.common.ExpectedThrownData;
 import org.adligo.tests4j.shared.asserts.common.I_Thrower;
+import org.adligo.tests4j.shared.asserts.reference.AllowedReferences;
 import org.adligo.tests4j.system.shared.trials.SourceFileScope;
 import org.adligo.tests4j.system.shared.trials.Test;
-import org.adligo.tests4j_4jacoco.plugin.data.common.Probes;
-import org.adligo.tests4j_4jacoco.plugin.data.common.ProbesMutant;
 import org.adligo.tests4j_tests.base_trials.I_CountType;
 import org.adligo.tests4j_tests.base_trials.SourceFileCountingTrial;
+import org.adligo.tests4j_tests.references_groups.Tests4J_Coverage_GwtReferenceGroup;
 
-@SourceFileScope (sourceClass=ProbesMutant.class, minCoverage=95.0)
+@SourceFileScope (sourceClass=ProbesMutant.class, minCoverage=87.0)
+@AllowedReferences (groups=Tests4J_Coverage_GwtReferenceGroup.class)
 public class ProbesMutantTrial extends SourceFileCountingTrial {
 
 	
-	@Test
+	@SuppressWarnings("boxing")
+  @Test
 	public void testCopyConstructor() throws Exception {
 		ProbesMutant probes = new ProbesMutant();
 		assertEquals(0, probes.size());
@@ -31,6 +35,8 @@ public class ProbesMutantTrial extends SourceFileCountingTrial {
 		assertFalse(probes.get(2));
 		assertFalse(probes.get(3));
 		assertTrue(probes.get(4));
+		assertEquals(5, probes.getCoverageUnits());
+		assertEquals(3, probes.getCoveredCoverageUnits());
 		
 		assertEquals(5, probes.size());
 		//assert no data linkage
@@ -61,6 +67,36 @@ public class ProbesMutantTrial extends SourceFileCountingTrial {
 		assertTrue(array[4]);
 	}
 
+	@SuppressWarnings("boxing")
+  @Test
+  public void testEqualsHashCodeToString() throws Exception {
+	  ProbesMutant pm = new ProbesMutant(new boolean[] {true});
+	  ProbesMutant pm1 = new ProbesMutant(new boolean[] {true});
+	  ProbesMutant pmb = new ProbesMutant(new boolean[] {false});
+	  
+	  
+	  assertEquals(pm, pm1);
+	  assertEquals(pm.hashCode(), pm1.hashCode());
+	  assertEquals("ProbesMutant [t]", pm.toString());
+	  
+	  assertNotEquals(pm, pmb);
+    assertNotEquals(pm.hashCode(), pmb.hashCode());
+    
+    ProbesMutant pmc = new ProbesMutant(new boolean[] {false,true, true});
+    ProbesMutant pmd = new ProbesMutant(new boolean[] {false, true, true});
+    ProbesMutant pme = new ProbesMutant(new boolean[] {false, true, false});
+    
+    assertEquals(pmc, pmd);
+    assertEquals(pmc.hashCode(), pmd.hashCode());
+    assertEquals("ProbesMutant [ftt]", pmc.toString());
+    
+    assertNotEquals(pmc, pme);
+    assertNotEquals(pmc.hashCode(), pme.hashCode());
+    
+    assertEquals("ProbesMutant [ftf,fft]", new ProbesMutant(new boolean[] {false, true, false,
+        false, false, true}).toString());
+    
+	}
 	
 	@Test
 	public void testConstructorExceptions() throws Exception {
@@ -75,17 +111,17 @@ public class ProbesMutantTrial extends SourceFileCountingTrial {
 	}
 	@Override
 	public int getTests(I_CountType type) {
-		return super.getTests(type, 2);
+		return super.getTests(type, 3, true);
 	}
 	
 	
 	@Override
 	public int getAsserts(I_CountType type) {
-		int thisAsserts = 25;
+		int thisAsserts = 38;
 		//code coverage and circular dependencies +
 		//custom afterTrialTests
 		//+ see above
-		int thisAfterAsserts = 2;
+		int thisAfterAsserts = 3;
 		if (type.isFromMetaWithCoverage()) {
 			return super.getAsserts(type, thisAsserts + thisAfterAsserts);
 		} else {
@@ -95,11 +131,11 @@ public class ProbesMutantTrial extends SourceFileCountingTrial {
 
 	@Override
 	public int getUniqueAsserts(I_CountType type) {
-		int thisUniqueAsserts = 5;
+		int thisUniqueAsserts = 13;
 		//code coverage and circular dependencies +
 		//custom afterTrialTests
 		//+ see above
-		int thisAfterUniqueAsserts = 2;
+		int thisAfterUniqueAsserts = 3;
 		if (type.isFromMetaWithCoverage()) {
 			//code coverage and circular dependencies +
 			//custom afterTrialTests

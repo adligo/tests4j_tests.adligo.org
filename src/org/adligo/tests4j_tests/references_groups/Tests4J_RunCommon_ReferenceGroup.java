@@ -1,11 +1,13 @@
 package org.adligo.tests4j_tests.references_groups;
 
-import org.adligo.tests4j.run.common.I_Notifier;
 import org.adligo.tests4j.run.common.I_Memory;
+import org.adligo.tests4j.run.common.I_Notifier;
 import org.adligo.tests4j.run.common.I_RemoteRunner;
 import org.adligo.tests4j.run.common.I_RemoteRunnerFactory;
 import org.adligo.tests4j.run.common.I_ThreadManager;
+import org.adligo.tests4j.run.common.I_Threads;
 import org.adligo.tests4j.run.common.NotifierDelegate;
+import org.adligo.tests4j.run.common.ThreadsDelegate;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -26,7 +28,9 @@ public class Tests4J_RunCommon_ReferenceGroup extends Tests4J_ReferenceGroup {
 		add(names, I_RemoteRunner.class);
 		add(names, I_RemoteRunnerFactory.class);
 		add(names, I_ThreadManager.class);
+		add(names, I_Threads.class);
 		add(names, NotifierDelegate.class);
+		add(names, ThreadsDelegate.class);
 		
 		names.addAll(Tests4J_Summary_ReferenceGroup.INSTANCE.getClassNames());
 		

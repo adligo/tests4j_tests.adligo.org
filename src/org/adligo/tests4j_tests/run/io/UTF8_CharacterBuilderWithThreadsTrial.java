@@ -1,18 +1,11 @@
 package org.adligo.tests4j_tests.run.io;
 
-import java.util.concurrent.ArrayBlockingQueue;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ThreadFactory;
-import java.util.concurrent.atomic.AtomicInteger;
-
 import org.adligo.tests4j.run.io.UTF8_CharacterBuilder;
 import org.adligo.tests4j.run.memory.Tests4J_ThreadFactory;
 import org.adligo.tests4j.system.shared.trials.AdditionalInstrumentation;
 import org.adligo.tests4j.system.shared.trials.AfterTrial;
 import org.adligo.tests4j.system.shared.trials.BeforeTrial;
 import org.adligo.tests4j.system.shared.trials.SourceFileScope;
-import org.adligo.tests4j.system.shared.trials.SubProgress;
 import org.adligo.tests4j.system.shared.trials.Test;
 import org.adligo.tests4j_tests.base_trials.I_CountType;
 import org.adligo.tests4j_tests.base_trials.SourceFileCountingTrial;
@@ -20,6 +13,12 @@ import org.adligo.tests4j_tests.run.io.helpers.I_UTF8_TestProgressMonitor;
 import org.adligo.tests4j_tests.run.io.helpers.StartCapture;
 import org.adligo.tests4j_tests.run.io.helpers.UTF8_CharacterBuilder_ChuckTester;
 import org.adligo.tests4j_tests.run.io.helpers.UTF8_Generator;
+
+import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ThreadFactory;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * This class tests the UTF8 charset

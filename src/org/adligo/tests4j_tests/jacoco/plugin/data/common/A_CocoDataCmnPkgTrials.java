@@ -7,6 +7,8 @@ import org.adligo.tests4j_4jacoco.plugin.CoveragePluginFactory;
 import org.adligo.tests4j_tests.base_trials.I_CountingPackageTrials;
 import org.adligo.tests4j_tests.base_trials.SimpleMetaTrial;
 import org.adligo.tests4j_tests.base_trials.SimplePackageTrials;
+import org.adligo.tests4j_tests.models.shared.coverage.ProbesMutantTrial;
+import org.adligo.tests4j_tests.models.shared.coverage.ProbesTrial;
 
 public class A_CocoDataCmnPkgTrials extends SimplePackageTrials 
 implements I_MetaTrialParams<A_CocoDataCmnPkgTrials>, I_CountingPackageTrials {
@@ -32,8 +34,7 @@ implements I_MetaTrialParams<A_CocoDataCmnPkgTrials>, I_CountingPackageTrials {
 	}
 
 	public void addTrials() throws Exception {
-		add(ProbesTrial.class);
-		add(ProbesMutantTrial.class);
+
 	}
 
 	@Override

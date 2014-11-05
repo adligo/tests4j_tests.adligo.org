@@ -1,4 +1,4 @@
-package org.adligo.tests4j_tests.run.common;
+package org.adligo.tests4j_tests.run.memory;
 
 import org.adligo.tests4j.run.api.Tests4J;
 import org.adligo.tests4j.system.shared.api.Tests4J_Params;
@@ -8,8 +8,8 @@ import org.adligo.tests4j_tests.base_trials.I_CountingPackageTrials;
 import org.adligo.tests4j_tests.base_trials.SimpleMetaTrial;
 import org.adligo.tests4j_tests.base_trials.SimplePackageTrials;
 
-public class A_RunCommonPkgTrials extends SimplePackageTrials 
-implements I_MetaTrialParams<A_RunCommonPkgTrials>, I_CountingPackageTrials {
+public class A_RunMemoryPkgTrials extends SimplePackageTrials 
+implements I_MetaTrialParams<A_RunMemoryPkgTrials>, I_CountingPackageTrials {
 	
 	public static void main(String [] args) {
 		try {
@@ -19,7 +19,7 @@ implements I_MetaTrialParams<A_RunCommonPkgTrials>, I_CountingPackageTrials {
 			
 
 			
-			A_RunCommonPkgTrials me = new A_RunCommonPkgTrials();
+			A_RunMemoryPkgTrials me = new A_RunMemoryPkgTrials();
 			me.setParams(params);
 			me.addTrials();
 			params.addTrials(me);
@@ -34,19 +34,11 @@ implements I_MetaTrialParams<A_RunCommonPkgTrials>, I_CountingPackageTrials {
 	}
 
 	public void addTrials()  throws Exception {
-	  add(I_NotifierTrial.class);
-	  add(I_MemoryTrial.class);
-	  add(I_RemoteRunnerTrial.class);
-	  add(I_RemoteRunnerFactoryTrial.class);
-	  add(I_ThreadManagerTrial.class);
-	  add(I_ThreadsTrial.class);
-	  
-	  add(NotifierDelegateTrial.class);
-	  add(ThreadsDelegateTrial.class);
+	  add(Tests4J_ThreadFactoryTrial.class);
 	}
 
 	@Override
-	public A_RunCommonPkgTrials getTrialParams() {
+	public A_RunMemoryPkgTrials getTrialParams() {
 		return this;
 	}
 

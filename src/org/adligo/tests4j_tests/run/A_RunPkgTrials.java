@@ -12,6 +12,7 @@ import org.adligo.tests4j_tests.run.common.A_RunCommonPkgTrials;
 import org.adligo.tests4j_tests.run.discovery.A_RunDiscPkgTrials;
 import org.adligo.tests4j_tests.run.helpers.A_RunHelpPkgTrials;
 import org.adligo.tests4j_tests.run.io.A_RemoIoPkgTrials;
+import org.adligo.tests4j_tests.run.memory.A_RunMemoryPkgTrials;
 import org.adligo.tests4j_tests.run.remote.socket_api.A_SocApiPkgTrials;
 
 public class A_RunPkgTrials extends SimplePackageTrials 
@@ -22,6 +23,7 @@ implements I_MetaTrialParams<A_RunPkgTrials>, I_CountingPackageTrials {
 	private static A_SocApiPkgTrials soc = new A_SocApiPkgTrials();
 	private static A_RunApiPkgTrials api = new A_RunApiPkgTrials();
 	private static A_RunCommonPkgTrials common = new A_RunCommonPkgTrials();
+	private static A_RunMemoryPkgTrials memory = new A_RunMemoryPkgTrials();
 	
 	public static void main(String [] args) {
 		try {
@@ -64,6 +66,9 @@ implements I_MetaTrialParams<A_RunPkgTrials>, I_CountingPackageTrials {
 		
 		api.addTrials();
 		add(api.getCountingTrials());
+		
+		memory.addTrials();
+		add(memory.getCountingTrials());
 	}
 
 	@Override
@@ -80,5 +85,6 @@ implements I_MetaTrialParams<A_RunPkgTrials>, I_CountingPackageTrials {
 		soc.setParams(params);
 		api.setParams(params);
 		common.setParams(params);
+		memory.setParams(params);
 	}
 }

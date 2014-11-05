@@ -10,6 +10,8 @@
         <pns:stage name="test" />
         <pns:stage name="publish" />
     </pns:stages>
+    
+    
     <lns:dependencies>
         <lns:library>jacoco</lns:library>
         <lns:library>mockito</lns:library>

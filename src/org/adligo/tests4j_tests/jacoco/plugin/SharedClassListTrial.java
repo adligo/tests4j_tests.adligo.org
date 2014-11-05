@@ -15,7 +15,7 @@ import org.adligo.tests4j_tests.base_trials.SourceFileCountingTrial;
 @SourceFileScope (sourceClass=SharedClassList.class, minCoverage=0.0)
 public class SharedClassListTrial extends SourceFileCountingTrial {
 
-	private static final int CLASSES_IN_WHITELIST = 169;
+	private static final int CLASSES_IN_WHITELIST = 170;
 
 	@Test 
 	public void testSharedClassesOnlyInTests4J_ApprovedPackages() {
