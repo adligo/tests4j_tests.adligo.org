@@ -1,18 +1,19 @@
-package org.adligo.tests4j_tests.jacoco.plugin.data.multi;
+package org.adligo.tests4j_tests.run.common;
 
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
+import org.adligo.tests4j.run.common.ConcurrentQualifiedMap;
 import org.adligo.tests4j.run.common.I_Notifier;
 import org.adligo.tests4j.run.common.NotifierDelegate;
 import org.adligo.tests4j.shared.asserts.common.ExpectedThrownData;
 import org.adligo.tests4j.shared.asserts.common.I_Thrower;
-import org.adligo.tests4j.system.shared.trials.IgnoreTest;
+import org.adligo.tests4j.shared.asserts.reference.AllowedReferences;
 import org.adligo.tests4j.system.shared.trials.SourceFileScope;
 import org.adligo.tests4j.system.shared.trials.Test;
-import org.adligo.tests4j_4jacoco.plugin.data.multi.ConcurrentQualifiedMap;
 import org.adligo.tests4j_tests.base_trials.I_CountType;
 import org.adligo.tests4j_tests.base_trials.SourceFileCountingTrial;
+import org.adligo.tests4j_tests.references_groups.Tests4J_RunCommon_ReferenceGroup;
 import org.adligo.tests4j_tests.run.common.mocks.InterruptedThreadExceptionMock;
 import org.adligo.tests4j_tests.run.common.mocks.NotifierMock;
 
@@ -28,6 +29,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
 @SourceFileScope (sourceClass=ConcurrentQualifiedMap.class, minCoverage=77.0)
+@AllowedReferences (groups=Tests4J_RunCommon_ReferenceGroup.class)
 public class ConcurrentQualifiedMapTrial extends SourceFileCountingTrial {
   
   @Test
@@ -94,6 +96,7 @@ public class ConcurrentQualifiedMapTrial extends SourceFileCountingTrial {
   public void testSpecialWaitNotifyMethods() {
     NotifierMock nMock = new NotifierMock();
     
+    @SuppressWarnings("unchecked")
     ConcurrentMap<Integer,String> mapMock_ = mock(ConcurrentMap.class);
     ConcurrentQualifiedMap<Integer,String> map = 
         new ConcurrentQualifiedMap<Integer,String>(
@@ -115,6 +118,7 @@ public class ConcurrentQualifiedMapTrial extends SourceFileCountingTrial {
     NotifierMock nMock = new NotifierMock(null,
         Collections.singletonMap("waitDelegate(26)", exeptions));
     
+    @SuppressWarnings("unchecked")
     ConcurrentMap<Integer,String> mapMock_ = mock(ConcurrentMap.class);
     ConcurrentQualifiedMap<Integer,String> map = 
         new ConcurrentQualifiedMap<Integer,String>(
@@ -144,6 +148,7 @@ public class ConcurrentQualifiedMapTrial extends SourceFileCountingTrial {
     NotifierMock nMock = new NotifierMock(null,
         Collections.singletonMap("waitDelegate(25)", exeptions));
     
+    @SuppressWarnings("unchecked")
     ConcurrentMap<Integer,String> mapMock_ = mock(ConcurrentMap.class);
     ConcurrentQualifiedMap<Integer,String> map = 
         new ConcurrentQualifiedMap<Integer,String>(
@@ -168,7 +173,7 @@ public class ConcurrentQualifiedMapTrial extends SourceFileCountingTrial {
   
   @Override
   public int getTests(I_CountType type) {
-    return super.getTests(type, 5);
+    return super.getTests(type, 5, true);
   }
 
   @Override
@@ -177,7 +182,7 @@ public class ConcurrentQualifiedMapTrial extends SourceFileCountingTrial {
     //code coverage and circular dependencies +
     //custom afterTrialTests
     //+ see above
-    int thisAfterAsserts = 2;
+    int thisAfterAsserts = 3;
     if (type.isFromMetaWithCoverage()) {
       return super.getAsserts(type, thisAsserts + thisAfterAsserts);
     } else {
@@ -191,7 +196,7 @@ public class ConcurrentQualifiedMapTrial extends SourceFileCountingTrial {
     //code coverage and circular dependencies +
     //custom afterTrialTests
     //+ see above
-    int thisAfterUniqueAsserts = 2;
+    int thisAfterUniqueAsserts = 3;
     if (type.isFromMetaWithCoverage()) {
       //code coverage and circular dependencies +
       //custom afterTrialTests

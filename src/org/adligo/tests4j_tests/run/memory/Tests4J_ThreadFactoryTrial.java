@@ -13,6 +13,8 @@ import org.adligo.tests4j_tests.base_trials.I_CountType;
 import org.adligo.tests4j_tests.base_trials.SourceFileCountingTrial;
 import org.adligo.tests4j_tests.run.common.mocks.ThreadsMock;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -24,7 +26,7 @@ import java.util.List;
  * TODO look at minCoverage I think it should be 100%
  * 
  */
-@SourceFileScope (sourceClass=Tests4J_ThreadFactory.class, minCoverage=93.0)
+@SourceFileScope (sourceClass=Tests4J_ThreadFactory.class, minCoverage=89.0)
 public class Tests4J_ThreadFactoryTrial extends SourceFileCountingTrial {
   
   @SuppressWarnings("unused")
@@ -93,7 +95,7 @@ public class Tests4J_ThreadFactoryTrial extends SourceFileCountingTrial {
     
     ThreadGroup tg = new ThreadGroup("mock-main-thread-group");
     Thread t = new Thread(tg, mock(Runnable.class),"mock-main");
-    ThreadsMock tm = new ThreadsMock(t);
+    ThreadsMock tm = new ThreadsMock(Collections.singletonList(t));
     factory = new Tests4J_ThreadFactory(new DefaultLog(), tm);
     assertSame(tg,factory.getInstanceCreationThreadGroup());
     
@@ -138,25 +140,35 @@ public class Tests4J_ThreadFactoryTrial extends SourceFileCountingTrial {
         factory.getInstanceCreationThreadGroup());
     
     ThreadGroup tg = new ThreadGroup("mock-main-thread-group");
-    Thread t = new Thread(tg, mock(Runnable.class),"mock-main");
-    ThreadsMock tm = new ThreadsMock(t);
+    List<Thread> mockThreads = new ArrayList<Thread>();
+    for (int i = 0; i < 4; i++) {
+      mockThreads.add(new Thread(tg, mock(Runnable.class),"mock-main"));
+    }
+    
+    ThreadsMock tm = new ThreadsMock(mockThreads);
+    //1
     factory = new Tests4J_ThreadFactory(new DefaultLog(), tm);
     
     Runnable r = mock(Runnable.class);
     
+    //2
     Thread top = factory.newThread(r);
     ThreadGroup topGroup = top.getThreadGroup();
     assertSame(tg, topGroup.getParent());
-    Tests4J_ThreadFactory childFactory = new Tests4J_ThreadFactory(factory, name);
+    //3
+    Tests4J_ThreadFactory childFactory = new Tests4J_ThreadFactory(factory, name, tm);
     
-    
+    //4
     Thread created = childFactory.newThread(r);
     assertEquals("tests4j-" + name + "-1", created.getName());
     //no good way to check the runnable so skipping it
     ThreadGroup createdGroup = created.getThreadGroup();
     assertSame(topGroup, createdGroup.getParent());
-    assertEquals("tests4j-" + name + "-group", createdGroup.getName());
-    
+    if (Tests4J_ThreadFactory.TRIAL_THREAD_NAME.equals(name)) {
+      assertEquals("tests4j-" + name + "-1-group", createdGroup.getName());
+    } else {
+      assertEquals("tests4j-" + name + "-group", createdGroup.getName());
+    }
     List<Thread> threads = childFactory.getThreads();
     assertContains(threads, created);
     assertEquals(1, threads.size());
@@ -166,7 +178,11 @@ public class Tests4J_ThreadFactoryTrial extends SourceFileCountingTrial {
     //no good way to check the runnable so skipping it
     ThreadGroup createdGroup2 = created2.getThreadGroup();
     assertSame(topGroup, createdGroup2.getParent());
-    assertEquals("tests4j-" + name + "-group", createdGroup2.getName());
+    if (Tests4J_ThreadFactory.TRIAL_THREAD_NAME.equals(name)) {
+      assertEquals("tests4j-" + name + "-1-group", createdGroup.getName());
+    } else {
+      assertEquals("tests4j-" + name + "-group", createdGroup.getName());
+    }
     
     List<Thread> threads2 = childFactory.getThreads();
     assertContains(threads2, created);
@@ -190,45 +206,65 @@ public class Tests4J_ThreadFactoryTrial extends SourceFileCountingTrial {
     assertSame(Thread.currentThread().getThreadGroup(),
         factory.getInstanceCreationThreadGroup());
     
-    ThreadGroup tg = new ThreadGroup("mock-main-thread-group");
-    Thread t = new Thread(tg, mock(Runnable.class),"mock-main");
-    ThreadsMock tm = new ThreadsMock(t);
+    List<Thread> threadMocks = new ArrayList<Thread>();
+    
+    ThreadGroup tg = new ThreadGroup("main-mock-group");
+    Thread t = new Thread(tg, mock(Runnable.class),"main-mock");
+    threadMocks.add(t);
+    
+    t = new Thread(tg, mock(Runnable.class),"main-mock");
+    threadMocks.add(t);
+    
+    tg = new ThreadGroup("tests4j-main-mock-group");
+    threadMocks.add(new Thread(tg, mock(Runnable.class),"tests4j-main-mock"));
+    threadMocks.add(new Thread(tg, mock(Runnable.class),"tests4j-main-mock"));
+    
+    tg = new ThreadGroup("tests4j-trial-1-mock-group");
+    threadMocks.add(new Thread(tg, mock(Runnable.class),"tests4j-trial-1"));
+    threadMocks.add(new Thread(tg, mock(Runnable.class),"tests4j-trial-1"));
+    threadMocks.add(new Thread(tg, mock(Runnable.class),"tests4j-trial-1"));
+
+    
+    ThreadsMock tm = new ThreadsMock(threadMocks);
+    //call 1
     factory = new Tests4J_ThreadFactory(new DefaultLog(), tm);
     
     Runnable r = mock(Runnable.class);
-    
-    Thread top = factory.newThread(r);
-    ThreadGroup topGroup = top.getThreadGroup();
+    //call 2
+    factory.newThread(r);
+    //call 3
     Tests4J_ThreadFactory childFactory = new Tests4J_ThreadFactory(
-        factory, Tests4J_ThreadFactory.TRIAL_THREAD_NAME);
-    
+        factory, Tests4J_ThreadFactory.TRIAL_THREAD_NAME,tm);
+    //call 4
     Thread second = childFactory.newThread(r);
     ThreadGroup secondGroup = second.getThreadGroup();
     
-    Tests4J_ThreadFactory grandFactory = new Tests4J_ThreadFactory(childFactory, name);
+    //5
+    Tests4J_ThreadFactory grandFactory = new Tests4J_ThreadFactory(childFactory, name,tm);
     Thread third = grandFactory.newThread(r);
     
     String baseGroup = "tests4j-" + Tests4J_ThreadFactory.TRIAL_THREAD_NAME ;
-    String base = baseGroup +  "-" + name;
-   
-    assertEquals(base + "-1", third.getName());
+    
+    assertEquals("tests4j-trial-1-" + name + "-1" , third.getName());
     //no good way to check the runnable so skipping it
+    //6
     ThreadGroup createdGroup = third.getThreadGroup();
     //these should both be the trial thread group
     assertSame(secondGroup, createdGroup);
-    assertEquals(baseGroup + "-group", createdGroup.getName());
+    assertEquals(baseGroup + "-1-group", createdGroup.getName());
     
     List<Thread> threads = grandFactory.getThreads();
     assertContains(threads, third);
     assertEquals(1, threads.size());
     
+    //7
     Thread created2 = grandFactory.newThread(r);
-    assertEquals(base + "-2", created2.getName());
+    assertEquals("tests4j-trial-1-" + name + "-2", created2.getName());
     //no good way to check the runnable so skipping it
     ThreadGroup createdGroup2 = created2.getThreadGroup();
     //these should both be the trial thread group
     assertSame(secondGroup, createdGroup2);
-    assertEquals(baseGroup + "-group", createdGroup2.getName());
+    assertEquals(baseGroup + "-1-group", createdGroup2.getName());
     
     List<Thread> threads2 = grandFactory.getThreads();
     assertContains(threads2, third);

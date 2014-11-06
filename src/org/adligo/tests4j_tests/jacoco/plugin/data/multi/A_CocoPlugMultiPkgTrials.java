@@ -9,6 +9,8 @@ import org.adligo.tests4j_4jacoco.plugin.instrumentation.TrialInstrumenter;
 import org.adligo.tests4j_tests.base_trials.I_CountingPackageTrials;
 import org.adligo.tests4j_tests.base_trials.SimpleMetaTrial;
 import org.adligo.tests4j_tests.base_trials.SimplePackageTrials;
+import org.adligo.tests4j_tests.run.common.ConcurrentQualifiedMapTrial;
+import org.adligo.tests4j_tests.run.common.HolderTrial;
 
 @SourceFileScope (sourceClass=TrialInstrumenter.class, minCoverage=1.0)
 public class A_CocoPlugMultiPkgTrials extends SimplePackageTrials 
@@ -35,8 +37,7 @@ implements I_MetaTrialParams<A_CocoPlugMultiPkgTrials>, I_CountingPackageTrials 
 	}
 
 	public void addTrials() throws Exception {
-		add(HolderTrial.class);
-		add(ConcurrentQualifiedMapTrial.class);
+
 	}
 
 	@Override

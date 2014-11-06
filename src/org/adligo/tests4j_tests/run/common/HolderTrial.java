@@ -1,15 +1,18 @@
-package org.adligo.tests4j_tests.jacoco.plugin.data.multi;
+package org.adligo.tests4j_tests.run.common;
 
+import org.adligo.tests4j.run.common.Holder;
+import org.adligo.tests4j.shared.asserts.reference.AllowedReferences;
 import org.adligo.tests4j.system.shared.trials.SourceFileScope;
 import org.adligo.tests4j.system.shared.trials.Test;
-import org.adligo.tests4j_4jacoco.plugin.data.multi.Holder;
 import org.adligo.tests4j_tests.base_trials.I_CountType;
 import org.adligo.tests4j_tests.base_trials.SourceFileCountingTrial;
+import org.adligo.tests4j_tests.references_groups.Tests4J_RunCommon_ReferenceGroup;
 
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 
 @SourceFileScope (sourceClass=Holder.class, minCoverage=100.0)
+@AllowedReferences (groups=Tests4J_RunCommon_ReferenceGroup.class)
 public class HolderTrial extends SourceFileCountingTrial {
 
   @Test
@@ -33,7 +36,7 @@ public class HolderTrial extends SourceFileCountingTrial {
 
   @Override
   public int getTests(I_CountType type) {
-    return super.getTests(type, 1);
+    return super.getTests(type, 1, true);
   }
 
   @Override
@@ -42,7 +45,7 @@ public class HolderTrial extends SourceFileCountingTrial {
     //code coverage and circular dependencies +
     //custom afterTrialTests
     //+ see above
-    int thisAfterAsserts = 2;
+    int thisAfterAsserts = 3;
     if (type.isFromMetaWithCoverage()) {
       return super.getAsserts(type, thisAsserts + thisAfterAsserts);
     } else {
@@ -56,7 +59,7 @@ public class HolderTrial extends SourceFileCountingTrial {
     //code coverage and circular dependencies +
     //custom afterTrialTests
     //+ see above
-    int thisAfterUniqueAsserts = 2;
+    int thisAfterUniqueAsserts = 3;
     if (type.isFromMetaWithCoverage()) {
       //code coverage and circular dependencies +
       //custom afterTrialTests

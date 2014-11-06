@@ -1,5 +1,6 @@
 package org.adligo.tests4j_tests.run.common;
 
+import org.adligo.tests4j.run.common.ThreadGroupFilter;
 import org.adligo.tests4j.run.common.ThreadsDelegate;
 import org.adligo.tests4j.shared.asserts.reference.AllowedReferences;
 import org.adligo.tests4j.system.shared.trials.SourceFileScope;
@@ -9,12 +10,11 @@ import org.adligo.tests4j_tests.base_trials.SourceFileCountingTrial;
 import org.adligo.tests4j_tests.references_groups.Tests4J_RunCommon_ReferenceGroup;
 
 /**
- * @author scott
  * 
  */
-@SourceFileScope (sourceClass=ThreadsDelegate.class, minCoverage=100.0)
+@SourceFileScope (sourceClass=ThreadGroupFilter.class, minCoverage=100.0)
 @AllowedReferences (groups=Tests4J_RunCommon_ReferenceGroup.class)
-public class ThreadsDelegateTrial extends SourceFileCountingTrial {
+public class ThreadGroupFilterTrial extends SourceFileCountingTrial {
   
   @Test 
   public void testCurrentThread() throws Exception {

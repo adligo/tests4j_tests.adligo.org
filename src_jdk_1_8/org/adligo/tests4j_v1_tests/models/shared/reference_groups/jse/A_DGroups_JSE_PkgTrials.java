@@ -58,7 +58,7 @@ implements I_MetaTrialParams<A_DGroups_JSE_PkgTrials>, I_CountingPackageTrials {
 		add(JSE_MathTrial.class);
 		add(JSE_SqlTrial.class);
 		add(JSE_UtilTrial.class);
-		
+		add(JSE_UtilConcurrentTrial.class);
 	}
 
 	@Override

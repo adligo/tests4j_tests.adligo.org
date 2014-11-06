@@ -43,6 +43,8 @@ implements I_MetaTrialParams<A_RunCommonPkgTrials>, I_CountingPackageTrials {
 	  
 	  add(NotifierDelegateTrial.class);
 	  add(ThreadsDelegateTrial.class);
+	  add(HolderTrial.class);
+	  add(ConcurrentQualifiedMapTrial.class);
 	}
 
 	@Override

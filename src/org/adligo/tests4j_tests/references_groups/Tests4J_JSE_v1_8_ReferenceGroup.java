@@ -10,6 +10,7 @@ import org.adligo.tests4j.models.shared.reference_groups.jse.v1_8.I_JSE_1_8_Log;
 import org.adligo.tests4j.models.shared.reference_groups.jse.v1_8.I_JSE_1_8_Math;
 import org.adligo.tests4j.models.shared.reference_groups.jse.v1_8.I_JSE_1_8_Sql;
 import org.adligo.tests4j.models.shared.reference_groups.jse.v1_8.I_JSE_1_8_Util;
+import org.adligo.tests4j.models.shared.reference_groups.jse.v1_8.I_JSE_1_8_UtilConcurrent;
 
 public class Tests4J_JSE_v1_8_ReferenceGroup extends Tests4J_ReferenceGroup {
 	public static final Tests4J_JSE_v1_8_ReferenceGroup INSTANCE = new Tests4J_JSE_v1_8_ReferenceGroup();
@@ -26,6 +27,7 @@ public class Tests4J_JSE_v1_8_ReferenceGroup extends Tests4J_ReferenceGroup {
 		add(names, I_JSE_1_8_Math.class);
 		add(names, I_JSE_1_8_Sql.class);
 		add(names, I_JSE_1_8_Util.class);
+		add(names, I_JSE_1_8_UtilConcurrent.class);
 		
 		names.addAll(Tests4J_JSE_v1_7_ReferenceGroup.INSTANCE.getClassNames());
 		
