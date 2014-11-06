@@ -1,10 +1,10 @@
 package org.adligo.tests4j_tests.references_groups;
 
-import org.adligo.tests4j.models.shared.reference_groups.gwt.v2_6.GWT_2_6_Annot;
-import org.adligo.tests4j.models.shared.reference_groups.gwt.v2_6.GWT_2_6_IO;
-import org.adligo.tests4j.models.shared.reference_groups.gwt.v2_6.GWT_2_6_Lang;
-import org.adligo.tests4j.models.shared.reference_groups.gwt.v2_6.GWT_2_6_Math;
-import org.adligo.tests4j.models.shared.reference_groups.gwt.v2_6.GWT_2_6_Util;
+import org.adligo.gwt_refs.v2_6.GWT_2_6_Annot;
+import org.adligo.gwt_refs.v2_6.GWT_2_6_IO;
+import org.adligo.gwt_refs.v2_6.GWT_2_6_Lang;
+import org.adligo.gwt_refs.v2_6.GWT_2_6_Math;
+import org.adligo.gwt_refs.v2_6.GWT_2_6_Util;
 import org.adligo.tests4j.shared.asserts.reference.ReferenceGroup;
 import org.adligo.tests4j.shared.asserts.reference.ReferenceGroupBaseDelegate;
 import org.adligo.tests4j.shared.asserts.reference.ReferenceGroupMutant;

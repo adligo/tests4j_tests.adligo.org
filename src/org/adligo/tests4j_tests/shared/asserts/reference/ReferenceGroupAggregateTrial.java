@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-import org.adligo.tests4j.models.shared.reference_groups.gwt.GWT_ReferenceGroup;
+import org.adligo.gwt_refs.GWT_ReferenceGroup;
 import org.adligo.tests4j.models.shared.reference_groups.jse.JSE_IO;
 import org.adligo.tests4j.models.shared.reference_groups.jse.JSE_Lang;
 import org.adligo.tests4j.shared.asserts.reference.AllowedReferences;

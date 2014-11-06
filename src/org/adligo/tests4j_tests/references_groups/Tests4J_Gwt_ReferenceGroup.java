@@ -3,8 +3,8 @@ package org.adligo.tests4j_tests.references_groups;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.adligo.gwt_refs.GWT_ReferenceGroup;
 import org.adligo.tests4j.models.shared.association.I_PackageConstantLookup;
-import org.adligo.tests4j.models.shared.reference_groups.gwt.GWT_ReferenceGroup;
 import org.adligo.tests4j.run.helpers.GWT_Classes;
 
 public class Tests4J_Gwt_ReferenceGroup extends Tests4J_ReferenceGroup {

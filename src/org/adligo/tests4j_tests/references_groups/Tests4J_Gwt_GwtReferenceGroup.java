@@ -3,7 +3,7 @@ package org.adligo.tests4j_tests.references_groups;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.adligo.tests4j.models.shared.reference_groups.gwt.GWT_ReferenceGroup;
+import org.adligo.gwt_refs.GWT_ReferenceGroup;
 import org.adligo.tests4j.shared.asserts.reference.I_ReferenceGroup;
 import org.adligo.tests4j.shared.asserts.reference.ReferenceGroupAggregate;
 import org.adligo.tests4j.shared.asserts.reference.ReferenceGroupBaseDelegate;

@@ -13,8 +13,11 @@
     
     
     <lns:dependencies>
+        <lns:project>gwt_refs.adligo.org</lns:project>
+        
         <lns:library>jacoco</lns:library>
         <lns:library>mockito</lns:library>
+        
         <lns:project>tests4j.adligo.org</lns:project>
         <lns:project>tests4j_4jacoco.adligo.org</lns:project>
         
