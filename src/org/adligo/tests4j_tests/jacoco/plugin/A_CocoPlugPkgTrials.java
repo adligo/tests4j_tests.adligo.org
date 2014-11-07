@@ -6,9 +6,9 @@ import org.adligo.tests4j.system.shared.api.Tests4J_Params;
 import org.adligo.tests4j.system.shared.report.summary.TestDisplay;
 import org.adligo.tests4j.system.shared.report.summary.TrialDisplay;
 import org.adligo.tests4j.system.shared.trials.I_MetaTrialParams;
-import org.adligo.tests4j_4jacoco.plugin.CoveragePluginFactory;
 import org.adligo.tests4j_4jacoco.plugin.Recorder;
 import org.adligo.tests4j_4jacoco.plugin.data.coverage.LazyPackageCoverage;
+import org.adligo.tests4j_4jacoco.plugin.factories.MockitoPluginFactory;
 import org.adligo.tests4j_tests.base_trials.I_CountingPackageTrials;
 import org.adligo.tests4j_tests.base_trials.SimpleMetaTrial;
 import org.adligo.tests4j_tests.base_trials.SimplePackageTrials;
@@ -16,6 +16,8 @@ import org.adligo.tests4j_tests.jacoco.plugin.data.common.A_CocoDataCmnPkgTrials
 import org.adligo.tests4j_tests.jacoco.plugin.data.coverage.A_CocoCoveragePkgTrials;
 import org.adligo.tests4j_tests.jacoco.plugin.data.inst.A_CocoPlugInstPkgTrials;
 import org.adligo.tests4j_tests.jacoco.plugin.data.multi.A_CocoPlugMultiPkgTrials;
+import org.adligo.tests4j_tests.jacoco.plugin.factories.MockitoPluginFactoryTrial;
+import org.adligo.tests4j_tests.jacoco.plugin.whitelists.A_CocoPlugWhitelistsPkgTrials;
 
 public class A_CocoPlugPkgTrials extends SimplePackageTrials 
 implements I_MetaTrialParams<A_CocoPlugPkgTrials>, I_CountingPackageTrials {
@@ -23,11 +25,12 @@ implements I_MetaTrialParams<A_CocoPlugPkgTrials>, I_CountingPackageTrials {
 	private A_CocoPlugInstPkgTrials instr = new A_CocoPlugInstPkgTrials();
 	private A_CocoCoveragePkgTrials cover = new A_CocoCoveragePkgTrials();
 	private A_CocoPlugMultiPkgTrials multi = new A_CocoPlugMultiPkgTrials();
+	private A_CocoPlugWhitelistsPkgTrials whitelist = new A_CocoPlugWhitelistsPkgTrials();
 	
 	public static void main(String [] args) {
 		try {
 			Tests4J_Params params = new Tests4J_Params();
-			params.setCoveragePluginFactoryClass(CoveragePluginFactory.class);
+			params.setCoveragePluginFactoryClass(MockitoPluginFactory.class);
 			params.setMetaTrialClass(SimpleMetaTrial.class);
 			
 			A_CocoPlugPkgTrials me = new A_CocoPlugPkgTrials();
@@ -55,8 +58,7 @@ implements I_MetaTrialParams<A_CocoPlugPkgTrials>, I_CountingPackageTrials {
 
 	public void addTrials() throws Exception{
 		
-		add(CoveragePluginFactoryTrial.class);
-		add(SharedClassListTrial.class);
+		add(MockitoPluginFactoryTrial.class);
 		dataCommon.addTrials();
 		add(dataCommon.getCountingTrials());
 		cover.addTrials();
@@ -65,6 +67,9 @@ implements I_MetaTrialParams<A_CocoPlugPkgTrials>, I_CountingPackageTrials {
 		add(instr.getCountingTrials());
 		multi.addTrials();
 		add(multi.getCountingTrials());
+		
+		whitelist.addTrials();
+		add(whitelist.getCountingTrials());
 	}
 
 	@Override
@@ -80,5 +85,6 @@ implements I_MetaTrialParams<A_CocoPlugPkgTrials>, I_CountingPackageTrials {
 		cover.setParams(params);
 		instr.setParams(params);
 		multi.setParams(params);
+		whitelist.setParams(params);
 	}
 }

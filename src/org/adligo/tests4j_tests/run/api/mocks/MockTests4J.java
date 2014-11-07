@@ -1,8 +1,8 @@
 package org.adligo.tests4j_tests.run.api.mocks;
 
 import org.adligo.tests4j.run.api.Tests4J;
+import org.adligo.tests4j.run.common.I_JseSystem;
 import org.adligo.tests4j.shared.common.I_System;
-import org.adligo.tests4j.shared.output.I_Tests4J_Log;
 import org.adligo.tests4j.system.shared.api.I_Tests4J_Controls;
 import org.adligo.tests4j.system.shared.api.I_Tests4J_DelegateFactory;
 import org.adligo.tests4j.system.shared.api.I_Tests4J_Listener;
@@ -31,7 +31,7 @@ public class MockTests4J extends Tests4J {
 	}
 
 
-	public void setSystemDelegate(I_System system) {
+	public void setSystemDelegate(I_JseSystem system) {
 		// TODO Auto-generated method stub
 		super.setSystem(system);
 	}

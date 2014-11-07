@@ -1,9 +1,9 @@
 package org.adligo.tests4j_tests.base_trials;
 
 import org.adligo.tests4j.models.shared.results.I_SourceFileTrialResult;
-import org.adligo.tests4j.system.shared.trials.SourceFileTrial;
+import org.adligo.tests4j_4mockito.MockitoSourceFileTrial;
 
-public abstract class SourceFileCountingTrial extends SourceFileTrial implements I_CountingTrial {
+public abstract class SourceFileCountingTrial extends MockitoSourceFileTrial implements I_CountingTrial {
 	
 	@Override
 	public void afterTrialTests(I_SourceFileTrialResult p) {

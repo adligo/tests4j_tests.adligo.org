@@ -1,7 +1,7 @@
 package org.adligo.tests4j_tests.trials_api.common;
 
 import org.adligo.tests4j.run.api.Tests4J;
-import org.adligo.tests4j.shared.common.I_System;
+import org.adligo.tests4j.run.common.I_JseSystem;
 import org.adligo.tests4j.system.shared.api.I_Tests4J_Controls;
 import org.adligo.tests4j.system.shared.api.I_Tests4J_Listener;
 import org.adligo.tests4j.system.shared.api.I_Tests4J_Params;
@@ -12,7 +12,7 @@ public class Tests4JRunnerMock extends Tests4J {
 		super();
 	}
 
-	protected  void setSystem(I_System system) {
+	protected  void setSystem(I_JseSystem system) {
 	  super.setSystem(system);
 	}
 	

@@ -1,10 +1,10 @@
 package org.adligo.tests4j_tests.run.api;
 
 import org.adligo.tests4j.run.api.Tests4J;
+import org.adligo.tests4j.run.common.I_JseSystem;
 import org.adligo.tests4j.run.helpers.JseSystem;
 import org.adligo.tests4j.run.helpers.Tests4J_Controls;
 import org.adligo.tests4j.shared.common.DefaultSystem;
-import org.adligo.tests4j.shared.common.I_System;
 import org.adligo.tests4j.system.shared.api.I_Tests4J_Controls;
 import org.adligo.tests4j.system.shared.api.I_Tests4J_Delegate;
 import org.adligo.tests4j.system.shared.api.I_Tests4J_DelegateFactory;
@@ -135,7 +135,7 @@ public class Tests4JTrial extends SourceFileCountingTrial implements I_Tests4J_D
 		controllsToSend = new Tests4J_Controls();
 		
 		MockTests4J mock = new MockTests4J();
-		I_System system = new DefaultSystem();
+		I_JseSystem system = new JseSystem();
 		
 		mock.setSystemDelegate(system);
 		assertSame(system, mock.getSystemDelegate());
@@ -143,7 +143,7 @@ public class Tests4JTrial extends SourceFileCountingTrial implements I_Tests4J_D
 		I_Tests4J_Controls controls =  mock.instanceRunDelegate(params, null);
 		assertSame(controllsToSend, controls);
 		
-		assertEquals(DefaultSystem.class.getName(), factory.getLastSystem().getClass().getName());
+		assertEquals(JseSystem.class.getName(), factory.getLastSystem().getClass().getName());
 		assertSame(params, lastSetupParams);
 		assertNull(lastSetupListener);
 	}
@@ -159,7 +159,7 @@ public class Tests4JTrial extends SourceFileCountingTrial implements I_Tests4J_D
 		
 		
 		MockTests4J mock = new MockTests4J();
-		I_System system = new DefaultSystem();
+		I_JseSystem system = new JseSystem();
 		
 		mock.setSystemDelegate(system);
 		assertSame(system, mock.getSystemDelegate());
@@ -168,7 +168,7 @@ public class Tests4JTrial extends SourceFileCountingTrial implements I_Tests4J_D
 		assertSame(controllsToSend, controls);
 		assertTrue(ran.get());
 		
-		assertEquals(DefaultSystem.class.getName(), factory.getLastSystem().getClass().getName());
+		assertEquals(JseSystem.class.getName(), factory.getLastSystem().getClass().getName());
 		assertSame(params, lastSetupParams);
 		assertSame(listener, lastSetupListener);
 	}
@@ -184,7 +184,7 @@ public class Tests4JTrial extends SourceFileCountingTrial implements I_Tests4J_D
 		I_Tests4J_Listener listener = new MockTests4J_Listener();
 		
 		MockTests4J mock = new MockTests4J();
-		I_System system = new DefaultSystem();
+		I_JseSystem system = new JseSystem();
 		
 		mock.setSystemDelegate(system);
 		assertSame(system, mock.getSystemDelegate());
@@ -193,7 +193,7 @@ public class Tests4JTrial extends SourceFileCountingTrial implements I_Tests4J_D
 		assertSame(controllsToSend, controls);
 		assertFalse(ran.get());
 		
-		assertEquals(DefaultSystem.class.getName(), factory.getLastSystem().getClass().getName());
+		assertEquals(JseSystem.class.getName(), factory.getLastSystem().getClass().getName());
 		assertSame(params, lastSetupParams);
 		assertSame(listener, lastSetupListener);	
 	}

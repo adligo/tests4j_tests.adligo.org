@@ -1,12 +1,13 @@
 package org.adligo.tests4j_tests.trials_api.common;
 
+import org.adligo.tests4j.run.common.I_JseSystem;
+import org.adligo.tests4j.shared.common.DefaultSystem;
+
+import java.io.File;
 import java.io.PrintStream;
 import java.util.List;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.atomic.AtomicLong;
-
-import org.adligo.tests4j.shared.common.DefaultSystem;
-import org.adligo.tests4j.shared.common.I_System;
 
 
 /**
@@ -16,7 +17,7 @@ import org.adligo.tests4j.shared.common.I_System;
  * @author scott
  *
  */
-public class SystemRunnerMock implements I_System {
+public class SystemRunnerMock implements I_JseSystem {
 	private final ArrayBlockingQueue<Integer> lastStatus = new ArrayBlockingQueue<>(10);
 	private final AtomicLong time = new AtomicLong();
 	private String lineSeperator;
@@ -79,6 +80,11 @@ public class SystemRunnerMock implements I_System {
 	public boolean isMainSystem() {
 		return false;
 	}
+
+  @Override
+  public File newFile(String path) {
+    return new File(path);
+  }
 
 
 }

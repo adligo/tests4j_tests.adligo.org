@@ -1,9 +1,9 @@
 package org.adligo.tests4j_tests.base_trials;
 
 import org.adligo.tests4j.models.shared.results.I_ApiTrialResult;
-import org.adligo.tests4j.system.shared.trials.ApiTrial;
+import org.adligo.tests4j_4mockito.MockitoApiTrial;
 
-public abstract class ApiCountingTrial extends ApiTrial implements I_CountingTrial {
+public abstract class ApiCountingTrial extends MockitoApiTrial implements I_CountingTrial {
 	
 	@Override
 	public void afterTrialTests(I_ApiTrialResult p) {

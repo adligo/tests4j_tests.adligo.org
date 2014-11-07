@@ -3,7 +3,7 @@ package org.adligo.tests4j_tests.shared.asserts.reference;
 import org.adligo.tests4j.run.api.Tests4J;
 import org.adligo.tests4j.system.shared.api.Tests4J_Params;
 import org.adligo.tests4j.system.shared.trials.I_MetaTrialParams;
-import org.adligo.tests4j_4jacoco.plugin.CoveragePluginFactory;
+import org.adligo.tests4j_4jacoco.plugin.factories.MockitoPluginFactory;
 import org.adligo.tests4j_tests.base_trials.I_CountingPackageTrials;
 import org.adligo.tests4j_tests.base_trials.SimpleMetaTrial;
 import org.adligo.tests4j_tests.base_trials.SimplePackageTrials;
@@ -17,7 +17,7 @@ public class A_AssertsRefPkgTrials extends SimplePackageTrials
 	public static void main(String [] args) {
 		try {
 			Tests4J_Params params = new Tests4J_Params();
-			params.setCoveragePluginFactoryClass(CoveragePluginFactory.class);
+			params.setCoveragePluginFactoryClass(MockitoPluginFactory.class);
 			params.setMetaTrialClass(SimpleMetaTrial.class);
 			
 			A_AssertsRefPkgTrials me = new A_AssertsRefPkgTrials();

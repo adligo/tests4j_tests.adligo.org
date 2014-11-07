@@ -22,14 +22,16 @@ public class BooleanAssertCommandTrial extends SourceFileCountingTrial {
 		assertThrown(new ExpectedThrownData(new IllegalArgumentException(BooleanAssertCommand.BOOLEAN_ASSERT_COMMAND_REQUIRES_A_BOOLEAN_TYPE)),
 				new I_Thrower() {
 					
-					@Override
+					@SuppressWarnings({"unused", "boxing"})
+          @Override
 					public void run() {
 						new BooleanAssertCommand(AssertType.AssertEquals, "some failure message", true);
 					}
 				});
 	}
 
-	@Test
+	@SuppressWarnings("boxing")
+  @Test
 	public void testEqualsHashCode() {
 		BooleanAssertCommand a = new BooleanAssertCommand(AssertType.AssertTrue, "some failure message", true);
 		BooleanAssertCommand b = new BooleanAssertCommand(AssertType.AssertFalse, "some failure message", true);
@@ -52,7 +54,8 @@ public class BooleanAssertCommandTrial extends SourceFileCountingTrial {
 		assertNotEquals(a, new Object());
 	}
 	
-	@Test
+	@SuppressWarnings("boxing")
+  @Test
 	public void testEvaluate() {
 		assertTrue(new BooleanAssertCommand(AssertType.AssertTrue, "some failure message", true).evaluate());
 		assertFalse(new BooleanAssertCommand(AssertType.AssertTrue, "some failure message", false).evaluate());
@@ -67,12 +70,48 @@ public class BooleanAssertCommandTrial extends SourceFileCountingTrial {
 		
 	}
 	
-	@Test
+	@SuppressWarnings("boxing")
+  @Test
 	public void testData() {
 		BooleanAssertCommand bac = new BooleanAssertCommand(AssertType.AssertTrue, "some failure message", true);
 		assertSame(bac, bac.getData());
 		assertTrue((Boolean) bac.getExpected());
 		assertTrue((Boolean) bac.getActual());
+		
+		bac = new BooleanAssertCommand(AssertType.AssertTrue, "some failure message", false);
+    assertSame(bac, bac.getData());
+    assertTrue((Boolean) bac.getExpected());
+    assertFalse((Boolean) bac.getActual());
+    
+    bac = new BooleanAssertCommand(AssertType.AssertFalse, "some failure message", false);
+    assertSame(bac, bac.getData());
+    assertFalse((Boolean) bac.getExpected());
+    assertFalse((Boolean) bac.getActual());
+    
+    bac = new BooleanAssertCommand(AssertType.AssertFalse, "some failure message", true);
+    assertSame(bac, bac.getData());
+    assertFalse((Boolean) bac.getExpected());
+    assertTrue((Boolean) bac.getActual());
+    
+    bac = new BooleanAssertCommand(AssertType.AssertNull, "some failure message", true);
+    assertSame(bac, bac.getData());
+    assertNull(bac.getExpected());
+    assertTrue((Boolean) bac.getActual());
+    
+    bac = new BooleanAssertCommand(AssertType.AssertNull, "some failure message", null);
+    assertSame(bac, bac.getData());
+    assertNull(bac.getExpected());
+    assertNull(bac.getActual());
+    
+    bac = new BooleanAssertCommand(AssertType.AssertNotNull, "some failure message", null);
+    assertSame(bac, bac.getData());
+    assertEquals("", bac.getExpected());
+    assertNull(bac.getActual());
+    
+    bac = new BooleanAssertCommand(AssertType.AssertNotNull, "some failure message", true);
+    assertSame(bac, bac.getData());
+    assertEquals("", bac.getExpected());
+    assertTrue((Boolean) bac.getActual());
 	}
 
 	@Override
@@ -82,7 +121,7 @@ public class BooleanAssertCommandTrial extends SourceFileCountingTrial {
 
 	@Override
 	public int getAsserts(I_CountType type) {
-		int thisAsserts = 22;
+		int thisAsserts = 43;
 		if (type.isFromMetaWithCoverage()) {
 			//code coverage and circular dependencies +
 			//custom afterTrialTests
@@ -94,7 +133,7 @@ public class BooleanAssertCommandTrial extends SourceFileCountingTrial {
 
 	@Override
 	public int getUniqueAsserts(I_CountType type) {
-		int thisUniqueAsserts = 11;
+		int thisUniqueAsserts = 21;
 		if (type.isFromMetaWithCoverage()) {
 			//code coverage and circular dependencies +
 			//custom afterTrialTests

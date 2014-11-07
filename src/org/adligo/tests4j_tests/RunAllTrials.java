@@ -18,7 +18,7 @@ import org.adligo.tests4j.system.shared.report.summary.TrialDisplay;
 import org.adligo.tests4j.system.shared.report.summary.TrialsProcessDisplay;
 import org.adligo.tests4j.system.shared.report.summary.TrialsProgressDisplay;
 import org.adligo.tests4j.system.shared.trials.I_MetaTrialParams;
-import org.adligo.tests4j_4jacoco.plugin.CoveragePluginFactory;
+import org.adligo.tests4j_4jacoco.plugin.factories.MockitoPluginFactory;
 import org.adligo.tests4j_tests.base_trials.I_CountingPackageTrials;
 import org.adligo.tests4j_tests.base_trials.SimplePackageTrials;
 import org.adligo.tests4j_tests.jacoco.api_trials.A_CocoApiPkgTrials;
@@ -57,7 +57,7 @@ implements I_MetaTrialParams<RunAllTrials>, I_CountingPackageTrials, I_Tests4J_L
 	public static void main(String [] args) {
 		try {
 			Tests4J_Params params = new Tests4J_Params();
-			params.setCoveragePluginFactoryClass(CoveragePluginFactory.class);
+			params.setCoveragePluginFactoryClass(MockitoPluginFactory.class);
 			params.setMetaTrialClass(TheMetaTrial.class);
 			//params.setMetaTrialClass(SimpleMetaTrial.class);
 			RunAllTrials me = new RunAllTrials();

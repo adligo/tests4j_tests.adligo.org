@@ -1,9 +1,5 @@
 package org.adligo.tests4j_tests.run.discovery;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-
 import org.adligo.tests4j.models.shared.metadata.I_MachineMetadata;
 import org.adligo.tests4j.models.shared.metadata.I_SourceInfoMetadata;
 import org.adligo.tests4j.models.shared.metadata.I_TestMetadata;
@@ -81,13 +77,15 @@ import org.adligo.tests4j.system.shared.trials.TrialTypeAnnotation;
 import org.adligo.tests4j.system.shared.trials.UseCaseScope;
 import org.adligo.tests4j.system.shared.trials.UseCaseTrial;
 import org.adligo.tests4j_4jacoco.plugin.CoveragePlugin;
-import org.adligo.tests4j_4jacoco.plugin.CoveragePluginFactory;
 import org.adligo.tests4j_4jacoco.plugin.CoveragePluginMemory;
 import org.adligo.tests4j_4jacoco.plugin.Recorder;
-import org.adligo.tests4j_4jacoco.plugin.SharedClassList;
 import org.adligo.tests4j_tests.base_trials.I_CountType;
 import org.adligo.tests4j_tests.base_trials.SourceFileCountingTrial;
 import org.adligo.tests4j_tests.run.discovery.package_discovery_inner_mocks.TwoNestedRunnables;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 @SourceFileScope (sourceClass=PackageDiscovery.class, minCoverage=50.0)
 public class PackageDiscoveryTrial extends SourceFileCountingTrial {
@@ -279,11 +277,9 @@ public class PackageDiscoveryTrial extends SourceFileCountingTrial {
 		
 		List<String> classNames = cd.getClassNames();
 		assertContains(classNames, CoveragePlugin.class.getName());
-		assertContains(classNames, CoveragePluginFactory.class.getName());
 		assertContains(classNames, CoveragePluginMemory.class.getName());
 		assertContains(classNames, Recorder.class.getName());
-		assertContains(classNames, SharedClassList.class.getName());
-		assertEquals(5, classNames.size());
+		assertEquals(3, classNames.size());
 		
 		
 		List<PackageDiscovery> children =  cd.getSubPackages();
@@ -296,9 +292,11 @@ public class PackageDiscoveryTrial extends SourceFileCountingTrial {
 		assertContains(childNames, "org.adligo.tests4j_4jacoco.plugin.common");
 		assertContains(childNames, "org.adligo.tests4j_4jacoco.plugin.data");
 		assertContains(childNames, "org.adligo.tests4j_4jacoco.plugin.discovery");
+		assertContains(childNames, "org.adligo.tests4j_4jacoco.plugin.factories");
 		assertContains(childNames, "org.adligo.tests4j_4jacoco.plugin.instrumentation");
 		assertContains(childNames, "org.adligo.tests4j_4jacoco.plugin.runtime");
-		assertEquals(7, children.size());
+		assertContains(childNames, "org.adligo.tests4j_4jacoco.plugin.whitelists");
+		assertEquals(9, children.size());
 		
 	}
 	@Override

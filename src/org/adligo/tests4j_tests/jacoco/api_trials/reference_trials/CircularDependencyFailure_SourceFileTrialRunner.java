@@ -19,7 +19,7 @@ import org.adligo.tests4j.shared.asserts.reference.CircularDependencyFailure;
 import org.adligo.tests4j.shared.en.Tests4J_EnglishConstants;
 import org.adligo.tests4j.shared.i18n.I_Tests4J_ResultMessages;
 import org.adligo.tests4j.system.shared.trials.I_SourceFileTrial;
-import org.adligo.tests4j_4jacoco.plugin.CoveragePluginFactory;
+import org.adligo.tests4j_4jacoco.plugin.factories.MockitoPluginFactory;
 import org.adligo.tests4j_tests.trials_api.common.ExpectedFailureRunner;
 import org.adligo.tests4j_tests.trials_api.common.SystemRunnerMock;
 
@@ -27,7 +27,7 @@ public class CircularDependencyFailure_SourceFileTrialRunner {
 
 	public static void runTestDelegate(I_Asserts asserts)  throws Exception {
 		ExpectedFailureRunner runner = new ExpectedFailureRunner();
-		runner.setCoveragPluginFactory(CoveragePluginFactory.class);
+		runner.setCoveragPluginFactory(MockitoPluginFactory.class);
 		
 		runner.run(CircularDependencyFailure_SourceFileTrial.class);
 		
