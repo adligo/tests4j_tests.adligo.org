@@ -14,6 +14,7 @@ import org.adligo.tests4j.models.shared.coverage.I_PackageCoverage;
 import org.adligo.tests4j.models.shared.coverage.I_ProbeCoverageContainer;
 import org.adligo.tests4j.models.shared.coverage.I_Probes;
 import org.adligo.tests4j.models.shared.coverage.I_SourceFileCoverage;
+import org.adligo.tests4j.models.shared.coverage.I_SourceFileProbes;
 import org.adligo.tests4j.models.shared.coverage.LineCoverage;
 import org.adligo.tests4j.models.shared.coverage.LineCoverageMutant;
 import org.adligo.tests4j.models.shared.coverage.LineCoverageSegment;
@@ -26,6 +27,8 @@ import org.adligo.tests4j.models.shared.coverage.ProbesMutant;
 import org.adligo.tests4j.models.shared.coverage.SourceFileCoverage;
 import org.adligo.tests4j.models.shared.coverage.SourceFileCoverageDelegator;
 import org.adligo.tests4j.models.shared.coverage.SourceFileCoverageMutant;
+import org.adligo.tests4j.models.shared.coverage.SourceFileProbes;
+import org.adligo.tests4j.models.shared.coverage.SourceFileProbesMutant;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -57,6 +60,7 @@ public class Tests4J_Coverage_ReferenceGroup extends Tests4J_ReferenceGroup {
 		add(names, I_Probes.class);
 		add(names, I_ProbeCoverageContainer.class);
 		add(names, I_SourceFileCoverage.class);
+		add(names, I_SourceFileProbes.class);
 		
 		add(names, LineCoverage.class);
 		add(names, LineCoverageMutant.class);
@@ -74,6 +78,9 @@ public class Tests4J_Coverage_ReferenceGroup extends Tests4J_ReferenceGroup {
 		add(names, SourceFileCoverageDelegator.class);
 		add(names, SourceFileCoverageMutant.class);
 		
+		
+		add(names, SourceFileProbes.class);
+		add(names, SourceFileProbesMutant.class);
 		
 		names.addAll(Tests4J_XML_ReferenceGroup.INSTANCE.getClassNames());
 		

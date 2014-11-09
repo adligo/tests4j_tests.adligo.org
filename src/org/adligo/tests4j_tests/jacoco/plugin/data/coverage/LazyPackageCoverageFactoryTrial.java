@@ -10,7 +10,7 @@ import org.adligo.tests4j_4jacoco.plugin.data.coverage.LazyPackageCoverageFactor
 import org.adligo.tests4j_tests.base_trials.I_CountType;
 import org.adligo.tests4j_tests.base_trials.SourceFileCountingTrial;
 
-@SourceFileScope (sourceClass=LazyPackageCoverageFactory.class, minCoverage=13.0)
+@SourceFileScope (sourceClass=LazyPackageCoverageFactory.class, minCoverage=8.0)
 public class LazyPackageCoverageFactoryTrial extends SourceFileCountingTrial {
 
 	@Test

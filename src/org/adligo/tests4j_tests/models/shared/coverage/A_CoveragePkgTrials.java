@@ -68,7 +68,8 @@ implements I_MetaTrialParams<A_CoveragePkgTrials>, I_CountingPackageTrials {
 		add(PackageCoverageTrial.class);
 		add(PackageCoverageDelegatorTrial.class);
 		
-
+		add(SourceFileProbesMutantTrial.class);
+		add(SourceFileProbesTrial.class);
 	}
 
 	@Override

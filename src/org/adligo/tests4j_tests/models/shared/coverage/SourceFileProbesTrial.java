@@ -2,7 +2,11 @@ package org.adligo.tests4j_tests.models.shared.coverage;
 
 import org.adligo.tests4j.models.shared.coverage.ClassProbes;
 import org.adligo.tests4j.models.shared.coverage.ClassProbesMutant;
+import org.adligo.tests4j.models.shared.coverage.I_ClassProbes;
+import org.adligo.tests4j.models.shared.coverage.Probes;
 import org.adligo.tests4j.models.shared.coverage.ProbesMutant;
+import org.adligo.tests4j.models.shared.coverage.SourceFileProbes;
+import org.adligo.tests4j.models.shared.coverage.SourceFileProbesMutant;
 import org.adligo.tests4j.shared.asserts.reference.AllowedReferences;
 import org.adligo.tests4j.system.shared.trials.SourceFileScope;
 import org.adligo.tests4j.system.shared.trials.Test;
@@ -10,28 +14,53 @@ import org.adligo.tests4j_tests.base_trials.I_CountType;
 import org.adligo.tests4j_tests.base_trials.SourceFileCountingTrial;
 import org.adligo.tests4j_tests.references_groups.Tests4J_Coverage_GwtReferenceGroup;
 
-@SourceFileScope (sourceClass=ClassProbes.class, minCoverage=82.0)
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
+@SourceFileScope (sourceClass=SourceFileProbes.class, minCoverage=56.0)
 @AllowedReferences (groups=Tests4J_Coverage_GwtReferenceGroup.class)
-public class ClassProbesTrial extends SourceFileCountingTrial {
+public class SourceFileProbesTrial extends SourceFileCountingTrial {
 
 	
 	@SuppressWarnings("boxing")
   @Test
 	public void testCopyConstructor() throws Exception {
-	  ClassProbesMutant mut = new ClassProbesMutant();
-	  mut.setClassId(73);
+	  SourceFileProbesMutant mut = new SourceFileProbesMutant();
 	  mut.setClassName("className");
-	  
 	 
 	  ProbesMutant pm = new ProbesMutant(new boolean [] {true, false, true});
 	  mut.setProbes(pm);
-	  
-	  ClassProbes cp = new ClassProbes(mut);
-	  assertEquals(73L, cp.getClassId());
-    assertEquals("className", cp.getClassName());
-    assertEquals(pm, cp.getProbes());
-    assertEquals(3, cp.getCoverageUnits());
-    assertEquals(2, cp.getCoveredCoverageUnits());
+	 
+	  List<ClassProbes> listCps = new ArrayList<ClassProbes>();
+	  ClassProbesMutant cpm3 = new ClassProbesMutant();
+    cpm3.setClassId(73);
+    cpm3.setClassName("cn");
+    cpm3.setProbes(new Probes(new boolean[] {true}));
+    listCps.add(new ClassProbes(cpm3));
+    
+    ClassProbesMutant cpm4 = new ClassProbesMutant();
+    cpm4.setClassId(74);
+    cpm4.setClassName("cn");
+    cpm4.setProbes(new Probes(new boolean[] {true}));
+    listCps.add(new ClassProbes(cpm4));
+    mut.setClassProbes(listCps);
+    
+	  SourceFileProbes mut2 = new SourceFileProbes(mut);
+	  assertEquals("className", mut2.getClassName());
+    assertEquals(pm, mut2.getProbes());
+    
+    List<I_ClassProbes> fromMutCPs4 = mut2.getClassProbes();
+    Set<Long> ids = new HashSet<Long>();
+    for (I_ClassProbes cp: fromMutCPs4) {
+      ids.add(cp.getClassId());
+    }
+    
+    assertContains(ids,73L);
+    assertContains(ids,74L);
+    assertEquals(2, fromMutCPs4.size());
+
 	}
 
 	@Override

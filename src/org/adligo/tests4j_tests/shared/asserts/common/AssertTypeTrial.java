@@ -1,8 +1,6 @@
 package org.adligo.tests4j_tests.shared.asserts.common;
 
-import java.util.Set;
-
-import org.adligo.tests4j.models.shared.coverage.I_SourceFileCoverage;
+import org.adligo.tests4j.models.shared.coverage.I_SourceFileProbes;
 import org.adligo.tests4j.models.shared.results.I_SourceFileTrialResult;
 import org.adligo.tests4j.shared.asserts.common.AssertType;
 import org.adligo.tests4j.shared.asserts.reference.AllowedReferences;
@@ -11,6 +9,8 @@ import org.adligo.tests4j.system.shared.trials.Test;
 import org.adligo.tests4j_tests.base_trials.I_CountType;
 import org.adligo.tests4j_tests.base_trials.SourceFileCountingTrial;
 import org.adligo.tests4j_tests.references_groups.Tests4J_AssertsCommon_GwtReferenceGroup;
+
+import java.util.Set;
 //TODO look at minCoverage should be 95.0
 @SourceFileScope (sourceClass=AssertType.class, minCoverage=7.0)
 @AllowedReferences (groups=Tests4J_AssertsCommon_GwtReferenceGroup.class)
@@ -141,17 +141,18 @@ public class AssertTypeTrial extends SourceFileCountingTrial {
 		}
 	}
 
-	@Override
+	@SuppressWarnings("boxing")
+  @Override
 	public void afterTrialTests(I_SourceFileTrialResult p) {
 		super.afterTrialTests(p);
 		if (p.hasRecordedCoverage()) {
-			I_SourceFileCoverage sfc =  p.getSourceFileCoverage();
+			I_SourceFileProbes probes =  p.getSourceFileProbes();
 			//assertEquals("org.adligo.tests4j.models.shared.asserts.common.AssertType",sfc.getClassName());
-			assertEquals(297, sfc.getCoverageUnits().get());
+			assertEquals(297, probes.getCoverageUnits());
 			//if you see a error on this next line,
 			// there is a bug in code coverage,
 			// TODO I have seen it 20% chance?
-			assertEquals(293, sfc.getCoveredCoverageUnits().get());
+			assertEquals(293, probes.getCoveredCoverageUnits());
 		}
 	}
 	

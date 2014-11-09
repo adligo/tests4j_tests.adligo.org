@@ -1,10 +1,9 @@
 package org.adligo.tests4j_tests.run.io;
 
-import org.adligo.tests4j.models.shared.coverage.I_SourceFileCoverage;
+import org.adligo.tests4j.models.shared.coverage.I_SourceFileProbes;
 import org.adligo.tests4j.models.shared.results.I_SourceFileTrialResult;
 import org.adligo.tests4j.run.io.Bits;
 import org.adligo.tests4j.system.shared.trials.SourceFileScope;
-import org.adligo.tests4j.system.shared.trials.SourceFileTrial;
 import org.adligo.tests4j.system.shared.trials.Test;
 import org.adligo.tests4j_tests.base_trials.I_CountType;
 import org.adligo.tests4j_tests.base_trials.SourceFileCountingTrial;
@@ -40,8 +39,8 @@ public class BitsTrial extends SourceFileCountingTrial {
 	public void afterTrialTests(I_SourceFileTrialResult p) {
 		super.afterTrialTests(p);
 		if (p.hasRecordedCoverage()) {
-			I_SourceFileCoverage coverage = p.getSourceFileCoverage();
-			assertGreaterThanOrEquals(100.00, coverage.getPercentageCoveredDouble());
+			I_SourceFileProbes probes = p.getSourceFileProbes();
+			assertGreaterThanOrEquals(100.00, probes.getPercentageCoveredDouble());
 		}
 	}
 	

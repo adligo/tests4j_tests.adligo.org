@@ -16,7 +16,7 @@ import java.util.Set;
 @SourceFileScope (sourceClass=RequiredList.class, minCoverage=99.0)
 public class RequiredListTrial extends SourceFileCountingTrial {
 
-	private static final int ASSERTS = 342;
+	private static final int ASSERTS = 346;
 
 
 	@SuppressWarnings({"unused", "boxing"})
