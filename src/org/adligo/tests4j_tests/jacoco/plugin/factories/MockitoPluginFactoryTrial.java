@@ -10,8 +10,8 @@ import org.adligo.tests4j.system.shared.trials.Test;
 import org.adligo.tests4j_4jacoco.plugin.CoveragePlugin;
 import org.adligo.tests4j_4jacoco.plugin.CoveragePluginMemory;
 import org.adligo.tests4j_4jacoco.plugin.factories.MockitoPluginFactory;
-import org.adligo.tests4j_4jacoco.plugin.whitelists.MockitoClassList;
-import org.adligo.tests4j_4jacoco.plugin.whitelists.RequiredClassList;
+import org.adligo.tests4j_4jacoco.plugin.whitelists.MockitoList;
+import org.adligo.tests4j_4jacoco.plugin.whitelists.RequiredList;
 import org.adligo.tests4j_4mockito.ReturnCount;
 import org.adligo.tests4j_tests.base_trials.I_CountType;
 import org.adligo.tests4j_tests.base_trials.SourceFileCountingTrial;
@@ -68,8 +68,8 @@ public class MockitoPluginFactoryTrial extends SourceFileCountingTrial {
 		CoveragePluginMemory cpm = cplug.getMemory();
 		assertNotNull(cpm);
 		
-		Set<String> required = new RequiredClassList().getWhitelist();
-		Set<String> mockito = new MockitoClassList().getWhitelist();
+		Set<String> required = new RequiredList().getWhitelist();
+		Set<String> mockito = new MockitoList().getWhitelist();
 		Set<String> whitelist =cpm.getWhitelist();
 		assertTrue(whitelist.containsAll(required));
 		assertTrue(whitelist.containsAll(mockito));

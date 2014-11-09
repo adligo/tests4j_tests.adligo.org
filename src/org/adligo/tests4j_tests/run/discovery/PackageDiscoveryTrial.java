@@ -77,6 +77,7 @@ import org.adligo.tests4j.system.shared.trials.TrialTypeAnnotation;
 import org.adligo.tests4j.system.shared.trials.UseCaseScope;
 import org.adligo.tests4j.system.shared.trials.UseCaseTrial;
 import org.adligo.tests4j_4jacoco.plugin.CoveragePlugin;
+import org.adligo.tests4j_4jacoco.plugin.CoveragePluginMapParams;
 import org.adligo.tests4j_4jacoco.plugin.CoveragePluginMemory;
 import org.adligo.tests4j_4jacoco.plugin.Recorder;
 import org.adligo.tests4j_tests.base_trials.I_CountType;
@@ -90,9 +91,10 @@ import java.util.List;
 @SourceFileScope (sourceClass=PackageDiscovery.class, minCoverage=50.0)
 public class PackageDiscoveryTrial extends SourceFileCountingTrial {
 
-	private static final int ASSERT_COUNT = 109;
+	private static final int ASSERT_COUNT = 110;
 
-	@Test
+	@SuppressWarnings("boxing")
+  @Test
 	public void testDiscoveryPackage() throws Exception {
 		PackageDiscovery cd = new PackageDiscovery("org.adligo.tests4j.run.discovery");
 		List<String> clazzNames = cd.getClassNames();
@@ -139,7 +141,8 @@ public class PackageDiscoveryTrial extends SourceFileCountingTrial {
 		assertMetadataPackage();
 	}
 
-	private PackageDiscovery assertMetadataPackage() throws IOException {
+	@SuppressWarnings("boxing")
+  private PackageDiscovery assertMetadataPackage() throws IOException {
 		PackageDiscovery cd = new PackageDiscovery("org.adligo.tests4j.models.shared.metadata");
 		List<String> classNames = cd.getClassNames();
 		assertContains(classNames, I_MachineMetadata.class.getName());
@@ -170,7 +173,8 @@ public class PackageDiscoveryTrial extends SourceFileCountingTrial {
 		return cd;
 	}
 	
-	@Test
+	@SuppressWarnings("boxing")
+  @Test
 	public void testModelsSharedTrials() throws Exception {
 		PackageDiscovery cd = new PackageDiscovery("org.adligo.tests4j.system.shared.trials");
 		List<String> classNames = cd.getClassNames();
@@ -236,7 +240,8 @@ public class PackageDiscoveryTrial extends SourceFileCountingTrial {
 		assertEquals(0, children.size());
 	}
 	
-	@Test
+	@SuppressWarnings("boxing")
+  @Test
 	public void testInnerClasses() throws Exception {
 		PackageDiscovery cd = new PackageDiscovery(
 				"org.adligo.tests4j_tests.run.discovery.package_discovery_inner_mocks");
@@ -251,7 +256,8 @@ public class PackageDiscoveryTrial extends SourceFileCountingTrial {
 		assertEquals(0, children.size());
 	}
 	
-	@Test
+	@SuppressWarnings("boxing")
+  @Test
 	public void testTestForJ() throws Exception {
 		PackageDiscovery cd = new PackageDiscovery("org.adligo.tests4j");
 		List<String> classNames = cd.getClassNames();
@@ -271,15 +277,17 @@ public class PackageDiscoveryTrial extends SourceFileCountingTrial {
 	}
 	
 	
-	@Test
+	@SuppressWarnings("boxing")
+  @Test
 	public void testCoco() throws Exception {
 		PackageDiscovery cd = new PackageDiscovery("org.adligo.tests4j_4jacoco.plugin");
 		
 		List<String> classNames = cd.getClassNames();
 		assertContains(classNames, CoveragePlugin.class.getName());
+		assertContains(classNames, CoveragePluginMapParams.class.getName());
 		assertContains(classNames, CoveragePluginMemory.class.getName());
 		assertContains(classNames, Recorder.class.getName());
-		assertEquals(3, classNames.size());
+		assertEquals(4, classNames.size());
 		
 		
 		List<PackageDiscovery> children =  cd.getSubPackages();

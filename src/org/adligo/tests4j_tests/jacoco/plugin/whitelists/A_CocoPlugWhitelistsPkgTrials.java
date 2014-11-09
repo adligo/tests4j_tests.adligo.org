@@ -56,8 +56,8 @@ implements I_MetaTrialParams<A_CocoPlugWhitelistsPkgTrials>, I_CountingPackageTr
 	public void addTrials() throws Exception{
 		
 	  add(BaseClassListTrial.class);
-	  add(MockitoClassListTrial.class);
-		add(RequiredClassListTrial.class);
+	  add(MockitoListTrial.class);
+		add(RequiredListTrial.class);
 	}
 
 	@Override

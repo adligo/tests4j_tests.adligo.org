@@ -1,6 +1,7 @@
 package org.adligo.tests4j_tests.trials_api.bad_mock_api_trials;
 
 import java.util.List;
+import java.util.Map;
 
 import org.adligo.tests4j.models.shared.metadata.I_TestMetadata;
 import org.adligo.tests4j.models.shared.metadata.I_TrialMetadata;
@@ -35,12 +36,13 @@ public class BeforeTrialNotStaticTrial extends ApiTrial {
 
 	
 	@BeforeTrial
-	public void beforeTrial() {}
+	public void beforeTrial(Map<String,Object> params) {}
 	
 	@Test
 	public void testFoo() {}
 
-	public static void runTestDelegate(I_Asserts asserts)  throws Exception {
+	@SuppressWarnings("boxing")
+  public static void runTestDelegate(I_Asserts asserts)  throws Exception {
 		ExpectedFailureRunner runner = new ExpectedFailureRunner();
 		runner.run(BeforeTrialNotStaticTrial.class);
 		

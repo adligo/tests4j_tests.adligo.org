@@ -1,7 +1,5 @@
 package org.adligo.tests4j_tests.trials_api.bad_mock_source_file_trials;
 
-import java.util.List;
-
 import org.adligo.tests4j.models.shared.metadata.I_TestMetadata;
 import org.adligo.tests4j.models.shared.metadata.I_TrialMetadata;
 import org.adligo.tests4j.models.shared.metadata.I_TrialRunMetadata;
@@ -16,6 +14,9 @@ import org.adligo.tests4j.system.shared.trials.TrialRecursion;
 import org.adligo.tests4j_tests.trials_api.common.ExpectedFailureRunner;
 import org.adligo.tests4j_tests.trials_api.common.SystemRunnerMock;
 
+import java.util.List;
+import java.util.Map;
+
 /**
  * note this trial is run by the Run_SourceFileTrial_Trial,
  * and is intended to fail.
@@ -28,10 +29,10 @@ import org.adligo.tests4j_tests.trials_api.common.SystemRunnerMock;
 public class MultipleBeforeTrialTrial extends SourceFileTrial {
 
 	@BeforeTrial
-	public static void beforeTrial() {}
+	public static void beforeTrial(Map<String,Object> params) {}
 
 	@BeforeTrial
-	public static void beforeTrial2() {}
+	public static void beforeTrial2(Map<String,Object> params) {}
 	
 	@Test
 	public void testFoo() {}

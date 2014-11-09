@@ -76,7 +76,7 @@ public class BeforeTrialHasParamsTrial extends SourceFileTrial {
 		I_TrialFailure failure = failures.get(0);
 		
 		I_Tests4J_AnnotationMessages messages =  Tests4J_EnglishConstants.ENGLISH.getAnnotationMessages();
-		asserts.assertEquals(messages.getBeforeTrialHasParams(), failure.getMessage());
+		asserts.assertEquals(messages.getBeforeTrialHasWrongParams(), failure.getMessage());
 		asserts.assertEquals(
 				"org.adligo.tests4j_tests.trials_api.bad_mock_source_file_trials.BeforeTrialHasParamsTrial was not annotated correctly.", 
 				failure.getFailureDetail());

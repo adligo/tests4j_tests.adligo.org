@@ -29,8 +29,8 @@ public class Tests4J_AnnotationMessagesTrial extends SourceFileCountingTrial {
 				messages.getAfterTrialNotStatic());
 		
 		
-		asserter.assertConstant("Methods annotated with @BeforeTrial must NOT take any parameters.", 
-				messages.getBeforeTrialHasParams());
+		asserter.assertConstant("Methods annotated with @BeforeTrial must take a single Map<String,Object> parameter.", 
+				messages.getBeforeTrialHasWrongParams());
 		asserter.assertConstant("Methods annotated with @BeforeTrial must be public.", 
 				messages.getBeforeTrialNotPublic());
 		asserter.assertConstant("Methods annotated with @BeforeTrial must be static.", 

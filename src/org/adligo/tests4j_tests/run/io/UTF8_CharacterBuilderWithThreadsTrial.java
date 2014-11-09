@@ -14,6 +14,7 @@ import org.adligo.tests4j_tests.run.io.helpers.StartCapture;
 import org.adligo.tests4j_tests.run.io.helpers.UTF8_CharacterBuilder_ChuckTester;
 import org.adligo.tests4j_tests.run.io.helpers.UTF8_Generator;
 
+import java.util.Map;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -31,7 +32,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  * @author scott
  *
  */
-@SourceFileScope (sourceClass=UTF8_CharacterBuilder.class, minCoverage=0.0)
+@SourceFileScope (sourceClass=UTF8_CharacterBuilder.class, minCoverage=84.0)
 @AdditionalInstrumentation (javaPackages="org.adligo.tests4j_tests.run.remote.nio.helpers")
 public class UTF8_CharacterBuilderWithThreadsTrial extends SourceFileCountingTrial implements I_UTF8_TestProgressMonitor {
 	private static final int threadCount = 32;
@@ -62,42 +63,21 @@ public class UTF8_CharacterBuilderWithThreadsTrial extends SourceFileCountingTri
 	private static ArrayBlockingQueue<StartCapture> charGroups = 
 			new ArrayBlockingQueue<StartCapture>(charGroupCount );
 	private AtomicInteger finishedCharGroups = new AtomicInteger();
-	private int lastPct = 0;
 	private String currentTest = null;
-	private int pctIncrement = 20;
 	private double pct;
 	
 	@BeforeTrial
-	public static void beforeTrial() {
-		Thread ct = Thread.currentThread();
-		ThreadGroup group = ct.getThreadGroup();
-		String groupName = group.getName();
-		if (groupName.indexOf(Tests4J_ThreadFactory.TRIAL_THREAD_NAME) == -1) {
-			while (group != null) {
-				group = group.getParent();
-				if (group != null) {
-					String nextName = group.getName();
-					if (nextName.indexOf(Tests4J_ThreadFactory.TRIAL_THREAD_NAME) != -1) {
-						break;
-					}
-				}
-			}
-		}
-		final ThreadGroup fixedGroup = group;
-		final AtomicInteger id = new AtomicInteger();
-		exetutor = Executors.newFixedThreadPool(8, new ThreadFactory() {
-			
-			@Override
-			public Thread newThread(Runnable r) {
-				return new Thread(fixedGroup, r, "UGF8_CharacterBuilderWithThreadsTrialThread-" + id.addAndGet(1));
-			}
-		});
+	public static void beforeTrial(Map<String,Object> params) {
+
+	  ThreadFactory factory = (ThreadFactory) params.get(BeforeTrial.THREAD_FACTORY);
+		exetutor = Executors.newFixedThreadPool(8, factory);
 		for (long i = 0; i < UTF8_Generator.SIX_BYTE_MAX_CODE_POINT_LONG; i = i + INCREMENT) {
 			charGroups.add(new StartCapture(i, CAPTURE));
 		}
 	}
 	
-	@Test 
+	@SuppressWarnings("boxing")
+  @Test 
 	public void testSiginifantCodePoints() throws Exception {
 		currentTest = "testSiginifantCodePoints";
 		assertEquals(128L, UTF8_Generator.ONE_BYTE_MAX_CODE_POINT_LONG);
