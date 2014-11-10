@@ -1,6 +1,6 @@
 package org.adligo.tests4j_tests.shared.asserts.common;
 
-import org.adligo.tests4j.models.shared.coverage.I_SourceFileProbes;
+import org.adligo.tests4j.models.shared.coverage.I_SourceFileCoverageBrief;
 import org.adligo.tests4j.models.shared.results.I_SourceFileTrialResult;
 import org.adligo.tests4j.shared.asserts.common.AssertType;
 import org.adligo.tests4j.shared.asserts.reference.AllowedReferences;
@@ -146,7 +146,7 @@ public class AssertTypeTrial extends SourceFileCountingTrial {
 	public void afterTrialTests(I_SourceFileTrialResult p) {
 		super.afterTrialTests(p);
 		if (p.hasRecordedCoverage()) {
-			I_SourceFileProbes probes =  p.getSourceFileProbes();
+			I_SourceFileCoverageBrief probes =  p.getSourceFileProbes();
 			//assertEquals("org.adligo.tests4j.models.shared.asserts.common.AssertType",sfc.getClassName());
 			assertEquals(297, probes.getCoverageUnits());
 			//if you see a error on this next line,

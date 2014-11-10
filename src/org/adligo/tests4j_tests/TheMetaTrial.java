@@ -5,7 +5,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
-import org.adligo.tests4j.models.shared.coverage.I_PackageCoverage;
+import org.adligo.tests4j.models.shared.coverage.I_PackageCoverageBrief;
 import org.adligo.tests4j.models.shared.metadata.I_TrialMetadata;
 import org.adligo.tests4j.models.shared.metadata.I_TrialRunMetadata;
 import org.adligo.tests4j.models.shared.results.I_TrialRunResult;
@@ -18,8 +18,8 @@ import org.adligo.tests4j.system.shared.trials.TrialTypeAnnotation;
 
 @TrialTypeAnnotation (type=TrialType.META_TRIAL_TYPE)
 public class TheMetaTrial  extends AbstractTrial implements I_MetaTrial {
-	private static final int TESTS = 2948;
-	private static final int TRIALS = 543;
+	private static final int TESTS = 2952;
+	private static final int TRIALS = 544;
 	private ClassesWithSourceFileTrialsCalculator calculator_;
 	private I_TrialRunResult results_;
 	private I_Tests4J_Log log_;
@@ -139,7 +139,7 @@ public class TheMetaTrial  extends AbstractTrial implements I_MetaTrial {
 		}
 		
 		if (results_.hasCoverage()) {
-			I_PackageCoverage cover =  getCoverage(pkgName, results_.getCoverage());
+			I_PackageCoverageBrief cover =  getCoverage(pkgName, results_.getCoverage());
 			assertNotNull("The following package didn't have code coverage and should;" +
 					System.lineSeparator() + pkgName,
 					cover);
@@ -151,13 +151,13 @@ public class TheMetaTrial  extends AbstractTrial implements I_MetaTrial {
 	}
 	
 	
-	private I_PackageCoverage getCoverage(String packageName, List<I_PackageCoverage> coverages) {
-		for (I_PackageCoverage pc: coverages) {
+	private I_PackageCoverageBrief getCoverage(String packageName, List<I_PackageCoverageBrief> coverages) {
+		for (I_PackageCoverageBrief pc: coverages) {
 			if (packageName.equals(pc.getPackageName())) {
 				return pc;
 			}
 		}
-		for (I_PackageCoverage pc: coverages) {
+		for (I_PackageCoverageBrief pc: coverages) {
 			if (packageName.contains(pc.getPackageName())) {
 				return getCoverage(packageName, pc.getChildPackageCoverage());
 			} 

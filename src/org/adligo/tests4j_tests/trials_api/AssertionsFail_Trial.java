@@ -1,6 +1,6 @@
 package org.adligo.tests4j_tests.trials_api;
 
-import org.adligo.tests4j.models.shared.coverage.I_PackageCoverage;
+import org.adligo.tests4j.models.shared.coverage.I_PackageCoverageBrief;
 import org.adligo.tests4j.models.shared.results.I_ApiTrialResult;
 import org.adligo.tests4j.system.shared.trials.AdditionalInstrumentation;
 import org.adligo.tests4j.system.shared.trials.PackageScope;
@@ -271,7 +271,7 @@ public class AssertionsFail_Trial extends ApiCountingTrial {
 	public void afterTrialTests(I_ApiTrialResult p) {
 		super.afterTrialTests(p);
 		if (p.hasRecordedCoverage()) {
-			I_PackageCoverage coverage = p.getPackageCoverage();
+			I_PackageCoverageBrief coverage = p.getPackageCoverage();
 			assertGreaterThanOrEquals(9.0, coverage.getPercentageCoveredDouble());
 		}
 	}

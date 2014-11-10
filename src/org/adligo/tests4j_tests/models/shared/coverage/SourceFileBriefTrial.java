@@ -5,8 +5,8 @@ import org.adligo.tests4j.models.shared.coverage.ClassProbesMutant;
 import org.adligo.tests4j.models.shared.coverage.I_ClassProbes;
 import org.adligo.tests4j.models.shared.coverage.Probes;
 import org.adligo.tests4j.models.shared.coverage.ProbesMutant;
-import org.adligo.tests4j.models.shared.coverage.SourceFileProbes;
-import org.adligo.tests4j.models.shared.coverage.SourceFileProbesMutant;
+import org.adligo.tests4j.models.shared.coverage.SourceFileCoverageBrief;
+import org.adligo.tests4j.models.shared.coverage.SourceFileCoverageBriefMutant;
 import org.adligo.tests4j.shared.asserts.reference.AllowedReferences;
 import org.adligo.tests4j.system.shared.trials.SourceFileScope;
 import org.adligo.tests4j.system.shared.trials.Test;
@@ -19,15 +19,15 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-@SourceFileScope (sourceClass=SourceFileProbes.class, minCoverage=56.0)
+@SourceFileScope (sourceClass=SourceFileCoverageBrief.class, minCoverage=56.0)
 @AllowedReferences (groups=Tests4J_Coverage_GwtReferenceGroup.class)
-public class SourceFileProbesTrial extends SourceFileCountingTrial {
+public class SourceFileBriefTrial extends SourceFileCountingTrial {
 
 	
 	@SuppressWarnings("boxing")
   @Test
 	public void testCopyConstructor() throws Exception {
-	  SourceFileProbesMutant mut = new SourceFileProbesMutant();
+	  SourceFileCoverageBriefMutant mut = new SourceFileCoverageBriefMutant();
 	  mut.setClassName("className");
 	 
 	  ProbesMutant pm = new ProbesMutant(new boolean [] {true, false, true});
@@ -47,7 +47,7 @@ public class SourceFileProbesTrial extends SourceFileCountingTrial {
     listCps.add(new ClassProbes(cpm4));
     mut.setClassProbes(listCps);
     
-	  SourceFileProbes mut2 = new SourceFileProbes(mut);
+	  SourceFileCoverageBrief mut2 = new SourceFileCoverageBrief(mut);
 	  assertEquals("className", mut2.getClassName());
     assertEquals(pm, mut2.getProbes());
     

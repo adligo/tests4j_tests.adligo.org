@@ -1,15 +1,15 @@
 package org.adligo.tests4j_tests.models.shared.coverage;
 
-import org.adligo.tests4j.models.shared.coverage.PackageCoverage;
+import org.adligo.tests4j.models.shared.coverage.PackageCoverageBriefDelegator;
 import org.adligo.tests4j.shared.asserts.reference.AllowedReferences;
 import org.adligo.tests4j.system.shared.trials.SourceFileScope;
 import org.adligo.tests4j_tests.base_trials.I_CountType;
 import org.adligo.tests4j_tests.base_trials.SourceFileCountingTrial;
 import org.adligo.tests4j_tests.references_groups.Tests4J_Coverage_GwtReferenceGroup;
 
-@SourceFileScope (sourceClass=PackageCoverage.class,minCoverage=0.0)
+@SourceFileScope (sourceClass=PackageCoverageBriefDelegator.class,minCoverage=0.0)
 @AllowedReferences (groups=Tests4J_Coverage_GwtReferenceGroup.class)
-public class PackageCoverageTrial extends SourceFileCountingTrial {
+public class PackageBriefDelegatorTrial extends SourceFileCountingTrial {
 
 	@Override
 	public int getTests(I_CountType type) {

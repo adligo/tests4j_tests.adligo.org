@@ -3,7 +3,7 @@ package org.adligo.tests4j_tests.trials_api;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.adligo.tests4j.models.shared.coverage.I_PackageCoverage;
+import org.adligo.tests4j.models.shared.coverage.I_PackageCoverageBrief;
 import org.adligo.tests4j.models.shared.metadata.I_TrialMetadata;
 import org.adligo.tests4j.models.shared.metadata.I_TrialRunMetadata;
 import org.adligo.tests4j.models.shared.results.I_ApiTrialResult;
@@ -155,7 +155,7 @@ public class BadApiTrials_Trial extends ApiCountingTrial {
 	public void afterTrialTests(I_ApiTrialResult p) {
 		super.afterTrialTests(p);
 		if (p.hasRecordedCoverage()) {
-			I_PackageCoverage coverage = p.getPackageCoverage();
+			I_PackageCoverageBrief coverage = p.getPackageCoverage();
 			assertGreaterThanOrEquals(10.0, coverage.getPercentageCoveredDouble());
 		}
 	}

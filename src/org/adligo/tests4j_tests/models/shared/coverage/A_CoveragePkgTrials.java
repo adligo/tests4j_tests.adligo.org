@@ -39,10 +39,10 @@ implements I_MetaTrialParams<A_CoveragePkgTrials>, I_CountingPackageTrials {
 		add(I_CoverageUnitsContainerTrial.class);
 		add(I_LineCoverageSegmentTrial.class);
 		add(I_LineCoverageTrial.class);
-		add(I_PackageCoverageTrial.class);
+		add(I_PackageBriefTrial.class);
 		add(I_ProbesTrial.class);
 		add(I_ProbesCoverageContainerTrial.class);
-		
+		add(I_SourceFileBriefTrial.class);
 		add(I_SourceFileCoverageTrial.class);
 		
     add(ProbesTrial.class);
@@ -64,12 +64,12 @@ implements I_MetaTrialParams<A_CoveragePkgTrials>, I_CountingPackageTrials {
 		add(SourceFileCoverageTrial.class);
 		add(SourceFileCoverageDelegatorTrial.class);
 		
-		add(PackageCoverageMutantTrial.class);
-		add(PackageCoverageTrial.class);
-		add(PackageCoverageDelegatorTrial.class);
+		add(PackageBriefMutantTrial.class);
+		add(PackageBriefTrial.class);
+		add(PackageBriefDelegatorTrial.class);
 		
-		add(SourceFileProbesMutantTrial.class);
-		add(SourceFileProbesTrial.class);
+		add(SourceFileBriefMutantTrial.class);
+		add(SourceFileBriefTrial.class);
 	}
 
 	@Override

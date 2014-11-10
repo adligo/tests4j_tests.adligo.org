@@ -4,7 +4,7 @@ import org.adligo.tests4j.models.shared.coverage.ClassProbesMutant;
 import org.adligo.tests4j.models.shared.coverage.I_ClassProbes;
 import org.adligo.tests4j.models.shared.coverage.Probes;
 import org.adligo.tests4j.models.shared.coverage.ProbesMutant;
-import org.adligo.tests4j.models.shared.coverage.SourceFileProbesMutant;
+import org.adligo.tests4j.models.shared.coverage.SourceFileCoverageBriefMutant;
 import org.adligo.tests4j.shared.asserts.reference.AllowedReferences;
 import org.adligo.tests4j.system.shared.trials.SourceFileScope;
 import org.adligo.tests4j.system.shared.trials.Test;
@@ -17,15 +17,15 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-@SourceFileScope (sourceClass=SourceFileProbesMutant.class, minCoverage=62.0)
+@SourceFileScope (sourceClass=SourceFileCoverageBriefMutant.class, minCoverage=62.0)
 @AllowedReferences (groups=Tests4J_Coverage_GwtReferenceGroup.class)
-public class SourceFileProbesMutantTrial extends SourceFileCountingTrial {
+public class SourceFileBriefMutantTrial extends SourceFileCountingTrial {
 
 	
 	@SuppressWarnings("boxing")
   @Test
 	public void testCopyConstructor() throws Exception {
-	  SourceFileProbesMutant mut = new SourceFileProbesMutant();
+	  SourceFileCoverageBriefMutant mut = new SourceFileCoverageBriefMutant();
 	  mut.setClassName("className");
 	  assertEquals("className", mut.getClassName());
 	  
@@ -51,7 +51,7 @@ public class SourceFileProbesMutantTrial extends SourceFileCountingTrial {
 	  mut.setProbes(new Probes(pm));
 	  assertEquals(pm, mut.getProbes());
 	  
-	  SourceFileProbesMutant mut2 = new SourceFileProbesMutant(mut);
+	  SourceFileCoverageBriefMutant mut2 = new SourceFileCoverageBriefMutant(mut);
 	  assertEquals("className", mut2.getClassName());
     assertEquals(pm, mut2.getProbes());
     
@@ -66,7 +66,7 @@ public class SourceFileProbesMutantTrial extends SourceFileCountingTrial {
 	@SuppressWarnings("boxing")
   @Test
 	public void testNonMutantSetters() {
-	  SourceFileProbesMutant mut = new SourceFileProbesMutant();
+	  SourceFileCoverageBriefMutant mut = new SourceFileCoverageBriefMutant();
     
     List<ClassProbesMutant> listCps3 = new ArrayList<ClassProbesMutant>();
     ClassProbesMutant cpm5 = new ClassProbesMutant();

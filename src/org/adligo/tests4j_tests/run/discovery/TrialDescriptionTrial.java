@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import org.adligo.tests4j.models.shared.coverage.I_PackageCoverage;
-import org.adligo.tests4j.models.shared.coverage.PackageCoverageMutant;
+import org.adligo.tests4j.models.shared.coverage.I_PackageCoverageBrief;
+import org.adligo.tests4j.models.shared.coverage.PackageCoverageBriefMutant;
 import org.adligo.tests4j.run.discovery.TrialDescription;
 import org.adligo.tests4j.system.shared.trials.SourceFileScope;
 import org.adligo.tests4j.system.shared.trials.Test;
@@ -23,10 +23,10 @@ public class TrialDescriptionTrial extends SourceFileCountingTrial {
 		
 		TrialDescription td = new TrialDescription(TrialDescriptionTrial.class, memoryMock);
 		
-		List<I_PackageCoverage> pc = new ArrayList<I_PackageCoverage>();
+		List<I_PackageCoverageBrief> pc = new ArrayList<I_PackageCoverageBrief>();
 		addPackage(pc, "org.adligo.tests4j.run.discovery", null);
 
-		I_PackageCoverage pk =  td.findPackageCoverage(pc);
+		I_PackageCoverageBrief pk =  td.findPackageCoverage(pc);
 		assertNotNull(pk);
 		assertEquals("org.adligo.tests4j.run.discovery", pk.getPackageName());
 		
@@ -44,13 +44,13 @@ public class TrialDescriptionTrial extends SourceFileCountingTrial {
 		
 	}
 	
-	public void addPackage(List<I_PackageCoverage> pc, String name, List<String> children) {
-		PackageCoverageMutant pcm = new PackageCoverageMutant();
+	public void addPackage(List<I_PackageCoverageBrief> pc, String name, List<String> children) {
+		PackageCoverageBriefMutant pcm = new PackageCoverageBriefMutant();
 		pcm.setPackageName(name);
 		pc .add(pcm);
 		if (children != null) {
 			for (String child: children) {
-				PackageCoverageMutant childCm = new PackageCoverageMutant();
+				PackageCoverageBriefMutant childCm = new PackageCoverageBriefMutant();
 				childCm.setPackageName(child);
 				pcm.addChild(childCm);
 			}

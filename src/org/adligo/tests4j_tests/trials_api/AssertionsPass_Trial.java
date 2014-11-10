@@ -5,7 +5,7 @@ import java.math.BigInteger;
 import java.util.HashSet;
 import java.util.Set;
 
-import org.adligo.tests4j.models.shared.coverage.I_PackageCoverage;
+import org.adligo.tests4j.models.shared.coverage.I_PackageCoverageBrief;
 import org.adligo.tests4j.models.shared.results.I_ApiTrialResult;
 import org.adligo.tests4j.shared.asserts.common.ExpectedThrownData;
 import org.adligo.tests4j.shared.asserts.common.I_Thrower;
@@ -262,7 +262,7 @@ public class AssertionsPass_Trial extends ApiCountingTrial {
 	public void afterTrialTests(I_ApiTrialResult p) {
 		super.afterTrialTests(p);
 		if (p.hasRecordedCoverage()) {
-			I_PackageCoverage coverage = p.getPackageCoverage();
+			I_PackageCoverageBrief coverage = p.getPackageCoverage();
 			assertGreaterThanOrEquals(8.0, coverage.getPercentageCoveredDouble());
 		}
 	}
