@@ -5,7 +5,7 @@ import java.util.Set;
 
 import org.adligo.tests4j.system.shared.report.summary.AbstractProcessDisplay;
 import org.adligo.tests4j.system.shared.report.summary.DefaultReporterStates;
-import org.adligo.tests4j.system.shared.report.summary.DependencyFailureException;
+import org.adligo.tests4j.system.shared.report.summary.AllowedReferencesFailureException;
 import org.adligo.tests4j.system.shared.report.summary.LineDiffTextDisplay;
 import org.adligo.tests4j.system.shared.report.summary.PercentFormat;
 import org.adligo.tests4j.system.shared.report.summary.RemoteProcessDisplay;
@@ -36,7 +36,7 @@ public class Tests4J_Summary_ReferenceGroup extends Tests4J_ReferenceGroup {
 		
 		add(names, AbstractProcessDisplay.class);
 		add(names, DefaultReporterStates.class);
-		add(names, DependencyFailureException.class);
+		add(names, AllowedReferencesFailureException.class);
 		add(names, LineDiffTextDisplay.class);
 		add(names, PercentFormat.class);
 		add(names, RemoteProcessDisplay.class);

@@ -42,7 +42,9 @@ implements I_MetaTrialParams<A_CoveragePkgTrials>, I_CountingPackageTrials {
 		add(I_PackageBriefTrial.class);
 		add(I_ProbesTrial.class);
 		add(I_ProbesCoverageContainerTrial.class);
+		add(I_ProbesCoverageContainerMutantTrial.class);
 		add(I_SourceFileBriefTrial.class);
+		add(I_SourceFileBriefMutantTrial.class);
 		add(I_SourceFileCoverageTrial.class);
 		
     add(ProbesTrial.class);

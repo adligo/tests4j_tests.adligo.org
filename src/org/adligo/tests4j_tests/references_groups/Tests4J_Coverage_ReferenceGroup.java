@@ -11,10 +11,12 @@ import org.adligo.tests4j.models.shared.coverage.I_CoverageUnitsContainer;
 import org.adligo.tests4j.models.shared.coverage.I_LineCoverage;
 import org.adligo.tests4j.models.shared.coverage.I_LineCoverageSegment;
 import org.adligo.tests4j.models.shared.coverage.I_PackageCoverageBrief;
-import org.adligo.tests4j.models.shared.coverage.I_ProbesCoverageContainer;
 import org.adligo.tests4j.models.shared.coverage.I_Probes;
+import org.adligo.tests4j.models.shared.coverage.I_ProbesCoverageContainer;
+import org.adligo.tests4j.models.shared.coverage.I_ProbesCoverageContainerMutant;
 import org.adligo.tests4j.models.shared.coverage.I_SourceFileCoverage;
 import org.adligo.tests4j.models.shared.coverage.I_SourceFileCoverageBrief;
+import org.adligo.tests4j.models.shared.coverage.I_SourceFileCoverageBriefMutant;
 import org.adligo.tests4j.models.shared.coverage.LineCoverage;
 import org.adligo.tests4j.models.shared.coverage.LineCoverageMutant;
 import org.adligo.tests4j.models.shared.coverage.LineCoverageSegment;
@@ -25,10 +27,10 @@ import org.adligo.tests4j.models.shared.coverage.PackageCoverageBriefMutant;
 import org.adligo.tests4j.models.shared.coverage.Probes;
 import org.adligo.tests4j.models.shared.coverage.ProbesMutant;
 import org.adligo.tests4j.models.shared.coverage.SourceFileCoverage;
-import org.adligo.tests4j.models.shared.coverage.SourceFileCoverageDelegator;
-import org.adligo.tests4j.models.shared.coverage.SourceFileCoverageMutant;
 import org.adligo.tests4j.models.shared.coverage.SourceFileCoverageBrief;
 import org.adligo.tests4j.models.shared.coverage.SourceFileCoverageBriefMutant;
+import org.adligo.tests4j.models.shared.coverage.SourceFileCoverageDelegator;
+import org.adligo.tests4j.models.shared.coverage.SourceFileCoverageMutant;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -59,8 +61,10 @@ public class Tests4J_Coverage_ReferenceGroup extends Tests4J_ReferenceGroup {
 		add(names, I_PackageCoverageBrief.class);
 		add(names, I_Probes.class);
 		add(names, I_ProbesCoverageContainer.class);
+		add(names, I_ProbesCoverageContainerMutant.class);
 		add(names, I_SourceFileCoverage.class);
 		add(names, I_SourceFileCoverageBrief.class);
+		add(names, I_SourceFileCoverageBriefMutant.class);
 		
 		add(names, LineCoverage.class);
 		add(names, LineCoverageMutant.class);

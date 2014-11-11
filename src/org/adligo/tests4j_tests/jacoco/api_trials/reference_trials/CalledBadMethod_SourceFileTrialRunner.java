@@ -1,7 +1,5 @@
 package org.adligo.tests4j_tests.jacoco.api_trials.reference_trials;
 
-import java.util.List;
-
 import org.adligo.tests4j.models.shared.metadata.I_TestMetadata;
 import org.adligo.tests4j.models.shared.metadata.I_TrialMetadata;
 import org.adligo.tests4j.models.shared.metadata.I_TrialRunMetadata;
@@ -18,15 +16,17 @@ import org.adligo.tests4j.shared.common.ClassMethods;
 import org.adligo.tests4j.shared.en.Tests4J_EnglishConstants;
 import org.adligo.tests4j.shared.i18n.I_Tests4J_ResultMessages;
 import org.adligo.tests4j.system.shared.trials.I_SourceFileTrial;
-import org.adligo.tests4j_4jacoco.plugin.factories.MockitoPluginFactory;
+import org.adligo.tests4j_4jacoco.plugin.factories.DefaultPluginFactory;
 import org.adligo.tests4j_tests.trials_api.common.ExpectedFailureRunner;
 import org.adligo.tests4j_tests.trials_api.common.SystemRunnerMock;
+
+import java.util.List;
 
 public class CalledBadMethod_SourceFileTrialRunner {
 
 	public static void runTestDelegate(I_Asserts asserts)  throws Exception {
 		ExpectedFailureRunner runner = new ExpectedFailureRunner();
-		runner.setCoveragPluginFactory(MockitoPluginFactory.class);
+		runner.setCoveragPluginFactory(DefaultPluginFactory.class);
 		
 		runner.run(CalledBadMethod_SourceFileTrial.class);
 		

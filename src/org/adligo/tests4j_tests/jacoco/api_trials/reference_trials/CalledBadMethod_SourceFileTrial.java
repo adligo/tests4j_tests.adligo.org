@@ -14,10 +14,11 @@ public class CalledBadMethod_SourceFileTrial extends SourceFileTrial {
 	public static final String TEST_METHOD_NAME = "test";
 	
 	public BadMethodCallMock bm_;
-	
+
 	@Test
 	public void test() {
 		bm_ = new BadMethodCallMock();
 		assertNotNull(bm_);
 	}
+	
 }
