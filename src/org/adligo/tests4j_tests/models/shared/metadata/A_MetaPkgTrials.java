@@ -39,13 +39,13 @@ implements I_MetaTrialParams<A_MetaPkgTrials>, I_CountingPackageTrials {
 		add(I_TestMetadataTrial.class);
 		add(I_TrialMetadataTrial.class);
 		add(I_TrialRunMetadataTrial.class);
-		add(I_UseCaseMetadataTrial.class);
+		add(I_UseCaseBriefTrial.class);
 		
 		add(TestMetadataMutantTrial.class);
 		add(TestMetadataTrial.class);
 		add(TrialMetadataMutantTrial.class);
 		add(TrialMetadataTrial.class);
-		add(UseCaseMetadataTrial.class);
+		add(UseCaseBriefTrial.class);
 		
 		add(MachineMetadataMutantTrial.class);
 		add(MachineMetadataTrial.class);

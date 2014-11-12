@@ -5,7 +5,7 @@ import org.adligo.tests4j.models.shared.metadata.I_SourceInfoMetadata;
 import org.adligo.tests4j.models.shared.metadata.I_TestMetadata;
 import org.adligo.tests4j.models.shared.metadata.I_TrialMetadata;
 import org.adligo.tests4j.models.shared.metadata.I_TrialRunMetadata;
-import org.adligo.tests4j.models.shared.metadata.I_UseCaseMetadata;
+import org.adligo.tests4j.models.shared.metadata.I_UseCaseBrief;
 import org.adligo.tests4j.models.shared.metadata.MachineMetadata;
 import org.adligo.tests4j.models.shared.metadata.MachineMetadataMutant;
 import org.adligo.tests4j.models.shared.metadata.SourceInfoMetadata;
@@ -16,7 +16,7 @@ import org.adligo.tests4j.models.shared.metadata.TrialMetadata;
 import org.adligo.tests4j.models.shared.metadata.TrialMetadataMutant;
 import org.adligo.tests4j.models.shared.metadata.TrialRunMetadata;
 import org.adligo.tests4j.models.shared.metadata.TrialRunMetadataMutant;
-import org.adligo.tests4j.models.shared.metadata.UseCaseMetadata;
+import org.adligo.tests4j.models.shared.metadata.UseCaseBrief;
 import org.adligo.tests4j.run.discovery.AfterTrialAuditor;
 import org.adligo.tests4j.run.discovery.AllowedDependenciesAuditor;
 import org.adligo.tests4j.run.discovery.BeforeTrialAuditor;
@@ -150,7 +150,7 @@ public class PackageDiscoveryTrial extends SourceFileCountingTrial {
 		assertContains(classNames, I_TestMetadata.class.getName());
 		assertContains(classNames, I_TrialMetadata.class.getName());
 		assertContains(classNames, I_TrialRunMetadata.class.getName());
-		assertContains(classNames, I_UseCaseMetadata.class.getName());
+		assertContains(classNames, I_UseCaseBrief.class.getName());
 		
 		assertContains(classNames, MachineMetadata.class.getName());
 		assertContains(classNames, MachineMetadataMutant.class.getName());
@@ -165,7 +165,7 @@ public class PackageDiscoveryTrial extends SourceFileCountingTrial {
 		assertContains(classNames, TrialMetadataMutant.class.getName());
 		assertContains(classNames, TrialRunMetadata.class.getName());
 		assertContains(classNames, TrialRunMetadataMutant.class.getName());
-		assertContains(classNames, UseCaseMetadata.class.getName());
+		assertContains(classNames, UseCaseBrief.class.getName());
 		
 		assertEquals(17, classNames.size());
 		List<PackageDiscovery> children =  cd.getSubPackages();
@@ -233,7 +233,7 @@ public class PackageDiscoveryTrial extends SourceFileCountingTrial {
 		assertContains(classNames, UseCaseScope.class.getName());
 		assertContains(classNames, UseCaseTrial.class.getName());
 		
-		assertEquals(43, classNames.size());
+		assertEquals(44, classNames.size());
 		List<PackageDiscovery> children =  cd.getSubPackages();
 		
 		

@@ -6,12 +6,15 @@ import org.adligo.tests4j.run.common.ConcurrentQualifiedMap;
 import org.adligo.tests4j.run.common.Holder;
 import org.adligo.tests4j.run.common.I_Classes;
 import org.adligo.tests4j.run.common.I_InitalValueFactory;
+import org.adligo.tests4j.run.common.I_JavaPackageNode;
 import org.adligo.tests4j.run.common.I_Memory;
 import org.adligo.tests4j.run.common.I_Notifier;
 import org.adligo.tests4j.run.common.I_RemoteRunner;
 import org.adligo.tests4j.run.common.I_RemoteRunnerFactory;
 import org.adligo.tests4j.run.common.I_ThreadManager;
 import org.adligo.tests4j.run.common.I_Threads;
+import org.adligo.tests4j.run.common.JavaPackageNodeMutant;
+import org.adligo.tests4j.run.common.JavaTree;
 import org.adligo.tests4j.run.common.NotifierDelegate;
 import org.adligo.tests4j.run.common.ThreadGroupFilter;
 import org.adligo.tests4j.run.common.ThreadGroupLocal;
@@ -37,12 +40,16 @@ public class Tests4J_RunCommon_ReferenceGroup extends Tests4J_ReferenceGroup {
 		
 		add(names, I_Classes.class);
 		add(names, I_InitalValueFactory.class);
+		add(names, I_JavaPackageNode.class);
 		add(names, I_Notifier.class);
 		add(names, I_Memory.class);
 		add(names, I_RemoteRunner.class);
 		add(names, I_RemoteRunnerFactory.class);
 		add(names, I_ThreadManager.class);
 		add(names, I_Threads.class);
+		
+		add(names, JavaPackageNodeMutant.class);
+		add(names, JavaTree.class);
 		
 		add(names, NotifierDelegate.class);
 		add(names, ThreadGroupFilter.class);

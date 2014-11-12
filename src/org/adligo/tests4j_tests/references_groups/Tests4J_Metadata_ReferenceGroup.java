@@ -8,7 +8,7 @@ import org.adligo.tests4j.models.shared.metadata.I_SourceInfoMetadata;
 import org.adligo.tests4j.models.shared.metadata.I_TestMetadata;
 import org.adligo.tests4j.models.shared.metadata.I_TrialMetadata;
 import org.adligo.tests4j.models.shared.metadata.I_TrialRunMetadata;
-import org.adligo.tests4j.models.shared.metadata.I_UseCaseMetadata;
+import org.adligo.tests4j.models.shared.metadata.I_UseCaseBrief;
 import org.adligo.tests4j.models.shared.metadata.MachineMetadata;
 import org.adligo.tests4j.models.shared.metadata.MachineMetadataMutant;
 import org.adligo.tests4j.models.shared.metadata.SourceInfoMetadata;
@@ -19,7 +19,7 @@ import org.adligo.tests4j.models.shared.metadata.TrialMetadata;
 import org.adligo.tests4j.models.shared.metadata.TrialMetadataMutant;
 import org.adligo.tests4j.models.shared.metadata.TrialRunMetadata;
 import org.adligo.tests4j.models.shared.metadata.TrialRunMetadataMutant;
-import org.adligo.tests4j.models.shared.metadata.UseCaseMetadata;
+import org.adligo.tests4j.models.shared.metadata.UseCaseBrief;
 
 /**
  *  @diagram_sync with PackageDependencies.class on 10/1/1014
@@ -36,7 +36,7 @@ public class Tests4J_Metadata_ReferenceGroup extends Tests4J_ReferenceGroupGwt {
 		add(names, I_TestMetadata.class);
 		add(names, I_TrialMetadata.class);
 		add(names, I_TrialRunMetadata.class);
-		add(names, I_UseCaseMetadata.class);
+		add(names, I_UseCaseBrief.class);
 		
 		
 		add(names, MachineMetadata.class);
@@ -52,7 +52,7 @@ public class Tests4J_Metadata_ReferenceGroup extends Tests4J_ReferenceGroupGwt {
 		add(names, TrialRunMetadata.class);
 		add(names, TrialRunMetadataMutant.class);
 		
-		add(names, UseCaseMetadata.class);
+		add(names, UseCaseBrief.class);
 		
 		names.addAll(Tests4J_XML_ReferenceGroup.INSTANCE.getClassNames());
 		

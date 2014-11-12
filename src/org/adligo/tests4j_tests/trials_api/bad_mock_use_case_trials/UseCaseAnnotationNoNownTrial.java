@@ -22,7 +22,7 @@ import org.adligo.tests4j_tests.trials_api.common.SystemRunnerMock;
  * @author scott
  *
  */
-@UseCaseScope(system="tests4j.adligo.org",verb="reveal",nown="")
+@UseCaseScope(verb="reveal",nown="")
 @TrialRecursion
 public class UseCaseAnnotationNoNownTrial extends UseCaseTrial {
 

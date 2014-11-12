@@ -75,7 +75,7 @@ implements I_MetaTrialParams<A_TrialsPkgTrials>, I_CountingPackageTrials {
 		add(IgnoreTrialTrial.class);
 		add(TrialRecursionTrial.class);
 		
-		
+		add(TrialRunContextTrial.class);
 		add(TrialParamValueTrial.class);
 		add(TrialParamValue_XML_ConsumerTrial.class);
 		

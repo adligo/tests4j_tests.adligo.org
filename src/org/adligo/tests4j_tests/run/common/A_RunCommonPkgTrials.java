@@ -36,6 +36,7 @@ implements I_MetaTrialParams<A_RunCommonPkgTrials>, I_CountingPackageTrials {
 	public void addTrials()  throws Exception {
 	  add(I_ClassesTrial.class);
 	  add(I_FilesTrial.class);
+	  add(I_JavaPackageNodeTrial.class);
 	  add(I_JseSystemTrial.class);
 	  
 	  add(I_NotifierTrial.class);
@@ -48,6 +49,8 @@ implements I_MetaTrialParams<A_RunCommonPkgTrials>, I_CountingPackageTrials {
 	  add(ClassesDelegateTrial.class);
 	  add(ConcurrentQualifiedMapTrial.class);
 	  
+	  add(JavaPackageNodeMutantTrial.class);
+	  add(JavaTreeTrial.class);
 	  add(NotifierDelegateTrial.class);
 	  add(ThreadsDelegateTrial.class);
 	  add(HolderTrial.class);

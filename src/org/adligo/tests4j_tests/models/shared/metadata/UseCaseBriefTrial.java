@@ -1,7 +1,7 @@
 package org.adligo.tests4j_tests.models.shared.metadata;
 
 
-import org.adligo.tests4j.models.shared.metadata.UseCaseMetadata;
+import org.adligo.tests4j.models.shared.metadata.UseCaseBrief;
 import org.adligo.tests4j.shared.asserts.common.ExpectedThrownData;
 import org.adligo.tests4j.shared.asserts.common.I_Thrower;
 import org.adligo.tests4j.shared.asserts.reference.AllowedReferences;
@@ -14,9 +14,9 @@ import org.adligo.tests4j_tests.base_trials.I_CountType;
 import org.adligo.tests4j_tests.base_trials.SourceFileCountingTrial;
 import org.adligo.tests4j_tests.references_groups.Tests4J_Metadata_GwtReferenceGroup;
 
-@SourceFileScope (sourceClass=UseCaseMetadata.class, minCoverage=86.0)
+@SourceFileScope (sourceClass=UseCaseBrief.class, minCoverage=86.0)
 @AllowedReferences (groups=Tests4J_Metadata_GwtReferenceGroup.class)
-public class UseCaseMetadataTrial extends SourceFileCountingTrial {
+public class UseCaseBriefTrial extends SourceFileCountingTrial {
 
 	
 	@Test
@@ -29,7 +29,7 @@ public class UseCaseMetadataTrial extends SourceFileCountingTrial {
 					
 					@Override
 					public void run() {
-						new UseCaseMetadata(null, null);
+						new UseCaseBrief(null, null);
 					}
 				});
 		assertThrown(new ExpectedThrownData(new IllegalArgumentException(
@@ -38,7 +38,7 @@ public class UseCaseMetadataTrial extends SourceFileCountingTrial {
 					
 					@Override
 					public void run() {
-						new UseCaseMetadata("", "");
+						new UseCaseBrief("", "");
 					}
 				});
 		assertThrown(new ExpectedThrownData(new IllegalArgumentException(
@@ -47,7 +47,7 @@ public class UseCaseMetadataTrial extends SourceFileCountingTrial {
 					
 					@Override
 					public void run() {
-						new UseCaseMetadata("nown", null);
+						new UseCaseBrief("nown", null);
 					}
 				});
 		assertThrown(new ExpectedThrownData(new IllegalArgumentException(
@@ -56,7 +56,7 @@ public class UseCaseMetadataTrial extends SourceFileCountingTrial {
 					
 					@Override
 					public void run() {
-						new UseCaseMetadata("nown", "");
+						new UseCaseBrief("nown", "");
 					}
 				});
 		assertThrown(new ExpectedThrownData(new IllegalArgumentException(
@@ -65,7 +65,7 @@ public class UseCaseMetadataTrial extends SourceFileCountingTrial {
 					
 					@Override
 					public void run() {
-						new UseCaseMetadata("<useCase nown=\"exception\" />");
+						new UseCaseBrief("<useCase nown=\"exception\" />");
 					}
 				});
 		
@@ -75,17 +75,17 @@ public class UseCaseMetadataTrial extends SourceFileCountingTrial {
 					
 					@Override
 					public void run() {
-						new UseCaseMetadata("<useCase verb=\"throw\" />");
+						new UseCaseBrief("<useCase verb=\"throw\" />");
 					}
 				});
 	}
 	
 	@Test
 	public void testEqualsHashCode() throws Exception {
-		UseCaseMetadata a = new UseCaseMetadata("exception", "throw");
-		UseCaseMetadata b = new UseCaseMetadata("football", "throw");
-		UseCaseMetadata c = new UseCaseMetadata("exception", "throw");
-		UseCaseMetadata d = new UseCaseMetadata("exception", "eat");
+		UseCaseBrief a = new UseCaseBrief("exception", "throw");
+		UseCaseBrief b = new UseCaseBrief("football", "throw");
+		UseCaseBrief c = new UseCaseBrief("exception", "throw");
+		UseCaseBrief d = new UseCaseBrief("exception", "eat");
 		
 		assertEquals(a, a);
 		assertEquals(a.hashCode(), a.hashCode());
@@ -104,18 +104,18 @@ public class UseCaseMetadataTrial extends SourceFileCountingTrial {
 	
 	@Test
 	public void testGettersAndCopyConstructor() throws Exception {
-		UseCaseMetadata uc = new UseCaseMetadata("exception", "throw");
+		UseCaseBrief uc = new UseCaseBrief("exception", "throw");
 		assertEquals("exception", uc.getNown());
 		assertEquals("throw", uc.getVerb());
 		
-		UseCaseMetadata uc2 = new UseCaseMetadata(uc);
+		UseCaseBrief uc2 = new UseCaseBrief(uc);
 		assertEquals("exception", uc2.getNown());
 		assertEquals("throw", uc2.getVerb());
 	}
 	
 	@Test
 	public void testToAndFromXML() throws Exception {
-		UseCaseMetadata uc = new UseCaseMetadata("exception", "throw");
+		UseCaseBrief uc = new UseCaseBrief("exception", "throw");
 		XML_Builder builder = new XML_Builder();
 		builder.addIndent();
 		uc.toXml(builder);
@@ -123,14 +123,14 @@ public class UseCaseMetadataTrial extends SourceFileCountingTrial {
 		assertEquals("\t<useCase nown=\"exception\" verb=\"throw\" />\n", result);
 		assertEquals("throw", uc.getVerb());
 		
-		UseCaseMetadata uc2 = new UseCaseMetadata(result);
+		UseCaseBrief uc2 = new UseCaseBrief(result);
 		assertEquals("exception", uc2.getNown());
 		assertEquals("throw", uc2.getVerb());
 	}
 	
 	@Test
 	public void testToString() throws Exception {
-		UseCaseMetadata uc = new UseCaseMetadata("exception", "throw");
+		UseCaseBrief uc = new UseCaseBrief("exception", "throw");
 		assertEquals("UseCase [nown=exception, verb=throw]", uc.toString());
 	}
 	

@@ -26,7 +26,7 @@ import org.adligo.tests4j_tests.trials_api.common.SystemRunnerMock;
  * @author scott
  *
  */
-@UseCaseScope(system="tests4j.adligo.org",verb="reveal",nown="mistake")
+@UseCaseScope(verb="reveal",nown="mistake")
 @TrialRecursion
 public class BeforeTrialNotPublicTrial extends UseCaseTrial {
 

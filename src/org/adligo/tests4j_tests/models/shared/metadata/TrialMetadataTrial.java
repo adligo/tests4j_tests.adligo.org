@@ -7,7 +7,7 @@ import org.adligo.tests4j.models.shared.metadata.I_TestMetadata;
 import org.adligo.tests4j.models.shared.metadata.TestMetadataMutant;
 import org.adligo.tests4j.models.shared.metadata.TrialMetadata;
 import org.adligo.tests4j.models.shared.metadata.TrialMetadataMutant;
-import org.adligo.tests4j.models.shared.metadata.UseCaseMetadata;
+import org.adligo.tests4j.models.shared.metadata.UseCaseBrief;
 import org.adligo.tests4j.shared.asserts.reference.AllowedReferences;
 import org.adligo.tests4j.shared.common.TrialType;
 import org.adligo.tests4j.shared.xml.XML_Builder;
@@ -33,9 +33,8 @@ public class TrialMetadataTrial extends SourceFileCountingTrial {
 		tmm.setType(TrialType.SourceFileTrial);
 		tmm.setMinimumCodeCoverage(11.1);
 		
-		UseCaseMetadata ucm = new UseCaseMetadata("nown", "verb");
+		UseCaseBrief ucm = new UseCaseBrief("nown", "verb");
 		tmm.setUseCase(ucm);
-		tmm.setSystem("systemName");
 		tmm.setIgnored(true);
 		
 		
@@ -55,8 +54,6 @@ public class TrialMetadataTrial extends SourceFileCountingTrial {
 		assertEquals(TrialType.SourceFileTrial, tm.getType());
 		assertSame(ucm, tm.getUseCase());
 		assertTrue(tm.isIgnored());
-		assertEquals("systemName", 
-				tm.getSystem());
 		assertEquals(11.1, tm.getMinimumCodeCoverage());
 		
 		assertEquals(2, tm.getTestCount());
@@ -70,66 +67,15 @@ public class TrialMetadataTrial extends SourceFileCountingTrial {
 		assertEquals(1, tm.getIgnoredTestCount());
 	}
 	
-	@Test
-	public void testToAndFromXML() throws Exception {
-		TrialMetadataMutant tmm = new TrialMetadataMutant();
-		XML_Builder builder = new XML_Builder();
-		builder.addIndent();
-		tmm.toXml(builder);
-		String result = builder.toXmlString();
-		assertEquals("\t<trialMetadata/>\n", result);
-		
-		TrialMetadataMutant other = new TrialMetadataMutant(result);
-		assertNull(other.getTrialName());
-		
-		tmm.setAfterTrialMethodName("afterTrialMethodName");
-		tmm.setBeforeTrialMethodName("beforeTrialMethodName");
-		tmm.setTestedPackage("testedPackageName");
-		tmm.setTestedSourceFile("testedSourceFile");
-		tmm.setTimeout(13L);
-		tmm.setTrialName("someTrialName");
-		tmm.setType(TrialType.SourceFileTrial);
-		tmm.setMinimumCodeCoverage(13.5);
-		
-		UseCaseMetadata ucm = new UseCaseMetadata("nown", "verb");
-		tmm.setUseCase(ucm);
-		tmm.setSystem("systemName");
-		tmm.setIgnored(true);
-		
-		
-		TestMetadataMutant testMm = new TestMetadataMutant();
-		testMm.setTestName("aTest");
-		tmm.addTest(testMm);
-		testMm = new TestMetadataMutant();
-		testMm.setTestName("bTest");
-		testMm.setIgnored(true);
-		tmm.addTest(testMm);
-		
-		
-		builder = new XML_Builder();
-		builder.addIndent();
-		tmm.toXml(builder);
-		result = builder.toXmlString();
-		assertEquals("\n\t<trialMetadata name=\"someTrialName\" type=\"SourceFileTrial\" timeout=\"13\"\n" +
-				"\t\t beforeTrial=\"beforeTrialMethodName\" ignored=\"true\" minCodeCoverage=\"13.5\"\n" +
-				"\t\t afterTrial=\"afterTrialMethodName\" testedSourceFile=\"testedSourceFile\" testedPackage=\"testedPackageName\"\n" +
-				"\t\t testedSystem=\"systemName\" >\n" +
-				"\t\t<useCase nown=\"nown\" verb=\"verb\" />\n" +
-				"\t\t<tests>\n" +
-				"\t\t\t<testMetadata name=\"aTest\" />\n" +
-				"\t\t\t<testMetadata name=\"bTest\" ignored=\"true\" />\n" +
-				"\t\t</tests>\n" +
-				"\t</trialMetadata>\n", "\n" + result);
-	}
-	
+
 	@Override
 	public int getTests(I_CountType type) {
-		return super.getTests(type, 2, true);
+		return super.getTests(type, 1, true);
 	}
 
 	@Override
 	public int getAsserts(I_CountType type) {
-		int thisAsserts = 17;
+		int thisAsserts = 13;
 		//code coverage and circular dependencies +
 		//custom afterTrialTests
 		//+ see above
@@ -143,7 +89,7 @@ public class TrialMetadataTrial extends SourceFileCountingTrial {
 
 	@Override
 	public int getUniqueAsserts(I_CountType type) {
-		int thisUniqueAsserts = 16;
+		int thisUniqueAsserts = 12;
 		//code coverage and circular dependencies +
 		//custom afterTrialTests
 		//+ see above

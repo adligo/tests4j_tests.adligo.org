@@ -22,7 +22,6 @@ import org.adligo.tests4j_tests.trials_api.bad_mock_use_case_trials.ProtectedTes
 import org.adligo.tests4j_tests.trials_api.bad_mock_use_case_trials.StaticTestTrial;
 import org.adligo.tests4j_tests.trials_api.bad_mock_use_case_trials.TestWithParamsTrial;
 import org.adligo.tests4j_tests.trials_api.bad_mock_use_case_trials.UseCaseAnnotationNoNownTrial;
-import org.adligo.tests4j_tests.trials_api.bad_mock_use_case_trials.UseCaseAnnotationNoSystemTrial;
 import org.adligo.tests4j_tests.trials_api.bad_mock_use_case_trials.UseCaseAnnotationNoVerbTrial;
 
 @PackageScope (packageName = "org.adligo.tests4j")
@@ -109,11 +108,6 @@ public class BadUseCaseTrials_Trial extends ApiCountingTrial {
 	}
 	
 	@Test
-	public void testUseCaseAnnotationNoSystemTrialFails()  throws Exception {
-		UseCaseAnnotationNoSystemTrial.runTestDelegate(this);
-	}
-	
-	@Test
 	public void testUseCaseAnnotationNoVerb()  throws Exception {
 		UseCaseAnnotationNoVerbTrial.runTestDelegate(this);
 	}
@@ -129,7 +123,7 @@ public class BadUseCaseTrials_Trial extends ApiCountingTrial {
 	
 	@Override
 	public int getTests(I_CountType type) {
-		return super.getTests(type, 18);
+		return super.getTests(type, 17);
 	}
 
 	
@@ -151,7 +145,6 @@ public class BadUseCaseTrials_Trial extends ApiCountingTrial {
 				StaticTestTrial.getAsserts() +
 				TestWithParamsTrial.getAsserts() +
 				UseCaseAnnotationNoNownTrial.getAsserts() +
-				UseCaseAnnotationNoSystemTrial.getAsserts() +
 				UseCaseAnnotationNoVerbTrial.getAsserts() ;
 		//overrode afterTrialTests above
 		if (type.isFromMetaWithCoverage()) {
@@ -163,7 +156,7 @@ public class BadUseCaseTrials_Trial extends ApiCountingTrial {
 
 	@Override
 	public int getUniqueAsserts(I_CountType type) {
-		int uAsserts = 251;
+		int uAsserts = 238;
 		//overrode afterTrialTests above
 		if (type.isFromMetaWithCoverage()) {
 			return super.getUniqueAsserts(type, uAsserts + 1);

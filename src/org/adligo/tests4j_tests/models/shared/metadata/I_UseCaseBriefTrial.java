@@ -1,15 +1,15 @@
 package org.adligo.tests4j_tests.models.shared.metadata;
 
-import org.adligo.tests4j.models.shared.metadata.I_UseCaseMetadata;
+import org.adligo.tests4j.models.shared.metadata.I_UseCaseBrief;
 import org.adligo.tests4j.shared.asserts.reference.AllowedReferences;
 import org.adligo.tests4j.system.shared.trials.SourceFileScope;
 import org.adligo.tests4j_tests.base_trials.I_CountType;
 import org.adligo.tests4j_tests.base_trials.SourceFileCountingTrial;
 import org.adligo.tests4j_tests.references_groups.Tests4J_Metadata_GwtReferenceGroup;
 
-@SourceFileScope (sourceClass=I_UseCaseMetadata.class)
+@SourceFileScope (sourceClass=I_UseCaseBrief.class)
 @AllowedReferences (groups=Tests4J_Metadata_GwtReferenceGroup.class)
-public class I_UseCaseMetadataTrial extends SourceFileCountingTrial {
+public class I_UseCaseBriefTrial extends SourceFileCountingTrial {
 
 	@Override
 	public int getTests(I_CountType type) {

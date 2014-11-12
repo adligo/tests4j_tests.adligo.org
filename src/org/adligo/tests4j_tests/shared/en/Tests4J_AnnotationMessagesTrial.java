@@ -71,8 +71,6 @@ public class Tests4J_AnnotationMessagesTrial extends SourceFileCountingTrial {
 		asserter.assertConstant("@UseCaseScope annotations must contain a non empty nown.",
 				messages.getUseCaseScopeEmptyNown());
 		
-		asserter.assertConstant("@UseCaseScope annotations must contain a non empty system.",
-				messages.getUseCaseScopeEmptySystem());
 		asserter.assertConstant("@UseCaseScope annotations must contain a non empty verb.",
 				messages.getUseCaseScopeEmptyVerb());
 		asserter.assertConstant(" was not annotated correctly.",
@@ -92,7 +90,7 @@ public class Tests4J_AnnotationMessagesTrial extends SourceFileCountingTrial {
 
 	@Override
 	public int getAsserts(I_CountType type) {
-		int thisAsserts = 76;
+		int thisAsserts = 73;
 		//code coverage and circular dependencies +
 		//custom afterTrialTests
 		//+ see above
@@ -106,7 +104,7 @@ public class Tests4J_AnnotationMessagesTrial extends SourceFileCountingTrial {
 
 	@Override
 	public int getUniqueAsserts(I_CountType type) {
-		int thisUniqueAsserts = 76;
+		int thisUniqueAsserts = 73;
 		//code coverage and circular dependencies +
 		//custom afterTrialTests
 		//+ see above
