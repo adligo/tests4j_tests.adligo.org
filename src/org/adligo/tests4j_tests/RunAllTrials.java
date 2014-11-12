@@ -6,6 +6,7 @@ import org.adligo.tests4j.models.shared.results.I_TrialResult;
 import org.adligo.tests4j.models.shared.results.I_TrialRunResult;
 import org.adligo.tests4j.run.api.Tests4J;
 import org.adligo.tests4j.run.helpers.Tests4J_Processor;
+import org.adligo.tests4j.run.xml_bindings.Tests4J_XmlFileOutputListener;
 import org.adligo.tests4j.shared.output.DefaultLog;
 import org.adligo.tests4j.shared.output.I_Tests4J_Log;
 import org.adligo.tests4j.system.shared.api.I_Tests4J_Listener;
@@ -33,7 +34,7 @@ import org.adligo.tests4j_v1_tests.A_JavaVersionSpecificTrials;
 import java.math.BigDecimal;
 
 public class RunAllTrials  extends SimplePackageTrials 
-implements I_MetaTrialParams<RunAllTrials>, I_CountingPackageTrials, I_Tests4J_Listener {
+implements I_MetaTrialParams<RunAllTrials>, I_CountingPackageTrials {
 	
 	static long start = System.currentTimeMillis();
 	static I_Tests4J_Log logger = new DefaultLog();
@@ -96,7 +97,7 @@ implements I_MetaTrialParams<RunAllTrials>, I_CountingPackageTrials, I_Tests4J_L
 			//params.setThreadPoolSize(1);
 			//params.setCoveragePlugin(new TieredJacocoPlugin());
 			//
-			 Tests4J.run(params, me);
+			 Tests4J.run(params, new Tests4J_XmlFileOutputListener());
 			
 		} catch (Throwable x) {
 			x.printStackTrace(ERR);
@@ -146,53 +147,6 @@ implements I_MetaTrialParams<RunAllTrials>, I_CountingPackageTrials, I_Tests4J_L
 		cocoApi.setParams(params);
 		cocoApi.addTrials();
 		add(cocoApi.getCountingTrials());
-	}
-
-
-	@Override
-	public void onMetadataCalculated(I_TrialRunMetadata metadata) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void onStartingTrial(String trialName) {
-	}
-
-	@Override
-	public void onStartingTest(String trialName, String testName) {
-	}
-
-	@Override
-	public void onTestCompleted(String trialName, String testName,
-			boolean passed) {
-		
-	}
-
-	@Override
-	public synchronized void onTrialCompleted(I_TrialResult result) {
-	}
-
-	@Override
-	public void onRunCompleted(I_TrialRunResult result) {
-		
-		long end = System.currentTimeMillis();
-		long dur = end - start;
-		BigDecimal durD = new BigDecimal(dur).divide(new BigDecimal(1000));
-		//use the reporter to log to the original System.out
-		logger.log("Total run time " +durD + " seconds.");
-	}
-
-	@Override
-	public void onProccessStateChange(I_PhaseState info) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void onProgress(I_PhaseState info) {
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override

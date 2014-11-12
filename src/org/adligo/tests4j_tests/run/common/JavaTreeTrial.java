@@ -22,7 +22,7 @@ import java.util.Set;
  * @author scott
  * 
  */
-@SourceFileScope (sourceClass=JavaTree.class, minCoverage=96.0, 
+@SourceFileScope (sourceClass=JavaTree.class, minCoverage=87.0, 
 allowedCircularDependencies=CircularDependencies.AllowInnerOuterClasses)
 @AllowedReferences (groups=Tests4J_RunCommon_ReferenceGroup.class)
 public class JavaTreeTrial extends SourceFileCountingTrial {
