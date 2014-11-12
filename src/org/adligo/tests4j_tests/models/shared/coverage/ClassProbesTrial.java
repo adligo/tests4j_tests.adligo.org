@@ -10,7 +10,7 @@ import org.adligo.tests4j_tests.base_trials.I_CountType;
 import org.adligo.tests4j_tests.base_trials.SourceFileCountingTrial;
 import org.adligo.tests4j_tests.references_groups.Tests4J_Coverage_GwtReferenceGroup;
 
-@SourceFileScope (sourceClass=ClassProbes.class, minCoverage=82.0)
+@SourceFileScope (sourceClass=ClassProbes.class, minCoverage=80.0)
 @AllowedReferences (groups=Tests4J_Coverage_GwtReferenceGroup.class)
 public class ClassProbesTrial extends SourceFileCountingTrial {
 
@@ -30,8 +30,6 @@ public class ClassProbesTrial extends SourceFileCountingTrial {
 	  assertEquals(73L, cp.getClassId());
     assertEquals("className", cp.getClassName());
     assertEquals(pm, cp.getProbes());
-    assertEquals(3, cp.getCoverageUnits());
-    assertEquals(2, cp.getCoveredCoverageUnits());
 	}
 
 	@Override
@@ -42,7 +40,7 @@ public class ClassProbesTrial extends SourceFileCountingTrial {
 	
 	@Override
 	public int getAsserts(I_CountType type) {
-		int thisAsserts = 5;
+		int thisAsserts = 3;
 		//code coverage and circular dependencies +
 		//custom afterTrialTests
 		//+ see above
@@ -56,7 +54,7 @@ public class ClassProbesTrial extends SourceFileCountingTrial {
 
 	@Override
 	public int getUniqueAsserts(I_CountType type) {
-		int thisUniqueAsserts = 5;
+		int thisUniqueAsserts = 3;
 		//code coverage and circular dependencies +
 		//custom afterTrialTests
 		//+ see above

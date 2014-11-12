@@ -27,15 +27,11 @@ public class ClassProbesMutantTrial extends SourceFileCountingTrial {
 	  ProbesMutant pm = new ProbesMutant(new boolean [] {true, false, true});
 	  mut.setProbes(pm);
 	  assertSame(pm, mut.getProbes());
-	  assertEquals(3, mut.getCoverageUnits());
-	  assertEquals(2, mut.getCoveredCoverageUnits());
 	  
 	  ClassProbesMutant mut2 = new ClassProbesMutant(mut);
 	  assertEquals(73L, mut2.getClassId());
     assertEquals("className", mut2.getClassName());
     assertEquals(pm, mut2.getProbes());
-    assertEquals(3, mut2.getCoverageUnits());
-    assertEquals(2, mut2.getCoveredCoverageUnits());
 	}
 
 	@Override
@@ -46,7 +42,7 @@ public class ClassProbesMutantTrial extends SourceFileCountingTrial {
 	
 	@Override
 	public int getAsserts(I_CountType type) {
-		int thisAsserts = 10;
+		int thisAsserts = 6;
 		//code coverage and circular dependencies +
 		//custom afterTrialTests
 		//+ see above
@@ -60,7 +56,7 @@ public class ClassProbesMutantTrial extends SourceFileCountingTrial {
 
 	@Override
 	public int getUniqueAsserts(I_CountType type) {
-		int thisUniqueAsserts = 6;
+		int thisUniqueAsserts = 4;
 		//code coverage and circular dependencies +
 		//custom afterTrialTests
 		//+ see above

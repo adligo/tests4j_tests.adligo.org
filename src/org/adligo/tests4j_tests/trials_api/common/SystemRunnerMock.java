@@ -4,6 +4,9 @@ import org.adligo.tests4j.run.common.I_JseSystem;
 import org.adligo.tests4j.shared.common.DefaultSystem;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.PrintStream;
 import java.util.List;
 import java.util.concurrent.ArrayBlockingQueue;
@@ -84,6 +87,30 @@ public class SystemRunnerMock implements I_JseSystem {
   @Override
   public File newFile(String path) {
     return new File(path);
+  }
+
+  @Override
+  public boolean mkdir(String path) {
+    // TODO Auto-generated method stub
+    return false;
+  }
+
+  @Override
+  public FileOutputStream newFileOutput(String path) throws IOException {
+    // TODO Auto-generated method stub
+    return null;
+  }
+
+  @Override
+  public FileInputStream newFileInput(String path) throws IOException {
+    // TODO Auto-generated method stub
+    return null;
+  }
+
+  @Override
+  public void remove(String path) throws IOException {
+    // TODO Auto-generated method stub
+    
   }
 
 

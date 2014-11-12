@@ -2,7 +2,7 @@ package org.adligo.tests4j_tests.run.api;
 
 import org.adligo.tests4j.run.api.Tests4J;
 import org.adligo.tests4j.run.common.I_JseSystem;
-import org.adligo.tests4j.run.helpers.JseSystem;
+import org.adligo.tests4j.run.common.JseSystem;
 import org.adligo.tests4j.run.helpers.Tests4J_Controls;
 import org.adligo.tests4j.shared.common.DefaultSystem;
 import org.adligo.tests4j.system.shared.api.I_Tests4J_Controls;

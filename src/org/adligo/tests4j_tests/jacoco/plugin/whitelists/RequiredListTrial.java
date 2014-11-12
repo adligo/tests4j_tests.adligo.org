@@ -16,7 +16,7 @@ import java.util.Set;
 @SourceFileScope (sourceClass=RequiredList.class, minCoverage=99.0)
 public class RequiredListTrial extends SourceFileCountingTrial {
 
-	private static final int ASSERTS = 352;
+	private static final int ASSERTS = 353;
 
 
 	@SuppressWarnings({"unused", "boxing"})
@@ -30,7 +30,8 @@ public class RequiredListTrial extends SourceFileCountingTrial {
 	  assertContains(nip, "sun.");
 	  assertContains(nip, "org.jacoco.");
 	  assertContains(nip, "org.objectweb.");
-	  assertEquals(5, nip.size());
+	  assertContains(nip, "org.w3c.");
+	  assertEquals(6, nip.size());
 	  
 		Set<String> allowedPackages = new HashSet<String>();
 		allowedPackages.add("org.adligo.tests4j.");

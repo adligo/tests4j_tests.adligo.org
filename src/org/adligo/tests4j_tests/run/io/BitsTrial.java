@@ -8,7 +8,7 @@ import org.adligo.tests4j.system.shared.trials.Test;
 import org.adligo.tests4j_tests.base_trials.I_CountType;
 import org.adligo.tests4j_tests.base_trials.SourceFileCountingTrial;
 
-@SourceFileScope (sourceClass=Bits.class)
+@SourceFileScope (sourceClass=Bits.class, minCoverage=33.0)
 public class BitsTrial extends SourceFileCountingTrial {
 
 	@Test
@@ -39,8 +39,8 @@ public class BitsTrial extends SourceFileCountingTrial {
 	public void afterTrialTests(I_SourceFileTrialResult p) {
 		super.afterTrialTests(p);
 		if (p.hasRecordedCoverage()) {
-			I_SourceFileCoverageBrief probes = p.getSourceFileProbes();
-			assertGreaterThanOrEquals(100.00, probes.getPercentageCoveredDouble());
+			I_SourceFileCoverageBrief probes = p.getSourceFileCoverage();
+			assertGreaterThanOrEquals(33.00, probes.getPercentageCoveredDouble());
 		}
 	}
 	

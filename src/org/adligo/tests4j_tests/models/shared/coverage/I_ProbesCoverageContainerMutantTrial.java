@@ -1,6 +1,6 @@
 package org.adligo.tests4j_tests.models.shared.coverage;
 
-import org.adligo.tests4j.models.shared.coverage.I_ProbesCoverageContainer;
+import org.adligo.tests4j.models.shared.coverage.I_CoverageIntContainer;
 import org.adligo.tests4j.models.shared.coverage.I_Probes;
 import org.adligo.tests4j.shared.asserts.reference.AllowedReferences;
 import org.adligo.tests4j.system.shared.trials.SourceFileScope;
@@ -8,7 +8,7 @@ import org.adligo.tests4j_tests.base_trials.I_CountType;
 import org.adligo.tests4j_tests.base_trials.SourceFileCountingTrial;
 import org.adligo.tests4j_tests.references_groups.Tests4J_Coverage_GwtReferenceGroup;
 
-@SourceFileScope (sourceClass=I_ProbesCoverageContainer.class)
+@SourceFileScope (sourceClass=I_CoverageIntContainer.class)
 @AllowedReferences (groups=Tests4J_Coverage_GwtReferenceGroup.class)
 public class I_ProbesCoverageContainerMutantTrial extends SourceFileCountingTrial {
 

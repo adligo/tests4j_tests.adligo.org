@@ -27,8 +27,6 @@ public class ProbesTrial extends SourceFileCountingTrial {
 		assertFalse(probes.get(2));
 		assertFalse(probes.get(3));
 		assertTrue(probes.get(0));
-		assertEquals(5, probes.getCoverageUnits());
-    assertEquals(3, probes.getCoveredCoverageUnits());
     
 		assertEquals(5, probes.size());
 		//assert no data linkage
@@ -95,7 +93,7 @@ public class ProbesTrial extends SourceFileCountingTrial {
 
 	@Override
 	public int getAsserts(I_CountType type) {
-		int thisAsserts = 27;
+		int thisAsserts = 25;
 		//code coverage and circular dependencies +
 		//custom afterTrialTests
 		//+ see above
@@ -109,7 +107,7 @@ public class ProbesTrial extends SourceFileCountingTrial {
 
 	@Override
 	public int getUniqueAsserts(I_CountType type) {
-		int thisUniqueAsserts = 12;
+		int thisUniqueAsserts = 11;
 		//code coverage and circular dependencies +
 		//custom afterTrialTests
 		//+ see above

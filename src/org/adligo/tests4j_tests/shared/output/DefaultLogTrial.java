@@ -1,6 +1,6 @@
 package org.adligo.tests4j_tests.shared.output;
 
-import org.adligo.tests4j.run.helpers.JseSystem;
+import org.adligo.tests4j.run.common.JseSystem;
 import org.adligo.tests4j.shared.asserts.reference.AllowedReferences;
 import org.adligo.tests4j.shared.common.DefaultSystem;
 import org.adligo.tests4j.shared.common.DelegateSystem;
