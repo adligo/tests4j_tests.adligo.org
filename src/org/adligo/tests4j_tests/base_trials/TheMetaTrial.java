@@ -1,4 +1,4 @@
-package org.adligo.tests4j_tests;
+package org.adligo.tests4j_tests.base_trials;
 
 import java.util.ArrayList;
 import java.util.Collections;

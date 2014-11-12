@@ -22,6 +22,7 @@ import org.adligo.tests4j.system.shared.trials.I_MetaTrialParams;
 import org.adligo.tests4j_4jacoco.plugin.factories.MockitoPluginFactory;
 import org.adligo.tests4j_tests.base_trials.I_CountingPackageTrials;
 import org.adligo.tests4j_tests.base_trials.SimplePackageTrials;
+import org.adligo.tests4j_tests.base_trials.TheMetaTrial;
 import org.adligo.tests4j_tests.jacoco.api_trials.A_CocoApiPkgTrials;
 import org.adligo.tests4j_tests.jacoco.plugin.A_CocoPlugPkgTrials;
 import org.adligo.tests4j_tests.models.A_ModelsPkgTrials;
