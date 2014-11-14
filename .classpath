@@ -11,5 +11,6 @@
 	<classpathentry kind="var" path="FAB_REPO/org.mockito/mockito-all-1.10.8.jar"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/gwt_refs.adligo.org"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/tests4j_4mockito.adligo.org"/>
+	<classpathentry kind="var" path="FAB_REPO"/>
 	<classpathentry kind="output" path="classes_e"/>
 </classpath>

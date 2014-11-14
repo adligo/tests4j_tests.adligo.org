@@ -5,6 +5,7 @@ import org.adligo.tests4j.models.shared.results.I_PhaseState;
 import org.adligo.tests4j.models.shared.results.I_TrialResult;
 import org.adligo.tests4j.models.shared.results.I_TrialRunResult;
 import org.adligo.tests4j.system.shared.api.I_Tests4J_Listener;
+import org.adligo.tests4j.system.shared.api.I_Tests4J_Params;
 
 public class Clumsey_Tests4J_Listener implements I_Tests4J_Listener {
 
@@ -48,5 +49,11 @@ public class Clumsey_Tests4J_Listener implements I_Tests4J_Listener {
 	public void onProgress(I_PhaseState info) {
 		throw new RuntimeException("mock from onProccessStateChange");
 	}
+
+  @Override
+  public void onStartingSetup(I_Tests4J_Params params) {
+    // TODO Auto-generated method stub
+    
+  }
 
 }

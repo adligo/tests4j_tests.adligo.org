@@ -44,6 +44,8 @@ public class Tests4J_EnglishConstants_Trial extends SourceFileCountingTrial {
 		
 		asserter.assertConstant("MethodBlocker requires a blocking method name.", 
 				messages.getMethodBlockerRequiresABlockingMethod());
+		asserter.assertConstant("Another instance of tests4j appears to be running in this directory;", 
+        messages.getAnotherTests4J_InstanceIsRunningHere());
 		
 		asserter.assertConstant("MethodBlocker requires a blocking class.", 
 				messages.getMethodBlockerRequiresABlockingClass());
@@ -85,7 +87,7 @@ public class Tests4J_EnglishConstants_Trial extends SourceFileCountingTrial {
 
 	@Override
 	public int getAsserts(I_CountType type) {
-		int thisAsserts = 32;
+		int thisAsserts = 35;
 		//code coverage and circular dependencies +
 		//custom afterTrialTests
 		//+ see above
@@ -99,7 +101,7 @@ public class Tests4J_EnglishConstants_Trial extends SourceFileCountingTrial {
 
 	@Override
 	public int getUniqueAsserts(I_CountType type) {
-		int thisUniqueAsserts = 32;
+		int thisUniqueAsserts = 35;
 		//code coverage and circular dependencies +
 		//custom afterTrialTests
 		//+ see above

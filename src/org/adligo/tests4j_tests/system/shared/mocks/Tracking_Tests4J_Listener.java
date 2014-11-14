@@ -1,13 +1,11 @@
 package org.adligo.tests4j_tests.system.shared.mocks;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import org.adligo.tests4j.models.shared.metadata.I_TrialRunMetadata;
 import org.adligo.tests4j.models.shared.results.I_PhaseState;
 import org.adligo.tests4j.models.shared.results.I_TrialResult;
 import org.adligo.tests4j.models.shared.results.I_TrialRunResult;
 import org.adligo.tests4j.system.shared.api.I_Tests4J_Listener;
+import org.adligo.tests4j.system.shared.api.I_Tests4J_Params;
 
 public class Tracking_Tests4J_Listener implements I_Tests4J_Listener {
 	private I_TrialRunMetadata lastMetadata;
@@ -19,6 +17,8 @@ public class Tracking_Tests4J_Listener implements I_Tests4J_Listener {
 	private I_TrialRunResult lastResult;
 	private I_PhaseState lastInfo;
 	private I_PhaseState lastProgress;
+	private I_Tests4J_Params lastParams;
+	
 	@Override
 	public void onMetadataCalculated(I_TrialRunMetadata metadata) {
 		lastMetadata = metadata;
@@ -92,6 +92,7 @@ public class Tracking_Tests4J_Listener implements I_Tests4J_Listener {
 		lastResult = null;
 		lastInfo = null;
 		lastProgress = null;
+		lastParams = null;
 	}
 
 	public Boolean getLastPassed() {
@@ -108,5 +109,22 @@ public class Tracking_Tests4J_Listener implements I_Tests4J_Listener {
 	public void onProgress(I_PhaseState info) {
 		lastProgress = info;
 	}
+
+  @Override
+  public void onStartingSetup(I_Tests4J_Params params) {
+    lastParams = params;
+  }
+
+  public I_PhaseState getLastInfo() {
+    return lastInfo;
+  }
+
+  public I_PhaseState getLastProgress() {
+    return lastProgress;
+  }
+
+  public I_Tests4J_Params getLastParams() {
+    return lastParams;
+  }
 
 }

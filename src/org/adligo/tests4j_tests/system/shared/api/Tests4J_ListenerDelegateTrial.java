@@ -7,6 +7,7 @@ import org.adligo.tests4j.shared.asserts.common.ExpectedThrownData;
 import org.adligo.tests4j.shared.asserts.common.I_Thrower;
 import org.adligo.tests4j.shared.asserts.reference.AllowedReferences;
 import org.adligo.tests4j.shared.output.I_Tests4J_Log;
+import org.adligo.tests4j.system.shared.api.I_Tests4J_Params;
 import org.adligo.tests4j.system.shared.api.Tests4J_ListenerDelegator;
 import org.adligo.tests4j.system.shared.trials.SourceFileScope;
 import org.adligo.tests4j.system.shared.trials.Test;
@@ -16,7 +17,7 @@ import org.adligo.tests4j_tests.references_groups.Tests4J_SystemApi_GwtReference
 import org.adligo.tests4j_tests.system.shared.mocks.Clumsey_Tests4J_Listener;
 import org.adligo.tests4j_tests.system.shared.mocks.Tracking_Tests4J_Listener;
 
-@SourceFileScope (sourceClass=Tests4J_ListenerDelegator.class, minCoverage=78.0)
+@SourceFileScope (sourceClass=Tests4J_ListenerDelegator.class, minCoverage=73.0)
 @AllowedReferences (groups=Tests4J_SystemApi_GwtReferenceGroup.class)
 public class Tests4J_ListenerDelegateTrial extends SourceFileCountingTrial implements I_Tests4J_Log {
 	private Throwable thrown;
@@ -77,6 +78,11 @@ public class Tests4J_ListenerDelegateTrial extends SourceFileCountingTrial imple
 	@Test
 	public void testNullDelegate() {
 		Tests4J_ListenerDelegator delegate = new Tests4J_ListenerDelegator(null, this);
+		
+		thrown = null;
+    delegate.onStartingSetup(null);
+    assertNull(thrown);
+    
 		thrown = null;
 		delegate.onMetadataCalculated(null);
 		assertNull(thrown);
@@ -101,6 +107,7 @@ public class Tests4J_ListenerDelegateTrial extends SourceFileCountingTrial imple
 		delegate.onTrialCompleted(null);
 		assertNull(thrown);
 		
+		
 	}
 	
 	@Test
@@ -109,9 +116,19 @@ public class Tests4J_ListenerDelegateTrial extends SourceFileCountingTrial imple
 		Tests4J_ListenerDelegator delegate = new Tests4J_ListenerDelegator(mock, this);
 		
 		thrown = null;
+    mock.clear();
+    assertNull(mock.getLastParams());
+    TrialRunMetadataMutant trm = new TrialRunMetadataMutant();
+    I_Tests4J_Params params = mock(I_Tests4J_Params.class);
+    
+    delegate.onStartingSetup(params);
+    assertNull(thrown);
+    assertSame(params, mock.getLastParams());
+    
+		thrown = null;
 		mock.clear();
 		assertNull(mock.getLastMetadata());
-		TrialRunMetadataMutant trm = new TrialRunMetadataMutant();
+		trm = new TrialRunMetadataMutant();
 		delegate.onMetadataCalculated(trm);
 		assertNull(thrown);
 		assertSame(trm, mock.getLastMetadata());
@@ -190,7 +207,7 @@ public class Tests4J_ListenerDelegateTrial extends SourceFileCountingTrial imple
 
 	@Override
 	public int getAsserts(I_CountType type) {
-		int thisAsserts = 49;
+		int thisAsserts = 53;
 		//code coverage and circular dependencies +
 		//custom afterTrialTests
 		//+ see above
@@ -204,7 +221,7 @@ public class Tests4J_ListenerDelegateTrial extends SourceFileCountingTrial imple
 
 	@Override
 	public int getUniqueAsserts(I_CountType type) {
-		int thisUniqueAsserts = 22;
+		int thisUniqueAsserts = 23;
 		//code coverage and circular dependencies +
 		//custom afterTrialTests
 		//+ see above

@@ -21,7 +21,7 @@ import org.adligo.tests4j_tests.run.helpers.MockTests4J_DelegateFactory;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 
-@SourceFileScope (sourceClass=Tests4J.class, minCoverage= 75.0)
+@SourceFileScope (sourceClass=Tests4J.class, minCoverage= 48.0)
 public class Tests4JTrial extends SourceFileCountingTrial implements I_Tests4J_Delegate {
 	private I_Tests4J_DelegateFactory originalFactory;
 	private MockTests4J_DelegateFactory factory = new MockTests4J_DelegateFactory(this);
