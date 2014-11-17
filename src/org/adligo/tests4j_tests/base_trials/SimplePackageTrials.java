@@ -1,16 +1,14 @@
 package org.adligo.tests4j_tests.base_trials;
 
-import java.io.PrintStream;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-
-import org.adligo.tests4j.shared.asserts.reference.CircularDependencies;
 import org.adligo.tests4j.system.shared.api.I_Tests4J_TrialList;
 import org.adligo.tests4j.system.shared.api.Tests4J_Params;
 import org.adligo.tests4j.system.shared.trials.I_Trial;
-import org.adligo.tests4j.system.shared.trials.SourceFileScope;
-import org.adligo.tests4j.system.shared.trials.SourceFileTrial;
+
+import java.io.PrintStream;
+import java.math.BigInteger;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 /**
  * a base class for running the trials in a package,
@@ -30,9 +28,9 @@ public class SimplePackageTrials implements I_Tests4J_TrialList, I_CountingPacka
 	private List<Class<? extends I_CountingTrial>> trials_ = new ArrayList<Class<? extends I_CountingTrial>>();
 	private Tests4J_Params params = new Tests4J_Params();
 	
-	private int tests_;
-	private long asserts;
-	private long uniqueAsserts;
+	private long tests_;
+	private BigInteger asserts = new BigInteger("0");
+	private BigInteger uniqueAsserts = new BigInteger("0");
 	//private int nonRunnableTrials_;
 	private CountType act;
 	
@@ -44,8 +42,8 @@ public class SimplePackageTrials implements I_Tests4J_TrialList, I_CountingPacka
 			//nonRunnableTrials_++;
 		} else {
 			tests_ = tests_ + testsI;
-			asserts = asserts + ctInst.getAsserts(act);
-			uniqueAsserts = uniqueAsserts + ctInst.getUniqueAsserts(act);
+			asserts = asserts.add(new BigInteger("" + ctInst.getAsserts(act)));
+			uniqueAsserts = uniqueAsserts.add(new BigInteger("" + ctInst.getUniqueAsserts(act)));
 		}
 	}
 	
@@ -73,17 +71,17 @@ public class SimplePackageTrials implements I_Tests4J_TrialList, I_CountingPacka
 	}
 	
 	@Override
-	public int getTestCount() {
+	public long getTestCount() {
 		return tests_;
 	}
 
 	@Override
-	public long getAssertCount() {
+	public BigInteger getAssertCount() {
 		return asserts;
 	}
 
 	@Override
-	public long getUniqueAssertCount() {
+	public BigInteger getUniqueAssertCount() {
 		return uniqueAsserts;
 	}
 

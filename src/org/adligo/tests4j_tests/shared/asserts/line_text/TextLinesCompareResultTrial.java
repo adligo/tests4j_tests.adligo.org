@@ -16,7 +16,7 @@ import org.adligo.tests4j_tests.base_trials.I_CountType;
 import org.adligo.tests4j_tests.base_trials.SourceFileCountingTrial;
 import org.adligo.tests4j_tests.references_groups.Tests4J_AssertsLineText_GwtReferenceGroup;
 
-@SourceFileScope (sourceClass=TextLinesCompareResult.class, minCoverage=60.0)
+@SourceFileScope (sourceClass=TextLinesCompareResult.class, minCoverage=35.0)
 @AllowedReferences (groups=Tests4J_AssertsLineText_GwtReferenceGroup.class)
 public class TextLinesCompareResultTrial extends SourceFileCountingTrial {
 

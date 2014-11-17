@@ -17,7 +17,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-@SourceFileScope (sourceClass=SourceFileCoverageBriefMutant.class, minCoverage=62.0)
+@SourceFileScope (sourceClass=SourceFileCoverageBriefMutant.class, minCoverage=60.0)
 @AllowedReferences (groups=Tests4J_Coverage_GwtReferenceGroup.class)
 public class SourceFileBriefMutantTrial extends SourceFileCountingTrial {
 

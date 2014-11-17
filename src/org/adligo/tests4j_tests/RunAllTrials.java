@@ -1,15 +1,10 @@
 package org.adligo.tests4j_tests;
 
-import org.adligo.tests4j.models.shared.metadata.I_TrialRunMetadata;
-import org.adligo.tests4j.models.shared.results.I_PhaseState;
-import org.adligo.tests4j.models.shared.results.I_TrialResult;
-import org.adligo.tests4j.models.shared.results.I_TrialRunResult;
 import org.adligo.tests4j.run.api.Tests4J;
 import org.adligo.tests4j.run.helpers.Tests4J_Processor;
 import org.adligo.tests4j.run.xml_bindings.Tests4J_XmlFileOutputListener;
 import org.adligo.tests4j.shared.output.DefaultLog;
 import org.adligo.tests4j.shared.output.I_Tests4J_Log;
-import org.adligo.tests4j.system.shared.api.I_Tests4J_Listener;
 import org.adligo.tests4j.system.shared.api.Tests4J_DefaultProgressParams;
 import org.adligo.tests4j.system.shared.api.Tests4J_Params;
 import org.adligo.tests4j.system.shared.report.summary.SetupProcessDisplay;
@@ -31,8 +26,6 @@ import org.adligo.tests4j_tests.shared.A_SharePkgTrials;
 import org.adligo.tests4j_tests.system.shared.A_SysPkgTrials;
 import org.adligo.tests4j_tests.trials_api.A_ApiPkgTrials;
 import org.adligo.tests4j_v1_tests.A_JavaVersionSpecificTrials;
-
-import java.math.BigDecimal;
 
 public class RunAllTrials  extends SimplePackageTrials 
 implements I_MetaTrialParams<RunAllTrials>, I_CountingPackageTrials {
