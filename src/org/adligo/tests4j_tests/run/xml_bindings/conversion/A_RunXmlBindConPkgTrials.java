@@ -1,4 +1,4 @@
-package org.adligo.tests4j_tests.run.io;
+package org.adligo.tests4j_tests.run.xml_bindings.conversion;
 
 import org.adligo.tests4j.run.api.Tests4J;
 import org.adligo.tests4j.system.shared.api.Tests4J_Params;
@@ -8,8 +8,8 @@ import org.adligo.tests4j_tests.base_trials.I_CountingPackageTrials;
 import org.adligo.tests4j_tests.base_trials.SimpleMetaTrial;
 import org.adligo.tests4j_tests.base_trials.SimplePackageTrials;
 
-public class A_RemoIoPkgTrials extends SimplePackageTrials 
-implements I_MetaTrialParams<A_RemoIoPkgTrials>, I_CountingPackageTrials {
+public class A_RunXmlBindConPkgTrials extends SimplePackageTrials 
+implements I_MetaTrialParams<A_RunXmlBindConPkgTrials>, I_CountingPackageTrials {
 
 	
 	public static void main(String [] args) {
@@ -19,7 +19,7 @@ implements I_MetaTrialParams<A_RemoIoPkgTrials>, I_CountingPackageTrials {
 			params.setMetaTrialClass(SimpleMetaTrial.class);
 			
 			
-			A_RemoIoPkgTrials me = new A_RemoIoPkgTrials();
+			A_RunXmlBindConPkgTrials me = new A_RunXmlBindConPkgTrials();
 			me.setParams(params);
 			me.addTrials();
 			params.addTrials(me);
@@ -34,13 +34,11 @@ implements I_MetaTrialParams<A_RemoIoPkgTrials>, I_CountingPackageTrials {
 	}
 
 	public void addTrials() throws Exception {
-		add(ByteMutantTrial.class);
-		add(UTF8_CharacterBuilderWithThreadsTrial.class);
-		add(BitsTrial.class);
+		add(ConvertCoverageByteArraysTrial.class);
 	}
 
 	@Override
-	public A_RemoIoPkgTrials getTrialParams() {
+	public A_RunXmlBindConPkgTrials getTrialParams() {
 		return this;
 	}
 }

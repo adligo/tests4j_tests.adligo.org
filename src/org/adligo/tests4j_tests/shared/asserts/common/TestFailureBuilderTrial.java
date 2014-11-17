@@ -46,7 +46,7 @@ import java.util.Collections;
  * AssertType.AssertCircularDependency;
  * AssertType.AssertReferences;
  */
-@SourceFileScope (sourceClass=TestFailureBuilder.class,minCoverage=95.0)
+@SourceFileScope (sourceClass=TestFailureBuilder.class,minCoverage=89.0)
 @AllowedReferences (groups=Tests4J_AssertsCommon_GwtReferenceGroup.class)
 public class TestFailureBuilderTrial extends SourceFileCountingTrial {
   TestFailureBuilder builder_ = new TestFailureBuilder();

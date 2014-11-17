@@ -1,4 +1,4 @@
-package org.adligo.tests4j_tests.run.api;
+package org.adligo.tests4j_tests.run.io;
 
 import org.adligo.tests4j.run.api.Tests4J;
 import org.adligo.tests4j.system.shared.api.Tests4J_Params;
@@ -7,13 +7,10 @@ import org.adligo.tests4j_4jacoco.plugin.factories.MockitoPluginFactory;
 import org.adligo.tests4j_tests.base_trials.I_CountingPackageTrials;
 import org.adligo.tests4j_tests.base_trials.SimpleMetaTrial;
 import org.adligo.tests4j_tests.base_trials.SimplePackageTrials;
-import org.adligo.tests4j_tests.run.discovery.A_RunDiscPkgTrials;
-import org.adligo.tests4j_tests.run.helpers.A_RunHelpPkgTrials;
-import org.adligo.tests4j_tests.run.io.A_RunIOPkgTrials;
-import org.adligo.tests4j_tests.run.remote.socket_api.A_SocApiPkgTrials;
 
-public class A_RunApiPkgTrials extends SimplePackageTrials 
-implements I_MetaTrialParams<A_RunApiPkgTrials>, I_CountingPackageTrials {
+public class A_RunIOPkgTrials extends SimplePackageTrials 
+implements I_MetaTrialParams<A_RunIOPkgTrials>, I_CountingPackageTrials {
+
 	
 	public static void main(String [] args) {
 		try {
@@ -21,9 +18,8 @@ implements I_MetaTrialParams<A_RunApiPkgTrials>, I_CountingPackageTrials {
 			params.setCoveragePluginFactoryClass(MockitoPluginFactory.class);
 			params.setMetaTrialClass(SimpleMetaTrial.class);
 			
-
 			
-			A_RunApiPkgTrials me = new A_RunApiPkgTrials();
+			A_RunIOPkgTrials me = new A_RunIOPkgTrials();
 			me.setParams(params);
 			me.addTrials();
 			params.addTrials(me);
@@ -37,19 +33,14 @@ implements I_MetaTrialParams<A_RunApiPkgTrials>, I_CountingPackageTrials {
 		}
 	}
 
-	public void addTrials()  throws Exception {
-		add(Tests4JTrial.class);
-		add(Tests4J_UncaughtExceptionHandlerTrial.class);
-		
+	public void addTrials() throws Exception {
+		add(ByteMutantTrial.class);
+		add(UTF8_CharacterBuilderWithThreadsTrial.class);
+		add(BitsTrial.class);
 	}
 
 	@Override
-	public A_RunApiPkgTrials getTrialParams() {
+	public A_RunIOPkgTrials getTrialParams() {
 		return this;
-	}
-
-	@Override
-	public void setParams(Tests4J_Params params) {
-		super.setParams(params);
 	}
 }

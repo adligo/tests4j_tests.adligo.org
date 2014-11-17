@@ -11,20 +11,22 @@ import org.adligo.tests4j_tests.run.api.A_RunApiPkgTrials;
 import org.adligo.tests4j_tests.run.common.A_RunCommonPkgTrials;
 import org.adligo.tests4j_tests.run.discovery.A_RunDiscPkgTrials;
 import org.adligo.tests4j_tests.run.helpers.A_RunHelpPkgTrials;
-import org.adligo.tests4j_tests.run.io.A_RemoIoPkgTrials;
+import org.adligo.tests4j_tests.run.io.A_RunIOPkgTrials;
 import org.adligo.tests4j_tests.run.memory.A_RunMemoryPkgTrials;
 import org.adligo.tests4j_tests.run.remote.socket_api.A_SocApiPkgTrials;
+import org.adligo.tests4j_tests.run.xml.A_RunXmlPkgTrials;
 
 public class A_RunPkgTrials extends SimplePackageTrials 
 implements I_MetaTrialParams<A_RunPkgTrials>, I_CountingPackageTrials {
 	private static A_RunDiscPkgTrials runDisc = new A_RunDiscPkgTrials();
 	private static A_RunHelpPkgTrials runHelp = new A_RunHelpPkgTrials();
-	private static A_RemoIoPkgTrials remoteIo = new A_RemoIoPkgTrials();
+	private static A_RunIOPkgTrials remoteIo = new A_RunIOPkgTrials();
 	private static A_SocApiPkgTrials soc = new A_SocApiPkgTrials();
 	private static A_RunApiPkgTrials api = new A_RunApiPkgTrials();
 	private static A_RunCommonPkgTrials common = new A_RunCommonPkgTrials();
 	private static A_RunMemoryPkgTrials memory = new A_RunMemoryPkgTrials();
-	
+	private static A_RunXmlPkgTrials xml = new A_RunXmlPkgTrials();
+  
 	public static void main(String [] args) {
 		try {
 			Tests4J_Params params = new Tests4J_Params();
@@ -69,6 +71,9 @@ implements I_MetaTrialParams<A_RunPkgTrials>, I_CountingPackageTrials {
 		
 		memory.addTrials();
 		add(memory.getCountingTrials());
+		
+		xml.addTrials();
+		add(xml.getCountingTrials());
 	}
 
 	@Override
@@ -86,5 +91,6 @@ implements I_MetaTrialParams<A_RunPkgTrials>, I_CountingPackageTrials {
 		api.setParams(params);
 		common.setParams(params);
 		memory.setParams(params);
+		xml.setParams(params);
 	}
 }

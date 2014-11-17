@@ -15,7 +15,7 @@ import org.adligo.tests4j_tests.base_trials.SourceFileCountingTrial;
 import org.adligo.tests4j_tests.references_groups.Tests4J_AssertsUniform_GwtReferenceGroup;
 import org.adligo.tests4j_tests.references_groups.Tests4J_AssertsUniform_ReferenceGroup;
 
-@SourceFileScope (sourceClass=EvaluatorLookupMutant.class, minCoverage=88.0)
+@SourceFileScope (sourceClass=EvaluatorLookupMutant.class, minCoverage=86.0)
 @AllowedReferences (groups=Tests4J_AssertsUniform_GwtReferenceGroup.class)
 public class EvaluatorLookupMutantTrial extends SourceFileCountingTrial {
 

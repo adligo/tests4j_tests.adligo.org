@@ -2,7 +2,7 @@ package org.adligo.tests4j_tests;
 
 import org.adligo.tests4j.run.api.Tests4J;
 import org.adligo.tests4j.run.helpers.Tests4J_Processor;
-import org.adligo.tests4j.run.xml_bindings.Tests4J_XmlFileOutputListener;
+import org.adligo.tests4j.run.xml_bindings.io.Tests4J_XmlFileOutputListener;
 import org.adligo.tests4j.shared.output.DefaultLog;
 import org.adligo.tests4j.shared.output.I_Tests4J_Log;
 import org.adligo.tests4j.system.shared.api.Tests4J_DefaultProgressParams;

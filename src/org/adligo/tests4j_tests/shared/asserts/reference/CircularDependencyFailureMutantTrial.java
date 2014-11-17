@@ -16,7 +16,7 @@ import org.adligo.tests4j_tests.base_trials.SourceFileCountingTrial;
 import org.adligo.tests4j_tests.references_groups.Tests4J_AssertsReference_GwtReferenceGroup;
 import org.adligo.tests4j_tests.references_groups.Tests4J_AssertsReference_ReferenceGroup;
 
-@SourceFileScope (sourceClass=CircularDependencyFailureMutant.class, minCoverage=90.0)
+@SourceFileScope (sourceClass=CircularDependencyFailureMutant.class, minCoverage=86.0)
 @AllowedReferences (groups=Tests4J_AssertsReference_GwtReferenceGroup.class)
 public class CircularDependencyFailureMutantTrial extends SourceFileCountingTrial {
 
