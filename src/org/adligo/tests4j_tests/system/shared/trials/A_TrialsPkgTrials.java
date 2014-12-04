@@ -91,6 +91,9 @@ implements I_MetaTrialParams<A_TrialsPkgTrials>, I_CountingPackageTrials {
 		add(UseCaseTrialTrial.class);
 		add(TrialDelegateTrial.class);
 		add(MetaTrialTrial.class);
+		
+		add(OmitCodeCoverageTrial.class);
+		add(TopicTrial.class);
 	}
 	
 	@Override

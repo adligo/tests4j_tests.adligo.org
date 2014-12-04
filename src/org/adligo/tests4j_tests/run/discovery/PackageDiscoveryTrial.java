@@ -57,11 +57,13 @@ import org.adligo.tests4j.system.shared.trials.I_TrialParamsAware;
 import org.adligo.tests4j.system.shared.trials.I_TrialParamsFactory;
 import org.adligo.tests4j.system.shared.trials.I_UseCaseTrial;
 import org.adligo.tests4j.system.shared.trials.IgnoreTest;
+import org.adligo.tests4j.system.shared.trials.OmitCodeCoverage;
 import org.adligo.tests4j.system.shared.trials.PackageScope;
 import org.adligo.tests4j.system.shared.trials.PlatformType;
 import org.adligo.tests4j.system.shared.trials.SourceFileScope;
 import org.adligo.tests4j.system.shared.trials.SourceFileTrial;
 import org.adligo.tests4j.system.shared.trials.SubProgress;
+import org.adligo.tests4j.system.shared.trials.Topic;
 import org.adligo.tests4j.system.shared.trials.SuppressOutput;
 import org.adligo.tests4j.system.shared.trials.TargetedPlatform;
 import org.adligo.tests4j.system.shared.trials.Test;
@@ -91,7 +93,7 @@ import java.util.List;
 @SourceFileScope (sourceClass=PackageDiscovery.class, minCoverage=50.0)
 public class PackageDiscoveryTrial extends SourceFileCountingTrial {
 
-	private static final int ASSERT_COUNT = 110;
+	private static final int ASSERT_COUNT = 112;
 
 	@SuppressWarnings("boxing")
   @Test
@@ -111,7 +113,7 @@ public class PackageDiscoveryTrial extends SourceFileCountingTrial {
 		assertContains(clazzNames, MemoryWarning.class.getName());
 		assertContains(clazzNames, NonTests4jMethodDiscovery.class.getName());
 		assertContains(clazzNames, PackageDiscovery.class.getName());
-
+		
 		assertContains(clazzNames, ClassesWithSourceFileTrialsCalculator.class.getName());
 		
 		assertContains(clazzNames, TestAuditor.class.getName());
@@ -208,12 +210,14 @@ public class PackageDiscoveryTrial extends SourceFileCountingTrial {
 		
 		assertContains(classNames, IgnoreTest.class.getName());
 		
+		assertContains(classNames, OmitCodeCoverage.class.getName());
 		assertContains(classNames, PlatformType.class.getName());
 		
 		assertContains(classNames, PackageScope.class.getName());
 		assertContains(classNames, SourceFileScope.class.getName());
 		assertContains(classNames, SourceFileTrial.class.getName());
 		assertContains(classNames, SubProgress.class.getName());
+		assertContains(classNames, Topic.class.getName());
 		assertContains(classNames, SuppressOutput.class.getName());
 		assertContains(classNames, TargetedPlatform.class.getName());
 		assertContains(classNames, Test.class.getName());
@@ -233,7 +237,7 @@ public class PackageDiscoveryTrial extends SourceFileCountingTrial {
 		assertContains(classNames, UseCaseScope.class.getName());
 		assertContains(classNames, UseCaseTrial.class.getName());
 		
-		assertEquals(44, classNames.size());
+		assertEquals(46, classNames.size());
 		List<PackageDiscovery> children =  cd.getSubPackages();
 		
 		

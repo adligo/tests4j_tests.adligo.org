@@ -2,7 +2,7 @@ package org.adligo.tests4j_tests.references_groups;
 
 import org.adligo.tests4j.run.xml.io.use_cases.v1_0.ObjectFactory;
 import org.adligo.tests4j.run.xml.io.use_cases.v1_0.SystemUseCasesType;
-import org.adligo.tests4j.run.xml.io.use_cases.v1_0.UseCaseBriefType;
+import org.adligo.tests4j.run.xml.io.use_cases.v1_0.UseCaseNameType;
 import org.adligo.tests4j.run.xml.io.use_cases.v1_0.UseCaseType;
 
 import java.util.HashSet;
@@ -23,7 +23,7 @@ public class Tests4J_XmlUseCases_ReferenceGroup extends Tests4J_ReferenceGroup {
 		names.add("org.adligo.tests4j.run.xml.io.use_cases.v1_0.package-info");
 		add(names, SystemUseCasesType.class);
 		
-		add(names, UseCaseBriefType.class);
+		add(names, UseCaseNameType.class);
 		add(names, UseCaseType.class);
 		
 		names.addAll(Tests4J_JaxB_ReferenceGroup.INSTANCE.getClassNames());
