@@ -35,7 +35,7 @@ implements I_MetaTrialParams<A_RunXmlIOUseCasesPkgTrials>, I_CountingPackageTria
 
 	public void addTrials() throws Exception {
 	  add(ObjectFactoryTrial.class);
-	  add(SystemUseCasesTypeTrial.class);
+	  add(StepTypeTrial.class);
 	  add(UseCaseNameTypeTrial.class);
 	  add(UseCaseTypeTrial.class);
 	}

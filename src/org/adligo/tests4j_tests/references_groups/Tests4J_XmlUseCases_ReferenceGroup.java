@@ -1,7 +1,7 @@
 package org.adligo.tests4j_tests.references_groups;
 
 import org.adligo.tests4j.run.xml.io.use_cases.v1_0.ObjectFactory;
-import org.adligo.tests4j.run.xml.io.use_cases.v1_0.SystemUseCasesType;
+import org.adligo.tests4j.run.xml.io.use_cases.v1_0.StepType;
 import org.adligo.tests4j.run.xml.io.use_cases.v1_0.UseCaseNameType;
 import org.adligo.tests4j.run.xml.io.use_cases.v1_0.UseCaseType;
 
@@ -21,8 +21,7 @@ public class Tests4J_XmlUseCases_ReferenceGroup extends Tests4J_ReferenceGroup {
 		
 		add(names, ObjectFactory.class);
 		names.add("org.adligo.tests4j.run.xml.io.use_cases.v1_0.package-info");
-		add(names, SystemUseCasesType.class);
-		
+		add(names, StepType.class);
 		add(names, UseCaseNameType.class);
 		add(names, UseCaseType.class);
 		
