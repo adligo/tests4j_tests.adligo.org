@@ -19,7 +19,8 @@ import org.adligo.tests4j_tests.trials_api.common.SystemRunnerMock;
 
 public class AssertNullFailsTrialRunner {
 	
-	public static void runTestDelegate(I_Asserts asserts)  throws Exception {
+	@SuppressWarnings("boxing")
+  public static void runTestDelegate(I_Asserts asserts)  throws Exception {
 		ExpectedFailureRunner runner = new ExpectedFailureRunner();
 		runner.run(AssertNullFailsTrial.class);
 		

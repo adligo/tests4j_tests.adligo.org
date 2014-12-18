@@ -17,7 +17,7 @@ public class ArrayUtilsTrial extends SourceFileCountingTrial {
 	@Test
 	public void testCopyGenericArrays() {
 		String [] ints = new String[] {"1","2","3"};
-		String [] oi = ArrayUtils.copyOf(ints);
+		String [] oi = ArrayUtils.copyOf(ints, new String[ints.length]);
 		for (int i = 0; i < 3; i++) {
 		  assertEquals(ints[i], oi[i]);
     }
