@@ -22,16 +22,17 @@ import org.adligo.tests4j_tests.trials_api.common.SystemRunnerMock;
  * @author scott
  *
  */
-@UseCaseScope(verb="",nown="mistake")
 @TrialRecursion
-public class UseCaseAnnotationNoVerbTrial extends UseCaseTrial {
+public class UseCaseAnnotationNameUnknown extends UseCaseTrial {
 
 	@Test
+	@UseCaseScope(name="reveal mistake")
 	public void testFoo() {}
 
-	public static void runTestDelegate(I_Asserts asserts)  throws Exception {
+	@SuppressWarnings("boxing")
+  public static void runTestDelegate(I_Asserts asserts)  throws Exception {
 		ExpectedFailureRunner runner = new ExpectedFailureRunner();
-		runner.run(UseCaseAnnotationNoVerbTrial.class);
+		runner.run(UseCaseAnnotationNameUnknown.class);
 		
 
 		I_TrialRunMetadata metadata = runner.getMetadata();

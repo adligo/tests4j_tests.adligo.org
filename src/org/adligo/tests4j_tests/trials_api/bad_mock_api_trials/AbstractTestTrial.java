@@ -31,6 +31,7 @@ public abstract class AbstractTestTrial extends ApiTrial {
 	@Test
 	public abstract void testFoo();
 	
+	@SuppressWarnings("boxing")
 	public static void runTestDelegate(I_Asserts asserts) throws Exception  {
 		ExpectedFailureRunner runner = new ExpectedFailureRunner();
 		runner.run(AbstractTestTrial.class);

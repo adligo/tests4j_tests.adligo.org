@@ -6,14 +6,16 @@ import org.adligo.tests4j.system.shared.trials.TrialRecursion;
 import org.adligo.tests4j.system.shared.trials.UseCaseScope;
 import org.adligo.tests4j.system.shared.trials.UseCaseTrial;
 
-@UseCaseScope(verb="reveal",nown="mistake")
+@TrialRecursion
 public class CreateThreadInBeforeTests extends UseCaseTrial {
 
-	public void beforeTests() {
+	@SuppressWarnings("unused")
+  public void beforeTests() {
 		Thread t = new Thread();
 	}
 	
 	@Test
+	@UseCaseScope(name="reveal mistake")
 	public void testNothing() {
 		
 	}

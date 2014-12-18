@@ -1,20 +1,17 @@
 package org.adligo.tests4j_tests.trials_api.bad_mock_use_case_trials;
 
-import java.util.List;
-
 import org.adligo.tests4j.models.shared.metadata.I_TestMetadata;
 import org.adligo.tests4j.models.shared.metadata.I_TrialMetadata;
 import org.adligo.tests4j.models.shared.metadata.I_TrialRunMetadata;
 import org.adligo.tests4j.models.shared.results.I_TrialFailure;
 import org.adligo.tests4j.models.shared.results.I_TrialResult;
 import org.adligo.tests4j.shared.asserts.common.I_Asserts;
-import org.adligo.tests4j.shared.en.Tests4J_EnglishConstants;
-import org.adligo.tests4j.shared.i18n.I_Tests4J_AnnotationMessages;
 import org.adligo.tests4j.system.shared.trials.TrialRecursion;
-import org.adligo.tests4j.system.shared.trials.UseCaseScope;
 import org.adligo.tests4j.system.shared.trials.UseCaseTrial;
 import org.adligo.tests4j_tests.trials_api.common.ExpectedFailureRunner;
 import org.adligo.tests4j_tests.trials_api.common.SystemRunnerMock;
+
+import java.util.List;
 
 /**
  * note this trial is run by the Run_UseCaseTrial_Trial,
@@ -23,11 +20,11 @@ import org.adligo.tests4j_tests.trials_api.common.SystemRunnerMock;
  * @author scott
  *
  */
-@UseCaseScope(verb="reveal",nown="mistake")
 @TrialRecursion
 public class NoTestsTrial extends UseCaseTrial {
 
-	public static void runTestDelegate(I_Asserts asserts)  throws Exception {
+	@SuppressWarnings("boxing")
+  public static void runTestDelegate(I_Asserts asserts)  throws Exception {
 		ExpectedFailureRunner runner = new ExpectedFailureRunner();
 		runner.run(NoTestsTrial.class);
 		List<I_TrialResult> results = runner.getResults();

@@ -33,8 +33,6 @@ public class TrialMetadataTrial extends SourceFileCountingTrial {
 		tmm.setType(TrialType.SourceFileTrial);
 		tmm.setMinimumCodeCoverage(11.1);
 		
-		UseCaseBrief ucm = new UseCaseBrief("nown", "verb");
-		tmm.setUseCase(ucm);
 		tmm.setIgnored(true);
 		
 		
@@ -52,7 +50,6 @@ public class TrialMetadataTrial extends SourceFileCountingTrial {
 		assertEquals(13L, tm.getTimeout());
 		assertEquals("someTrialName", tm.getTrialName());
 		assertEquals(TrialType.SourceFileTrial, tm.getType());
-		assertSame(ucm, tm.getUseCase());
 		assertTrue(tm.isIgnored());
 		assertEquals(11.1, tm.getMinimumCodeCoverage());
 		
@@ -75,7 +72,7 @@ public class TrialMetadataTrial extends SourceFileCountingTrial {
 
 	@Override
 	public int getAsserts(I_CountType type) {
-		int thisAsserts = 13;
+		int thisAsserts = 12;
 		//code coverage and circular dependencies +
 		//custom afterTrialTests
 		//+ see above
@@ -89,7 +86,7 @@ public class TrialMetadataTrial extends SourceFileCountingTrial {
 
 	@Override
 	public int getUniqueAsserts(I_CountType type) {
-		int thisUniqueAsserts = 12;
+		int thisUniqueAsserts = 11;
 		//code coverage and circular dependencies +
 		//custom afterTrialTests
 		//+ see above

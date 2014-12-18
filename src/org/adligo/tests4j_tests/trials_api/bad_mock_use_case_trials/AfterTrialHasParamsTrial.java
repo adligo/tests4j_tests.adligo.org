@@ -25,7 +25,6 @@ import org.adligo.tests4j_tests.trials_api.common.SystemRunnerMock;
  * @author scott
  *
  */
-@UseCaseScope(verb="reveal",nown="mistake")
 @TrialRecursion
 public class AfterTrialHasParamsTrial extends UseCaseTrial {
 
@@ -33,9 +32,11 @@ public class AfterTrialHasParamsTrial extends UseCaseTrial {
 	public static void afterTest(String p) {}
 	
 	@Test
+	@UseCaseScope(name="reveal mistake")
 	public void testFoo() {}
 
-	public static void runTestDelegate(I_Asserts asserts)  throws Exception {
+	@SuppressWarnings("boxing")
+  public static void runTestDelegate(I_Asserts asserts)  throws Exception {
 		ExpectedFailureRunner runner = new ExpectedFailureRunner();
 		runner.run(AfterTrialHasParamsTrial.class);
 		

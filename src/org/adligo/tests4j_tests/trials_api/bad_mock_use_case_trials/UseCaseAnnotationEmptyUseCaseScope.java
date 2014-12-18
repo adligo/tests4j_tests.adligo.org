@@ -22,16 +22,17 @@ import org.adligo.tests4j_tests.trials_api.common.SystemRunnerMock;
  * @author scott
  *
  */
-@UseCaseScope(verb="reveal",nown="")
 @TrialRecursion
-public class UseCaseAnnotationNoNownTrial extends UseCaseTrial {
+public class UseCaseAnnotationEmptyUseCaseScope extends UseCaseTrial {
 
 	@Test
+	@UseCaseScope(name="make bread")
 	public void testFoo() {}
 
-	public static void runTestDelegate(I_Asserts asserts) throws Exception  {
+	@SuppressWarnings("boxing")
+  public static void runTestDelegate(I_Asserts asserts) throws Exception  {
 		ExpectedFailureRunner runner = new ExpectedFailureRunner();
-		runner.run(UseCaseAnnotationNoNownTrial.class);
+		runner.run(UseCaseAnnotationEmptyUseCaseScope.class);
 		
 
 		I_TrialRunMetadata metadata = runner.getMetadata();
@@ -43,7 +44,7 @@ public class UseCaseAnnotationNoNownTrial extends UseCaseTrial {
 		asserts.assertEquals(1, trialsMetadata.size());
 		I_TrialMetadata trialMeta = trialsMetadata.get(0);
 		asserts.assertNotNull(trialMeta);
-		asserts.assertEquals("org.adligo.tests4j_tests.trials_api.bad_mock_use_case_trials.UseCaseAnnotationNoNownTrial", 
+		asserts.assertEquals("org.adligo.tests4j_tests.trials_api.bad_mock_use_case_trials.UseCaseAnnotationEmptyUseCaseScope", 
 				trialMeta.getTrialName());
 		asserts.assertEquals(0L, trialMeta.getTimeout());
 		asserts.assertFalse(trialMeta.isIgnored());

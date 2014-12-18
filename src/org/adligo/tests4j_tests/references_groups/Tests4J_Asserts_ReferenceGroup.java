@@ -50,7 +50,7 @@ public class Tests4J_Asserts_ReferenceGroup extends Tests4J_ReferenceGroup {
 		//note if you get a NoSuchFieldError here,
 		// it could be because your running different 
 		// class versions
-		
+		names.addAll(Tests4J_AssertsCommon_ReferenceGroup.INSTANCE.getClassNames());
 		names.addAll(Tests4J_AssertsUniform_ReferenceGroup.INSTANCE.getClassNames());
 		names.addAll(Tests4J_AssertsReference_ReferenceGroup.INSTANCE.getClassNames());
 		

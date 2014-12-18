@@ -59,7 +59,7 @@ public class Tests4J_AnnotationMessagesTrial extends SourceFileCountingTrial {
 		
 		asserter.assertConstant("SourceFileTrials must be annotated with @SourceFileScope.",
 			messages.getNoSourceFileScope());
-		asserter.assertConstant("UseCaseTrials must be annotated with @UseCaseScope.",
+		asserter.assertConstant("UseCaseTrial @Test methods must be annotated with @UseCaseScope.",
 				messages.getNoUseCaseScope());
 		asserter.assertConstant("@PackageScope annotations must contain a non empty packageName.",
 				messages.getPackageScopeEmptyName());
@@ -68,11 +68,11 @@ public class Tests4J_AnnotationMessagesTrial extends SourceFileCountingTrial {
 				messages.getSourceFileScopeEmptyClass());
 		asserter.assertConstant("The trial is missing a @TrialType annotation.",
 				messages.getTrialTypeMissing());
-		asserter.assertConstant("@UseCaseScope annotations must contain a non empty nown.",
-				messages.getUseCaseScopeEmptyNown());
 		
-		asserter.assertConstant("@UseCaseScope annotations must contain a non empty verb.",
-				messages.getUseCaseScopeEmptyVerb());
+		asserter.assertConstant("@UseCaseScope annotations must contain a non empty name.",
+				messages.getUseCaseScopeEmptyName());
+		asserter.assertConstant("@UseCaseScope annotations must match the name of a use case in a path from a system or project in the requirements xml file.",
+        messages.getUseCaseScopeNameUnknown());
 		asserter.assertConstant(" was not annotated correctly.",
 				messages.getWasAnnotatedIncorrectly());
 		asserter.assertConstant("The @AllowedDependencies group is not a singleton (add a INSTANCE field for better memory usage)",

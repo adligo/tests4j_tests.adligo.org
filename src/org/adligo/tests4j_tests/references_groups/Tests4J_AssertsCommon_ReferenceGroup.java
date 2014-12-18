@@ -1,8 +1,5 @@
 package org.adligo.tests4j_tests.references_groups;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import org.adligo.tests4j.shared.asserts.common.AssertCompareFailure;
 import org.adligo.tests4j.shared.asserts.common.AssertCompareFailureMutant;
 import org.adligo.tests4j.shared.asserts.common.AssertThrownFailure;
@@ -17,6 +14,7 @@ import org.adligo.tests4j.shared.asserts.common.I_AssertListener;
 import org.adligo.tests4j.shared.asserts.common.I_AssertThrownFailure;
 import org.adligo.tests4j.shared.asserts.common.I_AssertType;
 import org.adligo.tests4j.shared.asserts.common.I_AssertionData;
+import org.adligo.tests4j.shared.asserts.common.I_Asserts;
 import org.adligo.tests4j.shared.asserts.common.I_CollectionAssertionData;
 import org.adligo.tests4j.shared.asserts.common.I_CollectionContainsAssertionData;
 import org.adligo.tests4j.shared.asserts.common.I_CompareAssertCommand;
@@ -42,6 +40,9 @@ import org.adligo.tests4j.shared.asserts.common.ThrowableInfoMutant;
 import org.adligo.tests4j.shared.asserts.common.ThrownAssertionData;
 import org.adligo.tests4j.shared.asserts.common.ThrownAssertionDataMutant;
 
+import java.util.HashSet;
+import java.util.Set;
+
 /**
  * @diagram_sync with PackageDependencies.class on 10/1/1014
  * @author scott
@@ -63,6 +64,7 @@ public class Tests4J_AssertsCommon_ReferenceGroup extends Tests4J_ReferenceGroup
 		add(names, CompareAssertionData.class);
 		add(names, ExpectedThrownData.class);
 		
+		add(names, I_Asserts.class);
 		add(names, I_AssertCommand.class);
 		add(names, I_AssertCompareFailure.class);
 		add(names, I_AssertionData.class);

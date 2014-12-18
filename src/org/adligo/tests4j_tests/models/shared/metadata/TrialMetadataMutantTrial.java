@@ -37,7 +37,6 @@ public class TrialMetadataMutantTrial extends SourceFileCountingTrial {
 		assertNull(tmm.getTimeout());
 		assertNull(tmm.getTrialName());
 		assertNull(tmm.getType());
-		assertNull(tmm.getUseCase());
 		assertFalse(tmm.isIgnored());
 		
 		tmm.setAfterTrialMethodName("afterTrialMethodName");
@@ -68,9 +67,6 @@ public class TrialMetadataMutantTrial extends SourceFileCountingTrial {
 		tmm.setType(TrialType.SourceFileTrial);
 		assertEquals(TrialType.SourceFileTrial, tmm.getType());
 		
-		UseCaseBrief ucm = new UseCaseBrief("nown", "verb");
-		tmm.setUseCase(ucm);
-		assertSame(ucm, tmm.getUseCase());
 		
 		tmm.setIgnored(true);
 		assertTrue(tmm.isIgnored());
@@ -106,8 +102,6 @@ public class TrialMetadataMutantTrial extends SourceFileCountingTrial {
 		tmm.setType(TrialType.SourceFileTrial);
 		tmm.setMinimumCodeCoverage(11.1);
 		
-		UseCaseBrief ucm = new UseCaseBrief("nown", "verb");
-		tmm.setUseCase(ucm);
 		tmm.setIgnored(true);
 		
 		
@@ -125,7 +119,6 @@ public class TrialMetadataMutantTrial extends SourceFileCountingTrial {
 		assertEquals(13L, tmm.getTimeout());
 		assertEquals("someTrialName", tmm.getTrialName());
 		assertEquals(TrialType.SourceFileTrial, tmm.getType());
-		assertSame(ucm, tmm.getUseCase());
 		assertTrue(tmm.isIgnored());
 		assertEquals(11.1, tmm.getMinimumCodeCoverage());
 		
@@ -147,7 +140,7 @@ public class TrialMetadataMutantTrial extends SourceFileCountingTrial {
 
 	@Override
 	public int getAsserts(I_CountType type) {
-		int thisAsserts = 43;
+		int thisAsserts = 40;
 		//code coverage and circular dependencies +
 		//custom afterTrialTests
 		//+ see above
@@ -161,7 +154,7 @@ public class TrialMetadataMutantTrial extends SourceFileCountingTrial {
 
 	@Override
 	public int getUniqueAsserts(I_CountType type) {
-		int thisUniqueAsserts = 27;
+		int thisUniqueAsserts = 25;
 		//code coverage and circular dependencies +
 		//custom afterTrialTests
 		//+ see above

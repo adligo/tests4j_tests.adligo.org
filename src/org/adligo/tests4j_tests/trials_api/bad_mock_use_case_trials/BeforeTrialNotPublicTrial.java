@@ -26,7 +26,6 @@ import org.adligo.tests4j_tests.trials_api.common.SystemRunnerMock;
  * @author scott
  *
  */
-@UseCaseScope(verb="reveal",nown="mistake")
 @TrialRecursion
 public class BeforeTrialNotPublicTrial extends UseCaseTrial {
 
@@ -34,6 +33,7 @@ public class BeforeTrialNotPublicTrial extends UseCaseTrial {
 	protected static void beforeTrial(Map<String,Object> params) {}
 	
 	@Test
+	@UseCaseScope(name="reveal mistake")
 	public void testNada() {}
 
 	@SuppressWarnings("boxing")

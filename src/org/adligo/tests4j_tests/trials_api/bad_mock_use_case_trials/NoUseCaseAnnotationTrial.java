@@ -27,7 +27,8 @@ public class NoUseCaseAnnotationTrial extends UseCaseTrial {
 	@Test
 	public void testFoo() {}
 
-	public static void runTestDelegate(I_Asserts asserts)  throws Exception {
+	@SuppressWarnings("boxing")
+  public static void runTestDelegate(I_Asserts asserts)  throws Exception {
 		ExpectedFailureRunner runner = new ExpectedFailureRunner();
 		runner.run(NoUseCaseAnnotationTrial.class);
 		

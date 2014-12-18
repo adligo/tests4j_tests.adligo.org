@@ -11,7 +11,7 @@ import org.adligo.tests4j_tests.base_trials.I_CountType;
 import org.adligo.tests4j_tests.base_trials.SourceFileCountingTrial;
 import org.adligo.tests4j_tests.references_groups.Tests4J_Metadata_GwtReferenceGroup;
 
-@SourceFileScope (sourceClass=TestMetadataMutant.class, minCoverage=87.0)
+@SourceFileScope (sourceClass=TestMetadataMutant.class, minCoverage=79.0)
 @AllowedReferences (groups=Tests4J_Metadata_GwtReferenceGroup.class)
 public class TestMetadataMutantTrial extends SourceFileCountingTrial {
 
@@ -58,55 +58,16 @@ public class TestMetadataMutantTrial extends SourceFileCountingTrial {
 		assertEquals(atm.hashCode(), ctm.hashCode());
 	}
 	
-	@Test
-	public void testToAndFromXML() throws Exception {
-		TestMetadataMutant tmm = new TestMetadataMutant();
-		tmm.setTestName("testName");
-		
-		XML_Builder builder = new XML_Builder();
-		builder.addIndent();
-		TestMetadata tm = new TestMetadata(tmm);
-		tm.toXml(builder);
-		
-		String result = builder.toXmlString();
-		assertEquals("\t<testMetadata name=\"testName\" />\n", result);
-		tmm = new TestMetadataMutant(result);
-		assertEquals("testName", tmm.getTestName());
-		assertNull(tmm.getTimeout());
-		assertFalse(tmm.isIgnored());
-		
-		builder = new XML_Builder();
-		tmm.setTimeout(10L);
-		tm = new TestMetadata(tmm);
-		tm.toXml(builder);
-		result = builder.toXmlString();
-		assertEquals("<testMetadata name=\"testName\" timeout=\"10\" />\n", result);
-		tmm = new TestMetadataMutant(result);
-		assertEquals("testName", tmm.getTestName());
-		assertEquals(10L, tmm.getTimeout());
-		assertFalse(tmm.isIgnored());
-		
-		builder = new XML_Builder();
-		tmm.setIgnored(true);
-		tm = new TestMetadata(tmm);
-		tmm.toXml(builder);
-		result = builder.toXmlString();
-		assertEquals("<testMetadata name=\"testName\" ignored=\"true\" timeout=\"10\" />\n", result);
-		tmm = new TestMetadataMutant(result);
-		assertEquals("testName", tmm.getTestName());
-		assertEquals(10L, tmm.getTimeout());
-		assertTrue(tmm.isIgnored());
-		
-	}
+	
 	
 	@Override
 	public int getTests(I_CountType type) {
-		return super.getTests(type, 3, true);
+		return super.getTests(type, 2, true);
 	}
 
 	@Override
 	public int getAsserts(I_CountType type) {
-		int thisAsserts = 24;
+		int thisAsserts = 12;
 		//code coverage and circular dependencies +
 		//custom afterTrialTests
 		//+ see above
@@ -120,7 +81,7 @@ public class TestMetadataMutantTrial extends SourceFileCountingTrial {
 
 	@Override
 	public int getUniqueAsserts(I_CountType type) {
-		int thisUniqueAsserts = 15;
+		int thisUniqueAsserts = 7;
 		//code coverage and circular dependencies +
 		//custom afterTrialTests
 		//+ see above

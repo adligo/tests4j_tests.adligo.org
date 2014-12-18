@@ -23,14 +23,15 @@ import org.adligo.tests4j_tests.trials_api.common.SystemRunnerMock;
  * @author scott
  *
  */
-@UseCaseScope(verb="reveal",nown="mistake")
 @TrialRecursion
 public class ProtectedTestTrial extends UseCaseTrial {
 
 	@Test
+	@UseCaseScope(name="reveal mistake")
 	protected void testFoo() {}
 	
-	public static void runTestDelegate(I_Asserts asserts)  throws Exception {
+	@SuppressWarnings("boxing")
+  public static void runTestDelegate(I_Asserts asserts)  throws Exception {
 		ExpectedFailureRunner runner = new ExpectedFailureRunner();
 		runner.run(ProtectedTestTrial.class);
 		

@@ -9,6 +9,7 @@ import org.adligo.tests4j.system.shared.trials.TrialRecursion;
 @PackageScope (packageName="org.adligo.tests4j")
 public class AssertNullFailsTrial extends ApiTrial {
 
+  @SuppressWarnings("boxing")
 	@Test
 	public void testAssertNull() {
 		assertNull(1.0);
