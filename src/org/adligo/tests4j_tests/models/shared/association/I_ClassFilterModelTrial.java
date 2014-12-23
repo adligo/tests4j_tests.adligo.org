@@ -1,6 +1,6 @@
 package org.adligo.tests4j_tests.models.shared.association;
 
-import org.adligo.tests4j.models.shared.association.I_ClassFilterModel;
+import org.adligo.tests4j.run.helpers.I_ClassFilterModel;
 import org.adligo.tests4j.shared.asserts.reference.AllowedReferences;
 import org.adligo.tests4j.system.shared.trials.SourceFileScope;
 import org.adligo.tests4j_tests.base_trials.I_CountType;

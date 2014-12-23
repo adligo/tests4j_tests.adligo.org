@@ -6,7 +6,7 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-import org.adligo.tests4j.models.shared.association.ClassFilterMutant;
+import org.adligo.tests4j.run.helpers.ClassFilterMutant;
 import org.adligo.tests4j.shared.asserts.reference.ClassAttributesMutant;
 import org.adligo.tests4j.shared.asserts.reference.FieldSignature;
 import org.adligo.tests4j.shared.asserts.reference.I_FieldSignature;

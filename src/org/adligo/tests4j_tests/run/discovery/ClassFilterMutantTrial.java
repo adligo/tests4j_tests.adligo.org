@@ -4,7 +4,7 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
-import org.adligo.tests4j.models.shared.association.ClassFilterMutant;
+import org.adligo.tests4j.run.helpers.ClassFilterMutant;
 import org.adligo.tests4j.shared.asserts.common.ExpectedThrownData;
 import org.adligo.tests4j.shared.asserts.common.I_Thrower;
 import org.adligo.tests4j.system.shared.trials.SourceFileScope;

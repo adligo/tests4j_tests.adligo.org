@@ -5,20 +5,20 @@ import java.util.Set;
 
 import org.adligo.tests4j.models.shared.association.ClassAssociationsLocal;
 import org.adligo.tests4j.models.shared.association.ClassAssociationsLocalMutant;
-import org.adligo.tests4j.models.shared.association.ClassFilter;
-import org.adligo.tests4j.models.shared.association.ClassFilterMutant;
 import org.adligo.tests4j.models.shared.association.ClassParentsLocal;
 import org.adligo.tests4j.models.shared.association.ClassParentsLocalMutant;
 import org.adligo.tests4j.models.shared.association.I_ClassAssociations;
 import org.adligo.tests4j.models.shared.association.I_ClassAssociationsCache;
 import org.adligo.tests4j.models.shared.association.I_ClassAssociationsLocal;
-import org.adligo.tests4j.models.shared.association.I_ClassFilter;
-import org.adligo.tests4j.models.shared.association.I_ClassFilterModel;
 import org.adligo.tests4j.models.shared.association.I_ClassParents;
 import org.adligo.tests4j.models.shared.association.I_ClassParentsCache;
 import org.adligo.tests4j.models.shared.association.I_ClassParentsLocal;
 import org.adligo.tests4j.models.shared.association.I_PackageConstantLookup;
 import org.adligo.tests4j.models.shared.association.I_PackageConstantLookupModel;
+import org.adligo.tests4j.run.helpers.ClassFilter;
+import org.adligo.tests4j.run.helpers.ClassFilterMutant;
+import org.adligo.tests4j.run.helpers.I_ClassFilter;
+import org.adligo.tests4j.run.helpers.I_ClassFilterModel;
 /**
  * @diagram_sync with PackageDependencies.class on 10/1/1014
  * @author scott
