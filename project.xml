@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<pns:fabricate_project xmlns:pns="http://www.adligo.org/fabricate/xml/io/project" 
-    xmlns:lns="http://www.adligo.org/fabricate/xml/io/library" 
-    xmlns:tns="http://www.adligo.org/fabricate/xml/io/tasks" 
+<pns:fabricate_project xmlns:pns="http://www.adligo.org/fabricate/xml/io/project/v1_0" 
+    xmlns:lns="http://www.adligo.org/fabricate/xml/io/library/v1_0" 
+    xmlns:tns="http://www.adligo.org/fabricate/xml/io/tasks/v1_0" 
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" >
     <pns:stages>
         <pns:stage name="jar" >
