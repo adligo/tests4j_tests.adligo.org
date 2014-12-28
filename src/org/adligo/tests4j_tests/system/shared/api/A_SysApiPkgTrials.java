@@ -36,6 +36,8 @@ implements I_MetaTrialParams<A_SysApiPkgTrials>, I_CountingPackageTrials {
 
 	public void addTrials() throws Exception {
 		
+	  add(AbstractParamsFactoryTrial.class);
+	  
 		add(I_Tests4J_ControlsTrial.class);
 		add(I_Tests4J_CoveragePluginFactoryTrial.class);
 		add(I_Tests4J_CoveragePluginParamsTrial.class);

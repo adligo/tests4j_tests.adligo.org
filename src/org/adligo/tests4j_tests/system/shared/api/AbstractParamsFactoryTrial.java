@@ -1,0 +1,58 @@
+package org.adligo.tests4j_tests.system.shared.api;
+
+import org.adligo.tests4j.shared.asserts.reference.AllowedReferences;
+import org.adligo.tests4j.system.shared.api.AbstractParamsFactory;
+import org.adligo.tests4j.system.shared.api.I_Tests4J_Controls;
+import org.adligo.tests4j.system.shared.trials.SourceFileScope;
+import org.adligo.tests4j_tests.base_trials.I_CountType;
+import org.adligo.tests4j_tests.base_trials.SourceFileCountingTrial;
+import org.adligo.tests4j_tests.references_groups.Tests4J_SystemApi_GwtReferenceGroup;
+
+/**
+ * TODO fix minCoverage, abstract classes 
+ * do potentially have code to cover, but 
+ * it gets difficult to figure out how much there is,
+ * I think in this case I am just missing the init();
+ * 
+ * @author scott
+ *
+ */
+@SourceFileScope (sourceClass=AbstractParamsFactory.class, minCoverage=0.0)
+@AllowedReferences (groups=Tests4J_SystemApi_GwtReferenceGroup.class)
+public class AbstractParamsFactoryTrial extends SourceFileCountingTrial {
+
+	@Override
+	public int getTests(I_CountType type) {
+		return super.getTests(type, 0, true);
+	}
+
+	@Override
+	public int getAsserts(I_CountType type) {
+		int thisAsserts = 0;
+		//code coverage and circular dependencies +
+		//custom afterTrialTests
+		//+ see above
+		int thisAfterAsserts = 3;
+		if (type.isFromMetaWithCoverage()) {
+			return super.getAsserts(type, thisAsserts + thisAfterAsserts);
+		} else {
+			return super.getAsserts(type, thisAsserts);
+		}
+	}
+
+	@Override
+	public int getUniqueAsserts(I_CountType type) {
+		int thisUniqueAsserts = 0;
+		//code coverage and circular dependencies +
+		//custom afterTrialTests
+		//+ see above
+		int thisAfterUniqueAsserts = 3;
+		if (type.isFromMetaWithCoverage()) {
+			//code coverage and circular dependencies +
+			//custom afterTrialTests
+			return super.getUniqueAsserts(type, thisUniqueAsserts + thisAfterUniqueAsserts);
+		} else {
+			return super.getUniqueAsserts(type, thisUniqueAsserts);
+		}
+	}
+}

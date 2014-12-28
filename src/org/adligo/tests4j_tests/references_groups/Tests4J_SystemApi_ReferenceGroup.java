@@ -1,9 +1,7 @@
 package org.adligo.tests4j_tests.references_groups;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import org.adligo.tests4j.models.shared.results.I_PhaseState;
+import org.adligo.tests4j.system.shared.api.AbstractParamsFactory;
 import org.adligo.tests4j.system.shared.api.I_Tests4J_Controls;
 import org.adligo.tests4j.system.shared.api.I_Tests4J_CoveragePlugin;
 import org.adligo.tests4j.system.shared.api.I_Tests4J_CoveragePluginFactory;
@@ -35,6 +33,9 @@ import org.adligo.tests4j.system.shared.api.Tests4J_SourceInfoParams;
 import org.adligo.tests4j.system.shared.api.Tests4J_SourceInfoParamsDelegate;
 import org.adligo.tests4j.system.shared.api.Tests4J_TrialProgress;
 
+import java.util.HashSet;
+import java.util.Set;
+
 /**
  * @diagram_sync with PackageDependencies.class on 10/1/1014
  * @author scott
@@ -45,6 +46,7 @@ public class Tests4J_SystemApi_ReferenceGroup extends Tests4J_ReferenceGroup {
 	
 	private Tests4J_SystemApi_ReferenceGroup() {
 		Set<String> names = new HashSet<String>();
+		add(names, AbstractParamsFactory.class);
 		
 		add(names, I_Tests4J_Controls.class);
 		add(names, I_Tests4J_CoveragePlugin.class);

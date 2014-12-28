@@ -58,7 +58,7 @@ public class MockitoPluginFactoryTrial extends SourceFileCountingTrial {
     when(mockFile.listFiles()).thenReturn(list);
     when(sys.newFile("instrumentedClassOutputFolder")).thenReturn(mockFile);
     
-		I_Tests4J_CoveragePlugin cp =  factory.create(params, runParams);
+		I_Tests4J_CoveragePlugin cp =  factory.create(null, params, runParams);
 		assertNotNull(cp);
 		assertEquals(CoveragePlugin.class.getName(), cp.getClass().getName());
 		
