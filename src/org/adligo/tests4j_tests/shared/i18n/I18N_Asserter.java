@@ -20,6 +20,7 @@ public class I18N_Asserter {
 		toRet.add(JACOCO_DATA);
 		return Collections.unmodifiableList(toRet);
 	}
+	
 	public I18N_Asserter(I_Asserts p) {
 		asserts = p;
 		if (p == null) {

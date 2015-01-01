@@ -115,7 +115,7 @@ public class TheMetaTrial  extends AbstractTrial implements I_MetaTrial {
 		assertCoverageMatrix("org.adligo.tests4j.system.shared.report.summary",
 				100.0, 61.0);
 		assertCoverageMatrix("org.adligo.tests4j.run.common",
-        69.0, 55.0);
+        66.0, 54.0);
 		assertCoverageMatrix("org.adligo.tests4j.run.xml.io.use_cases.v1_0",
         100.0, 0.0);
 		

@@ -11,7 +11,7 @@ import org.adligo.tests4j_tests.base_trials.I_CountType;
 import org.adligo.tests4j_tests.base_trials.SourceFileCountingTrial;
 import org.adligo.tests4j_tests.references_groups.Tests4J_Coverage_GwtReferenceGroup;
 
-@SourceFileScope (sourceClass=ProbesMutant.class, minCoverage=87.0)
+@SourceFileScope (sourceClass=ProbesMutant.class, minCoverage=77.0)
 @AllowedReferences (groups=Tests4J_Coverage_GwtReferenceGroup.class)
 public class ProbesMutantTrial extends SourceFileCountingTrial {
 
