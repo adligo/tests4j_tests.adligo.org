@@ -1,25 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<pns:fabricate_project xmlns:pns="http://www.adligo.org/fabricate/xml/io/project/v1_0" 
-    xmlns:lns="http://www.adligo.org/fabricate/xml/io/library/v1_0" 
-    xmlns:tns="http://www.adligo.org/fabricate/xml/io/tasks/v1_0" 
+<tns:fabricate_project 
+	xmlns:cns="http://www.adligo.org/fabricate/xml/io_v1/common_v1_0.xsd" 
+	xmlns:tns="http://www.adligo.org/fabricate/xml/io_v1/project_v1_0.xsd" 
+    xmlns:lns="http://www.adligo.org/fabricate/xml/io_v1/library_v1_0.xsd" 
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" >
-    <pns:stages>
-        <pns:stage name="jar" >
+    <tns:stages>
+        <tns:stage name="jar" >
             <tns:param key="srcDirs" value="src_jdk_1_8,src" />
-        </pns:stage>
-        <pns:stage name="test" />
-        <pns:stage name="publish" />
-    </pns:stages>
+        </tns:stage>
+        <tns:stage name="test" />
+        <tns:stage name="publish" />
+    </tns:stages>
     
     
-    <lns:dependencies>
-        <lns:project>gwt_refs.adligo.org</lns:project>
-        
+    <tns:dependencies>
         <lns:library>jacoco</lns:library>
         <lns:library>mockito</lns:library>
-        
+        <lns:project>gwt_refs.adligo.org</lns:project>
         <lns:project>tests4j.adligo.org</lns:project>
         <lns:project>tests4j_4jacoco.adligo.org</lns:project>
         <lns:project>tests4j_4mockito.adligo.org</lns:project>
-    </lns:dependencies>
- </pns:fabricate_project>
+    </tns:dependencies>
+ </tns:fabricate_project>
