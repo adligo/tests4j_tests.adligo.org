@@ -2,8 +2,9 @@ package org.adligo.tests4j_tests.jacoco.plugin.data.inst;
 
 import org.adligo.tests4j.system.shared.trials.SourceFileScope;
 import org.adligo.tests4j.system.shared.trials.Test;
+import org.adligo.tests4j_4jacoco.plugin.common.I_CoveragePluginMemory;
 import org.adligo.tests4j_4jacoco.plugin.instrumentation.TrialInstrumenter;
-import org.adligo.tests4j_4jacoco.plugin.instrumentation.TrialInstrumenterSharedMemory;
+import org.adligo.tests4j_4jacoco.plugin.instrumentation.ClassInstrumenterSharedMemory;
 import org.adligo.tests4j_tests.base_trials.I_CountType;
 import org.adligo.tests4j_tests.base_trials.SourceFileCountingTrial;
 import org.adligo.tests4j_tests.system.shared.mocks.Tests4J_LogMock;
@@ -15,8 +16,9 @@ public class TrialInstrumenterTrial extends SourceFileCountingTrial {
 	
 	@Test
 	public void testGetAllPackages() throws Exception {
-		TrialInstrumenterSharedMemory tism = new TrialInstrumenterSharedMemory();
-		TrialInstrumenter ti = new TrialInstrumenter(tism);
+		ClassInstrumenterSharedMemory tism = new ClassInstrumenterSharedMemory();
+		I_CoveragePluginMemory memory = mock(I_CoveragePluginMemory.class);
+		TrialInstrumenter ti = new TrialInstrumenter(tism, memory);
 		
 		ti.setLog(log);
 		assertSame(log, ti.getLog());

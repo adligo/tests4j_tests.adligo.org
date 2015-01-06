@@ -59,6 +59,7 @@ implements I_MetaTrialParams<A_CocoPlugPkgTrials>, I_CountingPackageTrials {
 	public void addTrials() throws Exception{
 		
 		add(MockitoPluginFactoryTrial.class);
+		add(RecorderTrial.class);
 		dataCommon.addTrials();
 		add(dataCommon.getCountingTrials());
 		cover.addTrials();

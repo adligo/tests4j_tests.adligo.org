@@ -8,7 +8,7 @@ import org.adligo.tests4j_tests.base_trials.I_CountType;
 import org.adligo.tests4j_tests.base_trials.SourceFileCountingTrial;
 import org.adligo.tests4j_tests.references_groups.Tests4J_AssertsLineText_GwtReferenceGroup;
 
-@SourceFileScope (sourceClass=DiffIndexesMutant.class, minCoverage=59.0)
+@SourceFileScope (sourceClass=DiffIndexesMutant.class, minCoverage=54.0)
 @AllowedReferences (groups=Tests4J_AssertsLineText_GwtReferenceGroup.class)
 public class DiffIndexesMutantTrial extends SourceFileCountingTrial {
 

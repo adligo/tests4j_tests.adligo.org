@@ -14,18 +14,22 @@ import org.adligo.tests4j.system.shared.report.summary.TrialDisplay;
 import org.adligo.tests4j.system.shared.report.summary.TrialsProcessDisplay;
 import org.adligo.tests4j.system.shared.report.summary.TrialsProgressDisplay;
 import org.adligo.tests4j.system.shared.trials.I_MetaTrialParams;
+import org.adligo.tests4j_4jacoco.plugin.Recorder;
 import org.adligo.tests4j_4jacoco.plugin.factories.MockitoPluginFactory;
 import org.adligo.tests4j_tests.base_trials.I_CountingPackageTrials;
 import org.adligo.tests4j_tests.base_trials.SimplePackageTrials;
 import org.adligo.tests4j_tests.base_trials.TheMetaTrial;
 import org.adligo.tests4j_tests.jacoco.api_trials.A_CocoApiPkgTrials;
 import org.adligo.tests4j_tests.jacoco.plugin.A_CocoPlugPkgTrials;
+import org.adligo.tests4j_tests.mockito.A_MockitoTrials;
 import org.adligo.tests4j_tests.models.A_ModelsPkgTrials;
 import org.adligo.tests4j_tests.run.A_RunPkgTrials;
 import org.adligo.tests4j_tests.shared.A_SharePkgTrials;
 import org.adligo.tests4j_tests.system.shared.A_SysPkgTrials;
 import org.adligo.tests4j_tests.trials_api.A_ApiPkgTrials;
 import org.adligo.tests4j_v1_tests.A_JavaVersionSpecificTrials;
+
+import java.util.ArrayList;
 
 public class RunAllTrials  extends SimplePackageTrials 
 implements I_MetaTrialParams<RunAllTrials>, I_CountingPackageTrials {
@@ -47,14 +51,16 @@ implements I_MetaTrialParams<RunAllTrials>, I_CountingPackageTrials {
 	private A_JavaVersionSpecificTrials jv = new A_JavaVersionSpecificTrials();
 	
 	private A_ApiPkgTrials api = new A_ApiPkgTrials();
-	
+	private A_MockitoTrials mock = new A_MockitoTrials();
 	
 	public static void main(String [] args) {
 		try {
 			Tests4J_Params params = new Tests4J_Params();
 			params.setCoveragePluginFactoryClass(MockitoPluginFactory.class);
 			params.setMetaTrialClass(TheMetaTrial.class);
-			//params.setMetaTrialClass(SimpleMetaTrial.class);
+			java.util.List<String> additionalNonResultPackages = new ArrayList<String>();
+			additionalNonResultPackages.add("org.adligo.tests4j_tests.");
+			params.setAdditionalNonResultPackages(additionalNonResultPackages);
 			RunAllTrials me = new RunAllTrials();
 			//params.setMetaTrialParams(me);
 			
@@ -77,8 +83,11 @@ implements I_MetaTrialParams<RunAllTrials>, I_CountingPackageTrials {
 			params.setLogState(TrialsProcessDisplay.class, false);
 			params.setLogState(TrialsProgressDisplay.class, true);
 			params.setLogState(Tests4J_Processor.class, true);
+			params.setLogState(Recorder.class, true);
+			//params.setLogState(TrialInstrumenter.class, true);
+			//params.setLogState(ClassAndDependenciesInstrumenter.class, true);
 			//params.setLogState(TrialQueueDecisionTree.class, true);
-			//params.setLogState(MultiProbesMap.class, true);
+			//params.setLogState(MultiProbeDataStore.class, true);
 			
 			//params.setLogState(ReferenceTrackingClassVisitor.class, true);
 			//params.setLogState(ClassReferencesDiscovery.class, true);
@@ -141,6 +150,10 @@ implements I_MetaTrialParams<RunAllTrials>, I_CountingPackageTrials {
 		cocoApi.setParams(params);
 		cocoApi.addTrials();
 		add(cocoApi.getCountingTrials());
+		
+		mock.setParams(params);
+		mock.addTrials();
+		add(mock.getCountingTrials());
 	}
 
 	@Override

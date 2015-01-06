@@ -21,6 +21,7 @@ import org.adligo.tests4j.run.discovery.AfterTrialAuditor;
 import org.adligo.tests4j.run.discovery.AllowedDependenciesAuditor;
 import org.adligo.tests4j.run.discovery.BeforeTrialAuditor;
 import org.adligo.tests4j.run.discovery.ClassesWithSourceFileTrialsCalculator;
+import org.adligo.tests4j.run.discovery.I_PackageDiscovery;
 import org.adligo.tests4j.run.discovery.I_TrialDescription;
 import org.adligo.tests4j.run.discovery.I_TrialStateNameIdKey;
 import org.adligo.tests4j.run.discovery.MemoryWarning;
@@ -93,20 +94,21 @@ import java.util.List;
 @SourceFileScope (sourceClass=PackageDiscovery.class, minCoverage=50.0)
 public class PackageDiscoveryTrial extends SourceFileCountingTrial {
 
-	private static final int ASSERT_COUNT = 112;
+	private static final int ASSERT_COUNT = 113;
 
 	@SuppressWarnings("boxing")
   @Test
 	public void testDiscoveryPackage() throws Exception {
-		PackageDiscovery cd = new PackageDiscovery("org.adligo.tests4j.run.discovery");
+		I_PackageDiscovery cd = new PackageDiscovery("org.adligo.tests4j.run.discovery");
 		List<String> clazzNames = cd.getClassNames();
 		assertNotNull(clazzNames);
-		assertEquals(18, clazzNames.size());
+		assertEquals(19, clazzNames.size());
 		assertContains(clazzNames, AfterTrialAuditor.class.getName());
 		assertContains(clazzNames, AllowedDependenciesAuditor.class.getName());
 		
 		assertContains(clazzNames, BeforeTrialAuditor.class.getName());
 		
+		assertContains(clazzNames, I_PackageDiscovery.class.getName());
 		assertContains(clazzNames, I_TrialDescription.class.getName());
 		assertContains(clazzNames, I_TrialStateNameIdKey.class.getName());
 		
@@ -131,7 +133,7 @@ public class PackageDiscoveryTrial extends SourceFileCountingTrial {
 		
 		assertContains(clazzNames, TrialTypeFinder.class.getName());
 		
-		List<PackageDiscovery>  subs = cd.getSubPackages();
+		List<I_PackageDiscovery>  subs = cd.getSubPackages();
 		assertNotNull(subs);
 		assertEquals(0, subs.size());
 	}
@@ -144,8 +146,8 @@ public class PackageDiscoveryTrial extends SourceFileCountingTrial {
 	}
 
 	@SuppressWarnings("boxing")
-  private PackageDiscovery assertMetadataPackage() throws IOException {
-		PackageDiscovery cd = new PackageDiscovery("org.adligo.tests4j.models.shared.metadata");
+  private I_PackageDiscovery assertMetadataPackage() throws IOException {
+		I_PackageDiscovery cd = new PackageDiscovery("org.adligo.tests4j.models.shared.metadata");
 		List<String> classNames = cd.getClassNames();
 		assertContains(classNames, I_MachineMetadata.class.getName());
 		assertContains(classNames, I_SourceInfoMetadata.class.getName());
@@ -170,7 +172,7 @@ public class PackageDiscoveryTrial extends SourceFileCountingTrial {
 		assertContains(classNames, UseCaseBrief.class.getName());
 		
 		assertEquals(17, classNames.size());
-		List<PackageDiscovery> children =  cd.getSubPackages();
+		List<I_PackageDiscovery> children =  cd.getSubPackages();
 		assertEquals(0, children.size());
 		return cd;
 	}
@@ -178,7 +180,7 @@ public class PackageDiscoveryTrial extends SourceFileCountingTrial {
 	@SuppressWarnings("boxing")
   @Test
 	public void testModelsSharedTrials() throws Exception {
-		PackageDiscovery cd = new PackageDiscovery("org.adligo.tests4j.system.shared.trials");
+		I_PackageDiscovery cd = new PackageDiscovery("org.adligo.tests4j.system.shared.trials");
 		List<String> classNames = cd.getClassNames();
 		assertContains(classNames, AdditionalInstrumentation.class.getName());
 		assertContains(classNames, AbstractTrial.class.getName());
@@ -238,7 +240,7 @@ public class PackageDiscoveryTrial extends SourceFileCountingTrial {
 		assertContains(classNames, UseCaseTrial.class.getName());
 		
 		assertEquals(46, classNames.size());
-		List<PackageDiscovery> children =  cd.getSubPackages();
+		List<I_PackageDiscovery> children =  cd.getSubPackages();
 		
 		
 		assertEquals(0, children.size());
@@ -247,7 +249,7 @@ public class PackageDiscoveryTrial extends SourceFileCountingTrial {
 	@SuppressWarnings("boxing")
   @Test
 	public void testInnerClasses() throws Exception {
-		PackageDiscovery cd = new PackageDiscovery(
+		I_PackageDiscovery cd = new PackageDiscovery(
 				"org.adligo.tests4j_tests.run.discovery.package_discovery_inner_mocks");
 		List<String> classNames = cd.getClassNames();
 		assertContains(classNames, TwoNestedRunnables.class.getName());
@@ -256,20 +258,20 @@ public class PackageDiscoveryTrial extends SourceFileCountingTrial {
 		
 		
 		assertEquals(3, classNames.size());
-		List<PackageDiscovery> children =  cd.getSubPackages();
+		List<I_PackageDiscovery> children =  cd.getSubPackages();
 		assertEquals(0, children.size());
 	}
 	
 	@SuppressWarnings("boxing")
   @Test
 	public void testTestForJ() throws Exception {
-		PackageDiscovery cd = new PackageDiscovery("org.adligo.tests4j");
+		I_PackageDiscovery cd = new PackageDiscovery("org.adligo.tests4j");
 		List<String> classNames = cd.getClassNames();
 		
 		assertEquals(0, classNames.size());
-		List<PackageDiscovery> children =  cd.getSubPackages();
+		List<I_PackageDiscovery> children =  cd.getSubPackages();
 		List<String> childNames = new ArrayList<String>();
-		for(PackageDiscovery i: children) {
+		for(I_PackageDiscovery i: children) {
 			childNames.add(i.getPackageName());
 		}
 		assertContains(childNames, "org.adligo.tests4j.models");
@@ -284,7 +286,7 @@ public class PackageDiscoveryTrial extends SourceFileCountingTrial {
 	@SuppressWarnings("boxing")
   @Test
 	public void testCoco() throws Exception {
-		PackageDiscovery cd = new PackageDiscovery("org.adligo.tests4j_4jacoco.plugin");
+		I_PackageDiscovery cd = new PackageDiscovery("org.adligo.tests4j_4jacoco.plugin");
 		
 		List<String> classNames = cd.getClassNames();
 		assertContains(classNames, CoveragePlugin.class.getName());
@@ -294,9 +296,9 @@ public class PackageDiscoveryTrial extends SourceFileCountingTrial {
 		assertEquals(4, classNames.size());
 		
 		
-		List<PackageDiscovery> children =  cd.getSubPackages();
+		List<I_PackageDiscovery> children =  cd.getSubPackages();
 		List<String> childNames = new ArrayList<String>();
-		for(PackageDiscovery i: children) {
+		for(I_PackageDiscovery i: children) {
 			childNames.add(i.getPackageName());
 		}
 		assertContains(childNames, "org.adligo.tests4j_4jacoco.plugin.analysis");

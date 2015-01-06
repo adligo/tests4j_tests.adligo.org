@@ -1,9 +1,5 @@
 package org.adligo.tests4j_tests.references_groups;
 
-import org.adligo.tests4j.models.shared.reference_groups.jse.JSE_Lang;
-import org.adligo.tests4j.models.shared.reference_groups.jse.JSE_LangAnnot;
-import org.adligo.tests4j.models.shared.reference_groups.jse.JSE_Math;
-import org.adligo.tests4j.models.shared.reference_groups.jse.JSE_Util;
 import org.adligo.tests4j.shared.asserts.reference.NameOnlyReferenceGroup;
 import org.adligo.tests4j.shared.asserts.reference.ReferenceGroupBaseDelegate;
 

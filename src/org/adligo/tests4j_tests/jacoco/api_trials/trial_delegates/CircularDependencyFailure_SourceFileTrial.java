@@ -1,4 +1,4 @@
-package org.adligo.tests4j_tests.jacoco.api_trials.reference_trials;
+package org.adligo.tests4j_tests.jacoco.api_trials.trial_delegates;
 
 import org.adligo.tests4j.system.shared.trials.SourceFileScope;
 import org.adligo.tests4j.system.shared.trials.SourceFileTrial;
