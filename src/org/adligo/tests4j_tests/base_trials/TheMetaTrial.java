@@ -18,8 +18,8 @@ import org.adligo.tests4j.system.shared.trials.TrialTypeAnnotation;
 
 @TrialTypeAnnotation (type=TrialType.META_TRIAL_TYPE)
 public class TheMetaTrial  extends AbstractTrial implements I_MetaTrial {
-	private static final long TESTS = 3040;
-	private static final int TRIALS = 562;
+	private static final long TESTS = 3085;
+	private static final int TRIALS = 571;
 	
 	private ClassesWithSourceFileTrialsCalculator calculator_;
 	private I_TrialRunResult results_;
@@ -74,7 +74,7 @@ public class TheMetaTrial  extends AbstractTrial implements I_MetaTrial {
 		assertCoverageMatrix("org.adligo.tests4j.shared.en",
 				100.0, 100.0);
 		assertCoverageMatrix("org.adligo.tests4j.shared.common",
-				100.0, 63.0);
+				100.0, 62.0);
 		assertCoverageMatrix("org.adligo.tests4j.shared.xml",
 				100.0, 82.0);
 		assertCoverageMatrix("org.adligo.tests4j.shared.asserts.common",

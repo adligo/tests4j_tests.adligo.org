@@ -359,4 +359,16 @@ public class LineDiffTextDisplayTrial extends SourceFileCountingTrial implements
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+  @Override
+  public String getThreadWithGroupNameMessage() {
+    // TODO Auto-generated method stub
+    return null;
+  }
+
+  @Override
+  public String getThreadMessage() {
+    // TODO Auto-generated method stub
+    return null;
+  }
 }

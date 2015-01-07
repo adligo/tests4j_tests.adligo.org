@@ -40,6 +40,7 @@ implements I_MetaTrialParams<A_I18nPkgTrials>, I_CountingPackageTrials {
 		add(I_Tests4J_ConstantsTrial.class);
 		add(I_Tests4J_EclipseErrorsTrial.class);
 		add(I_Tests4J_LineDiffTextDisplayMessagesTrial.class);
+		add(I_Tests4J_LogMessagesTrial.class);
 		add(I_Tests4J_ParamsReaderMessagesTrial.class);
 		add(I_Tests4J_ReportMessagesTrial.class);
 		add(I_Tests4J_ResultMessagesTrial.class);

@@ -113,5 +113,11 @@ public class SystemRunnerMock implements I_JseSystem {
     
   }
 
+  @Override
+  public String getCurrentThreadGroupName() {
+    // TODO Auto-generated method stub
+    return null;
+  }
+
 
 }

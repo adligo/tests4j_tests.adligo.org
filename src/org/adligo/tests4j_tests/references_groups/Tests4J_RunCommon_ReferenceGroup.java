@@ -11,13 +11,17 @@ import org.adligo.tests4j.run.common.I_Memory;
 import org.adligo.tests4j.run.common.I_Notifier;
 import org.adligo.tests4j.run.common.I_RemoteRunner;
 import org.adligo.tests4j.run.common.I_RemoteRunnerFactory;
+import org.adligo.tests4j.run.common.I_ThreadGroupFilter;
+import org.adligo.tests4j.run.common.I_ThreadGroupLocal;
 import org.adligo.tests4j.run.common.I_ThreadManager;
+import org.adligo.tests4j.run.common.I_ThreadingFactory;
 import org.adligo.tests4j.run.common.I_Threads;
 import org.adligo.tests4j.run.common.JavaPackageNodeMutant;
 import org.adligo.tests4j.run.common.JavaTree;
 import org.adligo.tests4j.run.common.NotifierDelegate;
 import org.adligo.tests4j.run.common.ThreadGroupFilter;
 import org.adligo.tests4j.run.common.ThreadGroupLocal;
+import org.adligo.tests4j.run.common.ThreadingFactory;
 import org.adligo.tests4j.run.common.ThreadsDelegate;
 
 import java.util.HashSet;
@@ -45,6 +49,11 @@ public class Tests4J_RunCommon_ReferenceGroup extends Tests4J_ReferenceGroup {
 		add(names, I_Memory.class);
 		add(names, I_RemoteRunner.class);
 		add(names, I_RemoteRunnerFactory.class);
+		
+		add(names, I_ThreadGroupFilter.class);
+		add(names, I_ThreadGroupLocal.class);
+		add(names, I_ThreadingFactory.class);
+		
 		add(names, I_ThreadManager.class);
 		add(names, I_Threads.class);
 		
@@ -54,6 +63,7 @@ public class Tests4J_RunCommon_ReferenceGroup extends Tests4J_ReferenceGroup {
 		add(names, NotifierDelegate.class);
 		add(names, ThreadGroupFilter.class);
 		add(names, ThreadGroupLocal.class);
+		add(names, ThreadingFactory.class);
 		add(names, ThreadsDelegate.class);
 		
 		names.addAll(JSE_UtilConcurrent.INSTANCE.getClassNames());

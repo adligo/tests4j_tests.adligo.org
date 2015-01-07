@@ -37,7 +37,9 @@ implements I_MetaTrialParams<A_CocoPlugMultiPkgTrials>, I_CountingPackageTrials 
 	}
 
 	public void addTrials() throws Exception {
-
+	  super.add(CascadingProbeMapTrial.class);
+	  super.add(MultiProbesMapTrial.class);
+	  super.add(MultiProbeDataStoreTrial.class);
 	}
 
 	@Override

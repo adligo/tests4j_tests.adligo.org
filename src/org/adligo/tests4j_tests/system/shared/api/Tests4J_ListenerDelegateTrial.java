@@ -240,4 +240,17 @@ public class Tests4J_ListenerDelegateTrial extends SourceFileCountingTrial imple
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+
+  @Override
+  public String getThreadWithGroupNameMessage() {
+    // TODO Auto-generated method stub
+    return null;
+  }
+
+  @Override
+  public String getThreadMessage() {
+    // TODO Auto-generated method stub
+    return null;
+  }
 }

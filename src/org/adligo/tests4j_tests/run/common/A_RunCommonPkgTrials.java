@@ -43,7 +43,13 @@ implements I_MetaTrialParams<A_RunCommonPkgTrials>, I_CountingPackageTrials {
 	  add(I_MemoryTrial.class);
 	  add(I_RemoteRunnerTrial.class);
 	  add(I_RemoteRunnerFactoryTrial.class);
+	  
+	  add(I_ThreadGroupFilterTrial.class);
+	  add(I_ThreadGroupLocalTrial.class);
+	  add(I_ThreadingFactoryTrial.class);
+	  
 	  add(I_ThreadManagerTrial.class);
+	  
 	  add(I_ThreadsTrial.class);
 	  
 	  add(ClassesDelegateTrial.class);
@@ -57,6 +63,7 @@ implements I_MetaTrialParams<A_RunCommonPkgTrials>, I_CountingPackageTrials {
 	  
 	  add(ThreadGroupFilterTrial.class);
 	  add(ThreadGroupLocalTrial.class);
+	  add(ThreadingFactoryTrial.class);
 	}
 
 	@Override

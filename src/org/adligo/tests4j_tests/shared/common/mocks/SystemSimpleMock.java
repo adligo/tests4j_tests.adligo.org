@@ -69,4 +69,10 @@ public class SystemSimpleMock implements I_System {
 		return nextMainSystem;
 	}
 
+  @Override
+  public String getCurrentThreadGroupName() {
+    // TODO Auto-generated method stub
+    return null;
+  }
+
 }

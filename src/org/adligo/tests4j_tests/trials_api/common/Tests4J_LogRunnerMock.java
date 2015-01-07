@@ -33,4 +33,17 @@ public class Tests4J_LogRunnerMock implements I_Tests4J_Log{
 		return " on thread " + this.getClass().getSimpleName() + " ";
 	}
 
+
+  @Override
+  public String getThreadWithGroupNameMessage() {
+    // TODO Auto-generated method stub
+    return null;
+  }
+
+  @Override
+  public String getThreadMessage() {
+    // TODO Auto-generated method stub
+    return null;
+  }
+
 }

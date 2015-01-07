@@ -93,4 +93,16 @@ public class Tests4J_LogMock implements I_Tests4J_Log {
 	public String getCurrentThreadName() {
 		return " on thread " + this.getClass().getSimpleName() + " ";
 	}
+
+  @Override
+  public String getThreadWithGroupNameMessage() {
+    // TODO Auto-generated method stub
+    return null;
+  }
+
+  @Override
+  public String getThreadMessage() {
+    // TODO Auto-generated method stub
+    return null;
+  }
 }

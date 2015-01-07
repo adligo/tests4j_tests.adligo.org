@@ -1,8 +1,5 @@
 package org.adligo.tests4j_tests.references_groups;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import org.adligo.tests4j.models.shared.reference_groups.jse.JSE_Lang;
 import org.adligo.tests4j.models.shared.reference_groups.jse.JSE_LangAnnot;
 import org.adligo.tests4j.models.shared.reference_groups.jse.JSE_Math;
@@ -12,9 +9,13 @@ import org.adligo.tests4j.shared.i18n.I_Tests4J_AssertionInputMessages;
 import org.adligo.tests4j.shared.i18n.I_Tests4J_Constants;
 import org.adligo.tests4j.shared.i18n.I_Tests4J_EclipseErrors;
 import org.adligo.tests4j.shared.i18n.I_Tests4J_LineDiffTextDisplayMessages;
+import org.adligo.tests4j.shared.i18n.I_Tests4J_LogMessages;
 import org.adligo.tests4j.shared.i18n.I_Tests4J_ParamsReaderMessages;
 import org.adligo.tests4j.shared.i18n.I_Tests4J_ReportMessages;
 import org.adligo.tests4j.shared.i18n.I_Tests4J_ResultMessages;
+
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * @diagram_sync with PackageDependencies.class on 10/1/1014
@@ -39,6 +40,7 @@ public class Tests4J_I18N_ReferenceGroup extends Tests4J_ReferenceGroup {
 		add(names, I_Tests4J_Constants.class);
 		add(names, I_Tests4J_EclipseErrors.class);
 		add(names, I_Tests4J_LineDiffTextDisplayMessages.class);
+		add(names, I_Tests4J_LogMessages.class);
 		add(names, I_Tests4J_ParamsReaderMessages.class);
 		add(names, I_Tests4J_ReportMessages.class);
 		add(names, I_Tests4J_ResultMessages.class);

@@ -40,6 +40,7 @@ public class Tests4J_Output_ReferenceGroup extends Tests4J_ReferenceGroup {
 		add(names, PrintStreamOutputBuffer.class);
 		add(names, SafeOutputStreamBuffer.class);
 		
+		names.addAll(Tests4J_I18N_ReferenceGroup.INSTANCE.getClassNames());
 		names.addAll(Tests4J_Common_ReferenceGroup.INSTANCE.getClassNames());
 		
 		setupDelegates(names);

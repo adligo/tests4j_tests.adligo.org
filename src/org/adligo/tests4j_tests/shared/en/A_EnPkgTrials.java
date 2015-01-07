@@ -43,6 +43,8 @@ implements I_MetaTrialParams<A_EnPkgTrials>, I_CountingPackageTrials {
 		add(Tests4J_EnglishConstants_Trial.class);
 		
 		add(Tests4J_LineDiffTextDisplayMessages_Trial.class);
+		add(Tests4J_LogMessages_Trial.class);
+		
 		add(Tests4J_ParamsReaderMessages_Trial.class);
 		add(Tests4J_ReportMessages_Trial.class);
 		

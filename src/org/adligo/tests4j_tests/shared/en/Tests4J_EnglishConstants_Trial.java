@@ -1,14 +1,12 @@
 package org.adligo.tests4j_tests.shared.en;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.adligo.tests4j.shared.asserts.reference.AllowedReferences;
 import org.adligo.tests4j.shared.en.Tests4J_AnnotationMessages;
 import org.adligo.tests4j.shared.en.Tests4J_AssertionInputMessages;
 import org.adligo.tests4j.shared.en.Tests4J_EclipseErrors;
 import org.adligo.tests4j.shared.en.Tests4J_EnglishConstants;
 import org.adligo.tests4j.shared.en.Tests4J_LineDiffTextDisplayMessages;
+import org.adligo.tests4j.shared.en.Tests4J_LogMessages;
 import org.adligo.tests4j.shared.en.Tests4J_ParamsReaderMessages;
 import org.adligo.tests4j.shared.en.Tests4J_ReportMessages;
 import org.adligo.tests4j.shared.en.Tests4J_ResultMessages;
@@ -19,6 +17,9 @@ import org.adligo.tests4j_tests.base_trials.I_CountType;
 import org.adligo.tests4j_tests.base_trials.SourceFileCountingTrial;
 import org.adligo.tests4j_tests.references_groups.Tests4J_EN_GwtReferenceGroup;
 import org.adligo.tests4j_tests.shared.i18n.I18N_Asserter;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @SourceFileScope (sourceClass=Tests4J_EnglishConstants.class, minCoverage=93.0)
 @AllowedReferences (groups=Tests4J_EN_GwtReferenceGroup.class)
@@ -73,6 +74,8 @@ public class Tests4J_EnglishConstants_Trial extends SourceFileCountingTrial {
 		
 		assertEquals(Tests4J_LineDiffTextDisplayMessages.class.getName(),  
 				messages.getLineDiffTextDisplayMessages().getClass().getName());
+		assertEquals(Tests4J_LogMessages.class.getName(),  
+        messages.getLogMessages().getClass().getName());
 		
 		assertEquals(Tests4J_ParamsReaderMessages.class.getName(),  
 				messages.getParamReaderMessages().getClass().getName());
@@ -87,7 +90,7 @@ public class Tests4J_EnglishConstants_Trial extends SourceFileCountingTrial {
 
 	@Override
 	public int getAsserts(I_CountType type) {
-		int thisAsserts = 35;
+		int thisAsserts = 36;
 		//code coverage and circular dependencies +
 		//custom afterTrialTests
 		//+ see above
@@ -101,7 +104,7 @@ public class Tests4J_EnglishConstants_Trial extends SourceFileCountingTrial {
 
 	@Override
 	public int getUniqueAsserts(I_CountType type) {
-		int thisUniqueAsserts = 35;
+		int thisUniqueAsserts = 36;
 		//code coverage and circular dependencies +
 		//custom afterTrialTests
 		//+ see above

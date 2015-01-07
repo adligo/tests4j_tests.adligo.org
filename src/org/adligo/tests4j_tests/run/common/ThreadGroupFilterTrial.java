@@ -1,5 +1,6 @@
 package org.adligo.tests4j_tests.run.common;
 
+import org.adligo.tests4j.run.common.I_ThreadGroupFilter;
 import org.adligo.tests4j.run.common.ThreadGroupFilter;
 import org.adligo.tests4j.run.common.ThreadsDelegate;
 import org.adligo.tests4j.shared.asserts.common.ExpectedThrownData;
@@ -25,7 +26,7 @@ public class ThreadGroupFilterTrial extends SourceFileCountingTrial {
   
   @Test 
   public void testDefault() throws Exception {
-    ThreadGroupFilter tgf = new ThreadGroupFilter("hmm");
+    I_ThreadGroupFilter tgf = new ThreadGroupFilter("hmm");
     assertEquals("hmm", tgf.getFilter());
     assertEquals(ThreadsDelegate.class.getName(), tgf.getThreads().getClass().getName());
   }
@@ -59,7 +60,7 @@ public class ThreadGroupFilterTrial extends SourceFileCountingTrial {
     threadList.add(t);
     
     ThreadsMock tm = new ThreadsMock(threadList);
-    ThreadGroupFilter tgf = new ThreadGroupFilter("hmm", tm);
+    I_ThreadGroupFilter tgf = new ThreadGroupFilter("hmm", tm);
     assertEquals("hmm", tgf.getFilter());
     assertSame(tm, tgf.getThreads());
     

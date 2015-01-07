@@ -20,7 +20,7 @@ import java.util.Set;
 
 @SourceFileScope (sourceClass=DefaultLog.class, minCoverage=47.0)
 @AllowedReferences (groups=Tests4J_Output_GwtReferenceGroup.class)
-public class DefaultLogTrial extends SourceFileCountingTrial implements I_System {
+public class DefaultLogTrial extends SourceFileCountingTrial {
 
 	@Test
 	public void testDefault() {
@@ -32,58 +32,24 @@ public class DefaultLogTrial extends SourceFileCountingTrial implements I_System
 		defaultLoggers.add(DefaultSystem.class.getName());
 		defaultLoggers.add(JseSystem.class.getName());
 		assertFalse(d.isLogEnabled(this.getClass()));
+		
+		
 	}
 	
 	@Test
 	public void testSelfDelegate() {
 		Map<Class<?>, Boolean> logStates = new HashMap<Class<?>, Boolean>();
 		logStates.put(this.getClass(), true);
-		DefaultLog d = new DefaultLog(this, logStates);
+		I_System mockSys = mock(I_System.class);
+		when(mockSys.getCurrentThreadName()).thenReturn("cThread");
+		when(mockSys.getCurrentThreadGroupName()).thenReturn("cThreadGroup");
+		DefaultLog d = new DefaultLog(mockSys, logStates);
 		
 		assertTrue(d.isLogEnabled(this.getClass()));
+		assertEquals("Thread; cThread", d.getThreadMessage());
+		assertEquals("Thread/Group; cThread~~~cThreadGroup", d.getThreadWithGroupNameMessage());
 	}
 	
-	@Override
-	public void println(String p) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void exitJvm(int p) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public long getTime() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public String lineSeperator() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public String getCurrentThreadName() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public String getJseVersion() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public PrintStream getOut() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 	@Override
 	public int getTests(I_CountType type) {
@@ -92,7 +58,7 @@ public class DefaultLogTrial extends SourceFileCountingTrial implements I_System
 
 	@Override
 	public int getAsserts(I_CountType type) {
-		int thisAsserts = 4;
+		int thisAsserts = 6;
 		//code coverage and circular dependencies +
 		//custom afterTrialTests
 		//+ see above
@@ -106,7 +72,7 @@ public class DefaultLogTrial extends SourceFileCountingTrial implements I_System
 
 	@Override
 	public int getUniqueAsserts(I_CountType type) {
-		int thisUniqueAsserts = 4;
+		int thisUniqueAsserts = 6;
 		//code coverage and circular dependencies +
 		//custom afterTrialTests
 		//+ see above
@@ -118,12 +84,6 @@ public class DefaultLogTrial extends SourceFileCountingTrial implements I_System
 		} else {
 			return super.getUniqueAsserts(type, thisUniqueAsserts);
 		}
-	}
-
-	@Override
-	public boolean isMainSystem() {
-		// TODO Auto-generated method stub
-		return false;
 	}
 
 }

@@ -4,6 +4,7 @@ import static org.mockito.Mockito.mock;
 
 import org.adligo.tests4j.run.common.Holder;
 import org.adligo.tests4j.run.common.I_InitalValueFactory;
+import org.adligo.tests4j.run.common.I_ThreadGroupFilter;
 import org.adligo.tests4j.run.common.ThreadGroupFilter;
 import org.adligo.tests4j.shared.asserts.reference.AllowedReferences;
 import org.adligo.tests4j.system.shared.trials.SourceFileScope;
@@ -44,7 +45,7 @@ public class ThreadGroupLocalTrial extends SourceFileCountingTrial {
     threadList.add(t);
     
     ThreadsMock tm = new ThreadsMock(threadList);
-    ThreadGroupFilter tgf = new ThreadGroupFilter("hmm", tm);
+    I_ThreadGroupFilter tgf = new ThreadGroupFilter("hmm", tm);
     assertEquals("hmm", tgf.getFilter());
     assertSame(tm, tgf.getThreads());
     
@@ -82,7 +83,7 @@ public class ThreadGroupLocalTrial extends SourceFileCountingTrial {
     
     
     ThreadsMock tm = new ThreadsMock(threadList);
-    ThreadGroupFilter tgf = new ThreadGroupFilter("hmm", tm);
+    I_ThreadGroupFilter tgf = new ThreadGroupFilter("hmm", tm);
     assertEquals("hmm", tgf.getFilter());
     assertSame(tm, tgf.getThreads());
     

@@ -83,7 +83,7 @@ implements I_MetaTrialParams<RunAllTrials>, I_CountingPackageTrials {
 			params.setLogState(TrialsProcessDisplay.class, false);
 			params.setLogState(TrialsProgressDisplay.class, true);
 			params.setLogState(Tests4J_Processor.class, true);
-			params.setLogState(Recorder.class, true);
+			//params.setLogState(Recorder.class, true);
 			//params.setLogState(TrialInstrumenter.class, true);
 			//params.setLogState(ClassAndDependenciesInstrumenter.class, true);
 			//params.setLogState(TrialQueueDecisionTree.class, true);
