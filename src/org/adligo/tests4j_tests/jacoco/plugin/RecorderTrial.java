@@ -6,6 +6,8 @@ import org.adligo.tests4j.models.shared.coverage.I_SourceFileCoverageBrief;
 import org.adligo.tests4j.run.discovery.I_PackageDiscovery;
 import org.adligo.tests4j.run.helpers.I_CachedClassBytesClassLoader;
 import org.adligo.tests4j.shared.output.I_Tests4J_Log;
+import org.adligo.tests4j.system.shared.trials.IgnoreTest;
+import org.adligo.tests4j.system.shared.trials.IgnoreTrial;
 import org.adligo.tests4j.system.shared.trials.SourceFileScope;
 import org.adligo.tests4j.system.shared.trials.Test;
 import org.adligo.tests4j_4jacoco.plugin.Recorder;
@@ -25,7 +27,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-@SourceFileScope (sourceClass=Recorder.class,minCoverage=1.0)
+@SourceFileScope (sourceClass=Recorder.class,minCoverage=0.0)
+@IgnoreTrial
 public class RecorderTrial extends SourceFileCountingTrial {
 
   @SuppressWarnings("boxing")

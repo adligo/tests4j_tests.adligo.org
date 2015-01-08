@@ -91,7 +91,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-@SourceFileScope (sourceClass=PackageDiscovery.class, minCoverage=50.0)
+@SourceFileScope (sourceClass=PackageDiscovery.class, minCoverage=46.0)
 public class PackageDiscoveryTrial extends SourceFileCountingTrial {
 
 	private static final int ASSERT_COUNT = 113;
