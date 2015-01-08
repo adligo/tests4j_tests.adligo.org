@@ -1,9 +1,5 @@
 package org.adligo.tests4j_tests.system.shared.report.summary;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
 import org.adligo.tests4j.shared.asserts.line_text.DiffIndexes;
 import org.adligo.tests4j.shared.asserts.line_text.DiffIndexesPair;
 import org.adligo.tests4j.shared.asserts.line_text.I_TextLinesCompareResult;
@@ -19,32 +15,41 @@ import org.adligo.tests4j.shared.output.I_Tests4J_Log;
 import org.adligo.tests4j.system.shared.report.summary.LineDiffTextDisplay;
 import org.adligo.tests4j.system.shared.trials.SourceFileScope;
 import org.adligo.tests4j.system.shared.trials.Test;
+import org.adligo.tests4j_4mockito.MethodRecorder;
 import org.adligo.tests4j_tests.base_trials.I_CountType;
 import org.adligo.tests4j_tests.base_trials.SourceFileCountingTrial;
 import org.adligo.tests4j_tests.references_groups.Tests4J_Summary_GwtReferenceGroup;
 
+import java.util.Collections;
+
 @SourceFileScope (sourceClass=LineDiffTextDisplay.class, minCoverage=90.0)
 @AllowedReferences (groups=Tests4J_Summary_GwtReferenceGroup.class)
-public class LineDiffTextDisplayTrial extends SourceFileCountingTrial implements  I_Tests4J_Log {
-	private List<String> output = new ArrayList<String>();
+public class LineDiffTextDisplayTrial extends SourceFileCountingTrial  {
+	private I_Tests4J_Log logMock_;
+	private MethodRecorder<Void> logRecord_;
 	private LineDiffTextDisplay dislay = new LineDiffTextDisplay();
+	
 	@Override
 	public void beforeTests() {
-		output.clear();
+	  logMock_ = mock(I_Tests4J_Log.class);
+	  logRecord_ = new MethodRecorder<Void>();
+	  doAnswer(logRecord_).when(logMock_).log(anyVararg());
 	}
 	
-	@Test
+	@SuppressWarnings("boxing")
+  @Test
 	public void testSingleActualLineMissing() {
 		I_TextLinesCompareResult result = new TextLinesCompare().compare("a\nb", "a\nb\nc", true);
-		dislay.display(this,result, 3);
+		dislay.display(logMock_,result, 3);
 		
 		I_Tests4J_LineDiffTextDisplayMessages messages =  Tests4J_EnglishConstants.ENGLISH.getLineDiffTextDisplayMessages();
 		
-		assertEquals(messages.getTheFollowingActualLineOfTextIsMissing() + 2, output.get(0));
-		assertEquals("c", output.get(1));
-		assertEquals(2, output.size());
+		assertEquals(messages.getTheFollowingActualLineOfTextIsMissing() + 2, logRecord_.getArgument(0));
+		assertEquals("c", logRecord_.getArgument(1));
+		assertEquals(2, logRecord_.count());
 	}
 	
+	@SuppressWarnings("boxing")
 	@Test
 	public void testSingleActualLineMissing_NullActualLine() {
 		LineDiffMutant ldm = new LineDiffMutant();
@@ -56,14 +61,15 @@ public class LineDiffTextDisplayTrial extends SourceFileCountingTrial implements
 		I_TextLinesCompareResult result = new TextLinesCompareResult(new TextLines("hey", true),
 				new TextLines("hey2", true),false,Collections.singletonList(ldm));
 		
-		dislay.display(this,result, 3);
+		dislay.display(logMock_,result, 3);
 		
 		I_Tests4J_LineDiffTextDisplayMessages messages =  Tests4J_EnglishConstants.ENGLISH.getLineDiffTextDisplayMessages();
 		
-		assertEquals(messages.getError(), output.get(0));
-		assertEquals(1, output.size());
+		assertEquals(messages.getError(), logRecord_.getArgument(0));
+		assertEquals(1, logRecord_.count());
 	}
 	
+	@SuppressWarnings("boxing")
 	@Test
 	public void testSinglePartialMatch_NullActualLine() {
 		LineDiffMutant ldm = new LineDiffMutant();
@@ -75,14 +81,15 @@ public class LineDiffTextDisplayTrial extends SourceFileCountingTrial implements
 		I_TextLinesCompareResult result = new TextLinesCompareResult(new TextLines("hey", true),
 				new TextLines("hey2", true),false,Collections.singletonList(ldm));
 		
-		dislay.display(this,result, 3);
+		dislay.display(logMock_,result, 3);
 		
 		I_Tests4J_LineDiffTextDisplayMessages messages =  Tests4J_EnglishConstants.ENGLISH.getLineDiffTextDisplayMessages();
 		
-		assertEquals(messages.getError(), output.get(0));
-		assertEquals(1, output.size());
+		assertEquals(messages.getError(), logRecord_.getArgument(0));
+		assertEquals(1, logRecord_.count());
 	}
 	
+	@SuppressWarnings("boxing")
 	@Test
 	public void testSinglePartialMatch_NullExpectedLine() {
 		LineDiffMutant ldm = new LineDiffMutant();
@@ -94,52 +101,56 @@ public class LineDiffTextDisplayTrial extends SourceFileCountingTrial implements
 		I_TextLinesCompareResult result = new TextLinesCompareResult(new TextLines("hey", true),
 				new TextLines("hey2", true),false,Collections.singletonList(ldm));
 		
-		dislay.display(this,result, 3);
+		dislay.display(logMock_,result, 3);
 		
 		I_Tests4J_LineDiffTextDisplayMessages messages =  Tests4J_EnglishConstants.ENGLISH.getLineDiffTextDisplayMessages();
 		
-		assertEquals(messages.getError(), output.get(0));
-		assertEquals(1, output.size());
+		assertEquals(messages.getError(), logRecord_.getArgument(0));
+		assertEquals(1, logRecord_.count());
 	}
 	
+	@SuppressWarnings("boxing")
 	@Test
 	public void testSingleExpectedLineMissing_MissingExampleLine() {
 		I_TextLinesCompareResult result = new TextLinesCompare().compare("a\nb\nc", "a\nb", true);
-		dislay.display(this,result, 3);
+		dislay.display(logMock_,result, 3);
 		
 		I_Tests4J_LineDiffTextDisplayMessages messages =  Tests4J_EnglishConstants.ENGLISH.getLineDiffTextDisplayMessages();
 		
-		assertEquals(messages.getTheFollowingExpectedLineOfTextIsMissing() + 2, output.get(0));
-		assertEquals("c", output.get(1));
-		assertEquals(2, output.size());
+		assertEquals(messages.getTheFollowingExpectedLineOfTextIsMissing() + 2, logRecord_.getArgument(0));
+		assertEquals("c", logRecord_.getArgument(1));
+		assertEquals(2, logRecord_.count());
 	}
 	
+	@SuppressWarnings("boxing")
 	@Test
 	public void testDoubleActualLineMissing_ExpectedLinesEmpty() {
 		I_TextLinesCompareResult result = new TextLinesCompare().compare("", "a\nb", true);
-		dislay.display(this,result, 3);
+		dislay.display(logMock_,result, 3);
 		
 		I_Tests4J_LineDiffTextDisplayMessages messages =  Tests4J_EnglishConstants.ENGLISH.getLineDiffTextDisplayMessages();
 		
-		assertEquals(messages.getTheFollowingActualLineOfTextIsMissing() + 0, output.get(0));
-		assertEquals("a", output.get(1));
-		assertEquals(messages.getTheFollowingActualLineOfTextIsMissing() + 1, output.get(2));
-		assertEquals("b", output.get(3));
-		assertEquals(4, output.size());
+		assertEquals(messages.getTheFollowingActualLineOfTextIsMissing() + 0, logRecord_.getArgument(0));
+		assertEquals("a", logRecord_.getArgument(1));
+		assertEquals(messages.getTheFollowingActualLineOfTextIsMissing() + 1, logRecord_.getArgument(2));
+		assertEquals("b", logRecord_.getArgument(3));
+		assertEquals(4, logRecord_.count());
 	}
 	
+	@SuppressWarnings("boxing")
 	@Test
 	public void testSingleExpectedLineMissing() {
 		I_TextLinesCompareResult result = new TextLinesCompare().compare("a", "", true);
-		dislay.display(this,result, 3);
+		dislay.display(logMock_,result, 3);
 		
 		I_Tests4J_LineDiffTextDisplayMessages messages =  Tests4J_EnglishConstants.ENGLISH.getLineDiffTextDisplayMessages();
 		
-		assertEquals(messages.getTheFollowingExpectedLineOfTextIsMissing() + 0, output.get(0));
-		assertEquals("a", output.get(1));
-		assertEquals(2, output.size());
+		assertEquals(messages.getTheFollowingExpectedLineOfTextIsMissing() + 0, logRecord_.getArgument(0));
+		assertEquals("a", logRecord_.getArgument(1));
+		assertEquals(2, logRecord_.count());
 	}
 	
+	@SuppressWarnings("boxing")
 	@Test
 	public void testSingleExpecteLineMissing_NullExpectedLine() {
 		LineDiffMutant ldm = new LineDiffMutant();
@@ -151,15 +162,15 @@ public class LineDiffTextDisplayTrial extends SourceFileCountingTrial implements
 		I_TextLinesCompareResult result = new TextLinesCompareResult(new TextLines("hey", true),
 				new TextLines("hey2", true),false,Collections.singletonList(ldm));
 		
-		dislay.display(this,result, 3);
+		dislay.display(logMock_,result, 3);
 		
 		I_Tests4J_LineDiffTextDisplayMessages messages =  Tests4J_EnglishConstants.ENGLISH.getLineDiffTextDisplayMessages();
 		
-		assertEquals(messages.getError() , output.get(0));
-		assertEquals(1, output.size());
+		assertEquals(messages.getError() , logRecord_.getArgument(0));
+		assertEquals(1, logRecord_.count());
 	}
 
-
+	@SuppressWarnings("boxing")
 	@Test
 	public void testDisplaySingleDiffSafeNullType_NullActualLine() {
 		LineDiffMutant ldm = new LineDiffMutant();
@@ -170,13 +181,14 @@ public class LineDiffTextDisplayTrial extends SourceFileCountingTrial implements
 		I_TextLinesCompareResult result = new TextLinesCompareResult(new TextLines("hey", true),
 				new TextLines("hey2", true),false,Collections.singletonList(ldm));
 		
-		dislay.display(this,result, 3);
+		dislay.display(logMock_,result, 3);
 		I_Tests4J_LineDiffTextDisplayMessages messages =  Tests4J_EnglishConstants.ENGLISH.getLineDiffTextDisplayMessages();
 		
-		assertEquals(messages.getError(), output.get(0));
-		assertEquals(1, output.size());
+		assertEquals(messages.getError(), logRecord_.getArgument(0));
+		assertEquals(1, logRecord_.count());
 	}
 	
+	@SuppressWarnings("boxing")
 	@Test
 	public void testDisplaySingleDiffComplex_ActualDifferent() {
 		LineDiffMutant ldm = new LineDiffMutant();
@@ -187,19 +199,20 @@ public class LineDiffTextDisplayTrial extends SourceFileCountingTrial implements
 		TextLinesCompareResult result = new TextLinesCompareResult(new TextLines("hey", true),
 				new TextLines("hey2", true),false,Collections.singletonList(ldm));
 		
-		dislay.display(this,result, 3);
+		dislay.display(logMock_,result, 3);
 		I_Tests4J_LineDiffTextDisplayMessages messages =  Tests4J_EnglishConstants.ENGLISH.getLineDiffTextDisplayMessages();
 		
-		assertEquals(messages.getTheLineOfTextIsDifferent(), output.get(0));
-		assertEquals(messages.getExpected()+ " " + 0, output.get(1));
-		assertEquals("hey", output.get(2));
-		assertEquals(messages.getActual() + " " + 0, output.get(3));
-		assertEquals("hey2", output.get(4));
-		assertEquals(messages.getDifferences(), output.get(5));
-		assertEquals("'2'", output.get(6));
-		assertEquals(7, output.size());
+		assertEquals(messages.getTheLineOfTextIsDifferent(), logRecord_.getArgument(0));
+		assertEquals(messages.getExpected()+ " " + 0, logRecord_.getArgument(1));
+		assertEquals("hey", logRecord_.getArgument(2));
+		assertEquals(messages.getActual() + " " + 0, logRecord_.getArgument(3));
+		assertEquals("hey2", logRecord_.getArgument(4));
+		assertEquals(messages.getDifferences(), logRecord_.getArgument(5));
+		assertEquals("'2'", logRecord_.getArgument(6));
+		assertEquals(7, logRecord_.count());
 	}
 	
+	@SuppressWarnings("boxing")
 	@Test
 	public void testDisplaySingleDiffComplex_ExpectedDifferent() {
 		LineDiffMutant ldm = new LineDiffMutant();
@@ -210,20 +223,21 @@ public class LineDiffTextDisplayTrial extends SourceFileCountingTrial implements
 		TextLinesCompareResult result = new TextLinesCompareResult(new TextLines("hey2", true),
 				new TextLines("hey", true),false,Collections.singletonList(ldm));
 		
-		dislay.display(this,result, 3);
+		dislay.display(logMock_,result, 3);
 		I_Tests4J_LineDiffTextDisplayMessages messages =  Tests4J_EnglishConstants.ENGLISH.getLineDiffTextDisplayMessages();
 		
-		assertEquals(messages.getTheLineOfTextIsDifferent(), output.get(0));
-		assertEquals(messages.getExpected() + " " + 0, output.get(1));
-		assertEquals("hey2", output.get(2));
-		assertEquals(messages.getDifferences(), output.get(3));
-		assertEquals("'2'", output.get(4));
-		assertEquals(messages.getActual() + " " + 0, output.get(5));
-		assertEquals("hey", output.get(6));
+		assertEquals(messages.getTheLineOfTextIsDifferent(), logRecord_.getArgument(0));
+		assertEquals(messages.getExpected() + " " + 0, logRecord_.getArgument(1));
+		assertEquals("hey2", logRecord_.getArgument(2));
+		assertEquals(messages.getDifferences(), logRecord_.getArgument(3));
+		assertEquals("'2'", logRecord_.getArgument(4));
+		assertEquals(messages.getActual() + " " + 0, logRecord_.getArgument(5));
+		assertEquals("hey", logRecord_.getArgument(6));
 
-		assertEquals(7, output.size());
+		assertEquals(7, logRecord_.count());
 	}
 	
+	@SuppressWarnings("boxing")
 	@Test
 	public void testDisplaySingleDiffComplex_BadExpectedIndexes() {
 		LineDiffMutant ldm = new LineDiffMutant();
@@ -234,14 +248,15 @@ public class LineDiffTextDisplayTrial extends SourceFileCountingTrial implements
 		TextLinesCompareResult result = new TextLinesCompareResult(new TextLines("hey2", true),
 				new TextLines("hey", true),false,Collections.singletonList(ldm));
 		
-		dislay.display(this,result, 3);
+		dislay.display(logMock_,result, 3);
 		I_Tests4J_LineDiffTextDisplayMessages messages =  Tests4J_EnglishConstants.ENGLISH.getLineDiffTextDisplayMessages();
 		
-		assertEquals(messages.getTheLineOfTextIsDifferent(), output.get(0));
-		assertEquals(messages.getError(), output.get(1));
-		assertEquals(2, output.size());
+		assertEquals(messages.getTheLineOfTextIsDifferent(), logRecord_.getArgument(0));
+		assertEquals(messages.getError(), logRecord_.getArgument(1));
+		assertEquals(2, logRecord_.count());
 	}
 	
+	@SuppressWarnings("boxing")
 	@Test
 	public void testDisplaySingleDiffComplex_BadActualIndexes() {
 		LineDiffMutant ldm = new LineDiffMutant();
@@ -252,14 +267,15 @@ public class LineDiffTextDisplayTrial extends SourceFileCountingTrial implements
 		TextLinesCompareResult result = new TextLinesCompareResult(new TextLines("hey2", true),
 				new TextLines("hey", true),false,Collections.singletonList(ldm));
 		
-		dislay.display(this,result, 3);
+		dislay.display(logMock_,result, 3);
 		I_Tests4J_LineDiffTextDisplayMessages messages =  Tests4J_EnglishConstants.ENGLISH.getLineDiffTextDisplayMessages();
 		
-		assertEquals(messages.getTheLineOfTextIsDifferent(), output.get(0));
-		assertEquals(messages.getError(), output.get(1));
-		assertEquals(2, output.size());
+		assertEquals(messages.getTheLineOfTextIsDifferent(), logRecord_.getArgument(0));
+		assertEquals(messages.getError(), logRecord_.getArgument(1));
+		assertEquals(2, logRecord_.count());
 	}
-	@Test
+	@SuppressWarnings("boxing")
+  @Test
 	public void testDisplaySingleDiffComplex_BothDifferent() {
 		LineDiffMutant ldm = new LineDiffMutant();
 		ldm.setType(LineDiffType.PartialMatch);
@@ -269,19 +285,19 @@ public class LineDiffTextDisplayTrial extends SourceFileCountingTrial implements
 		TextLinesCompareResult result = new TextLinesCompareResult(new TextLines("hey2", true),
 				new TextLines("hey3", true),false,Collections.singletonList(ldm));
 		
-		dislay.display(this,result, 3);
+		dislay.display(logMock_,result, 3);
 		I_Tests4J_LineDiffTextDisplayMessages messages =  Tests4J_EnglishConstants.ENGLISH.getLineDiffTextDisplayMessages();
 		
-		assertEquals(messages.getTheLineOfTextIsDifferent(), output.get(0));
-		assertEquals(messages.getExpected() + " " + 0, output.get(1));
-		assertEquals("hey2", output.get(2));
-		assertEquals(messages.getDifferences(), output.get(3));
-		assertEquals("'2'", output.get(4));
-		assertEquals(messages.getActual() + " " + 0, output.get(5));
-		assertEquals("hey3", output.get(6));
-		assertEquals(messages.getDifferences(), output.get(7));
-		assertEquals("'3'", output.get(8));
-		assertEquals(9, output.size());
+		assertEquals(messages.getTheLineOfTextIsDifferent(), logRecord_.getArgument(0));
+		assertEquals(messages.getExpected() + " " + 0, logRecord_.getArgument(1));
+		assertEquals("hey2", logRecord_.getArgument(2));
+		assertEquals(messages.getDifferences(), logRecord_.getArgument(3));
+		assertEquals("'2'", logRecord_.getArgument(4));
+		assertEquals(messages.getActual() + " " + 0, logRecord_.getArgument(5));
+		assertEquals("hey3", logRecord_.getArgument(6));
+		assertEquals(messages.getDifferences(), logRecord_.getArgument(7));
+		assertEquals("'3'", logRecord_.getArgument(8));
+		assertEquals(9, logRecord_.count());
 	}
 	
 	@Test
@@ -290,34 +306,6 @@ public class LineDiffTextDisplayTrial extends SourceFileCountingTrial implements
 	}
 
 
-	@Override
-	public void onThrowable(Throwable p) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public boolean isMainLog() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-	
-	@Override
-	public void log(String p) {
-		output.add(p);
-	}
-
-	@Override
-	public String getLineSeperator() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public boolean isLogEnabled(Class<?> clazz) {
-		// TODO Auto-generated method stub
-		return false;
-	}
 	
 	@Override
 	public int getTests(I_CountType type) {
@@ -353,22 +341,4 @@ public class LineDiffTextDisplayTrial extends SourceFileCountingTrial implements
 			return super.getUniqueAsserts(type, thisUniqueAsserts);
 		}
 	}
-
-	@Override
-	public String getCurrentThreadName() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-  @Override
-  public String getThreadWithGroupNameMessage() {
-    // TODO Auto-generated method stub
-    return null;
-  }
-
-  @Override
-  public String getThreadMessage() {
-    // TODO Auto-generated method stub
-    return null;
-  }
 }

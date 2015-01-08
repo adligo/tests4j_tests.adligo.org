@@ -19,8 +19,14 @@ public class Tests4J_LogMessages_Trial extends SourceFileCountingTrial {
 	public void testMessages() {
 		I_Tests4J_LogMessages messages = Tests4J_EnglishConstants.ENGLISH.getLogMessages();
 		I18N_Asserter asserter = new I18N_Asserter(this);
+		asserter.assertConstant("detected the following probe hit;",messages.getDetectedTheFollowingProbeHit());
+		asserter.assertConstant("for the following class;",messages.getForTheFollowingClass());
+		asserter.assertConstant("is creating new probes for the following class;",messages.getIsCreatingNewProbesForTheFollowingClass());
+    asserter.assertConstant("is getting the following probes;",messages.getIsGettingTheFollowingThreadGroupLocalProbes());
 		asserter.assertConstant("Thread; ", messages.getThread());
 		asserter.assertConstant("Thread/Group; ",messages.getThreadSlashThreadGroup());
+		
+		
 		
 		
 		asserter.assertConstantsMatchMethods(Tests4J_LogMessages.class);
@@ -33,7 +39,7 @@ public class Tests4J_LogMessages_Trial extends SourceFileCountingTrial {
 
 	@Override
 	public int getAsserts(I_CountType type) {
-		int thisAsserts = 7;
+		int thisAsserts = 19;
 		//code coverage and circular dependencies +
 		//custom afterTrialTests
 		//+ see above
@@ -47,7 +53,7 @@ public class Tests4J_LogMessages_Trial extends SourceFileCountingTrial {
 
 	@Override
 	public int getUniqueAsserts(I_CountType type) {
-		int thisUniqueAsserts = 7;
+		int thisUniqueAsserts = 19;
 		//code coverage and circular dependencies +
 		//custom afterTrialTests
 		//+ see above

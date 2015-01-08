@@ -14,7 +14,7 @@ import org.adligo.tests4j.system.shared.report.summary.TrialDisplay;
 import org.adligo.tests4j.system.shared.report.summary.TrialsProcessDisplay;
 import org.adligo.tests4j.system.shared.report.summary.TrialsProgressDisplay;
 import org.adligo.tests4j.system.shared.trials.I_MetaTrialParams;
-import org.adligo.tests4j_4jacoco.plugin.Recorder;
+import org.adligo.tests4j_4jacoco.plugin.data.multi.MultiProbesMap;
 import org.adligo.tests4j_4jacoco.plugin.factories.MockitoPluginFactory;
 import org.adligo.tests4j_tests.base_trials.I_CountingPackageTrials;
 import org.adligo.tests4j_tests.base_trials.SimplePackageTrials;
@@ -83,7 +83,7 @@ implements I_MetaTrialParams<RunAllTrials>, I_CountingPackageTrials {
 			params.setLogState(TrialsProcessDisplay.class, false);
 			params.setLogState(TrialsProgressDisplay.class, true);
 			params.setLogState(Tests4J_Processor.class, true);
-			//params.setLogState(Recorder.class, true);
+			//params.setLogState(MultiProbesMap.class, true);
 			//params.setLogState(TrialInstrumenter.class, true);
 			//params.setLogState(ClassAndDependenciesInstrumenter.class, true);
 			//params.setLogState(TrialQueueDecisionTree.class, true);

@@ -1,26 +1,29 @@
 package org.adligo.tests4j_tests.run.discovery;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
 import org.adligo.tests4j.models.shared.coverage.I_PackageCoverageBrief;
 import org.adligo.tests4j.models.shared.coverage.PackageCoverageBriefMutant;
+import org.adligo.tests4j.run.common.I_Memory;
 import org.adligo.tests4j.run.discovery.TrialDescription;
+import org.adligo.tests4j.shared.output.I_Tests4J_Log;
 import org.adligo.tests4j.system.shared.trials.SourceFileScope;
 import org.adligo.tests4j.system.shared.trials.Test;
 import org.adligo.tests4j_tests.base_trials.I_CountType;
 import org.adligo.tests4j_tests.base_trials.SourceFileCountingTrial;
 import org.adligo.tests4j_tests.run.helpers.mock_trials.MockWithNothingTrial;
-import org.adligo.tests4j_tests.run.helpers.mocks.Tests4J_MemoryMock;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 @SourceFileScope (sourceClass=TrialDescription.class, minCoverage=33.0)
 public class TrialDescriptionTrial extends SourceFileCountingTrial {
 
 	@Test
 	public void testGetPackageCoverage() {
-		Tests4J_MemoryMock memoryMock = new Tests4J_MemoryMock();
-		
+	  I_Tests4J_Log logMock = mock(I_Tests4J_Log.class);
+    I_Memory memoryMock = mock(I_Memory.class);
+    when(memoryMock.getLog()).thenReturn(logMock); 
+    
 		TrialDescription td = new TrialDescription(TrialDescriptionTrial.class, memoryMock);
 		
 		List<I_PackageCoverageBrief> pc = new ArrayList<I_PackageCoverageBrief>();
@@ -59,9 +62,11 @@ public class TrialDescriptionTrial extends SourceFileCountingTrial {
 	
 	@Test
 	public void testFindBeforeAfterTrials() {
-		Tests4J_MemoryMock memoryMock = new Tests4J_MemoryMock();
+		I_Tests4J_Log logMock = mock(I_Tests4J_Log.class);
+		I_Memory memoryMock = mock(I_Memory.class);
+		when(memoryMock.getLog()).thenReturn(logMock);
 		
-		TrialDescription td = new TrialDescription(MockWithNothingTrial.class, memoryMock);
+		TrialDescription td = new TrialDescription(MockWithNothingTrial.class,memoryMock);
 		//shouldn't throw a exception
 		td.findBeforeAfterTrials(null);
 		assertNull(td.getBeforeTrialMethod());

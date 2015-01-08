@@ -1,10 +1,5 @@
 package org.adligo.tests4j_v1_tests.jacoco.plugin.discovery;
 
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-
 import org.adligo.tests4j.models.shared.association.ClassParentsLocal;
 import org.adligo.tests4j.models.shared.association.I_ClassParentsCache;
 import org.adligo.tests4j.models.shared.association.I_ClassParentsLocal;
@@ -12,9 +7,10 @@ import org.adligo.tests4j.run.helpers.CachedClassBytesClassLoader;
 import org.adligo.tests4j.run.helpers.ClassFilter;
 import org.adligo.tests4j.run.helpers.ClassFilterMutant;
 import org.adligo.tests4j.shared.common.CacheControl;
-import org.adligo.tests4j.system.shared.trials.IgnoreTest;
+import org.adligo.tests4j.shared.output.I_Tests4J_Log;
 import org.adligo.tests4j.system.shared.trials.SourceFileScope;
 import org.adligo.tests4j.system.shared.trials.Test;
+import org.adligo.tests4j_4jacoco.plugin.common.I_LoggerDataAccessorFactory;
 import org.adligo.tests4j_4jacoco.plugin.discovery.ClassParentsDiscovery;
 import org.adligo.tests4j_4jacoco.plugin.discovery.I_ClassParentsDiscovery;
 import org.adligo.tests4j_tests.base_trials.I_CountType;
@@ -41,12 +37,15 @@ import org.adligo.tests4j_tests.run.helpers.class_loading_mocks.MockWithStaticIn
 import org.adligo.tests4j_tests.run.helpers.class_loading_mocks.MockWithTriangleA;
 import org.adligo.tests4j_tests.run.helpers.class_loading_mocks.MockWithTriangleB;
 import org.adligo.tests4j_tests.run.helpers.class_loading_mocks.MockWithTriangleC;
-import org.adligo.tests4j_tests.system.shared.mocks.Tests4J_LogMock;
 import org.adligo.tests4j_v1_tests.jacoco.plugin.discovery.delegates.CPDT_Assert_Linear_to_20;
 import org.adligo.tests4j_v1_tests.jacoco.plugin.discovery.delegates.CPDT_Assert_Linear_to_30;
 import org.adligo.tests4j_v1_tests.jacoco.plugin.discovery.delegates.CPDT_Assert_Simple;
-import org.adligo.tests4j_v1_tests.jacoco.plugin.discovery.delegates.ClassReferencesCacheMock;
 import org.adligo.tests4j_v1_tests.jacoco.plugin.discovery.delegates.I_ClassParentsDiscoveryTrial;
+
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
 
 @SourceFileScope (sourceClass=ClassParentsDiscovery.class, minCoverage=81.0)
 public class ClassParentsDiscoveryTrial extends SourceFileCountingTrial implements I_ClassParentsCache, I_ClassParentsDiscoveryTrial {
@@ -55,7 +54,6 @@ public class ClassParentsDiscoveryTrial extends SourceFileCountingTrial implemen
 	
 	private Map<String,I_ClassParentsLocal> parentsCache = new HashMap<String, I_ClassParentsLocal>();
 	private final ClassFilter classFilter = new ClassFilter();
-	private Tests4J_LogMock logMock = new Tests4J_LogMock();
 	private CPDT_Assert_Simple simple;
 	private CPDT_Assert_Linear_to_20 linearTo20;
 	private CPDT_Assert_Linear_to_30 linearTo30;
@@ -68,6 +66,7 @@ public class ClassParentsDiscoveryTrial extends SourceFileCountingTrial implemen
 		linearTo20 = new CPDT_Assert_Linear_to_20(this);
 		linearTo30 = new CPDT_Assert_Linear_to_30(this);
 		
+		I_Tests4J_Log logMock = mock(I_Tests4J_Log.class);
 		ccbClassLoader = new CachedClassBytesClassLoader(logMock,
 				null,null, cacheControl);
 		
@@ -279,13 +278,6 @@ public class ClassParentsDiscoveryTrial extends SourceFileCountingTrial implemen
 	@Override
 	public ClassFilter getClassFilter() {
 		return classFilter;
-	}
-	/* (non-Javadoc)
-	 * @see org.adligo.tests4j_tests.jacoco.plugin.discovery.I_ClassParentsDiscoveryTrial#getLogMock()
-	 */
-	@Override
-	public Tests4J_LogMock getLogMock() {
-		return logMock;
 	}
 
 	public Map<String, I_ClassParentsLocal> getParentsCache() {

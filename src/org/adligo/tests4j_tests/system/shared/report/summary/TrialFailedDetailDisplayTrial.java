@@ -5,44 +5,52 @@ import org.adligo.tests4j.shared.asserts.reference.AllowedReferences;
 import org.adligo.tests4j.shared.asserts.reference.CircularDependencies;
 import org.adligo.tests4j.shared.en.Tests4J_EnglishConstants;
 import org.adligo.tests4j.shared.i18n.I_Tests4J_ReportMessages;
+import org.adligo.tests4j.shared.output.I_Tests4J_Log;
 import org.adligo.tests4j.system.shared.report.summary.TrialFailedDetailDisplay;
 import org.adligo.tests4j.system.shared.trials.SourceFileScope;
 import org.adligo.tests4j.system.shared.trials.Test;
+import org.adligo.tests4j_4mockito.MethodRecorder;
 import org.adligo.tests4j_tests.base_trials.I_CountType;
 import org.adligo.tests4j_tests.base_trials.SourceFileCountingTrial;
 import org.adligo.tests4j_tests.references_groups.Tests4J_Summary_GwtReferenceGroup;
-import org.adligo.tests4j_tests.system.shared.mocks.Tests4J_LogMock;
 
 @SourceFileScope (sourceClass=TrialFailedDetailDisplay.class, minCoverage=4.0,
 		allowedCircularDependencies=CircularDependencies.AllowInnerOuterClasses)
 @AllowedReferences (groups=Tests4J_Summary_GwtReferenceGroup.class)
 public class TrialFailedDetailDisplayTrial extends SourceFileCountingTrial {
-	private Tests4J_LogMock log = new Tests4J_LogMock();
+  private I_Tests4J_Log logMock_;
+  private MethodRecorder<Void> logRecord_;
+  private MethodRecorder<Void> onThrowableRecord_;
 	
 	@Override
 	public void beforeTests() {
-		log.clear();
-		log.clearStates();
+	  logMock_ = mock(I_Tests4J_Log.class);
+    logRecord_ = new MethodRecorder<Void>();
+    doAnswer(logRecord_).when(logMock_).log(anyVararg());
+    onThrowableRecord_ = new MethodRecorder<Void>();
+    doAnswer(onThrowableRecord_).when(logMock_).onThrowable(any());
+    when(logMock_.getLineSeperator()).thenReturn("lineSeperator");
 	}
 
 	
-	@Test
+	@SuppressWarnings("boxing")
+  @Test
 	public void testProgressReportLogOff() {
-		TrialFailedDetailDisplay display = new TrialFailedDetailDisplay(log);
+		TrialFailedDetailDisplay display = new TrialFailedDetailDisplay(logMock_);
 		
 		BaseTrialResultMutant btrm = new BaseTrialResultMutant();
 		btrm.setTrialName("someTrialName");
 		
 		display.logTrialFailure(btrm);
-		assertEquals(0, log.getLogMessagesSize());
-		assertEquals(0, log.getExceptionsSize());
-		assertEquals(0, log.getStatesSize());
+		assertEquals(0, logRecord_.count());
+		assertEquals(0, onThrowableRecord_.count());
 	}
 	
-	@Test
+	@SuppressWarnings("boxing")
+  @Test
 	public void testProgressReportBasicLog() {
-		TrialFailedDetailDisplay display = new TrialFailedDetailDisplay(log);
-		log.setState(TrialFailedDetailDisplay.class, true);
+		TrialFailedDetailDisplay display = new TrialFailedDetailDisplay(logMock_);
+		when(logMock_.isLogEnabled(any())).thenReturn(true);
 		
 		BaseTrialResultMutant btrm = new BaseTrialResultMutant();
 		btrm.setTrialName("someTrialName");
@@ -52,10 +60,9 @@ public class TrialFailedDetailDisplayTrial extends SourceFileCountingTrial {
 		I_Tests4J_ReportMessages messages =  Tests4J_EnglishConstants.ENGLISH.getReportMessages();
 		
 		assertEquals("someTrialName" + messages.getFailedEOS() + 
-				log.getLineSeperator(), log.getLogMessage(0));
-		assertEquals(1, log.getLogMessagesSize());
-		assertEquals(0, log.getExceptionsSize());
-		assertEquals(1, log.getStatesSize());
+				"lineSeperator", logRecord_.getArgument(0));
+		assertEquals(1, logRecord_.count());
+		assertEquals(0, onThrowableRecord_.count());
 	}
 	
 	
@@ -66,7 +73,7 @@ public class TrialFailedDetailDisplayTrial extends SourceFileCountingTrial {
 
 	@Override
 	public int getAsserts(I_CountType type) {
-		int thisAsserts = 7;
+		int thisAsserts = 5;
 		//code coverage and circular dependencies +
 		//custom afterTrialTests
 		//+ see above

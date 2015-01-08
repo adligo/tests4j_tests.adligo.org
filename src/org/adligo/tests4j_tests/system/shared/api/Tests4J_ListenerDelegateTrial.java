@@ -11,6 +11,7 @@ import org.adligo.tests4j.system.shared.api.I_Tests4J_Params;
 import org.adligo.tests4j.system.shared.api.Tests4J_ListenerDelegator;
 import org.adligo.tests4j.system.shared.trials.SourceFileScope;
 import org.adligo.tests4j.system.shared.trials.Test;
+import org.adligo.tests4j_4mockito.MethodRecorder;
 import org.adligo.tests4j_tests.base_trials.I_CountType;
 import org.adligo.tests4j_tests.base_trials.SourceFileCountingTrial;
 import org.adligo.tests4j_tests.references_groups.Tests4J_SystemApi_GwtReferenceGroup;
@@ -19,15 +20,31 @@ import org.adligo.tests4j_tests.system.shared.mocks.Tracking_Tests4J_Listener;
 
 @SourceFileScope (sourceClass=Tests4J_ListenerDelegator.class, minCoverage=73.0)
 @AllowedReferences (groups=Tests4J_SystemApi_GwtReferenceGroup.class)
-public class Tests4J_ListenerDelegateTrial extends SourceFileCountingTrial implements I_Tests4J_Log {
-	private Throwable thrown;
-	
+public class Tests4J_ListenerDelegateTrial extends SourceFileCountingTrial {
+  private I_Tests4J_Log logMock_;
+  private MethodRecorder<Void> logRecord_;
+  private MethodRecorder<Void> logLineRecord_;
+  private MethodRecorder<Void> onThrowableRecord_;
+  
+  @Override
+  public void beforeTests() {
+    logMock_ = mock(I_Tests4J_Log.class);
+    logRecord_ = new MethodRecorder<Void>();
+    doAnswer(logRecord_).when(logMock_).log(any());
+    logLineRecord_ = new MethodRecorder<Void>();
+    doAnswer(logLineRecord_).when(logMock_).logLine(anyVararg());
+    onThrowableRecord_ = new MethodRecorder<Void>();
+    doAnswer(onThrowableRecord_).when(logMock_).onThrowable(any());
+    when(logMock_.getLineSeperator()).thenReturn("lineSeperator");
+  }
+  
+  @SuppressWarnings("unused")
 	@Test
 	public void testConstructorExceptions() {
 		assertThrown(new ExpectedThrownData(new IllegalArgumentException(Tests4J_ListenerDelegator.TRIAL_RUN_LISTENER_DELEGATE_REQUIRES_A_I_TESTS4J_LOGGER)), 
 				new I_Thrower() {
 					
-					@Override
+          @Override
 					public void run() {
 						new Tests4J_ListenerDelegator(new Clumsey_Tests4J_Listener(), null);
 					}
@@ -36,170 +53,136 @@ public class Tests4J_ListenerDelegateTrial extends SourceFileCountingTrial imple
 	
 	@Test
 	public void testThrowableCatches() {
-		Tests4J_ListenerDelegator delegate = new Tests4J_ListenerDelegator(new Clumsey_Tests4J_Listener(), this);
-		thrown = null;
+		Tests4J_ListenerDelegator delegate = new Tests4J_ListenerDelegator(new Clumsey_Tests4J_Listener(), logMock_);
+		
 		delegate.onMetadataCalculated(null);
+		Exception thrown = (Exception) onThrowableRecord_.getArgument(0);
 		assertNotNull(thrown);
 		assertEquals(RuntimeException.class, thrown.getClass());
 		assertEquals("mock from onMetadataCalculated", thrown.getMessage());
 		
-		thrown = null;
 		delegate.onRunCompleted(null);
+		thrown = (Exception) onThrowableRecord_.getArgument(1);
 		assertNotNull(thrown);
 		assertEquals(RuntimeException.class, thrown.getClass());
 		assertEquals("mock from onRunCompleted", thrown.getMessage());
 		
-		thrown = null;
 		delegate.onStartingTest(null, null);
+		thrown = (Exception) onThrowableRecord_.getArgument(2);
 		assertNotNull(thrown);
 		assertEquals(RuntimeException.class, thrown.getClass());
 		assertEquals("mock from onStartingTest", thrown.getMessage());
 		
-		thrown = null;
 		delegate.onStartingTrial(null);
+		thrown = (Exception) onThrowableRecord_.getArgument(3);
 		assertNotNull(thrown);
 		assertEquals(RuntimeException.class, thrown.getClass());
 		assertEquals("mock from onStartingTrial", thrown.getMessage());
 		
-		thrown = null;
 		delegate.onTestCompleted(null, null, true);
+		thrown = (Exception) onThrowableRecord_.getArgument(4);
 		assertNotNull(thrown);
 		assertEquals(RuntimeException.class, thrown.getClass());
 		assertEquals("mock from onTestCompleted", thrown.getMessage());
 		
-		thrown = null;
 		delegate.onTrialCompleted(null);
+		thrown = (Exception) onThrowableRecord_.getArgument(5);
 		assertNotNull(thrown);
 		assertEquals(RuntimeException.class, thrown.getClass());
 		assertEquals("mock from onTrialCompleted", thrown.getMessage());
 		
 	}
 	
-	@Test
+	@SuppressWarnings("boxing")
+  @Test
 	public void testNullDelegate() {
-		Tests4J_ListenerDelegator delegate = new Tests4J_ListenerDelegator(null, this);
+		Tests4J_ListenerDelegator delegate = new Tests4J_ListenerDelegator(null, logMock_);
 		
-		thrown = null;
     delegate.onStartingSetup(null);
-    assertNull(thrown);
+    assertEquals(0, onThrowableRecord_.count());
     
-		thrown = null;
 		delegate.onMetadataCalculated(null);
-		assertNull(thrown);
+		assertEquals(0, onThrowableRecord_.count());
 		
-		thrown = null;
 		delegate.onRunCompleted(null);
-		assertNull(thrown);
+		assertEquals(0, onThrowableRecord_.count());
 		
-		thrown = null;
 		delegate.onStartingTest(null, null);
-		assertNull(thrown);
+		assertEquals(0, onThrowableRecord_.count());
 		
-		thrown = null;
 		delegate.onStartingTrial(null);
-		assertNull(thrown);
+		assertEquals(0, onThrowableRecord_.count());
 		
-		thrown = null;
 		delegate.onTestCompleted(null, null, true);
-		assertNull(thrown);
+		assertEquals(0, onThrowableRecord_.count());
 		
-		thrown = null;
 		delegate.onTrialCompleted(null);
-		assertNull(thrown);
-		
+		assertEquals(0, onThrowableRecord_.count());
 		
 	}
 	
-	@Test
+	@SuppressWarnings("boxing")
+  @Test
 	public void testPassThroughs() {
 		Tracking_Tests4J_Listener mock = new Tracking_Tests4J_Listener();
-		Tests4J_ListenerDelegator delegate = new Tests4J_ListenerDelegator(mock, this);
+		Tests4J_ListenerDelegator delegate = new Tests4J_ListenerDelegator(mock, logMock_);
 		
-		thrown = null;
     mock.clear();
     assertNull(mock.getLastParams());
     TrialRunMetadataMutant trm = new TrialRunMetadataMutant();
     I_Tests4J_Params params = mock(I_Tests4J_Params.class);
     
     delegate.onStartingSetup(params);
-    assertNull(thrown);
+    assertEquals(0, onThrowableRecord_.count());
     assertSame(params, mock.getLastParams());
     
-		thrown = null;
 		mock.clear();
 		assertNull(mock.getLastMetadata());
 		trm = new TrialRunMetadataMutant();
 		delegate.onMetadataCalculated(trm);
-		assertNull(thrown);
+		assertEquals(0, onThrowableRecord_.count());
 		assertSame(trm, mock.getLastMetadata());
 		
-		thrown = null;
 		mock.clear();
 		assertNull(mock.getLastResult());
 		TrialRunResultMutant trrm = new TrialRunResultMutant();
 		delegate.onRunCompleted(trrm);
-		assertNull(thrown);
+		assertEquals(0, onThrowableRecord_.count());
 		assertSame(trrm, mock.getLastResult());
 		
-		thrown = null;
 		mock.clear();
 		assertNull(mock.getLastTestName());
 		assertNull(mock.getLastTrialName());
 		delegate.onStartingTest("trialName", "testName");
-		assertNull(thrown);
+		assertEquals(0, onThrowableRecord_.count());
 		assertEquals("testName", mock.getLastTestName());
 		assertEquals("trialName", mock.getLastTrialName());
 		
-		thrown = null;
 		mock.clear();
 		assertNull(mock.getLastTrialName());
 		delegate.onStartingTrial("trialName");
-		assertNull(thrown);
+		assertEquals(0, onThrowableRecord_.count());
 		assertEquals("trialName", mock.getLastTrialName());
 		
-		thrown = null;
 		mock.clear();
 		assertNull(mock.getLastTestName());
 		assertNull(mock.getLastTrialName());
 		assertNull(mock.getLastPassed());
 		delegate.onTestCompleted("trialName", "testName", true);
-		assertNull(thrown);
+		assertEquals(0, onThrowableRecord_.count());
 		assertEquals("testName", mock.getLastTestName());
 		assertEquals("trialName", mock.getLastTrialName());
 		assertTrue(mock.getLastPassed());
 		
-		thrown = null;
 		mock.clear();
 		assertNull(mock.getLastResult());
 		ApiTrialResultMutant atrm = new ApiTrialResultMutant();
 		delegate.onTrialCompleted(atrm);
-		assertNull(thrown);
+		assertEquals(0, onThrowableRecord_.count());
 		assertSame(atrm, mock.getLastTrialResult());
 		
 	}
 
-	@Override
-	public void onThrowable(Throwable p) {
-		thrown = p;
-	}
-
-	@Override
-	public boolean isMainLog() {
-		return false;
-	}
-
-	@Override
-	public String getLineSeperator() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public boolean isLogEnabled(Class<?> clazz) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-	
 	@Override
 	public int getTests(I_CountType type) {
 		return super.getTests(type, 4, true);
@@ -221,7 +204,7 @@ public class Tests4J_ListenerDelegateTrial extends SourceFileCountingTrial imple
 
 	@Override
 	public int getUniqueAsserts(I_CountType type) {
-		int thisUniqueAsserts = 23;
+		int thisUniqueAsserts = 24;
 		//code coverage and circular dependencies +
 		//custom afterTrialTests
 		//+ see above
@@ -234,23 +217,4 @@ public class Tests4J_ListenerDelegateTrial extends SourceFileCountingTrial imple
 			return super.getUniqueAsserts(type, thisUniqueAsserts);
 		}
 	}
-
-	@Override
-	public String getCurrentThreadName() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-
-  @Override
-  public String getThreadWithGroupNameMessage() {
-    // TODO Auto-generated method stub
-    return null;
-  }
-
-  @Override
-  public String getThreadMessage() {
-    // TODO Auto-generated method stub
-    return null;
-  }
 }

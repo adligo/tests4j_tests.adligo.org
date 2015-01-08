@@ -7,56 +7,68 @@ import org.adligo.tests4j.shared.asserts.reference.AllowedReferences;
 import org.adligo.tests4j.shared.common.DefaultSystem;
 import org.adligo.tests4j.shared.en.Tests4J_EnglishConstants;
 import org.adligo.tests4j.shared.i18n.I_Tests4J_ReportMessages;
+import org.adligo.tests4j.shared.output.I_Tests4J_Log;
 import org.adligo.tests4j.system.shared.report.summary.ThreadDisplay;
 import org.adligo.tests4j.system.shared.report.summary.TrialDisplay;
-import org.adligo.tests4j.system.shared.report.summary.TrialFailedDisplay;
 import org.adligo.tests4j.system.shared.trials.SourceFileScope;
 import org.adligo.tests4j.system.shared.trials.Test;
+import org.adligo.tests4j_4mockito.MethodRecorder;
 import org.adligo.tests4j_tests.base_trials.I_CountType;
 import org.adligo.tests4j_tests.base_trials.SourceFileCountingTrial;
 import org.adligo.tests4j_tests.references_groups.Tests4J_Summary_GwtReferenceGroup;
-import org.adligo.tests4j_tests.system.shared.mocks.Tests4J_LogMock;
 
 import java.util.List;
 
-@SourceFileScope (sourceClass=TrialDisplay.class, minCoverage=89.0)
+@SourceFileScope (sourceClass=TrialDisplay.class, minCoverage=83.0)
 @AllowedReferences (groups=Tests4J_Summary_GwtReferenceGroup.class)
 public class TrialDisplayTrial extends SourceFileCountingTrial {
-	private Tests4J_LogMock log = new Tests4J_LogMock();
-	private ThreadDisplay threadDisplay = new ThreadDisplay(log, new DefaultSystem());
+  private I_Tests4J_Log logMock_;
+  private MethodRecorder<Void> logRecord_;
+  private MethodRecorder<Void> logLineRecord_;
+  private MethodRecorder<Void> onThrowableRecord_;
+	private ThreadDisplay threadDisplay;
+	
 	@Override
 	public void beforeTests() {
-		log.clear();
-		log.clearStates();
+	  logMock_ = mock(I_Tests4J_Log.class);
+    logRecord_ = new MethodRecorder<Void>();
+    doAnswer(logRecord_).when(logMock_).log(any());
+    logLineRecord_ = new MethodRecorder<Void>();
+    doAnswer(logLineRecord_).when(logMock_).logLine(anyVararg());
+    onThrowableRecord_ = new MethodRecorder<Void>();
+    doAnswer(onThrowableRecord_).when(logMock_).onThrowable(any());
+    when(logMock_.getLineSeperator()).thenReturn("lineSeperator");
+    
+	  threadDisplay = new ThreadDisplay(logMock_, new DefaultSystem());
 	}
 
 	
-	@Test
+	@SuppressWarnings("boxing")
+  @Test
 	public void testStartReportLogOff() {
-		TrialDisplay display = new TrialDisplay(log, threadDisplay);
+		TrialDisplay display = new TrialDisplay(logMock_, threadDisplay);
 		
 		display.onStartingTrial("someTrialName");
-		assertEquals(0, log.getLogMessagesSize());
-		assertEquals(0, log.getExceptionsSize());
-		assertEquals(0, log.getStatesSize());
+		assertEquals(0, logRecord_.count());
+		assertEquals(0, onThrowableRecord_.count());
 		
 		List<I_TrialResult> results =  display.getFailedTrials();
 		assertNotNull(results);
 		assertEquals(0, results.size());
 	}
 	
-	@Test
+	@SuppressWarnings("boxing")
+  @Test
 	public void testStartReportLogOn() {
-		TrialDisplay display = new TrialDisplay(log, threadDisplay);
-		log.setState(TrialDisplay.class, true);
+		TrialDisplay display = new TrialDisplay(logMock_, threadDisplay);
+		when(logMock_.isLogEnabled(TrialDisplay.class)).thenReturn(true);
 		
 		display.onStartingTrial("someTrialName");
-		assertEquals(1, log.getLogMessagesSize());
+		assertEquals(1, logRecord_.count());
 		I_Tests4J_ReportMessages messages = Tests4J_EnglishConstants.ENGLISH.getReportMessages();
 		
-		assertEquals("Tests4J" + messages.getStartingTrial() + "someTrialName", log.getLogMessage(0));
-		assertEquals(0, log.getExceptionsSize());
-		assertEquals(1, log.getStatesSize());
+		assertEquals("Tests4J" + messages.getStartingTrial() + "someTrialName", logRecord_.getArgument(0));
+		assertEquals(0, onThrowableRecord_.count());
 		
 		List<I_TrialResult> results =  display.getFailedTrials();
 		assertNotNull(results);
@@ -64,9 +76,10 @@ public class TrialDisplayTrial extends SourceFileCountingTrial {
 	}
 	
 	
-	@Test
+	@SuppressWarnings("boxing")
+  @Test
 	public void testPassedLogOff() {
-		TrialDisplay display = new TrialDisplay(log, threadDisplay);
+		TrialDisplay display = new TrialDisplay(logMock_, threadDisplay);
 		
 		BaseTrialResultMutant btrm = new BaseTrialResultMutant();
 		btrm.setTrialName("someTrialName");
@@ -81,19 +94,19 @@ public class TrialDisplayTrial extends SourceFileCountingTrial {
 		assertTrue(btrm.isPassed());
 		
 		display.onTrialCompleted(btrm);
-		assertEquals(0, log.getLogMessagesSize());
-		assertEquals(0, log.getExceptionsSize());
-		assertEquals(0, log.getStatesSize());
+		assertEquals(0, logRecord_.count());
+		assertEquals(0, onThrowableRecord_.count());
 		
 		List<I_TrialResult> results =  display.getFailedTrials();
 		assertNotNull(results);
 		assertEquals(0, results.size());
 	}
 	
-	@Test
+	@SuppressWarnings("boxing")
+  @Test
 	public void testPassedLogOn() {
-		TrialDisplay display = new TrialDisplay(log, threadDisplay);
-		log.setState(TrialDisplay.class, true);
+		TrialDisplay display = new TrialDisplay(logMock_, threadDisplay);
+		when(logMock_.isLogEnabled(any())).thenReturn(true);
 		
 		BaseTrialResultMutant btrm = new BaseTrialResultMutant();
 		btrm.setTrialName("someTrialName");
@@ -107,12 +120,11 @@ public class TrialDisplayTrial extends SourceFileCountingTrial {
 		assertTrue(btrm.isPassed());
 		
 		display.onTrialCompleted(btrm);
-		assertEquals(1, log.getLogMessagesSize());
+		assertEquals(1, logRecord_.count());
 		I_Tests4J_ReportMessages messages = Tests4J_EnglishConstants.ENGLISH.getReportMessages();
 		assertEquals("Tests4J" + messages.getTrialHeading() + "someTrialName" + messages.getPassedEOS(),
-				log.getLogMessage(0));
-		assertEquals(0, log.getExceptionsSize());
-		assertEquals(1, log.getStatesSize());
+				logRecord_.getArgument(0));
+		assertEquals(0, onThrowableRecord_.count());
 		
 		List<I_TrialResult> results =  display.getFailedTrials();
 		assertNotNull(results);
@@ -121,9 +133,10 @@ public class TrialDisplayTrial extends SourceFileCountingTrial {
 	
 	
 	
-	@Test
+	@SuppressWarnings("boxing")
+  @Test
 	public void testFailedLogOff() {
-		TrialDisplay display = new TrialDisplay(log, threadDisplay);
+		TrialDisplay display = new TrialDisplay(logMock_, threadDisplay);
 		
 		BaseTrialResultMutant btrm = new BaseTrialResultMutant();
 		btrm.setTrialName("someOtherTrialName");
@@ -131,9 +144,8 @@ public class TrialDisplayTrial extends SourceFileCountingTrial {
 		
 		display.onTrialCompleted(btrm);
 		
-		assertEquals(0, log.getLogMessagesSize());
-		assertEquals(0, log.getExceptionsSize());
-		assertEquals(0, log.getStatesSize());
+		assertEquals(0, logRecord_.count());
+		assertEquals(0, onThrowableRecord_.count());
 		
 		List<I_TrialResult> results =  display.getFailedTrials();
 		assertNotNull(results);
@@ -141,25 +153,31 @@ public class TrialDisplayTrial extends SourceFileCountingTrial {
 		assertSame(btrm, results.get(0));
 	}
 	
-	@Test
+	@SuppressWarnings("boxing")
+  @Test
 	public void testFailedLogOn() {
-		TrialDisplay display = new TrialDisplay(log, threadDisplay);
-		log.setState(TrialFailedDisplay.class, true);
+		TrialDisplay display = new TrialDisplay(logMock_, threadDisplay);
+		when(logMock_.isLogEnabled(any())).thenReturn(true);
 		
 		BaseTrialResultMutant btrm = new BaseTrialResultMutant();
 		btrm.setTrialName("someOtherTrialName");
 		btrm.setPassed(false);
 		
-		log.setState(TrialFailedDisplay.class, true);
 		
 		display.onTrialCompleted(btrm);
 		
-		assertEquals(1, log.getLogMessagesSize());
+		assertEquals(1, logLineRecord_.count());
+		Object [] args = logLineRecord_.getArguments(0);
 		I_Tests4J_ReportMessages messages = Tests4J_EnglishConstants.ENGLISH.getReportMessages();
-		assertEquals("Tests4J"  + messages.getTrialHeading() + "someOtherTrialName" + messages.getFailedEOS(),
-				log.getLogMessage(0));
-		assertEquals(0, log.getExceptionsSize());
-		assertEquals(1, log.getStatesSize());
+		assertEquals("Tests4J", args[0]);
+		assertEquals(messages.getTrialHeading(), args[1]);
+		assertEquals("someOtherTrialName", args[2]);
+		assertEquals(messages.getFailedEOS(), args[3]);
+		assertEquals(4, args.length);
+		
+		assertEquals(0, logRecord_.count());
+		assertEquals(0, onThrowableRecord_.count());
+		
 		
 		List<I_TrialResult> results =  display.getFailedTrials();
 		assertNotNull(results);
@@ -176,7 +194,7 @@ public class TrialDisplayTrial extends SourceFileCountingTrial {
 
 	@Override
 	public int getAsserts(I_CountType type) {
-		int thisAsserts = 37;
+		int thisAsserts = 36;
 		//code coverage and circular dependencies +
 		//custom afterTrialTests
 		//+ see above
@@ -190,7 +208,7 @@ public class TrialDisplayTrial extends SourceFileCountingTrial {
 
 	@Override
 	public int getUniqueAsserts(I_CountType type) {
-		int thisUniqueAsserts = 23;
+		int thisUniqueAsserts = 27;
 		//code coverage and circular dependencies +
 		//custom afterTrialTests
 		//+ see above

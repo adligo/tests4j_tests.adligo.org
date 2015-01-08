@@ -21,7 +21,7 @@ import org.adligo.tests4j_tests.shared.i18n.I18N_Asserter;
 import java.util.ArrayList;
 import java.util.List;
 
-@SourceFileScope (sourceClass=Tests4J_EnglishConstants.class, minCoverage=93.0)
+@SourceFileScope (sourceClass=Tests4J_EnglishConstants.class, minCoverage=92.0)
 @AllowedReferences (groups=Tests4J_EN_GwtReferenceGroup.class)
 public class Tests4J_EnglishConstants_Trial extends SourceFileCountingTrial {
 
@@ -29,6 +29,11 @@ public class Tests4J_EnglishConstants_Trial extends SourceFileCountingTrial {
 	public void testMessages() {
 		I_Tests4J_Constants messages = Tests4J_EnglishConstants.ENGLISH;
 		I18N_Asserter asserter = new I18N_Asserter(this);
+		
+		asserter.assertConstant("Tests4J: ", 
+        messages.getHeader());
+		asserter.assertConstant("Tests4J", 
+        messages.getPrefix());
 		
 		asserter.assertConstant("Classes which implement I_AbstractTrial must have a zero argument constructor.", 
 				messages.getBadConstuctor());
@@ -90,7 +95,7 @@ public class Tests4J_EnglishConstants_Trial extends SourceFileCountingTrial {
 
 	@Override
 	public int getAsserts(I_CountType type) {
-		int thisAsserts = 36;
+		int thisAsserts = 42;
 		//code coverage and circular dependencies +
 		//custom afterTrialTests
 		//+ see above
@@ -104,7 +109,7 @@ public class Tests4J_EnglishConstants_Trial extends SourceFileCountingTrial {
 
 	@Override
 	public int getUniqueAsserts(I_CountType type) {
-		int thisUniqueAsserts = 36;
+		int thisUniqueAsserts = 42;
 		//code coverage and circular dependencies +
 		//custom afterTrialTests
 		//+ see above

@@ -1,21 +1,20 @@
 package org.adligo.tests4j_tests.jacoco.plugin.data.inst;
 
+import org.adligo.tests4j.shared.output.I_Tests4J_Log;
 import org.adligo.tests4j.system.shared.trials.SourceFileScope;
 import org.adligo.tests4j.system.shared.trials.Test;
 import org.adligo.tests4j_4jacoco.plugin.common.I_CoveragePluginMemory;
-import org.adligo.tests4j_4jacoco.plugin.instrumentation.TrialInstrumenter;
 import org.adligo.tests4j_4jacoco.plugin.instrumentation.ClassInstrumenterSharedMemory;
+import org.adligo.tests4j_4jacoco.plugin.instrumentation.TrialInstrumenter;
 import org.adligo.tests4j_tests.base_trials.I_CountType;
 import org.adligo.tests4j_tests.base_trials.SourceFileCountingTrial;
-import org.adligo.tests4j_tests.system.shared.mocks.Tests4J_LogMock;
 
 @SourceFileScope (sourceClass=TrialInstrumenter.class, minCoverage=1.0)
 public class TrialInstrumenterTrial extends SourceFileCountingTrial {
-	private static final Tests4J_LogMock log = new Tests4J_LogMock();
-	private Tests4J_LogMock logMock_ = new Tests4J_LogMock();
 	
 	@Test
 	public void testGetAllPackages() throws Exception {
+	  I_Tests4J_Log log = mock(I_Tests4J_Log.class);
 		ClassInstrumenterSharedMemory tism = new ClassInstrumenterSharedMemory();
 		I_CoveragePluginMemory memory = mock(I_CoveragePluginMemory.class);
 		TrialInstrumenter ti = new TrialInstrumenter(tism, memory);

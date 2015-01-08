@@ -1,14 +1,12 @@
 package org.adligo.tests4j_v1_tests.jacoco.plugin.discovery.delegates;
 
-import java.util.Map;
-
 import org.adligo.tests4j.models.shared.association.I_ClassParentsLocal;
 import org.adligo.tests4j.run.helpers.CachedClassBytesClassLoader;
 import org.adligo.tests4j.run.helpers.ClassFilter;
-import org.adligo.tests4j.run.helpers.I_ClassFilter;
 import org.adligo.tests4j.system.shared.trials.I_Trial;
 import org.adligo.tests4j_4jacoco.plugin.discovery.I_ClassParentsDiscovery;
-import org.adligo.tests4j_tests.system.shared.mocks.Tests4J_LogMock;
+
+import java.util.Map;
 
 public interface I_ClassParentsDiscoveryTrial extends I_Trial {
 
@@ -19,8 +17,6 @@ public interface I_ClassParentsDiscoveryTrial extends I_Trial {
 	public abstract Map<String, I_ClassParentsLocal> getParentsCache();
 
 	public abstract ClassFilter getClassFilter();
-
-	public abstract Tests4J_LogMock getLogMock();
 
 	public CPDT_Assert_Simple getSimple();
 	

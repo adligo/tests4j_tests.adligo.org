@@ -5,12 +5,18 @@ import org.adligo.tests4j.shared.asserts.reference.AllowedReferences;
 import org.adligo.tests4j.shared.common.DefaultSystem;
 import org.adligo.tests4j.shared.common.DelegateSystem;
 import org.adligo.tests4j.shared.common.I_System;
+import org.adligo.tests4j.shared.i18n.I_Tests4J_Constants;
 import org.adligo.tests4j.shared.output.DefaultLog;
+import org.adligo.tests4j.system.shared.trials.BeforeTrial;
 import org.adligo.tests4j.system.shared.trials.SourceFileScope;
 import org.adligo.tests4j.system.shared.trials.Test;
+import org.adligo.tests4j_4mockito.MockitoSourceFileTrial;
 import org.adligo.tests4j_tests.base_trials.I_CountType;
 import org.adligo.tests4j_tests.base_trials.SourceFileCountingTrial;
 import org.adligo.tests4j_tests.references_groups.Tests4J_Output_GwtReferenceGroup;
+import org.adligo.tests4j_tests.system.shared.mocks.Tests4J_ConstantsMockDelegate;
+import org.mockito.Mock;
+import org.mockito.Mockito;
 
 import java.io.PrintStream;
 import java.util.HashMap;
@@ -18,10 +24,24 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-@SourceFileScope (sourceClass=DefaultLog.class, minCoverage=47.0)
+@SourceFileScope (sourceClass=DefaultLog.class, minCoverage=45.0)
 @AllowedReferences (groups=Tests4J_Output_GwtReferenceGroup.class)
 public class DefaultLogTrial extends SourceFileCountingTrial {
 
+  public void afterTests() {
+    Tests4J_ConstantsMockDelegate.reset();
+  }
+  @SuppressWarnings("boxing")
+  @Test
+  public void testFormat() {
+    
+    assertEquals("a c", DefaultLogMock.orderLine("a"," ","c"));
+    I_Tests4J_Constants constantsMock = mock(I_Tests4J_Constants.class);
+    when(constantsMock.isLeftToRight()).thenReturn(false);
+    Tests4J_ConstantsMockDelegate.setup(constantsMock);
+    assertEquals("c a", DefaultLogMock.orderLine("a"," ","c"));
+  }
+  
 	@Test
 	public void testDefault() {
 		DefaultLogMock d = new DefaultLogMock();
@@ -53,12 +73,12 @@ public class DefaultLogTrial extends SourceFileCountingTrial {
 
 	@Override
 	public int getTests(I_CountType type) {
-		return super.getTests(type, 2, true);
+		return super.getTests(type, 3, true);
 	}
 
 	@Override
 	public int getAsserts(I_CountType type) {
-		int thisAsserts = 6;
+		int thisAsserts = 8;
 		//code coverage and circular dependencies +
 		//custom afterTrialTests
 		//+ see above
@@ -72,7 +92,7 @@ public class DefaultLogTrial extends SourceFileCountingTrial {
 
 	@Override
 	public int getUniqueAsserts(I_CountType type) {
-		int thisUniqueAsserts = 6;
+		int thisUniqueAsserts = 8;
 		//code coverage and circular dependencies +
 		//custom afterTrialTests
 		//+ see above

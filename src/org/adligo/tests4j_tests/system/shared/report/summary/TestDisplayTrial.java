@@ -4,97 +4,100 @@ import org.adligo.tests4j.shared.asserts.reference.AllowedReferences;
 import org.adligo.tests4j.shared.common.DefaultSystem;
 import org.adligo.tests4j.shared.en.Tests4J_EnglishConstants;
 import org.adligo.tests4j.shared.i18n.I_Tests4J_ReportMessages;
+import org.adligo.tests4j.shared.output.I_Tests4J_Log;
 import org.adligo.tests4j.system.shared.report.summary.TestDisplay;
-import org.adligo.tests4j.system.shared.report.summary.TestFailedDisplay;
 import org.adligo.tests4j.system.shared.report.summary.ThreadDisplay;
 import org.adligo.tests4j.system.shared.trials.SourceFileScope;
 import org.adligo.tests4j.system.shared.trials.Test;
+import org.adligo.tests4j_4mockito.MethodRecorder;
 import org.adligo.tests4j_tests.base_trials.I_CountType;
 import org.adligo.tests4j_tests.base_trials.SourceFileCountingTrial;
 import org.adligo.tests4j_tests.references_groups.Tests4J_Summary_GwtReferenceGroup;
-import org.adligo.tests4j_tests.system.shared.mocks.Tests4J_LogMock;
 
 @SourceFileScope (sourceClass=TestDisplay.class, minCoverage=80.0)
 @AllowedReferences (groups=Tests4J_Summary_GwtReferenceGroup.class)
 public class TestDisplayTrial extends SourceFileCountingTrial {
-	private Tests4J_LogMock log = new Tests4J_LogMock();
-	private TestDisplay reporter = new TestDisplay(log, 
-	    new ThreadDisplay(log, new DefaultSystem()));
+  private I_Tests4J_Log logMock_;
+  private MethodRecorder<Void> logRecord_;
+  private MethodRecorder<Void> onThrowableRecord_;
+	private TestDisplay reporter;
 	
 	@Override
 	public void beforeTests() {
-		log.clear();
-		log.clearStates();
+	  logMock_ = mock(I_Tests4J_Log.class);
+    logRecord_ = new MethodRecorder<Void>();
+    doAnswer(logRecord_).when(logMock_).log(anyVararg());
+    onThrowableRecord_ = new MethodRecorder<Void>();
+    doAnswer(onThrowableRecord_).when(logMock_).onThrowable(any());
+    when(logMock_.getLineSeperator()).thenReturn("lineSeperator");
+    
+	  reporter = new TestDisplay(logMock_, 
+	      new ThreadDisplay(logMock_, new DefaultSystem()));
 	}
 
 	
-	@Test
+	@SuppressWarnings("boxing")
+  @Test
 	public void testLogOff() {
 		
 		reporter.onStartingTest("someTrial[0]", "someTest");
-		assertEquals(0, log.getLogMessagesSize());
-		assertEquals(0, log.getExceptionsSize());
-		assertEquals(0, log.getStatesSize());
+		assertEquals(0, logRecord_.count());
+		assertEquals(0, onThrowableRecord_.count());
 		
 	}
 	
-	@Test
+	@SuppressWarnings("boxing")
+  @Test
 	public void testStart() {
-		log.setState(TestDisplay.class, true);
+	  when(logMock_.isLogEnabled(TestDisplay.class)).thenReturn(true);
 		
 		reporter.onStartingTest("someTrial[0]", "someTest");
 		
-		assertEquals(1, log.getLogMessagesSize());
+		assertEquals(1, logRecord_.count());
 		I_Tests4J_ReportMessages messages = Tests4J_EnglishConstants.ENGLISH.getReportMessages();
 		assertEquals("Tests4J"  + messages.getStartingTest() + "someTrial[0].someTest",
-				log.getLogMessage(0));
-		assertEquals(0, log.getExceptionsSize());
-		assertEquals(1, log.getStatesSize());
-		assertTrue(log.isLogEnabled(TestDisplay.class));
+				logRecord_.getArgument(0));
+		assertEquals(0, onThrowableRecord_.count());
 		
 	}
-	@Test
+	@SuppressWarnings("boxing")
+  @Test
 	public void testProgressReportLogOff() {
 		
 		reporter.onTestCompleted("someTrial", "someTest", false);
-		assertEquals(0, log.getLogMessagesSize());
-		assertEquals(0, log.getExceptionsSize());
-		assertEquals(0, log.getStatesSize());
+		assertEquals(0, logRecord_.count());
+		assertEquals(0, onThrowableRecord_.count());
 		
 	}
 	
-	@Test
+	@SuppressWarnings("boxing")
+  @Test
 	public void testSuccess() {
-		log.setState(TestDisplay.class, true);
-		
+	  when(logMock_.isLogEnabled(eq(TestDisplay.class))).thenReturn(true);
+    
 		reporter.onTestCompleted("someTrial[0]", "someTest", true);
 		
-		assertEquals(1, log.getLogMessagesSize());
+		assertEquals(1, logRecord_.count());
 		I_Tests4J_ReportMessages messages = Tests4J_EnglishConstants.ENGLISH.getReportMessages();
 		assertEquals("Tests4J"  + messages.getTestHeading() + "someTrial[0].someTest" + messages.getPassedEOS(),
-				log.getLogMessage(0));
-		assertEquals(0, log.getExceptionsSize());
-		assertEquals(1, log.getStatesSize());
-		assertTrue(log.isLogEnabled(TestDisplay.class));
+				logRecord_.getArgument(0));
+		assertEquals(0, onThrowableRecord_.count());
 		
 	}
 	
 	
-	@Test
+	@SuppressWarnings("boxing")
+  @Test
 	public void testFailedDelegate() {
-		log.setState(TestDisplay.class, true);
-		log.setState(TestFailedDisplay.class, true);
-		
+	  when(logMock_.isLogEnabled(any())).thenReturn(true);
+    
 		reporter.onTestCompleted("someTrial[0]", "someTest", false);
 		
-		assertEquals(1, log.getLogMessagesSize());
+		assertEquals(1, logRecord_.count());
 		I_Tests4J_ReportMessages messages = Tests4J_EnglishConstants.ENGLISH.getReportMessages();
 		assertEquals("Tests4J"  + messages.getTestHeading() + "someTrial[0].someTest" + messages.getFailedEOS(),
-				log.getLogMessage(0));
-		assertEquals(0, log.getExceptionsSize());
-		assertEquals(2, log.getStatesSize());
-		assertTrue(log.isLogEnabled(TestDisplay.class));
-		assertTrue(log.isLogEnabled(TestFailedDisplay.class));
+				logRecord_.getArgument(0));
+		assertEquals(0, onThrowableRecord_.count());
 		
 	}
 	
@@ -105,7 +108,7 @@ public class TestDisplayTrial extends SourceFileCountingTrial {
 
 	@Override
 	public int getAsserts(I_CountType type) {
-		int thisAsserts = 22;
+		int thisAsserts = 13;
 		//code coverage and circular dependencies +
 		//custom afterTrialTests
 		//+ see above
@@ -119,7 +122,7 @@ public class TestDisplayTrial extends SourceFileCountingTrial {
 
 	@Override
 	public int getUniqueAsserts(I_CountType type) {
-		int thisUniqueAsserts = 15;
+		int thisUniqueAsserts = 11;
 		//code coverage and circular dependencies +
 		//custom afterTrialTests
 		//+ see above

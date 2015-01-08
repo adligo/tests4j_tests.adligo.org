@@ -5,6 +5,7 @@ import java.util.Collections;
 import org.adligo.tests4j.shared.asserts.common.ExpectedThrownData;
 import org.adligo.tests4j.shared.asserts.common.I_Thrower;
 import org.adligo.tests4j.shared.asserts.reference.AllowedReferences;
+import org.adligo.tests4j.shared.asserts.reference.CircularDependencies;
 import org.adligo.tests4j.shared.common.MethodBlocker;
 import org.adligo.tests4j.shared.common.Tests4J_Constants;
 import org.adligo.tests4j.shared.en.Tests4J_EnglishConstants;
@@ -17,7 +18,8 @@ import org.adligo.tests4j_tests.base_trials.SourceFileCountingTrial;
 import org.adligo.tests4j_tests.references_groups.Tests4J_Common_ReferenceGroup;
 import org.adligo.tests4j_tests.shared.common.mocks.MockWithMethodBlocker;
 
-@SourceFileScope (sourceClass=MethodBlocker.class, minCoverage=97.0)
+@SourceFileScope (sourceClass=MethodBlocker.class, 
+  minCoverage=97.0, allowedCircularDependencies=CircularDependencies.AllowInPackage)
 @AdditionalInstrumentation (javaPackages="org.adligo.tests4j_tests.shared.common.mocks")
 @AllowedReferences (groups=Tests4J_Common_ReferenceGroup.class)
 public class MethodBlockerTrial extends SourceFileCountingTrial {

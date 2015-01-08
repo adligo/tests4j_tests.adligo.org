@@ -1,20 +1,15 @@
 package org.adligo.tests4j_v1_tests.jacoco.plugin.discovery;
 
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-
 import org.adligo.tests4j.models.shared.association.ClassAssociationsLocal;
 import org.adligo.tests4j.models.shared.association.I_ClassAssociationsCache;
 import org.adligo.tests4j.models.shared.association.I_ClassAssociationsLocal;
-import org.adligo.tests4j.models.shared.association.I_ClassParentsCache;
 import org.adligo.tests4j.models.shared.association.I_ClassParentsLocal;
 import org.adligo.tests4j.run.helpers.CachedClassBytesClassLoader;
 import org.adligo.tests4j.run.helpers.ClassFilter;
 import org.adligo.tests4j.run.helpers.ClassFilterMutant;
 import org.adligo.tests4j.run.helpers.I_ClassFilter;
 import org.adligo.tests4j.shared.common.CacheControl;
+import org.adligo.tests4j.shared.output.I_Tests4J_Log;
 import org.adligo.tests4j.system.shared.trials.PackageScope;
 import org.adligo.tests4j.system.shared.trials.Test;
 import org.adligo.tests4j_4jacoco.plugin.discovery.CircularDependenciesDiscovery;
@@ -26,7 +21,6 @@ import org.adligo.tests4j_4jacoco.plugin.discovery.OrderedClassDiscovery;
 import org.adligo.tests4j_4jacoco.plugin.discovery.ReferenceTrackingClassVisitor;
 import org.adligo.tests4j_tests.base_trials.ApiCountingTrial;
 import org.adligo.tests4j_tests.base_trials.I_CountType;
-import org.adligo.tests4j_tests.system.shared.mocks.Tests4J_LogMock;
 import org.adligo.tests4j_v1_tests.jacoco.plugin.discovery.delegates.ClassReferencesCacheMock;
 import org.adligo.tests4j_v1_tests.jacoco.plugin.discovery.delegates.DAT_Assert_Circular_to_10;
 import org.adligo.tests4j_v1_tests.jacoco.plugin.discovery.delegates.DAT_Assert_Linear_to_10;
@@ -38,6 +32,10 @@ import org.adligo.tests4j_v1_tests.jacoco.plugin.discovery.delegates.DAT_Assert_
 import org.adligo.tests4j_v1_tests.jacoco.plugin.discovery.delegates.I_DiscoveryApiTrial;
 import org.objectweb.asm.Opcodes;
 
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
+
 @PackageScope (packageName="org.adligo.tests4j_4jacoco.plugin.discovery")
 public class DiscoveryApiTrial extends ApiCountingTrial implements I_DiscoveryApiTrial, I_ClassAssociationsCache {
 	private CachedClassBytesClassLoader ccbClassLoader;
@@ -47,7 +45,6 @@ public class DiscoveryApiTrial extends ApiCountingTrial implements I_DiscoveryAp
 	
 	private Map<String,I_ClassAssociationsLocal> refsCache = new HashMap<String, I_ClassAssociationsLocal>();
 	private final ClassFilter classFilter;
-	private Tests4J_LogMock logMock = new Tests4J_LogMock();
 	private final I_ClassFilter primitiveClassFilter;
 	private DAT_Assert_Simple simple;
 	private DAT_Assert_Linear_to_10 linear_to10;
@@ -74,6 +71,7 @@ public class DiscoveryApiTrial extends ApiCountingTrial implements I_DiscoveryAp
 		circular = new DAT_Assert_Circular_to_10(this);
 		everythingDelegate = new DAT_Assert_MockWithEverything(this);
 		
+		I_Tests4J_Log logMock = mock(I_Tests4J_Log.class);
 		ccbClassLoader = new CachedClassBytesClassLoader(logMock, null, null
 				, cacheControl);
 		orderedClassDiscovery = new OrderedClassDiscovery();
@@ -335,13 +333,6 @@ public class DiscoveryApiTrial extends ApiCountingTrial implements I_DiscoveryAp
 	@Override
 	public ClassFilter getClassFilter() {
 		return classFilter;
-	}
-	/* (non-Javadoc)
-	 * @see org.adligo.tests4j_tests.jacoco.plugin.discovery.I_ClassReferencesDiscoveryTrial#getLogMock()
-	 */
-	@Override
-	public Tests4J_LogMock getLogMock() {
-		return logMock;
 	}
 	/* (non-Javadoc)
 	 * @see org.adligo.tests4j_tests.jacoco.plugin.discovery.I_ClassReferencesDiscoveryTrial#getPrimitiveClassFilter()

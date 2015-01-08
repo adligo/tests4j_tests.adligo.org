@@ -1,5 +1,20 @@
 package org.adligo.tests4j_tests.run.helpers;
 
+import org.adligo.tests4j.run.helpers.CachedClassBytesClassLoader;
+import org.adligo.tests4j.shared.asserts.common.ExpectedThrownData;
+import org.adligo.tests4j.shared.asserts.common.I_Thrower;
+import org.adligo.tests4j.shared.asserts.reference.CircularDependencies;
+import org.adligo.tests4j.shared.common.ClassMethods;
+import org.adligo.tests4j.shared.output.I_Tests4J_Log;
+import org.adligo.tests4j.system.shared.trials.SourceFileScope;
+import org.adligo.tests4j.system.shared.trials.Test;
+import org.adligo.tests4j_4mockito.MethodRecorder;
+import org.adligo.tests4j_tests.base_trials.I_CountType;
+import org.adligo.tests4j_tests.base_trials.SourceFileCountingTrial;
+import org.adligo.tests4j_tests.run.helpers.class_loading_mocks.MockCachedClassBytesClassLoader;
+import org.adligo.tests4j_tests.run.helpers.class_loading_mocks.MockInputStream;
+import org.adligo.tests4j_tests.run.helpers.class_loading_mocks.MockWithNothing;
+
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -7,20 +22,6 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-
-import org.adligo.tests4j.run.helpers.CachedClassBytesClassLoader;
-import org.adligo.tests4j.shared.asserts.common.ExpectedThrownData;
-import org.adligo.tests4j.shared.asserts.common.I_Thrower;
-import org.adligo.tests4j.shared.asserts.reference.CircularDependencies;
-import org.adligo.tests4j.shared.common.ClassMethods;
-import org.adligo.tests4j.system.shared.trials.SourceFileScope;
-import org.adligo.tests4j.system.shared.trials.Test;
-import org.adligo.tests4j_tests.base_trials.I_CountType;
-import org.adligo.tests4j_tests.base_trials.SourceFileCountingTrial;
-import org.adligo.tests4j_tests.run.helpers.class_loading_mocks.MockCachedClassBytesClassLoader;
-import org.adligo.tests4j_tests.run.helpers.class_loading_mocks.MockInputStream;
-import org.adligo.tests4j_tests.run.helpers.class_loading_mocks.MockWithNothing;
-import org.adligo.tests4j_tests.system.shared.mocks.Tests4J_LogMock;
 
 @SourceFileScope (sourceClass=CachedClassBytesClassLoader.class, 
 	minCoverage=76.0, allowedCircularDependencies=CircularDependencies.AllowInnerOuterClasses)
@@ -31,13 +32,19 @@ public class CachedClassBytesClassLoaderTrial extends SourceFileCountingTrial {
 	private static final String MOCK_WITH_NOTHING_RESOURCE_NAME = ClassMethods.toResource(MOCK_WITH_NOTHING_NAME);
 
 	
-	@Test
+	@SuppressWarnings("boxing")
+  @Test
 	public void testNullListsLog() throws Exception {
-		Tests4J_LogMock lm = new Tests4J_LogMock();
-		lm.setState(CachedClassBytesClassLoader.class, true);
-		CachedClassBytesClassLoader cl = new CachedClassBytesClassLoader(lm,
+		I_Tests4J_Log logMock = mock(I_Tests4J_Log.class);
+		MethodRecorder<Void> onThrowableRecord = new MethodRecorder<Void>();
+		doAnswer(onThrowableRecord).when(logMock).onThrowable(any());
+		when(logMock.getLineSeperator()).thenReturn("lineSeperator");
+		
+		when(logMock.isLogEnabled(CachedClassBytesClassLoader.class)).thenReturn(true);
+		
+		CachedClassBytesClassLoader cl = new CachedClassBytesClassLoader(logMock,
 				null, null, null);
-		assertSame(lm, cl.getLog());
+		assertSame(logMock, cl.getLog());
 		Set<String> pkgsWithOutWarn = cl.getPackagesNotRequired();
 		assertNotNull(pkgsWithOutWarn);
 		assertEquals(Collections.singleton("java.").getClass().getName(), pkgsWithOutWarn.getClass().getName() );
@@ -45,17 +52,17 @@ public class CachedClassBytesClassLoaderTrial extends SourceFileCountingTrial {
 		assertEquals(1, pkgsWithOutWarn.size());
 		assertEquals(Collections.emptySet(), cl.getClassesNotRequired());
 		
-		cl = new CachedClassBytesClassLoader(lm,
+		cl = new CachedClassBytesClassLoader(logMock,
 				new HashSet<String>(),
 				new HashSet<String>(), null);
 		final InputStream in = this.getClass().getResourceAsStream(MOCK_WITH_NOTHING_RESOURCE_NAME);
 		cl.addCache(in, MOCK_WITH_NOTHING_NAME);
-		assertEquals(1, lm.getExceptionsSize());
-		Throwable exception = lm.getException(0);
+		assertEquals(1, onThrowableRecord.count());
+		Throwable exception = (Throwable) onThrowableRecord.getArgument(0);
 		assertEquals(IllegalStateException.class.getName(), exception.getClass().getName());
 		String message = exception.getMessage();
-		assertTrue(message, message.contains(" the following class should to be cached at this point," + lm.getLineSeperator() +
-				" using the parent classloader (which can mess up code coverage assertions);" + lm.getLineSeperator() +
+		assertTrue(message, message.contains(" the following class should to be cached at this point," + "lineSeperator" +
+				" using the parent classloader (which can mess up code coverage assertions);" + "lineSeperator" +
 				"java.lang.Object"));
 		
 		List<String> cachedClasses = cl.getAllCachedClasses();
@@ -78,8 +85,10 @@ public class CachedClassBytesClassLoaderTrial extends SourceFileCountingTrial {
 	
 	@Test
 	public void testClassNotCachedState() throws Exception {
-		Tests4J_LogMock lm = new Tests4J_LogMock();
-		CachedClassBytesClassLoader cl = new CachedClassBytesClassLoader(lm,
+	  I_Tests4J_Log logMock = mock(I_Tests4J_Log.class);
+    when(logMock.getLineSeperator()).thenReturn("lineSeperator");
+    
+		CachedClassBytesClassLoader cl = new CachedClassBytesClassLoader(logMock,
 				Collections.singleton("java."),
 				Collections.singleton(""), null);
 		Set<String> pkgs = cl.getPackagesNotRequired();
@@ -104,8 +113,10 @@ public class CachedClassBytesClassLoaderTrial extends SourceFileCountingTrial {
 	
 	@Test
 	public void testCreateCachedState() throws Exception {
-		Tests4J_LogMock lm = new Tests4J_LogMock();
-		CachedClassBytesClassLoader cl = new CachedClassBytesClassLoader(lm,
+	  I_Tests4J_Log logMock = mock(I_Tests4J_Log.class);
+    when(logMock.getLineSeperator()).thenReturn("lineSeperator");
+    
+		CachedClassBytesClassLoader cl = new CachedClassBytesClassLoader(logMock,
 				Collections.singleton("java."),
 				Collections.singleton(""), null);
 		
@@ -118,8 +129,10 @@ public class CachedClassBytesClassLoaderTrial extends SourceFileCountingTrial {
 	
 	@Test
 	public void testAddCacheTwice() throws Exception {
-		Tests4J_LogMock lm = new Tests4J_LogMock();
-		CachedClassBytesClassLoader cl = new CachedClassBytesClassLoader(lm,
+	  I_Tests4J_Log logMock = mock(I_Tests4J_Log.class);
+    when(logMock.getLineSeperator()).thenReturn("lineSeperator");
+    
+		CachedClassBytesClassLoader cl = new CachedClassBytesClassLoader(logMock,
 				Collections.singleton("java."),
 				Collections.singleton(""), null);
 		
@@ -135,8 +148,9 @@ public class CachedClassBytesClassLoaderTrial extends SourceFileCountingTrial {
 	
 	@Test
 	public void testMapReCheck() throws Exception {
-		Tests4J_LogMock lm = new Tests4J_LogMock();
-		MockCachedClassBytesClassLoader cl = new MockCachedClassBytesClassLoader(lm,
+	  I_Tests4J_Log logMock = mock(I_Tests4J_Log.class);
+    when(logMock.getLineSeperator()).thenReturn("lineSeperator");
+		MockCachedClassBytesClassLoader cl = new MockCachedClassBytesClassLoader(logMock,
 				Collections.singleton("java."),
 				Collections.singleton(""));
 		
@@ -162,8 +176,9 @@ public class CachedClassBytesClassLoaderTrial extends SourceFileCountingTrial {
 	
 	@Test
 	public void testInputStreamGetsClosed() throws Exception {
-		Tests4J_LogMock lm = new Tests4J_LogMock();
-		final CachedClassBytesClassLoader cl = new CachedClassBytesClassLoader(lm,
+	  I_Tests4J_Log logMock = mock(I_Tests4J_Log.class);
+    when(logMock.getLineSeperator()).thenReturn("lineSeperator");
+		final CachedClassBytesClassLoader cl = new CachedClassBytesClassLoader(logMock,
 				Collections.singleton("java."),
 				Collections.singleton(""), null);
 		
