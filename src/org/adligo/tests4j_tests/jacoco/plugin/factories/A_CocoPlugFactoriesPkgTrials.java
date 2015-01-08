@@ -19,10 +19,6 @@ import org.adligo.tests4j_tests.jacoco.plugin.data.multi.A_CocoPlugMultiPkgTrial
 
 public class A_CocoPlugFactoriesPkgTrials extends SimplePackageTrials 
 implements I_MetaTrialParams<A_CocoPlugFactoriesPkgTrials>, I_CountingPackageTrials {
-	private A_CocoDataCmnPkgTrials dataCommon = new A_CocoDataCmnPkgTrials();
-	private A_CocoPlugInstPkgTrials instr = new A_CocoPlugInstPkgTrials();
-	private A_CocoCoveragePkgTrials cover = new A_CocoCoveragePkgTrials();
-	private A_CocoPlugMultiPkgTrials multi = new A_CocoPlugMultiPkgTrials();
 	
 	public static void main(String [] args) {
 		try {
@@ -62,13 +58,4 @@ implements I_MetaTrialParams<A_CocoPlugFactoriesPkgTrials>, I_CountingPackageTri
 		return this;
 	}
 
-	@Override
-	public void setParams(Tests4J_Params params) {
-		super.setParams(params);
-		
-		dataCommon.setParams(params);
-		cover.setParams(params);
-		instr.setParams(params);
-		multi.setParams(params);
-	}
 }

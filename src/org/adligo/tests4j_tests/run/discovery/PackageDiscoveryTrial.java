@@ -64,10 +64,10 @@ import org.adligo.tests4j.system.shared.trials.PlatformType;
 import org.adligo.tests4j.system.shared.trials.SourceFileScope;
 import org.adligo.tests4j.system.shared.trials.SourceFileTrial;
 import org.adligo.tests4j.system.shared.trials.SubProgress;
-import org.adligo.tests4j.system.shared.trials.Topic;
 import org.adligo.tests4j.system.shared.trials.SuppressOutput;
 import org.adligo.tests4j.system.shared.trials.TargetedPlatform;
 import org.adligo.tests4j.system.shared.trials.Test;
+import org.adligo.tests4j.system.shared.trials.Topic;
 import org.adligo.tests4j.system.shared.trials.TrialBindings;
 import org.adligo.tests4j.system.shared.trials.TrialDelegate;
 import org.adligo.tests4j.system.shared.trials.TrialParamValue;
@@ -89,13 +89,32 @@ import org.adligo.tests4j_tests.run.discovery.package_discovery_inner_mocks.TwoN
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @SourceFileScope (sourceClass=PackageDiscovery.class, minCoverage=46.0)
 public class PackageDiscoveryTrial extends SourceFileCountingTrial {
 
-	private static final int ASSERT_COUNT = 113;
 
+	@SuppressWarnings("boxing")
+  @Test
+  public void testClassMethodTopNames() throws Exception {
+	  Set<String> names = new HashSet<String>();
+	  names.add("org.adligo.tests4j");
+	  names.add("org.adligo.tests4j.shared");
+	  names.add("org.adligo.tests4j_4jacoco");
+	  names.add("org.adligo.tests4j_4jacoco.common");
+	  names.add("org.adligo.gwt_refs");
+	  names.add("org.adligo.gwt_refs.v2_6");
+    
+	  Set<String> tops = PackageDiscovery.findTopPackages(names);
+    assertContains(tops, "org.adligo.tests4j");
+    assertContains(tops, "org.adligo.tests4j_4jacoco");
+    assertContains(tops, "org.adligo.gwt_refs");
+    assertEquals(3, tops.size());
+  }
+	
 	@SuppressWarnings("boxing")
   @Test
 	public void testDiscoveryPackage() throws Exception {
@@ -315,12 +334,12 @@ public class PackageDiscoveryTrial extends SourceFileCountingTrial {
 	}
 	@Override
 	public int getTests(I_CountType type) {
-		return super.getTests(type, 6);
+		return super.getTests(type, 7, false);
 	}
 
 	@Override
 	public int getAsserts(I_CountType type) {
-		int thisAsserts = ASSERT_COUNT;
+		int thisAsserts = 117;
 		//code coverage and circular dependencies +
 		//custom afterTrialTests
 		//+ see above
@@ -334,7 +353,7 @@ public class PackageDiscoveryTrial extends SourceFileCountingTrial {
 
 	@Override
 	public int getUniqueAsserts(I_CountType type) {
-		int thisUniqueAsserts = ASSERT_COUNT;
+		int thisUniqueAsserts = 117;
 		//code coverage and circular dependencies +
 		//custom afterTrialTests
 		//+ see above

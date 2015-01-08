@@ -16,6 +16,7 @@ import org.adligo.tests4j_tests.jacoco.plugin.data.common.A_CocoDataCmnPkgTrials
 import org.adligo.tests4j_tests.jacoco.plugin.data.coverage.A_CocoCoveragePkgTrials;
 import org.adligo.tests4j_tests.jacoco.plugin.data.inst.A_CocoPlugInstPkgTrials;
 import org.adligo.tests4j_tests.jacoco.plugin.data.multi.A_CocoPlugMultiPkgTrials;
+import org.adligo.tests4j_tests.jacoco.plugin.factories.A_CocoPlugFactoriesPkgTrials;
 import org.adligo.tests4j_tests.jacoco.plugin.factories.MockitoPluginFactoryTrial;
 import org.adligo.tests4j_tests.jacoco.plugin.whitelists.A_CocoPlugWhitelistsPkgTrials;
 
@@ -26,6 +27,7 @@ implements I_MetaTrialParams<A_CocoPlugPkgTrials>, I_CountingPackageTrials {
 	private A_CocoCoveragePkgTrials cover = new A_CocoCoveragePkgTrials();
 	private A_CocoPlugMultiPkgTrials multi = new A_CocoPlugMultiPkgTrials();
 	private A_CocoPlugWhitelistsPkgTrials whitelist = new A_CocoPlugWhitelistsPkgTrials();
+	private A_CocoPlugFactoriesPkgTrials factories = new A_CocoPlugFactoriesPkgTrials();
 	
 	public static void main(String [] args) {
 		try {
@@ -58,7 +60,7 @@ implements I_MetaTrialParams<A_CocoPlugPkgTrials>, I_CountingPackageTrials {
 
 	public void addTrials() throws Exception{
 		
-		add(MockitoPluginFactoryTrial.class);
+		add(CoveragePluginMemoryTrial.class);
 		add(RecorderTrial.class);
 		dataCommon.addTrials();
 		add(dataCommon.getCountingTrials());
@@ -71,6 +73,9 @@ implements I_MetaTrialParams<A_CocoPlugPkgTrials>, I_CountingPackageTrials {
 		
 		whitelist.addTrials();
 		add(whitelist.getCountingTrials());
+		
+		factories.addTrials();
+		add(factories.getCountingTrials());
 	}
 
 	@Override
@@ -87,5 +92,6 @@ implements I_MetaTrialParams<A_CocoPlugPkgTrials>, I_CountingPackageTrials {
 		instr.setParams(params);
 		multi.setParams(params);
 		whitelist.setParams(params);
+		factories.setParams(params);
 	}
 }

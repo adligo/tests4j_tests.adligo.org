@@ -6,8 +6,6 @@ import org.adligo.tests4j.models.shared.coverage.I_SourceFileCoverageBrief;
 import org.adligo.tests4j.run.discovery.I_PackageDiscovery;
 import org.adligo.tests4j.run.helpers.I_CachedClassBytesClassLoader;
 import org.adligo.tests4j.shared.output.I_Tests4J_Log;
-import org.adligo.tests4j.system.shared.trials.IgnoreTest;
-import org.adligo.tests4j.system.shared.trials.IgnoreTrial;
 import org.adligo.tests4j.system.shared.trials.SourceFileScope;
 import org.adligo.tests4j.system.shared.trials.Test;
 import org.adligo.tests4j_4jacoco.plugin.Recorder;
@@ -22,37 +20,54 @@ import org.adligo.tests4j_tests.base_trials.I_CountType;
 import org.adligo.tests4j_tests.base_trials.SourceFileCountingTrial;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
 @SourceFileScope (sourceClass=Recorder.class,minCoverage=0.0)
-@IgnoreTrial
 public class RecorderTrial extends SourceFileCountingTrial {
 
   @SuppressWarnings("boxing")
   @Test
-  public void testGetAllCoverage_PackageNormalization_3Packages() {
+  public void testMethodGetAllCoverage_PackageNormalization_3SourceFilesInDifferentPackages() {
     
     I_CachedClassBytesClassLoader classLoaderMock = mock(I_CachedClassBytesClassLoader.class);
     I_CoveragePluginMemory memory = mock(I_CoveragePluginMemory.class);
+    Set<String> topPackages = new HashSet<String>();
+    topPackages.add("com.example.foo");
+    when(memory.getTopPackageNames()).thenReturn(topPackages);
     when(memory.isFiltered(any(String.class))).thenReturn(false);
     
     when(memory.getCachedClassLoader()).thenReturn(classLoaderMock);
-    List<String> cachedClasses = new ArrayList<String>();
-    cachedClasses.add("com.example.foo.Bar");
-    cachedClasses.add("com.example.foo.a.Aar");
-    cachedClasses.add("com.example.foo.c.Car");
-    when(classLoaderMock.getAllCachedClasses()).thenReturn(cachedClasses);
+    
+    ArgMap<I_PackageDiscovery> argMap = new ArgMap<I_PackageDiscovery>();
+    I_PackageDiscovery pkgFoo = mock(I_PackageDiscovery.class);
+    when(pkgFoo.getPackageName()).thenReturn("com.example.foo");
+    when(pkgFoo.getClassNames()).thenReturn(Collections.singletonList("com.example.foo.Bar"));
+    argMap.putVar(pkgFoo, "com.example.foo");
+    
+    I_PackageDiscovery pkgA = mock(I_PackageDiscovery.class);
+    when(pkgA.getPackageName()).thenReturn("com.example.foo.a");
+    when(pkgA.getClassNames()).thenReturn(Collections.singletonList("com.example.foo.a.Aar"));
+    
+    I_PackageDiscovery pkgC = mock(I_PackageDiscovery.class);
+    when(pkgC.getPackageName()).thenReturn("com.example.foo.c");
+    when(pkgC.getClassNames()).thenReturn(Collections.singletonList("com.example.foo.c.Car"));
+    
+    List<I_PackageDiscovery> subs = new ArrayList<I_PackageDiscovery>();
+    subs.add(pkgA);
+    subs.add(pkgC);
+    when(pkgFoo.getSubPackages()).thenReturn(subs);
+    
+    MethodRecorder<I_PackageDiscovery> pkgRecord = new MethodRecorder<I_PackageDiscovery>(argMap);
+    when(memory.getPackage(any())).then(pkgRecord);
     
     I_Runtime runtime = mock(I_Runtime.class);
     MethodRecorder<Void> ensureProbesInitRecord = new MethodRecorder<Void>();
     doAnswer(ensureProbesInitRecord).when(runtime).ensureProbesInitialized(any(I_ClassInstrumentationMetadata.class));
     
     when(memory.getRuntime()).thenReturn(runtime);
-    I_PackageDiscovery packages = mock(I_PackageDiscovery.class);
-    when(memory.getPackage("com.example.foo")).thenReturn(packages);
     
     I_ClassInstrumentationMetadataStoreMutant store = mock(I_ClassInstrumentationMetadataStoreMutant.class);
     when(memory.getClassInstrumentationInfoStore()).thenReturn(store);
@@ -113,20 +128,18 @@ public class RecorderTrial extends SourceFileCountingTrial {
     
     List<I_PackageCoverageBrief> children = brief.getChildPackageCoverage();
     assertNotNull(children);
-    I_PackageCoverageBrief childC = children.get(0);
-    assertEquals("com.example.foo.c", childC.getPackageName());
-    souceFileNames = childC.getSourceFileNames();
-    assertContains(souceFileNames, "com.example.foo.c.Car");
-    assertEquals(1, souceFileNames.size());
-    
-    I_PackageCoverageBrief childA = children.get(1);
+    I_PackageCoverageBrief childA = children.get(0);
     assertEquals("com.example.foo.a", childA.getPackageName());
     souceFileNames = childA.getSourceFileNames();
     assertContains(souceFileNames, "com.example.foo.a.Aar");
     assertEquals(1, souceFileNames.size());
     
-    
-    
+    I_PackageCoverageBrief childC = children.get(1);
+    assertEquals("com.example.foo.c", childC.getPackageName());
+    souceFileNames = childC.getSourceFileNames();
+    assertContains(souceFileNames, "com.example.foo.c.Car");
+    assertEquals(1, souceFileNames.size());
+
     assertEquals(2, children.size());
   }
   @Override
