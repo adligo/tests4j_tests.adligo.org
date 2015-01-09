@@ -11,6 +11,7 @@ import org.adligo.tests4j.shared.asserts.common.I_Asserts;
 
 public class I18N_Asserter {
 	public static final String JACOCO_DATA = "$jacocoData";
+	public static final String INSTANCE = "INSTANCE";
 	private static final List<String> IGNORED_FIELD_NAMES = getIgnoredFieldNames();
 	private I_Asserts asserts;
 	private int constantCount;
@@ -18,6 +19,7 @@ public class I18N_Asserter {
 	private static List<String> getIgnoredFieldNames() {
 		List<String> toRet = new ArrayList<String>();
 		toRet.add(JACOCO_DATA);
+		toRet.add(INSTANCE);
 		return Collections.unmodifiableList(toRet);
 	}
 	

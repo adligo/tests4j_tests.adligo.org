@@ -1,9 +1,5 @@
 package org.adligo.tests4j_tests.system.shared.api;
 
-import java.util.List;
-import java.util.logging.LogManager;
-import java.util.logging.Logger;
-
 import org.adligo.tests4j.shared.asserts.reference.AllowedReferences;
 import org.adligo.tests4j.system.shared.api.Tests4J_Params;
 import org.adligo.tests4j.system.shared.trials.I_Trial;
@@ -12,6 +8,12 @@ import org.adligo.tests4j.system.shared.trials.Test;
 import org.adligo.tests4j_tests.base_trials.I_CountType;
 import org.adligo.tests4j_tests.base_trials.SourceFileCountingTrial;
 import org.adligo.tests4j_tests.references_groups.Tests4J_SystemApi_GwtReferenceGroup;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.logging.LogManager;
+import java.util.logging.Logger;
 
 
 @SourceFileScope(sourceClass=Tests4J_Params.class,minCoverage=6.0)
@@ -22,72 +24,100 @@ public class Tests4J_ParamsTrial extends SourceFileCountingTrial {
 	// in our security manager which blocks thread creation during tests
 	private static final Logger log = LogManager.getLogManager().getLogger(Tests4J_ParamsTrial.class.getName());
 	
-	@Test
-	public void testDefaultParams() {
+	@SuppressWarnings("boxing")
+  @Test
+	public void testConstructorAndDefaults() {
 		Tests4J_Params params = new Tests4J_Params();
 		List<Class<? extends I_Trial>> trials = params.getTrials();
 		assertNotNull(trials);
 		assertEquals(0, trials.size());
 		assertNull( params.getRecommendedTrialThreadCount());
+		List<String> additionalNonInstrumentedPackages = params.getAdditionalNonInstrumentedPackages();
+		assertNotNull(additionalNonInstrumentedPackages);
+		assertEquals(0, additionalNonInstrumentedPackages.size());
 		
+		List<String> additionalNonInstrumentedClasses = params.getAdditionalNonInstrumentedClasses();
+    assertNotNull(additionalNonInstrumentedClasses);
+    assertEquals(0, additionalNonInstrumentedClasses.size());
 	}
 	
-	@Test
-	public void testOneTrialRunParams() {
-		Tests4J_Params params = new Tests4J_Params();
-		params.addTrial(Tests4J_ParamsTrial.class);
-		List<Class<? extends I_Trial>> trials = params.getTrials();
-		assertNotNull(trials);
-		assertEquals(1, trials.size());
-		assertEquals(Tests4J_ParamsTrial.class, trials.get(0));
-		
+	@SuppressWarnings("boxing")
+  @Test
+  public void testMethodsAdditionalNonInstrumentedClasses() {
+	  Tests4J_Params params = new Tests4J_Params();
+	  params.addAdditionalNonInstrumentedClass(null);
+	  List<String> additionalNonInstrumentedClasses = params.getAdditionalNonInstrumentedClasses();
+    assertNotNull(additionalNonInstrumentedClasses);
+    assertEquals(0, additionalNonInstrumentedClasses.size());
+    
+    params.addAdditionalNonInstrumentedClass("clazz");
+    additionalNonInstrumentedClasses = params.getAdditionalNonInstrumentedClasses();
+    assertNotNull(additionalNonInstrumentedClasses);
+    assertContains(additionalNonInstrumentedClasses, "clazz");
+    assertEquals(1, additionalNonInstrumentedClasses.size());
+    
+    params.setAdditionalNonInstrumentedClasses(null);
+    additionalNonInstrumentedClasses = params.getAdditionalNonInstrumentedClasses();
+    assertNotNull(additionalNonInstrumentedClasses);
+    assertEquals(0, additionalNonInstrumentedClasses.size());
+    
+    List<String> vals = new ArrayList<String>();
+    vals.add("clazz2");
+    vals.add(null);
+    params.setAdditionalNonInstrumentedClasses(vals);
+    additionalNonInstrumentedClasses = params.getAdditionalNonInstrumentedClasses();
+    assertContains(additionalNonInstrumentedClasses, "clazz2");
+    assertEquals(1, additionalNonInstrumentedClasses.size());
+  }
+	
+	@SuppressWarnings("boxing")
+  @Test
+  public void testMethodsAdditionalNonInstrumentedPackages() {
+	  Tests4J_Params params = new Tests4J_Params();
+    params.addAdditionalNonInstrumentedPackage(null);
+    List<String> additionalNonInstrumentedPackages = params.getAdditionalNonInstrumentedPackages();
+    assertNotNull(additionalNonInstrumentedPackages);
+    assertEquals(0, additionalNonInstrumentedPackages.size());
+    
+    params.addAdditionalNonInstrumentedPackage("clazz");
+    additionalNonInstrumentedPackages = params.getAdditionalNonInstrumentedPackages();
+    assertNotNull(additionalNonInstrumentedPackages);
+    assertContains(additionalNonInstrumentedPackages, "clazz");
+    assertEquals(1, additionalNonInstrumentedPackages.size());
+    
+    params.setAdditionalNonInstrumentedPackages(null);
+    additionalNonInstrumentedPackages = params.getAdditionalNonInstrumentedPackages();
+    assertNotNull(additionalNonInstrumentedPackages);
+    assertEquals(0, additionalNonInstrumentedPackages.size());
+    
+    List<String> vals = new ArrayList<String>();
+    vals.add("clazz2");
+    vals.add(null);
+    params.setAdditionalNonInstrumentedPackages(vals);
+    additionalNonInstrumentedPackages = params.getAdditionalNonInstrumentedPackages();
+    assertContains(additionalNonInstrumentedPackages, "clazz2");
+    assertEquals(1, additionalNonInstrumentedPackages.size());
 	}
 	
-	
-	/*
-	@Test
-	public void testBasicToFromXml() {
-		Tests4J_Params params = new Tests4J_Params();
-		params.addTrial(Tests4J_ParamsTrial.class);
-		params.setCoveragePluginClass(ScopedJacocoPlugin.class);
-		String xml = params.toXml();
-		assertUniform(
-				"<Tests4J_Params threadCount=\"org.adligo.tests4j.models.shared.system.SimpleThreadCount\" coveragePlugin=\"org.adligo.tests4j_4jacoco.plugin.ScopedJacocoPlugin\" >\n" +
-				"\t<SimpleThreadCount count=\"32\"/>\n" +
-				"\t<trials>\n" +
-				"\t\t<trial>org.adligo.tests4j_tests.models.shared.system.Tests4J_ParamsTrial</trial>\n" +
-				"\t</trials>\n" +
-				"</Tests4J_Params>", xml);
-		
-		 params = new Tests4J_Params(xml);
-		 I_ThreadCount tc = params.getThreadCount();
-		 assertNotNull(tc);
-		 assertEquals(32, tc.getThreadCount());
-		 assertEquals(ScopedJacocoPlugin.class, params.getCoveragePluginClass());
-		 assertTrue(params.getCoveragePlugin() instanceof I_CoveragePlugin);
-		 List<Class<? extends I_Trial>> trials = params.getTrials();
-		 assertEquals(1, trials.size());
-		 assertEquals(Tests4J_ParamsTrial.class, trials.get(0));
-		 
+	@SuppressWarnings("boxing")
+  @Test
+	public void testMethodsTrialsOneTrialRunParams() {
+    Tests4J_Params params = new Tests4J_Params();
+    params.addTrial(Tests4J_ParamsTrial.class);
+    List<Class<? extends I_Trial>> trials = params.getTrials();
+    assertNotNull(trials);
+    assertEquals(1, trials.size());
+    assertEquals(Tests4J_ParamsTrial.class, trials.get(0));
 	}
-	@Override
-	public void afterTrialTests(I_SourceFileTrialResult p) {
-		assertCounts(p);
-		if (p.hasRecordedCoverage()) {
-			I_SourceFileCoverage coverage = p.getSourceFileCoverage();
-			assertGreaterThanOrEquals(46.00, coverage.getPercentageCoveredDouble());
-		}
-	}
-	*/
 	
 	@Override
 	public int getTests(I_CountType type) {
-		return super.getTests(type, 2, true);
+		return super.getTests(type, 4, true);
 	}
 
 	@Override
 	public int getAsserts(I_CountType type) {
-		int thisAsserts = 6;
+		int thisAsserts = 28;
 		//code coverage and circular dependencies +
 		//custom afterTrialTests
 		//+ see above
@@ -101,7 +131,7 @@ public class Tests4J_ParamsTrial extends SourceFileCountingTrial {
 
 	@Override
 	public int getUniqueAsserts(I_CountType type) {
-		int thisUniqueAsserts = 6;
+		int thisUniqueAsserts = 18;
 		//code coverage and circular dependencies +
 		//custom afterTrialTests
 		//+ see above
