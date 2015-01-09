@@ -106,7 +106,7 @@ public class RecorderTrial extends SourceFileCountingTrial {
     I_Tests4J_Log log = mock(I_Tests4J_Log.class);
     Recorder recorder = new Recorder(memory, log);
     assertNotNull(recorder);
-    List<I_PackageCoverageBrief> result = recorder.getAllCoverage();
+    List<I_PackageCoverageBrief> result = recorder.getAllCoverage(Collections.emptySet());
     assertNotNull(result);
     I_PackageCoverageBrief brief = result.get(0);
     assertNotNull(brief);
@@ -142,14 +142,95 @@ public class RecorderTrial extends SourceFileCountingTrial {
 
     assertEquals(2, children.size());
   }
+  
+  @SuppressWarnings("boxing")
+  @Test
+  public void testMethodGetAllCoverage_2PackagesOneIsTrialPackages() {
+    
+    I_CachedClassBytesClassLoader classLoaderMock = mock(I_CachedClassBytesClassLoader.class);
+    I_CoveragePluginMemory memory = mock(I_CoveragePluginMemory.class);
+    Set<String> topPackages = new HashSet<String>();
+    topPackages.add("com.example.foo");
+    topPackages.add("com.example.foo_tests");
+    when(memory.getTopPackageNames()).thenReturn(topPackages);
+    when(memory.isFiltered(any(String.class))).thenReturn(false);
+    
+    when(memory.getCachedClassLoader()).thenReturn(classLoaderMock);
+    
+    ArgMap<I_PackageDiscovery> argMap = new ArgMap<I_PackageDiscovery>();
+    I_PackageDiscovery pkgFoo = mock(I_PackageDiscovery.class);
+    when(pkgFoo.getPackageName()).thenReturn("com.example.foo");
+    when(pkgFoo.getClassNames()).thenReturn(Collections.singletonList("com.example.foo.Bar"));
+    argMap.putVar(pkgFoo, "com.example.foo");
+    
+    I_PackageDiscovery pkgA = mock(I_PackageDiscovery.class);
+    when(pkgA.getPackageName()).thenReturn("com.example.foo_tests");
+    when(pkgA.getClassNames()).thenReturn(Collections.singletonList("com.example.foo_tests.BarTrial"));
+    argMap.putVar(pkgA, "com.example.foo_tests");
+    
+    MethodRecorder<I_PackageDiscovery> pkgRecord = new MethodRecorder<I_PackageDiscovery>(argMap);
+    when(memory.getPackage(any())).then(pkgRecord);
+    
+    I_Runtime runtime = mock(I_Runtime.class);
+    MethodRecorder<Void> ensureProbesInitRecord = new MethodRecorder<Void>();
+    doAnswer(ensureProbesInitRecord).when(runtime).ensureProbesInitialized(any(I_ClassInstrumentationMetadata.class));
+    
+    when(memory.getRuntime()).thenReturn(runtime);
+    
+    I_ClassInstrumentationMetadataStoreMutant store = mock(I_ClassInstrumentationMetadataStoreMutant.class);
+    when(memory.getClassInstrumentationInfoStore()).thenReturn(store);
+    ArgMap<I_ClassInstrumentationMetadata> metas = new ArgMap<I_ClassInstrumentationMetadata>(
+        new I_ArgFactory<I_ClassInstrumentationMetadata>() {
+          @Override
+          public I_ClassInstrumentationMetadata create(Object [] args) {
+            return mock(I_ClassInstrumentationMetadata.class);
+          }
+    });
+    metas.putFactory("com.example.foo.Bar");
+    metas.putFactory("com.example.foo_tests.BarTrial");
+    MethodRecorder<I_ClassInstrumentationMetadata> metaRecord = new MethodRecorder<I_ClassInstrumentationMetadata>(metas);
+    when(store.getClassInstrumentation(any())).then(metaRecord);
+    
+    ArgMap<I_SourceFileCoverageBrief> briefs = new ArgMap<I_SourceFileCoverageBrief>(
+          new I_ArgFactory<I_SourceFileCoverageBrief>() {
+          @Override
+          public I_SourceFileCoverageBrief create(Object [] args) {
+            I_SourceFileCoverageBrief toRet = mock(I_SourceFileCoverageBrief.class);
+            I_Probes probes = mock(I_Probes.class);
+            when(toRet.getProbes()).thenReturn(probes);
+            String className = (String) args[0];
+            when(toRet.getClassName()).thenReturn(className);
+            return toRet;
+          }
+        });
+    briefs.putFactory("com.example.foo.Bar");
+    briefs.putFactory("com.example.foo_tests.BarTrial");
+    MethodRecorder<I_SourceFileCoverageBrief> sourceCoverRecord= new MethodRecorder<I_SourceFileCoverageBrief>(briefs);
+    when(runtime.getSourceFileCoverage(any(String.class))).thenAnswer(sourceCoverRecord);
+    when(memory.isResultPackage(any())).thenReturn(true);
+    
+    I_Tests4J_Log log = mock(I_Tests4J_Log.class);
+    Recorder recorder = new Recorder(memory, log);
+    assertNotNull(recorder);
+    List<I_PackageCoverageBrief> result = recorder.getAllCoverage(Collections.singleton("com.example.foo_tests"));
+    assertNotNull(result);
+    I_PackageCoverageBrief brief = result.get(0);
+    assertNotNull(brief);
+    assertEquals("com.example.foo", brief.getPackageName());
+    Set<String> souceFileNames = brief.getSourceFileNames();
+    assertContains(souceFileNames, "com.example.foo.Bar");
+    assertEquals(1, souceFileNames.size());
+    
+    assertEquals(1, result.size());
+  }
   @Override
   public int getTests(I_CountType type) {
-    return super.getTests(type, 1);
+    return super.getTests(type, 2, false);
   }
 
   @Override
   public int getAsserts(I_CountType type) {
-    int thisAsserts = 22;
+    int thisAsserts = 29;
     //code coverage and circular dependencies +
     //custom afterTrialTests
     //+ see above
@@ -163,7 +244,7 @@ public class RecorderTrial extends SourceFileCountingTrial {
 
   @Override
   public int getUniqueAsserts(I_CountType type) {
-    int thisUniqueAsserts = 19;
+    int thisUniqueAsserts = 25;
     //code coverage and circular dependencies +
     //custom afterTrialTests
     //+ see above
