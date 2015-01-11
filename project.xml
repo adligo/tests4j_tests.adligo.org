@@ -6,7 +6,7 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" >
     <tns:stages>
         <tns:stage name="jar" >
-            <tns:param key="srcDirs" value="src_jdk_1_8,src" />
+            <tns:param key="srcDirs" value="src,src_jdk_1_8" />
         </tns:stage>
         <tns:stage name="test" />
         <tns:stage name="publish" />
@@ -14,11 +14,18 @@
     
     
     <tns:dependencies>
+        <lns:library>ide</lns:library>
         <lns:library>jacoco</lns:library>
         <lns:library>mockito</lns:library>
+        <lns:dependency group="java" artifact="java" version="default" type="ide">
+	    	<lns:ide name="eclipse" >
+	    		<lns:arg key="src" value="src,src_jdk_1_8" />
+	    	</lns:ide>
+	    </lns:dependency>
         <lns:project>gwt_refs.adligo.org</lns:project>
         <lns:project>tests4j.adligo.org</lns:project>
         <lns:project>tests4j_4jacoco.adligo.org</lns:project>
         <lns:project>tests4j_4mockito.adligo.org</lns:project>
+       
     </tns:dependencies>
  </tns:fabricate_project>
