@@ -43,7 +43,8 @@ implements I_MetaTrialParams<A_AssertsUniPkgTrials>, I_CountingPackageTrials {
 		add(EvaluatorLookupTrial.class);
 		add(StringUniformEvaluatorTrial.class);
 		add(ThrowableUniformEvaluatorTrial.class);
-		
+		add(UniformThrownAssertionEvaluatorTrial.class);
+		add(UniformThrownAssertionEvaluatorUseTrial.class);
 	}
 
 	@Override

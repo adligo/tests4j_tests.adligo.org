@@ -51,6 +51,7 @@ public class A_AssertsCmPkgTrials extends SimplePackageTrials
 		add(I_SimpleCompareAssertCommandTrial.class);
 		add(I_SourceTestFailureTrial.class);
 		
+		add(I_MatchTypeTrial.class);
 		add(I_TestFailureTrial.class);
 		add(I_TestFailureTypeTrial.class);
 		
@@ -73,6 +74,7 @@ public class A_AssertsCmPkgTrials extends SimplePackageTrials
 		add(TestFailureMutantTrial.class);
 		add(TestFailureTrial.class);
 		add(TestFailureBuilderTrial.class);
+		add(MatchTypeTrial.class);
 		
 		add(SourceTestFailureMutantTrial.class);
 		add(SourceTestFailureTrial.class);

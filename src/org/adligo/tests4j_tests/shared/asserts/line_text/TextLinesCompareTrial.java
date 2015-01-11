@@ -10,6 +10,7 @@ import org.adligo.tests4j.shared.asserts.line_text.I_TextLinesCompareResult;
 import org.adligo.tests4j.shared.asserts.line_text.LineDiffType;
 import org.adligo.tests4j.shared.asserts.line_text.TextLinesCompare;
 import org.adligo.tests4j.shared.asserts.reference.AllowedReferences;
+import org.adligo.tests4j.shared.en.Tests4J_EnglishConstants;
 import org.adligo.tests4j.system.shared.trials.SourceFileScope;
 import org.adligo.tests4j.system.shared.trials.Test;
 import org.adligo.tests4j_tests.base_trials.I_CountType;
@@ -21,10 +22,24 @@ import org.adligo.tests4j_tests.references_groups.Tests4J_AssertsLineText_Refere
 @AllowedReferences (groups=Tests4J_AssertsLineText_GwtReferenceGroup.class)
 public class TextLinesCompareTrial extends SourceFileCountingTrial {
 
-	
-	
-	
-	@Test
+  @SuppressWarnings("boxing")
+  @Test
+  public void testNulls() {
+    TextLinesCompare tlc = new TextLinesCompare();
+    I_TextLinesCompareResult result = tlc.compare(null, null, false);
+    assertNotNull(result);
+    assertTrue(result.hasErrorMessage());
+    assertEquals(Tests4J_EnglishConstants.ENGLISH.getAssertionInputMessages().getTheExpectedValueShouldNeverBeNull(),
+        result.getErrorMessage());
+    
+    result = tlc.compare("e", null, false);
+    assertNotNull(result);
+    assertTrue(result.hasErrorMessage());
+    assertEquals(Tests4J_EnglishConstants.ENGLISH.getAssertionInputMessages().getTheActualValueIsNull(),
+        result.getErrorMessage());
+  }
+	@SuppressWarnings("boxing")
+  @Test
 	public void test1LineMatchAchievement() {
 		TextLinesCompare tlc = new TextLinesCompare();
 		I_TextLinesCompareResult result = tlc.compare("a", "a", true);
@@ -50,6 +65,7 @@ public class TextLinesCompareTrial extends SourceFileCountingTrial {
 		
 	}
 	
+	@SuppressWarnings("boxing")
 	@Test
 	public void test1LineEmptyMatchAchievement() {
 		TextLinesCompare tlc = new TextLinesCompare();
@@ -76,6 +92,7 @@ public class TextLinesCompareTrial extends SourceFileCountingTrial {
 		
 	}
 	
+	@SuppressWarnings("boxing")
 	@Test
 	public void test1LineMatchFail() {
 		TextLinesCompare tlc = new TextLinesCompare();
@@ -108,6 +125,7 @@ public class TextLinesCompareTrial extends SourceFileCountingTrial {
 		assertNull(diff.getIndexes());
 	}
 	
+	@SuppressWarnings("boxing")
 	@Test
 	public void test2LineMatchAchievement() {
 		TextLinesCompare tlc = new TextLinesCompare();
@@ -149,6 +167,7 @@ public class TextLinesCompareTrial extends SourceFileCountingTrial {
 	 *     'b'    'b'           b  = b
 	 *                            ^\ b 
 	 */
+	@SuppressWarnings("boxing")
 	@Test
 	public void test2LineMatchFail_AB_BB() {
 		TextLinesCompare tlc = new TextLinesCompare();
@@ -198,6 +217,7 @@ public class TextLinesCompareTrial extends SourceFileCountingTrial {
 	 *                          a /^
 	 *                          b /^ 
 	 */
+	@SuppressWarnings("boxing")
 	@Test
 	public void test2LineMatchFail_AB_DC() {
 		TextLinesCompare tlc = new TextLinesCompare();
@@ -252,6 +272,7 @@ public class TextLinesCompareTrial extends SourceFileCountingTrial {
 	 *     'b'    'c'             ^\ c
 	 *                          b /^ 
 	 */
+	@SuppressWarnings("boxing")
 	@Test
 	public void test2LineMatchFail_AB_AC() {
 		TextLinesCompare tlc = new TextLinesCompare();
@@ -293,6 +314,7 @@ public class TextLinesCompareTrial extends SourceFileCountingTrial {
 		assertNull(diff.getIndexes());
 	}
 	
+	@SuppressWarnings("boxing")
 	@Test
 	public void test3LineMatchAchievement() {
 		TextLinesCompare tlc = new TextLinesCompare();
@@ -343,6 +365,7 @@ public class TextLinesCompareTrial extends SourceFileCountingTrial {
 	 *     'c'    'c'             ^\ b
 	 *                          c  = c 
 	 */
+	@SuppressWarnings("boxing")
 	@Test
 	public void test3LineMatchFail_ABC_BBC() {
 		TextLinesCompare tlc = new TextLinesCompare();
@@ -401,6 +424,7 @@ public class TextLinesCompareTrial extends SourceFileCountingTrial {
 	 *                          b /^ 
 	 *                          c /^  
 	 */
+	@SuppressWarnings("boxing")
 	@Test
 	public void test3LineMatchFail_ABC_CBA() {
 		TextLinesCompare tlc = new TextLinesCompare();
@@ -467,6 +491,7 @@ public class TextLinesCompareTrial extends SourceFileCountingTrial {
 	 *                            ^\ d 
 	 *                          c /^  
 	 */
+	@SuppressWarnings("boxing")
 	@Test
 	public void test3LineMatchFail_ABC_CBD() {
 		TextLinesCompare tlc = new TextLinesCompare();
@@ -534,6 +559,7 @@ public class TextLinesCompareTrial extends SourceFileCountingTrial {
 	 *                          b /^
 	 *                          c /^  
 	 */
+	@SuppressWarnings("boxing")
 	@Test
 	public void test3LineMatchFail_ABC_DEF() {
 		TextLinesCompare tlc = new TextLinesCompare();
@@ -606,6 +632,7 @@ public class TextLinesCompareTrial extends SourceFileCountingTrial {
 	 *     'c'    'c'           b /^
 	 *                          c  = c 
 	 */
+	@SuppressWarnings("boxing")
 	@Test
 	public void test3LineMatchFail_ABC_AEC() {
 		TextLinesCompare tlc = new TextLinesCompare();
@@ -658,6 +685,7 @@ public class TextLinesCompareTrial extends SourceFileCountingTrial {
 		
 	}
 	
+	@SuppressWarnings("boxing")
 	@Test
 	public void testMultiLine2x2CharPartialMatchEndOfFirstLine() {
 		TextLinesCompare tlc = new TextLinesCompare();
@@ -699,7 +727,7 @@ public class TextLinesCompareTrial extends SourceFileCountingTrial {
 		assertNull(diff.getIndexes());
 	}
 	
-	
+	@SuppressWarnings("boxing")
 	@Test
 	public void testMultiLine2x2CharPartialMatchEndOfLastLine() {
 		TextLinesCompare tlc = new TextLinesCompare();
@@ -743,6 +771,7 @@ public class TextLinesCompareTrial extends SourceFileCountingTrial {
 		assertEquals(0, actual.getDiffRightToLeft());
 	}
 	
+	@SuppressWarnings("boxing")
 	@Test
 	public void testMultiLine3x3CharPartialMatchMiddleOfMiddleLine() {
 		TextLinesCompare tlc = new TextLinesCompare();
@@ -808,12 +837,12 @@ public class TextLinesCompareTrial extends SourceFileCountingTrial {
 	
 	@Override
 	public int getTests(I_CountType type) {
-		return super.getTests(type, 16, true);
+		return super.getTests(type, 17, true);
 	}
 	
 	@Override
 	public int getAsserts(I_CountType type) {
-		int asserts = 404;
+		int asserts = 410;
 		if (type.isFromMetaWithCoverage()) {
 			//code coverage and circular dependencies
 			return super.getAsserts(type, asserts + 3);
@@ -824,7 +853,7 @@ public class TextLinesCompareTrial extends SourceFileCountingTrial {
 
 	@Override
 	public int getUniqueAsserts(I_CountType type) {
-		int uasserts = 238;
+		int uasserts = 243;
 		if (type.isFromMetaWithCoverage()) {
 			return super.getUniqueAsserts(type, uasserts + 3);
 		} else {

@@ -32,7 +32,7 @@ public class Tests4J_AssertionResultMessages_Trial extends SourceFileCountingTri
 		asserter.assertConstant("The collection should contain the value.",
 				messages.getTheCollectionShouldContainTheValue());
 		
-		asserter.assertConstant("Either no throwable was thrown or the expected throwable was NOT uniform with the actual throwable.",
+		asserter.assertConstant("The expected throwable was NOT uniform with the actual throwable.",
 				messages.getTheExpectedThrowableDataWasNotUniformTheActual());
 	
 		
@@ -74,12 +74,12 @@ public class Tests4J_AssertionResultMessages_Trial extends SourceFileCountingTri
 		
 		asserter.assertConstant("The expected thrown class did NOT match the actual thrown class.",
 				messages.getThrowableClassMismatch());
-		asserter.assertConstant("The expected throwable message was NOT equals to the actual thrown message.",
-				messages.getThrowableMessageNotEquals());
+		asserter.assertConstant("The expected throwable message did NOT match to the actual thrown message.",
+				messages.getThrowableMessagesMismatch());
 		asserter.assertConstant("The expected throwable message was NOT uniform with the actual thrown message.",
 				messages.getThrowableMessageNotUniform());
 		
-		asserter.assertConstant("The expected throwable did not match the actual throwable, or nothing was thrown.",
+		asserter.assertConstant("The expected throwable did not match the actual throwable.",
 				messages.getTheExpectedThrowableDidNotMatch());
 		
 		asserter.assertConstant("The test timed out.",

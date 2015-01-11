@@ -96,12 +96,14 @@ public class ProbesMutantTrial extends SourceFileCountingTrial {
     
 	}
 	
+	@SuppressWarnings("unused")
 	@Test
 	public void testConstructorExceptions() throws Exception {
-		assertThrown(new ExpectedThrownData(new NullPointerException(null)), 
+		assertThrown(new ExpectedThrownData(NullPointerException.class), 
 				new I_Thrower() {
 					
-					@Override
+					
+          @Override
 					public void run() {
 						new Probes((boolean []) null);
 					}

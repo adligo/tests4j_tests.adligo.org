@@ -16,7 +16,7 @@ public class ThrownAssertionDataTrial extends SourceFileCountingTrial {
 
 	@Test
 	public void testEqualsHashCodeAndCopyConstructor() {
-		ExpectedThrownData etd = new ExpectedThrownData();
+		ExpectedThrownData etd = mock(ExpectedThrownData.class);
 		
 		ThrownAssertionDataMutant a = new ThrownAssertionDataMutant();
 		a.setExpected(etd);

@@ -46,7 +46,7 @@ public class ProbesTrial extends SourceFileCountingTrial {
 
 	@Test
 	public void testConstructorExceptions() throws Exception {
-		assertThrown(new ExpectedThrownData(new NullPointerException(null)), 
+		assertThrown(new ExpectedThrownData(NullPointerException.class), 
 				new I_Thrower() {
 					
 					@Override

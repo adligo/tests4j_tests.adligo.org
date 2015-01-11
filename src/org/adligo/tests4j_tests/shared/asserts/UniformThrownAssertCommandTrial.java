@@ -6,10 +6,12 @@ import org.adligo.tests4j.shared.asserts.common.I_AssertionData;
 import org.adligo.tests4j.shared.asserts.common.I_ExpectedThrownData;
 import org.adligo.tests4j.shared.asserts.common.I_Thrower;
 import org.adligo.tests4j.shared.asserts.common.I_ThrownAssertionData;
+import org.adligo.tests4j.shared.asserts.common.MatchType;
 import org.adligo.tests4j.shared.asserts.common.ThrownAssertionData;
 import org.adligo.tests4j.shared.asserts.reference.AllowedReferences;
 import org.adligo.tests4j.shared.asserts.uniform.I_Evaluation;
 import org.adligo.tests4j.shared.asserts.uniform.UniformThrownAssertionEvaluator;
+import org.adligo.tests4j.shared.common.Tests4J_Constants;
 import org.adligo.tests4j.shared.en.Tests4J_EnglishConstants;
 import org.adligo.tests4j.shared.i18n.I_Tests4J_AssertionInputMessages;
 import org.adligo.tests4j.shared.i18n.I_Tests4J_ResultMessages;
@@ -18,14 +20,13 @@ import org.adligo.tests4j.system.shared.trials.Test;
 import org.adligo.tests4j_tests.base_trials.I_CountType;
 import org.adligo.tests4j_tests.base_trials.SourceFileCountingTrial;
 import org.adligo.tests4j_tests.references_groups.Tests4J_Asserts_GwtReferenceGroup;
-import org.adligo.tests4j_tests.references_groups.Tests4J_Asserts_ReferenceGroup;
 
 @SourceFileScope (sourceClass=UniformThrownAssertCommand.class, minCoverage=76.0)
 @AllowedReferences (groups=Tests4J_Asserts_GwtReferenceGroup.class)
 public class UniformThrownAssertCommandTrial extends SourceFileCountingTrial {
 
 	@Test
-	@SuppressWarnings({ "unchecked", "rawtypes" })
+	@SuppressWarnings("unused")
 	public void test01_ConstructorExceptions() {
 		I_Tests4J_AssertionInputMessages messages = Tests4J_EnglishConstants.ENGLISH.getAssertionInputMessages();
 		
@@ -33,7 +34,8 @@ public class UniformThrownAssertCommandTrial extends SourceFileCountingTrial {
 				messages.getExpectedThrownDataRequiresThrowable())),
 				new I_Thrower() {
 					
-					@Override
+					
+          @Override
 					public void run() {
 						new UniformThrownAssertCommand("failure message", null, null);
 					}
@@ -49,9 +51,23 @@ public class UniformThrownAssertCommandTrial extends SourceFileCountingTrial {
 								new ExpectedThrownData(new IllegalArgumentException("failure message")), null);
 					}
 				});
+		assertThrown(new ExpectedThrownData(new IllegalArgumentException(
+        messages.getThrownUniformExpectedThrownDataMustBeMatchTypeAnyEqualsOrNull())),
+        new I_Thrower() {
+          
+          
+          @Override
+          public void run() {
+            new UniformThrownAssertCommand("failure message", 
+                new ExpectedThrownData(new IllegalArgumentException("failure message"), 
+                    new ExpectedThrownData(new IllegalArgumentException("mnn"), MatchType.CONTAINS)),
+                new UniformThrownAssertionEvaluator());
+          }
+        });
 	}
 	
-	@Test
+	@SuppressWarnings("boxing")
+  @Test
 	public void test02_EqualsHashCode() {
 		UniformThrownAssertionEvaluator tue = new UniformThrownAssertionEvaluator();
 		UniformThrownAssertCommand a = 
@@ -114,7 +130,8 @@ public class UniformThrownAssertCommandTrial extends SourceFileCountingTrial {
 				});
 	}
 	
-	@Test
+	@SuppressWarnings("boxing")
+  @Test
 	public void test04_GettersAfterEvaluateFailNothingThrown() {
 		
 		ExpectedThrownData etd = new ExpectedThrownData(new IllegalArgumentException("bad exeception message\n\r"
@@ -146,13 +163,13 @@ public class UniformThrownAssertCommandTrial extends SourceFileCountingTrial {
 		assertEquals(1, tad.getFailureThrowable());
 	}
 	
-	@Test
+	@SuppressWarnings("boxing")
+  @Test
 	public void test05_EvaluatePass() {
 		final IllegalArgumentException iae = new IllegalArgumentException("expected exception messsage");
 		ExpectedThrownData etd = new ExpectedThrownData(iae);
-		final UniformThrownAssertCommand utac = new UniformThrownAssertCommand
-				
-				("failure message", etd, new UniformThrownAssertionEvaluator());
+		final UniformThrownAssertCommand utac = new UniformThrownAssertCommand("failure message", etd,
+		    new UniformThrownAssertionEvaluator());
 		assertEquals("failure message", utac.getFailureMessage());
 	
 		assertThrown(new ExpectedThrownData(NullPointerException.class),
@@ -173,13 +190,21 @@ public class UniformThrownAssertCommandTrial extends SourceFileCountingTrial {
 		}));
 		I_Evaluation<I_ThrownAssertionData> eval =  utac.getEvaluation();
 		assertTrue(eval.isSuccess());
-		assertNull(eval.getData());
-		assertNull(utac.getData());
+		I_ThrownAssertionData data = eval.getData();
+		assertNotNull(data);
+		assertNull(data.getFailureReason());
+		assertEquals(0, data.getFailureThrowable());
+		Throwable actual = data.getActual();
+		assertNotNull(actual);
+		assertEquals(IllegalArgumentException.class.getName(), actual.getClass().getName());
+		assertSame(etd, data.getExpected());
+		assertSame(data, utac.getData());
 		
 		
 	}
 	
-	@Test
+	@SuppressWarnings("boxing")
+  @Test
 	public void test06_GettersAfterEvaluateFailClassMismatch() {
 		final IllegalStateException iae = new IllegalStateException("expected exception messsage\n"
 				+ "123");
@@ -215,7 +240,8 @@ public class UniformThrownAssertCommandTrial extends SourceFileCountingTrial {
 	}
 	
 	
-	@Test
+	@SuppressWarnings("boxing")
+  @Test
 	public void test07_GettersAfterEvaluateFailTextNotUniform() {
 		final IllegalArgumentException iae = new IllegalArgumentException("expected exception messsage\n"
 				+ "123");
@@ -252,7 +278,8 @@ public class UniformThrownAssertCommandTrial extends SourceFileCountingTrial {
 
 
 
-	@Test
+	@SuppressWarnings("boxing")
+  @Test
 	public void test08_GettersAfterEvaluateFailClassMismatchDeep() {
 		final IllegalArgumentException iae = new IllegalArgumentException("message");
 		iae.initCause(new NullPointerException());
@@ -304,7 +331,8 @@ public class UniformThrownAssertCommandTrial extends SourceFileCountingTrial {
 		assertEquals(3, tad.getFailureThrowable());
 	}
 	
-	@Test
+	@SuppressWarnings("boxing")
+  @Test
 	public void test09_GettersAfterEvaluateFailTextNotUniformDeep() {
 		final IllegalArgumentException iae = new IllegalArgumentException("message");
 		iae.initCause(new NullPointerException("npe\n2"));
@@ -364,7 +392,7 @@ public class UniformThrownAssertCommandTrial extends SourceFileCountingTrial {
 
 	@Override
 	public int getAsserts(I_CountType type) {
-		int thisAsserts = 76;
+		int thisAsserts = 82;
 		if (type.isFromMetaWithCoverage()) {
 			//code coverage and circular dependencies +
 			//custom afterTrialTests
@@ -376,7 +404,7 @@ public class UniformThrownAssertCommandTrial extends SourceFileCountingTrial {
 
 	@Override
 	public int getUniqueAsserts(I_CountType type) {
-		int thisUniqueAsserts = 57;
+		int thisUniqueAsserts = 64;
 		if (type.isFromMetaWithCoverage()) {
 			return super.getUniqueAsserts(type, thisUniqueAsserts + 3);
 		}  else {

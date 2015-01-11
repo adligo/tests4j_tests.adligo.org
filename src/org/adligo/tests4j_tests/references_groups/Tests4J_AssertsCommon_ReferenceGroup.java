@@ -20,6 +20,7 @@ import org.adligo.tests4j.shared.asserts.common.I_CollectionContainsAssertionDat
 import org.adligo.tests4j.shared.asserts.common.I_CompareAssertCommand;
 import org.adligo.tests4j.shared.asserts.common.I_CompareAssertionData;
 import org.adligo.tests4j.shared.asserts.common.I_ExpectedThrownData;
+import org.adligo.tests4j.shared.asserts.common.I_MatchType;
 import org.adligo.tests4j.shared.asserts.common.I_SimpleAssertCommand;
 import org.adligo.tests4j.shared.asserts.common.I_SimpleCompareAssertCommand;
 import org.adligo.tests4j.shared.asserts.common.I_SourceTestFailure;
@@ -29,6 +30,7 @@ import org.adligo.tests4j.shared.asserts.common.I_ThrowableInfo;
 import org.adligo.tests4j.shared.asserts.common.I_Thrower;
 import org.adligo.tests4j.shared.asserts.common.I_ThrownAssertCommand;
 import org.adligo.tests4j.shared.asserts.common.I_ThrownAssertionData;
+import org.adligo.tests4j.shared.asserts.common.MatchType;
 import org.adligo.tests4j.shared.asserts.common.SourceTestFailure;
 import org.adligo.tests4j.shared.asserts.common.SourceTestFailureMutant;
 import org.adligo.tests4j.shared.asserts.common.TestFailure;
@@ -78,6 +80,7 @@ public class Tests4J_AssertsCommon_ReferenceGroup extends Tests4J_ReferenceGroup
 		add(names, I_CompareAssertionData.class);
 		
 		add(names, I_ExpectedThrownData.class);
+		add(names, I_MatchType.class);
 		
 		add(names, I_SimpleAssertCommand.class);
 		add(names, I_SimpleCompareAssertCommand.class);
@@ -89,6 +92,8 @@ public class Tests4J_AssertsCommon_ReferenceGroup extends Tests4J_ReferenceGroup
 		add(names, I_Thrower.class);
 		add(names, I_ThrownAssertCommand.class);
 		add(names, I_ThrownAssertionData.class);
+		
+		add(names, MatchType.class);
 		
 		add(names, SourceTestFailure.class);
 		add(names, SourceTestFailureMutant.class);

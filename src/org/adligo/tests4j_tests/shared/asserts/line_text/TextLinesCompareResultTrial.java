@@ -20,7 +20,6 @@ import org.adligo.tests4j_tests.references_groups.Tests4J_AssertsLineText_GwtRef
 @AllowedReferences (groups=Tests4J_AssertsLineText_GwtReferenceGroup.class)
 public class TextLinesCompareResultTrial extends SourceFileCountingTrial {
 
-	
 	@Test
 	public void testConstructorAndGetters() {
 		LineDiffMutant ldm = new LineDiffMutant();

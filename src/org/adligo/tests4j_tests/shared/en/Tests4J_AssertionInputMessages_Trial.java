@@ -38,6 +38,11 @@ public class Tests4J_AssertionInputMessages_Trial extends SourceFileCountingTria
 		asserter.assertConstant("The uniform thown evaluator is null.",
 				messages.getTheUniformThrownEvaluatorIsNull());
 		
+		asserter.assertConstant("The expected thrown data for a assertThrownUniform method must have a message match type of any, equals or null.",
+        messages.getThrownUniformExpectedThrownDataMustBeMatchTypeAnyEqualsOrNull());
+		asserter.assertConstant("ExpectedThrownData instances with a MatchType of Equals or Contains require a throwable message.",
+        messages.getExpectedThrownDataWithEqualsOrContainMatchTypesRequireAMessage());
+		
 		asserter.assertConstantsMatchMethods(Tests4J_AssertionInputMessages.class);
 	}
 	
@@ -49,7 +54,7 @@ public class Tests4J_AssertionInputMessages_Trial extends SourceFileCountingTria
 
 	@Override
 	public int getAsserts(I_CountType type) {
-		int thisAsserts = 22;
+		int thisAsserts = 28;
 		//code coverage and circular dependencies +
 		//custom afterTrialTests
 		//+ see above
@@ -63,7 +68,7 @@ public class Tests4J_AssertionInputMessages_Trial extends SourceFileCountingTria
 
 	@Override
 	public int getUniqueAsserts(I_CountType type) {
-		int thisUniqueAsserts = 22;
+		int thisUniqueAsserts = 28;
 		//code coverage and circular dependencies +
 		//custom afterTrialTests
 		//+ see above

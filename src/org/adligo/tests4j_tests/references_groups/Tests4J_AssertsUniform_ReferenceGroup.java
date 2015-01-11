@@ -1,8 +1,5 @@
 package org.adligo.tests4j_tests.references_groups;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import org.adligo.tests4j.shared.asserts.uniform.Evaluation;
 import org.adligo.tests4j.shared.asserts.uniform.EvaluationMutant;
 import org.adligo.tests4j.shared.asserts.uniform.EvaluatorLookup;
@@ -16,6 +13,10 @@ import org.adligo.tests4j.shared.asserts.uniform.I_UniformThrownAssertionEvaluat
 import org.adligo.tests4j.shared.asserts.uniform.StringUniformEvaluator;
 import org.adligo.tests4j.shared.asserts.uniform.ThrowableUniformEvaluator;
 import org.adligo.tests4j.shared.asserts.uniform.UniformThrownAssertionEvaluator;
+import org.adligo.tests4j.shared.asserts.uniform.UniformThrownAssertionEvaluatorUse;
+
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * @diagram_sync with PackageDependencies.class on 10/1/1014
@@ -44,6 +45,7 @@ public class Tests4J_AssertsUniform_ReferenceGroup extends Tests4J_ReferenceGrou
 		add(names, StringUniformEvaluator.class);
 		add(names, ThrowableUniformEvaluator.class);
 		add(names, UniformThrownAssertionEvaluator.class);
+		add(names, UniformThrownAssertionEvaluatorUse.class);
 		
 		names.addAll(Tests4J_AssertsLineText_ReferenceGroup.INSTANCE.getClassNames());
 		

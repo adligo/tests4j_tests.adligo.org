@@ -6,6 +6,7 @@ import org.adligo.tests4j.shared.asserts.common.ExpectedThrownData;
 import org.adligo.tests4j.shared.asserts.common.I_AssertionData;
 import org.adligo.tests4j.shared.asserts.common.I_ExpectedThrownData;
 import org.adligo.tests4j.shared.asserts.common.I_Thrower;
+import org.adligo.tests4j.shared.asserts.common.MatchType;
 import org.adligo.tests4j.shared.asserts.common.ThrownAssertionData;
 import org.adligo.tests4j.shared.asserts.reference.AllowedReferences;
 import org.adligo.tests4j.shared.en.Tests4J_EnglishConstants;
@@ -16,13 +17,13 @@ import org.adligo.tests4j.system.shared.trials.Test;
 import org.adligo.tests4j_tests.base_trials.I_CountType;
 import org.adligo.tests4j_tests.base_trials.SourceFileCountingTrial;
 import org.adligo.tests4j_tests.references_groups.Tests4J_Asserts_GwtReferenceGroup;
-import org.adligo.tests4j_tests.references_groups.Tests4J_Asserts_ReferenceGroup;
 
-@SourceFileScope (sourceClass=ThrownAssertCommand.class, minCoverage=76.0)
+@SourceFileScope (sourceClass=ThrownAssertCommand.class, minCoverage=73.0)
 @AllowedReferences (groups=Tests4J_Asserts_GwtReferenceGroup.class)
 public class ThrownAssertCommandTrial extends SourceFileCountingTrial {
 
 
+  @SuppressWarnings("unused")
 	@Test
 	public void testConstructorExceptions() {
 		I_Tests4J_AssertionInputMessages messages =  Tests4J_EnglishConstants.ENGLISH.getAssertionInputMessages();
@@ -30,14 +31,16 @@ public class ThrownAssertCommandTrial extends SourceFileCountingTrial {
 				messages.getTheExpectedValueShouldNeverBeNull())), 
 				new I_Thrower() {
 					
-					@Override
+					
+          @Override
 					public void run() {
 						new ThrownAssertCommand("failure message", null);
 					}
 				});
 	}
 	
-	@Test
+	@SuppressWarnings("boxing")
+  @Test
 	public void testEqualsHashCode() {
 		ThrownAssertCommand a =
 				new ThrownAssertCommand("failure message", 
@@ -54,7 +57,10 @@ public class ThrownAssertCommandTrial extends SourceFileCountingTrial {
 		ThrownAssertCommand e =
 				new ThrownAssertCommand("failure message", 
 				new ExpectedThrownData(new IllegalStateException("hey")));
-	
+		ThrownAssertCommand f =
+        new ThrownAssertCommand("failure message", 
+        new ExpectedThrownData(new IllegalArgumentException("hey"), MatchType.CONTAINS));
+		
 		assertEquals(a, a);
 		assertEquals(a.hashCode(), a.hashCode());
 		
@@ -70,9 +76,14 @@ public class ThrownAssertCommandTrial extends SourceFileCountingTrial {
 		//IllegalStateException not IllegalArgumentException
 		assertNotEquals(a, e);
 		assertNotEquals(a.hashCode(), e.hashCode());
+		
+		//match type
+		assertNotEquals(a, f);
+    assertNotEquals(a.hashCode(), f.hashCode());
 	}
 	
-	@Test
+	@SuppressWarnings("boxing")
+  @Test
 	public void testEvaluateSlashGetData() {
 		ThrownAssertCommand a =
 				new ThrownAssertCommand("failure message", 
@@ -121,8 +132,9 @@ public class ThrownAssertCommandTrial extends SourceFileCountingTrial {
 	}
 	
 	
-	@Test
-	public void testDeepEvaluate() {
+	@SuppressWarnings("boxing")
+  @Test
+	public void testDeepEvaluateDefaults() {
 		ThrownAssertCommand a =
 				new ThrownAssertCommand("failure message", 
 						new ExpectedThrownData(new IllegalArgumentException("hey"),
@@ -148,7 +160,7 @@ public class ThrownAssertCommandTrial extends SourceFileCountingTrial {
 						throw new IllegalArgumentException("...");
 					}
 				}));
-		assertEquals(messages.getThrowableMessageNotEquals(), a.getFailureReason());
+		assertEquals(messages.getThrowableMessagesMismatch(), a.getFailureReason());
 		assertEquals(1, a.getFailureThrowable());
 		
 		assertFalse(a.evaluate(new I_Thrower() {
@@ -225,7 +237,7 @@ public class ThrownAssertCommandTrial extends SourceFileCountingTrial {
 				throw top;
 			}
 		}));
-		assertEquals(messages.getThrowableMessageNotEquals(), a.getFailureReason());
+		assertEquals(messages.getThrowableMessagesMismatch(), a.getFailureReason());
 		assertEquals(3, a.getFailureThrowable());
 		
 		assertFalse(a.evaluate(new I_Thrower() {
@@ -240,7 +252,7 @@ public class ThrownAssertCommandTrial extends SourceFileCountingTrial {
 				throw top;
 			}
 		}));
-		assertEquals(messages.getThrowableMessageNotEquals(), a.getFailureReason());
+		assertEquals(messages.getThrowableMessagesMismatch(), a.getFailureReason());
 		assertEquals(3, a.getFailureThrowable());
 		
 		assertTrue(a.evaluate(new I_Thrower() {
@@ -257,15 +269,113 @@ public class ThrownAssertCommandTrial extends SourceFileCountingTrial {
 		}));
 	}
 	
+	@SuppressWarnings("boxing")
+  @Test
+  public void testDeepEvaluateAny() {
+    ThrownAssertCommand a =
+        new ThrownAssertCommand("failure message", 
+            new ExpectedThrownData(IllegalArgumentException.class, MatchType.ANY,
+            new ExpectedThrownData(IllegalStateException.class, MatchType.ANY,
+            new ExpectedThrownData(IllegalArgumentException.class, MatchType.ANY))));
+    
+    assertFalse(a.evaluate(new I_Thrower() {
+      
+      @Override
+      public void run() {
+        throw new IllegalArgumentException("...");
+      }
+    }));
+    I_Tests4J_ResultMessages messages =  Tests4J_EnglishConstants.ENGLISH.getResultMessages();
 
+    assertEquals(messages.getThrowableClassMismatch(), a.getFailureReason());
+    assertEquals(2, a.getFailureThrowable());
+    
+    assertFalse(a.evaluate(new I_Thrower() {
+          
+          @Override
+          public void run() {
+            IllegalArgumentException top = new IllegalArgumentException("...");
+            IllegalStateException second = new IllegalStateException("...");
+            top.initCause(second);
+            throw top;
+          }
+        }));
+    assertEquals(messages.getThrowableClassMismatch(), a.getFailureReason());
+    assertEquals(3, a.getFailureThrowable());
+    
+    assertTrue(a.evaluate(new I_Thrower() {
+      
+      @Override
+      public void run() {
+        IllegalArgumentException top = new IllegalArgumentException("...");
+        IllegalStateException second = new IllegalStateException("...");
+        top.initCause(second);
+        
+        IllegalArgumentException third = new IllegalArgumentException("...");
+        second.initCause(third);
+        throw top;
+      }
+    }));
+	}
+	
+	@SuppressWarnings("boxing")
+  @Test
+  public void testDeepEvaluateContains() {
+    ThrownAssertCommand a =
+        new ThrownAssertCommand("failure message", 
+            new ExpectedThrownData(new IllegalArgumentException("hey"), MatchType.CONTAINS,
+            new ExpectedThrownData(new IllegalStateException("hmm"),MatchType.CONTAINS,
+            new ExpectedThrownData(new IllegalArgumentException("zzz"),MatchType.CONTAINS))));
+    
+    assertFalse(a.evaluate(new I_Thrower() {
+      
+      @Override
+      public void run() {
+        throw new IllegalStateException("aheya");
+      }
+    }));
+    I_Tests4J_ResultMessages messages =  Tests4J_EnglishConstants.ENGLISH.getResultMessages();
+
+    assertEquals(messages.getThrowableClassMismatch(), a.getFailureReason());
+    assertEquals(1, a.getFailureThrowable());
+    
+    assertFalse(a.evaluate(new I_Thrower() {
+      
+      @Override
+      public void run() {
+        IllegalArgumentException top = new IllegalArgumentException("...");
+        IllegalStateException second = new IllegalStateException("...");
+        top.initCause(second);
+        throw top;
+      }
+    }));
+    assertEquals(messages.getThrowableMessagesMismatch(), a.getFailureReason());
+    assertEquals(1, a.getFailureThrowable());
+    
+    assertTrue(a.evaluate(new I_Thrower() {
+      
+      @Override
+      public void run() {
+        IllegalArgumentException top = new IllegalArgumentException("ahey.");
+        IllegalStateException second = new IllegalStateException("ahmma");
+        top.initCause(second);
+        
+        IllegalArgumentException third = new IllegalArgumentException("azzz");
+        second.initCause(third);
+        throw top;
+      }
+    }));
+
+  }
+	
 	@Override
 	public int getTests(I_CountType type) {
-		return super.getTests(type, 4, true);
+		return super.getTests(type, 6, true);
 	}
 
 	@Override
 	public int getAsserts(I_CountType type) {
-		int thisAsserts = 57;
+		int thisAsserts = 73;
 		if (type.isFromMetaWithCoverage()) {
 			//code coverage and circular dependencies +
 			//custom afterTrialTests
@@ -277,7 +387,7 @@ public class ThrownAssertCommandTrial extends SourceFileCountingTrial {
 
 	@Override
 	public int getUniqueAsserts(I_CountType type) {
-		int thisUniqueAsserts = 25;
+		int thisUniqueAsserts = 36;
 		if (type.isFromMetaWithCoverage()) {
 			//code coverage and circular dependencies +
 			//custom afterTrialTests

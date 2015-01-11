@@ -8,7 +8,6 @@ import org.adligo.tests4j.system.shared.trials.Test;
 import org.adligo.tests4j_tests.base_trials.I_CountType;
 import org.adligo.tests4j_tests.base_trials.SourceFileCountingTrial;
 import org.adligo.tests4j_tests.references_groups.Tests4J_AssertsCommon_GwtReferenceGroup;
-import org.adligo.tests4j_tests.references_groups.Tests4J_AssertsCommon_ReferenceGroup;
 
 @SourceFileScope (sourceClass=ThrownAssertionDataMutant.class, minCoverage=70.0)
 @AllowedReferences (groups=Tests4J_AssertsCommon_GwtReferenceGroup.class)
@@ -16,7 +15,7 @@ public class ThrownAssertionDataMutantTrial extends SourceFileCountingTrial {
 	
 	@Test
 	public void testEqualsHashCodeAndCopyConstructor() {
-		ExpectedThrownData etd = new ExpectedThrownData();
+		ExpectedThrownData etd = mock(ExpectedThrownData.class);
 		
 		ThrownAssertionDataMutant a = new ThrownAssertionDataMutant();
 		a.setExpected(etd);
