@@ -18,13 +18,14 @@ import org.adligo.tests4j_tests.references_groups.Tests4J_AssertsLineText_GwtRef
 public class DiffIndexesTrial extends SourceFileCountingTrial {
   private static final I_System SYS = new DefaultSystem();
   
-	@Test
+  @SuppressWarnings({"unused","boxing"})
+  @Test
 	public void testConstructorExceptions() {
 		assertThrown(new ExpectedThrownData(new IllegalArgumentException(
 				DiffIndexes.START_END_DIFF_REQUIRES_POSITIVE_INDEXES)),
 				new I_Thrower() {
 					
-					@Override
+          @Override
 					public void run() {
 						new DiffIndexes(-1, 0, null, null);
 					}
@@ -140,7 +141,8 @@ public class DiffIndexesTrial extends SourceFileCountingTrial {
 				});
 	}
 	
-	@Test
+	@SuppressWarnings("boxing")
+  @Test
 	public void testConstructorAndGettersAndToString() {
 		I_DiffIndexes sed = new DiffIndexes(0, 1, null, null);
 		assertEquals(0, sed.getDiffLeftToRight());
@@ -185,7 +187,8 @@ public class DiffIndexesTrial extends SourceFileCountingTrial {
 		assertTrue(sed.isEmpty());
 	}
 	
-	@Test
+	@SuppressWarnings("boxing")
+  @Test
 	public void testGetLeftDiffsRightMatches() {
 		//text to the left of this is different;
 		I_DiffIndexes sed = new DiffIndexes(null, null, 0, 0);
@@ -216,7 +219,8 @@ public class DiffIndexesTrial extends SourceFileCountingTrial {
 		assertEquals("d", matches[0]);
 	}
 	
-	@Test
+	@SuppressWarnings("boxing")
+  @Test
 	public void testGetLeftMatchesAndDifferencesNullLine() {
 		//text to the right of this is different;
 		I_DiffIndexes sed = new DiffIndexes(null, null, 0, 0);
@@ -228,7 +232,8 @@ public class DiffIndexesTrial extends SourceFileCountingTrial {
 	}
 	
 	
-	@Test
+	@SuppressWarnings("boxing")
+  @Test
 	public void testGetLeftMatchesRightDifferent() {
 		//text to the right of this is different;
 		I_DiffIndexes sed = new DiffIndexes(null, null, 0, 0);
@@ -260,7 +265,8 @@ public class DiffIndexesTrial extends SourceFileCountingTrial {
 		assertEquals("ab", matches[0]);
 	}
 	
-	@Test
+	@SuppressWarnings("boxing")
+  @Test
 	public void testGetMiddleDiff() {
 		//middle char is different
 		I_DiffIndexes sed = new DiffIndexes(1, 1, 0, 2);
@@ -275,7 +281,8 @@ public class DiffIndexesTrial extends SourceFileCountingTrial {
 		
 	}
 	
-	@Test
+	@SuppressWarnings("boxing")
+  @Test
 	public void testGetMiddleMatches() {
 		//middle char is different
 		I_DiffIndexes sed = new DiffIndexes(0, 2, 1, 1);

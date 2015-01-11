@@ -15,7 +15,7 @@ import org.adligo.tests4j_tests.references_groups.Tests4J_AssertsLineText_GwtRef
 @AllowedReferences (groups=Tests4J_AssertsLineText_GwtReferenceGroup.class)
 public class DiffIndexesPairTrial extends SourceFileCountingTrial {
 
-	
+  @SuppressWarnings("boxing")
 	@Test
 	public void testConstructorAndGetters() {
 		I_DiffIndexes sed = new DiffIndexes(0, 1, null, null);
@@ -27,6 +27,7 @@ public class DiffIndexesPairTrial extends SourceFileCountingTrial {
 		assertSame(sed2, pair.getActual());
 	}
 	
+  @SuppressWarnings("boxing")
 	@Test
 	public void testCompareLinesRightMatch() throws Exception {
 		DiffIndexesPair result = new DiffIndexesPair("cab", "dab");
@@ -46,7 +47,8 @@ public class DiffIndexesPairTrial extends SourceFileCountingTrial {
 		assertEquals(2, actualIndexes.getMatchRightToLeft());
 	}
 	
-	@Test
+	@SuppressWarnings("boxing")
+  @Test
 	public void testCompareLinesRightMatchExpectedLonger() throws Exception {
 		DiffIndexesPair result = new DiffIndexesPair("rcab", "dab");
 		assertNotNull(result);
@@ -65,6 +67,7 @@ public class DiffIndexesPairTrial extends SourceFileCountingTrial {
 		assertEquals(2, actualIndexes.getMatchRightToLeft());
 	}
 	
+	@SuppressWarnings("boxing")
 	@Test
 	public void testCompareLinesRightMatchActualLonger() throws Exception {
 		DiffIndexesPair result = new DiffIndexesPair("cab", "rdab");
@@ -83,6 +86,8 @@ public class DiffIndexesPairTrial extends SourceFileCountingTrial {
 		assertEquals(2, actualIndexes.getMatchLeftToRight());
 		assertEquals(3, actualIndexes.getMatchRightToLeft());
 	}
+	
+	@SuppressWarnings("boxing")
 	@Test
 	public void testCompareLinesMatchActualLongerOnLeft() throws Exception {
 		DiffIndexesPair result = new DiffIndexesPair("cab", "fcab");
@@ -102,6 +107,7 @@ public class DiffIndexesPairTrial extends SourceFileCountingTrial {
 		assertEquals(3, actualIndexes.getMatchRightToLeft());
 	}
 	
+	@SuppressWarnings("boxing")
 	@Test
 	public void testCompareLinesMatchActualLongerOnRight() throws Exception {
 		DiffIndexesPair result = new DiffIndexesPair("cab", "cabf");
@@ -121,6 +127,7 @@ public class DiffIndexesPairTrial extends SourceFileCountingTrial {
 		assertEquals(2, actualIndexes.getMatchRightToLeft());
 	}
 	
+	@SuppressWarnings("boxing")
 	@Test
 	public void testCompareLinesMatchExpectedLongerOnLeft() throws Exception {
 		DiffIndexesPair result = new DiffIndexesPair("fcab", "cab");
@@ -142,7 +149,7 @@ public class DiffIndexesPairTrial extends SourceFileCountingTrial {
 	}
 	
 	
-	
+	@SuppressWarnings("boxing")
 	@Test
 	public void testCompareLinesMatchExpectedLongerOnRight() throws Exception {
 		DiffIndexesPair result = new DiffIndexesPair("cabf", "cab");
@@ -163,6 +170,7 @@ public class DiffIndexesPairTrial extends SourceFileCountingTrial {
 		
 	}
 	
+	@SuppressWarnings("boxing")
 	@Test
 	public void testCompareLinesLeftMatch() throws Exception {
 		DiffIndexesPair result = new DiffIndexesPair("abc", "aba");
@@ -182,6 +190,7 @@ public class DiffIndexesPairTrial extends SourceFileCountingTrial {
 		assertEquals(1, actualIndexes.getMatchRightToLeft());
 	}
 	
+	@SuppressWarnings("boxing")
 	@Test
 	public void testCompareLinesLeftMatchExampleLonger() throws Exception {
 		DiffIndexesPair result = new DiffIndexesPair("abce", "aba");
@@ -201,6 +210,7 @@ public class DiffIndexesPairTrial extends SourceFileCountingTrial {
 		assertEquals(1, actualIndexes.getMatchRightToLeft());
 	}
 
+	@SuppressWarnings("boxing")
 	@Test
 	public void testCompareLinesLeftMatchActualLonger() throws Exception {
 		DiffIndexesPair result = new DiffIndexesPair("abc", "abde");
@@ -220,6 +230,7 @@ public class DiffIndexesPairTrial extends SourceFileCountingTrial {
 		assertEquals(1, actualIndexes.getMatchRightToLeft());
 	}
 	
+	@SuppressWarnings("boxing")
 	@Test
 	public void testCompareLinesLeftMatchActualLongerAtLeft_MockWithArray_vs_MockWithMethodReturn_Issue() throws Exception {
 		String expected = "Arrayorg.adligo.tests4j_tests.run.helpers.class_loading_mocks.MockWith";
@@ -260,6 +271,7 @@ public class DiffIndexesPairTrial extends SourceFileCountingTrial {
 		assertEquals("MethodReturn", diffs[0]);
 	}
 	
+	@SuppressWarnings("boxing")
 	@Test
 	public void testCompareLinesLeftMatchExpectedLongerAtLeft_MockWithArray_vs_MockWithMethodReturn_Issue() throws Exception {
 		String expected = "MethodReturnorg.adligo.tests4j_tests.run.helpers.class_loading_mocks.MockWith";
@@ -300,6 +312,7 @@ public class DiffIndexesPairTrial extends SourceFileCountingTrial {
 		assertEquals("Array", diffs[0]);
 	}
 	
+	@SuppressWarnings("boxing")
 	@Test
 	public void testCompareLinesLeftMatchActualLongerAtRight_MockWithArray_vs_MockWithMethodReturn_Issue() throws Exception {
 		String expected = "org.adligo.tests4j_tests.run.helpers.class_loading_mocks.MockWithArray";
@@ -340,6 +353,7 @@ public class DiffIndexesPairTrial extends SourceFileCountingTrial {
 		assertEquals("MethodReturn", diffs[0]);
 	}
 	
+	@SuppressWarnings("boxing")
 	@Test
 	public void testCompareLinesLeftMatchActualLongerAtRight_MockWithArray_vs_MockWithBidirectionalA_Issue() throws Exception {
 		String expected = "org.adligo.tests4j_tests.run.helpers.class_loading_mocks.MockWithArray";
@@ -380,6 +394,7 @@ public class DiffIndexesPairTrial extends SourceFileCountingTrial {
 		assertEquals("BidirectionalA", diffs[0]);
 	}
 	
+	@SuppressWarnings("boxing")
 	@Test
 	public void testCompareLinesLeftMatchExpectedLongerAtRight_MockWithArray_vs_MockWithMethodReturn_Issue() throws Exception {
 		String expected = "org.adligo.tests4j_tests.run.helpers.class_loading_mocks.MockWithMethodReturn";
@@ -420,6 +435,7 @@ public class DiffIndexesPairTrial extends SourceFileCountingTrial {
 		assertEquals("Array", diffs[0]);
 	}
 	
+	@SuppressWarnings("boxing")
 	@Test
 	public void testCompareLinesLeftMatchExpectedLongerAtRight_MockWithArray_vs_MockWithBidirectionalA_Issue() throws Exception {
 		String expected = "org.adligo.tests4j_tests.run.helpers.class_loading_mocks.MockWithBidirectionalA";
@@ -460,6 +476,7 @@ public class DiffIndexesPairTrial extends SourceFileCountingTrial {
 		assertEquals("Array", diffs[0]);
 	}
 	
+	@SuppressWarnings("boxing")
 	@Test
 	public void testCompareLinesMiddleDiff() throws Exception {
 		String example = "abcbloff123";
@@ -508,6 +525,7 @@ public class DiffIndexesPairTrial extends SourceFileCountingTrial {
 		assertEquals(13, actualIndexes.getMatchRightToLeft());
 	}
 
+	@SuppressWarnings("boxing")
 	@Test
 	public void testCompareLinesMiddleDiffMismatch() throws Exception {
 		String example = "123a2456";
@@ -556,7 +574,7 @@ public class DiffIndexesPairTrial extends SourceFileCountingTrial {
 		assertEquals(1, actualIndexes.getMatchRightToLeft());
 	}
 	
-	
+	@SuppressWarnings("boxing")
 	@Test
 	public void testCompareLinesLeftMatch_MiddleMatch() throws Exception {
 		String example = "a1";
@@ -607,6 +625,7 @@ public class DiffIndexesPairTrial extends SourceFileCountingTrial {
 		assertEquals(4, actualIndexes.getMatchRightToLeft());
 	}
 	
+	@SuppressWarnings("boxing")
 	@Test
 	public void testCompareLinesMiddleMatch() throws Exception {
 		String example = "jscoffde";
@@ -658,6 +677,7 @@ public class DiffIndexesPairTrial extends SourceFileCountingTrial {
 		assertEquals(7, actualIndexes.getMatchRightToLeft());
 	}
 	
+	@SuppressWarnings("boxing")
 	@Test
 	public void testCompareLinesMiddleMatchMismatch() throws Exception {
 		String example = "jsabcefde";
@@ -709,6 +729,7 @@ public class DiffIndexesPairTrial extends SourceFileCountingTrial {
 		assertEquals(3, actualIndexes.getMatchRightToLeft());
 	}
 	
+	@SuppressWarnings("boxing")
 	@Test
 	public void testCompareLinesMiddleMatchMismatchRight() throws Exception {
 		String example = "org.abl";
@@ -756,6 +777,7 @@ public class DiffIndexesPairTrial extends SourceFileCountingTrial {
 		assertEquals(5, actualIndexes.getMatchRightToLeft());
 	}
 	
+	@SuppressWarnings("boxing")
 	@Test
 	public void testCompareLinesOuterMatchActualLonger() throws Exception {
 		String example = "abce";
@@ -805,6 +827,7 @@ public class DiffIndexesPairTrial extends SourceFileCountingTrial {
 		
 	}
 	
+	@SuppressWarnings("boxing")
 	@Test
 	public void testCompareLinesOuterMatchExpectedLonger() throws Exception {
 		String example = "abcde";
@@ -854,6 +877,7 @@ public class DiffIndexesPairTrial extends SourceFileCountingTrial {
 		
 	}
 	
+	@SuppressWarnings("boxing")
 	@Test
 	public void testLongTextVsA() {
 		String example = "The following actual line of text is missing in the expected lines of text;";
@@ -895,6 +919,7 @@ public class DiffIndexesPairTrial extends SourceFileCountingTrial {
 		assertEquals(0, actualIndexes.getMatchRightToLeft());
 	}
 	
+	@SuppressWarnings("boxing")
 	@Test
 	public void testActualEndCharDiff() {
 		String example = "The";
@@ -935,7 +960,7 @@ public class DiffIndexesPairTrial extends SourceFileCountingTrial {
 		assertEquals(2, actualIndexes.getMatchRightToLeft());
 	}
 	
-	
+	@SuppressWarnings("boxing")
 	@Test
 	public void testExpectedEndCharDiff() {
 		String example = "The2";
@@ -977,14 +1002,44 @@ public class DiffIndexesPairTrial extends SourceFileCountingTrial {
 		assertEquals(2, actualIndexes.getMatchRightToLeft());
 	}
 	
+	@SuppressWarnings({"boxing", "unused"})
+  @Test
+  public void testEndsInSlash() {
+    DiffIndexesPair pair = new DiffIndexesPair("foo", "/opt/foo/");
+    I_DiffIndexes actual = pair.getActual();
+    assertEquals(0, actual.getDiffLeftToRight());
+    assertEquals(8, actual.getDiffRightToLeft());
+    assertEquals(5, actual.getMatchLeftToRight());
+    assertEquals(7, actual.getMatchRightToLeft());
+    
+    I_DiffIndexes expected = pair.getExpected();
+    assertEquals(0, expected.getMatchLeftToRight());
+    assertEquals(2, expected.getMatchRightToLeft());
+    assertNull(expected.getDiffLeftToRight());
+    assertNull(expected.getDiffRightToLeft());
+    
+    pair = new DiffIndexesPair("/opt/foo/", "foo");
+    actual = pair.getActual();
+    assertNull(actual.getDiffLeftToRight());
+    assertNull(actual.getDiffRightToLeft());
+    assertEquals(0, actual.getMatchLeftToRight());
+    assertEquals(2, actual.getMatchRightToLeft());
+    
+    expected = pair.getExpected();
+    assertEquals(5, expected.getMatchLeftToRight());
+    assertEquals(7, expected.getMatchRightToLeft());
+    assertEquals(0, expected.getDiffLeftToRight());
+    assertEquals(8, expected.getDiffRightToLeft());
+  }
+	
 	@Override
 	public int getTests(I_CountType type) {
-		return super.getTests(type, 28, true);
+		return super.getTests(type, 29, true);
 	}
 
 	@Override
 	public int getAsserts(I_CountType type) {
-		int asserts = 440;
+		int asserts = 456;
 		if (type.isFromMetaWithCoverage()) {
 			//code coverage and circular dependencies
 			return super.getAsserts(type, asserts + 3);
@@ -995,7 +1050,7 @@ public class DiffIndexesPairTrial extends SourceFileCountingTrial {
 
 	@Override
 	public int getUniqueAsserts(I_CountType type) {
-		int uasserts = 276;
+		int uasserts = 282;
 		if (type.isFromMetaWithCoverage()) {
 			return super.getUniqueAsserts(type, uasserts + 3);
 		} else {

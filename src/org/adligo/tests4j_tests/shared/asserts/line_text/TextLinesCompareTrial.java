@@ -1,7 +1,5 @@
 package org.adligo.tests4j_tests.shared.asserts.line_text;
 
-import java.util.List;
-
 import org.adligo.tests4j.shared.asserts.line_text.I_DiffIndexes;
 import org.adligo.tests4j.shared.asserts.line_text.I_DiffIndexesPair;
 import org.adligo.tests4j.shared.asserts.line_text.I_LineDiff;
@@ -16,13 +14,13 @@ import org.adligo.tests4j.system.shared.trials.Test;
 import org.adligo.tests4j_tests.base_trials.I_CountType;
 import org.adligo.tests4j_tests.base_trials.SourceFileCountingTrial;
 import org.adligo.tests4j_tests.references_groups.Tests4J_AssertsLineText_GwtReferenceGroup;
-import org.adligo.tests4j_tests.references_groups.Tests4J_AssertsLineText_ReferenceGroup;
+
+import java.util.List;
 
 @SourceFileScope (sourceClass=TextLinesCompare.class, minCoverage=88.0)
 @AllowedReferences (groups=Tests4J_AssertsLineText_GwtReferenceGroup.class)
 public class TextLinesCompareTrial extends SourceFileCountingTrial {
 
-  @SuppressWarnings("boxing")
   @Test
   public void testNulls() {
     TextLinesCompare tlc = new TextLinesCompare();
@@ -833,7 +831,7 @@ public class TextLinesCompareTrial extends SourceFileCountingTrial {
 		assertNull(diff.getIndexes());
 	}
 
-	
+
 	
 	@Override
 	public int getTests(I_CountType type) {
