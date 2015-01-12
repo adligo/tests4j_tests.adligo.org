@@ -6,7 +6,9 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" >
     <tns:stages>
         <tns:stage name="jar" >
-            <tns:param key="srcDirs" value="src,src_jdk_1_8" />
+        	<tns:params>
+            	<cns:param key="srcDirs" value="src,src_jdk_1_8" />
+            </tns:params>
         </tns:stage>
         <tns:stage name="test" />
         <tns:stage name="publish" />
