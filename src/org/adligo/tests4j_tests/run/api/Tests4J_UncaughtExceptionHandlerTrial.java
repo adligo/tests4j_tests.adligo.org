@@ -9,7 +9,7 @@ import org.adligo.tests4j.system.shared.trials.AdditionalInstrumentation;
 import org.adligo.tests4j.system.shared.trials.AfterTrial;
 import org.adligo.tests4j.system.shared.trials.SourceFileScope;
 import org.adligo.tests4j.system.shared.trials.Test;
-import org.adligo.tests4j_4mockito.MethodRecorder;
+import org.adligo.tests4j_4mockito.MockMethod;
 import org.adligo.tests4j_tests.base_trials.I_CountType;
 import org.adligo.tests4j_tests.base_trials.SourceFileCountingTrial;
 import org.adligo.tests4j_tests.run.api.mocks.BadMockTests4J_UncaughtExceptionHandler;
@@ -21,8 +21,8 @@ import org.adligo.tests4j_tests.run.api.mocks.MockTests4J_UncaughtExceptionHandl
 @AdditionalInstrumentation (javaPackages="org.adligo.tests4j_tests.run.mocks")
 public class Tests4J_UncaughtExceptionHandlerTrial extends SourceFileCountingTrial {
   private I_Tests4J_Log mockLog;
-  private MethodRecorder<Void> logRecord = new MethodRecorder<Void>();
-  private MethodRecorder<Void> onThrowableRecord = new MethodRecorder<Void>();
+  private MockMethod<Void> logRecord = new MockMethod<Void>();
+  private MockMethod<Void> onThrowableRecord = new MockMethod<Void>();
   
   @Override
 	public void beforeTests() {
@@ -30,8 +30,8 @@ public class Tests4J_UncaughtExceptionHandlerTrial extends SourceFileCountingTri
 		//lets hope no uncaught exceptions occur, which overlap with this test
 		//in the multiple trial/test threads
     mockLog = mock(I_Tests4J_Log.class);
-    logRecord = new MethodRecorder<Void>();
-    onThrowableRecord = new MethodRecorder<Void>();
+    logRecord = new MockMethod<Void>();
+    onThrowableRecord = new MockMethod<Void>();
     
     doAnswer(logRecord).when(mockLog).log(any());
     doAnswer(onThrowableRecord).when(mockLog).onThrowable(any());
@@ -43,8 +43,8 @@ public class Tests4J_UncaughtExceptionHandlerTrial extends SourceFileCountingTri
 		MockTests4J_UncaughtExceptionHandler handler = new MockTests4J_UncaughtExceptionHandler();
 		IllegalArgumentException iae = new IllegalArgumentException("hey");
 		handler.uncaughtException(new Thread("ThreadName"), iae);
-		assertEquals("uncaughtException on thread ThreadName", logRecord.getArgument(0));
-		assertSame(iae, onThrowableRecord.getArgument(0));
+		assertEquals("uncaughtException on thread ThreadName", logRecord.getArg(0));
+		assertSame(iae, onThrowableRecord.getArg(0));
 		assertSame(mockLog, MockTests4J_UncaughtExceptionHandler.getStaticLogger());
 	}
 	

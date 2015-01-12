@@ -8,7 +8,7 @@ import org.adligo.tests4j.shared.common.ClassMethods;
 import org.adligo.tests4j.shared.output.I_Tests4J_Log;
 import org.adligo.tests4j.system.shared.trials.SourceFileScope;
 import org.adligo.tests4j.system.shared.trials.Test;
-import org.adligo.tests4j_4mockito.MethodRecorder;
+import org.adligo.tests4j_4mockito.MockMethod;
 import org.adligo.tests4j_tests.base_trials.I_CountType;
 import org.adligo.tests4j_tests.base_trials.SourceFileCountingTrial;
 import org.adligo.tests4j_tests.run.helpers.class_loading_mocks.MockCachedClassBytesClassLoader;
@@ -36,7 +36,7 @@ public class CachedClassBytesClassLoaderTrial extends SourceFileCountingTrial {
   @Test
 	public void testNullListsLog() throws Exception {
 		I_Tests4J_Log logMock = mock(I_Tests4J_Log.class);
-		MethodRecorder<Void> onThrowableRecord = new MethodRecorder<Void>();
+		MockMethod<Void> onThrowableRecord = new MockMethod<Void>();
 		doAnswer(onThrowableRecord).when(logMock).onThrowable(any());
 		when(logMock.getLineSeperator()).thenReturn("lineSeperator");
 		
@@ -58,7 +58,7 @@ public class CachedClassBytesClassLoaderTrial extends SourceFileCountingTrial {
 		final InputStream in = this.getClass().getResourceAsStream(MOCK_WITH_NOTHING_RESOURCE_NAME);
 		cl.addCache(in, MOCK_WITH_NOTHING_NAME);
 		assertEquals(1, onThrowableRecord.count());
-		Throwable exception = (Throwable) onThrowableRecord.getArgument(0);
+		Throwable exception = (Throwable) onThrowableRecord.getArg(0);
 		assertEquals(IllegalStateException.class.getName(), exception.getClass().getName());
 		String message = exception.getMessage();
 		assertTrue(message, message.contains(" the following class should to be cached at this point," + "lineSeperator" +

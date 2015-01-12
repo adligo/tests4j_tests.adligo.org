@@ -15,7 +15,7 @@ import org.adligo.tests4j_4jacoco.plugin.instrumentation.common.I_ClassInstrumen
 import org.adligo.tests4j_4jacoco.plugin.instrumentation.common.I_ClassInstrumentationMetadataStoreMutant;
 import org.adligo.tests4j_4mockito.ArgMap;
 import org.adligo.tests4j_4mockito.I_ArgFactory;
-import org.adligo.tests4j_4mockito.MethodRecorder;
+import org.adligo.tests4j_4mockito.MockMethod;
 import org.adligo.tests4j_tests.base_trials.I_CountType;
 import org.adligo.tests4j_tests.base_trials.SourceFileCountingTrial;
 
@@ -60,11 +60,11 @@ public class RecorderTrial extends SourceFileCountingTrial {
     subs.add(pkgC);
     when(pkgFoo.getSubPackages()).thenReturn(subs);
     
-    MethodRecorder<I_PackageDiscovery> pkgRecord = new MethodRecorder<I_PackageDiscovery>(argMap);
+    MockMethod<I_PackageDiscovery> pkgRecord = new MockMethod<I_PackageDiscovery>(argMap);
     when(memory.getPackage(any())).then(pkgRecord);
     
     I_Runtime runtime = mock(I_Runtime.class);
-    MethodRecorder<Void> ensureProbesInitRecord = new MethodRecorder<Void>();
+    MockMethod<Void> ensureProbesInitRecord = new MockMethod<Void>();
     doAnswer(ensureProbesInitRecord).when(runtime).ensureProbesInitialized(any(I_ClassInstrumentationMetadata.class));
     
     when(memory.getRuntime()).thenReturn(runtime);
@@ -81,7 +81,7 @@ public class RecorderTrial extends SourceFileCountingTrial {
     metas.putFactory("com.example.foo.Bar");
     metas.putFactory("com.example.foo.a.Aar");
     metas.putFactory("com.example.foo.c.Car");
-    MethodRecorder<I_ClassInstrumentationMetadata> metaRecord = new MethodRecorder<I_ClassInstrumentationMetadata>(metas);
+    MockMethod<I_ClassInstrumentationMetadata> metaRecord = new MockMethod<I_ClassInstrumentationMetadata>(metas);
     when(store.getClassInstrumentation(any())).then(metaRecord);
     
     ArgMap<I_SourceFileCoverageBrief> briefs = new ArgMap<I_SourceFileCoverageBrief>(
@@ -99,7 +99,7 @@ public class RecorderTrial extends SourceFileCountingTrial {
     briefs.putFactory("com.example.foo.Bar");
     briefs.putFactory("com.example.foo.a.Aar");
     briefs.putFactory("com.example.foo.c.Car");
-    MethodRecorder<I_SourceFileCoverageBrief> sourceCoverRecord= new MethodRecorder<I_SourceFileCoverageBrief>(briefs);
+    MockMethod<I_SourceFileCoverageBrief> sourceCoverRecord= new MockMethod<I_SourceFileCoverageBrief>(briefs);
     when(runtime.getSourceFileCoverage(any(String.class))).thenAnswer(sourceCoverRecord);
     when(memory.isResultPackage(any())).thenReturn(true);
     
@@ -117,14 +117,14 @@ public class RecorderTrial extends SourceFileCountingTrial {
     
     assertEquals(1, result.size());
     assertEquals(3, metaRecord.count());
-    assertEquals("com.example.foo.Bar", metaRecord.getArgument(0));
-    assertEquals("com.example.foo.a.Aar", metaRecord.getArgument(1));
-    assertEquals("com.example.foo.c.Car", metaRecord.getArgument(2));
+    assertEquals("com.example.foo.Bar", metaRecord.getArg(0));
+    assertEquals("com.example.foo.a.Aar", metaRecord.getArg(1));
+    assertEquals("com.example.foo.c.Car", metaRecord.getArg(2));
     
     //it was passed from the memory, class loader to ensureProbesInitialized
-    assertEquals(metas.getVar("com.example.foo.Bar"), ensureProbesInitRecord.getArgument(0));
-    assertEquals(metas.getVar("com.example.foo.a.Aar"), ensureProbesInitRecord.getArgument(1));
-    assertEquals(metas.getVar("com.example.foo.c.Car"), ensureProbesInitRecord.getArgument(2));
+    assertEquals(metas.getVar("com.example.foo.Bar"), ensureProbesInitRecord.getArg(0));
+    assertEquals(metas.getVar("com.example.foo.a.Aar"), ensureProbesInitRecord.getArg(1));
+    assertEquals(metas.getVar("com.example.foo.c.Car"), ensureProbesInitRecord.getArg(2));
     
     List<I_PackageCoverageBrief> children = brief.getChildPackageCoverage();
     assertNotNull(children);
@@ -168,11 +168,11 @@ public class RecorderTrial extends SourceFileCountingTrial {
     when(pkgA.getClassNames()).thenReturn(Collections.singletonList("com.example.foo_tests.BarTrial"));
     argMap.putVar(pkgA, "com.example.foo_tests");
     
-    MethodRecorder<I_PackageDiscovery> pkgRecord = new MethodRecorder<I_PackageDiscovery>(argMap);
+    MockMethod<I_PackageDiscovery> pkgRecord = new MockMethod<I_PackageDiscovery>(argMap);
     when(memory.getPackage(any())).then(pkgRecord);
     
     I_Runtime runtime = mock(I_Runtime.class);
-    MethodRecorder<Void> ensureProbesInitRecord = new MethodRecorder<Void>();
+    MockMethod<Void> ensureProbesInitRecord = new MockMethod<Void>();
     doAnswer(ensureProbesInitRecord).when(runtime).ensureProbesInitialized(any(I_ClassInstrumentationMetadata.class));
     
     when(memory.getRuntime()).thenReturn(runtime);
@@ -188,7 +188,7 @@ public class RecorderTrial extends SourceFileCountingTrial {
     });
     metas.putFactory("com.example.foo.Bar");
     metas.putFactory("com.example.foo_tests.BarTrial");
-    MethodRecorder<I_ClassInstrumentationMetadata> metaRecord = new MethodRecorder<I_ClassInstrumentationMetadata>(metas);
+    MockMethod<I_ClassInstrumentationMetadata> metaRecord = new MockMethod<I_ClassInstrumentationMetadata>(metas);
     when(store.getClassInstrumentation(any())).then(metaRecord);
     
     ArgMap<I_SourceFileCoverageBrief> briefs = new ArgMap<I_SourceFileCoverageBrief>(
@@ -205,7 +205,7 @@ public class RecorderTrial extends SourceFileCountingTrial {
         });
     briefs.putFactory("com.example.foo.Bar");
     briefs.putFactory("com.example.foo_tests.BarTrial");
-    MethodRecorder<I_SourceFileCoverageBrief> sourceCoverRecord= new MethodRecorder<I_SourceFileCoverageBrief>(briefs);
+    MockMethod<I_SourceFileCoverageBrief> sourceCoverRecord= new MockMethod<I_SourceFileCoverageBrief>(briefs);
     when(runtime.getSourceFileCoverage(any(String.class))).thenAnswer(sourceCoverRecord);
     when(memory.isResultPackage(any())).thenReturn(true);
     

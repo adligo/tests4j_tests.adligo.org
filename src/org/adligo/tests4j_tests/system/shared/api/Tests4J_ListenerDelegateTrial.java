@@ -11,7 +11,7 @@ import org.adligo.tests4j.system.shared.api.I_Tests4J_Params;
 import org.adligo.tests4j.system.shared.api.Tests4J_ListenerDelegator;
 import org.adligo.tests4j.system.shared.trials.SourceFileScope;
 import org.adligo.tests4j.system.shared.trials.Test;
-import org.adligo.tests4j_4mockito.MethodRecorder;
+import org.adligo.tests4j_4mockito.MockMethod;
 import org.adligo.tests4j_tests.base_trials.I_CountType;
 import org.adligo.tests4j_tests.base_trials.SourceFileCountingTrial;
 import org.adligo.tests4j_tests.references_groups.Tests4J_SystemApi_GwtReferenceGroup;
@@ -22,18 +22,18 @@ import org.adligo.tests4j_tests.system.shared.mocks.Tracking_Tests4J_Listener;
 @AllowedReferences (groups=Tests4J_SystemApi_GwtReferenceGroup.class)
 public class Tests4J_ListenerDelegateTrial extends SourceFileCountingTrial {
   private I_Tests4J_Log logMock_;
-  private MethodRecorder<Void> logRecord_;
-  private MethodRecorder<Void> logLineRecord_;
-  private MethodRecorder<Void> onThrowableRecord_;
+  private MockMethod<Void> logRecord_;
+  private MockMethod<Void> logLineRecord_;
+  private MockMethod<Void> onThrowableRecord_;
   
   @Override
   public void beforeTests() {
     logMock_ = mock(I_Tests4J_Log.class);
-    logRecord_ = new MethodRecorder<Void>();
+    logRecord_ = new MockMethod<Void>();
     doAnswer(logRecord_).when(logMock_).log(any());
-    logLineRecord_ = new MethodRecorder<Void>();
+    logLineRecord_ = new MockMethod<Void>();
     doAnswer(logLineRecord_).when(logMock_).logLine(anyVararg());
-    onThrowableRecord_ = new MethodRecorder<Void>();
+    onThrowableRecord_ = new MockMethod<Void>();
     doAnswer(onThrowableRecord_).when(logMock_).onThrowable(any());
     when(logMock_.getLineSeperator()).thenReturn("lineSeperator");
   }
@@ -56,37 +56,37 @@ public class Tests4J_ListenerDelegateTrial extends SourceFileCountingTrial {
 		Tests4J_ListenerDelegator delegate = new Tests4J_ListenerDelegator(new Clumsey_Tests4J_Listener(), logMock_);
 		
 		delegate.onMetadataCalculated(null);
-		Exception thrown = (Exception) onThrowableRecord_.getArgument(0);
+		Exception thrown = (Exception) onThrowableRecord_.getArg(0);
 		assertNotNull(thrown);
 		assertEquals(RuntimeException.class, thrown.getClass());
 		assertEquals("mock from onMetadataCalculated", thrown.getMessage());
 		
 		delegate.onRunCompleted(null);
-		thrown = (Exception) onThrowableRecord_.getArgument(1);
+		thrown = (Exception) onThrowableRecord_.getArg(1);
 		assertNotNull(thrown);
 		assertEquals(RuntimeException.class, thrown.getClass());
 		assertEquals("mock from onRunCompleted", thrown.getMessage());
 		
 		delegate.onStartingTest(null, null);
-		thrown = (Exception) onThrowableRecord_.getArgument(2);
+		thrown = (Exception) onThrowableRecord_.getArg(2);
 		assertNotNull(thrown);
 		assertEquals(RuntimeException.class, thrown.getClass());
 		assertEquals("mock from onStartingTest", thrown.getMessage());
 		
 		delegate.onStartingTrial(null);
-		thrown = (Exception) onThrowableRecord_.getArgument(3);
+		thrown = (Exception) onThrowableRecord_.getArg(3);
 		assertNotNull(thrown);
 		assertEquals(RuntimeException.class, thrown.getClass());
 		assertEquals("mock from onStartingTrial", thrown.getMessage());
 		
 		delegate.onTestCompleted(null, null, true);
-		thrown = (Exception) onThrowableRecord_.getArgument(4);
+		thrown = (Exception) onThrowableRecord_.getArg(4);
 		assertNotNull(thrown);
 		assertEquals(RuntimeException.class, thrown.getClass());
 		assertEquals("mock from onTestCompleted", thrown.getMessage());
 		
 		delegate.onTrialCompleted(null);
-		thrown = (Exception) onThrowableRecord_.getArgument(5);
+		thrown = (Exception) onThrowableRecord_.getArg(5);
 		assertNotNull(thrown);
 		assertEquals(RuntimeException.class, thrown.getClass());
 		assertEquals("mock from onTrialCompleted", thrown.getMessage());

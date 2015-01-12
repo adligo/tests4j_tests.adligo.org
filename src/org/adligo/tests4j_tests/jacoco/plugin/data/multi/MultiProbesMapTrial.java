@@ -18,7 +18,7 @@ import org.adligo.tests4j_4jacoco.plugin.common.I_Runtime;
 import org.adligo.tests4j_4jacoco.plugin.data.multi.CascadingProbeMap;
 import org.adligo.tests4j_4jacoco.plugin.data.multi.MultiContext;
 import org.adligo.tests4j_4jacoco.plugin.data.multi.MultiProbesMap;
-import org.adligo.tests4j_4mockito.MethodRecorder;
+import org.adligo.tests4j_4mockito.MockMethod;
 import org.adligo.tests4j_tests.base_trials.I_CountType;
 import org.adligo.tests4j_tests.base_trials.SourceFileCountingTrial;
 
@@ -129,15 +129,15 @@ public class MultiProbesMapTrial extends SourceFileCountingTrial {
     when(classProbes.getProbes()).thenReturn(probesMock);
     I_ThreadingFactory mockFactory = mock(I_ThreadingFactory.class);
     
-    MethodRecorder<I_ThreadGroupLocal<CascadingProbeMap>> threadGroupLocalRecord = 
-        new MethodRecorder<I_ThreadGroupLocal<CascadingProbeMap>>();
+    MockMethod<I_ThreadGroupLocal<CascadingProbeMap>> threadGroupLocalRecord = 
+        new MockMethod<I_ThreadGroupLocal<CascadingProbeMap>>();
     I_ThreadGroupFilter filterMock = mock(I_ThreadGroupFilter.class);
     when(mockFactory.createThreadGroupFilter(Tests4J_ThreadFactory.TRIAL_THREAD_GROUP_PREFIX)).thenReturn(filterMock);
     when(mockFactory.createThreadGroupLocal(any(), any())).then(threadGroupLocalRecord);
     MultiContext ctx = mock(MultiContext.class);
     
     I_Tests4J_Log logMock = mock(I_Tests4J_Log.class);
-    MethodRecorder<Void> logRecord = new MethodRecorder<Void>();
+    MockMethod<Void> logRecord = new MockMethod<Void>();
     doAnswer(logRecord).when(logMock).log(any());
     when(logMock.getThreadWithGroupNameMessage()).thenReturn("MockThread/MockThreadGroup");
     when(logMock.isLogEnabled(any())).thenReturn(true);
@@ -147,7 +147,7 @@ public class MultiProbesMapTrial extends SourceFileCountingTrial {
     new MultiProbesMap(classProbes, ctx, mockFactory);
     
     assertEquals(1, threadGroupLocalRecord.count());
-    Object[] args = threadGroupLocalRecord.getArguments(0);
+    Object[] args = threadGroupLocalRecord.getArgs(0);
     assertEquals(2, args.length);
     assertSame(filterMock, args[0]);
     I_InitalValueFactory<CascadingProbeMap> valueFactory = (I_InitalValueFactory<CascadingProbeMap>) args[1];
@@ -160,7 +160,7 @@ public class MultiProbesMapTrial extends SourceFileCountingTrial {
     }
     cpm.put(0, true);
     assertEquals(1, logRecord.count());
-    String logMessage = (String) logRecord.getArgument(0);
+    String logMessage = (String) logRecord.getArg(0);
     assertEquals("MultiProbesMap MockThread/MockThreadGroup\nlineSeperator" +
         "\tis creating new probes for the following class;\nlineSeperator" +
         "\tcn", logMessage);
@@ -204,22 +204,22 @@ public class MultiProbesMapTrial extends SourceFileCountingTrial {
     when(classProbes.getProbes()).thenReturn(probesMock);
     I_ThreadingFactory mockFactory = mock(I_ThreadingFactory.class);
     
-    MethodRecorder<I_ThreadGroupLocal<CascadingProbeMap>> threadGroupLocalRecord = 
-        new MethodRecorder<I_ThreadGroupLocal<CascadingProbeMap>>();
+    MockMethod<I_ThreadGroupLocal<CascadingProbeMap>> threadGroupLocalRecord = 
+        new MockMethod<I_ThreadGroupLocal<CascadingProbeMap>>();
     I_ThreadGroupFilter filterMock = mock(I_ThreadGroupFilter.class);
     when(mockFactory.createThreadGroupFilter(Tests4J_ThreadFactory.TRIAL_THREAD_GROUP_PREFIX)).thenReturn(filterMock);
     when(mockFactory.createThreadGroupLocal(any(), any())).then(threadGroupLocalRecord);
     MultiContext ctx = mock(MultiContext.class);
     
     I_Tests4J_Log logMock = mock(I_Tests4J_Log.class);
-    MethodRecorder<Void> logRecord = new MethodRecorder<Void>();
+    MockMethod<Void> logRecord = new MockMethod<Void>();
     doAnswer(logRecord).when(logMock).log(any());
     
     when(ctx.getLog()).thenReturn(logMock);
     new MultiProbesMap(classProbes, ctx, mockFactory);
     
     assertEquals(1, threadGroupLocalRecord.count());
-    Object[] args = threadGroupLocalRecord.getArguments(0);
+    Object[] args = threadGroupLocalRecord.getArgs(0);
     assertEquals(2, args.length);
     assertSame(filterMock, args[0]);
     I_InitalValueFactory<CascadingProbeMap> valueFactory = (I_InitalValueFactory<CascadingProbeMap>) args[1];
@@ -268,15 +268,15 @@ public class MultiProbesMapTrial extends SourceFileCountingTrial {
     when(classProbes.getProbes()).thenReturn(probesMock);
     I_ThreadingFactory mockFactory = mock(I_ThreadingFactory.class);
     
-    MethodRecorder<I_ThreadGroupLocal<CascadingProbeMap>> threadGroupLocalRecord = 
-        new MethodRecorder<I_ThreadGroupLocal<CascadingProbeMap>>();
+    MockMethod<I_ThreadGroupLocal<CascadingProbeMap>> threadGroupLocalRecord = 
+        new MockMethod<I_ThreadGroupLocal<CascadingProbeMap>>();
     I_ThreadGroupFilter filterMock = mock(I_ThreadGroupFilter.class);
     when(mockFactory.createThreadGroupFilter(Tests4J_ThreadFactory.TRIAL_THREAD_GROUP_PREFIX)).thenReturn(filterMock);
     when(mockFactory.createThreadGroupLocal(any(), any())).then(threadGroupLocalRecord);
     MultiContext ctx = mock(MultiContext.class);
     
     I_Tests4J_Log logMock = mock(I_Tests4J_Log.class);
-    MethodRecorder<Void> logRecord = new MethodRecorder<Void>();
+    MockMethod<Void> logRecord = new MockMethod<Void>();
     doAnswer(logRecord).when(logMock).log(any());
     
     when(ctx.getLog()).thenReturn(logMock);
@@ -301,8 +301,8 @@ public class MultiProbesMapTrial extends SourceFileCountingTrial {
     when(classProbes.getProbes()).thenReturn(probesMock);
     I_ThreadingFactory mockFactory = mock(I_ThreadingFactory.class);
     
-    MethodRecorder<I_ThreadGroupLocal<CascadingProbeMap>> threadGroupLocalRecord = 
-        new MethodRecorder<I_ThreadGroupLocal<CascadingProbeMap>>();
+    MockMethod<I_ThreadGroupLocal<CascadingProbeMap>> threadGroupLocalRecord = 
+        new MockMethod<I_ThreadGroupLocal<CascadingProbeMap>>();
     I_ThreadGroupFilter filterMock = mock(I_ThreadGroupFilter.class);
     when(filterMock.getThreadGroupNameMatchingFilter()).thenReturn("hmm");
     when(mockFactory.createThreadGroupFilter(Tests4J_ThreadFactory.TRIAL_THREAD_GROUP_PREFIX)).thenReturn(filterMock);
@@ -310,7 +310,7 @@ public class MultiProbesMapTrial extends SourceFileCountingTrial {
     MultiContext ctx = mock(MultiContext.class);
     
     I_Tests4J_Log logMock = mock(I_Tests4J_Log.class);
-    MethodRecorder<Void> logRecord = new MethodRecorder<Void>();
+    MockMethod<Void> logRecord = new MockMethod<Void>();
     doAnswer(logRecord).when(logMock).log(any());
     when(logMock.isLogEnabled(any())).thenReturn(true);
     when(logMock.getLineSeperator()).thenReturn("\nls");
@@ -331,7 +331,7 @@ public class MultiProbesMapTrial extends SourceFileCountingTrial {
       assertFalse(probes[i]);
     }
     assertEquals(1, logRecord.count());
-    String logMessage = (String) logRecord.getArgument(0);
+    String logMessage = (String) logRecord.getArg(0);
     assertEquals("MultiProbesMap MockThread/MockThreadGroup\nls"
         + "\tdetected the following probe hit;\nls"
         + "\tcn\nls"
@@ -348,8 +348,8 @@ public class MultiProbesMapTrial extends SourceFileCountingTrial {
     when(classProbes.getProbes()).thenReturn(probesMock);
     I_ThreadingFactory mockFactory = mock(I_ThreadingFactory.class);
     
-    MethodRecorder<I_ThreadGroupLocal<CascadingProbeMap>> threadGroupLocalRecord = 
-        new MethodRecorder<I_ThreadGroupLocal<CascadingProbeMap>>();
+    MockMethod<I_ThreadGroupLocal<CascadingProbeMap>> threadGroupLocalRecord = 
+        new MockMethod<I_ThreadGroupLocal<CascadingProbeMap>>();
     I_ThreadGroupFilter filterMock = mock(I_ThreadGroupFilter.class);
     when(filterMock.getThreadGroupNameMatchingFilter()).thenReturn("hmm");
     when(mockFactory.createThreadGroupFilter(Tests4J_ThreadFactory.TRIAL_THREAD_GROUP_PREFIX)).thenReturn(filterMock);
@@ -357,7 +357,7 @@ public class MultiProbesMapTrial extends SourceFileCountingTrial {
     MultiContext ctx = mock(MultiContext.class);
     
     I_Tests4J_Log logMock = mock(I_Tests4J_Log.class);
-    MethodRecorder<Void> logRecord = new MethodRecorder<Void>();
+    MockMethod<Void> logRecord = new MockMethod<Void>();
     doAnswer(logRecord).when(logMock).log(any());
     
     I_Runtime runtimeMock = mock(I_Runtime.class);
@@ -391,8 +391,8 @@ public class MultiProbesMapTrial extends SourceFileCountingTrial {
     I_ThreadGroupLocal<CascadingProbeMap> threadGroupLocalMock = mock(I_ThreadGroupLocal.class);
     when(threadGroupLocalMock.getValue()).thenReturn(cascadingProbeMap);
     
-    MethodRecorder<I_ThreadGroupLocal<CascadingProbeMap>> threadGroupLocalRecord = 
-        new MethodRecorder<I_ThreadGroupLocal<CascadingProbeMap>>(threadGroupLocalMock, true);
+    MockMethod<I_ThreadGroupLocal<CascadingProbeMap>> threadGroupLocalRecord = 
+        new MockMethod<I_ThreadGroupLocal<CascadingProbeMap>>(threadGroupLocalMock, true);
     I_ThreadGroupFilter filterMock = mock(I_ThreadGroupFilter.class);
     when(filterMock.getThreadGroupNameMatchingFilter()).thenReturn("hmm");
     when(mockFactory.createThreadGroupFilter(Tests4J_ThreadFactory.TRIAL_THREAD_GROUP_PREFIX)).thenReturn(filterMock);
@@ -400,7 +400,7 @@ public class MultiProbesMapTrial extends SourceFileCountingTrial {
     MultiContext ctx = mock(MultiContext.class);
     
     I_Tests4J_Log logMock = mock(I_Tests4J_Log.class);
-    MethodRecorder<Void> logRecord = new MethodRecorder<Void>();
+    MockMethod<Void> logRecord = new MockMethod<Void>();
     doAnswer(logRecord).when(logMock).log(any());
     when(logMock.isLogEnabled(any())).thenReturn(true);
     when(logMock.getLineSeperator()).thenReturn("\nls");
@@ -422,7 +422,7 @@ public class MultiProbesMapTrial extends SourceFileCountingTrial {
       assertFalse(probes[i]);
     }
     assertEquals(1, logRecord.count());
-    String logMessage = (String) logRecord.getArgument(0);
+    String logMessage = (String) logRecord.getArg(0);
     assertEquals("MultiProbesMap MockThread/MockThreadGroup\nls"
         + "\tdetected the following probe hit;\nls"
         + "\tcn\nls"
@@ -440,7 +440,7 @@ public class MultiProbesMapTrial extends SourceFileCountingTrial {
       assertFalse(cascadingProbeMap.get(i));
     }
     assertEquals(2, logRecord.count());
-    logMessage = (String) logRecord.getArgument(1);
+    logMessage = (String) logRecord.getArg(1);
     assertEquals("MultiProbesMap MockThread/MockThreadGroup\nls"
         + "\tdetected the following probe hit;\nls"
         + "\tcn\nls"
@@ -461,8 +461,8 @@ public class MultiProbesMapTrial extends SourceFileCountingTrial {
     I_ThreadGroupLocal<CascadingProbeMap> threadGroupLocalMock = mock(I_ThreadGroupLocal.class);
     when(threadGroupLocalMock.getValue()).thenReturn(cascadingProbeMap);
     
-    MethodRecorder<I_ThreadGroupLocal<CascadingProbeMap>> threadGroupLocalRecord = 
-        new MethodRecorder<I_ThreadGroupLocal<CascadingProbeMap>>(threadGroupLocalMock, true);
+    MockMethod<I_ThreadGroupLocal<CascadingProbeMap>> threadGroupLocalRecord = 
+        new MockMethod<I_ThreadGroupLocal<CascadingProbeMap>>(threadGroupLocalMock, true);
     I_ThreadGroupFilter filterMock = mock(I_ThreadGroupFilter.class);
     when(filterMock.getThreadGroupNameMatchingFilter()).thenReturn("hmm");
     when(mockFactory.createThreadGroupFilter(Tests4J_ThreadFactory.TRIAL_THREAD_GROUP_PREFIX)).thenReturn(filterMock);
@@ -470,7 +470,7 @@ public class MultiProbesMapTrial extends SourceFileCountingTrial {
     MultiContext ctx = mock(MultiContext.class);
     
     I_Tests4J_Log logMock = mock(I_Tests4J_Log.class);
-    MethodRecorder<Void> logRecord = new MethodRecorder<Void>();
+    MockMethod<Void> logRecord = new MockMethod<Void>();
     doAnswer(logRecord).when(logMock).log(any());
     
     I_Runtime runtimeMock = mock(I_Runtime.class);
@@ -519,8 +519,8 @@ public class MultiProbesMapTrial extends SourceFileCountingTrial {
     I_ThreadGroupLocal<CascadingProbeMap> threadGroupLocalMock = mock(I_ThreadGroupLocal.class);
     when(threadGroupLocalMock.getValue()).thenReturn(cascadingProbeMap);
     
-    MethodRecorder<I_ThreadGroupLocal<CascadingProbeMap>> threadGroupLocalRecord = 
-        new MethodRecorder<I_ThreadGroupLocal<CascadingProbeMap>>(threadGroupLocalMock, true);
+    MockMethod<I_ThreadGroupLocal<CascadingProbeMap>> threadGroupLocalRecord = 
+        new MockMethod<I_ThreadGroupLocal<CascadingProbeMap>>(threadGroupLocalMock, true);
     I_ThreadGroupFilter filterMock = mock(I_ThreadGroupFilter.class);
     when(filterMock.getThreadGroupNameMatchingFilter()).thenReturn("hmm");
     when(mockFactory.createThreadGroupFilter(Tests4J_ThreadFactory.TRIAL_THREAD_GROUP_PREFIX)).thenReturn(filterMock);
@@ -528,7 +528,7 @@ public class MultiProbesMapTrial extends SourceFileCountingTrial {
     MultiContext ctx = mock(MultiContext.class);
     
     I_Tests4J_Log logMock = mock(I_Tests4J_Log.class);
-    MethodRecorder<Void> logRecord = new MethodRecorder<Void>();
+    MockMethod<Void> logRecord = new MockMethod<Void>();
     doAnswer(logRecord).when(logMock).log(any());
     when(logMock.isLogEnabled(any())).thenReturn(true);
     when(logMock.getLineSeperator()).thenReturn("\nls");
@@ -550,7 +550,7 @@ public class MultiProbesMapTrial extends SourceFileCountingTrial {
       assertFalse(probes[i]);
     }
     assertEquals(1, logRecord.count());
-    String logMessage = (String) logRecord.getArgument(0);
+    String logMessage = (String) logRecord.getArg(0);
     assertEquals("MultiProbesMap MockThread/MockThreadGroup\nls"
         + "\tdetected the following probe hit;\nls"
         + "\tcn\nls"
@@ -572,8 +572,8 @@ public class MultiProbesMapTrial extends SourceFileCountingTrial {
     I_ThreadGroupLocal<CascadingProbeMap> threadGroupLocalMock = mock(I_ThreadGroupLocal.class);
     when(threadGroupLocalMock.getValue()).thenReturn(cascadingProbeMap);
     
-    MethodRecorder<I_ThreadGroupLocal<CascadingProbeMap>> threadGroupLocalRecord = 
-        new MethodRecorder<I_ThreadGroupLocal<CascadingProbeMap>>(threadGroupLocalMock, true);
+    MockMethod<I_ThreadGroupLocal<CascadingProbeMap>> threadGroupLocalRecord = 
+        new MockMethod<I_ThreadGroupLocal<CascadingProbeMap>>(threadGroupLocalMock, true);
     I_ThreadGroupFilter filterMock = mock(I_ThreadGroupFilter.class);
     when(filterMock.getThreadGroupNameMatchingFilter()).thenReturn("hmm");
     when(mockFactory.createThreadGroupFilter(Tests4J_ThreadFactory.TRIAL_THREAD_GROUP_PREFIX)).thenReturn(filterMock);
@@ -581,7 +581,7 @@ public class MultiProbesMapTrial extends SourceFileCountingTrial {
     MultiContext ctx = mock(MultiContext.class);
     
     I_Tests4J_Log logMock = mock(I_Tests4J_Log.class);
-    MethodRecorder<Void> logRecord = new MethodRecorder<Void>();
+    MockMethod<Void> logRecord = new MockMethod<Void>();
     doAnswer(logRecord).when(logMock).log(any());
     
     I_Runtime runtimeMock = mock(I_Runtime.class);
@@ -616,8 +616,8 @@ public class MultiProbesMapTrial extends SourceFileCountingTrial {
     I_ThreadGroupLocal<CascadingProbeMap> threadGroupLocalMock = mock(I_ThreadGroupLocal.class);
     when(threadGroupLocalMock.getValue()).thenReturn(cascadingProbeMap);
     
-    MethodRecorder<I_ThreadGroupLocal<CascadingProbeMap>> threadGroupLocalRecord = 
-        new MethodRecorder<I_ThreadGroupLocal<CascadingProbeMap>>(threadGroupLocalMock, true);
+    MockMethod<I_ThreadGroupLocal<CascadingProbeMap>> threadGroupLocalRecord = 
+        new MockMethod<I_ThreadGroupLocal<CascadingProbeMap>>(threadGroupLocalMock, true);
     I_ThreadGroupFilter filterMock = mock(I_ThreadGroupFilter.class);
     when(filterMock.getThreadGroupNameMatchingFilter()).thenReturn("hmm");
     when(mockFactory.createThreadGroupFilter(Tests4J_ThreadFactory.TRIAL_THREAD_GROUP_PREFIX)).thenReturn(filterMock);
@@ -625,7 +625,7 @@ public class MultiProbesMapTrial extends SourceFileCountingTrial {
     MultiContext ctx = mock(MultiContext.class);
     
     I_Tests4J_Log logMock = mock(I_Tests4J_Log.class);
-    MethodRecorder<Void> logRecord = new MethodRecorder<Void>();
+    MockMethod<Void> logRecord = new MockMethod<Void>();
     doAnswer(logRecord).when(logMock).log(any());
     when(logMock.isLogEnabled(any())).thenReturn(true);
     when(logMock.getLineSeperator()).thenReturn("\nls");
@@ -649,7 +649,7 @@ public class MultiProbesMapTrial extends SourceFileCountingTrial {
     }
     
     assertEquals(2, logRecord.count());
-    String logMessage = (String) logRecord.getArgument(1);
+    String logMessage = (String) logRecord.getArg(1);
     assertEquals("MultiProbesMap MockThread/MockThreadGroup\nls"
         + "\tis getting the following probes;\nls"
         + "\t[t,f,f,f,f]\nls"
@@ -671,8 +671,8 @@ public class MultiProbesMapTrial extends SourceFileCountingTrial {
     I_ThreadGroupLocal<CascadingProbeMap> threadGroupLocalMock = mock(I_ThreadGroupLocal.class);
     when(threadGroupLocalMock.getValue()).thenReturn(cascadingProbeMap);
     
-    MethodRecorder<I_ThreadGroupLocal<CascadingProbeMap>> threadGroupLocalRecord = 
-        new MethodRecorder<I_ThreadGroupLocal<CascadingProbeMap>>(threadGroupLocalMock, true);
+    MockMethod<I_ThreadGroupLocal<CascadingProbeMap>> threadGroupLocalRecord = 
+        new MockMethod<I_ThreadGroupLocal<CascadingProbeMap>>(threadGroupLocalMock, true);
     I_ThreadGroupFilter filterMock = mock(I_ThreadGroupFilter.class);
     when(filterMock.getThreadGroupNameMatchingFilter()).thenReturn("hmm");
     when(mockFactory.createThreadGroupFilter(Tests4J_ThreadFactory.TRIAL_THREAD_GROUP_PREFIX)).thenReturn(filterMock);
@@ -680,7 +680,7 @@ public class MultiProbesMapTrial extends SourceFileCountingTrial {
     MultiContext ctx = mock(MultiContext.class);
     
     I_Tests4J_Log logMock = mock(I_Tests4J_Log.class);
-    MethodRecorder<Void> logRecord = new MethodRecorder<Void>();
+    MockMethod<Void> logRecord = new MockMethod<Void>();
     doAnswer(logRecord).when(logMock).log(any());
     
     I_Runtime runtimeMock = mock(I_Runtime.class);
@@ -717,8 +717,8 @@ public class MultiProbesMapTrial extends SourceFileCountingTrial {
    
     I_ThreadGroupLocal mockThreadGroupLocal = mock(I_ThreadGroupLocal.class);
     when(mockThreadGroupLocal.getValue()).thenReturn(cpm);
-    MethodRecorder<I_ThreadGroupLocal<CascadingProbeMap>> threadGroupLocalRecord = 
-        new MethodRecorder<I_ThreadGroupLocal<CascadingProbeMap>>(mockThreadGroupLocal, true);
+    MockMethod<I_ThreadGroupLocal<CascadingProbeMap>> threadGroupLocalRecord = 
+        new MockMethod<I_ThreadGroupLocal<CascadingProbeMap>>(mockThreadGroupLocal, true);
     I_ThreadGroupFilter filterMock = mock(I_ThreadGroupFilter.class);
     when(mockFactory.createThreadGroupFilter(Tests4J_ThreadFactory.TRIAL_THREAD_GROUP_PREFIX)).thenReturn(filterMock);
     when(mockFactory.createThreadGroupLocal(any(), any())).then(threadGroupLocalRecord);

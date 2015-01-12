@@ -4,17 +4,17 @@ import org.adligo.tests4j.shared.asserts.common.AssertionFailedException;
 import org.adligo.tests4j.system.shared.trials.SourceFileScope;
 import org.adligo.tests4j.system.shared.trials.Test;
 import org.adligo.tests4j_4mockito.ArgMap;
-import org.adligo.tests4j_4mockito.MethodRecorder;
+import org.adligo.tests4j_4mockito.MockMethod;
 import org.adligo.tests4j_tests.base_trials.I_CountType;
 import org.adligo.tests4j_tests.base_trials.SourceFileCountingTrial;
 import org.mockito.invocation.InvocationOnMock;
 
-@SourceFileScope (sourceClass=MethodRecorder.class, minCoverage=22.0)
+@SourceFileScope (sourceClass=MockMethod.class, minCoverage=22.0)
 public class MethodRecorderTrial extends SourceFileCountingTrial {
 
   @Test
   public void testGetArgumentsSingle() throws Exception {
-    MethodRecorder<String> rec = new MethodRecorder<String>("hey");
+    MockMethod<String> rec = new MockMethod<String>("hey");
     InvocationOnMock mock = mock(InvocationOnMock.class);
     
     when(mock.getArguments()).thenReturn(new Object[] {});
@@ -27,7 +27,7 @@ public class MethodRecorderTrial extends SourceFileCountingTrial {
   
   @Test
   public void testGetArgumentsVariable() throws Exception {
-    MethodRecorder<String> rec = new MethodRecorder<String>("hey","hey2");
+    MockMethod<String> rec = new MockMethod<String>("hey","hey2");
     InvocationOnMock mock = mock(InvocationOnMock.class);
     
     when(mock.getArguments()).thenReturn(new Object[] {});
@@ -41,7 +41,7 @@ public class MethodRecorderTrial extends SourceFileCountingTrial {
   
   @Test
   public void testGetArgumentsDefault() throws Exception {
-    MethodRecorder<String> rec = new MethodRecorder<String>("hey",true);
+    MockMethod<String> rec = new MockMethod<String>("hey",true);
     InvocationOnMock mock = mock(InvocationOnMock.class);
     
     when(mock.getArguments()).thenReturn(new Object[] {});
@@ -62,7 +62,7 @@ public class MethodRecorderTrial extends SourceFileCountingTrial {
     argMap.putVar("hey12", 1, 2);
     argMap.putVar("hey13", 1, 3);
     argMap.putVar("hey14", 1, 4);
-    MethodRecorder<String> rec = new MethodRecorder<String>(argMap);
+    MockMethod<String> rec = new MockMethod<String>(argMap);
     InvocationOnMock mock = mock(InvocationOnMock.class);
     
     
@@ -92,7 +92,7 @@ public class MethodRecorderTrial extends SourceFileCountingTrial {
     argMap.putVar("hey12", 1, 2);
     argMap.putVar("hey13", 1, 3);
     argMap.putVar("hey14", 1, 4);
-    MethodRecorder<String> rec = new MethodRecorder<String>(argMap, "hey");
+    MockMethod<String> rec = new MockMethod<String>(argMap, "hey");
     InvocationOnMock mock = mock(InvocationOnMock.class);
     
     

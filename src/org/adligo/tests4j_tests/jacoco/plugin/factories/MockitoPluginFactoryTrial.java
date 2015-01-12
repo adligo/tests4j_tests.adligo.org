@@ -12,7 +12,7 @@ import org.adligo.tests4j_4jacoco.plugin.CoveragePluginMemory;
 import org.adligo.tests4j_4jacoco.plugin.factories.MockitoPluginFactory;
 import org.adligo.tests4j_4jacoco.plugin.whitelists.MockitoList;
 import org.adligo.tests4j_4jacoco.plugin.whitelists.RequiredList;
-import org.adligo.tests4j_4mockito.MethodRecorder;
+import org.adligo.tests4j_4mockito.MockMethod;
 import org.adligo.tests4j_tests.base_trials.I_CountType;
 import org.adligo.tests4j_tests.base_trials.SourceFileCountingTrial;
 import org.mockito.invocation.InvocationOnMock;
@@ -38,12 +38,12 @@ public class MockitoPluginFactoryTrial extends SourceFileCountingTrial {
 		I_JseSystem sys = mock(I_JseSystem.class);
 		
 		File delA = mock(File.class);
-		MethodRecorder<Boolean> delACount = new MethodRecorder<Boolean>(true);
+		MockMethod<Boolean> delACount = new MockMethod<Boolean>(true);
     when(delA.getName()).thenReturn("aoo.class");
     when(delA.delete()).thenAnswer(delACount);
     
 		File delB = mock(File.class);
-		MethodRecorder<Boolean> delBCount = new MethodRecorder<Boolean>(true);
+		MockMethod<Boolean> delBCount = new MockMethod<Boolean>(true);
     when(delB.getName()).thenReturn("bar.class");
     when(delB.delete()).thenAnswer(delBCount);
     

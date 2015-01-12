@@ -8,7 +8,7 @@ import org.adligo.tests4j.shared.output.I_Tests4J_Log;
 import org.adligo.tests4j.system.shared.report.summary.RemoteProgressDisplay;
 import org.adligo.tests4j.system.shared.trials.SourceFileScope;
 import org.adligo.tests4j.system.shared.trials.Test;
-import org.adligo.tests4j_4mockito.MethodRecorder;
+import org.adligo.tests4j_4mockito.MockMethod;
 import org.adligo.tests4j_tests.base_trials.I_CountType;
 import org.adligo.tests4j_tests.base_trials.SourceFileCountingTrial;
 import org.adligo.tests4j_tests.references_groups.Tests4J_Summary_GwtReferenceGroup;
@@ -17,19 +17,19 @@ import org.adligo.tests4j_tests.references_groups.Tests4J_Summary_GwtReferenceGr
 @AllowedReferences (groups=Tests4J_Summary_GwtReferenceGroup.class)
 public class RemoteProgressDisplayTrial extends SourceFileCountingTrial {
   private I_Tests4J_Log logMock_;
-  private MethodRecorder<Void> logRecord_;
-  private MethodRecorder<Void> logLineRecord_;
-  private MethodRecorder<Void> onThrowableRecord_;
+  private MockMethod<Void> logRecord_;
+  private MockMethod<Void> logLineRecord_;
+  private MockMethod<Void> onThrowableRecord_;
 	private RemoteProgressDisplay reporter = new RemoteProgressDisplay();
 	
 	@Override
 	public void beforeTests() {
 	  logMock_ = mock(I_Tests4J_Log.class);
-    logRecord_ = new MethodRecorder<Void>();
+    logRecord_ = new MockMethod<Void>();
     doAnswer(logRecord_).when(logMock_).log(any());
-    logLineRecord_ = new MethodRecorder<Void>();
+    logLineRecord_ = new MockMethod<Void>();
     doAnswer(logLineRecord_).when(logMock_).logLine(anyVararg());
-    onThrowableRecord_ = new MethodRecorder<Void>();
+    onThrowableRecord_ = new MockMethod<Void>();
     doAnswer(onThrowableRecord_).when(logMock_).onThrowable(any());
     when(logMock_.getLineSeperator()).thenReturn("lineSeperator");
 	}
@@ -60,7 +60,7 @@ public class RemoteProgressDisplayTrial extends SourceFileCountingTrial {
 		reporter.onProgress(logMock_, info);
 		
 		assertEquals(1, logLineRecord_.count());
-		Object [] args = logLineRecord_.getArguments(0);
+		Object [] args = logLineRecord_.getArgs(0);
 		
 		I_Tests4J_ReportMessages messages = Tests4J_EnglishConstants.ENGLISH.getReportMessages();
 		assertEquals("Tests4J: ", args[0]);
@@ -85,7 +85,7 @@ public class RemoteProgressDisplayTrial extends SourceFileCountingTrial {
     reporter.onProgress(logMock_, info);
     
 		assertEquals(1, logLineRecord_.count());
-		Object [] args = logLineRecord_.getArguments(0);
+		Object [] args = logLineRecord_.getArgs(0);
 		
 		I_Tests4J_ReportMessages messages = Tests4J_EnglishConstants.ENGLISH.getReportMessages();
 		assertEquals("Tests4J: ", args[0]);
