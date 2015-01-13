@@ -21,12 +21,12 @@ public class StringUniformEvaluatorTrial extends SourceFileCountingTrial {
 	@Test
 	public void testGetters() {
 		assertEquals(String.class, 
-				new StringUniformEvaluator().getType());
+				new StringUniformEvaluator(Tests4J_EnglishConstants.ENGLISH).getType());
 	}
 	
 	@Test
 	public void testIsUniform() {
-		StringUniformEvaluator evaluator = new StringUniformEvaluator();
+		StringUniformEvaluator evaluator = new StringUniformEvaluator(Tests4J_EnglishConstants.ENGLISH);
 		I_Evaluation<I_TextLinesCompareResult> eval = evaluator.isUniform(
 				new CompareAssertionData<String>("hey\nu", "hey\nyou", AssertType.AssertUniform));
 		assertFalse(eval.isSuccess());
@@ -46,7 +46,7 @@ public class StringUniformEvaluatorTrial extends SourceFileCountingTrial {
 	
 	@Test
 	public void testIsNotUniform() {
-		StringUniformEvaluator evaluator = new StringUniformEvaluator();
+		StringUniformEvaluator evaluator = new StringUniformEvaluator(Tests4J_EnglishConstants.ENGLISH);
 		I_Evaluation<I_TextLinesCompareResult> eval = evaluator.isNotUniform(
 				new CompareAssertionData<String>("hey\nu", "hey\nyou", AssertType.AssertUniform));
 		assertTrue(eval.isSuccess());

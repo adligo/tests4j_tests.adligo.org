@@ -3,7 +3,7 @@ package org.adligo.tests4j_tests.models.shared.coverage;
 import java.math.BigInteger;
 
 import org.adligo.tests4j.models.shared.coverage.CoverageUnits;
-import org.adligo.tests4j.shared.asserts.common.ExpectedThrownData;
+import org.adligo.tests4j.shared.asserts.common.ExpectedThrowable;
 import org.adligo.tests4j.shared.asserts.common.I_Thrower;
 import org.adligo.tests4j.shared.asserts.reference.AllowedReferences;
 import org.adligo.tests4j.system.shared.trials.SourceFileScope;
@@ -18,7 +18,7 @@ public class CoverageUnitsTrial extends SourceFileCountingTrial {
 
 	@Test
 	public void testConstructorExceptions() {
-		assertThrown(new ExpectedThrownData(new IllegalArgumentException(
+		assertThrown(new ExpectedThrowable(new IllegalArgumentException(
 				CoverageUnits.COVERAGE_UNITS_MUST_BE_GREATER_THAN_OR_EQUAL_TO_ZERO)), new I_Thrower() {
 			
 			@Override
@@ -26,7 +26,7 @@ public class CoverageUnitsTrial extends SourceFileCountingTrial {
 				new CoverageUnits(-1);
 			}
 		});
-		assertThrown(new ExpectedThrownData(new IllegalArgumentException(
+		assertThrown(new ExpectedThrowable(new IllegalArgumentException(
 				CoverageUnits.COVERAGE_UNITS_MUST_BE_GREATER_THAN_OR_EQUAL_TO_ZERO)), new I_Thrower() {
 			
 			@Override

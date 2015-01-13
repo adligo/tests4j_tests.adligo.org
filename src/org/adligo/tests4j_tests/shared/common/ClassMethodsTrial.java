@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import org.adligo.tests4j.shared.asserts.common.ExpectedThrownData;
+import org.adligo.tests4j.shared.asserts.common.ExpectedThrowable;
 import org.adligo.tests4j.shared.asserts.common.I_Thrower;
 import org.adligo.tests4j.shared.asserts.reference.AllowedReferences;
 import org.adligo.tests4j.shared.common.ClassMethods;
@@ -73,7 +73,7 @@ public class ClassMethodsTrial extends SourceFileCountingTrial {
 	@Test
 	public void testFromTypeDescription() {
 		
-		assertThrown(new ExpectedThrownData(IllegalArgumentException.class),
+		assertThrown(new ExpectedThrowable(IllegalArgumentException.class),
 				new I_Thrower() {
 					
 					@Override
@@ -81,7 +81,7 @@ public class ClassMethodsTrial extends SourceFileCountingTrial {
 						ClassMethods.fromTypeDescription(null);
 					}
 				});
-		assertThrown(new ExpectedThrownData(IllegalArgumentException.class),
+		assertThrown(new ExpectedThrowable(IllegalArgumentException.class),
 				new I_Thrower() {
 					
 					@Override

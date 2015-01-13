@@ -2,7 +2,7 @@ package org.adligo.tests4j_tests.models.shared.coverage;
 
 import org.adligo.tests4j.models.shared.coverage.Probes;
 import org.adligo.tests4j.models.shared.coverage.ProbesMutant;
-import org.adligo.tests4j.shared.asserts.common.ExpectedThrownData;
+import org.adligo.tests4j.shared.asserts.common.ExpectedThrowable;
 import org.adligo.tests4j.shared.asserts.common.I_Thrower;
 import org.adligo.tests4j.shared.asserts.reference.AllowedReferences;
 import org.adligo.tests4j.system.shared.trials.SourceFileScope;
@@ -99,7 +99,7 @@ public class ProbesMutantTrial extends SourceFileCountingTrial {
 	@SuppressWarnings("unused")
 	@Test
 	public void testConstructorExceptions() throws Exception {
-		assertThrown(new ExpectedThrownData(NullPointerException.class), 
+		assertThrown(new ExpectedThrowable(NullPointerException.class), 
 				new I_Thrower() {
 					
 					

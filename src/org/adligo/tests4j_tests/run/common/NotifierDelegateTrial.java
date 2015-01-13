@@ -1,7 +1,7 @@
 package org.adligo.tests4j_tests.run.common;
 
 import org.adligo.tests4j.run.common.NotifierDelegate;
-import org.adligo.tests4j.shared.asserts.common.ExpectedThrownData;
+import org.adligo.tests4j.shared.asserts.common.ExpectedThrowable;
 import org.adligo.tests4j.shared.asserts.common.I_Thrower;
 import org.adligo.tests4j.shared.asserts.reference.AllowedReferences;
 import org.adligo.tests4j.system.shared.trials.SourceFileScope;
@@ -40,7 +40,7 @@ public class NotifierDelegateTrial extends SourceFileCountingTrial {
   
   @Test 
   public void testNullDelegate() throws Exception {
-    assertThrown(new ExpectedThrownData(NullPointerException.class),
+    assertThrown(new ExpectedThrowable(NullPointerException.class),
       new I_Thrower() {
         
         @SuppressWarnings("unused")

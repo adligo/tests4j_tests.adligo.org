@@ -3,7 +3,7 @@ package org.adligo.tests4j_tests.shared.asserts;
 import org.adligo.tests4j.shared.asserts.UniformAssertCommand;
 import org.adligo.tests4j.shared.asserts.common.AssertType;
 import org.adligo.tests4j.shared.asserts.common.CompareAssertionData;
-import org.adligo.tests4j.shared.asserts.common.ExpectedThrownData;
+import org.adligo.tests4j.shared.asserts.common.ExpectedThrowable;
 import org.adligo.tests4j.shared.asserts.common.I_Thrower;
 import org.adligo.tests4j.shared.asserts.line_text.I_TextLinesCompareResult;
 import org.adligo.tests4j.shared.asserts.reference.AllowedReferences;
@@ -24,46 +24,45 @@ import org.adligo.tests4j_tests.references_groups.Tests4J_Asserts_ReferenceGroup
 public class UniformAssertCommandTrial extends SourceFileCountingTrial {
 
 	@Test
-	@SuppressWarnings({ "unchecked", "rawtypes" })
+	@SuppressWarnings({ "unchecked", "rawtypes","unused" })
 	public void testConstructorExceptions() {
-		assertThrown(new ExpectedThrownData(new IllegalArgumentException(UniformAssertCommand.BAD_TYPE)), 
+		assertThrown(new ExpectedThrowable(new IllegalArgumentException(UniformAssertCommand.BAD_TYPE)), 
 				new I_Thrower(){
-
-					
-					@Override
+          @Override
 					public void run() {
-						new UniformAssertCommand("failureMessage", new CompareAssertionData<String>(null,null, AssertType.AssertFalse), null);
+						new UniformAssertCommand(Tests4J_EnglishConstants.ENGLISH, 
+						    "failureMessage", new CompareAssertionData<String>(null,null, AssertType.AssertFalse), null);
 					}
 		});
 			
-		assertThrown(new ExpectedThrownData(NullPointerException.class), 
+		assertThrown(new ExpectedThrowable(NullPointerException.class), 
 				new I_Thrower(){
 
 					@Override
 					public void run() {
-						new UniformAssertCommand("failureMessage", null, null);						
+						new UniformAssertCommand(Tests4J_EnglishConstants.ENGLISH, "failureMessage", null, null);						
 					}
 		});
 		
 		I_Tests4J_AssertionInputMessages messages =  Tests4J_EnglishConstants.ENGLISH.getAssertionInputMessages();
-		assertThrown(new ExpectedThrownData(new IllegalArgumentException(
+		assertThrown(new ExpectedThrowable(new IllegalArgumentException(
 				messages.getTheExpectedValueShouldNeverBeNull())), 
 				new I_Thrower(){
 
 					@Override
 					public void run() {
-						new UniformAssertCommand("failureMessage", 
+						new UniformAssertCommand(Tests4J_EnglishConstants.ENGLISH, "failureMessage", 
 								new CompareAssertionData<String>(null, null, AssertType.AssertUniform), null);
 					}
 		});
 		
-		assertThrown(new ExpectedThrownData(new IllegalArgumentException(
+		assertThrown(new ExpectedThrowable(new IllegalArgumentException(
 				UniformAssertCommand.UNIFORM_ASSERT_COMMAND_REQUIRES_EVAULATOR)), 
 				new I_Thrower(){
 
 					@Override
 					public void run() {
-						new UniformAssertCommand("failureMessage", 
+						new UniformAssertCommand(Tests4J_EnglishConstants.ENGLISH, "failureMessage", 
 								new CompareAssertionData<String>("1", "2", AssertType.AssertUniform), null);
 					}
 		});
@@ -73,9 +72,10 @@ public class UniformAssertCommandTrial extends SourceFileCountingTrial {
 	@Test
 	public void testGettersAndEvaluate() {
 		UniformAssertCommand<String, I_TextLinesCompareResult> uac = new UniformAssertCommand
-					<String, I_TextLinesCompareResult>(
+					<String, I_TextLinesCompareResult>(Tests4J_EnglishConstants.ENGLISH, 
 							 "failureMessage", 
-				new CompareAssertionData<String>("a", "b", AssertType.AssertUniform), new StringUniformEvaluator());
+				new CompareAssertionData<String>("a", "b", AssertType.AssertUniform), 
+				    new StringUniformEvaluator(Tests4J_EnglishConstants.ENGLISH));
 		assertEquals(AssertType.AssertUniform, uac.getType());
 		assertEquals("failureMessage", uac.getFailureMessage());
 		assertEquals("a", uac.getExpected());

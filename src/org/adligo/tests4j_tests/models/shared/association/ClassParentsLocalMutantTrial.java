@@ -6,7 +6,7 @@ import org.adligo.tests4j.models.shared.association.ClassParentsLocal;
 import org.adligo.tests4j.models.shared.association.ClassParentsLocalMutant;
 import org.adligo.tests4j.models.shared.association.I_ClassParents;
 import org.adligo.tests4j.models.shared.association.I_ClassParentsLocal;
-import org.adligo.tests4j.shared.asserts.common.ExpectedThrownData;
+import org.adligo.tests4j.shared.asserts.common.ExpectedThrowable;
 import org.adligo.tests4j.shared.asserts.common.I_Thrower;
 import org.adligo.tests4j.shared.asserts.reference.AllowedReferences;
 import org.adligo.tests4j.shared.asserts.reference.CircularDependencies;
@@ -29,7 +29,7 @@ public class ClassParentsLocalMutantTrial extends SourceFileCountingTrial {
 	
 	@Test
 	public void testConstructorExceptions() throws Exception {
-		assertThrown(new ExpectedThrownData(
+		assertThrown(new ExpectedThrowable(
 				NullPointerException.class),
 				new I_Thrower() {
 					
@@ -38,7 +38,7 @@ public class ClassParentsLocalMutantTrial extends SourceFileCountingTrial {
 						new ClassParentsLocalMutant((Class<?>) null);
 					}
 				});
-		assertThrown(new ExpectedThrownData(
+		assertThrown(new ExpectedThrowable(
 				NullPointerException.class),
 				new I_Thrower() {
 					

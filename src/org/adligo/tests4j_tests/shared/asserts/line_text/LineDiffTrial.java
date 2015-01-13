@@ -3,7 +3,7 @@ package org.adligo.tests4j_tests.shared.asserts.line_text;
 import java.util.Iterator;
 import java.util.TreeSet;
 
-import org.adligo.tests4j.shared.asserts.common.ExpectedThrownData;
+import org.adligo.tests4j.shared.asserts.common.ExpectedThrowable;
 import org.adligo.tests4j.shared.asserts.common.I_Thrower;
 import org.adligo.tests4j.shared.asserts.line_text.DiffIndexes;
 import org.adligo.tests4j.shared.asserts.line_text.DiffIndexesPair;
@@ -25,7 +25,7 @@ public class LineDiffTrial extends SourceFileCountingTrial {
 
 	@Test
 	public void testConstructorExceptions() {
-		assertThrown(new ExpectedThrownData(new IllegalArgumentException(
+		assertThrown(new ExpectedThrowable(new IllegalArgumentException(
 				LineDiffMutant.LINE_NUMBERS_MUST_BE_NEGATIVE_ONE_OR_GREATER)),
 				new I_Thrower() {
 					
@@ -62,7 +62,7 @@ public class LineDiffTrial extends SourceFileCountingTrial {
 						});
 					}
 				});
-		assertThrown(new ExpectedThrownData(new IllegalArgumentException(
+		assertThrown(new ExpectedThrowable(new IllegalArgumentException(
 				LineDiffMutant.LINE_NUMBERS_MUST_BE_NEGATIVE_ONE_OR_GREATER)),
 				new I_Thrower() {
 					

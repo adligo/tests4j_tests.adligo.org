@@ -1,7 +1,7 @@
 package org.adligo.tests4j_tests.run.common;
 
 import org.adligo.tests4j.run.common.ClassesDelegate;
-import org.adligo.tests4j.shared.asserts.common.ExpectedThrownData;
+import org.adligo.tests4j.shared.asserts.common.ExpectedThrowable;
 import org.adligo.tests4j.shared.asserts.common.I_Thrower;
 import org.adligo.tests4j.shared.asserts.reference.AllowedReferences;
 import org.adligo.tests4j.system.shared.trials.SourceFileScope;
@@ -26,7 +26,7 @@ public class ClassesDelegateTrial extends SourceFileCountingTrial {
     Class<?> string = cd.forName(String.class.getName());
     assertEquals(String.class.getName(), string.getName());
     
-    assertThrown(new ExpectedThrownData(new ClassNotFoundException("hey")),
+    assertThrown(new ExpectedThrowable(new ClassNotFoundException("hey")),
         new I_Thrower() {
           
           @Override
@@ -38,7 +38,7 @@ public class ClassesDelegateTrial extends SourceFileCountingTrial {
     Class<?> longClazz = cd.forName(Long.class.getName(), true, ClassLoader.getSystemClassLoader());
     assertEquals(Long.class.getName(), longClazz.getName());
     
-    assertThrown(new ExpectedThrownData(new ClassNotFoundException("hmm")),
+    assertThrown(new ExpectedThrowable(new ClassNotFoundException("hmm")),
         new I_Thrower() {
           
           @Override

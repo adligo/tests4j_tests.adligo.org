@@ -24,13 +24,13 @@ public class TextLinesCompareTrial extends SourceFileCountingTrial {
   @Test
   public void testNulls() {
     TextLinesCompare tlc = new TextLinesCompare();
-    I_TextLinesCompareResult result = tlc.compare(null, null, false);
+    I_TextLinesCompareResult result = tlc.compare(Tests4J_EnglishConstants.ENGLISH, null, null, false);
     assertNotNull(result);
     assertTrue(result.hasErrorMessage());
     assertEquals(Tests4J_EnglishConstants.ENGLISH.getAssertionInputMessages().getTheExpectedValueShouldNeverBeNull(),
         result.getErrorMessage());
     
-    result = tlc.compare("e", null, false);
+    result = tlc.compare(Tests4J_EnglishConstants.ENGLISH,  "e", null, false);
     assertNotNull(result);
     assertTrue(result.hasErrorMessage());
     assertEquals(Tests4J_EnglishConstants.ENGLISH.getAssertionInputMessages().getTheActualValueIsNull(),
@@ -40,7 +40,7 @@ public class TextLinesCompareTrial extends SourceFileCountingTrial {
   @Test
 	public void test1LineMatchAchievement() {
 		TextLinesCompare tlc = new TextLinesCompare();
-		I_TextLinesCompareResult result = tlc.compare("a", "a", true);
+		I_TextLinesCompareResult result = tlc.compare(Tests4J_EnglishConstants.ENGLISH, "a", "a", true);
 		assertTrue(result.isMatched());
 		I_TextLines expectedLines = result.getExpectedLines();
 		assertNotNull(expectedLines);
@@ -67,7 +67,7 @@ public class TextLinesCompareTrial extends SourceFileCountingTrial {
 	@Test
 	public void test1LineEmptyMatchAchievement() {
 		TextLinesCompare tlc = new TextLinesCompare();
-		I_TextLinesCompareResult result = tlc.compare("\n", "\n", true);
+		I_TextLinesCompareResult result = tlc.compare(Tests4J_EnglishConstants.ENGLISH, "\n", "\n", true);
 		assertTrue(result.isMatched());
 		I_TextLines expectedLines = result.getExpectedLines();
 		assertNotNull(expectedLines);
@@ -94,7 +94,7 @@ public class TextLinesCompareTrial extends SourceFileCountingTrial {
 	@Test
 	public void test1LineMatchFail() {
 		TextLinesCompare tlc = new TextLinesCompare();
-		I_TextLinesCompareResult result = tlc.compare("a", "b", true);
+		I_TextLinesCompareResult result = tlc.compare(Tests4J_EnglishConstants.ENGLISH, "a", "b", true);
 		assertFalse(result.isMatched());
 		I_TextLines expectedLines = result.getExpectedLines();
 		assertNotNull(expectedLines);
@@ -127,7 +127,7 @@ public class TextLinesCompareTrial extends SourceFileCountingTrial {
 	@Test
 	public void test2LineMatchAchievement() {
 		TextLinesCompare tlc = new TextLinesCompare();
-		I_TextLinesCompareResult result = tlc.compare("a\nb", "a\rb", true);
+		I_TextLinesCompareResult result = tlc.compare(Tests4J_EnglishConstants.ENGLISH,  "a\nb", "a\rb", true);
 		assertTrue(result.isMatched());
 		I_TextLines expectedLines = result.getExpectedLines();
 		assertNotNull(expectedLines);
@@ -169,7 +169,8 @@ public class TextLinesCompareTrial extends SourceFileCountingTrial {
 	@Test
 	public void test2LineMatchFail_AB_BB() {
 		TextLinesCompare tlc = new TextLinesCompare();
-		I_TextLinesCompareResult result = tlc.compare("a\nb", "b\rb", true);
+		I_TextLinesCompareResult result = tlc.compare(
+		    Tests4J_EnglishConstants.ENGLISH, "a\nb", "b\rb", true);
 		assertFalse(result.isMatched());
 		I_TextLines expectedLines = result.getExpectedLines();
 		assertNotNull(expectedLines);
@@ -219,7 +220,8 @@ public class TextLinesCompareTrial extends SourceFileCountingTrial {
 	@Test
 	public void test2LineMatchFail_AB_DC() {
 		TextLinesCompare tlc = new TextLinesCompare();
-		I_TextLinesCompareResult result = tlc.compare("a\nb", "d\rc", true);
+		I_TextLinesCompareResult result = tlc.compare(
+		    Tests4J_EnglishConstants.ENGLISH, "a\nb", "d\rc", true);
 		assertFalse(result.isMatched());
 		I_TextLines expectedLines = result.getExpectedLines();
 		assertNotNull(expectedLines);
@@ -274,7 +276,8 @@ public class TextLinesCompareTrial extends SourceFileCountingTrial {
 	@Test
 	public void test2LineMatchFail_AB_AC() {
 		TextLinesCompare tlc = new TextLinesCompare();
-		I_TextLinesCompareResult result = tlc.compare("a\rb", "a\rc", true);
+		I_TextLinesCompareResult result = tlc.compare(
+		    Tests4J_EnglishConstants.ENGLISH, "a\rb", "a\rc", true);
 		assertFalse(result.isMatched());
 		I_TextLines expectedLines = result.getExpectedLines();
 		assertNotNull(expectedLines);
@@ -316,7 +319,8 @@ public class TextLinesCompareTrial extends SourceFileCountingTrial {
 	@Test
 	public void test3LineMatchAchievement() {
 		TextLinesCompare tlc = new TextLinesCompare();
-		I_TextLinesCompareResult result = tlc.compare("a\nb\r\nc", "a\rb\rc", true);
+		I_TextLinesCompareResult result = tlc.compare(
+		    Tests4J_EnglishConstants.ENGLISH, "a\nb\r\nc", "a\rb\rc", true);
 		assertTrue(result.isMatched());
 		I_TextLines expectedLines = result.getExpectedLines();
 		assertNotNull(expectedLines);
@@ -367,7 +371,8 @@ public class TextLinesCompareTrial extends SourceFileCountingTrial {
 	@Test
 	public void test3LineMatchFail_ABC_BBC() {
 		TextLinesCompare tlc = new TextLinesCompare();
-		I_TextLinesCompareResult result = tlc.compare("a\nb\r\nc", "b\rb\rc", true);
+		I_TextLinesCompareResult result = tlc.compare(
+		    Tests4J_EnglishConstants.ENGLISH, "a\nb\r\nc", "b\rb\rc", true);
 		assertFalse(result.isMatched());
 		I_TextLines expectedLines = result.getExpectedLines();
 		assertNotNull(expectedLines);
@@ -426,7 +431,8 @@ public class TextLinesCompareTrial extends SourceFileCountingTrial {
 	@Test
 	public void test3LineMatchFail_ABC_CBA() {
 		TextLinesCompare tlc = new TextLinesCompare();
-		I_TextLinesCompareResult result = tlc.compare("a\nb\r\nc", "c\rb\ra", true);
+		I_TextLinesCompareResult result = tlc.compare(
+		    Tests4J_EnglishConstants.ENGLISH, "a\nb\r\nc", "c\rb\ra", true);
 		assertFalse(result.isMatched());
 		I_TextLines expectedLines = result.getExpectedLines();
 		assertNotNull(expectedLines);
@@ -493,7 +499,8 @@ public class TextLinesCompareTrial extends SourceFileCountingTrial {
 	@Test
 	public void test3LineMatchFail_ABC_CBD() {
 		TextLinesCompare tlc = new TextLinesCompare();
-		I_TextLinesCompareResult result = tlc.compare("a\nb\r\nc", "c\rb\rd", true);
+		I_TextLinesCompareResult result = tlc.compare(
+		    Tests4J_EnglishConstants.ENGLISH, "a\nb\r\nc", "c\rb\rd", true);
 		assertFalse(result.isMatched());
 		I_TextLines expectedLines = result.getExpectedLines();
 		assertNotNull(expectedLines);
@@ -561,7 +568,8 @@ public class TextLinesCompareTrial extends SourceFileCountingTrial {
 	@Test
 	public void test3LineMatchFail_ABC_DEF() {
 		TextLinesCompare tlc = new TextLinesCompare();
-		I_TextLinesCompareResult result = tlc.compare("a\nb\r\nc", "d\ne\nf", true);
+		I_TextLinesCompareResult result = tlc.compare(
+		    Tests4J_EnglishConstants.ENGLISH, "a\nb\r\nc", "d\ne\nf", true);
 		assertFalse(result.isMatched());
 		I_TextLines expectedLines = result.getExpectedLines();
 		assertNotNull(expectedLines);
@@ -634,7 +642,8 @@ public class TextLinesCompareTrial extends SourceFileCountingTrial {
 	@Test
 	public void test3LineMatchFail_ABC_AEC() {
 		TextLinesCompare tlc = new TextLinesCompare();
-		I_TextLinesCompareResult result = tlc.compare("a\nb\r\nc", "a\ne\nc", true);
+		I_TextLinesCompareResult result = tlc.compare(
+		    Tests4J_EnglishConstants.ENGLISH, "a\nb\r\nc", "a\ne\nc", true);
 		assertFalse(result.isMatched());
 		I_TextLines expectedLines = result.getExpectedLines();
 		assertNotNull(expectedLines);
@@ -687,7 +696,7 @@ public class TextLinesCompareTrial extends SourceFileCountingTrial {
 	@Test
 	public void testMultiLine2x2CharPartialMatchEndOfFirstLine() {
 		TextLinesCompare tlc = new TextLinesCompare();
-		I_TextLinesCompareResult result = tlc.compare("a1\na2", "b1\na2", true);
+		I_TextLinesCompareResult result = tlc.compare(Tests4J_EnglishConstants.ENGLISH, "a1\na2", "b1\na2", true);
 		assertFalse(result.isMatched());
 		I_TextLines expectedLines = result.getExpectedLines();
 		assertNotNull(expectedLines);
@@ -729,7 +738,7 @@ public class TextLinesCompareTrial extends SourceFileCountingTrial {
 	@Test
 	public void testMultiLine2x2CharPartialMatchEndOfLastLine() {
 		TextLinesCompare tlc = new TextLinesCompare();
-		I_TextLinesCompareResult result = tlc.compare("a1\na2", "a1\nb2", true);
+		I_TextLinesCompareResult result = tlc.compare(Tests4J_EnglishConstants.ENGLISH, "a1\na2", "a1\nb2", true);
 		assertFalse(result.isMatched());
 		I_TextLines expectedLines = result.getExpectedLines();
 		assertNotNull(expectedLines);
@@ -773,7 +782,7 @@ public class TextLinesCompareTrial extends SourceFileCountingTrial {
 	@Test
 	public void testMultiLine3x3CharPartialMatchMiddleOfMiddleLine() {
 		TextLinesCompare tlc = new TextLinesCompare();
-		I_TextLinesCompareResult result = tlc.compare("a1\n123a2456\nc4", "b2\n1279a20456\nc4", true);
+		I_TextLinesCompareResult result = tlc.compare(Tests4J_EnglishConstants.ENGLISH, "a1\n123a2456\nc4", "b2\n1279a20456\nc4", true);
 		assertFalse(result.isMatched());
 		I_TextLines expectedLines = result.getExpectedLines();
 		assertNotNull(expectedLines);

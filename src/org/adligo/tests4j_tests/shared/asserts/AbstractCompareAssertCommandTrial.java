@@ -3,7 +3,7 @@ package org.adligo.tests4j_tests.shared.asserts;
 import org.adligo.tests4j.shared.asserts.AbstractCompareAssertCommand;
 import org.adligo.tests4j.shared.asserts.common.AssertType;
 import org.adligo.tests4j.shared.asserts.common.CompareAssertionData;
-import org.adligo.tests4j.shared.asserts.common.ExpectedThrownData;
+import org.adligo.tests4j.shared.asserts.common.ExpectedThrowable;
 import org.adligo.tests4j.shared.asserts.common.I_CompareAssertionData;
 import org.adligo.tests4j.shared.asserts.common.I_Thrower;
 import org.adligo.tests4j.shared.asserts.reference.AllowedReferences;
@@ -22,7 +22,7 @@ public class AbstractCompareAssertCommandTrial extends SourceFileCountingTrial {
 	
 	@Test
 	public void testConstructorExceptions() {
-		assertThrown(new ExpectedThrownData(NullPointerException.class), 
+		assertThrown(new ExpectedThrowable(NullPointerException.class), 
 			new I_Thrower() {
 				@Override
 				public void run() {

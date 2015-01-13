@@ -2,7 +2,7 @@ package org.adligo.tests4j_tests.shared.asserts;
 
 import org.adligo.tests4j.shared.asserts.BooleanAssertCommand;
 import org.adligo.tests4j.shared.asserts.common.AssertType;
-import org.adligo.tests4j.shared.asserts.common.ExpectedThrownData;
+import org.adligo.tests4j.shared.asserts.common.ExpectedThrowable;
 import org.adligo.tests4j.shared.asserts.common.I_Thrower;
 import org.adligo.tests4j.shared.asserts.reference.AllowedReferences;
 import org.adligo.tests4j.system.shared.trials.SourceFileScope;
@@ -19,7 +19,7 @@ public class BooleanAssertCommandTrial extends SourceFileCountingTrial {
 
 	@Test
 	public void testConstructorExceptions() {
-		assertThrown(new ExpectedThrownData(new IllegalArgumentException(BooleanAssertCommand.BOOLEAN_ASSERT_COMMAND_REQUIRES_A_BOOLEAN_TYPE)),
+		assertThrown(new ExpectedThrowable(new IllegalArgumentException(BooleanAssertCommand.BOOLEAN_ASSERT_COMMAND_REQUIRES_A_BOOLEAN_TYPE)),
 				new I_Thrower() {
 					
 					@SuppressWarnings({"unused", "boxing"})

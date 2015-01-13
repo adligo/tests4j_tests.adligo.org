@@ -3,7 +3,7 @@ package org.adligo.tests4j_tests.shared.asserts;
 import org.adligo.tests4j.shared.asserts.IdenticalStringAssertCommand;
 import org.adligo.tests4j.shared.asserts.common.AssertType;
 import org.adligo.tests4j.shared.asserts.common.CompareAssertionData;
-import org.adligo.tests4j.shared.asserts.common.ExpectedThrownData;
+import org.adligo.tests4j.shared.asserts.common.ExpectedThrowable;
 import org.adligo.tests4j.shared.asserts.common.I_AssertionData;
 import org.adligo.tests4j.shared.asserts.common.I_Thrower;
 import org.adligo.tests4j.shared.asserts.reference.AllowedReferences;
@@ -19,27 +19,30 @@ import org.adligo.tests4j_tests.references_groups.Tests4J_Asserts_ReferenceGroup
 @SourceFileScope (sourceClass=IdenticalStringAssertCommand.class, minCoverage=80.0)
 @AllowedReferences (groups=Tests4J_Asserts_GwtReferenceGroup.class)
 public class IdenticalStringAssertCommandTrial extends SourceFileCountingTrial {
+  
+  @SuppressWarnings("unused")
 	@Test
 	public void testConstructorExceptions() {
-		assertThrown(new ExpectedThrownData(new IllegalArgumentException(
+		assertThrown(new ExpectedThrowable(new IllegalArgumentException(
 				IdenticalStringAssertCommand.BAD_TYPE)), 
 				new I_Thrower() {
 					
-					@Override
+					@SuppressWarnings("unused")
+          @Override
 					public void run() {
-						new IdenticalStringAssertCommand( "exceptionMessage",
+						new IdenticalStringAssertCommand(Tests4J_EnglishConstants.ENGLISH, "exceptionMessage",
 								new CompareAssertionData<String>("hey", "you", AssertType.AssertTrue ));
 					}
 				});
 		
 		I_Tests4J_AssertionInputMessages messages =  Tests4J_EnglishConstants.ENGLISH.getAssertionInputMessages();
-		assertThrown(new ExpectedThrownData(new IllegalArgumentException(
+		assertThrown(new ExpectedThrowable(new IllegalArgumentException(
 				messages.getTheExpectedValueShouldNeverBeNull())), 
 				new I_Thrower() {
 					
 					@Override
 					public void run() {
-						new IdenticalStringAssertCommand("exceptionMessage",
+						new IdenticalStringAssertCommand(Tests4J_EnglishConstants.ENGLISH, "exceptionMessage",
 								new CompareAssertionData<String>(null, "you", AssertType.AssertEquals));
 					}
 				});
@@ -48,6 +51,7 @@ public class IdenticalStringAssertCommandTrial extends SourceFileCountingTrial {
 	@Test
 	public void testConstructorAndGetters() {
 		IdenticalStringAssertCommand cmd = new IdenticalStringAssertCommand(
+		    Tests4J_EnglishConstants.ENGLISH,
 				"exceptionMessage",
 				new CompareAssertionData<String>("hey", "you", AssertType.AssertNotEquals));
 		assertEquals(AssertType.AssertNotEquals, cmd.getType());
@@ -56,26 +60,28 @@ public class IdenticalStringAssertCommandTrial extends SourceFileCountingTrial {
 		assertEquals("exceptionMessage", cmd.getFailureMessage());
 	}
 	
-	@Test
+	@SuppressWarnings("boxing")
+  @Test
 	public void testEqualsAndHashCode() {
 		IdenticalStringAssertCommand a = new IdenticalStringAssertCommand(
+		    Tests4J_EnglishConstants.ENGLISH,
 				"exceptionMessage",
 				new CompareAssertionData<String>("hey", "you", AssertType.AssertNotEquals));
 		
 		IdenticalStringAssertCommand b = new IdenticalStringAssertCommand( 
-				"exceptionMessage",
+		    Tests4J_EnglishConstants.ENGLISH, "exceptionMessage",
 				new CompareAssertionData<String>("hey", "you2", AssertType.AssertNotEquals));
 		
 		IdenticalStringAssertCommand c = new IdenticalStringAssertCommand( 
-				"exceptionMessage",
+		    Tests4J_EnglishConstants.ENGLISH, "exceptionMessage",
 				new CompareAssertionData<String>("hey", "you", AssertType.AssertNotEquals));
 		
 		IdenticalStringAssertCommand d = new IdenticalStringAssertCommand(
-				"exceptionMessage2",
+		    Tests4J_EnglishConstants.ENGLISH, "exceptionMessage2",
 				new CompareAssertionData<String>("hey", "you", AssertType.AssertNotEquals));
 		
 		IdenticalStringAssertCommand e = new IdenticalStringAssertCommand(
-				"exceptionMessage",
+		    Tests4J_EnglishConstants.ENGLISH, "exceptionMessage",
 				new CompareAssertionData<String>("hey", "you", AssertType.AssertEquals));
 		
 		assertEquals(a, a);
@@ -100,7 +106,7 @@ public class IdenticalStringAssertCommandTrial extends SourceFileCountingTrial {
 	@Test
 	public void testEvaluateEquals() {
 		IdenticalStringAssertCommand a = new IdenticalStringAssertCommand(
-				"failureMessage",
+		    Tests4J_EnglishConstants.ENGLISH, "failureMessage",
 				new CompareAssertionData<String>("hey", "you", AssertType.AssertEquals));
 		
 		assertFalse(a.evaluate());
@@ -114,7 +120,7 @@ public class IdenticalStringAssertCommandTrial extends SourceFileCountingTrial {
 		assertEquals(AssertType.AssertEquals, cad.getType());
 		
 		IdenticalStringAssertCommand b = new IdenticalStringAssertCommand( 
-				"exceptionMessage",
+		    Tests4J_EnglishConstants.ENGLISH, "exceptionMessage",
 				new CompareAssertionData<String>("hey", "hey", AssertType.AssertEquals));
 		assertTrue(b.evaluate());	
 		data = a.getData();
@@ -130,7 +136,7 @@ public class IdenticalStringAssertCommandTrial extends SourceFileCountingTrial {
 	@Test
 	public void testEvaluateNotEquals() {
 		IdenticalStringAssertCommand a = new IdenticalStringAssertCommand(
-				"exceptionMessage",
+		    Tests4J_EnglishConstants.ENGLISH,"exceptionMessage",
 				new CompareAssertionData<String>("hey", "you", AssertType.AssertNotEquals));
 		
 		assertTrue(a.evaluate());
@@ -142,7 +148,7 @@ public class IdenticalStringAssertCommandTrial extends SourceFileCountingTrial {
 		
 		
 		IdenticalStringAssertCommand b = new IdenticalStringAssertCommand(
-				"exceptionMessage",
+		    Tests4J_EnglishConstants.ENGLISH, "exceptionMessage",
 				new CompareAssertionData<String>("hey", "hey", AssertType.AssertNotEquals));
 		assertFalse(b.evaluate());	
 		data = b.getData();

@@ -23,7 +23,7 @@ public class AbstractProgressDisplayTrial extends SourceFileCountingTrial {
   private MockMethod<Void> logRecord_;
   private MockMethod<Void> logLineRecord_;
   private MockMethod<Void> onThrowableRecord_;
-  private ProgressDisplayImpl reporter = new ProgressDisplayImpl();
+  private ProgressDisplayImpl reporter = new ProgressDisplayImpl(Tests4J_EnglishConstants.ENGLISH);
 	
 	@Override
 	public void beforeTests() {

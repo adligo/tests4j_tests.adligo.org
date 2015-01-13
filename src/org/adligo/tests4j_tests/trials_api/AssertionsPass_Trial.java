@@ -2,7 +2,7 @@ package org.adligo.tests4j_tests.trials_api;
 
 import org.adligo.tests4j.models.shared.coverage.I_PackageCoverageBrief;
 import org.adligo.tests4j.models.shared.results.I_ApiTrialResult;
-import org.adligo.tests4j.shared.asserts.common.ExpectedThrownData;
+import org.adligo.tests4j.shared.asserts.common.ExpectedThrowable;
 import org.adligo.tests4j.shared.asserts.common.I_Thrower;
 import org.adligo.tests4j.system.shared.trials.PackageScope;
 import org.adligo.tests4j.system.shared.trials.Test;
@@ -169,7 +169,7 @@ public class AssertionsPass_Trial extends ApiCountingTrial {
 	
 	@Test
 	public void testThrown() {
-		assertThrown(new ExpectedThrownData(new IllegalStateException("exception message")), new I_Thrower() {
+		assertThrown(new ExpectedThrowable(new IllegalStateException("exception message")), new I_Thrower() {
 			
 			@Override
 			public void run() {
@@ -177,8 +177,8 @@ public class AssertionsPass_Trial extends ApiCountingTrial {
 			}
 		}) ;
 		
-		assertThrown(new ExpectedThrownData(new IllegalStateException("exception message"),
-				new ExpectedThrownData(IllegalArgumentException.class)), new I_Thrower() {
+		assertThrown(new ExpectedThrowable(new IllegalStateException("exception message"),
+				new ExpectedThrowable(IllegalArgumentException.class)), new I_Thrower() {
 			
 			@Override
 			public void run() {
@@ -193,7 +193,7 @@ public class AssertionsPass_Trial extends ApiCountingTrial {
 	
 	@Test
 	public void testThrownUniform() {
-		assertThrownUniform(new ExpectedThrownData(new IllegalStateException("exception message\nline2")), 
+		assertThrownUniform(new ExpectedThrowable(new IllegalStateException("exception message\nline2")), 
 			new I_Thrower() {
 			
 			@Override

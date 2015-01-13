@@ -1,6 +1,6 @@
 package org.adligo.tests4j_tests.shared.asserts.uniform;
 
-import org.adligo.tests4j.shared.asserts.common.ExpectedThrownData;
+import org.adligo.tests4j.shared.asserts.common.ExpectedThrowable;
 import org.adligo.tests4j.shared.asserts.common.I_ThrownAssertionData;
 import org.adligo.tests4j.shared.asserts.common.MatchType;
 import org.adligo.tests4j.shared.asserts.reference.AllowedReferences;
@@ -13,7 +13,7 @@ import org.adligo.tests4j_tests.base_trials.I_CountType;
 import org.adligo.tests4j_tests.base_trials.SourceFileCountingTrial;
 import org.adligo.tests4j_tests.references_groups.Tests4J_Asserts_GwtReferenceGroup;
 
-@SourceFileScope (sourceClass=UniformThrownAssertionEvaluatorUse.class, minCoverage=89.0)
+@SourceFileScope (sourceClass=UniformThrownAssertionEvaluatorUse.class, minCoverage=86.0)
 @AllowedReferences (groups=Tests4J_Asserts_GwtReferenceGroup.class)
 public class UniformThrownAssertionEvaluatorUseTrial extends SourceFileCountingTrial {
 
@@ -24,9 +24,10 @@ public class UniformThrownAssertionEvaluatorUseTrial extends SourceFileCountingT
   @Test
   public void test01_ConstructorSimpleSuccess() {
     //any
-    ExpectedThrownData expected = new ExpectedThrownData(NullPointerException.class);
+    ExpectedThrowable expected = new ExpectedThrowable(NullPointerException.class);
     Throwable actual = new NullPointerException();
-    UniformThrownAssertionEvaluatorUse use = new UniformThrownAssertionEvaluatorUse(expected, actual);
+    UniformThrownAssertionEvaluatorUse use = new UniformThrownAssertionEvaluatorUse(
+        Tests4J_EnglishConstants.ENGLISH, expected, actual);
     I_Evaluation<I_ThrownAssertionData> result = use.getResult();
     assertTrue(result.isSuccess());
     assertNull(result.getFailureReason());
@@ -36,8 +37,8 @@ public class UniformThrownAssertionEvaluatorUseTrial extends SourceFileCountingT
     assertEquals(0, data.getFailureThrowable());
     assertNull(data.getFailureReason());
    
-    expected = new ExpectedThrownData(NullPointerException.class, MatchType.NULL);
-    use = new UniformThrownAssertionEvaluatorUse(expected, actual);
+    expected = new ExpectedThrowable(NullPointerException.class, MatchType.NULL);
+    use = new UniformThrownAssertionEvaluatorUse(Tests4J_EnglishConstants.ENGLISH, expected, actual);
     result = use.getResult();
     assertTrue(result.isSuccess());
     assertNull(result.getFailureReason());
@@ -48,8 +49,8 @@ public class UniformThrownAssertionEvaluatorUseTrial extends SourceFileCountingT
     assertNull(data.getFailureReason());
     
     actual = new NullPointerException("hey");
-    expected = new ExpectedThrownData(new NullPointerException("hey"));
-    use = new UniformThrownAssertionEvaluatorUse(expected, actual);
+    expected = new ExpectedThrowable(new NullPointerException("hey"));
+    use = new UniformThrownAssertionEvaluatorUse(Tests4J_EnglishConstants.ENGLISH, expected, actual);
     result = use.getResult();
     assertTrue(result.isSuccess());
     assertNull(result.getFailureReason());
@@ -63,9 +64,10 @@ public class UniformThrownAssertionEvaluatorUseTrial extends SourceFileCountingT
   @SuppressWarnings("boxing")
   @Test
   public void test02_ConstructorSimpleFailureClass() {
-    ExpectedThrownData expected = new ExpectedThrownData(NullPointerException.class);
+    ExpectedThrowable expected = new ExpectedThrowable(NullPointerException.class);
     Throwable actual = new IllegalStateException();
-    UniformThrownAssertionEvaluatorUse use = new UniformThrownAssertionEvaluatorUse(expected, actual);
+    UniformThrownAssertionEvaluatorUse use = new UniformThrownAssertionEvaluatorUse(
+        Tests4J_EnglishConstants.ENGLISH, expected, actual);
     I_Evaluation<I_ThrownAssertionData> result = use.getResult();
     assertFalse(result.isSuccess());
     
@@ -82,9 +84,10 @@ public class UniformThrownAssertionEvaluatorUseTrial extends SourceFileCountingT
   @SuppressWarnings("boxing")
   @Test
   public void test03_ConstructorSimpleFailureMessageNotEquals() {
-    ExpectedThrownData expected = new ExpectedThrownData(new NullPointerException("arg"));
+    ExpectedThrowable expected = new ExpectedThrowable(new NullPointerException("arg"));
     Throwable actual = new NullPointerException("hmm");
-    UniformThrownAssertionEvaluatorUse use = new UniformThrownAssertionEvaluatorUse(expected, actual);
+    UniformThrownAssertionEvaluatorUse use = new UniformThrownAssertionEvaluatorUse(
+        Tests4J_EnglishConstants.ENGLISH, expected, actual);
     I_Evaluation<I_ThrownAssertionData> result = use.getResult();
     assertFalse(result.isSuccess());
     
@@ -101,9 +104,10 @@ public class UniformThrownAssertionEvaluatorUseTrial extends SourceFileCountingT
   @SuppressWarnings("boxing")
   @Test
   public void test04_ConstructorSimpleFailureMessageNotNull() {
-    ExpectedThrownData expected = new ExpectedThrownData(NullPointerException.class, MatchType.NULL);
+    ExpectedThrowable expected = new ExpectedThrowable(NullPointerException.class, MatchType.NULL);
     Throwable actual = new NullPointerException("hmm");
-    UniformThrownAssertionEvaluatorUse use = new UniformThrownAssertionEvaluatorUse(expected, actual);
+    UniformThrownAssertionEvaluatorUse use = new UniformThrownAssertionEvaluatorUse(
+        Tests4J_EnglishConstants.ENGLISH, expected, actual);
     I_Evaluation<I_ThrownAssertionData> result = use.getResult();
     assertFalse(result.isSuccess());
     
@@ -122,13 +126,14 @@ public class UniformThrownAssertionEvaluatorUseTrial extends SourceFileCountingT
   @Test
   public void test05_ConstructorComplexCauseSuccess() {
     //any
-    ExpectedThrownData expected = new ExpectedThrownData(NullPointerException.class,
-        new ExpectedThrownData(IllegalStateException.class));
+    ExpectedThrowable expected = new ExpectedThrowable(NullPointerException.class,
+        new ExpectedThrowable(IllegalStateException.class));
     Throwable actual = new NullPointerException();
     Throwable cause = new IllegalStateException();
     actual.initCause(cause);
     
-    UniformThrownAssertionEvaluatorUse use = new UniformThrownAssertionEvaluatorUse(expected, actual);
+    UniformThrownAssertionEvaluatorUse use = new UniformThrownAssertionEvaluatorUse(
+        Tests4J_EnglishConstants.ENGLISH, expected, actual);
     I_Evaluation<I_ThrownAssertionData> result = use.getResult();
     assertTrue(result.isSuccess());
     assertNull(result.getFailureReason());
@@ -138,9 +143,10 @@ public class UniformThrownAssertionEvaluatorUseTrial extends SourceFileCountingT
     assertEquals(0, data.getFailureThrowable());
     assertNull(data.getFailureReason());
    
-    expected = new ExpectedThrownData(NullPointerException.class,
-        new ExpectedThrownData(IllegalStateException.class, MatchType.NULL));
-    use = new UniformThrownAssertionEvaluatorUse(expected, actual);
+    expected = new ExpectedThrowable(NullPointerException.class,
+        new ExpectedThrowable(IllegalStateException.class, MatchType.NULL));
+    use = new UniformThrownAssertionEvaluatorUse(
+        Tests4J_EnglishConstants.ENGLISH, expected, actual);
     result = use.getResult();
     assertTrue(result.isSuccess());
     assertNull(result.getFailureReason());
@@ -154,9 +160,10 @@ public class UniformThrownAssertionEvaluatorUseTrial extends SourceFileCountingT
     cause = new IllegalStateException("hey");
     actual.initCause(cause);
     
-    expected = new ExpectedThrownData(NullPointerException.class,
-        new ExpectedThrownData(new IllegalStateException("hey")));
-    use = new UniformThrownAssertionEvaluatorUse(expected, actual);
+    expected = new ExpectedThrowable(NullPointerException.class,
+        new ExpectedThrowable(new IllegalStateException("hey")));
+    use = new UniformThrownAssertionEvaluatorUse(
+        Tests4J_EnglishConstants.ENGLISH, expected, actual);
     result = use.getResult();
     assertTrue(result.isSuccess());
     assertNull(result.getFailureReason());
@@ -170,13 +177,14 @@ public class UniformThrownAssertionEvaluatorUseTrial extends SourceFileCountingT
   @SuppressWarnings("boxing")
   @Test
   public void test06_Constructor_ComplexCauseFailureClass() {
-    ExpectedThrownData expected = new ExpectedThrownData(NullPointerException.class,
-        new ExpectedThrownData(IllegalStateException.class));
+    ExpectedThrowable expected = new ExpectedThrowable(NullPointerException.class,
+        new ExpectedThrowable(IllegalStateException.class));
     Throwable actual = new NullPointerException();
     Throwable cause = new NullPointerException();
     actual.initCause(cause);
     
-    UniformThrownAssertionEvaluatorUse use = new UniformThrownAssertionEvaluatorUse(expected, actual);
+    UniformThrownAssertionEvaluatorUse use = new UniformThrownAssertionEvaluatorUse(
+        Tests4J_EnglishConstants.ENGLISH, expected, actual);
     I_Evaluation<I_ThrownAssertionData> result = use.getResult();
     assertFalse(result.isSuccess());
     
@@ -193,13 +201,14 @@ public class UniformThrownAssertionEvaluatorUseTrial extends SourceFileCountingT
   @SuppressWarnings("boxing")
   @Test
   public void test07_ConstructorComplexCauseFailureMessageNotEquals() {
-    ExpectedThrownData expected = new ExpectedThrownData(new NullPointerException("hey"),
-        new ExpectedThrownData(new IllegalStateException("...\n..")));
+    ExpectedThrowable expected = new ExpectedThrowable(new NullPointerException("hey"),
+        new ExpectedThrowable(new IllegalStateException("...\n..")));
     Throwable actual = new NullPointerException("hey");
     Throwable cause = new IllegalStateException("..");
     actual.initCause(cause);
     
-    UniformThrownAssertionEvaluatorUse use = new UniformThrownAssertionEvaluatorUse(expected, actual);
+    UniformThrownAssertionEvaluatorUse use = new UniformThrownAssertionEvaluatorUse(
+        Tests4J_EnglishConstants.ENGLISH, expected, actual);
     I_Evaluation<I_ThrownAssertionData> result = use.getResult();
     assertFalse(result.isSuccess());
     
@@ -216,13 +225,14 @@ public class UniformThrownAssertionEvaluatorUseTrial extends SourceFileCountingT
   @SuppressWarnings("boxing")
   @Test
   public void test08_ConstructorComplexCauseFailureMessageNotNull() {
-    ExpectedThrownData expected = new ExpectedThrownData(new NullPointerException("hey"),
-        new ExpectedThrownData(IllegalStateException.class, MatchType.NULL));
+    ExpectedThrowable expected = new ExpectedThrowable(new NullPointerException("hey"),
+        new ExpectedThrowable(IllegalStateException.class, MatchType.NULL));
     Throwable actual = new NullPointerException("hey");
     Throwable cause = new IllegalStateException("..");
     actual.initCause(cause);
     
-    UniformThrownAssertionEvaluatorUse use = new UniformThrownAssertionEvaluatorUse(expected, actual);
+    UniformThrownAssertionEvaluatorUse use = new UniformThrownAssertionEvaluatorUse(
+        Tests4J_EnglishConstants.ENGLISH, expected, actual);
     I_Evaluation<I_ThrownAssertionData> result = use.getResult();
     assertFalse(result.isSuccess());
     

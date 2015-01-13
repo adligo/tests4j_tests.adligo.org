@@ -46,7 +46,7 @@ public class TrialDisplayTrial extends SourceFileCountingTrial {
 	@SuppressWarnings("boxing")
   @Test
 	public void testStartReportLogOff() {
-		TrialDisplay display = new TrialDisplay(logMock_, threadDisplay);
+		TrialDisplay display = new TrialDisplay(Tests4J_EnglishConstants.ENGLISH,  logMock_, threadDisplay);
 		
 		display.onStartingTrial("someTrialName");
 		assertEquals(0, logRecord_.count());
@@ -60,7 +60,7 @@ public class TrialDisplayTrial extends SourceFileCountingTrial {
 	@SuppressWarnings("boxing")
   @Test
 	public void testStartReportLogOn() {
-		TrialDisplay display = new TrialDisplay(logMock_, threadDisplay);
+		TrialDisplay display = new TrialDisplay(Tests4J_EnglishConstants.ENGLISH, logMock_, threadDisplay);
 		when(logMock_.isLogEnabled(TrialDisplay.class)).thenReturn(true);
 		
 		display.onStartingTrial("someTrialName");
@@ -79,7 +79,7 @@ public class TrialDisplayTrial extends SourceFileCountingTrial {
 	@SuppressWarnings("boxing")
   @Test
 	public void testPassedLogOff() {
-		TrialDisplay display = new TrialDisplay(logMock_, threadDisplay);
+		TrialDisplay display = new TrialDisplay(Tests4J_EnglishConstants.ENGLISH, logMock_, threadDisplay);
 		
 		BaseTrialResultMutant btrm = new BaseTrialResultMutant();
 		btrm.setTrialName("someTrialName");
@@ -105,7 +105,7 @@ public class TrialDisplayTrial extends SourceFileCountingTrial {
 	@SuppressWarnings("boxing")
   @Test
 	public void testPassedLogOn() {
-		TrialDisplay display = new TrialDisplay(logMock_, threadDisplay);
+		TrialDisplay display = new TrialDisplay(Tests4J_EnglishConstants.ENGLISH, logMock_, threadDisplay);
 		when(logMock_.isLogEnabled(any())).thenReturn(true);
 		
 		BaseTrialResultMutant btrm = new BaseTrialResultMutant();
@@ -136,7 +136,7 @@ public class TrialDisplayTrial extends SourceFileCountingTrial {
 	@SuppressWarnings("boxing")
   @Test
 	public void testFailedLogOff() {
-		TrialDisplay display = new TrialDisplay(logMock_, threadDisplay);
+		TrialDisplay display = new TrialDisplay(Tests4J_EnglishConstants.ENGLISH, logMock_, threadDisplay);
 		
 		BaseTrialResultMutant btrm = new BaseTrialResultMutant();
 		btrm.setTrialName("someOtherTrialName");
@@ -156,7 +156,7 @@ public class TrialDisplayTrial extends SourceFileCountingTrial {
 	@SuppressWarnings("boxing")
   @Test
 	public void testFailedLogOn() {
-		TrialDisplay display = new TrialDisplay(logMock_, threadDisplay);
+		TrialDisplay display = new TrialDisplay(Tests4J_EnglishConstants.ENGLISH, logMock_, threadDisplay);
 		when(logMock_.isLogEnabled(any())).thenReturn(true);
 		
 		BaseTrialResultMutant btrm = new BaseTrialResultMutant();

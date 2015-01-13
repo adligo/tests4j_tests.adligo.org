@@ -4,7 +4,7 @@ import java.util.Iterator;
 import java.util.Set;
 import java.util.TreeSet;
 
-import org.adligo.tests4j.shared.asserts.common.ExpectedThrownData;
+import org.adligo.tests4j.shared.asserts.common.ExpectedThrowable;
 import org.adligo.tests4j.shared.asserts.common.I_Thrower;
 import org.adligo.tests4j.shared.asserts.reference.AllowedReferences;
 import org.adligo.tests4j.shared.asserts.reference.ClassAlias;
@@ -26,7 +26,7 @@ public class DependencyMutantTrial extends SourceFileCountingTrial {
 	@Test
 	public void testSetterExceptions() {
 		final DependencyMutant dm = new DependencyMutant();
-		assertThrown(new ExpectedThrownData(new IllegalArgumentException(
+		assertThrown(new ExpectedThrowable(new IllegalArgumentException(
 				DependencyMutant.CLASS_ALIAS_MAY_NOT_BE_SET_TO_A_NULL_VALUE)),
 				new I_Thrower() {
 					

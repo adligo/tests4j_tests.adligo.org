@@ -33,7 +33,7 @@ public class TestsProgressDisplayTrial extends SourceFileCountingTrial {
     doAnswer(onThrowableRecord_).when(logMock_).onThrowable(any());
     when(logMock_.getLineSeperator()).thenReturn("lineSeperator");
     
-		reporter_ = new TestsProgressDisplay();
+		reporter_ = new TestsProgressDisplay(Tests4J_EnglishConstants.ENGLISH);
 	}
 
 	

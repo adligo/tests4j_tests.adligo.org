@@ -1,6 +1,6 @@
 package org.adligo.tests4j_tests.trials_api.assert_fails_trials;
 
-import org.adligo.tests4j.shared.asserts.common.ExpectedThrownData;
+import org.adligo.tests4j.shared.asserts.common.ExpectedThrowable;
 import org.adligo.tests4j.shared.asserts.common.I_Thrower;
 import org.adligo.tests4j.system.shared.trials.ApiTrial;
 import org.adligo.tests4j.system.shared.trials.PackageScope;
@@ -18,7 +18,7 @@ public class AssertThrownWithMessageFailsTrial extends ApiTrial {
 		called = false;
 		assertFalse(called);
 		assertThrown(TEST_ASSERT_FAILS_MESSAGE,
-			new ExpectedThrownData(new RuntimeException("hey")), 
+			new ExpectedThrowable(new RuntimeException("hey")), 
 			new I_Thrower() {
 			
 			@Override

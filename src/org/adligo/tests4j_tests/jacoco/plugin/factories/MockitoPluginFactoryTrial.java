@@ -1,6 +1,7 @@
 package org.adligo.tests4j_tests.jacoco.plugin.factories;
 
 import org.adligo.tests4j.run.common.I_JseSystem;
+import org.adligo.tests4j.shared.en.Tests4J_EnglishConstants;
 import org.adligo.tests4j.shared.output.DefaultLog;
 import org.adligo.tests4j.system.shared.api.I_Tests4J_CoveragePlugin;
 import org.adligo.tests4j.system.shared.api.I_Tests4J_CoveragePluginFactory;
@@ -52,6 +53,7 @@ public class MockitoPluginFactoryTrial extends SourceFileCountingTrial {
 		Map<String,Object> runParams = new HashMap<String,Object>();
 		runParams.put(I_Tests4J_CoveragePluginFactory.LOG, logger);
 		runParams.put(I_Tests4J_CoveragePluginFactory.SYSTEM, sys);
+		runParams.put(I_Tests4J_CoveragePluginFactory.CONSTANTS, Tests4J_EnglishConstants.ENGLISH);
 		
 		File mockFile = mock(File.class);
     when(mockFile.exists()).thenReturn(true);

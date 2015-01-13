@@ -1,6 +1,6 @@
 package org.adligo.tests4j_tests.trials_api.asserts_null_expected_trials;
 
-import org.adligo.tests4j.shared.asserts.common.ExpectedThrownData;
+import org.adligo.tests4j.shared.asserts.common.ExpectedThrowable;
 import org.adligo.tests4j.system.shared.trials.ApiTrial;
 import org.adligo.tests4j.system.shared.trials.PackageScope;
 import org.adligo.tests4j.system.shared.trials.Test;
@@ -14,7 +14,7 @@ public class AssertThrownUniformNullThrowerFailsTrial extends ApiTrial {
 	public void testAssertThrownNull() {
 		called = false;
 		assertFalse(called);
-		assertThrownUniform(new ExpectedThrownData(new RuntimeException("hey")), null);
+		assertThrownUniform(new ExpectedThrowable(new RuntimeException("hey")), null);
 		assertTrue(called);
 	}
 }

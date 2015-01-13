@@ -31,7 +31,7 @@ public class TestDisplayTrial extends SourceFileCountingTrial {
     doAnswer(onThrowableRecord_).when(logMock_).onThrowable(any());
     when(logMock_.getLineSeperator()).thenReturn("lineSeperator");
     
-	  reporter = new TestDisplay(logMock_, 
+	  reporter = new TestDisplay(Tests4J_EnglishConstants.ENGLISH, logMock_, 
 	      new ThreadDisplay(logMock_, new DefaultSystem()));
 	}
 

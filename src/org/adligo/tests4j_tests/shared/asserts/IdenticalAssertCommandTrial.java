@@ -3,7 +3,7 @@ package org.adligo.tests4j_tests.shared.asserts;
 import org.adligo.tests4j.shared.asserts.IdenticalAssertCommand;
 import org.adligo.tests4j.shared.asserts.common.AssertType;
 import org.adligo.tests4j.shared.asserts.common.CompareAssertionData;
-import org.adligo.tests4j.shared.asserts.common.ExpectedThrownData;
+import org.adligo.tests4j.shared.asserts.common.ExpectedThrowable;
 import org.adligo.tests4j.shared.asserts.common.I_Thrower;
 import org.adligo.tests4j.shared.asserts.reference.AllowedReferences;
 import org.adligo.tests4j.shared.en.Tests4J_EnglishConstants;
@@ -13,41 +13,46 @@ import org.adligo.tests4j.system.shared.trials.Test;
 import org.adligo.tests4j_tests.base_trials.I_CountType;
 import org.adligo.tests4j_tests.base_trials.SourceFileCountingTrial;
 import org.adligo.tests4j_tests.references_groups.Tests4J_Asserts_GwtReferenceGroup;
-import org.adligo.tests4j_tests.references_groups.Tests4J_Asserts_ReferenceGroup;
 
 @SourceFileScope (sourceClass=IdenticalAssertCommand.class, minCoverage=70.0)
 @AllowedReferences (groups=Tests4J_Asserts_GwtReferenceGroup.class)
 public class IdenticalAssertCommandTrial extends SourceFileCountingTrial {
 
+  @SuppressWarnings({"unused","boxing"})
 	@Test
 	public void testConstructorExceptions() {
-		assertThrown(new ExpectedThrownData(new IllegalArgumentException(IdenticalAssertCommand.BAD_TYPE)),
+		assertThrown(new ExpectedThrowable(new IllegalArgumentException(IdenticalAssertCommand.BAD_TYPE)),
 				new I_Thrower() {
-
-					@Override
+		  
+          @Override
 					public void run() {
-						new IdenticalAssertCommand("failureMessage", new CompareAssertionData<Double>(0.0, 0.0, AssertType.AssertFalse));
+						new IdenticalAssertCommand(Tests4J_EnglishConstants.ENGLISH,
+						    "failureMessage", new CompareAssertionData<Double>(0.0, 0.0, AssertType.AssertFalse));
 					}
 			
 		});
 		I_Tests4J_AssertionInputMessages messages =  Tests4J_EnglishConstants.ENGLISH.getAssertionInputMessages();
 		
-		assertThrown(new ExpectedThrownData(new IllegalArgumentException(
+		assertThrown(new ExpectedThrowable(new IllegalArgumentException(
 				messages.getTheExpectedValueShouldNeverBeNull())),
 				new I_Thrower() {
 
 					@Override
 					public void run() {
-						new IdenticalAssertCommand("failureMessage", new CompareAssertionData<Double>(null, 0.0, AssertType.AssertFalse));
+						new IdenticalAssertCommand(
+						    Tests4J_EnglishConstants.ENGLISH,"failureMessage", 
+						    new CompareAssertionData<Double>(null, 0.0, AssertType.AssertFalse));
 					}
 			
 		});
 	}
 	
-	@Test
+	@SuppressWarnings("boxing")
+  @Test
 	public void testGetters() {
 		CompareAssertionData<Double> cad = new CompareAssertionData<Double>(0.0, 1.0, AssertType.AssertEquals);
-		IdenticalAssertCommand a = new IdenticalAssertCommand("failureMessage", cad);
+		IdenticalAssertCommand a = new IdenticalAssertCommand(
+		    Tests4J_EnglishConstants.ENGLISH,"failureMessage", cad);
 		
 		assertSame(cad, a.getData());
 		assertEquals(1.0, a.getActual());
@@ -56,19 +61,20 @@ public class IdenticalAssertCommandTrial extends SourceFileCountingTrial {
 		assertSame(AssertType.AssertEquals, a.getType());
 	}
 	
+	@SuppressWarnings("boxing")
 	@Test
 	public void testEqualsHashCode() {
-		IdenticalAssertCommand a = new IdenticalAssertCommand(
+		IdenticalAssertCommand a = new IdenticalAssertCommand(Tests4J_EnglishConstants.ENGLISH,
 				"failureMessage", new CompareAssertionData<Double>(0.0, 1.0, AssertType.AssertNotSame));
-		IdenticalAssertCommand b = new IdenticalAssertCommand(
+		IdenticalAssertCommand b = new IdenticalAssertCommand(Tests4J_EnglishConstants.ENGLISH,
 				"failureMessage", new CompareAssertionData<Double>(0.0, 0.0, AssertType.AssertNotSame));
-		IdenticalAssertCommand c = new IdenticalAssertCommand(
+		IdenticalAssertCommand c = new IdenticalAssertCommand(Tests4J_EnglishConstants.ENGLISH,
 				"failureMessage", new CompareAssertionData<Double>(0.0, 1.0, AssertType.AssertNotSame));
-		IdenticalAssertCommand d = new IdenticalAssertCommand(
+		IdenticalAssertCommand d = new IdenticalAssertCommand(Tests4J_EnglishConstants.ENGLISH,
 				"failureMessage", new CompareAssertionData<Double>(1.0, 1.0, AssertType.AssertNotSame));
-		IdenticalAssertCommand e = new IdenticalAssertCommand(
+		IdenticalAssertCommand e = new IdenticalAssertCommand(Tests4J_EnglishConstants.ENGLISH,
 				"failureMessage2", new CompareAssertionData<Double>(0.0, 1.0, AssertType.AssertNotSame));
-		IdenticalAssertCommand f = new IdenticalAssertCommand(
+    IdenticalAssertCommand f = new IdenticalAssertCommand(Tests4J_EnglishConstants.ENGLISH,
 				"failureMessage", new CompareAssertionData<Double>(0.0, 1.0, AssertType.AssertSame));
 		
 		
@@ -91,28 +97,29 @@ public class IdenticalAssertCommandTrial extends SourceFileCountingTrial {
 		assertNotEquals(a.hashCode(), f.hashCode());
 	}
 	
-	@Test
+	@SuppressWarnings("boxing")
+  @Test
 	public void testEvaluate() {
-		assertFalse(new IdenticalAssertCommand(
+		assertFalse(new IdenticalAssertCommand(Tests4J_EnglishConstants.ENGLISH,
 				"failureMessage", new CompareAssertionData<Double>(0.0, 1.0, AssertType.AssertEquals)).evaluate());
-		assertTrue(new IdenticalAssertCommand(
+		assertTrue(new IdenticalAssertCommand(Tests4J_EnglishConstants.ENGLISH,
 				"failureMessage", new CompareAssertionData<Double>(0.0, 0.0, AssertType.AssertEquals)).evaluate());
 		
-		assertFalse(new IdenticalAssertCommand(
+		assertFalse(new IdenticalAssertCommand(Tests4J_EnglishConstants.ENGLISH,
 				"failureMessage", new CompareAssertionData<Double>(0.0, 0.0, AssertType.AssertNotEquals)).evaluate());
-		assertTrue(new IdenticalAssertCommand(
+		assertTrue(new IdenticalAssertCommand(Tests4J_EnglishConstants.ENGLISH,
 				"failureMessage", new CompareAssertionData<Double>(1.0, 0.0, AssertType.AssertNotEquals)).evaluate());
 		
 		Object a = new Object();
 		Object b = new Object();
-		assertFalse(new IdenticalAssertCommand( 
+		assertFalse(new IdenticalAssertCommand(Tests4J_EnglishConstants.ENGLISH, 
 				"failureMessage", new CompareAssertionData<Object>(a, b, AssertType.AssertSame)).evaluate());
-		assertTrue(new IdenticalAssertCommand( 
+		assertTrue(new IdenticalAssertCommand( Tests4J_EnglishConstants.ENGLISH,
 				"failureMessage", new CompareAssertionData<Object>(a, a, AssertType.AssertSame)).evaluate());
 		
-		assertFalse(new IdenticalAssertCommand( 
+		assertFalse(new IdenticalAssertCommand( Tests4J_EnglishConstants.ENGLISH,
 				"failureMessage", new CompareAssertionData<Object>(a, a, AssertType.AssertNotSame)).evaluate());
-		assertTrue(new IdenticalAssertCommand(
+		assertTrue(new IdenticalAssertCommand(Tests4J_EnglishConstants.ENGLISH,
 				"failureMessage", new CompareAssertionData<Object>(a, b, AssertType.AssertNotSame)).evaluate());
 	}
 

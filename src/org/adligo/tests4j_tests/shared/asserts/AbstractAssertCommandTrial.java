@@ -2,7 +2,7 @@ package org.adligo.tests4j_tests.shared.asserts;
 
 import org.adligo.tests4j.shared.asserts.AbstractAssertCommand;
 import org.adligo.tests4j.shared.asserts.common.AssertType;
-import org.adligo.tests4j.shared.asserts.common.ExpectedThrownData;
+import org.adligo.tests4j.shared.asserts.common.ExpectedThrowable;
 import org.adligo.tests4j.shared.asserts.common.I_Thrower;
 import org.adligo.tests4j.shared.asserts.reference.AllowedReferences;
 import org.adligo.tests4j.system.shared.trials.SourceFileScope;
@@ -19,7 +19,7 @@ public class AbstractAssertCommandTrial extends SourceFileCountingTrial {
 	@Test
 	public void testConstructorsExceptions() {
 		assertEquals("AssertCommands requires a type.",AbstractAssertCommand.ASSERT_COMMANDS_REQUIRES_A_TYPE);
-		assertThrown(new ExpectedThrownData(new IllegalArgumentException(
+		assertThrown(new ExpectedThrowable(new IllegalArgumentException(
 					AbstractAssertCommand.ASSERT_COMMANDS_REQUIRES_A_TYPE)), 
 				new I_Thrower() {
 					
@@ -30,7 +30,7 @@ public class AbstractAssertCommandTrial extends SourceFileCountingTrial {
 				});
 		
 		assertEquals("AssertCommands requres a non empty failue message.",AbstractAssertCommand.ASSERT_COMMANDS_REQURES_A_NON_EMPTY_FAILUE_MESSAGE);
-		assertThrown(new ExpectedThrownData(new IllegalArgumentException(
+		assertThrown(new ExpectedThrowable(new IllegalArgumentException(
 					AbstractAssertCommand.ASSERT_COMMANDS_REQURES_A_NON_EMPTY_FAILUE_MESSAGE)), 
 				new I_Thrower() {
 					
@@ -39,7 +39,7 @@ public class AbstractAssertCommandTrial extends SourceFileCountingTrial {
 						new ExtendedAssertCommand(AssertType.AssertFalse, null);
 					}
 				});
-		assertThrown(new ExpectedThrownData(new IllegalArgumentException(
+		assertThrown(new ExpectedThrowable(new IllegalArgumentException(
 					AbstractAssertCommand.ASSERT_COMMANDS_REQURES_A_NON_EMPTY_FAILUE_MESSAGE)), 
 				new I_Thrower() {
 					

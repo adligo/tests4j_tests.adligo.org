@@ -5,7 +5,7 @@ import java.util.Set;
 
 import org.adligo.tests4j.run.helpers.ClassFilter;
 import org.adligo.tests4j.run.helpers.ClassFilterMutant;
-import org.adligo.tests4j.shared.asserts.common.ExpectedThrownData;
+import org.adligo.tests4j.shared.asserts.common.ExpectedThrowable;
 import org.adligo.tests4j.shared.asserts.common.I_Thrower;
 import org.adligo.tests4j.system.shared.trials.SourceFileScope;
 import org.adligo.tests4j.system.shared.trials.Test;
@@ -18,7 +18,7 @@ public class ClassFilterTrial extends SourceFileCountingTrial {
 
 	@Test
 	public void testConstructorExceptions() throws Exception {
-		assertThrown(new ExpectedThrownData(NullPointerException.class),
+		assertThrown(new ExpectedThrowable(NullPointerException.class),
 				new I_Thrower() {
 					
 					@Override

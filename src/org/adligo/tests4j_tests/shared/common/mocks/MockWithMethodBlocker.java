@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.adligo.tests4j.shared.common.MethodBlocker;
+import org.adligo.tests4j.shared.en.Tests4J_EnglishConstants;
 
 
 public class MockWithMethodBlocker {
@@ -18,7 +19,7 @@ public class MockWithMethodBlocker {
 	private MethodBlocker getABlock() {
 		List<String> allowedCallersClassNames = new ArrayList<String>();
 		allowedCallersClassNames.add("org.adligo.tests4j_tests.shared.common.MethodBlockerTrial");
-		MethodBlocker mb = new MethodBlocker(MockWithMethodBlocker.class, "doA", allowedCallersClassNames);
+		MethodBlocker mb = new MethodBlocker(Tests4J_EnglishConstants.ENGLISH, MockWithMethodBlocker.class, "doA", allowedCallersClassNames);
 		return mb;
 	}
 	
@@ -29,7 +30,7 @@ public class MockWithMethodBlocker {
 	private MethodBlocker getBBlock() {
 		List<String> allowedCallersClassNames = new ArrayList<String>();
 		allowedCallersClassNames.add("org.adligo.tests4j_tests.shared.common.mocks.MockWithMethodBlocker");
-		MethodBlocker mb = new MethodBlocker(MockWithMethodBlocker.class, "doB", allowedCallersClassNames);
+		MethodBlocker mb = new MethodBlocker(Tests4J_EnglishConstants.ENGLISH, MockWithMethodBlocker.class, "doB", allowedCallersClassNames);
 		return mb;
 	}
 	
@@ -45,7 +46,7 @@ public class MockWithMethodBlocker {
 		List<String> allowedCallersClassNames = new ArrayList<String>();
 		allowedCallersClassNames.add("org.adligo.tests4j_tests.shared.common.MethodBlockerTrial");
 		allowedCallersClassNames.add("org.adligo.tests4j_tests.shared.common.mocks.MockWithMethodBlocker");
-		MethodBlocker mb = new MethodBlocker(MockWithMethodBlocker.class, "doD", allowedCallersClassNames);
+		MethodBlocker mb = new MethodBlocker(Tests4J_EnglishConstants.ENGLISH,MockWithMethodBlocker.class, "doD", allowedCallersClassNames);
 		return mb;
 	}
 	

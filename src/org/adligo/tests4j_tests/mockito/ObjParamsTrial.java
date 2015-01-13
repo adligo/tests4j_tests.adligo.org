@@ -1,6 +1,6 @@
 package org.adligo.tests4j_tests.mockito;
 
-import org.adligo.tests4j.shared.asserts.common.ExpectedThrownData;
+import org.adligo.tests4j.shared.asserts.common.ExpectedThrowable;
 import org.adligo.tests4j.shared.asserts.common.I_Thrower;
 import org.adligo.tests4j.system.shared.trials.SourceFileScope;
 import org.adligo.tests4j.system.shared.trials.Test;
@@ -13,7 +13,7 @@ public class ObjParamsTrial extends SourceFileCountingTrial {
 
 	@Test
 	public void testConstructorExceptions() {
-		assertThrown(new ExpectedThrownData(
+		assertThrown(new ExpectedThrowable(
 				NullPointerException.class),
 				new I_Thrower() {
 					

@@ -46,7 +46,7 @@ public class A_AssertsCmPkgTrials extends SimplePackageTrials
 		add(I_CollectionContainsAssertionDataTrial.class);
 		add(I_CompareAssertCommandTrial.class);
 		add(I_CompareAssertionDataTrial.class);
-		add(I_ExpectedThrownDataTrial.class);
+		add(I_ExpectedThrowableTrial.class);
 		add(I_SimpleAssertCommandTrial.class);
 		add(I_SimpleCompareAssertCommandTrial.class);
 		add(I_SourceTestFailureTrial.class);
@@ -63,7 +63,8 @@ public class A_AssertsCmPkgTrials extends SimplePackageTrials
 		add(AssertTypeTrial.class);
 		add(AssertionFailedExceptionTrial.class);
 		add(CompareAssertionDataTrial.class);
-		add(ExpectedThrownDataTrial.class);
+		add(ExpectedThrowableTrial.class);
+		add(ExpectedThrowableValidatorTrial.class);
 		add(ThrownAssertionDataMutantTrial.class);
 		add(ThrownAssertionDataTrial.class);
 		

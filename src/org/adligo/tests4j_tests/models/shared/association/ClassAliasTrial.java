@@ -1,6 +1,6 @@
 package org.adligo.tests4j_tests.models.shared.association;
 
-import org.adligo.tests4j.shared.asserts.common.ExpectedThrownData;
+import org.adligo.tests4j.shared.asserts.common.ExpectedThrowable;
 import org.adligo.tests4j.shared.asserts.common.I_Thrower;
 import org.adligo.tests4j.shared.asserts.reference.AllowedReferences;
 import org.adligo.tests4j.shared.asserts.reference.ClassAlias;
@@ -17,7 +17,7 @@ public class ClassAliasTrial extends SourceFileCountingTrial {
 
 	@Test
 	public void testConstructorExceptions() {
-		assertThrown(new ExpectedThrownData(
+		assertThrown(new ExpectedThrowable(
 				NullPointerException.class),
 				new I_Thrower() {
 					
@@ -26,7 +26,7 @@ public class ClassAliasTrial extends SourceFileCountingTrial {
 						new ClassAlias((Class<?>) null);
 					}
 				});
-		assertThrown(new ExpectedThrownData(
+		assertThrown(new ExpectedThrowable(
 				new IllegalArgumentException(ClassAlias.NO_NAME)),
 				new I_Thrower() {
 					

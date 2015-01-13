@@ -1,6 +1,6 @@
 package org.adligo.tests4j_tests.system.shared.api;
 
-import org.adligo.tests4j.shared.asserts.common.ExpectedThrownData;
+import org.adligo.tests4j.shared.asserts.common.ExpectedThrowable;
 import org.adligo.tests4j.shared.asserts.common.I_Thrower;
 import org.adligo.tests4j.shared.asserts.reference.AllowedReferences;
 import org.adligo.tests4j.shared.en.Tests4J_EnglishConstants;
@@ -14,163 +14,145 @@ import org.adligo.tests4j_tests.base_trials.SourceFileCountingTrial;
 import org.adligo.tests4j_tests.references_groups.Tests4J_SystemApi_GwtReferenceGroup;
 import org.adligo.tests4j_tests.system.shared.mocks.Tests4J_RemoteInfoMock;
 
-@SourceFileScope (sourceClass=Tests4J_RemoteInfo.class, minCoverage=86.0)
+@SourceFileScope (sourceClass=Tests4J_RemoteInfo.class, minCoverage=69.0)
 @AllowedReferences (groups=Tests4J_SystemApi_GwtReferenceGroup.class)
 public class Tests4J_RemoteInfoTrial extends SourceFileCountingTrial {
 	
+  @SuppressWarnings("unused")
 	@Test
 	public void testConstructorExceptions() {
 		I_Tests4J_ParamsReaderMessages messages = Tests4J_EnglishConstants.ENGLISH.getParamReaderMessages();
 		
-		assertThrown(new ExpectedThrownData(new IllegalArgumentException(
+		//null constants
+		assertThrown(new ExpectedThrowable(NullPointerException.class), 
+        new I_Thrower() {
+          
+          @Override
+          public void run() {
+            new Tests4J_RemoteInfo(null, null);
+          }
+        });
+		assertThrown(new ExpectedThrowable(new IllegalArgumentException(
 				messages.getHostRequired())), 
 				new I_Thrower() {
 					
 					@Override
 					public void run() {
-						new Tests4J_RemoteInfo(null, 0, null);
+						new Tests4J_RemoteInfo(Tests4J_EnglishConstants.ENGLISH, null, 0, null);
 					}
 				});
-		assertThrown(new ExpectedThrownData(new IllegalArgumentException(
+		assertThrown(new ExpectedThrowable(new IllegalArgumentException(
 				messages.getHostRequired())), 
 				new I_Thrower() {
 					
 					@Override
 					public void run() {
-						new Tests4J_RemoteInfo("", 0, null);
+						new Tests4J_RemoteInfo(Tests4J_EnglishConstants.ENGLISH, "", 0, null);
 					}
 				});
 		
 		final Tests4J_RemoteInfoMock mock = new Tests4J_RemoteInfoMock();
 		//host null
-		assertThrown(new ExpectedThrownData(new IllegalArgumentException(
+		assertThrown(new ExpectedThrowable(new IllegalArgumentException(
 				messages.getHostRequired())), 
 				new I_Thrower() {
 					
-					@Override
+          @Override
 					public void run() {
-						new Tests4J_RemoteInfo(mock);
+						new Tests4J_RemoteInfo(Tests4J_EnglishConstants.ENGLISH, mock);
 					}
 				});
 		//host empty
 		mock.setHost("");
-		assertThrown(new ExpectedThrownData(new IllegalArgumentException(
+		assertThrown(new ExpectedThrowable(new IllegalArgumentException(
 				messages.getHostRequired())), 
 				new I_Thrower() {
 					
 					@Override
 					public void run() {
-						new Tests4J_RemoteInfo(mock);
+						new Tests4J_RemoteInfo(Tests4J_EnglishConstants.ENGLISH, mock);
 					}
 				});
 		
 		//authCodeDefault null
 		mock.setHost("abc");
-		assertThrown(new ExpectedThrownData(new IllegalArgumentException(
+		assertThrown(new ExpectedThrowable(new IllegalArgumentException(
 				messages.getAuthCodeOrAuthCodeDefaultRequired())), 
 				new I_Thrower() {
 					
 					@Override
 					public void run() {
-						new Tests4J_RemoteInfo(mock, null);
+						new Tests4J_RemoteInfo(Tests4J_EnglishConstants.ENGLISH, mock, null);
 					}
 				});
 		//authCodeDefault empty
-		assertThrown(new ExpectedThrownData(new IllegalArgumentException(
+		assertThrown(new ExpectedThrowable(new IllegalArgumentException(
 				messages.getAuthCodeOrAuthCodeDefaultRequired())), 
 				new I_Thrower() {
 					
 					@Override
 					public void run() {
-						new Tests4J_RemoteInfo(mock, "");
+						new Tests4J_RemoteInfo(Tests4J_EnglishConstants.ENGLISH, mock, "");
 					}
 				});
 		
 		//authCode null
 		mock.setAuthCode(null);
-		assertThrown(new ExpectedThrownData(new IllegalArgumentException(
+		assertThrown(new ExpectedThrowable(new IllegalArgumentException(
 				messages.getAuthCodeOrAuthCodeDefaultRequired())), 
 				new I_Thrower() {
 					
 					@Override
 					public void run() {
-						new Tests4J_RemoteInfo(mock, null);
+						new Tests4J_RemoteInfo(Tests4J_EnglishConstants.ENGLISH, mock, null);
 					}
 				});
 		
 		//authCode empty
 		mock.setAuthCode("");
-		assertThrown(new ExpectedThrownData(new IllegalArgumentException(
+		assertThrown(new ExpectedThrowable(new IllegalArgumentException(
 				messages.getAuthCodeOrAuthCodeDefaultRequired())), 
 				new I_Thrower() {
 					
 					@Override
 					public void run() {
-						new Tests4J_RemoteInfo(mock, null);
+						new Tests4J_RemoteInfo(Tests4J_EnglishConstants.ENGLISH, mock, null);
 					}
 				});
 	}
 	
-	@Test
+	@SuppressWarnings("boxing")
+  @Test
 	public void testCopyConstructors() {
 		final Tests4J_RemoteInfoMock mock = new Tests4J_RemoteInfoMock();
 		mock.setHost("abc");
 		mock.setPort(7);
-		Tests4J_RemoteInfo ri = new Tests4J_RemoteInfo(mock);
+		Tests4J_RemoteInfo ri = new Tests4J_RemoteInfo(Tests4J_EnglishConstants.ENGLISH, mock);
 		assertEquals("abc", ri.getHost());
 		assertEquals(7, ri.getPort());
 		assertNull(ri.getAuthCode());
 		
-		ri = new Tests4J_RemoteInfo(mock, "hey7");
+		ri = new Tests4J_RemoteInfo(Tests4J_EnglishConstants.ENGLISH, mock, "hey7");
 		assertEquals("abc", ri.getHost());
 		assertEquals(7, ri.getPort());
 		assertEquals("hey7", ri.getAuthCode());
 		
-		ri = new Tests4J_RemoteInfo("mock",11,  "hey999");
+		ri = new Tests4J_RemoteInfo(Tests4J_EnglishConstants.ENGLISH, "mock",11,  "hey999");
 		assertEquals("mock", ri.getHost());
 		assertEquals(11, ri.getPort());
 		assertEquals("hey999", ri.getAuthCode());
 	}
 	
-	@Test
-	public void testCopyConstructorsToAndFromXml() {
-		Tests4J_RemoteInfo a = new Tests4J_RemoteInfo("mock",11, null);
-		XML_Builder builder = new XML_Builder();
-		builder.setAttributesPerLine(1);
-		a.toXml(builder);
-		String result = builder.toXmlString();
-		assertEquals("<remoteInfo host=\"mock\" port=\"11\" />\n", result);
-		assertEquals(1, builder.getAttributesPerLine());
-		
-		
-		Tests4J_RemoteInfo b = new Tests4J_RemoteInfo(result);
-		assertEquals("mock", b.getHost());
-		assertEquals(11, b.getPort());
-		assertNull(b.getAuthCode());
-		
-		
-		a = new Tests4J_RemoteInfo("mock",11, "bb");
-		builder = new XML_Builder();
-		builder.setAttributesPerLine(2);
-		a.toXml(builder);
-		result = builder.toXmlString();
-		assertEquals("<remoteInfo host=\"mock\" port=\"11\" authCode=\"bb\" />\n", result);
-		assertEquals(2, builder.getAttributesPerLine());
-		
-		b = new Tests4J_RemoteInfo(result);
-		assertEquals("mock", b.getHost());
-		assertEquals(11, b.getPort());
-		assertEquals("bb", b.getAuthCode());
-	}
 	
-	@Test
+	@SuppressWarnings("boxing")
+  @Test
 	public void testEqualsHashCode() {
 		
-		Tests4J_RemoteInfo a = new Tests4J_RemoteInfo("mock",11,  "hey999");
-		Tests4J_RemoteInfo b = new Tests4J_RemoteInfo("mockb",11,  "hey999");
-		Tests4J_RemoteInfo c = new Tests4J_RemoteInfo("mock",11,  "hey999");
-		Tests4J_RemoteInfo d = new Tests4J_RemoteInfo("mock",12,  "hey999");
-		Tests4J_RemoteInfo e = new Tests4J_RemoteInfo("mock",11,  "hey997");
+		Tests4J_RemoteInfo a = new Tests4J_RemoteInfo(Tests4J_EnglishConstants.ENGLISH, "mock",11,  "hey999");
+		Tests4J_RemoteInfo b = new Tests4J_RemoteInfo(Tests4J_EnglishConstants.ENGLISH, "mockb",11,  "hey999");
+		Tests4J_RemoteInfo c = new Tests4J_RemoteInfo(Tests4J_EnglishConstants.ENGLISH, "mock",11,  "hey999");
+		Tests4J_RemoteInfo d = new Tests4J_RemoteInfo(Tests4J_EnglishConstants.ENGLISH, "mock",12,  "hey999");
+		Tests4J_RemoteInfo e = new Tests4J_RemoteInfo(Tests4J_EnglishConstants.ENGLISH, "mock",11,  "hey997");
 		
 		assertEquals(a, a);
 		assertEquals(a.hashCode(), a.hashCode());
@@ -190,12 +172,12 @@ public class Tests4J_RemoteInfoTrial extends SourceFileCountingTrial {
 	
 	@Override
 	public int getTests(I_CountType type) {
-		return super.getTests(type, 4, true);
+		return super.getTests(type, 3, true);
 	}
 
 	@Override
 	public int getAsserts(I_CountType type) {
-		int thisAsserts = 37;
+		int thisAsserts = 28;
 		//code coverage and circular dependencies +
 		//custom afterTrialTests
 		//+ see above
@@ -209,7 +191,7 @@ public class Tests4J_RemoteInfoTrial extends SourceFileCountingTrial {
 
 	@Override
 	public int getUniqueAsserts(I_CountType type) {
-		int thisUniqueAsserts = 27;
+		int thisUniqueAsserts = 20;
 		//code coverage and circular dependencies +
 		//custom afterTrialTests
 		//+ see above

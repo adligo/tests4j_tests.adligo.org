@@ -20,7 +20,7 @@ public class RemoteProgressDisplayTrial extends SourceFileCountingTrial {
   private MockMethod<Void> logRecord_;
   private MockMethod<Void> logLineRecord_;
   private MockMethod<Void> onThrowableRecord_;
-	private RemoteProgressDisplay reporter = new RemoteProgressDisplay();
+	private RemoteProgressDisplay reporter = new RemoteProgressDisplay(Tests4J_EnglishConstants.ENGLISH);
 	
 	@Override
 	public void beforeTests() {

@@ -1,6 +1,6 @@
 package org.adligo.tests4j_tests.run.api;
 
-import org.adligo.tests4j.shared.asserts.common.ExpectedThrownData;
+import org.adligo.tests4j.shared.asserts.common.ExpectedThrowable;
 import org.adligo.tests4j.shared.asserts.common.I_Thrower;
 import org.adligo.tests4j.shared.asserts.reference.CircularDependencies;
 import org.adligo.tests4j.shared.output.DefaultLog;
@@ -50,7 +50,7 @@ public class Tests4J_UncaughtExceptionHandlerTrial extends SourceFileCountingTri
 	
 	@Test
 	public void testSetLogFailure() throws Exception {
-		assertThrown(new ExpectedThrownData(new IllegalStateException(
+		assertThrown(new ExpectedThrowable(new IllegalStateException(
 				"The Method class org.adligo.tests4j.run.api.Tests4J_UncaughtExceptionHandler.setLogger "
 				+ "may only be called by [org.adligo.tests4j_tests.run.api.mocks.MockTests4J_UncaughtExceptionHandler]")),
 				new I_Thrower() {

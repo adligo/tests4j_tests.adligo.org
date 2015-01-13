@@ -4,7 +4,6 @@ import org.adligo.tests4j.shared.common.ArrayUtils;
 import org.adligo.tests4j.shared.common.CacheControl;
 import org.adligo.tests4j.shared.common.ClassMethods;
 import org.adligo.tests4j.shared.common.DefaultSystem;
-import org.adligo.tests4j.shared.common.DelegateSystem;
 import org.adligo.tests4j.shared.common.I_CacheControl;
 import org.adligo.tests4j.shared.common.I_Immutable;
 import org.adligo.tests4j.shared.common.I_Platform;
@@ -18,8 +17,6 @@ import org.adligo.tests4j.shared.common.Platform;
 import org.adligo.tests4j.shared.common.StackTraceBuilder;
 import org.adligo.tests4j.shared.common.StringMethods;
 import org.adligo.tests4j.shared.common.SystemWithPrintStreamDelegate;
-import org.adligo.tests4j.shared.common.Tests4J_Constants;
-import org.adligo.tests4j.shared.common.Tests4J_ConstantsWrapper;
 import org.adligo.tests4j.shared.common.TrialType;
 
 import java.util.HashSet;
@@ -41,7 +38,6 @@ public class Tests4J_Common_ReferenceGroup extends Tests4J_ReferenceGroup {
 		add(names, ClassMethods.class);
 		
 		add(names, DefaultSystem.class);
-		add(names, DelegateSystem.class);
 		
 		add(names, I_CacheControl.class);
 		add(names, I_Immutable.class);
@@ -62,8 +58,6 @@ public class Tests4J_Common_ReferenceGroup extends Tests4J_ReferenceGroup {
 		add(names, StringMethods.class);
 		add(names, SystemWithPrintStreamDelegate.class);
 		
-		add(names, Tests4J_Constants.class);
-		add(names, Tests4J_ConstantsWrapper.class);
 		add(names, TrialType.class);
 		
 		names.addAll(Tests4J_EN_ReferenceGroup.INSTANCE.getClassNames());

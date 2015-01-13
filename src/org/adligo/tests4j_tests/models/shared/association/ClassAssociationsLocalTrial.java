@@ -5,7 +5,7 @@ import java.util.Set;
 
 import org.adligo.tests4j.models.shared.association.ClassAssociationsLocal;
 import org.adligo.tests4j.models.shared.association.ClassAssociationsLocalMutant;
-import org.adligo.tests4j.shared.asserts.common.ExpectedThrownData;
+import org.adligo.tests4j.shared.asserts.common.ExpectedThrowable;
 import org.adligo.tests4j.shared.asserts.common.I_Thrower;
 import org.adligo.tests4j.shared.asserts.reference.AllowedReferences;
 import org.adligo.tests4j.shared.asserts.reference.ClassAliasLocal;
@@ -22,7 +22,7 @@ public class ClassAssociationsLocalTrial extends SourceFileCountingTrial {
 
 	@Test
 	public void testConstructorExceptions() {
-		assertThrown(new ExpectedThrownData(NullPointerException.class),
+		assertThrown(new ExpectedThrowable(NullPointerException.class),
 				new I_Thrower() {
 					
 					@Override
@@ -30,7 +30,7 @@ public class ClassAssociationsLocalTrial extends SourceFileCountingTrial {
 						new ClassAssociationsLocal(null);
 					}
 				});
-		assertThrown(new ExpectedThrownData(
+		assertThrown(new ExpectedThrowable(
 				NullPointerException.class),
 				new I_Thrower() {
 					

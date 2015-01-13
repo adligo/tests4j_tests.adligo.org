@@ -4,7 +4,7 @@ import org.adligo.tests4j.models.shared.coverage.Probes;
 import org.adligo.tests4j.run.io.Bits;
 import org.adligo.tests4j.run.xml_bindings.conversion.ConvertCoverageByteArrays;
 import org.adligo.tests4j.run.xml_bindings.conversion.DataFromBytesMutant;
-import org.adligo.tests4j.shared.asserts.common.ExpectedThrownData;
+import org.adligo.tests4j.shared.asserts.common.ExpectedThrowable;
 import org.adligo.tests4j.shared.asserts.common.I_Thrower;
 import org.adligo.tests4j.system.shared.trials.SourceFileScope;
 import org.adligo.tests4j.system.shared.trials.Test;
@@ -149,7 +149,7 @@ public class ConvertCoverageByteArraysTrial extends SourceFileCountingTrial {
   @Test
   public void testToFromPositiveInts() {
     byte [] byteWrong = new byte[3];
-    assertThrown(new ExpectedThrownData(IllegalArgumentException.class),
+    assertThrown(new ExpectedThrowable(IllegalArgumentException.class),
         new I_Thrower() {
           
           @Override

@@ -8,12 +8,15 @@ import org.adligo.tests4j.run.common.I_ThreadGroupLocal;
 import org.adligo.tests4j.run.common.I_ThreadingFactory;
 import org.adligo.tests4j.run.common.ThreadingFactory;
 import org.adligo.tests4j.run.memory.Tests4J_ThreadFactory;
-import org.adligo.tests4j.shared.asserts.common.ExpectedThrownData;
+import org.adligo.tests4j.shared.asserts.common.ExpectedThrowable;
 import org.adligo.tests4j.shared.asserts.common.I_Thrower;
 import org.adligo.tests4j.shared.asserts.reference.CircularDependencies;
+import org.adligo.tests4j.shared.en.Tests4J_EnglishConstants;
+import org.adligo.tests4j.shared.i18n.I_Tests4J_Constants;
 import org.adligo.tests4j.shared.output.I_Tests4J_Log;
 import org.adligo.tests4j.system.shared.trials.SourceFileScope;
 import org.adligo.tests4j.system.shared.trials.Test;
+import org.adligo.tests4j_4jacoco.plugin.common.I_LoggerDataAccessorFactory;
 import org.adligo.tests4j_4jacoco.plugin.common.I_Runtime;
 import org.adligo.tests4j_4jacoco.plugin.data.multi.CascadingProbeMap;
 import org.adligo.tests4j_4jacoco.plugin.data.multi.MultiContext;
@@ -31,30 +34,38 @@ public class MultiProbesMapTrial extends SourceFileCountingTrial {
   @SuppressWarnings({"unused", "boxing"})
   @Test
   public void testConstructorTwoArg() {
-    assertThrown(new ExpectedThrownData(NullPointerException.class), new I_Thrower() {
+    assertThrown(new ExpectedThrowable(NullPointerException.class), new I_Thrower() {
       @Override
       public void run() throws Throwable {
         new MultiProbesMap(null, null);
       }
     });
-    assertThrown(new ExpectedThrownData(NullPointerException.class), new I_Thrower() {
+    assertThrown(new ExpectedThrowable(NullPointerException.class), new I_Thrower() {
       @Override
       public void run() throws Throwable {
         new MultiProbesMap(mock(I_ClassProbes.class), null);
       }
     });
-    assertThrown(new ExpectedThrownData(new NullPointerException(
+    assertThrown(new ExpectedThrowable(new NullPointerException(
         MultiProbesMap.THE_I_CLASS_PROBES_MUST_CONTAIN_THE_CLASS_NAME_OF_THE_COVERED_CLASS)), 
         new I_Thrower() {
       @Override
       public void run() throws Throwable {
-        new MultiProbesMap(mock(I_ClassProbes.class), mock(MultiContext.class));
+        MultiContext ctx = mock(MultiContext.class);
+        when(ctx.getLog()).thenReturn(mock(I_Tests4J_Log.class));
+        when(ctx.getConstants()).thenReturn(Tests4J_EnglishConstants.ENGLISH);
+        new MultiProbesMap(mock(I_ClassProbes.class), ctx);
       }
     });
     I_ClassProbes classProbes = mock(I_ClassProbes.class);
     when(classProbes.getClassName()).thenReturn("cn");
     when(classProbes.getProbes()).thenReturn(mock(I_Probes.class));
-    MultiProbesMap mpm = new MultiProbesMap(classProbes, mock(MultiContext.class));
+    
+    MultiContext ctx = mock(MultiContext.class);
+    
+    I_Tests4J_Log logMock = mock(I_Tests4J_Log.class);
+    when(ctx.getConstants()).thenReturn(Tests4J_EnglishConstants.ENGLISH);
+    MultiProbesMap mpm = new MultiProbesMap(classProbes, ctx);
     I_ThreadingFactory factory = mpm.getThreadingFactory();
     assertNotNull(factory);
     assertEquals(ThreadingFactory.INSTANCE.getClass().getName(), factory.getClass().getName());
@@ -71,24 +82,28 @@ public class MultiProbesMapTrial extends SourceFileCountingTrial {
   @SuppressWarnings({"unused", "boxing"})
   @Test
   public void testConstructorThreeArg() {
-    assertThrown(new ExpectedThrownData(NullPointerException.class), new I_Thrower() {
+    assertThrown(new ExpectedThrowable(NullPointerException.class), new I_Thrower() {
       @Override
       public void run() throws Throwable {
         new MultiProbesMap(null, null, null);
       }
     });
-    assertThrown(new ExpectedThrownData(NullPointerException.class), new I_Thrower() {
+    assertThrown(new ExpectedThrowable(NullPointerException.class), new I_Thrower() {
       @Override
       public void run() throws Throwable {
         new MultiProbesMap(mock(I_ClassProbes.class), null, null);
       }
     });
-    assertThrown(new ExpectedThrownData(new NullPointerException(
+    assertThrown(new ExpectedThrowable(new NullPointerException(
         MultiProbesMap.THE_I_CLASS_PROBES_MUST_CONTAIN_THE_CLASS_NAME_OF_THE_COVERED_CLASS)), 
         new I_Thrower() {
       @Override
       public void run() throws Throwable {
-        new MultiProbesMap(mock(I_ClassProbes.class), mock(MultiContext.class), null);
+        MultiContext ctx = mock(MultiContext.class);
+        
+        I_Tests4J_Log logMock = mock(I_Tests4J_Log.class);
+        when(ctx.getConstants()).thenReturn(Tests4J_EnglishConstants.ENGLISH);
+        new MultiProbesMap(mock(I_ClassProbes.class), ctx, null);
       }
     });
     I_ClassProbes classProbes = mock(I_ClassProbes.class);
@@ -98,7 +113,12 @@ public class MultiProbesMapTrial extends SourceFileCountingTrial {
     when(probesMock.size()).thenReturn(5);
     when(classProbes.getProbes()).thenReturn(probesMock);
     I_ThreadingFactory mockFactory = mock(I_ThreadingFactory.class);
-    MultiProbesMap mpm = new MultiProbesMap(classProbes, mock(MultiContext.class), mockFactory);
+    
+    MultiContext ctx = mock(MultiContext.class);
+    I_Tests4J_Log logMock = mock(I_Tests4J_Log.class);
+    when(ctx.getConstants()).thenReturn(Tests4J_EnglishConstants.ENGLISH);
+    
+    MultiProbesMap mpm = new MultiProbesMap(classProbes, ctx, mockFactory);
     I_ThreadingFactory factory = mpm.getThreadingFactory();
     assertNotNull(factory);
     assertSame(mockFactory, factory);
@@ -137,6 +157,7 @@ public class MultiProbesMapTrial extends SourceFileCountingTrial {
     MultiContext ctx = mock(MultiContext.class);
     
     I_Tests4J_Log logMock = mock(I_Tests4J_Log.class);
+    when(ctx.getConstants()).thenReturn(Tests4J_EnglishConstants.ENGLISH);
     MockMethod<Void> logRecord = new MockMethod<Void>();
     doAnswer(logRecord).when(logMock).log(any());
     when(logMock.getThreadWithGroupNameMessage()).thenReturn("MockThread/MockThreadGroup");
@@ -144,6 +165,7 @@ public class MultiProbesMapTrial extends SourceFileCountingTrial {
     when(logMock.getLineSeperator()).thenReturn("\nlineSeperator");
     
     when(ctx.getLog()).thenReturn(logMock);
+    when(ctx.getConstants()).thenReturn(Tests4J_EnglishConstants.ENGLISH); 
     new MultiProbesMap(classProbes, ctx, mockFactory);
     
     assertEquals(1, threadGroupLocalRecord.count());
@@ -216,6 +238,7 @@ public class MultiProbesMapTrial extends SourceFileCountingTrial {
     doAnswer(logRecord).when(logMock).log(any());
     
     when(ctx.getLog()).thenReturn(logMock);
+    when(ctx.getConstants()).thenReturn(Tests4J_EnglishConstants.ENGLISH);
     new MultiProbesMap(classProbes, ctx, mockFactory);
     
     assertEquals(1, threadGroupLocalRecord.count());
@@ -280,6 +303,7 @@ public class MultiProbesMapTrial extends SourceFileCountingTrial {
     doAnswer(logRecord).when(logMock).log(any());
     
     when(ctx.getLog()).thenReturn(logMock);
+    when(ctx.getConstants()).thenReturn(Tests4J_EnglishConstants.ENGLISH);
     MultiProbesMap map = new MultiProbesMap(classProbes, ctx, mockFactory);
     
     assertFalse(map.put(null, null));
@@ -321,6 +345,7 @@ public class MultiProbesMapTrial extends SourceFileCountingTrial {
     when(ctx.getRuntime()).thenReturn(runtimeMock);
     
     when(ctx.getLog()).thenReturn(logMock);
+    when(ctx.getConstants()).thenReturn(Tests4J_EnglishConstants.ENGLISH);
     MultiProbesMap map = new MultiProbesMap(classProbes, ctx, mockFactory);
     
     map.put(0, true);
@@ -365,6 +390,7 @@ public class MultiProbesMapTrial extends SourceFileCountingTrial {
     when(ctx.getRuntime()).thenReturn(runtimeMock);
     
     when(ctx.getLog()).thenReturn(logMock);
+    when(ctx.getConstants()).thenReturn(Tests4J_EnglishConstants.ENGLISH);
     MultiProbesMap map = new MultiProbesMap(classProbes, ctx, mockFactory);
     
     map.put(0, true);
@@ -411,6 +437,7 @@ public class MultiProbesMapTrial extends SourceFileCountingTrial {
     when(ctx.getRuntime()).thenReturn(runtimeMock);
     
     when(ctx.getLog()).thenReturn(logMock);
+    when(ctx.getConstants()).thenReturn(Tests4J_EnglishConstants.ENGLISH);
     MultiProbesMap map = new MultiProbesMap(classProbes, ctx, mockFactory);
     
     //have to set the regular probe first
@@ -478,6 +505,7 @@ public class MultiProbesMapTrial extends SourceFileCountingTrial {
     when(ctx.getRuntime()).thenReturn(runtimeMock);
     
     when(ctx.getLog()).thenReturn(logMock);
+    when(ctx.getConstants()).thenReturn(Tests4J_EnglishConstants.ENGLISH);
     MultiProbesMap map = new MultiProbesMap(classProbes, ctx, mockFactory);
     
     //have to set the regular probe first
@@ -539,6 +567,7 @@ public class MultiProbesMapTrial extends SourceFileCountingTrial {
     when(ctx.getRuntime()).thenReturn(runtimeMock);
     
     when(ctx.getLog()).thenReturn(logMock);
+    when(ctx.getConstants()).thenReturn(Tests4J_EnglishConstants.ENGLISH);
     MultiProbesMap map = new MultiProbesMap(classProbes, ctx, mockFactory);
     
     //have to set the regular probe first
@@ -589,6 +618,7 @@ public class MultiProbesMapTrial extends SourceFileCountingTrial {
     when(ctx.getRuntime()).thenReturn(runtimeMock);
     
     when(ctx.getLog()).thenReturn(logMock);
+    when(ctx.getConstants()).thenReturn(Tests4J_EnglishConstants.ENGLISH);
     MultiProbesMap map = new MultiProbesMap(classProbes, ctx, mockFactory);
     
     //have to set the regular probe first
@@ -636,6 +666,7 @@ public class MultiProbesMapTrial extends SourceFileCountingTrial {
     when(ctx.getRuntime()).thenReturn(runtimeMock);
     
     when(ctx.getLog()).thenReturn(logMock);
+    when(ctx.getConstants()).thenReturn(Tests4J_EnglishConstants.ENGLISH);
     MultiProbesMap map = new MultiProbesMap(classProbes, ctx, mockFactory);
     
     //set both probes
@@ -688,6 +719,7 @@ public class MultiProbesMapTrial extends SourceFileCountingTrial {
     when(ctx.getRuntime()).thenReturn(runtimeMock);
     
     when(ctx.getLog()).thenReturn(logMock);
+    when(ctx.getConstants()).thenReturn(Tests4J_EnglishConstants.ENGLISH); 
     MultiProbesMap map = new MultiProbesMap(classProbes, ctx, mockFactory);
     
     //set both probes
@@ -727,6 +759,7 @@ public class MultiProbesMapTrial extends SourceFileCountingTrial {
     I_Tests4J_Log logMock = mock(I_Tests4J_Log.class);
     
     when(ctx.getLog()).thenReturn(logMock);
+    when(ctx.getConstants()).thenReturn(Tests4J_EnglishConstants.ENGLISH);
     MultiProbesMap map = new MultiProbesMap(classProbes, ctx, mockFactory);
     assertEquals("MultiProbesMap [classCovered=cn, probes=[f,f,f,f,f],threadGroupLocalProbes=[f,f,f,f,f]]", map.toString());
     cpm.put(0, true);
@@ -741,7 +774,11 @@ public class MultiProbesMapTrial extends SourceFileCountingTrial {
     when(classProbes.getClassName()).thenReturn("cn");
     when(classProbes.getProbes()).thenReturn(mock(I_Probes.class));
     I_ThreadingFactory mockFactory = mock(I_ThreadingFactory.class);
-    MultiProbesMap map = new MultiProbesMap(classProbes, mock(MultiContext.class), mockFactory);
+    MultiContext ctxMock = mock(MultiContext.class);
+    
+    when(ctxMock.getLog()).thenReturn(mock(I_Tests4J_Log.class));
+    when(ctxMock.getConstants()).thenReturn(Tests4J_EnglishConstants.ENGLISH);
+    MultiProbesMap map = new MultiProbesMap(classProbes, ctxMock, mockFactory);
     assertMethodNotImplemented(new I_Thrower() {
       @Override
       public void run() throws Throwable {
@@ -834,6 +871,6 @@ public class MultiProbesMapTrial extends SourceFileCountingTrial {
   }
   
   private void assertMethodNotImplemented(I_Thrower thrower) {
-    assertThrown(new ExpectedThrownData(new IllegalStateException(MultiProbesMap.METHOD_NOT_IMPLEMENTED)), thrower);
+    assertThrown(new ExpectedThrowable(new IllegalStateException(MultiProbesMap.METHOD_NOT_IMPLEMENTED)), thrower);
   }
 }

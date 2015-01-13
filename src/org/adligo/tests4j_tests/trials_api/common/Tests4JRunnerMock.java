@@ -16,8 +16,10 @@ public class Tests4JRunnerMock extends Tests4J {
 	  super.setSystem(system);
 	}
 	
-	protected I_Tests4J_Controls instanceRun(I_Tests4J_Params pParams, I_Tests4J_Listener pListener) {
-		return super.instanceRun(pParams, pListener);
+	protected I_Tests4J_Controls instanceRun(I_Tests4J_Params params, I_Tests4J_Listener listener) {
+	  super.setParams(params);
+	  super.setListener(listener);
+		return super.instanceRun();
 	}
 	
 }

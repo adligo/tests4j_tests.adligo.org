@@ -119,5 +119,10 @@ public class SystemRunnerMock implements I_JseSystem {
     return null;
   }
 
+  @Override
+  public String getLanguage() {
+    return "en";
+  }
+
 
 }

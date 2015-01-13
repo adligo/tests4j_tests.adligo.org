@@ -40,7 +40,6 @@ public class A_CmnPkgTrials extends SimplePackageTrials
 		add(CacheControlTrial.class);
 		add(ClassMethodsTrial.class);
 		add(DefaultSystemTrial.class);
-		add(DelegateSystemTrial.class);
 		
 		add(I_CacheControlTrial.class);
 		add(I_ImmutableTrial.class);
@@ -60,8 +59,6 @@ public class A_CmnPkgTrials extends SimplePackageTrials
 		add(StringMethodsTrial.class);
 		add(SystemWithPrintStreamDelegateTrial.class);
 		
-		add(Tests4J_ConstantsTrial.class);
-		add(Tests4J_ConstantsWrapperTrial.class);
 		add(TrialTypeTrial.class);
 	}
 	

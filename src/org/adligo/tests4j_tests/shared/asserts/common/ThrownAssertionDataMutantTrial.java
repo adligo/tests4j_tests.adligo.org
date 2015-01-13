@@ -1,6 +1,6 @@
 package org.adligo.tests4j_tests.shared.asserts.common;
 
-import org.adligo.tests4j.shared.asserts.common.ExpectedThrownData;
+import org.adligo.tests4j.shared.asserts.common.ExpectedThrowable;
 import org.adligo.tests4j.shared.asserts.common.ThrownAssertionDataMutant;
 import org.adligo.tests4j.shared.asserts.reference.AllowedReferences;
 import org.adligo.tests4j.system.shared.trials.SourceFileScope;
@@ -15,7 +15,7 @@ public class ThrownAssertionDataMutantTrial extends SourceFileCountingTrial {
 	
 	@Test
 	public void testEqualsHashCodeAndCopyConstructor() {
-		ExpectedThrownData etd = mock(ExpectedThrownData.class);
+		ExpectedThrowable etd = mock(ExpectedThrowable.class);
 		
 		ThrownAssertionDataMutant a = new ThrownAssertionDataMutant();
 		a.setExpected(etd);

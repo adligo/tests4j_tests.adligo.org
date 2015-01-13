@@ -27,7 +27,7 @@ import java.util.Collections;
 public class LineDiffTextDisplayTrial extends SourceFileCountingTrial  {
 	private I_Tests4J_Log logMock_;
 	private MockMethod<Void> logRecord_;
-	private LineDiffTextDisplay dislay = new LineDiffTextDisplay();
+	private LineDiffTextDisplay dislay = new LineDiffTextDisplay(Tests4J_EnglishConstants.ENGLISH);
 	
 	@Override
 	public void beforeTests() {
@@ -39,7 +39,8 @@ public class LineDiffTextDisplayTrial extends SourceFileCountingTrial  {
 	@SuppressWarnings("boxing")
   @Test
 	public void testSingleActualLineMissing() {
-		I_TextLinesCompareResult result = new TextLinesCompare().compare("a\nb", "a\nb\nc", true);
+		I_TextLinesCompareResult result = new TextLinesCompare().compare(
+		    Tests4J_EnglishConstants.ENGLISH, "a\nb", "a\nb\nc", true);
 		dislay.display(logMock_,result, 3);
 		
 		I_Tests4J_LineDiffTextDisplayMessages messages =  Tests4J_EnglishConstants.ENGLISH.getLineDiffTextDisplayMessages();
@@ -112,7 +113,8 @@ public class LineDiffTextDisplayTrial extends SourceFileCountingTrial  {
 	@SuppressWarnings("boxing")
 	@Test
 	public void testSingleExpectedLineMissing_MissingExampleLine() {
-		I_TextLinesCompareResult result = new TextLinesCompare().compare("a\nb\nc", "a\nb", true);
+		I_TextLinesCompareResult result = new TextLinesCompare().compare(
+		    Tests4J_EnglishConstants.ENGLISH,"a\nb\nc", "a\nb", true);
 		dislay.display(logMock_,result, 3);
 		
 		I_Tests4J_LineDiffTextDisplayMessages messages =  Tests4J_EnglishConstants.ENGLISH.getLineDiffTextDisplayMessages();
@@ -125,7 +127,8 @@ public class LineDiffTextDisplayTrial extends SourceFileCountingTrial  {
 	@SuppressWarnings("boxing")
 	@Test
 	public void testDoubleActualLineMissing_ExpectedLinesEmpty() {
-		I_TextLinesCompareResult result = new TextLinesCompare().compare("", "a\nb", true);
+		I_TextLinesCompareResult result = new TextLinesCompare().compare(
+		    Tests4J_EnglishConstants.ENGLISH,"", "a\nb", true);
 		dislay.display(logMock_,result, 3);
 		
 		I_Tests4J_LineDiffTextDisplayMessages messages =  Tests4J_EnglishConstants.ENGLISH.getLineDiffTextDisplayMessages();
@@ -140,7 +143,8 @@ public class LineDiffTextDisplayTrial extends SourceFileCountingTrial  {
 	@SuppressWarnings("boxing")
 	@Test
 	public void testSingleExpectedLineMissing() {
-		I_TextLinesCompareResult result = new TextLinesCompare().compare("a", "", true);
+		I_TextLinesCompareResult result = new TextLinesCompare().compare(
+		    Tests4J_EnglishConstants.ENGLISH,"a", "", true);
 		dislay.display(logMock_,result, 3);
 		
 		I_Tests4J_LineDiffTextDisplayMessages messages =  Tests4J_EnglishConstants.ENGLISH.getLineDiffTextDisplayMessages();

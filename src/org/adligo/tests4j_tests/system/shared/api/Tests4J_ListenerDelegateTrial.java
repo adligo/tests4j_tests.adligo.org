@@ -3,7 +3,7 @@ package org.adligo.tests4j_tests.system.shared.api;
 import org.adligo.tests4j.models.shared.metadata.TrialRunMetadataMutant;
 import org.adligo.tests4j.models.shared.results.ApiTrialResultMutant;
 import org.adligo.tests4j.models.shared.results.TrialRunResultMutant;
-import org.adligo.tests4j.shared.asserts.common.ExpectedThrownData;
+import org.adligo.tests4j.shared.asserts.common.ExpectedThrowable;
 import org.adligo.tests4j.shared.asserts.common.I_Thrower;
 import org.adligo.tests4j.shared.asserts.reference.AllowedReferences;
 import org.adligo.tests4j.shared.output.I_Tests4J_Log;
@@ -41,7 +41,7 @@ public class Tests4J_ListenerDelegateTrial extends SourceFileCountingTrial {
   @SuppressWarnings("unused")
 	@Test
 	public void testConstructorExceptions() {
-		assertThrown(new ExpectedThrownData(new IllegalArgumentException(Tests4J_ListenerDelegator.TRIAL_RUN_LISTENER_DELEGATE_REQUIRES_A_I_TESTS4J_LOGGER)), 
+		assertThrown(new ExpectedThrowable(new IllegalArgumentException(Tests4J_ListenerDelegator.TRIAL_RUN_LISTENER_DELEGATE_REQUIRES_A_I_TESTS4J_LOGGER)), 
 				new I_Thrower() {
 					
           @Override

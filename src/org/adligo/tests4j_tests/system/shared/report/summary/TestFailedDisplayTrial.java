@@ -29,7 +29,7 @@ public class TestFailedDisplayTrial extends SourceFileCountingTrial {
     doAnswer(onThrowableRecord_).when(logMock_).onThrowable(any());
     when(logMock_.getLineSeperator()).thenReturn("lineSeperator");
     
-	  reporter = new TestFailedDisplay(logMock_);
+	  reporter = new TestFailedDisplay(Tests4J_EnglishConstants.ENGLISH, logMock_);
 	}
 
 	

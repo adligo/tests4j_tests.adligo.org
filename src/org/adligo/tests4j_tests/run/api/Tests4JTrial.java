@@ -5,6 +5,7 @@ import org.adligo.tests4j.run.common.I_JseSystem;
 import org.adligo.tests4j.run.common.JseSystem;
 import org.adligo.tests4j.run.helpers.Tests4J_Controls;
 import org.adligo.tests4j.shared.common.DefaultSystem;
+import org.adligo.tests4j.shared.en.Tests4J_EnglishConstants;
 import org.adligo.tests4j.system.shared.api.I_Tests4J_Controls;
 import org.adligo.tests4j.system.shared.api.I_Tests4J_Delegate;
 import org.adligo.tests4j.system.shared.api.I_Tests4J_DelegateFactory;
@@ -65,7 +66,8 @@ public class Tests4JTrial extends SourceFileCountingTrial implements I_Tests4J_D
 		assertSame(controllsToSend, controlls);
 		assertTrue(ran.get());
 		
-		assertEquals(params, lastSetupParams);
+		assertNotSame(params, lastSetupParams);
+    assertEquals(Tests4J_EnglishConstants.ENGLISH, lastSetupParams.getConstants());
 		assertNull(lastSetupListener);
 		
 		
@@ -83,7 +85,8 @@ public class Tests4JTrial extends SourceFileCountingTrial implements I_Tests4J_D
 		assertSame(controllsToSend, controlls);
 		
 		assertFalse(ran.get());
-		assertSame(params, lastSetupParams);
+		assertNotSame(params, lastSetupParams);
+    assertEquals(Tests4J_EnglishConstants.ENGLISH, lastSetupParams.getConstants());
 		assertNull(lastSetupListener);
 		assertFalse(ran.get());
 		
@@ -102,7 +105,8 @@ public class Tests4JTrial extends SourceFileCountingTrial implements I_Tests4J_D
 		assertSame(controllsToSend, controlls);
 		assertTrue(ran.get());
 		
-		assertSame(params, lastSetupParams);
+		assertNotSame(params, lastSetupParams);
+    assertEquals(Tests4J_EnglishConstants.ENGLISH, lastSetupParams.getConstants());
 		assertSame(listener, lastSetupListener);
 	}
 	
@@ -122,7 +126,8 @@ public class Tests4JTrial extends SourceFileCountingTrial implements I_Tests4J_D
 		assertFalse(ran.get());
 		
 		assertEquals(JseSystem.class.getName(), factory.getLastSystem().getClass().getName());
-		assertSame(params, lastSetupParams);
+		assertNotSame(params, lastSetupParams);
+		assertEquals(Tests4J_EnglishConstants.ENGLISH, lastSetupParams.getConstants());
 		assertSame(listener, lastSetupListener);
 	}
 	
@@ -144,7 +149,8 @@ public class Tests4JTrial extends SourceFileCountingTrial implements I_Tests4J_D
 		assertSame(controllsToSend, controls);
 		
 		assertEquals(JseSystem.class.getName(), factory.getLastSystem().getClass().getName());
-		assertSame(params, lastSetupParams);
+		assertNotSame(params, lastSetupParams);
+    assertEquals(Tests4J_EnglishConstants.ENGLISH, lastSetupParams.getConstants());
 		assertNull(lastSetupListener);
 	}
 	
@@ -169,7 +175,8 @@ public class Tests4JTrial extends SourceFileCountingTrial implements I_Tests4J_D
 		assertTrue(ran.get());
 		
 		assertEquals(JseSystem.class.getName(), factory.getLastSystem().getClass().getName());
-		assertSame(params, lastSetupParams);
+		assertNotSame(params, lastSetupParams);
+    assertEquals(Tests4J_EnglishConstants.ENGLISH, lastSetupParams.getConstants());
 		assertSame(listener, lastSetupListener);
 	}
 	
@@ -194,7 +201,8 @@ public class Tests4JTrial extends SourceFileCountingTrial implements I_Tests4J_D
 		assertFalse(ran.get());
 		
 		assertEquals(JseSystem.class.getName(), factory.getLastSystem().getClass().getName());
-		assertSame(params, lastSetupParams);
+		assertNotSame(params, lastSetupParams);
+    assertEquals(Tests4J_EnglishConstants.ENGLISH, lastSetupParams.getConstants());
 		assertSame(listener, lastSetupListener);	
 	}
 	
@@ -227,7 +235,7 @@ public class Tests4JTrial extends SourceFileCountingTrial implements I_Tests4J_D
 
 	@Override
 	public int getAsserts(I_CountType type) {
-		int thisAsserts = 44;
+		int thisAsserts = 51;
 		//code coverage and circular dependencies +
 		//custom afterTrialTests
 		//+ see above
@@ -241,7 +249,7 @@ public class Tests4JTrial extends SourceFileCountingTrial implements I_Tests4J_D
 
 	@Override
 	public int getUniqueAsserts(I_CountType type) {
-		int thisUniqueAsserts = 41;
+		int thisUniqueAsserts = 48;
 		//code coverage and circular dependencies +
 		//custom afterTrialTests
 		//+ see above

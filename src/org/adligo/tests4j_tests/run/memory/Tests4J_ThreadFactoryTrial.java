@@ -4,7 +4,7 @@ import static org.mockito.Mockito.mock;
 
 import org.adligo.tests4j.run.common.ThreadsDelegate;
 import org.adligo.tests4j.run.memory.Tests4J_ThreadFactory;
-import org.adligo.tests4j.shared.asserts.common.ExpectedThrownData;
+import org.adligo.tests4j.shared.asserts.common.ExpectedThrowable;
 import org.adligo.tests4j.shared.asserts.common.I_Thrower;
 import org.adligo.tests4j.shared.output.DefaultLog;
 import org.adligo.tests4j.system.shared.trials.SourceFileScope;
@@ -32,7 +32,7 @@ public class Tests4J_ThreadFactoryTrial extends SourceFileCountingTrial {
   @SuppressWarnings("unused")
   @Test 
   public void testConstructorExceptionsThread() throws Exception {
-    assertThrown(new ExpectedThrownData(NullPointerException.class), 
+    assertThrown(new ExpectedThrowable(NullPointerException.class), 
         new I_Thrower() {
 
           
@@ -42,7 +42,7 @@ public class Tests4J_ThreadFactoryTrial extends SourceFileCountingTrial {
           }
       
     });
-    assertThrown(new ExpectedThrownData(NullPointerException.class), 
+    assertThrown(new ExpectedThrowable(NullPointerException.class), 
         new I_Thrower() {
 
           
@@ -52,7 +52,7 @@ public class Tests4J_ThreadFactoryTrial extends SourceFileCountingTrial {
           }
       
     });
-    assertThrown(new ExpectedThrownData(NullPointerException.class), 
+    assertThrown(new ExpectedThrowable(NullPointerException.class), 
         new I_Thrower() {
 
           
@@ -62,7 +62,7 @@ public class Tests4J_ThreadFactoryTrial extends SourceFileCountingTrial {
           }
       
     });
-    assertThrown(new ExpectedThrownData(new IllegalArgumentException(Tests4J_ThreadFactory.NAME_NOT_ALLOWED)), 
+    assertThrown(new ExpectedThrowable(new IllegalArgumentException(Tests4J_ThreadFactory.NAME_NOT_ALLOWED)), 
         new I_Thrower() {
 
           
@@ -74,7 +74,7 @@ public class Tests4J_ThreadFactoryTrial extends SourceFileCountingTrial {
     });
     
     
-    assertThrown(new ExpectedThrownData(NullPointerException.class), 
+    assertThrown(new ExpectedThrowable(NullPointerException.class), 
         new I_Thrower() {
 
           

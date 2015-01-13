@@ -4,7 +4,7 @@ import org.adligo.tests4j.shared.asserts.AssertionProcessor;
 import org.adligo.tests4j.shared.asserts.BooleanAssertCommand;
 import org.adligo.tests4j.shared.asserts.ThrownAssertCommand;
 import org.adligo.tests4j.shared.asserts.common.AssertType;
-import org.adligo.tests4j.shared.asserts.common.ExpectedThrownData;
+import org.adligo.tests4j.shared.asserts.common.ExpectedThrowable;
 import org.adligo.tests4j.shared.asserts.common.I_AssertCommand;
 import org.adligo.tests4j.shared.asserts.common.I_AssertCompareFailure;
 import org.adligo.tests4j.shared.asserts.common.I_AssertListener;
@@ -14,6 +14,7 @@ import org.adligo.tests4j.shared.asserts.common.I_ThrowableInfo;
 import org.adligo.tests4j.shared.asserts.common.I_Thrower;
 import org.adligo.tests4j.shared.asserts.line_text.TextLines;
 import org.adligo.tests4j.shared.asserts.reference.AllowedReferences;
+import org.adligo.tests4j.shared.en.Tests4J_EnglishConstants;
 import org.adligo.tests4j.system.shared.trials.I_AbstractTrial;
 import org.adligo.tests4j.system.shared.trials.SourceFileScope;
 import org.adligo.tests4j.system.shared.trials.Test;
@@ -36,6 +37,7 @@ public class AssertionProcessorTrial extends SourceFileCountingTrial implements 
   }
   
   
+  @SuppressWarnings("boxing")
   @Test
   public void testSimple() {
     assertNull(lastAssertCommand);
@@ -56,7 +58,7 @@ public class AssertionProcessorTrial extends SourceFileCountingTrial implements 
     TextLines lines = new TextLines(lastTestFailure.getFailureDetail(), true);
     assertUniform("\torg.adligo.tests4j.shared.asserts.AssertionFailureLocation", lines.getLine(0));
     assertUniform("\tat org.adligo.tests4j_tests.shared.asserts."
-        + "AssertionProcessorTrial.testSimple(AssertionProcessorTrial.java:52)", lines.getLine(1));
+        + "AssertionProcessorTrial.testSimple(AssertionProcessorTrial.java:54)", lines.getLine(1));
     
     assertTrue(lastTestFailure instanceof I_AssertCompareFailure);
     I_AssertCompareFailure acf = (I_AssertCompareFailure) lastTestFailure;
@@ -67,12 +69,14 @@ public class AssertionProcessorTrial extends SourceFileCountingTrial implements 
     assertEquals("false", acf.getActualValue());
   }
   
+  @SuppressWarnings("boxing")
   @Test
   public void testThrown() {
     assertNull(lastAssertCommand);
     assertNull(lastTestFailure);
-    ThrownAssertCommand tac = new ThrownAssertCommand("should be true", 
-        new ExpectedThrownData(new RuntimeException("thrown message")));
+    ThrownAssertCommand tac = new ThrownAssertCommand(Tests4J_EnglishConstants.ENGLISH,
+        "should be true", 
+        new ExpectedThrowable(new RuntimeException("thrown message")));
     throwable = new RuntimeException();
     AssertionProcessor.evaluate(this, tac, this);
     assertNull(lastAssertCommand);
@@ -82,7 +86,7 @@ public class AssertionProcessorTrial extends SourceFileCountingTrial implements 
     TextLines lines = new TextLines(lastTestFailure.getFailureDetail(), true);
     assertUniform("\torg.adligo.tests4j.shared.asserts.AssertionFailureLocation",lines.getLine(0));
     assertUniform("\tat org.adligo.tests4j_tests.shared.asserts."
-        + "AssertionProcessorTrial.testThrown(AssertionProcessorTrial.java:77)",lines.getLine(1));
+        + "AssertionProcessorTrial.testThrown(AssertionProcessorTrial.java:81)",lines.getLine(1));
     
     assertEquals(AssertType.AssertThrown, lastTestFailure.getAssertType());
     assertTrue(lastTestFailure instanceof I_AssertThrownFailure);
@@ -107,7 +111,7 @@ public class AssertionProcessorTrial extends SourceFileCountingTrial implements 
     assertEquals("\tjava.lang.RuntimeException", lines.getLine(0));
     assertEquals("\tat org.adligo.tests4j_tests.shared.asserts."
         + "AssertionProcessorTrial.testThrown("
-        + "AssertionProcessorTrial.java:76)", lines.getLine(1));
+        + "AssertionProcessorTrial.java:80)", lines.getLine(1));
     assertNull(actual.getCause());
     
     

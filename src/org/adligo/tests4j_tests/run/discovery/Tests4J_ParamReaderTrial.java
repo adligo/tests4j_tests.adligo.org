@@ -1,6 +1,7 @@
 package org.adligo.tests4j_tests.run.discovery;
 
 import org.adligo.tests4j.run.discovery.Tests4J_ParamsReader;
+import org.adligo.tests4j.shared.en.Tests4J_EnglishConstants;
 import org.adligo.tests4j.shared.output.I_Tests4J_Log;
 import org.adligo.tests4j.system.shared.api.Tests4J_Params;
 import org.adligo.tests4j.system.shared.api.Tests4J_Selection;
@@ -24,6 +25,7 @@ public class Tests4J_ParamReaderTrial extends SourceFileCountingTrial {
 		
 		Tests4J_Selection sel = new Tests4J_Selection(MockWithArrayTrial.class, "testMockWithArray");
 		params.addTest(sel);
+		params.setConstants(Tests4J_EnglishConstants.ENGLISH);
 		
 		Tests4J_ParamsReader t4jpr = new Tests4J_ParamsReader(ms, params);
 		I_Tests4J_Log logMock = mock(I_Tests4J_Log.class);

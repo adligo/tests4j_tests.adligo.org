@@ -1,6 +1,6 @@
 package org.adligo.tests4j_tests.shared.asserts.line_text;
 
-import org.adligo.tests4j.shared.asserts.common.ExpectedThrownData;
+import org.adligo.tests4j.shared.asserts.common.ExpectedThrowable;
 import org.adligo.tests4j.shared.asserts.common.I_Thrower;
 import org.adligo.tests4j.shared.asserts.line_text.DiffIndexes;
 import org.adligo.tests4j.shared.asserts.line_text.I_DiffIndexes;
@@ -21,7 +21,7 @@ public class DiffIndexesTrial extends SourceFileCountingTrial {
   @SuppressWarnings({"unused","boxing"})
   @Test
 	public void testConstructorExceptions() {
-		assertThrown(new ExpectedThrownData(new IllegalArgumentException(
+		assertThrown(new ExpectedThrowable(new IllegalArgumentException(
 				DiffIndexes.START_END_DIFF_REQUIRES_POSITIVE_INDEXES)),
 				new I_Thrower() {
 					
@@ -30,7 +30,7 @@ public class DiffIndexesTrial extends SourceFileCountingTrial {
 						new DiffIndexes(-1, 0, null, null);
 					}
 				});
-		assertThrown(new ExpectedThrownData(new IllegalArgumentException(
+		assertThrown(new ExpectedThrowable(new IllegalArgumentException(
 				DiffIndexes.START_END_DIFF_REQUIRES_POSITIVE_INDEXES)),
 				new I_Thrower() {
 					
@@ -39,7 +39,7 @@ public class DiffIndexesTrial extends SourceFileCountingTrial {
 						new DiffIndexes(0, -1, null, null);
 					}
 				});
-		assertThrown(new ExpectedThrownData(new IllegalArgumentException(
+		assertThrown(new ExpectedThrowable(new IllegalArgumentException(
 				DiffIndexes.START_END_DIFF_REQUIRES_POSITIVE_INDEXES)),
 				new I_Thrower() {
 					
@@ -48,7 +48,7 @@ public class DiffIndexesTrial extends SourceFileCountingTrial {
 						new DiffIndexes(0, 0, -1, null);
 					}
 				});
-		assertThrown(new ExpectedThrownData(new IllegalArgumentException(
+		assertThrown(new ExpectedThrowable(new IllegalArgumentException(
 				DiffIndexes.START_END_DIFF_REQUIRES_POSITIVE_INDEXES)),
 				new I_Thrower() {
 					
@@ -59,7 +59,7 @@ public class DiffIndexesTrial extends SourceFileCountingTrial {
 				});
 		
 
-		assertThrown(new ExpectedThrownData(new IllegalArgumentException(
+		assertThrown(new ExpectedThrowable(new IllegalArgumentException(
 				DiffIndexes.DIFF_LEFT_TO_RIGHT_NEEDS_CORRESPONDING_RIGHT_TO_LEFT_DIFF)),
 				new I_Thrower() {
 					
@@ -68,7 +68,7 @@ public class DiffIndexesTrial extends SourceFileCountingTrial {
 						new DiffIndexes(0, null, 3, 1);
 					}
 				});
-		assertThrown(new ExpectedThrownData(new IllegalArgumentException(
+		assertThrown(new ExpectedThrowable(new IllegalArgumentException(
 				DiffIndexes.MATCH_LEFT_TO_RIGHT_NEEDS_CORRESPONDING_RIGHT_TO_LEFT_MATCH)),
 				new I_Thrower() {
 					
@@ -78,7 +78,7 @@ public class DiffIndexesTrial extends SourceFileCountingTrial {
 					}
 				});
 		
-		assertThrown(new ExpectedThrownData(new IllegalArgumentException(
+		assertThrown(new ExpectedThrowable(new IllegalArgumentException(
 				DiffIndexes.WHEN_THERE_ARE_NO_MATCHES_THE_DIFFS_MUST_BOUND_THE_STRING)),
 				new I_Thrower() {
 					
@@ -88,7 +88,7 @@ public class DiffIndexesTrial extends SourceFileCountingTrial {
 					}
 				});
 		
-		assertThrown(new ExpectedThrownData(new IllegalArgumentException(
+		assertThrown(new ExpectedThrowable(new IllegalArgumentException(
 				DiffIndexes.FOR_LEFT_DIFFS_THE_DIFF_RIGHT_TO_LEFT_MUST_BE_IMMEDIATELY_FOLLOWED_BY_THE_RIGHT_TO_LEFT_MATCH)),
 				new I_Thrower() {
 					
@@ -97,7 +97,7 @@ public class DiffIndexesTrial extends SourceFileCountingTrial {
 						new DiffIndexes(0, 4, 6, 6);
 					}
 				});
-		assertThrown(new ExpectedThrownData(new IllegalArgumentException(
+		assertThrown(new ExpectedThrowable(new IllegalArgumentException(
 				DiffIndexes.FOR_LEFT_MATCHES_THE_MATCH_RIGHT_TO_LEFT_MUST_BE_IMMEDIATELY_FOLLOWED_BY_THE_LEFT_TO_RIGHT_DIFF)),
 				new I_Thrower() {
 					
@@ -107,7 +107,7 @@ public class DiffIndexesTrial extends SourceFileCountingTrial {
 					}
 				});
 		
-		assertThrown(new ExpectedThrownData(new IllegalArgumentException(
+		assertThrown(new ExpectedThrowable(new IllegalArgumentException(
 				DiffIndexes.MATCH_ERROR_PART_ONE + 
 				SYS.lineSeperator() +
 				DiffIndexes.MATCH_L2R_DIFF_L2R_MATCH_R2L_DIFF_R2L)),
@@ -119,7 +119,7 @@ public class DiffIndexesTrial extends SourceFileCountingTrial {
 					}
 				});
 		
-		assertThrown(new ExpectedThrownData(new IllegalArgumentException(
+		assertThrown(new ExpectedThrowable(new IllegalArgumentException(
 				DiffIndexes.MATCH_ERROR_PART_ONE + 
 				SYS.lineSeperator() +
 				DiffIndexes.DIFF_L2R_MATCH_L2R_DIFF_R2L_MATCH_R2L)),
@@ -130,7 +130,7 @@ public class DiffIndexesTrial extends SourceFileCountingTrial {
 						new DiffIndexes(0, 4, 2, 5);
 					}
 				});
-		assertThrown(new ExpectedThrownData(new IllegalArgumentException(
+		assertThrown(new ExpectedThrowable(new IllegalArgumentException(
 				DiffIndexes.EITHER_THE_MATCH_OF_DIFF_MUST_START_AT_THE_LEFT)),
 				new I_Thrower() {
 					

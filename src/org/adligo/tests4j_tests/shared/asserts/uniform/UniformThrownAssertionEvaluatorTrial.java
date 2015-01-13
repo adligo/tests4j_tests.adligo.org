@@ -1,9 +1,9 @@
 package org.adligo.tests4j_tests.shared.asserts.uniform;
 
 import org.adligo.tests4j.shared.asserts.UniformThrownAssertCommand;
-import org.adligo.tests4j.shared.asserts.common.ExpectedThrownData;
+import org.adligo.tests4j.shared.asserts.common.ExpectedThrowable;
 import org.adligo.tests4j.shared.asserts.common.I_AssertionData;
-import org.adligo.tests4j.shared.asserts.common.I_ExpectedThrownData;
+import org.adligo.tests4j.shared.asserts.common.I_ExpectedThrowable;
 import org.adligo.tests4j.shared.asserts.common.I_Thrower;
 import org.adligo.tests4j.shared.asserts.common.I_ThrownAssertionData;
 import org.adligo.tests4j.shared.asserts.common.ThrownAssertionData;
@@ -26,10 +26,11 @@ public class UniformThrownAssertionEvaluatorTrial extends SourceFileCountingTria
   @Test
 	public void test01_GettersAfterEvaluateFailNothingThrown() {
 		
-		ExpectedThrownData etd = new ExpectedThrownData(new IllegalArgumentException("bad exeception message\n\r"
+		ExpectedThrowable etd = new ExpectedThrowable(new IllegalArgumentException("bad exeception message\n\r"
 				+ "123"));
 		UniformThrownAssertCommand utac = new UniformThrownAssertCommand
-				("failure message",  etd, new UniformThrownAssertionEvaluator());
+				(Tests4J_EnglishConstants.ENGLISH,"failure message",  etd, 
+				    new UniformThrownAssertionEvaluator(Tests4J_EnglishConstants.ENGLISH));
 		assertEquals("failure message", utac.getFailureMessage());
 		assertFalse(utac.evaluate(new I_Thrower() {
 			
@@ -43,7 +44,7 @@ public class UniformThrownAssertionEvaluatorTrial extends SourceFileCountingTria
 		assertTrue(data instanceof ThrownAssertionData);
 		ThrownAssertionData tad = (ThrownAssertionData) data;
 		
-		I_ExpectedThrownData expected = tad.getExpected();
+		I_ExpectedThrowable expected = tad.getExpected();
 		Throwable actual = tad.getActual();
 		assertNull(actual);
 		assertEquals(IllegalArgumentException.class, expected.getThrowableClass());
@@ -59,12 +60,13 @@ public class UniformThrownAssertionEvaluatorTrial extends SourceFileCountingTria
   @Test
 	public void test05_EvaluatePass() {
 		final IllegalArgumentException iae = new IllegalArgumentException("expected exception messsage");
-		ExpectedThrownData etd = new ExpectedThrownData(iae);
-		final UniformThrownAssertCommand utac = new UniformThrownAssertCommand("failure message", etd,
-		    new UniformThrownAssertionEvaluator());
+		ExpectedThrowable etd = new ExpectedThrowable(iae);
+		final UniformThrownAssertCommand utac = new UniformThrownAssertCommand(
+		    Tests4J_EnglishConstants.ENGLISH, "failure message", etd,
+		    new UniformThrownAssertionEvaluator(Tests4J_EnglishConstants.ENGLISH));
 		assertEquals("failure message", utac.getFailureMessage());
 	
-		assertThrown(new ExpectedThrownData(NullPointerException.class),
+		assertThrown(new ExpectedThrowable(NullPointerException.class),
 				new I_Thrower() {
 					
 					

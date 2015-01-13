@@ -2,9 +2,9 @@ package org.adligo.tests4j_tests.shared.asserts;
 
 import org.adligo.tests4j.shared.asserts.ThrownAssertCommand;
 import org.adligo.tests4j.shared.asserts.common.AssertType;
-import org.adligo.tests4j.shared.asserts.common.ExpectedThrownData;
+import org.adligo.tests4j.shared.asserts.common.ExpectedThrowable;
 import org.adligo.tests4j.shared.asserts.common.I_AssertionData;
-import org.adligo.tests4j.shared.asserts.common.I_ExpectedThrownData;
+import org.adligo.tests4j.shared.asserts.common.I_ExpectedThrowable;
 import org.adligo.tests4j.shared.asserts.common.I_Thrower;
 import org.adligo.tests4j.shared.asserts.common.MatchType;
 import org.adligo.tests4j.shared.asserts.common.ThrownAssertionData;
@@ -27,14 +27,14 @@ public class ThrownAssertCommandTrial extends SourceFileCountingTrial {
 	@Test
 	public void testConstructorExceptions() {
 		I_Tests4J_AssertionInputMessages messages =  Tests4J_EnglishConstants.ENGLISH.getAssertionInputMessages();
-		assertThrown(new ExpectedThrownData(new IllegalArgumentException(
+		assertThrown(new ExpectedThrowable(new IllegalArgumentException(
 				messages.getTheExpectedValueShouldNeverBeNull())), 
 				new I_Thrower() {
 					
 					
           @Override
 					public void run() {
-						new ThrownAssertCommand("failure message", null);
+						new ThrownAssertCommand(Tests4J_EnglishConstants.ENGLISH, "failure message", null);
 					}
 				});
 	}
@@ -43,23 +43,23 @@ public class ThrownAssertCommandTrial extends SourceFileCountingTrial {
   @Test
 	public void testEqualsHashCode() {
 		ThrownAssertCommand a =
-				new ThrownAssertCommand("failure message", 
-				new ExpectedThrownData(new IllegalArgumentException("hey")));
+				new ThrownAssertCommand(Tests4J_EnglishConstants.ENGLISH, "failure message", 
+				new ExpectedThrowable(new IllegalArgumentException("hey")));
 		ThrownAssertCommand b =
-				new ThrownAssertCommand("failure message", 
-				new ExpectedThrownData(new IllegalArgumentException("hey2")));
+				new ThrownAssertCommand(Tests4J_EnglishConstants.ENGLISH, "failure message", 
+				new ExpectedThrowable(new IllegalArgumentException("hey2")));
 		ThrownAssertCommand c =
-				new ThrownAssertCommand("failure message", 
-				new ExpectedThrownData(new IllegalArgumentException("hey")));
+				new ThrownAssertCommand(Tests4J_EnglishConstants.ENGLISH, "failure message", 
+				new ExpectedThrowable(new IllegalArgumentException("hey")));
 		ThrownAssertCommand d =
-				new ThrownAssertCommand("failure message2", 
-				new ExpectedThrownData(new IllegalArgumentException("hey")));
+				new ThrownAssertCommand(Tests4J_EnglishConstants.ENGLISH, "failure message2", 
+				new ExpectedThrowable(new IllegalArgumentException("hey")));
 		ThrownAssertCommand e =
-				new ThrownAssertCommand("failure message", 
-				new ExpectedThrownData(new IllegalStateException("hey")));
+				new ThrownAssertCommand(Tests4J_EnglishConstants.ENGLISH, "failure message", 
+				new ExpectedThrowable(new IllegalStateException("hey")));
 		ThrownAssertCommand f =
-        new ThrownAssertCommand("failure message", 
-        new ExpectedThrownData(new IllegalArgumentException("hey"), MatchType.CONTAINS));
+        new ThrownAssertCommand(Tests4J_EnglishConstants.ENGLISH, "failure message", 
+        new ExpectedThrowable(new IllegalArgumentException("hey"), MatchType.CONTAINS));
 		
 		assertEquals(a, a);
 		assertEquals(a.hashCode(), a.hashCode());
@@ -86,13 +86,13 @@ public class ThrownAssertCommandTrial extends SourceFileCountingTrial {
   @Test
 	public void testEvaluateSlashGetData() {
 		ThrownAssertCommand a =
-				new ThrownAssertCommand("failure message", 
-						new ExpectedThrownData(new IllegalArgumentException("hey")));
+				new ThrownAssertCommand(Tests4J_EnglishConstants.ENGLISH, "failure message", 
+						new ExpectedThrowable(new IllegalArgumentException("hey")));
 		I_AssertionData data = a.getData();
 		assertNotNull(data);
 		assertTrue(data instanceof ThrownAssertionData);
 		ThrownAssertionData tad = (ThrownAssertionData) data;
-		I_ExpectedThrownData expected =  tad.getExpected();
+		I_ExpectedThrowable expected =  tad.getExpected();
 		Throwable actual = tad.getActual();
 		
 		assertNull(actual);
@@ -136,10 +136,10 @@ public class ThrownAssertCommandTrial extends SourceFileCountingTrial {
   @Test
 	public void testDeepEvaluateDefaults() {
 		ThrownAssertCommand a =
-				new ThrownAssertCommand("failure message", 
-						new ExpectedThrownData(new IllegalArgumentException("hey"),
-						new ExpectedThrownData(IllegalStateException.class,
-						new ExpectedThrownData(new IllegalStateException("zzz")))));
+				new ThrownAssertCommand(Tests4J_EnglishConstants.ENGLISH, "failure message", 
+						new ExpectedThrowable(new IllegalArgumentException("hey"),
+						new ExpectedThrowable(IllegalStateException.class,
+						new ExpectedThrowable(new IllegalStateException("zzz")))));
 		
 		assertFalse(a.evaluate(new I_Thrower() {
 			
@@ -273,10 +273,10 @@ public class ThrownAssertCommandTrial extends SourceFileCountingTrial {
   @Test
   public void testDeepEvaluateAny() {
     ThrownAssertCommand a =
-        new ThrownAssertCommand("failure message", 
-            new ExpectedThrownData(IllegalArgumentException.class, MatchType.ANY,
-            new ExpectedThrownData(IllegalStateException.class, MatchType.ANY,
-            new ExpectedThrownData(IllegalArgumentException.class, MatchType.ANY))));
+        new ThrownAssertCommand(Tests4J_EnglishConstants.ENGLISH, "failure message", 
+            new ExpectedThrowable(IllegalArgumentException.class, MatchType.ANY,
+            new ExpectedThrowable(IllegalStateException.class, MatchType.ANY,
+            new ExpectedThrowable(IllegalArgumentException.class, MatchType.ANY))));
     
     assertFalse(a.evaluate(new I_Thrower() {
       
@@ -322,10 +322,10 @@ public class ThrownAssertCommandTrial extends SourceFileCountingTrial {
   @Test
   public void testDeepEvaluateContains() {
     ThrownAssertCommand a =
-        new ThrownAssertCommand("failure message", 
-            new ExpectedThrownData(new IllegalArgumentException("hey"), MatchType.CONTAINS,
-            new ExpectedThrownData(new IllegalStateException("hmm"),MatchType.CONTAINS,
-            new ExpectedThrownData(new IllegalArgumentException("zzz"),MatchType.CONTAINS))));
+        new ThrownAssertCommand(Tests4J_EnglishConstants.ENGLISH, "failure message", 
+            new ExpectedThrowable(new IllegalArgumentException("hey"), MatchType.CONTAINS,
+            new ExpectedThrowable(new IllegalStateException("hmm"),MatchType.CONTAINS,
+            new ExpectedThrowable(new IllegalArgumentException("zzz"),MatchType.CONTAINS))));
     
     assertFalse(a.evaluate(new I_Thrower() {
       

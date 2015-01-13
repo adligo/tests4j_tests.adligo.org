@@ -16,7 +16,7 @@ import org.adligo.tests4j_tests.references_groups.Tests4J_Summary_GwtReferenceGr
 @SourceFileScope (sourceClass=SetupProgressDisplay.class)
 @AllowedReferences (groups=Tests4J_Summary_GwtReferenceGroup.class)
 public class SetupProgressDisplayTrial extends SourceFileCountingTrial {
-	private SetupProgressDisplay reporter = new SetupProgressDisplay();
+	private SetupProgressDisplay reporter = new SetupProgressDisplay(Tests4J_EnglishConstants.ENGLISH);
   private I_Tests4J_Log logMock_;
   private MockMethod<Void> logRecord_;
   private MockMethod<Void> logLineRecord_;

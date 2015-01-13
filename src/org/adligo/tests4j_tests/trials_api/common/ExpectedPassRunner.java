@@ -4,6 +4,8 @@ import org.adligo.tests4j.models.shared.metadata.I_TrialRunMetadata;
 import org.adligo.tests4j.models.shared.results.I_PhaseState;
 import org.adligo.tests4j.models.shared.results.I_TrialResult;
 import org.adligo.tests4j.models.shared.results.I_TrialRunResult;
+import org.adligo.tests4j.shared.en.Tests4J_EnglishConstants;
+import org.adligo.tests4j.shared.output.DefaultLog;
 import org.adligo.tests4j.system.shared.api.I_Tests4J_Controls;
 import org.adligo.tests4j.system.shared.api.I_Tests4J_Listener;
 import org.adligo.tests4j.system.shared.api.I_Tests4J_Params;
@@ -17,7 +19,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 public class ExpectedPassRunner implements I_Tests4J_Listener {
 	private I_TrialRunMetadata metadata;
-	SummaryReporter silentReporter = new SummaryReporter();
+	SummaryReporter silentReporter = new SummaryReporter(Tests4J_EnglishConstants.ENGLISH, new DefaultLog());
 	
 	private int size = 0;
 	private final CopyOnWriteArrayList<I_TrialResult> results = new CopyOnWriteArrayList<I_TrialResult>();

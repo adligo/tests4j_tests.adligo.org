@@ -25,7 +25,7 @@ public class AllowedReferencesFailureTrial extends SourceFileCountingTrial {
 
 	@Test
 	public void testCopyConstructor() {
-		AllowedReferencesFailure failure = new AllowedReferencesFailure();
+		AllowedReferencesFailure failure = new AllowedReferencesFailure(Tests4J_EnglishConstants.ENGLISH);
 	
 		assertEquals(AssertType.AssertReferences ,failure.getAssertType());
 		assertEquals(TestFailureType.AssertReferencesFailure ,failure.getType());
@@ -45,7 +45,7 @@ public class AllowedReferencesFailureTrial extends SourceFileCountingTrial {
 		assertNull(failure.getField());
 		
 		//...
-		AllowedReferencesFailureMutant mutant = new AllowedReferencesFailureMutant();
+		AllowedReferencesFailureMutant mutant = new AllowedReferencesFailureMutant(Tests4J_EnglishConstants.ENGLISH);
 		failure = new AllowedReferencesFailure(mutant);
 		gns = failure.getGroupNames();
 		assertNotNull(gns);

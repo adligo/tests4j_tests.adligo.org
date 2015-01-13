@@ -1,13 +1,10 @@
 package org.adligo.tests4j_tests.shared.common;
 
-import java.util.Collections;
-
-import org.adligo.tests4j.shared.asserts.common.ExpectedThrownData;
+import org.adligo.tests4j.shared.asserts.common.ExpectedThrowable;
 import org.adligo.tests4j.shared.asserts.common.I_Thrower;
 import org.adligo.tests4j.shared.asserts.reference.AllowedReferences;
 import org.adligo.tests4j.shared.asserts.reference.CircularDependencies;
 import org.adligo.tests4j.shared.common.MethodBlocker;
-import org.adligo.tests4j.shared.common.Tests4J_Constants;
 import org.adligo.tests4j.shared.en.Tests4J_EnglishConstants;
 import org.adligo.tests4j.shared.i18n.I_Tests4J_Constants;
 import org.adligo.tests4j.system.shared.trials.AdditionalInstrumentation;
@@ -17,6 +14,8 @@ import org.adligo.tests4j_tests.base_trials.I_CountType;
 import org.adligo.tests4j_tests.base_trials.SourceFileCountingTrial;
 import org.adligo.tests4j_tests.references_groups.Tests4J_Common_ReferenceGroup;
 import org.adligo.tests4j_tests.shared.common.mocks.MockWithMethodBlocker;
+
+import java.util.Collections;
 
 @SourceFileScope (sourceClass=MethodBlocker.class, 
   minCoverage=97.0, allowedCircularDependencies=CircularDependencies.AllowInPackage)
@@ -47,7 +46,7 @@ public class MethodBlockerTrial extends SourceFileCountingTrial {
 				mockWithMethodBlocker.doF();
 			}
 		};
-		assertThrown(new ExpectedThrownData(new IllegalStateException(DO_D_EXCEPTION_MESSAGE)), 
+		assertThrown(new ExpectedThrowable(new IllegalStateException(DO_D_EXCEPTION_MESSAGE)), 
 			new I_Thrower() {
 			
 			@Override
@@ -62,50 +61,62 @@ public class MethodBlockerTrial extends SourceFileCountingTrial {
 	public void testConstructorException() {
 		I_Tests4J_Constants constants =  Tests4J_EnglishConstants.ENGLISH;
 		
-		assertThrown(new ExpectedThrownData(new IllegalArgumentException( 
+		assertThrown(new ExpectedThrowable(NullPointerException.class), 
+      new I_Thrower() {
+      
+      @Override
+      public void run() {
+        new MethodBlocker(null, null, 
+            "run", 
+            Collections.<String> emptyList());
+        
+      }
+    });
+		
+		assertThrown(new ExpectedThrowable(new IllegalArgumentException( 
 				constants.getMethodBlockerRequiresABlockingClass())), 
 			new I_Thrower() {
 			
 			@Override
 			public void run() {
-				new MethodBlocker(null, 
+				new MethodBlocker(Tests4J_EnglishConstants.ENGLISH, null, 
 						"run", 
 						Collections.<String> emptyList());
 				
 			}
 		});
-		assertThrown(new ExpectedThrownData(new IllegalArgumentException( 
+		assertThrown(new ExpectedThrowable(new IllegalArgumentException( 
 				constants.getMethodBlockerRequiresABlockingMethod())), 
 			new I_Thrower() {
 			
 			@Override
 			public void run() {
-				new MethodBlocker(this.getClass(), 
+				new MethodBlocker(Tests4J_EnglishConstants.ENGLISH, this.getClass(), 
 						null, 
 						Collections.<String> emptyList());
 				
 			}
 		});
 		
-		assertThrown(new ExpectedThrownData(new IllegalArgumentException( 
+		assertThrown(new ExpectedThrowable(new IllegalArgumentException( 
 				constants.getMethodBlockerRequiresAtLeastOneAllowedCallerClassNames())), 
 			new I_Thrower() {
 			
 			@Override
 			public void run() {
-				new MethodBlocker(this.getClass(), 
+				new MethodBlocker(Tests4J_EnglishConstants.ENGLISH,  this.getClass(), 
 						"run", 
 						Collections.<String> emptyList());
 				
 			}
 		});
-		assertThrown(new ExpectedThrownData(new IllegalArgumentException( 
+		assertThrown(new ExpectedThrowable(new IllegalArgumentException( 
 				constants.getMethodBlockerRequiresAtLeastOneAllowedCallerClassNames())), 
 			new I_Thrower() {
 			
 			@Override
 			public void run() {
-				new MethodBlocker(this.getClass(), 
+				new MethodBlocker(Tests4J_EnglishConstants.ENGLISH,  this.getClass(), 
 						"run", null);
 				
 			}
@@ -115,14 +126,14 @@ public class MethodBlockerTrial extends SourceFileCountingTrial {
 	@Test
 	public void testMethodWithBlockThrowsException() {
 		
-		String message = Tests4J_Constants.CONSTANTS.getTheMethodCanOnlyBeCalledBy_PartOne() +
+		String message = Tests4J_EnglishConstants.ENGLISH.getTheMethodCanOnlyBeCalledBy_PartOne() +
 				"class org.adligo.tests4j_tests.shared.common.mocks.MockWithMethodBlocker.doA" +
-				Tests4J_Constants.CONSTANTS.getTheMethodCanOnlyBeCalledBy_PartTwo() +
+				Tests4J_EnglishConstants.ENGLISH.getTheMethodCanOnlyBeCalledBy_PartTwo() +
 				"[org.adligo.tests4j_tests.shared.common.MethodBlockerTrial]";
 		final MockWithMethodBlocker mockWithMethodBlocker = new MockWithMethodBlocker();
 		//first call allows anyone to call
 		mockWithMethodBlocker.doA();
-		assertThrown(new ExpectedThrownData(new IllegalStateException(message)), 
+		assertThrown(new ExpectedThrowable(new IllegalStateException(message)), 
 			new I_Thrower() {
 			
 			@Override
@@ -138,14 +149,14 @@ public class MethodBlockerTrial extends SourceFileCountingTrial {
 		// this test is a bit confusing
 		mockWithMethodBlocker.doA();
 		
-		message = Tests4J_Constants.CONSTANTS.getTheMethodCanOnlyBeCalledBy_PartOne() +
+		message = Tests4J_EnglishConstants.ENGLISH.getTheMethodCanOnlyBeCalledBy_PartOne() +
 				"class org.adligo.tests4j_tests.shared.common.mocks.MockWithMethodBlocker.doB" +
-				Tests4J_Constants.CONSTANTS.getTheMethodCanOnlyBeCalledBy_PartTwo() +
+				Tests4J_EnglishConstants.ENGLISH.getTheMethodCanOnlyBeCalledBy_PartTwo() +
 				"[org.adligo.tests4j_tests.shared.common.mocks.MockWithMethodBlocker]";
 		
 		//first call allows anyone to call
 		mockWithMethodBlocker.doB();
-		assertThrown(new ExpectedThrownData(new IllegalStateException(message)), 
+		assertThrown(new ExpectedThrowable(new IllegalStateException(message)), 
 			new I_Thrower() {
 				
 				@Override
@@ -173,7 +184,7 @@ public class MethodBlockerTrial extends SourceFileCountingTrial {
 		
 		//note it is doB here 
 		// and not doF, because doB is the method with the MethodBlocker
-		assertThrown(new ExpectedThrownData(new IllegalStateException(
+		assertThrown(new ExpectedThrowable(new IllegalStateException(
 				DO_D_EXCEPTION_MESSAGE)), 
 				new I_Thrower() {
 					
@@ -197,20 +208,22 @@ public class MethodBlockerTrial extends SourceFileCountingTrial {
 	
 	@Override
 	public int getAsserts(I_CountType type) {
+	  int asserts = 9;
 		if (type.isFromMetaWithCoverage()) {
 			//code coverage and circular dependencies
-			return super.getAsserts(type,11);
+			return super.getAsserts(type, asserts + 3);
 		} else {
-			return super.getAsserts(type, 8);
+			return super.getAsserts(type, asserts);
 		}
 	}
 
 	@Override
 	public int getUniqueAsserts(I_CountType type) {
+	  int uAsserts = 9;
 		if (type.isFromMetaWithCoverage()) {
-			return super.getUniqueAsserts(type, 11);
+			return super.getUniqueAsserts(type, uAsserts + 3);
 		} else {
-			return super.getUniqueAsserts(type, 8);
+			return super.getUniqueAsserts(type, uAsserts);
 		}
 	}
 }

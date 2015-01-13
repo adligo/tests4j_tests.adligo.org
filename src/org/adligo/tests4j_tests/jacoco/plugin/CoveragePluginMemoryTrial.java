@@ -1,6 +1,7 @@
 package org.adligo.tests4j_tests.jacoco.plugin;
 
 import org.adligo.tests4j.run.common.I_JseSystem;
+import org.adligo.tests4j.shared.en.Tests4J_EnglishConstants;
 import org.adligo.tests4j.shared.output.I_Tests4J_Log;
 import org.adligo.tests4j.system.shared.api.I_Tests4J_CoveragePlugin;
 import org.adligo.tests4j.system.shared.api.I_Tests4J_CoveragePluginFactory;
@@ -34,6 +35,7 @@ public class CoveragePluginMemoryTrial extends SourceFileCountingTrial {
     
     I_JseSystem system = mock(I_JseSystem.class);
     runtimeParams.put(I_Tests4J_CoveragePluginFactory.SYSTEM, system);
+    runtimeParams.put(I_Tests4J_CoveragePluginFactory.CONSTANTS, Tests4J_EnglishConstants.ENGLISH);
     
     I_Tests4J_CoveragePlugin plugin = factory.create(params, pluginParams, runtimeParams);
     CoveragePlugin cp = (CoveragePlugin) plugin;

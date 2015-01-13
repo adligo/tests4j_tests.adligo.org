@@ -1,6 +1,5 @@
 package org.adligo.tests4j_tests.references_groups;
 
-import org.adligo.tests4j.shared.common.Tests4J_Constants;
 import org.adligo.tests4j.shared.en.Tests4J_AnnotationMessages;
 import org.adligo.tests4j.shared.en.Tests4J_AssertionInputMessages;
 import org.adligo.tests4j.shared.en.Tests4J_EclipseErrors;
@@ -27,7 +26,6 @@ public class Tests4J_EN_ReferenceGroup extends Tests4J_ReferenceGroup {
 		
 		add(names, Tests4J_AnnotationMessages.class);
 		add(names, Tests4J_AssertionInputMessages.class);
-		add(names, Tests4J_Constants.class);
 		add(names, Tests4J_EnglishConstants.class);
 		add(names, Tests4J_EclipseErrors.class);
 		add(names, Tests4J_LineDiffTextDisplayMessages.class);

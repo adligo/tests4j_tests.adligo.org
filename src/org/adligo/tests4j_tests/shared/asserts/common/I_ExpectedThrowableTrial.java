@@ -1,24 +1,21 @@
-package org.adligo.tests4j_tests.shared.common;
+package org.adligo.tests4j_tests.shared.asserts.common;
 
+import org.adligo.tests4j.shared.asserts.common.I_ExpectedThrowable;
 import org.adligo.tests4j.shared.asserts.reference.AllowedReferences;
-import org.adligo.tests4j.shared.asserts.reference.CircularDependencies;
-import org.adligo.tests4j.shared.common.Tests4J_Constants;
 import org.adligo.tests4j.system.shared.trials.SourceFileScope;
 import org.adligo.tests4j_tests.base_trials.I_CountType;
 import org.adligo.tests4j_tests.base_trials.SourceFileCountingTrial;
-import org.adligo.tests4j_tests.references_groups.Tests4J_Common_ReferenceGroup;
+import org.adligo.tests4j_tests.references_groups.Tests4J_AssertsCommon_GwtReferenceGroup;
 
-@SourceFileScope (sourceClass=Tests4J_Constants.class, 
-  minCoverage=0.0, allowedCircularDependencies=CircularDependencies.AllowInPackage)
-@AllowedReferences (groups=Tests4J_Common_ReferenceGroup.class)
-public class Tests4J_ConstantsTrial extends SourceFileCountingTrial {
+@SourceFileScope (sourceClass=I_ExpectedThrowable.class)
+@AllowedReferences (groups=Tests4J_AssertsCommon_GwtReferenceGroup.class)
+public class I_ExpectedThrowableTrial extends SourceFileCountingTrial {
 
 	@Override
 	public int getTests(I_CountType type) {
 		return super.getTests(type, 0, true);
 	}
-
-
+	
 	@Override
 	public int getAsserts(I_CountType type) {
 		if (type.isFromMetaWithCoverage()) {

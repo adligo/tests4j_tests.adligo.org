@@ -25,7 +25,7 @@ public class AllowedReferencesFailureMutantTrial extends SourceFileCountingTrial
 	@Test
 	public void testDefaultsGettersAndSetters() {
 		
-		AllowedReferencesFailureMutant mutant = new AllowedReferencesFailureMutant();
+		AllowedReferencesFailureMutant mutant = new AllowedReferencesFailureMutant(Tests4J_EnglishConstants.ENGLISH);
 		//assertDefaults
 		assertEquals(AssertType.AssertReferences ,mutant.getAssertType());
 		mutant.setAssertType(AssertType.AssertContains);
@@ -70,22 +70,35 @@ public class AllowedReferencesFailureMutantTrial extends SourceFileCountingTrial
 		assertSame(fs, mutant.getField());
 	}
 	
-	@Test
+	@SuppressWarnings("boxing")
+  @Test
 	public void testCopyConstructor() {
 		
-		AllowedReferencesFailureMutant mutant = new AllowedReferencesFailureMutant();
-		//assertDefaults
+		AllowedReferencesFailureMutant mutant = new AllowedReferencesFailureMutant(Tests4J_EnglishConstants.ENGLISH);
+		I_Tests4J_ResultMessages messages = Tests4J_EnglishConstants.ENGLISH.getResultMessages();
+    
+	  //assertDefaults
+    assertEquals(messages.getCalledMethodOrFieldsOutsideOfAllowedDepenencies(),
+        mutant.getFailureMessage());
 		assertEquals(AssertType.AssertReferences ,mutant.getAssertType());
 		assertEquals(TestFailureType.AssertReferencesFailure ,mutant.getType());
 		mutant.setCalledClass("foo");
+		assertEquals("foo", mutant.getCalledClass());
 		mutant.setFailureDetail("failureDetail");
-		mutant.setFailureMessage("failureMessage");
+		assertEquals("failureDetail", mutant.getFailureDetail());
 		mutant.setGroupNames(Collections.singletonList("Nane"));
+		List<String> gnames = mutant.getGroupNames();
+		assertContains(gnames, "Nane");
+		assertEquals(1, gnames.size());
+		
 		MethodSignature ms = new MethodSignature("methodNameIn");
 		mutant.setMethod(ms);
+		assertSame(ms, mutant.getMethod());
 		mutant.setSourceClass(AllowedReferencesFailureMutant.class);
+		assertSame(AllowedReferencesFailureMutant.class, mutant.getSourceClass());
 		FieldSignature fs = new FieldSignature("nameIn", "classNameIn");
 		mutant.setField(fs);
+		assertSame(fs, mutant.getField());
 		
 		mutant = new AllowedReferencesFailureMutant(mutant);
 		//assertDefaults
@@ -94,8 +107,6 @@ public class AllowedReferencesFailureMutantTrial extends SourceFileCountingTrial
 		//no set type
 		assertEquals("foo", mutant.getCalledClass());
 		assertEquals("failureDetail", mutant.getFailureDetail());
-		
-		I_Tests4J_ResultMessages messages = Tests4J_EnglishConstants.ENGLISH.getResultMessages();
 		
 		assertEquals(messages.getCalledMethodOrFieldsOutsideOfAllowedDepenencies(),
 				mutant.getFailureMessage());
@@ -117,7 +128,7 @@ public class AllowedReferencesFailureMutantTrial extends SourceFileCountingTrial
 
 	@Override
 	public int getAsserts(I_CountType type) {
-		int thisAsserts = 33;
+		int thisAsserts = 41;
 		//code coverage and circular dependencies +
 		//custom afterTrialTests
 		//+ see above
@@ -131,7 +142,7 @@ public class AllowedReferencesFailureMutantTrial extends SourceFileCountingTrial
 
 	@Override
 	public int getUniqueAsserts(I_CountType type) {
-		int thisUniqueAsserts = 24;
+		int thisUniqueAsserts = 26;
 		//code coverage and circular dependencies +
 		//custom afterTrialTests
 		//+ see above

@@ -7,7 +7,8 @@ import org.adligo.tests4j.shared.asserts.common.AssertThrownFailureMutant;
 import org.adligo.tests4j.shared.asserts.common.AssertType;
 import org.adligo.tests4j.shared.asserts.common.AssertionFailedException;
 import org.adligo.tests4j.shared.asserts.common.CompareAssertionData;
-import org.adligo.tests4j.shared.asserts.common.ExpectedThrownData;
+import org.adligo.tests4j.shared.asserts.common.ExpectedThrowable;
+import org.adligo.tests4j.shared.asserts.common.ExpectedThrowableValidator;
 import org.adligo.tests4j.shared.asserts.common.I_AssertCommand;
 import org.adligo.tests4j.shared.asserts.common.I_AssertCompareFailure;
 import org.adligo.tests4j.shared.asserts.common.I_AssertListener;
@@ -19,7 +20,7 @@ import org.adligo.tests4j.shared.asserts.common.I_CollectionAssertionData;
 import org.adligo.tests4j.shared.asserts.common.I_CollectionContainsAssertionData;
 import org.adligo.tests4j.shared.asserts.common.I_CompareAssertCommand;
 import org.adligo.tests4j.shared.asserts.common.I_CompareAssertionData;
-import org.adligo.tests4j.shared.asserts.common.I_ExpectedThrownData;
+import org.adligo.tests4j.shared.asserts.common.I_ExpectedThrowable;
 import org.adligo.tests4j.shared.asserts.common.I_MatchType;
 import org.adligo.tests4j.shared.asserts.common.I_SimpleAssertCommand;
 import org.adligo.tests4j.shared.asserts.common.I_SimpleCompareAssertCommand;
@@ -64,7 +65,8 @@ public class Tests4J_AssertsCommon_ReferenceGroup extends Tests4J_ReferenceGroup
 		
 		add(names, AssertType.class);
 		add(names, CompareAssertionData.class);
-		add(names, ExpectedThrownData.class);
+		add(names, ExpectedThrowable.class);
+		add(names, ExpectedThrowableValidator.class);
 		
 		add(names, I_Asserts.class);
 		add(names, I_AssertCommand.class);
@@ -79,7 +81,7 @@ public class Tests4J_AssertsCommon_ReferenceGroup extends Tests4J_ReferenceGroup
 		add(names, I_CompareAssertCommand.class);
 		add(names, I_CompareAssertionData.class);
 		
-		add(names, I_ExpectedThrownData.class);
+		add(names, I_ExpectedThrowable.class);
 		add(names, I_MatchType.class);
 		
 		add(names, I_SimpleAssertCommand.class);

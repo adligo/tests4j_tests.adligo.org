@@ -2,7 +2,7 @@ package org.adligo.tests4j_tests.shared.asserts.reference;
 
 import java.util.Set;
 
-import org.adligo.tests4j.shared.asserts.common.ExpectedThrownData;
+import org.adligo.tests4j.shared.asserts.common.ExpectedThrowable;
 import org.adligo.tests4j.shared.asserts.common.I_Thrower;
 import org.adligo.tests4j.shared.asserts.reference.AllowedReferences;
 import org.adligo.tests4j.shared.asserts.reference.ClassAttributes;
@@ -23,7 +23,7 @@ public class ClassAttributesTrial extends SourceFileCountingTrial {
 
 	@Test
 	public void testConstructorExceptions() {
-		assertThrown(new ExpectedThrownData(NullPointerException.class),
+		assertThrown(new ExpectedThrowable(NullPointerException.class),
 				new I_Thrower() {
 					
 					@Override
@@ -32,7 +32,7 @@ public class ClassAttributesTrial extends SourceFileCountingTrial {
 						new ClassAttributes(ms);
 					}
 				});
-		assertThrown(new ExpectedThrownData(new IllegalArgumentException(ClassAttributes.REQUIRES_A_CLASS_NAME)),
+		assertThrown(new ExpectedThrowable(new IllegalArgumentException(ClassAttributes.REQUIRES_A_CLASS_NAME)),
 				new I_Thrower() {
 					
 					@Override
@@ -42,7 +42,7 @@ public class ClassAttributesTrial extends SourceFileCountingTrial {
 						new ClassAttributes(ms);
 					}
 				});
-		assertThrown(new ExpectedThrownData(new IllegalArgumentException(ClassAttributes.REQUIRES_A_CLASS_NAME)),
+		assertThrown(new ExpectedThrowable(new IllegalArgumentException(ClassAttributes.REQUIRES_A_CLASS_NAME)),
 				new I_Thrower() {
 					
 					@Override

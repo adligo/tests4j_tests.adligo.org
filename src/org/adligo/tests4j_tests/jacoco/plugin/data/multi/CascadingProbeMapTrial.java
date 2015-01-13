@@ -1,6 +1,6 @@
 package org.adligo.tests4j_tests.jacoco.plugin.data.multi;
 
-import org.adligo.tests4j.shared.asserts.common.ExpectedThrownData;
+import org.adligo.tests4j.shared.asserts.common.ExpectedThrowable;
 import org.adligo.tests4j.shared.asserts.common.I_Thrower;
 import org.adligo.tests4j.system.shared.trials.SourceFileScope;
 import org.adligo.tests4j.system.shared.trials.Test;
@@ -16,7 +16,7 @@ public class CascadingProbeMapTrial extends SourceFileCountingTrial {
   @SuppressWarnings({"unused", "boxing"})
   @Test
   public void testConstructor() {
-    assertThrown(new ExpectedThrownData(NullPointerException.class), new I_Thrower() {
+    assertThrown(new ExpectedThrowable(NullPointerException.class), new I_Thrower() {
       
       @Override
       public void run() throws Throwable {
@@ -143,6 +143,6 @@ public class CascadingProbeMapTrial extends SourceFileCountingTrial {
   }
   
   private void assertMethodNotImplemented(I_Thrower thrower) {
-    assertThrown(new ExpectedThrownData(new IllegalStateException(CascadingProbeMap.METHOD_NOT_IMPLEMENTED)), thrower);
+    assertThrown(new ExpectedThrowable(new IllegalStateException(CascadingProbeMap.METHOD_NOT_IMPLEMENTED)), thrower);
   }
 }

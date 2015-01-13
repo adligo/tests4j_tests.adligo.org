@@ -1,11 +1,8 @@
 package org.adligo.tests4j_tests.shared.asserts;
 
-import java.util.Collections;
-import java.util.List;
-
 import org.adligo.tests4j.shared.asserts.ContainsAssertCommand;
 import org.adligo.tests4j.shared.asserts.common.AssertType;
-import org.adligo.tests4j.shared.asserts.common.ExpectedThrownData;
+import org.adligo.tests4j.shared.asserts.common.ExpectedThrowable;
 import org.adligo.tests4j.shared.asserts.common.I_AssertionData;
 import org.adligo.tests4j.shared.asserts.common.I_CollectionContainsAssertionData;
 import org.adligo.tests4j.shared.asserts.common.I_Thrower;
@@ -17,39 +14,49 @@ import org.adligo.tests4j.system.shared.trials.Test;
 import org.adligo.tests4j_tests.base_trials.I_CountType;
 import org.adligo.tests4j_tests.base_trials.SourceFileCountingTrial;
 import org.adligo.tests4j_tests.references_groups.Tests4J_Asserts_GwtReferenceGroup;
-import org.adligo.tests4j_tests.references_groups.Tests4J_Asserts_ReferenceGroup;
+
+import java.util.Collections;
+import java.util.List;
 
 @SourceFileScope (sourceClass=ContainsAssertCommand.class, minCoverage=70.0)
 @AllowedReferences (groups=Tests4J_Asserts_GwtReferenceGroup.class)
 public class ContainsAssertCommandTrial extends SourceFileCountingTrial {
 
+  @SuppressWarnings("unused")
 	@Test
 	public void testConstructorExceptions() {
 		I_Tests4J_AssertionInputMessages messages =  Tests4J_EnglishConstants.ENGLISH.getAssertionInputMessages();
 		
-		assertThrown(new ExpectedThrownData(new IllegalArgumentException(
+		assertThrown(new ExpectedThrowable(new IllegalArgumentException(
 				messages.getTheExpectedValueShouldNeverBeNull())),
 				new I_Thrower() {
-					
-					@Override
+		  
+          @Override
 					public void run() {
-						new ContainsAssertCommand("failure message", null, null);
+						new ContainsAssertCommand(Tests4J_EnglishConstants.ENGLISH,
+						    "failure message", null, null);
 					}
 				});
 	}
 	
-	@Test
+	@SuppressWarnings("boxing")
+  @Test
 	public void testEqualsHashCode() {
 		ContainsAssertCommand a = 
-				new ContainsAssertCommand("failure message", Collections.singletonList("hey"), "hey");
+				new ContainsAssertCommand(Tests4J_EnglishConstants.ENGLISH, "failure message", 
+				    Collections.singletonList("hey"), "hey");
 		ContainsAssertCommand b = 
-				new ContainsAssertCommand("failure message", Collections.singletonList("hey1"), "hey");
+				new ContainsAssertCommand(Tests4J_EnglishConstants.ENGLISH, "failure message", 
+				    Collections.singletonList("hey1"), "hey");
 		ContainsAssertCommand c = 
-				new ContainsAssertCommand("failure message", Collections.singletonList("hey"), "hey");
+				new ContainsAssertCommand(Tests4J_EnglishConstants.ENGLISH, "failure message", 
+				    Collections.singletonList("hey"), "hey");
 		ContainsAssertCommand d = 
-				new ContainsAssertCommand("failure message1", Collections.singletonList("hey"), "hey");
+				new ContainsAssertCommand(Tests4J_EnglishConstants.ENGLISH, "failure message1", 
+				    Collections.singletonList("hey"), "hey");
 		ContainsAssertCommand e = 
-				new ContainsAssertCommand("failure message", Collections.singletonList("hey"), "hey1");
+				new ContainsAssertCommand(Tests4J_EnglishConstants.ENGLISH, "failure message", 
+				    Collections.singletonList("hey"), "hey1");
 		
 		assertEquals(a, a);
 		assertEquals(a.hashCode(), a.hashCode());
@@ -72,7 +79,7 @@ public class ContainsAssertCommandTrial extends SourceFileCountingTrial {
 		List<String> col = Collections.singletonList("hey");
 		String hey = "hey";
 		ContainsAssertCommand a = 
-				new ContainsAssertCommand("failure message", col, hey);
+				new ContainsAssertCommand(Tests4J_EnglishConstants.ENGLISH, "failure message", col, hey);
 		I_AssertionData data = a.getData();
 		assertNotNull(data);
 		I_CollectionContainsAssertionData ccad  = (I_CollectionContainsAssertionData) data;
@@ -89,11 +96,11 @@ public class ContainsAssertCommandTrial extends SourceFileCountingTrial {
 		List<String> col = Collections.singletonList("hey");
 		String hey = "hey";
 		ContainsAssertCommand a = 
-				new ContainsAssertCommand("failure message", col, hey);
+				new ContainsAssertCommand(Tests4J_EnglishConstants.ENGLISH, "failure message", col, hey);
 		assertTrue(a.evaluate());
 		
 		ContainsAssertCommand b = 
-				new ContainsAssertCommand("failure message", col, "he");
+				new ContainsAssertCommand(Tests4J_EnglishConstants.ENGLISH, "failure message", col, "he");
 		assertFalse(b.evaluate());
 	
 	}

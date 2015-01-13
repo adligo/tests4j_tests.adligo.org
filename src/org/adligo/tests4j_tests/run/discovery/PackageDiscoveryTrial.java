@@ -21,6 +21,7 @@ import org.adligo.tests4j.run.discovery.AfterTrialAuditor;
 import org.adligo.tests4j.run.discovery.AllowedDependenciesAuditor;
 import org.adligo.tests4j.run.discovery.BeforeTrialAuditor;
 import org.adligo.tests4j.run.discovery.ClassesWithSourceFileTrialsCalculator;
+import org.adligo.tests4j.run.discovery.ConstantsDiscovery;
 import org.adligo.tests4j.run.discovery.I_PackageDiscovery;
 import org.adligo.tests4j.run.discovery.I_TrialDescription;
 import org.adligo.tests4j.run.discovery.I_TrialStateNameIdKey;
@@ -121,11 +122,12 @@ public class PackageDiscoveryTrial extends SourceFileCountingTrial {
 		I_PackageDiscovery cd = new PackageDiscovery("org.adligo.tests4j.run.discovery");
 		List<String> clazzNames = cd.getClassNames();
 		assertNotNull(clazzNames);
-		assertEquals(19, clazzNames.size());
+		assertEquals(20, clazzNames.size());
 		assertContains(clazzNames, AfterTrialAuditor.class.getName());
 		assertContains(clazzNames, AllowedDependenciesAuditor.class.getName());
 		
 		assertContains(clazzNames, BeforeTrialAuditor.class.getName());
+		assertContains(clazzNames, ConstantsDiscovery.class.getName());
 		
 		assertContains(clazzNames, I_PackageDiscovery.class.getName());
 		assertContains(clazzNames, I_TrialDescription.class.getName());
@@ -339,7 +341,7 @@ public class PackageDiscoveryTrial extends SourceFileCountingTrial {
 
 	@Override
 	public int getAsserts(I_CountType type) {
-		int thisAsserts = 117;
+		int thisAsserts = 118;
 		//code coverage and circular dependencies +
 		//custom afterTrialTests
 		//+ see above
@@ -353,7 +355,7 @@ public class PackageDiscoveryTrial extends SourceFileCountingTrial {
 
 	@Override
 	public int getUniqueAsserts(I_CountType type) {
-		int thisUniqueAsserts = 117;
+		int thisUniqueAsserts = 118;
 		//code coverage and circular dependencies +
 		//custom afterTrialTests
 		//+ see above

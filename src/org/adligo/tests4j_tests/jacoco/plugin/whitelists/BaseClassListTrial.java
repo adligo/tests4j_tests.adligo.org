@@ -1,6 +1,6 @@
 package org.adligo.tests4j_tests.jacoco.plugin.whitelists;
 
-import org.adligo.tests4j.shared.asserts.common.ExpectedThrownData;
+import org.adligo.tests4j.shared.asserts.common.ExpectedThrowable;
 import org.adligo.tests4j.shared.asserts.common.I_Thrower;
 import org.adligo.tests4j.system.shared.trials.SourceFileScope;
 import org.adligo.tests4j.system.shared.trials.Test;
@@ -40,7 +40,7 @@ public class BaseClassListTrial extends SourceFileCountingTrial {
 	  exceptions.put("hmm", new ClassNotFoundException("hmm"));
     ClassesMock cm = new ClassesMock(classes, exceptions);
     
-    assertThrown(new ExpectedThrownData(
+    assertThrown(new ExpectedThrowable(
         new RuntimeException(
         new ClassNotFoundException("hmm"))),
         new I_Thrower() {

@@ -6,7 +6,7 @@ import static org.mockito.Mockito.when;
 import org.adligo.tests4j.run.common.ConcurrentQualifiedMap;
 import org.adligo.tests4j.run.common.I_Notifier;
 import org.adligo.tests4j.run.common.NotifierDelegate;
-import org.adligo.tests4j.shared.asserts.common.ExpectedThrownData;
+import org.adligo.tests4j.shared.asserts.common.ExpectedThrowable;
 import org.adligo.tests4j.shared.asserts.common.I_Thrower;
 import org.adligo.tests4j.shared.asserts.reference.AllowedReferences;
 import org.adligo.tests4j.system.shared.trials.SourceFileScope;
@@ -125,7 +125,7 @@ public class ConcurrentQualifiedMapTrial extends SourceFileCountingTrial {
         mapMock_, nMock);
     when(mapMock_.containsKey(12)).thenReturn(false);
     
-    assertThrown(new ExpectedThrownData(InterruptedThreadExceptionMock.class),
+    assertThrown(new ExpectedThrowable(InterruptedThreadExceptionMock.class),
         new I_Thrower() {
           
           @Override
@@ -156,7 +156,7 @@ public class ConcurrentQualifiedMapTrial extends SourceFileCountingTrial {
     when(mapMock_.containsKey(12)).thenReturn(true);
     when(mapMock_.get(12)).thenReturn(null).thenReturn("value");
     
-    assertThrown(new ExpectedThrownData(InterruptedThreadExceptionMock.class),
+    assertThrown(new ExpectedThrowable(InterruptedThreadExceptionMock.class),
         new I_Thrower() {
           
           @Override

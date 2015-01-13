@@ -32,7 +32,7 @@ public class TrialsProgressDisplayTrial extends SourceFileCountingTrial {
     onThrowableRecord_ = new MockMethod<Void>();
     doAnswer(onThrowableRecord_).when(logMock_).onThrowable(any());
     when(logMock_.getLineSeperator()).thenReturn("lineSeperator");
-		reporter_ = new TrialsProgressDisplay();
+		reporter_ = new TrialsProgressDisplay(Tests4J_EnglishConstants.ENGLISH);
 	}
 
 	

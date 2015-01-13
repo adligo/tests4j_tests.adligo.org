@@ -3,12 +3,11 @@ package org.adligo.tests4j_tests.models.shared.metadata;
 
 import org.adligo.tests4j.models.shared.metadata.I_UseCaseBrief;
 import org.adligo.tests4j.models.shared.metadata.UseCaseBrief;
-import org.adligo.tests4j.shared.asserts.common.ExpectedThrownData;
+import org.adligo.tests4j.shared.asserts.common.ExpectedThrowable;
 import org.adligo.tests4j.shared.asserts.common.I_Thrower;
 import org.adligo.tests4j.shared.asserts.reference.AllowedReferences;
 import org.adligo.tests4j.shared.en.Tests4J_EnglishConstants;
 import org.adligo.tests4j.shared.i18n.I_Tests4J_AnnotationMessages;
-import org.adligo.tests4j.shared.xml.XML_Builder;
 import org.adligo.tests4j.system.shared.trials.SourceFileScope;
 import org.adligo.tests4j.system.shared.trials.Test;
 import org.adligo.tests4j_tests.base_trials.I_CountType;
@@ -24,33 +23,42 @@ public class UseCaseBriefTrial extends SourceFileCountingTrial {
 	public void testConstructorExceptions() throws Exception {
 		I_Tests4J_AnnotationMessages messages =  Tests4J_EnglishConstants.ENGLISH.getAnnotationMessages();
 		 
-		assertThrown(new ExpectedThrownData(new IllegalArgumentException(
-				messages.getUseCaseScopeEmptyName())), 
-				new I_Thrower() {
-					
-					@SuppressWarnings("unused")
-          @Override
-					public void run() {
-						new UseCaseBrief((String) null);
-					}
-				});
-		assertThrown(new ExpectedThrownData(new IllegalArgumentException(
-				messages.getUseCaseScopeEmptyName())), 
-				new I_Thrower() {
-					
-					@SuppressWarnings("unused")
-          @Override
-					public void run() {
-						new UseCaseBrief("");
-					}
-				});
-		assertThrown(new ExpectedThrownData(NullPointerException.class), 
+		assertThrown(new ExpectedThrowable(NullPointerException.class), 
         new I_Thrower() {
           
           @SuppressWarnings("unused")
           @Override
           public void run() {
-            new UseCaseBrief((I_UseCaseBrief) null);
+            new UseCaseBrief(null, (String) null);
+          }
+        });
+		assertThrown(new ExpectedThrowable(new IllegalArgumentException(
+				messages.getUseCaseScopeEmptyName())), 
+				new I_Thrower() {
+					
+					@SuppressWarnings("unused")
+          @Override
+					public void run() {
+						new UseCaseBrief(Tests4J_EnglishConstants.ENGLISH, (String) null);
+					}
+				});
+		assertThrown(new ExpectedThrowable(new IllegalArgumentException(
+				messages.getUseCaseScopeEmptyName())), 
+				new I_Thrower() {
+					
+					@SuppressWarnings("unused")
+          @Override
+					public void run() {
+						new UseCaseBrief(Tests4J_EnglishConstants.ENGLISH, "");
+					}
+				});
+		assertThrown(new ExpectedThrowable(NullPointerException.class), 
+        new I_Thrower() {
+          
+          @SuppressWarnings("unused")
+          @Override
+          public void run() {
+            new UseCaseBrief(Tests4J_EnglishConstants.ENGLISH, (I_UseCaseBrief) null);
           }
         });
 	}
@@ -58,10 +66,10 @@ public class UseCaseBriefTrial extends SourceFileCountingTrial {
 	@SuppressWarnings("boxing")
   @Test
 	public void testEqualsHashCode() throws Exception {
-		UseCaseBrief a = new UseCaseBrief("throw exception");
-		UseCaseBrief b = new UseCaseBrief("throw football");
-		UseCaseBrief c = new UseCaseBrief("throw exception");
-		UseCaseBrief d = new UseCaseBrief("eat exception");
+		UseCaseBrief a = new UseCaseBrief(Tests4J_EnglishConstants.ENGLISH, "throw exception");
+		UseCaseBrief b = new UseCaseBrief(Tests4J_EnglishConstants.ENGLISH, "throw football");
+		UseCaseBrief c = new UseCaseBrief(Tests4J_EnglishConstants.ENGLISH, "throw exception");
+		UseCaseBrief d = new UseCaseBrief(Tests4J_EnglishConstants.ENGLISH, "eat exception");
 		
 		assertEquals(a, a);
 		assertEquals(a.hashCode(), a.hashCode());
@@ -80,17 +88,17 @@ public class UseCaseBriefTrial extends SourceFileCountingTrial {
 	
 	@Test
 	public void testGettersAndCopyConstructor() throws Exception {
-		UseCaseBrief uc = new UseCaseBrief("throw exception");
+		UseCaseBrief uc = new UseCaseBrief(Tests4J_EnglishConstants.ENGLISH, "throw exception");
 		assertEquals("throw exception", uc.getName());
 		
-		UseCaseBrief uc2 = new UseCaseBrief(uc);
+		UseCaseBrief uc2 = new UseCaseBrief(Tests4J_EnglishConstants.ENGLISH, uc);
 		assertEquals("throw exception", uc2.getName());
 	}
 	
 
 	@Test
 	public void testToString() throws Exception {
-		UseCaseBrief uc = new UseCaseBrief("throw exception");
+		UseCaseBrief uc = new UseCaseBrief(Tests4J_EnglishConstants.ENGLISH, "throw exception");
 		assertEquals("UseCase [throw exception]", uc.toString());
 	}
 	
@@ -101,7 +109,7 @@ public class UseCaseBriefTrial extends SourceFileCountingTrial {
 
 	@Override
 	public int getAsserts(I_CountType type) {
-		int thisAsserts = 15;
+		int thisAsserts = 16;
 		//code coverage and circular dependencies +
 		//custom afterTrialTests
 		//+ see above
@@ -115,7 +123,7 @@ public class UseCaseBriefTrial extends SourceFileCountingTrial {
 
 	@Override
 	public int getUniqueAsserts(I_CountType type) {
-		int thisUniqueAsserts = 9;
+		int thisUniqueAsserts = 10;
 		//code coverage and circular dependencies +
 		//custom afterTrialTests
 		//+ see above

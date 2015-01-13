@@ -1,7 +1,7 @@
 package org.adligo.tests4j_tests.run.helpers;
 
 import org.adligo.tests4j.run.helpers.CachedClassBytesClassLoader;
-import org.adligo.tests4j.shared.asserts.common.ExpectedThrownData;
+import org.adligo.tests4j.shared.asserts.common.ExpectedThrowable;
 import org.adligo.tests4j.shared.asserts.common.I_Thrower;
 import org.adligo.tests4j.shared.asserts.reference.CircularDependencies;
 import org.adligo.tests4j.shared.common.ClassMethods;
@@ -184,7 +184,7 @@ public class CachedClassBytesClassLoaderTrial extends SourceFileCountingTrial {
 		
 		IOException ioX =new IOException("testException");
 		final MockInputStream mis = new MockInputStream(ioX);
-		assertThrown(new ExpectedThrownData(ioX), new I_Thrower() {
+		assertThrown(new ExpectedThrowable(ioX), new I_Thrower() {
 			
 			@Override
 			public void run() throws Exception {

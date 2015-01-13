@@ -22,12 +22,12 @@ public class ThrowableUniformEvaluatorTrial extends SourceFileCountingTrial {
 	@Test
 	public void testGetters() {
 		assertEquals(Throwable.class, 
-				new ThrowableUniformEvaluator().getType());
+				new ThrowableUniformEvaluator(Tests4J_EnglishConstants.ENGLISH).getType());
 	}
 	
 	@Test
 	public void testIsUniform() {
-		ThrowableUniformEvaluator evaluator = new ThrowableUniformEvaluator();
+		ThrowableUniformEvaluator evaluator = new ThrowableUniformEvaluator(Tests4J_EnglishConstants.ENGLISH);
 		
 		I_Evaluation<I_TextLinesCompareResult> eval = evaluator.isUniform(
 				new CompareAssertionData<Throwable>(
@@ -85,7 +85,7 @@ public class ThrowableUniformEvaluatorTrial extends SourceFileCountingTrial {
 	
 	@Test
 	public void testIsNotUniform() {
-		ThrowableUniformEvaluator evaluator = new ThrowableUniformEvaluator();
+		ThrowableUniformEvaluator evaluator = new ThrowableUniformEvaluator(Tests4J_EnglishConstants.ENGLISH);
 		I_Evaluation<I_TextLinesCompareResult> eval = evaluator.isNotUniform(
 				new CompareAssertionData<Throwable>(
 						new IllegalArgumentException("hey\nu"), 

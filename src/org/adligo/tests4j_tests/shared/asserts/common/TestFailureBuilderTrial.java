@@ -16,9 +16,9 @@ import org.adligo.tests4j.shared.asserts.common.AssertCompareFailureMutant;
 import org.adligo.tests4j.shared.asserts.common.AssertThrownFailureMutant;
 import org.adligo.tests4j.shared.asserts.common.AssertType;
 import org.adligo.tests4j.shared.asserts.common.CompareAssertionData;
-import org.adligo.tests4j.shared.asserts.common.ExpectedThrownData;
+import org.adligo.tests4j.shared.asserts.common.ExpectedThrowable;
 import org.adligo.tests4j.shared.asserts.common.I_AssertionData;
-import org.adligo.tests4j.shared.asserts.common.I_ExpectedThrownData;
+import org.adligo.tests4j.shared.asserts.common.I_ExpectedThrowable;
 import org.adligo.tests4j.shared.asserts.common.I_ThrowableInfo;
 import org.adligo.tests4j.shared.asserts.common.I_Thrower;
 import org.adligo.tests4j.shared.asserts.common.I_ThrownAssertionData;
@@ -28,6 +28,7 @@ import org.adligo.tests4j.shared.asserts.reference.AllowedReferences;
 import org.adligo.tests4j.shared.asserts.uniform.I_Evaluation;
 import org.adligo.tests4j.shared.asserts.uniform.I_UniformAssertionEvaluator;
 import org.adligo.tests4j.shared.asserts.uniform.I_UniformThrownAssertionEvaluator;
+import org.adligo.tests4j.shared.en.Tests4J_EnglishConstants;
 import org.adligo.tests4j.system.shared.trials.SourceFileScope;
 import org.adligo.tests4j.system.shared.trials.Test;
 import org.adligo.tests4j_tests.base_trials.I_CountType;
@@ -54,7 +55,7 @@ public class TestFailureBuilderTrial extends SourceFileCountingTrial {
   
   @Test
   public void testBuildContains() {
-    ContainsAssertCommand bac = new ContainsAssertCommand(
+    ContainsAssertCommand bac = new ContainsAssertCommand(Tests4J_EnglishConstants.ENGLISH, 
         "hey", Collections.singleton("FailureMessage"), "true");
     TestFailureMutant  tfm = builder_.build(bac, "buildFailureMessage");
     
@@ -69,7 +70,7 @@ public class TestFailureBuilderTrial extends SourceFileCountingTrial {
     assertNull(acfm.getActualValue());
     
     
-    bac = new ContainsAssertCommand(
+    bac = new ContainsAssertCommand(Tests4J_EnglishConstants.ENGLISH, 
         "hey", Collections.singleton("FailureMessage"), "FailureMessage");
     tfm = builder_.build(bac, "buildFailureMessage");
     
@@ -87,7 +88,8 @@ public class TestFailureBuilderTrial extends SourceFileCountingTrial {
   @Test
   public void testBuildEquals() {
     AssertType type = AssertType.AssertEquals;
-    IdenticalAssertCommand iac = new IdenticalAssertCommand("failureMessage",
+    IdenticalAssertCommand iac = new IdenticalAssertCommand(
+        Tests4J_EnglishConstants.ENGLISH, "failureMessage",
         new CompareAssertionData<String>("false", "true", type));
     
     assertDefault(type, iac.getData());
@@ -128,7 +130,8 @@ public class TestFailureBuilderTrial extends SourceFileCountingTrial {
   @Test
   public void testBuildNotEquals() {
     AssertType type = AssertType.AssertNotEquals;
-    IdenticalAssertCommand iac = new IdenticalAssertCommand("failureMessage",
+    IdenticalAssertCommand iac = new IdenticalAssertCommand(
+        Tests4J_EnglishConstants.ENGLISH, "failureMessage",
         new CompareAssertionData<String>("false", "true", type));
     
     assertDefault(type, iac.getData());
@@ -169,7 +172,8 @@ public class TestFailureBuilderTrial extends SourceFileCountingTrial {
   @Test
   public void testBuildNotSame() {
     AssertType type = AssertType.AssertNotSame;
-    IdenticalAssertCommand iac = new IdenticalAssertCommand("failureMessage",
+    IdenticalAssertCommand iac = new IdenticalAssertCommand(
+        Tests4J_EnglishConstants.ENGLISH, "failureMessage",
         new CompareAssertionData<String>("false", "true", type));
     
     assertDefault(type, iac.getData());
@@ -181,7 +185,8 @@ public class TestFailureBuilderTrial extends SourceFileCountingTrial {
     AssertType type = AssertType.AssertNotUniform;
     I_UniformAssertionEvaluator<String, String> uae = mock(I_UniformAssertionEvaluator.class);
     
-    UniformAssertCommand<String, String> iac = new UniformAssertCommand<String, String>("failureMessage",
+    UniformAssertCommand<String, String> iac = new UniformAssertCommand<String, String>(
+        Tests4J_EnglishConstants.ENGLISH, "failureMessage",
         new CompareAssertionData<String>("false", "true", type), uae);
     
     assertDefault(type, iac.getData());
@@ -222,7 +227,8 @@ public class TestFailureBuilderTrial extends SourceFileCountingTrial {
   @Test
   public void testBuildSame() {
     AssertType type = AssertType.AssertSame;
-    IdenticalAssertCommand iac = new IdenticalAssertCommand("failureMessage",
+    IdenticalAssertCommand iac = new IdenticalAssertCommand(
+        Tests4J_EnglishConstants.ENGLISH, "failureMessage",
         new CompareAssertionData<String>("false", "true", type));
     
     assertDefault(type, iac.getData());
@@ -231,7 +237,8 @@ public class TestFailureBuilderTrial extends SourceFileCountingTrial {
   @Test
   public void testBuildThrown() {
     ThrownAssertCommand bac = new ThrownAssertCommand(
-        "FailureMessage", new ExpectedThrownData(NullPointerException.class));
+        Tests4J_EnglishConstants.ENGLISH, 
+        "FailureMessage", new ExpectedThrowable(NullPointerException.class));
     TestFailureMutant  tfm = builder_.build(bac.getData(), "buildFailureMessage");
     
     assertTrue(tfm instanceof AssertThrownFailureMutant);
@@ -250,19 +257,20 @@ public class TestFailureBuilderTrial extends SourceFileCountingTrial {
   public void testBuildThrownUniform() throws Throwable {
     I_UniformThrownAssertionEvaluator evalator = mock(I_UniformThrownAssertionEvaluator.class);
     UniformThrownAssertCommand bac = new UniformThrownAssertCommand(
-        "FailureMessage", new ExpectedThrownData(NullPointerException.class),
+        Tests4J_EnglishConstants.ENGLISH, 
+        "FailureMessage", new ExpectedThrowable(NullPointerException.class),
         evalator);
     I_Evaluation<I_ThrownAssertionData> eval = mock(I_Evaluation.class);
     I_ThrownAssertionData data = mock(I_ThrownAssertionData.class);
     when(eval.getData()).thenReturn(data);
     when(data.getType()).thenReturn(AssertType.AssertThrownUniform);
     
-    ExpectedThrownData expected = new ExpectedThrownData(NullPointerException.class);
+    ExpectedThrowable expected = new ExpectedThrowable(NullPointerException.class);
     when(data.getExpected()).thenReturn(expected);
     Throwable actual = new Throwable();
     when(data.getActual()).thenReturn(actual);
     when(eval.getFailureReason()).thenReturn("failureReason");
-    when(evalator.isUniform(any(I_ExpectedThrownData.class), any(Throwable.class))).thenReturn(eval);
+    when(evalator.isUniform(any(I_ExpectedThrowable.class), any(Throwable.class))).thenReturn(eval);
     I_Thrower thrower = mock(I_Thrower.class);
     doThrow(new IllegalStateException("test")).when(thrower).run();
     bac.evaluate(thrower);
@@ -286,7 +294,8 @@ public class TestFailureBuilderTrial extends SourceFileCountingTrial {
     AssertType type = AssertType.AssertUniform;
     I_UniformAssertionEvaluator<String, String> uae = mock(I_UniformAssertionEvaluator.class);
     
-    UniformAssertCommand<String, String> iac = new UniformAssertCommand<String, String>("failureMessage",
+    UniformAssertCommand<String, String> iac = new UniformAssertCommand<String, String>(
+        Tests4J_EnglishConstants.ENGLISH, "failureMessage",
         new CompareAssertionData<String>("false", "true", type), uae);
     
     assertDefault(type, iac.getData());

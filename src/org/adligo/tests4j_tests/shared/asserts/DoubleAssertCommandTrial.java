@@ -3,7 +3,7 @@ package org.adligo.tests4j_tests.shared.asserts;
 import org.adligo.tests4j.shared.asserts.DoubleAssertCommand;
 import org.adligo.tests4j.shared.asserts.common.AssertType;
 import org.adligo.tests4j.shared.asserts.common.CompareAssertionData;
-import org.adligo.tests4j.shared.asserts.common.ExpectedThrownData;
+import org.adligo.tests4j.shared.asserts.common.ExpectedThrowable;
 import org.adligo.tests4j.shared.asserts.common.I_Thrower;
 import org.adligo.tests4j.shared.asserts.reference.AllowedReferences;
 import org.adligo.tests4j.system.shared.trials.SourceFileScope;
@@ -19,7 +19,7 @@ public class DoubleAssertCommandTrial extends SourceFileCountingTrial {
 
 	@Test
 	public void testConstructorExeptions() {
-		assertThrown(new ExpectedThrownData(new IllegalArgumentException(DoubleAssertCommand.BAD_TYPE)),
+		assertThrown(new ExpectedThrowable(new IllegalArgumentException(DoubleAssertCommand.BAD_TYPE)),
 				new I_Thrower() {
 					
 					@Override

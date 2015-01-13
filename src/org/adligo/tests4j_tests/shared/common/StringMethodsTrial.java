@@ -1,6 +1,6 @@
 package org.adligo.tests4j_tests.shared.common;
 
-import org.adligo.tests4j.shared.asserts.common.ExpectedThrownData;
+import org.adligo.tests4j.shared.asserts.common.ExpectedThrowable;
 import org.adligo.tests4j.shared.asserts.common.I_Thrower;
 import org.adligo.tests4j.shared.asserts.reference.AllowedReferences;
 import org.adligo.tests4j.shared.common.StringMethods;
@@ -22,7 +22,7 @@ public class StringMethodsTrial extends SourceFileCountingTrial {
 		assertTrue(StringMethods.isEmpty("\n"));
 		assertFalse(StringMethods.isEmpty("hey"));
 		
-		assertThrown(new ExpectedThrownData(new IllegalArgumentException("null message.")), new I_Thrower() {
+		assertThrown(new ExpectedThrowable(new IllegalArgumentException("null message.")), new I_Thrower() {
 			
 			@Override
 			public void run() {

@@ -41,7 +41,7 @@ public class TrialFailedDisplayTrial extends SourceFileCountingTrial {
 	@SuppressWarnings("boxing")
   @Test
 	public void testProgressReportLogOff() {
-		TrialFailedDisplay display = new TrialFailedDisplay(logMock_);
+		TrialFailedDisplay display = new TrialFailedDisplay(Tests4J_EnglishConstants.ENGLISH, logMock_);
 		
 		BaseTrialResultMutant btrm = new BaseTrialResultMutant();
 		btrm.setTrialName("someTrialName");
@@ -60,7 +60,8 @@ public class TrialFailedDisplayTrial extends SourceFileCountingTrial {
 	@SuppressWarnings("boxing")
   @Test
 	public void testProgressReportPartDone() {
-		TrialFailedDisplay display = new TrialFailedDisplay(logMock_);
+		TrialFailedDisplay display = new TrialFailedDisplay(
+		    Tests4J_EnglishConstants.ENGLISH,logMock_);
 		when(logMock_.isLogEnabled(any())).thenReturn(true);
 		
 		BaseTrialResultMutant btrm = new BaseTrialResultMutant();

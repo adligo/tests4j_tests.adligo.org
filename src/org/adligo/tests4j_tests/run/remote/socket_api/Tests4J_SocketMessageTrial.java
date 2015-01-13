@@ -1,7 +1,7 @@
 package org.adligo.tests4j_tests.run.remote.socket_api;
 
 import org.adligo.tests4j.run.remote.socket_api.Tests4J_SocketMessage;
-import org.adligo.tests4j.shared.asserts.common.ExpectedThrownData;
+import org.adligo.tests4j.shared.asserts.common.ExpectedThrowable;
 import org.adligo.tests4j.shared.asserts.common.I_Thrower;
 import org.adligo.tests4j.system.shared.trials.SourceFileScope;
 import org.adligo.tests4j.system.shared.trials.Test;
@@ -31,7 +31,7 @@ public class Tests4J_SocketMessageTrial extends SourceFileCountingTrial {
 	*/
 	@Test
 	public void testXmlErrors() {
-		assertThrown(new ExpectedThrownData(
+		assertThrown(new ExpectedThrowable(
 				new IllegalArgumentException(Tests4J_SocketMessage.REQUIRES_ERROR)), 
 			new I_Thrower() {
 			
@@ -41,7 +41,7 @@ public class Tests4J_SocketMessageTrial extends SourceFileCountingTrial {
 			}
 		});
 		
-		assertThrown(new ExpectedThrownData(
+		assertThrown(new ExpectedThrowable(
 				new IllegalArgumentException(Tests4J_SocketMessage.REQUIRES_ERROR)), 
 			new I_Thrower() {
 			
@@ -51,7 +51,7 @@ public class Tests4J_SocketMessageTrial extends SourceFileCountingTrial {
 			}
 		});
 		
-		assertThrown(new ExpectedThrownData(
+		assertThrown(new ExpectedThrowable(
 				new IllegalArgumentException("Unknown Version null expecting 1.0.")), 
 			new I_Thrower() {
 			
