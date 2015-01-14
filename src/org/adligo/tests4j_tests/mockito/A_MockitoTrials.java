@@ -38,7 +38,7 @@ implements I_MetaTrialParams<A_MockitoTrials>, I_CountingPackageTrials {
 		//in dependency order
 	  super.add(ObjParamsTrial.class);
 	  super.add(ArgMapTrial.class);
-	  super.add(MethodRecorderTrial.class);
+	  super.add(MockMethodTrial.class);
 	}
 
 	@Override

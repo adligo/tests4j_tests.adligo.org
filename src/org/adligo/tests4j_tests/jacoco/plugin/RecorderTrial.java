@@ -45,7 +45,7 @@ public class RecorderTrial extends SourceFileCountingTrial {
     I_PackageDiscovery pkgFoo = mock(I_PackageDiscovery.class);
     when(pkgFoo.getPackageName()).thenReturn("com.example.foo");
     when(pkgFoo.getClassNames()).thenReturn(Collections.singletonList("com.example.foo.Bar"));
-    argMap.putVar(pkgFoo, "com.example.foo");
+    argMap.putVal(pkgFoo, "com.example.foo");
     
     I_PackageDiscovery pkgA = mock(I_PackageDiscovery.class);
     when(pkgA.getPackageName()).thenReturn("com.example.foo.a");
@@ -78,9 +78,6 @@ public class RecorderTrial extends SourceFileCountingTrial {
             return mock(I_ClassInstrumentationMetadata.class);
           }
     });
-    metas.putFactory("com.example.foo.Bar");
-    metas.putFactory("com.example.foo.a.Aar");
-    metas.putFactory("com.example.foo.c.Car");
     MockMethod<I_ClassInstrumentationMetadata> metaRecord = new MockMethod<I_ClassInstrumentationMetadata>(metas);
     when(store.getClassInstrumentation(any())).then(metaRecord);
     
@@ -96,9 +93,6 @@ public class RecorderTrial extends SourceFileCountingTrial {
             return toRet;
           }
         });
-    briefs.putFactory("com.example.foo.Bar");
-    briefs.putFactory("com.example.foo.a.Aar");
-    briefs.putFactory("com.example.foo.c.Car");
     MockMethod<I_SourceFileCoverageBrief> sourceCoverRecord= new MockMethod<I_SourceFileCoverageBrief>(briefs);
     when(runtime.getSourceFileCoverage(any(String.class))).thenAnswer(sourceCoverRecord);
     when(memory.isResultPackage(any())).thenReturn(true);
@@ -161,12 +155,12 @@ public class RecorderTrial extends SourceFileCountingTrial {
     I_PackageDiscovery pkgFoo = mock(I_PackageDiscovery.class);
     when(pkgFoo.getPackageName()).thenReturn("com.example.foo");
     when(pkgFoo.getClassNames()).thenReturn(Collections.singletonList("com.example.foo.Bar"));
-    argMap.putVar(pkgFoo, "com.example.foo");
+    argMap.putVal(pkgFoo, "com.example.foo");
     
     I_PackageDiscovery pkgA = mock(I_PackageDiscovery.class);
     when(pkgA.getPackageName()).thenReturn("com.example.foo_tests");
     when(pkgA.getClassNames()).thenReturn(Collections.singletonList("com.example.foo_tests.BarTrial"));
-    argMap.putVar(pkgA, "com.example.foo_tests");
+    argMap.putVal(pkgA, "com.example.foo_tests");
     
     MockMethod<I_PackageDiscovery> pkgRecord = new MockMethod<I_PackageDiscovery>(argMap);
     when(memory.getPackage(any())).then(pkgRecord);
@@ -186,8 +180,6 @@ public class RecorderTrial extends SourceFileCountingTrial {
             return mock(I_ClassInstrumentationMetadata.class);
           }
     });
-    metas.putFactory("com.example.foo.Bar");
-    metas.putFactory("com.example.foo_tests.BarTrial");
     MockMethod<I_ClassInstrumentationMetadata> metaRecord = new MockMethod<I_ClassInstrumentationMetadata>(metas);
     when(store.getClassInstrumentation(any())).then(metaRecord);
     
@@ -203,8 +195,6 @@ public class RecorderTrial extends SourceFileCountingTrial {
             return toRet;
           }
         });
-    briefs.putFactory("com.example.foo.Bar");
-    briefs.putFactory("com.example.foo_tests.BarTrial");
     MockMethod<I_SourceFileCoverageBrief> sourceCoverRecord= new MockMethod<I_SourceFileCoverageBrief>(briefs);
     when(runtime.getSourceFileCoverage(any(String.class))).thenAnswer(sourceCoverRecord);
     when(memory.isResultPackage(any())).thenReturn(true);

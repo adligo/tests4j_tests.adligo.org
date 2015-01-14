@@ -27,13 +27,16 @@ public class ObjParamsTrial extends SourceFileCountingTrial {
 
 	
 	
-	@Test
+	@SuppressWarnings("boxing")
+  @Test
 	public void testEqualsHashCode_AndToString() {
 	  ObjParams a = new ObjParams(new Object[]{"ObjectA"});
 	  ObjParams a1 = new ObjParams(new Object[]{"ObjectA"});
 	  ObjParams b = new ObjParams(new Object[]{"ObjectB"});
 	  ObjParams b1 = new ObjParams(new Object[]{"ObjectA","ObjectB"});
 	  ObjParams c = new ObjParams(new Object[]{"ObjectA","ObjectC"});
+	  
+	  assertEquals("ObjectA", a.toArray()[0]);
 	  
 		assertEquals(a, a);
 		assertEquals(a.hashCode(), a.hashCode());
@@ -68,7 +71,7 @@ public class ObjParamsTrial extends SourceFileCountingTrial {
 
 	@Override
 	public int getAsserts(I_CountType type) {
-		int thisAsserts = 20;
+		int thisAsserts = 21;
 		//code coverage and circular dependencies +
 		//custom afterTrialTests
 		//+ see above
@@ -82,7 +85,7 @@ public class ObjParamsTrial extends SourceFileCountingTrial {
 
 	@Override
 	public int getUniqueAsserts(I_CountType type) {
-		int thisUniqueAsserts = 11;
+		int thisUniqueAsserts = 12;
 		//code coverage and circular dependencies +
 		//custom afterTrialTests
 		//+ see above

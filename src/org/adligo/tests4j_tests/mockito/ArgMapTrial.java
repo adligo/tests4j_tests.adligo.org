@@ -11,29 +11,24 @@ import org.adligo.tests4j_tests.base_trials.SourceFileCountingTrial;
 @SourceFileScope (sourceClass=ArgMap.class, minCoverage=22.0)
 public class ArgMapTrial extends SourceFileCountingTrial {
 
+  @SuppressWarnings("boxing")
 	@Test
 	public void testConstructorsNoArgt() {
 	  ArgMap<String> map = new ArgMap<String>();
-	  map.putDefault(1);
-	  //yes null, there wasn't a default
-	  assertNull(map.getVar(1));
-	  map.putFactory(1);
-    //yes null, there wasn't a factory
     assertNull(map.getVar(1));
     
 	}
 
-	@Test
+	@SuppressWarnings("boxing")
+  @Test
   public void testConstructorsDefault() {
     ArgMap<String> map = new ArgMap<String>("hmm");
-    map.putDefault(1);
     assertEquals("hmm",map.getVar(1));
-    map.putFactory(1);
-    //yes null, there wasn't a factory
-    assertNull(map.getVar(1));
-    
+    assertEquals("hmm",map.getVar(2));
+    assertEquals("hmm",map.getVar(3));
   }
 	
+	@SuppressWarnings("boxing")
 	@Test
   public void testConstructorsFactory() {
     ArgMap<String> map = new ArgMap<String>(new I_ArgFactory<String>() {
@@ -43,16 +38,22 @@ public class ArgMapTrial extends SourceFileCountingTrial {
         return "1" + keys[0];
       }
     });
-    map.putDefault(1);
-    //yes null, there wasn't a default
-    assertNull(map.getVar(1));
-    map.putFactory(1);
-    assertEquals("11", map.getVar(1));
+    String resultOne = map.getVar(1);
+    assertEquals("11", resultOne);
+    assertSame(resultOne, map.getVar(1));
     
+    String resultTwo = map.getVar(2);
+    assertEquals("12", resultTwo);
+    assertSame(resultTwo, map.getVar(2));
+    
+    String resultThree = map.getVar(3);
+    assertEquals("13", resultThree);
+    assertSame(resultThree, map.getVar(3));
   }
 	
-	 @Test
-   public void testConstructorsFactoryAndDefault() {
+	@SuppressWarnings("boxing")
+	@Test
+  public void testConstructorsFactoryAndDefault() {
      ArgMap<String> map = new ArgMap<String>("hey", new I_ArgFactory<String>() {
 
        @Override
@@ -60,15 +61,13 @@ public class ArgMapTrial extends SourceFileCountingTrial {
          return "1" + keys[0];
        }
      });
-     map.putDefault(1);
-     assertEquals("hey", map.getVar(1));
-     map.putFactory(1);
      assertEquals("11", map.getVar(1));
      
    }
 	
-	 @Test
-	 public void testPutAndGet() {
+	@SuppressWarnings("boxing")
+	@Test
+	public void testPutAndGet() {
 	   ArgMap<String> map = new ArgMap<String>();
 	   Object [] a = new Object[] {1};
 	   map.put(a, "1");
@@ -87,14 +86,15 @@ public class ArgMapTrial extends SourceFileCountingTrial {
      assertEquals("12", map.get(o));
      
      a = new Object[] {1,2, 3};
-     map.putVar("value", 1, 2,3);
+     map.putVal("value", 1, 2,3);
      assertEquals("value", map.get(a));
      assertEquals("value", map.get(new ObjParams(a)));
      assertEquals("value", map.getVar(1,2,3));
      o = a;
      assertEquals("value", map.get(o));
-	 }
-	  
+	}
+	
+	@SuppressWarnings("boxing")
 	@Test
 	public void testEqualsHashCode_AndToString() {
 	  ObjParams a = new ObjParams(new Object[]{"ObjectA"});
@@ -136,7 +136,7 @@ public class ArgMapTrial extends SourceFileCountingTrial {
 
 	@Override
 	public int getAsserts(I_CountType type) {
-		int thisAsserts = 39;
+		int thisAsserts = 42;
 		//code coverage and circular dependencies 
 		int thisAfterAsserts = 2;
 		if (type.isFromMetaWithCoverage()) {
@@ -148,7 +148,7 @@ public class ArgMapTrial extends SourceFileCountingTrial {
 
 	@Override
 	public int getUniqueAsserts(I_CountType type) {
-		int thisUniqueAsserts = 20;
+		int thisUniqueAsserts = 22;
 		//code coverage and circular dependencies 
 		int thisAfterUniqueAsserts = 2;
 		if (type.isFromMetaWithCoverage()) {
