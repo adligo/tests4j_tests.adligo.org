@@ -14,7 +14,7 @@ import org.adligo.tests4j_4jacoco.plugin.common.I_Runtime;
 import org.adligo.tests4j_4jacoco.plugin.instrumentation.common.I_ClassInstrumentationMetadata;
 import org.adligo.tests4j_4jacoco.plugin.instrumentation.common.I_ClassInstrumentationMetadataStoreMutant;
 import org.adligo.tests4j_4mockito.ArgMap;
-import org.adligo.tests4j_4mockito.I_ArgFactory;
+import org.adligo.tests4j_4mockito.I_ReturnFactory;
 import org.adligo.tests4j_4mockito.MockMethod;
 import org.adligo.tests4j_tests.base_trials.I_CountType;
 import org.adligo.tests4j_tests.base_trials.SourceFileCountingTrial;
@@ -72,7 +72,7 @@ public class RecorderTrial extends SourceFileCountingTrial {
     I_ClassInstrumentationMetadataStoreMutant store = mock(I_ClassInstrumentationMetadataStoreMutant.class);
     when(memory.getClassInstrumentationInfoStore()).thenReturn(store);
     ArgMap<I_ClassInstrumentationMetadata> metas = new ArgMap<I_ClassInstrumentationMetadata>(
-        new I_ArgFactory<I_ClassInstrumentationMetadata>() {
+        new I_ReturnFactory<I_ClassInstrumentationMetadata>() {
           @Override
           public I_ClassInstrumentationMetadata create(Object [] args) {
             return mock(I_ClassInstrumentationMetadata.class);
@@ -82,7 +82,7 @@ public class RecorderTrial extends SourceFileCountingTrial {
     when(store.getClassInstrumentation(any())).then(metaRecord);
     
     ArgMap<I_SourceFileCoverageBrief> briefs = new ArgMap<I_SourceFileCoverageBrief>(
-          new I_ArgFactory<I_SourceFileCoverageBrief>() {
+          new I_ReturnFactory<I_SourceFileCoverageBrief>() {
           @Override
           public I_SourceFileCoverageBrief create(Object [] args) {
             I_SourceFileCoverageBrief toRet = mock(I_SourceFileCoverageBrief.class);
@@ -174,7 +174,7 @@ public class RecorderTrial extends SourceFileCountingTrial {
     I_ClassInstrumentationMetadataStoreMutant store = mock(I_ClassInstrumentationMetadataStoreMutant.class);
     when(memory.getClassInstrumentationInfoStore()).thenReturn(store);
     ArgMap<I_ClassInstrumentationMetadata> metas = new ArgMap<I_ClassInstrumentationMetadata>(
-        new I_ArgFactory<I_ClassInstrumentationMetadata>() {
+        new I_ReturnFactory<I_ClassInstrumentationMetadata>() {
           @Override
           public I_ClassInstrumentationMetadata create(Object [] args) {
             return mock(I_ClassInstrumentationMetadata.class);
@@ -184,7 +184,7 @@ public class RecorderTrial extends SourceFileCountingTrial {
     when(store.getClassInstrumentation(any())).then(metaRecord);
     
     ArgMap<I_SourceFileCoverageBrief> briefs = new ArgMap<I_SourceFileCoverageBrief>(
-          new I_ArgFactory<I_SourceFileCoverageBrief>() {
+          new I_ReturnFactory<I_SourceFileCoverageBrief>() {
           @Override
           public I_SourceFileCoverageBrief create(Object [] args) {
             I_SourceFileCoverageBrief toRet = mock(I_SourceFileCoverageBrief.class);

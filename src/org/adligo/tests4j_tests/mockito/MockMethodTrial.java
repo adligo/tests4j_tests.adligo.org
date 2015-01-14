@@ -3,7 +3,7 @@ package org.adligo.tests4j_tests.mockito;
 import org.adligo.tests4j.system.shared.trials.SourceFileScope;
 import org.adligo.tests4j.system.shared.trials.Test;
 import org.adligo.tests4j_4mockito.ArgMap;
-import org.adligo.tests4j_4mockito.I_ArgFactory;
+import org.adligo.tests4j_4mockito.I_ReturnFactory;
 import org.adligo.tests4j_4mockito.MockMethod;
 import org.adligo.tests4j_tests.base_trials.I_CountType;
 import org.adligo.tests4j_tests.base_trials.SourceFileCountingTrial;
@@ -153,7 +153,7 @@ public class MockMethodTrial extends SourceFileCountingTrial {
   @Test
   public void testConstructorFactory() throws Exception {
     //ok you would probably never need to mock a list
-    ArgMap<String> map = new ArgMap<String>(new I_ArgFactory<String>() {
+    ArgMap<String> map = new ArgMap<String>(new I_ReturnFactory<String>() {
 
       @Override
       public String create(Object[] keys) {
