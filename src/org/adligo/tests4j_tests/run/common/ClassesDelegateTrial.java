@@ -3,6 +3,7 @@ package org.adligo.tests4j_tests.run.common;
 import org.adligo.tests4j.run.common.ClassesDelegate;
 import org.adligo.tests4j.shared.asserts.common.ExpectedThrowable;
 import org.adligo.tests4j.shared.asserts.common.I_Thrower;
+import org.adligo.tests4j.shared.asserts.common.MatchType;
 import org.adligo.tests4j.shared.asserts.reference.AllowedReferences;
 import org.adligo.tests4j.system.shared.trials.SourceFileScope;
 import org.adligo.tests4j.system.shared.trials.SuppressOutput;
@@ -26,7 +27,10 @@ public class ClassesDelegateTrial extends SourceFileCountingTrial {
     Class<?> string = cd.forName(String.class.getName());
     assertEquals(String.class.getName(), string.getName());
     
-    assertThrown(new ExpectedThrowable(new ClassNotFoundException("hey")),
+    assertThrown(new ExpectedThrowable(new IllegalStateException(
+        " the following class should to be cached at this point," + System.lineSeparator() +
+        " using the parent classloader (which can mess up code coverage assertions);" + System.lineSeparator() +
+        "hey"), MatchType.CONTAINS),
         new I_Thrower() {
           
           @Override

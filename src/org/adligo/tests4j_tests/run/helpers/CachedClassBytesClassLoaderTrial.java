@@ -3,6 +3,7 @@ package org.adligo.tests4j_tests.run.helpers;
 import org.adligo.tests4j.run.helpers.CachedClassBytesClassLoader;
 import org.adligo.tests4j.shared.asserts.common.ExpectedThrowable;
 import org.adligo.tests4j.shared.asserts.common.I_Thrower;
+import org.adligo.tests4j.shared.asserts.common.MatchType;
 import org.adligo.tests4j.shared.asserts.reference.CircularDependencies;
 import org.adligo.tests4j.shared.common.ClassMethods;
 import org.adligo.tests4j.shared.output.I_Tests4J_Log;
@@ -24,7 +25,7 @@ import java.util.List;
 import java.util.Set;
 
 @SourceFileScope (sourceClass=CachedClassBytesClassLoader.class, 
-	minCoverage=76.0, allowedCircularDependencies=CircularDependencies.AllowInnerOuterClasses)
+	minCoverage=74.0, allowedCircularDependencies=CircularDependencies.AllowInnerOuterClasses)
 public class CachedClassBytesClassLoaderTrial extends SourceFileCountingTrial {
 	private static final String MOCK_PACKAGE_NAME = MockWithNothing.class.getPackage().getName();
 	
@@ -52,31 +53,31 @@ public class CachedClassBytesClassLoaderTrial extends SourceFileCountingTrial {
 		assertEquals(1, pkgsWithOutWarn.size());
 		assertEquals(Collections.emptySet(), cl.getClassesNotRequired());
 		
-		cl = new CachedClassBytesClassLoader(logMock,
+		final CachedClassBytesClassLoader cl2 = new CachedClassBytesClassLoader(logMock,
 				new HashSet<String>(),
 				new HashSet<String>(), null);
 		final InputStream in = this.getClass().getResourceAsStream(MOCK_WITH_NOTHING_RESOURCE_NAME);
-		cl.addCache(in, MOCK_WITH_NOTHING_NAME);
-		assertEquals(1, onThrowableRecord.count());
-		Throwable exception = (Throwable) onThrowableRecord.getArg(0);
-		assertEquals(IllegalStateException.class.getName(), exception.getClass().getName());
-		String message = exception.getMessage();
-		assertTrue(message, message.contains(" the following class should to be cached at this point," + "lineSeperator" +
-				" using the parent classloader (which can mess up code coverage assertions);" + "lineSeperator" +
-				"java.lang.Object"));
+		assertThrown(new ExpectedThrowable(new IllegalStateException(" the following class should to be cached at this point," + "lineSeperator" +
+        " using the parent classloader (which can mess up code coverage assertions);" + "lineSeperator" +
+        "java.lang.Object"), MatchType.CONTAINS) , new I_Thrower() {
+          
+          @Override
+          public void run() throws Throwable {
+            cl2.addCache(in, MOCK_WITH_NOTHING_NAME);
+          }
+        });
 		
-		List<String> cachedClasses = cl.getAllCachedClasses();
-		assertEquals(1, cachedClasses.size());
-		assertContains(cachedClasses, MOCK_WITH_NOTHING_NAME);
-		List<String> classesInPackage = cl.getCachedClassesInPackage(MOCK_PACKAGE_NAME);
-		assertEquals(1, classesInPackage.size());
-		assertContains(classesInPackage, MOCK_WITH_NOTHING_NAME);
 		
-		assertNotNull(cl.getLoadedClass(Object.class.getName()));
-		assertNotNull(cl.getLoadedClass(MOCK_WITH_NOTHING_NAME));
+		List<String> cachedClasses = cl2.getAllCachedClasses();
+		assertEquals(0, cachedClasses.size());
+		List<String> classesInPackage = cl2.getCachedClassesInPackage(MOCK_PACKAGE_NAME);
+		assertEquals(0, classesInPackage.size());
 		
-		assertFalse(cl.hasCache(Object.class.getName()));
-		assertTrue(cl.hasCache(MOCK_WITH_NOTHING_NAME));
+		assertNull(cl2.getLoadedClass(Object.class.getName()));
+		assertNull(cl2.getLoadedClass(MOCK_WITH_NOTHING_NAME));
+		
+		assertFalse(cl2.hasCache(Object.class.getName()));
+		assertFalse(cl2.hasCache(MOCK_WITH_NOTHING_NAME));
 		InputStream bs = cl.getCachedBytesStream(MOCK_WITH_NOTHING_NAME); 
 		assertNotNull(bs);
 		bs.close();
@@ -86,7 +87,7 @@ public class CachedClassBytesClassLoaderTrial extends SourceFileCountingTrial {
 	@Test
 	public void testClassNotCachedState() throws Exception {
 	  I_Tests4J_Log logMock = mock(I_Tests4J_Log.class);
-    when(logMock.getLineSeperator()).thenReturn("lineSeperator");
+    when(logMock.getLineSeperator()).thenReturn("lineSeparator");
     
 		CachedClassBytesClassLoader cl = new CachedClassBytesClassLoader(logMock,
 				Collections.singleton("java."),
@@ -98,12 +99,23 @@ public class CachedClassBytesClassLoaderTrial extends SourceFileCountingTrial {
 		assertEquals(1, classes.size());
 		assertContains(classes, "");
 		
-		Class.forName(MOCK_WITH_NOTHING_NAME, false, cl);
+		assertThrown(new ExpectedThrowable(new IllegalStateException(
+		    cl.toString() + " the following class should to be cached at this point,lineSeparator" + 
+          " using the parent classloader (which can mess up code coverage assertions);lineSeparator" +
+          MOCK_WITH_NOTHING_NAME)), 
+		    new I_Thrower() {
+          
+          @Override
+          public void run() throws Throwable {
+            Class.forName(MOCK_WITH_NOTHING_NAME, false, cl);
+          }
+        });
+		
 		assertFalse(cl.hasCache(MOCK_WITH_NOTHING_NAME));
 		Class<?> c = cl.getCachedClass(MOCK_WITH_NOTHING_NAME);
 		assertNull(c);
 		c = cl.getLoadedClass(MOCK_WITH_NOTHING_NAME);
-		assertNotNull(c);
+		assertNull(c);
 		
 		List<String> cachedClasses = cl.getAllCachedClasses();
 		assertEquals(0, cachedClasses.size());
@@ -201,7 +213,7 @@ public class CachedClassBytesClassLoaderTrial extends SourceFileCountingTrial {
 
 	@Override
 	public int getAsserts(I_CountType type) {
-		int thisAsserts = 36;
+		int thisAsserts = 33;
 		//code coverage and circular dependencies +
 		//custom afterTrialTests
 		//+ see above
@@ -215,7 +227,7 @@ public class CachedClassBytesClassLoaderTrial extends SourceFileCountingTrial {
 
 	@Override
 	public int getUniqueAsserts(I_CountType type) {
-		int thisUniqueAsserts = 28;
+		int thisUniqueAsserts = 24;
 		//code coverage and circular dependencies +
 		//custom afterTrialTests
 		//+ see above
