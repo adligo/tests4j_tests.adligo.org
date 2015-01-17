@@ -39,7 +39,7 @@ public class CachedClassBytesClassLoaderTrial extends SourceFileCountingTrial {
 		I_Tests4J_Log logMock = mock(I_Tests4J_Log.class);
 		MockMethod<Void> onThrowableRecord = new MockMethod<Void>();
 		doAnswer(onThrowableRecord).when(logMock).onThrowable(any());
-		when(logMock.getLineSeperator()).thenReturn("lineSeperator");
+		when(logMock.lineSeparator()).thenReturn("lineSeperator");
 		
 		when(logMock.isLogEnabled(CachedClassBytesClassLoader.class)).thenReturn(true);
 		
@@ -87,7 +87,7 @@ public class CachedClassBytesClassLoaderTrial extends SourceFileCountingTrial {
 	@Test
 	public void testClassNotCachedState() throws Exception {
 	  I_Tests4J_Log logMock = mock(I_Tests4J_Log.class);
-    when(logMock.getLineSeperator()).thenReturn("lineSeparator");
+    when(logMock.lineSeparator()).thenReturn("lineSeparator");
     
 		CachedClassBytesClassLoader cl = new CachedClassBytesClassLoader(logMock,
 				Collections.singleton("java."),
@@ -126,7 +126,7 @@ public class CachedClassBytesClassLoaderTrial extends SourceFileCountingTrial {
 	@Test
 	public void testCreateCachedState() throws Exception {
 	  I_Tests4J_Log logMock = mock(I_Tests4J_Log.class);
-    when(logMock.getLineSeperator()).thenReturn("lineSeperator");
+    when(logMock.lineSeparator()).thenReturn("lineSeperator");
     
 		CachedClassBytesClassLoader cl = new CachedClassBytesClassLoader(logMock,
 				Collections.singleton("java."),
@@ -142,7 +142,7 @@ public class CachedClassBytesClassLoaderTrial extends SourceFileCountingTrial {
 	@Test
 	public void testAddCacheTwice() throws Exception {
 	  I_Tests4J_Log logMock = mock(I_Tests4J_Log.class);
-    when(logMock.getLineSeperator()).thenReturn("lineSeperator");
+    when(logMock.lineSeparator()).thenReturn("lineSeperator");
     
 		CachedClassBytesClassLoader cl = new CachedClassBytesClassLoader(logMock,
 				Collections.singleton("java."),
@@ -161,7 +161,7 @@ public class CachedClassBytesClassLoaderTrial extends SourceFileCountingTrial {
 	@Test
 	public void testMapReCheck() throws Exception {
 	  I_Tests4J_Log logMock = mock(I_Tests4J_Log.class);
-    when(logMock.getLineSeperator()).thenReturn("lineSeperator");
+    when(logMock.lineSeparator()).thenReturn("lineSeperator");
 		MockCachedClassBytesClassLoader cl = new MockCachedClassBytesClassLoader(logMock,
 				Collections.singleton("java."),
 				Collections.singleton(""));
@@ -189,7 +189,7 @@ public class CachedClassBytesClassLoaderTrial extends SourceFileCountingTrial {
 	@Test
 	public void testInputStreamGetsClosed() throws Exception {
 	  I_Tests4J_Log logMock = mock(I_Tests4J_Log.class);
-    when(logMock.getLineSeperator()).thenReturn("lineSeperator");
+    when(logMock.lineSeparator()).thenReturn("lineSeperator");
 		final CachedClassBytesClassLoader cl = new CachedClassBytesClassLoader(logMock,
 				Collections.singleton("java."),
 				Collections.singleton(""), null);

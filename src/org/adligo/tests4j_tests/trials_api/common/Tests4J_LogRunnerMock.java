@@ -29,7 +29,7 @@ public class Tests4J_LogRunnerMock implements I_Tests4J_Log{
 	}
 
 	@Override
-	public String getLineSeperator() {
+	public String lineSeparator() {
 		return null;
 	}
 

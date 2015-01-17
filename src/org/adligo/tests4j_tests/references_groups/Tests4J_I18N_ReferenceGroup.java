@@ -7,6 +7,7 @@ import org.adligo.tests4j.models.shared.reference_groups.jse.JSE_Util;
 import org.adligo.tests4j.shared.i18n.I_Tests4J_AnnotationMessages;
 import org.adligo.tests4j.shared.i18n.I_Tests4J_AssertionInputMessages;
 import org.adligo.tests4j.shared.i18n.I_Tests4J_Constants;
+import org.adligo.tests4j.shared.i18n.I_Tests4J_CoveragePluginMessages;
 import org.adligo.tests4j.shared.i18n.I_Tests4J_EclipseErrors;
 import org.adligo.tests4j.shared.i18n.I_Tests4J_LineDiffTextDisplayMessages;
 import org.adligo.tests4j.shared.i18n.I_Tests4J_LogMessages;
@@ -44,6 +45,7 @@ public class Tests4J_I18N_ReferenceGroup extends Tests4J_ReferenceGroup {
 		add(names, I_Tests4J_ParamsReaderMessages.class);
 		add(names, I_Tests4J_ReportMessages.class);
 		add(names, I_Tests4J_ResultMessages.class);
+		add(names, I_Tests4J_CoveragePluginMessages.class);
 		super.setupDelegates(names);
 	}
 	

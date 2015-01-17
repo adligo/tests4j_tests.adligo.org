@@ -39,6 +39,8 @@ implements I_MetaTrialParams<A_EnPkgTrials>, I_CountingPackageTrials {
 		add(Tests4J_AssertionInputMessages_Trial.class);
 		add(Tests4J_AnnotationMessagesTrial.class);
 		
+		add(Tests4J_CoveragePluginMessages_Trial.class);
+		
 		add(Tests4J_EclipseMessages_Trial.class);
 		add(Tests4J_EnglishConstants_Trial.class);
 		

@@ -56,7 +56,7 @@ public class AssertionProcessorTrial extends SourceFileCountingTrial implements 
     assertNotNull(lastTestFailure);
     assertEquals("should be true", lastTestFailure.getFailureMessage());
     TextLines lines = new TextLines(lastTestFailure.getFailureDetail(), true);
-    assertUniform("\torg.adligo.tests4j.shared.asserts.AssertionFailureLocation", lines.getLine(0));
+    assertUniform("org.adligo.tests4j.shared.asserts.AssertionFailureLocation", lines.getLine(0));
     assertUniform("\tat org.adligo.tests4j_tests.shared.asserts."
         + "AssertionProcessorTrial.testSimple(AssertionProcessorTrial.java:54)", lines.getLine(1));
     
@@ -84,7 +84,7 @@ public class AssertionProcessorTrial extends SourceFileCountingTrial implements 
     assertNotNull(lastTestFailure);
     assertEquals("should be true", lastTestFailure.getFailureMessage());
     TextLines lines = new TextLines(lastTestFailure.getFailureDetail(), true);
-    assertUniform("\torg.adligo.tests4j.shared.asserts.AssertionFailureLocation",lines.getLine(0));
+    assertUniform("org.adligo.tests4j.shared.asserts.AssertionFailureLocation",lines.getLine(0));
     assertUniform("\tat org.adligo.tests4j_tests.shared.asserts."
         + "AssertionProcessorTrial.testThrown(AssertionProcessorTrial.java:81)",lines.getLine(1));
     
@@ -108,7 +108,7 @@ public class AssertionProcessorTrial extends SourceFileCountingTrial implements 
     String stack = actual.getStacktrace();
     assertNotNull(stack);
     lines = new TextLines(stack);
-    assertEquals("\tjava.lang.RuntimeException", lines.getLine(0));
+    assertEquals("java.lang.RuntimeException", lines.getLine(0));
     assertEquals("\tat org.adligo.tests4j_tests.shared.asserts."
         + "AssertionProcessorTrial.testThrown("
         + "AssertionProcessorTrial.java:80)", lines.getLine(1));
@@ -162,7 +162,7 @@ public class AssertionProcessorTrial extends SourceFileCountingTrial implements 
 
   @Override
   public int getUniqueAsserts(I_CountType type) {
-    int thisUniqueAsserts = 26;
+    int thisUniqueAsserts = 25;
     if (type.isFromMetaWithCoverage()) {
       //code coverage and circular dependencies +
       //custom afterTrialTests

@@ -116,7 +116,8 @@ public class BadApiTrials_Trial extends ApiCountingTrial {
 		TestWithParamsTrial.runTestDelegate(this);
 	}
 	
-	@Test
+	@SuppressWarnings("boxing")
+  @Test
 	@IgnoreTest
 	public void testTrialRunOverlapPrevention() throws Exception {
 		ExpectedPassRunner runner = new ExpectedPassRunner();

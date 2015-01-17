@@ -162,7 +162,7 @@ public class MultiProbesMapTrial extends SourceFileCountingTrial {
     doAnswer(logRecord).when(logMock).log(any());
     when(logMock.getThreadWithGroupNameMessage()).thenReturn("MockThread/MockThreadGroup");
     when(logMock.isLogEnabled(any())).thenReturn(true);
-    when(logMock.getLineSeperator()).thenReturn("\nlineSeperator");
+    when(logMock.lineSeparator()).thenReturn("\nlineSeperator");
     
     when(ctx.getLog()).thenReturn(logMock);
     when(ctx.getConstants()).thenReturn(Tests4J_EnglishConstants.ENGLISH); 
@@ -337,7 +337,7 @@ public class MultiProbesMapTrial extends SourceFileCountingTrial {
     MockMethod<Void> logRecord = new MockMethod<Void>();
     doAnswer(logRecord).when(logMock).log(any());
     when(logMock.isLogEnabled(any())).thenReturn(true);
-    when(logMock.getLineSeperator()).thenReturn("\nls");
+    when(logMock.lineSeparator()).thenReturn("\nls");
     when(logMock.getThreadWithGroupNameMessage()).thenReturn("MockThread/MockThreadGroup");
     
     I_Runtime runtimeMock = mock(I_Runtime.class);
@@ -429,7 +429,7 @@ public class MultiProbesMapTrial extends SourceFileCountingTrial {
     MockMethod<Void> logRecord = new MockMethod<Void>();
     doAnswer(logRecord).when(logMock).log(any());
     when(logMock.isLogEnabled(any())).thenReturn(true);
-    when(logMock.getLineSeperator()).thenReturn("\nls");
+    when(logMock.lineSeparator()).thenReturn("\nls");
     when(logMock.getThreadWithGroupNameMessage()).thenReturn("MockThread/MockThreadGroup");
     
     I_Runtime runtimeMock = mock(I_Runtime.class);
@@ -559,7 +559,7 @@ public class MultiProbesMapTrial extends SourceFileCountingTrial {
     MockMethod<Void> logRecord = new MockMethod<Void>();
     doAnswer(logRecord).when(logMock).log(any());
     when(logMock.isLogEnabled(any())).thenReturn(true);
-    when(logMock.getLineSeperator()).thenReturn("\nls");
+    when(logMock.lineSeparator()).thenReturn("\nls");
     when(logMock.getThreadWithGroupNameMessage()).thenReturn("MockThread/MockThreadGroup");
     
     I_Runtime runtimeMock = mock(I_Runtime.class);
@@ -658,7 +658,7 @@ public class MultiProbesMapTrial extends SourceFileCountingTrial {
     MockMethod<Void> logRecord = new MockMethod<Void>();
     doAnswer(logRecord).when(logMock).log(any());
     when(logMock.isLogEnabled(any())).thenReturn(true);
-    when(logMock.getLineSeperator()).thenReturn("\nls");
+    when(logMock.lineSeparator()).thenReturn("\nls");
     when(logMock.getThreadWithGroupNameMessage()).thenReturn("MockThread/MockThreadGroup");
     
     I_Runtime runtimeMock = mock(I_Runtime.class);

@@ -28,8 +28,8 @@ public class AssertionFailureLocationTrial extends SourceFileCountingTrial {
 		assertEquals("testAssertionStack",  e.getMethodName());
 		assertEquals(22,  e.getLineNumber());
 		
-		TextLines lines = new TextLines(StackTraceBuilder.toString(afl, true), true);
-		assertUniform("	org.adligo.tests4j.shared.asserts.AssertionFailureLocation", lines.getLine(0));
+		TextLines lines = new TextLines(new StackTraceBuilder().toString(afl, true), true);
+		assertUniform("org.adligo.tests4j.shared.asserts.AssertionFailureLocation", lines.getLine(0));
 		assertUniform("\tat org.adligo.tests4j_tests.shared.asserts."
 				+ "AssertionFailureLocationTrial.testAssertionStack("
 				+ "AssertionFailureLocationTrial.java:22)", lines.getLine(1));
@@ -54,8 +54,8 @@ public class AssertionFailureLocationTrial extends SourceFileCountingTrial {
     assertEquals("testAssertionStackWithTrial",  e.getMethodName());
     assertEquals(43,  e.getLineNumber());
     
-    TextLines lines = new TextLines(StackTraceBuilder.toString(afl, true), true);
-    assertUniform("\torg.adligo.tests4j.shared.asserts.AssertionFailureLocation", lines.getLine(0));
+    TextLines lines = new TextLines(new StackTraceBuilder().toString(afl, true), true);
+    assertUniform("org.adligo.tests4j.shared.asserts.AssertionFailureLocation", lines.getLine(0));
     assertUniform("\tat org.adligo.tests4j_tests.shared.asserts.common."
         + "AssertTypeTrial.init("
         + "AssertTypeTrial.java:1)", lines.getLine(1));

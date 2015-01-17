@@ -36,7 +36,8 @@ public class BadPackageConstructorTrial extends ApiTrial {
 	@Test
 	public void exhibitB() {}
 	
-	public static void runTestDelegate(I_Asserts asserts)  throws Exception  {
+	@SuppressWarnings("boxing")
+  public static void runTestDelegate(I_Asserts asserts)  throws Exception  {
 		ExpectedFailureRunner runner = new ExpectedFailureRunner();
 		runner.run(BadPackageConstructorTrial.class);
 		
@@ -76,7 +77,9 @@ public class BadPackageConstructorTrial extends ApiTrial {
 		
 		asserts.assertEquals("Classes which implement I_AbstractTrial must have a zero argument constructor.", failure.getMessage());
 		TextLines lines = new TextLines(failure.getFailureDetail());
-		asserts.assertEquals("\tjava.lang.NoSuchMethodException: org.adligo.tests4j_tests.trials_api.bad_mock_api_trials.BadPackageConstructorTrial.<init>()", lines.getLine(0));
+		asserts.assertEquals("java.lang.NoSuchMethodException: "
+		    + "org.adligo.tests4j_tests.trials_api.bad_mock_api_trials."
+		    + "BadPackageConstructorTrial.<init>()", lines.getLine(0));
 		//make sure its a full stack trace without testing java line numbers
 		asserts.assertGreaterThanOrEquals(3,lines.getLines());
 		

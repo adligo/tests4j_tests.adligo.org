@@ -76,7 +76,7 @@ public class BadConstructorTrial extends UseCaseTrial {
 				failure.getMessage());
 		TextLines lines = new TextLines(failure.getFailureDetail());
 		asserts.assertEquals(
-				"\tjava.lang.NoSuchMethodException: org.adligo.tests4j_tests.trials_api.bad_mock_use_case_trials.BadConstructorTrial.<init>()", 
+				"java.lang.NoSuchMethodException: org.adligo.tests4j_tests.trials_api.bad_mock_use_case_trials.BadConstructorTrial.<init>()", 
 				lines.getLine(0));
 		//it should be a full stack trace with 10 or so lines
 		asserts.assertGreaterThanOrEquals(3, lines.getLines());

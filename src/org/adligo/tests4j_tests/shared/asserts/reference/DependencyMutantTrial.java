@@ -36,8 +36,10 @@ public class DependencyMutantTrial extends SourceFileCountingTrial {
 					}
 				});
 	}
-	@Test
-	public void testGetsSetsAndConstructor() {
+	
+	@SuppressWarnings("boxing")
+  @Test
+	public void testMethodsGetsSetsAndConstructor() {
 		DependencyMutant dm = new DependencyMutant();
 		assertNull(dm.getAlias());
 		assertEquals(0, dm.getReferences());
@@ -57,7 +59,8 @@ public class DependencyMutantTrial extends SourceFileCountingTrial {
 	}
 	
 	
-	@Test
+	@SuppressWarnings("boxing")
+  @Test
 	public void testComparatorImpl() {
 		DependencyMutant dm = new DependencyMutant();
 		dm.addReference();
@@ -96,7 +99,7 @@ public class DependencyMutantTrial extends SourceFileCountingTrial {
 	}
 
 	@Test
-	public void testComparatorImpl_FromMockWithMethodException() {
+	public void testMethodComparatorImpl_FromMockWithMethodException() {
 		DependencyMutant dmObj = new DependencyMutant();
 		dmObj.setAlias(new ClassAlias(Object.class));
 		for (int i = 0; i < 4; i++) {
@@ -139,6 +142,34 @@ public class DependencyMutantTrial extends SourceFileCountingTrial {
 		assertEquals(dmMw, it.next());
 	}
 	
+	@SuppressWarnings("boxing")
+  @Test
+  public void testMethodEqualsHashCodes() {
+    DependencyMutant dm = new DependencyMutant();
+    dm.setAlias(new ClassAlias("someName"));
+   
+    DependencyMutant dmA = new DependencyMutant();
+    dmA.setAlias(new ClassAlias("someName"));
+    
+    DependencyMutant dmB = new DependencyMutant();
+    dmB.setAlias(new ClassAlias("otherClassName"));
+   
+    DependencyMutant dmC = new DependencyMutant(dm);
+    dmC.setAlias(new ClassAlias("someOtherName"));
+    
+    assertEquals(dm.hashCode(), dmA.hashCode());
+    assertTrue(dm.equals(dmA));
+    assertTrue(dmA.equals(dm));
+    
+    assertNotEquals(dm.hashCode(), dmB.hashCode());
+    assertFalse(dm.equals(dmB));
+    assertFalse(dmB.equals(dm));
+    
+    assertNotEquals(dm.hashCode(), dmC.hashCode());
+    assertFalse(dm.equals(dmC));
+    assertFalse(dmC.equals(dm));
+  }
+	
 	@Test
 	public void testToString() {
 		DependencyMutant dm = new DependencyMutant();
@@ -151,12 +182,12 @@ public class DependencyMutantTrial extends SourceFileCountingTrial {
 	}
 	@Override
 	public int getTests(I_CountType type) {
-		return super.getTests(type, 5, true);
+		return super.getTests(type, 6, true);
 	}
 
 	@Override
 	public int getAsserts(I_CountType type) {
-		int thisAsserts = 24;
+		int thisAsserts = 33;
 		//code coverage and circular dependencies +
 		//custom afterTrialTests
 		//+ see above
@@ -170,7 +201,7 @@ public class DependencyMutantTrial extends SourceFileCountingTrial {
 
 	@Override
 	public int getUniqueAsserts(I_CountType type) {
-		int thisUniqueAsserts = 21;
+		int thisUniqueAsserts = 26;
 		//code coverage and circular dependencies +
 		//custom afterTrialTests
 		//+ see above

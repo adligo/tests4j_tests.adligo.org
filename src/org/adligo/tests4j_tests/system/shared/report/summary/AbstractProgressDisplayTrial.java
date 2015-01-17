@@ -34,7 +34,7 @@ public class AbstractProgressDisplayTrial extends SourceFileCountingTrial {
     doAnswer(logLineRecord_).when(logMock_).logLine(anyVararg());
     onThrowableRecord_ = new MockMethod<Void>();
     doAnswer(onThrowableRecord_).when(logMock_).onThrowable(any());
-    when(logMock_.getLineSeperator()).thenReturn("lineSeperator");
+    when(logMock_.lineSeparator()).thenReturn("lineSeperator");
 	}
 
 	@SuppressWarnings("boxing")

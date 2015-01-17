@@ -29,7 +29,7 @@ public class Tests4J_ParamReaderTrial extends SourceFileCountingTrial {
 		
 		Tests4J_ParamsReader t4jpr = new Tests4J_ParamsReader(ms, params);
 		I_Tests4J_Log logMock = mock(I_Tests4J_Log.class);
-		when(logMock.getLineSeperator()).thenReturn("\n");
+		when(logMock.lineSeparator()).thenReturn("\n");
 		t4jpr.read(logMock);
 		assertFalse(t4jpr.isRunnable());
 		Throwable runFailed = t4jpr.getRunFalseReason();

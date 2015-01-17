@@ -17,7 +17,8 @@ import org.adligo.tests4j_tests.trials_api.common.SystemRunnerMock;
 
 public class AssertUniformWithMessageFailsTrialRunner {
 	
-	public static void runTestDelegate(I_Asserts asserts)  throws Exception {
+	@SuppressWarnings("boxing")
+  public static void runTestDelegate(I_Asserts asserts)  throws Exception {
 		ExpectedFailureRunner runner = new ExpectedFailureRunner();
 		runner.run(AssertUniformWithMessageFailsTrial.class);
 		
@@ -76,8 +77,10 @@ public class AssertUniformWithMessageFailsTrialRunner {
 		
 		String failedLocation = testFailure.getFailureDetail();
 		TextLines lines = new TextLines(failedLocation);
-		asserts.assertEquals("\torg.adligo.tests4j.shared.asserts.AssertionFailureLocation", lines.getLine(0));
-		asserts.assertEquals("\tat org.adligo.tests4j_tests.trials_api.assert_fails_trials.AssertUniformWithMessageFailsTrial.testAssertUniformWithMessage(AssertUniformWithMessageFailsTrial.java:16)", lines.getLine(1));
+		asserts.assertEquals("org.adligo.tests4j.shared.asserts.AssertionFailureLocation", lines.getLine(0));
+		asserts.assertEquals("\tat org.adligo.tests4j_tests.trials_api.assert_fails_trials."
+		    + "AssertUniformWithMessageFailsTrial.testAssertUniformWithMessage("
+		    + "AssertUniformWithMessageFailsTrial.java:16)", lines.getLine(1));
 		
 		SystemRunnerMock tracker =  runner.getMockSystem();
 		asserts.assertEquals(0, tracker.getLastStatus());

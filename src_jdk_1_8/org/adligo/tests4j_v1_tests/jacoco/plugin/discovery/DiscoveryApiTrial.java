@@ -9,6 +9,7 @@ import org.adligo.tests4j.run.helpers.ClassFilter;
 import org.adligo.tests4j.run.helpers.ClassFilterMutant;
 import org.adligo.tests4j.run.helpers.I_ClassFilter;
 import org.adligo.tests4j.shared.common.CacheControl;
+import org.adligo.tests4j.shared.en.Tests4J_EnglishConstants;
 import org.adligo.tests4j.shared.output.I_Tests4J_Log;
 import org.adligo.tests4j.system.shared.trials.PackageScope;
 import org.adligo.tests4j.system.shared.trials.Test;
@@ -78,6 +79,7 @@ public class DiscoveryApiTrial extends ApiCountingTrial implements I_DiscoveryAp
 		orderedClassDiscovery.setCache(this);
 		orderedClassDiscovery.setLog(logMock);
 		orderedClassDiscovery.setClassFilter(classFilter);
+		orderedClassDiscovery.setConstants(Tests4J_EnglishConstants.ENGLISH);
 		
 		ClassParentsDiscovery classParentsDiscovery = new ClassParentsDiscovery();
 		classParentsDiscovery.setCache(parentsCache);

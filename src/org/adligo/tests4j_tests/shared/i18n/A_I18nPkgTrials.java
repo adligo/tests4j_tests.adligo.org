@@ -25,8 +25,6 @@ implements I_MetaTrialParams<A_I18nPkgTrials>, I_CountingPackageTrials {
 			params.addTrials(me);
 			params.setMetaTrialParams(me);
 			
-			//TieredJacocoPlugin covargePlugin =new TieredJacocoPlugin();
-			
 			Tests4J.run(params);
 		} catch (Exception x) {
 			x.printStackTrace();
@@ -37,7 +35,10 @@ implements I_MetaTrialParams<A_I18nPkgTrials>, I_CountingPackageTrials {
 	public void addTrials() throws Exception {
 		add(I_Tests4J_AnnotationMessagesTrial.class);
 		add(I_Tests4J_AssertionInputMessagesTrial.class);
+		
 		add(I_Tests4J_ConstantsTrial.class);
+		add(I_Tests4J_CoveragePluginMessagesTrial.class);
+		
 		add(I_Tests4J_EclipseErrorsTrial.class);
 		add(I_Tests4J_LineDiffTextDisplayMessagesTrial.class);
 		add(I_Tests4J_LogMessagesTrial.class);

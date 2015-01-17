@@ -13,20 +13,22 @@ import org.adligo.tests4j_tests.references_groups.Tests4J_Common_ReferenceGroup;
 @AllowedReferences (groups=Tests4J_Common_ReferenceGroup.class)
 public class StackTraceBuilderTrial extends SourceFileCountingTrial {
 
-	@Test
+	@SuppressWarnings("boxing")
+  @Test
 	public void testToStringDeep() {
 		
 		IllegalArgumentException x = getX();
-		String result = StackTraceBuilder.toString(x, true);
+		StackTraceBuilder stb = new StackTraceBuilder();
+		String result = stb.toString(x, true);
 		TextLines lines = new TextLines(result);
-		assertEquals("\tjava.lang.IllegalArgumentException", lines.getLine(0));
+		assertEquals("java.lang.IllegalArgumentException", lines.getLine(0));
 		assertEquals("\tat x.Xmethod1(Xfile1:1)", lines.getLine(1));
 		assertEquals("\tat x.Xmethod2(Xfile2:2)", lines.getLine(2));
 		assertEquals("\tat x.Xmethod3(Xfile3:3)", lines.getLine(3));
-		assertEquals("\t\tjava.lang.IllegalArgumentException", lines.getLine(4));
+		assertEquals("\tjava.lang.IllegalArgumentException", lines.getLine(4));
 		assertEquals("\t\tat y.Ymethod1(Yfile1:1)", lines.getLine(5));
 		assertEquals("\t\tat y.Ymethod2(Yfile2:2)", lines.getLine(6));
-		assertEquals("\t\t\tjava.lang.IllegalStateException", lines.getLine(7));
+		assertEquals("\t\tjava.lang.IllegalStateException", lines.getLine(7));
 		assertEquals("\t\t\tat z.Zmethod1(Zfile1:1)", lines.getLine(8));
 		assertEquals("\t\t\tat z.Zmethod2(Zfile2:2)", lines.getLine(9));
 		assertEquals(10, lines.getLines());
@@ -56,17 +58,40 @@ public class StackTraceBuilderTrial extends SourceFileCountingTrial {
 		return x;
 	}
 	
-	@Test
+	@SuppressWarnings("boxing")
+  @Test
 	public void testToStringShallow() {
 		IllegalArgumentException x = getX();
-		String result = StackTraceBuilder.toString(x, false);
+		StackTraceBuilder stb = new StackTraceBuilder();
+		assertEquals("", stb.getInitalIndent());
+    assertEquals("\t", stb.getIndent());
+    assertTrue(stb.isLeftToRight());
+    assertEquals("at", stb.getAt());
+    
+		String result = stb.toString(x, false);
 		TextLines lines = new TextLines(result);
-		assertEquals("\tjava.lang.IllegalArgumentException", lines.getLine(0));
+		assertEquals("java.lang.IllegalArgumentException", lines.getLine(0));
 		assertEquals("\tat x.Xmethod1(Xfile1:1)", lines.getLine(1));
 		assertEquals("\tat x.Xmethod2(Xfile2:2)", lines.getLine(2));
 		assertEquals("\tat x.Xmethod3(Xfile3:3)", lines.getLine(3));
 		assertEquals(4, lines.getLines());
 		
+		stb.setInitalIndent("\t");
+		assertEquals("\t", stb.getInitalIndent());
+		stb.setIndent(" ");
+		assertEquals(" ", stb.getIndent());
+		stb.setLeftToRight(false);
+		assertFalse(stb.isLeftToRight());
+		stb.setAt("on");
+		assertEquals("on", stb.getAt());
+		
+		result = stb.toString(x, false);
+    lines = new TextLines(result);
+    assertEquals("java.lang.IllegalArgumentException\t", lines.getLine(0));
+    assertEquals("x.Xmethod1(Xfile1:1) on \t", lines.getLine(1));
+    assertEquals("x.Xmethod2(Xfile2:2) on \t", lines.getLine(2));
+    assertEquals("x.Xmethod3(Xfile3:3) on \t", lines.getLine(3));
+    assertEquals(4, lines.getLines());
 	}
 	
 
@@ -77,20 +102,22 @@ public class StackTraceBuilderTrial extends SourceFileCountingTrial {
 
 	@Override
 	public int getAsserts(I_CountType type) {
+	  int asserts = 29;
 		if (type.isFromMetaWithCoverage()) {
 			//code coverage and circular dependencies
-			return super.getAsserts(type,19);
+			return super.getAsserts(type,asserts + 2);
 		} else {
-			return super.getAsserts(type, 16);
+			return super.getAsserts(type, asserts);
 		}
 	}
 
 	@Override
 	public int getUniqueAsserts(I_CountType type) {
+	  int uasserts = 27;
 		if (type.isFromMetaWithCoverage()) {
-			return super.getUniqueAsserts(type, 19);
+			return super.getUniqueAsserts(type, uasserts + 2);
 		} else {
-			return super.getUniqueAsserts(type, 16);
+			return super.getUniqueAsserts(type, uasserts);
 		}
 	}
 }

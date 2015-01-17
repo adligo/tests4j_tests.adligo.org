@@ -78,8 +78,10 @@ public class AssertUniformNullFailsTrialRunner {
 		
 		String failedLocation = testFailure.getFailureDetail();
 		TextLines lines = new TextLines(failedLocation);
-		asserts.assertEquals("\torg.adligo.tests4j.shared.asserts.AssertionFailureLocation", lines.getLine(0));
-		asserts.assertEquals("\tat org.adligo.tests4j_tests.trials_api.asserts_null_expected_trials.AssertUniformNullFailsTrial.testAssertUniform(AssertUniformNullFailsTrial.java:14)", lines.getLine(1));
+		asserts.assertEquals("org.adligo.tests4j.shared.asserts.AssertionFailureLocation", lines.getLine(0));
+		asserts.assertEquals("\tat org.adligo.tests4j_tests.trials_api.asserts_null_expected_trials."
+		    + "AssertUniformNullFailsTrial.testAssertUniform("
+		    + "AssertUniformNullFailsTrial.java:14)", lines.getLine(1));
 		
 		SystemRunnerMock tracker =  runner.getMockSystem();
 		asserts.assertEquals(0, tracker.getLastStatus());

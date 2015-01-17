@@ -4,6 +4,7 @@ import org.adligo.tests4j.run.common.JseSystem;
 import org.adligo.tests4j.shared.asserts.reference.AllowedReferences;
 import org.adligo.tests4j.shared.common.DefaultSystem;
 import org.adligo.tests4j.shared.common.I_System;
+import org.adligo.tests4j.shared.common.StringMethods;
 import org.adligo.tests4j.shared.en.Tests4J_EnglishConstants;
 import org.adligo.tests4j.shared.i18n.I_Tests4J_Constants;
 import org.adligo.tests4j.shared.output.DefaultLog;
@@ -21,16 +22,6 @@ import java.util.Set;
 @SourceFileScope (sourceClass=DefaultLog.class, minCoverage=45.0)
 @AllowedReferences (groups=Tests4J_Output_GwtReferenceGroup.class)
 public class DefaultLogTrial extends SourceFileCountingTrial {
-
-  @SuppressWarnings("boxing")
-  @Test
-  public void testFormat() {
-    
-    assertEquals("a c", DefaultLogMock.orderLine(true, "a"," ","c"));
-    I_Tests4J_Constants constantsMock = mock(I_Tests4J_Constants.class);
-    when(constantsMock.isLeftToRight()).thenReturn(false);
-    assertEquals("c a", DefaultLogMock.orderLine(false, "a"," ","c"));
-  }
   
 	@Test
 	public void testDefault() {
@@ -63,12 +54,12 @@ public class DefaultLogTrial extends SourceFileCountingTrial {
 
 	@Override
 	public int getTests(I_CountType type) {
-		return super.getTests(type, 3, true);
+		return super.getTests(type, 2, true);
 	}
 
 	@Override
 	public int getAsserts(I_CountType type) {
-		int thisAsserts = 8;
+		int thisAsserts = 6;
 		//code coverage and circular dependencies +
 		//custom afterTrialTests
 		//+ see above
@@ -82,7 +73,7 @@ public class DefaultLogTrial extends SourceFileCountingTrial {
 
 	@Override
 	public int getUniqueAsserts(I_CountType type) {
-		int thisUniqueAsserts = 8;
+		int thisUniqueAsserts = 6;
 		//code coverage and circular dependencies +
 		//custom afterTrialTests
 		//+ see above

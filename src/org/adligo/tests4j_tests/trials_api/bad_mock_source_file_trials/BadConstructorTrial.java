@@ -35,7 +35,8 @@ public class BadConstructorTrial extends SourceFileTrial {
 	@Test
 	public void exhibitA() {}
 	
-	public static void runTestDelegate(I_Asserts asserts) throws Exception  {
+	@SuppressWarnings("boxing")
+  public static void runTestDelegate(I_Asserts asserts) throws Exception  {
 		ExpectedFailureRunner runner = new ExpectedFailureRunner();
 		runner.run(BadConstructorTrial.class);
 		
@@ -78,7 +79,8 @@ public class BadConstructorTrial extends SourceFileTrial {
 		asserts.assertEquals("Classes which implement I_AbstractTrial must have a zero argument constructor.", failure.getMessage());
 		TextLines lines = new TextLines(failure.getFailureDetail());
 		asserts.assertEquals(
-				"\tjava.lang.NoSuchMethodException: org.adligo.tests4j_tests.trials_api.bad_mock_source_file_trials.BadConstructorTrial.<init>()", 
+				"java.lang.NoSuchMethodException: org.adligo.tests4j_tests.trials_api."
+				+ "bad_mock_source_file_trials.BadConstructorTrial.<init>()", 
 				lines.getLine(0));
 		//make sure it's a full stack trace
 		asserts.assertGreaterThanOrEquals(2, lines.getLines());

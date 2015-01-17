@@ -23,7 +23,8 @@ import org.adligo.tests4j_tests.trials_api.common.SystemRunnerMock;
 @PackageScope (packageName="org.adligo.tests4j")
 public class AssertNotEqualsStringWithMessageFailsTrialRunner {
 	
-	public static void runTestDelegate(I_Asserts asserts)  throws Exception {
+	@SuppressWarnings("boxing")
+  public static void runTestDelegate(I_Asserts asserts)  throws Exception {
 		ExpectedFailureRunner runner = new ExpectedFailureRunner();
 		runner.run(AssertNotEqualsStringWithMessageFailsTrial.class);
 		
@@ -82,8 +83,10 @@ public class AssertNotEqualsStringWithMessageFailsTrialRunner {
 		
 		String failedLocation = testFailure.getFailureDetail();
 		TextLines lines = new TextLines(failedLocation);
-		asserts.assertEquals("\torg.adligo.tests4j.shared.asserts.AssertionFailureLocation", lines.getLine(0));
-		asserts.assertEquals("\tat org.adligo.tests4j_tests.trials_api.assert_fails_trials.AssertNotEqualsStringWithMessageFailsTrial.testAssertNotEqualsWithMessage(AssertNotEqualsStringWithMessageFailsTrial.java:16)", lines.getLine(1));
+		asserts.assertEquals("org.adligo.tests4j.shared.asserts.AssertionFailureLocation", lines.getLine(0));
+		asserts.assertEquals("\tat org.adligo.tests4j_tests.trials_api.assert_fails_trials."
+		    + "AssertNotEqualsStringWithMessageFailsTrial.testAssertNotEqualsWithMessage("
+		    + "AssertNotEqualsStringWithMessageFailsTrial.java:16)", lines.getLine(1));
 		
 		SystemRunnerMock tracker =  runner.getMockSystem();
 		asserts.assertEquals(0, tracker.getLastStatus());

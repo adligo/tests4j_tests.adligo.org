@@ -48,7 +48,7 @@ public class TrialFailedDetailDisplayTrial extends SourceFileCountingTrial {
     doAnswer(logRecord_).when(logMock_).log(anyVararg());
     onThrowableRecord_ = new MockMethod<Void>();
     doAnswer(onThrowableRecord_).when(logMock_).onThrowable(any());
-    when(logMock_.getLineSeperator()).thenReturn("\n");
+    when(logMock_.lineSeparator()).thenReturn("\n");
     
 	}
 

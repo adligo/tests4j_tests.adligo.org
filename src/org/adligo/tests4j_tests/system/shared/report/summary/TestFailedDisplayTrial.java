@@ -27,7 +27,7 @@ public class TestFailedDisplayTrial extends SourceFileCountingTrial {
     doAnswer(logRecord_).when(logMock_).log(anyVararg());
     onThrowableRecord_ = new MockMethod<Void>();
     doAnswer(onThrowableRecord_).when(logMock_).onThrowable(any());
-    when(logMock_.getLineSeperator()).thenReturn("lineSeperator");
+    when(logMock_.lineSeparator()).thenReturn("lineSeperator");
     
 	  reporter = new TestFailedDisplay(Tests4J_EnglishConstants.ENGLISH, logMock_);
 	}

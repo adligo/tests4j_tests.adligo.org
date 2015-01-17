@@ -15,7 +15,7 @@ import org.adligo.tests4j_tests.shared.i18n.I18N_Asserter;
 @AllowedReferences (groups=Tests4J_EN_GwtReferenceGroup.class)
 public class Tests4J_ReportMessages_Trial extends SourceFileCountingTrial {
 
-	private static final int ASSERTS = 76;
+	private static final int ASSERTS = 79;
 
 	@Test
 	public void testMessages() {
@@ -76,6 +76,8 @@ public class Tests4J_ReportMessages_Trial extends SourceFileCountingTrial {
 				messages.getNonMetaTrials());
 		asserter.assertConstant("trial descriptions", 
 				messages.getTrialDescriptionsInStatement());
+		asserter.assertConstant("The stack trace follows;", 
+        messages.getTheStackTraceFollows());
 		asserter.assertConstant(" on thread <Z/> ", 
 				messages.getOnThreadZ());
 		
