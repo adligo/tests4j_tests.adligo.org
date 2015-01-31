@@ -20,6 +20,7 @@ import java.io.File;
 @AllowedReferences (groups=Tests4J_RunCommon_ReferenceGroup.class)
 public class FileUtilsTrial extends SourceFileCountingTrial {
 
+  @SuppressWarnings("boxing")
   @Test
   public void testMethodGetRunDir() {
     File file = new File(".");
@@ -27,6 +28,7 @@ public class FileUtilsTrial extends SourceFileCountingTrial {
     assertTrue(file.getAbsolutePath().indexOf(dir) == 0);
     int idx = dir.lastIndexOf(".");
     assertFalse(idx == dir.length() - 1);
+    assertEquals(File.separatorChar, dir.charAt(dir.length() - 1));
   }
   
 	@Override
@@ -35,7 +37,7 @@ public class FileUtilsTrial extends SourceFileCountingTrial {
 	}
 	@Override
 	public int getAsserts(I_CountType type) {
-	  int asserts = 2;
+	  int asserts = 3;
 		if (type.isFromMetaWithCoverage()) {
 			//code coverage and circular dependencies
 			return super.getAsserts(type,asserts + 3);
@@ -46,7 +48,7 @@ public class FileUtilsTrial extends SourceFileCountingTrial {
 
 	@Override
 	public int getUniqueAsserts(I_CountType type) {
-	  int uasserts = 2;
+	  int uasserts = 3;
 		if (type.isFromMetaWithCoverage()) {
 			return super.getUniqueAsserts(type,uasserts + 3);
 		} else {
