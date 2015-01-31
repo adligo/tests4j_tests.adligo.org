@@ -14,6 +14,87 @@ public class JSE_IOTrial extends SourceFileCountingTrial {
 
 	@Test
 	public void testConstants() {
+    assertEquals("CLOSEABLE",JSE_IO.INSTANCE.getConstantName("java.io.Closeable"));
+    assertEquals("DATA_OUTPUT",JSE_IO.INSTANCE.getConstantName("java.io.DataOutput"));
+    assertEquals("DATA_INPUT",JSE_IO.INSTANCE.getConstantName("java.io.DataInput"));
+    assertEquals("EXTERNALIZABLE",JSE_IO.INSTANCE.getConstantName("java.io.Externalizable"));
+    assertEquals("FILE_FILTER",JSE_IO.INSTANCE.getConstantName("java.io.FileFilter"));
+    assertEquals("FILENAME_FILTER",JSE_IO.INSTANCE.getConstantName("java.io.FilenameFilter"));
+    assertEquals("FLUSHABLE",JSE_IO.INSTANCE.getConstantName("java.io.Flushable"));
+    assertEquals("OBJECT_INPUT",JSE_IO.INSTANCE.getConstantName("java.io.ObjectInput"));
+    assertEquals("OBJECT_INPUT_VALIDATION",JSE_IO.INSTANCE.getConstantName("java.io.ObjectInputValidation"));
+    assertEquals("OBJECT_OUTPUT",JSE_IO.INSTANCE.getConstantName("java.io.ObjectOutput"));
+    assertEquals("OBJECT_STREAM_CONSTANTS",JSE_IO.INSTANCE.getConstantName("java.io.ObjectStreamConstants"));
+    assertEquals("SERIALIZABLE",JSE_IO.INSTANCE.getConstantName("java.io.Serializable"));
+    assertEquals("BUFFERED_INPUT_STREAM",JSE_IO.INSTANCE.getConstantName("java.io.BufferedInputStream"));
+    assertEquals("BUFFERED_OUTPUT_STREAM",JSE_IO.INSTANCE.getConstantName("java.io.BufferedOutputStream"));
+    assertEquals("BUFFERED_READER",JSE_IO.INSTANCE.getConstantName("java.io.BufferedReader"));
+    assertEquals("BUFFERED_WRITER",JSE_IO.INSTANCE.getConstantName("java.io.BufferedWriter"));
+    assertEquals("BYTE_ARRAY_INPUT_STREAM",JSE_IO.INSTANCE.getConstantName("java.io.ByteArrayInputStream"));
+    assertEquals("BYTE_ARRAY_OUTPUT_STREAM",JSE_IO.INSTANCE.getConstantName("java.io.ByteArrayOutputStream"));
+    assertEquals("CHAR_ARRAY_READER",JSE_IO.INSTANCE.getConstantName("java.io.CharArrayReader"));
+    assertEquals("CHAR_ARRAY_WRITER",JSE_IO.INSTANCE.getConstantName("java.io.CharArrayWriter"));
+    assertEquals("CONSOLE",JSE_IO.INSTANCE.getConstantName("java.io.Console"));
+    assertEquals("DATA_INPUT_STREAM",JSE_IO.INSTANCE.getConstantName("java.io.DataInputStream"));
+    assertEquals("DATA_OUTPUT_STREAM",JSE_IO.INSTANCE.getConstantName("java.io.DataOutputStream"));
+    assertEquals("FILE",JSE_IO.INSTANCE.getConstantName("java.io.File"));
+    assertEquals("FILE_DESCRIPTOR",JSE_IO.INSTANCE.getConstantName("java.io.FileDescriptor"));
+    assertEquals("FILE_INPUT_STREAM",JSE_IO.INSTANCE.getConstantName("java.io.FileInputStream"));
+    assertEquals("FILE_OUTPUT_STREAM",JSE_IO.INSTANCE.getConstantName("java.io.FileOutputStream"));
+    assertEquals("FILE_PERMISSION",JSE_IO.INSTANCE.getConstantName("java.io.FilePermission"));
+    assertEquals("FILE_READER",JSE_IO.INSTANCE.getConstantName("java.io.FileReader"));
+    assertEquals("FILE_WRITER",JSE_IO.INSTANCE.getConstantName("java.io.FileWriter"));
+    assertEquals("FILTER_INPUT_STREAM",JSE_IO.INSTANCE.getConstantName("java.io.FilterInputStream"));
+    assertEquals("FILTER_OUTPUT_STREAM",JSE_IO.INSTANCE.getConstantName("java.io.FilterOutputStream"));
+    assertEquals("FILTER_READER",JSE_IO.INSTANCE.getConstantName("java.io.FilterReader"));
+    assertEquals("FILTER_WRITER",JSE_IO.INSTANCE.getConstantName("java.io.FilterWriter"));
+    assertEquals("INPUT_STREAM",JSE_IO.INSTANCE.getConstantName("java.io.InputStream"));
+    assertEquals("INPUT_STREAM_READER",JSE_IO.INSTANCE.getConstantName("java.io.InputStreamReader"));
+    assertEquals("LINE_NUMBER_INPUT_STREAM",JSE_IO.INSTANCE.getConstantName("java.io.LineNumberInputStream"));
+    assertEquals("LINE_NUMBER_READER",JSE_IO.INSTANCE.getConstantName("java.io.LineNumberReader"));
+    assertEquals("OBJECT_INPUT_STREAM",JSE_IO.INSTANCE.getConstantName("java.io.ObjectInputStream"));
+    assertEquals("GET_FIELD",JSE_IO.INSTANCE.getConstantName("java.io.ObjectInputStream$GetField"));
+    assertEquals("OBJECT_OUTPUT_STREAM",JSE_IO.INSTANCE.getConstantName("java.io.ObjectOutputStream"));
+    assertEquals("PUT_FIELD",JSE_IO.INSTANCE.getConstantName("java.io.ObjectOutputStream$PutField"));
+    assertEquals("OBJECT_STREAM_CLASS",JSE_IO.INSTANCE.getConstantName("java.io.ObjectStreamClass"));
+    assertEquals("OBJECT_STREAM_FIELD",JSE_IO.INSTANCE.getConstantName("java.io.ObjectStreamField"));
+    assertEquals("OUTPUT_STREAM",JSE_IO.INSTANCE.getConstantName("java.io.OutputStream"));
+    assertEquals("OUTPUT_STREAM_WRITER",JSE_IO.INSTANCE.getConstantName("java.io.OutputStreamWriter"));
+    assertEquals("PIPED_INPUT_STREAM",JSE_IO.INSTANCE.getConstantName("java.io.PipedInputStream"));
+    assertEquals("PIPED_OUTPUT_STREAM",JSE_IO.INSTANCE.getConstantName("java.io.PipedOutputStream"));
+    assertEquals("PIPED_READER",JSE_IO.INSTANCE.getConstantName("java.io.PipedReader"));
+    assertEquals("PIPED_WRITER",JSE_IO.INSTANCE.getConstantName("java.io.PipedWriter"));
+    assertEquals("PRINT_STREAM",JSE_IO.INSTANCE.getConstantName("java.io.PrintStream"));
+    assertEquals("PRINT_WRITER",JSE_IO.INSTANCE.getConstantName("java.io.PrintWriter"));
+    assertEquals("PUSHBACK_INPUT_STREAM",JSE_IO.INSTANCE.getConstantName("java.io.PushbackInputStream"));
+    assertEquals("PUSHBACK_READER",JSE_IO.INSTANCE.getConstantName("java.io.PushbackReader"));
+    assertEquals("RANDOM_ACCESS_FILE",JSE_IO.INSTANCE.getConstantName("java.io.RandomAccessFile"));
+    assertEquals("READER",JSE_IO.INSTANCE.getConstantName("java.io.Reader"));
+    assertEquals("SEQUENCE_INPUT_STREAM",JSE_IO.INSTANCE.getConstantName("java.io.SequenceInputStream"));
+    assertEquals("SERIALIZABLE_PERMISSION",JSE_IO.INSTANCE.getConstantName("java.io.SerializablePermission"));
+    assertEquals("STREAM_TOKENIZER",JSE_IO.INSTANCE.getConstantName("java.io.StreamTokenizer"));
+    assertEquals("STRING_BUFFER_INPUT_STREAM",JSE_IO.INSTANCE.getConstantName("java.io.StringBufferInputStream"));
+    assertEquals("STRING_READER",JSE_IO.INSTANCE.getConstantName("java.io.StringReader"));
+    assertEquals("STRING_WRITER",JSE_IO.INSTANCE.getConstantName("java.io.StringWriter"));
+    assertEquals("WRITER",JSE_IO.INSTANCE.getConstantName("java.io.Writer"));
+    assertEquals("CHAR_CONVERSION_EXCEPTION",JSE_IO.INSTANCE.getConstantName("java.io.CharConversionException"));
+    assertEquals("EOFEXCEPTION",JSE_IO.INSTANCE.getConstantName("java.io.EOFException"));
+    assertEquals("FILE_NOT_FOUND_EXCEPTION",JSE_IO.INSTANCE.getConstantName("java.io.FileNotFoundException"));
+    assertEquals("INTERRUPTED_IO_EXCEPTION",JSE_IO.INSTANCE.getConstantName("java.io.InterruptedIOException"));
+    assertEquals("INVALID_CLASS_EXCEPTION",JSE_IO.INSTANCE.getConstantName("java.io.InvalidClassException"));
+    assertEquals("INVALID_OBJECT_EXCEPTION",JSE_IO.INSTANCE.getConstantName("java.io.InvalidObjectException"));
+    assertEquals("IOEXCEPTION",JSE_IO.INSTANCE.getConstantName("java.io.IOException"));
+    assertEquals("NOT_ACTIVE_EXCEPTION",JSE_IO.INSTANCE.getConstantName("java.io.NotActiveException"));
+    assertEquals("NOT_SERIALIZABLE_EXCEPTION",JSE_IO.INSTANCE.getConstantName("java.io.NotSerializableException"));
+    assertEquals("OBJECT_STREAM_EXCEPTION",JSE_IO.INSTANCE.getConstantName("java.io.ObjectStreamException"));
+    assertEquals("OPTIONAL_DATA_EXCEPTION",JSE_IO.INSTANCE.getConstantName("java.io.OptionalDataException"));
+    assertEquals("STREAM_CORRUPTED_EXCEPTION",JSE_IO.INSTANCE.getConstantName("java.io.StreamCorruptedException"));
+    assertEquals("SYNC_FAILED_EXCEPTION",JSE_IO.INSTANCE.getConstantName("java.io.SyncFailedException"));
+    assertEquals("UNSUPPORTED_ENCODING_EXCEPTION",JSE_IO.INSTANCE.getConstantName("java.io.UnsupportedEncodingException"));
+    assertEquals("UTFDATA_FORMAT_EXCEPTION",JSE_IO.INSTANCE.getConstantName("java.io.UTFDataFormatException"));
+    assertEquals("WRITE_ABORTED_EXCEPTION",JSE_IO.INSTANCE.getConstantName("java.io.WriteAbortedException"));
+    assertEquals("IOERROR",JSE_IO.INSTANCE.getConstantName("java.io.IOError"));
+    
 		//autogenerated by org.adligo.tests4j_tests.models.shared.dependency_group.PackageClassNameWriter
 		assertEquals("java.io.Closeable",JSE_IO.CLOSEABLE);
 		assertEquals("java.io.DataOutput",JSE_IO.DATA_OUTPUT);
@@ -104,7 +185,7 @@ public class JSE_IOTrial extends SourceFileCountingTrial {
 
 	@Override
 	public int getAsserts(I_CountType type) {
-		int thisAsserts = 81;
+		int thisAsserts = 161;
 		//code coverage and circular dependencies +
 		//custom afterTrialTests
 		//+ see above
@@ -118,7 +199,7 @@ public class JSE_IOTrial extends SourceFileCountingTrial {
 
 	@Override
 	public int getUniqueAsserts(I_CountType type) {
-		int thisUniqueAsserts = 81;
+		int thisUniqueAsserts = 161;
 		//code coverage and circular dependencies +
 		//custom afterTrialTests
 		//+ see above

@@ -55,6 +55,8 @@ implements I_MetaTrialParams<A_RunCommonPkgTrials>, I_CountingPackageTrials {
 	  add(ClassesDelegateTrial.class);
 	  add(ConcurrentQualifiedMapTrial.class);
 	  
+	  add(FileUtilsTrial.class);
+	  
 	  add(JavaPackageNodeMutantTrial.class);
 	  add(JavaTreeTrial.class);
 	  add(NotifierDelegateTrial.class);

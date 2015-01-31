@@ -18,8 +18,8 @@ import org.adligo.tests4j.system.shared.trials.TrialTypeAnnotation;
 
 @TrialTypeAnnotation (type=TrialType.META_TRIAL_TYPE)
 public class TheMetaTrial  extends AbstractTrial implements I_MetaTrial {
-	private static final long TESTS = 3142;
-	private static final int TRIALS = 576;
+	private static final long TESTS = 3238;
+	private static final int TRIALS = 595;
 	
 	private ClassesWithSourceFileTrialsCalculator calculator_;
 	private I_TrialRunResult results_;
@@ -30,7 +30,8 @@ public class TheMetaTrial  extends AbstractTrial implements I_MetaTrial {
 	// minimum source file coverage %
 	// minimum package coverage %
 	
-	@Override
+	@SuppressWarnings("boxing")
+  @Override
 	public void afterMetadataCalculated(I_TrialRunMetadata metadata) throws Exception {
 		calculator_ = new ClassesWithSourceFileTrialsCalculator(metadata);
 		
@@ -168,7 +169,6 @@ public class TheMetaTrial  extends AbstractTrial implements I_MetaTrial {
 		return null;
 	}
 	
-	@SuppressWarnings("boxing")
   @Override
 	public void afterNonMetaTrialsRun(I_TrialRunResult results) throws Exception {
 		//this assert is also for the child-packages;

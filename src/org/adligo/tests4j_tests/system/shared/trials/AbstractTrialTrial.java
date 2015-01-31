@@ -4,9 +4,12 @@ import org.adligo.tests4j.shared.asserts.reference.AllowedReferences;
 import org.adligo.tests4j.shared.asserts.reference.CircularDependencies;
 import org.adligo.tests4j.system.shared.trials.AbstractTrial;
 import org.adligo.tests4j.system.shared.trials.SourceFileScope;
+import org.adligo.tests4j.system.shared.trials.Test;
 import org.adligo.tests4j_tests.base_trials.I_CountType;
 import org.adligo.tests4j_tests.base_trials.SourceFileCountingTrial;
 import org.adligo.tests4j_tests.references_groups.Tests4J_SystemTrials_GwtReferenceGroup;
+
+import java.io.File;
 
 @SourceFileScope (sourceClass=AbstractTrial.class, 
 	minCoverage=0.0, allowedCircularDependencies=CircularDependencies.AllowInPackage)
@@ -31,7 +34,7 @@ public class AbstractTrialTrial extends SourceFileCountingTrial {
 			return super.getAsserts(type, thisAsserts);
 		}
 	}
-
+	
 	@Override
 	public int getUniqueAsserts(I_CountType type) {
 		int thisUniqueAsserts = 0;

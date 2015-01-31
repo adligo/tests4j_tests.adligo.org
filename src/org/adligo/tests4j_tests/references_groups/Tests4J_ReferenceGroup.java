@@ -6,7 +6,8 @@ import org.adligo.tests4j.shared.asserts.reference.ReferenceGroupBaseDelegate;
 import java.util.Set;
 
 /**
- * base class for tests4j dependency groups outside of GWT,
+ * Base class for tests4j dependency groups outside of GWT,
+ * using class lists for dependency assertion.
  * 
  * @author scott
  *

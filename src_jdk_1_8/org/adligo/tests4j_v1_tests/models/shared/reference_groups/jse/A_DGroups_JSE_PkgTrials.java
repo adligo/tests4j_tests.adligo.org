@@ -7,7 +7,6 @@ import org.adligo.tests4j_4jacoco.plugin.factories.MockitoPluginFactory;
 import org.adligo.tests4j_tests.base_trials.I_CountingPackageTrials;
 import org.adligo.tests4j_tests.base_trials.SimpleMetaTrial;
 import org.adligo.tests4j_tests.base_trials.SimplePackageTrials;
-import org.adligo.tests4j_tests.models.shared.association.I_PackageConstantLookupTrial;
 import org.adligo.tests4j_v1_tests.models.shared.reference_groups.jse.v1_6.A_DGroups_JSE_1_6_PkgTrials;
 import org.adligo.tests4j_v1_tests.models.shared.reference_groups.jse.v1_7.A_DGroups_JSE_1_7_PkgTrials;
 import org.adligo.tests4j_v1_tests.models.shared.reference_groups.jse.v1_8.A_DGroups_JSE_1_8_PkgTrials;
@@ -56,9 +55,15 @@ implements I_MetaTrialParams<A_DGroups_JSE_PkgTrials>, I_CountingPackageTrials {
 		add(JSE_LogTrial.class);
 		
 		add(JSE_MathTrial.class);
+		add(JSE_NIOTrial.class);
+		add(JSE_NIOFileTrial.class);
+		
 		add(JSE_SqlTrial.class);
 		add(JSE_UtilTrial.class);
 		add(JSE_UtilConcurrentTrial.class);
+		
+		add(JSE_XmlSaxTrial.class);
+		add(JSE_XmlSaxExtTrial.class);
 	}
 
 	@Override

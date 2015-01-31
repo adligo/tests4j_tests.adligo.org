@@ -1,16 +1,19 @@
 package org.adligo.tests4j_tests.references_groups;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import org.adligo.tests4j.models.shared.association.I_PackageConstantLookup;
 import org.adligo.tests4j.models.shared.reference_groups.jse.JSE_IO;
 import org.adligo.tests4j.models.shared.reference_groups.jse.JSE_Lang;
 import org.adligo.tests4j.models.shared.reference_groups.jse.JSE_LangAnnot;
 import org.adligo.tests4j.models.shared.reference_groups.jse.JSE_Log;
 import org.adligo.tests4j.models.shared.reference_groups.jse.JSE_Math;
+import org.adligo.tests4j.models.shared.reference_groups.jse.JSE_NIO;
 import org.adligo.tests4j.models.shared.reference_groups.jse.JSE_Sql;
 import org.adligo.tests4j.models.shared.reference_groups.jse.JSE_Util;
+import org.adligo.tests4j.models.shared.reference_groups.jse.JSE_XmlSax;
+import org.adligo.tests4j.models.shared.reference_groups.jse.JSE_XmlSaxExt;
+
+import java.util.HashSet;
+import java.util.Set;
 
 public class Tests4J_JSE_ReferenceGroup extends Tests4J_ReferenceGroup {
 	public static final Tests4J_JSE_ReferenceGroup INSTANCE = new Tests4J_JSE_ReferenceGroup();
@@ -25,8 +28,11 @@ public class Tests4J_JSE_ReferenceGroup extends Tests4J_ReferenceGroup {
 		add(names, JSE_LangAnnot.class);
 		add(names, JSE_Log.class);
 		add(names, JSE_Math.class);
+		add(names, JSE_NIO.class);
 		add(names, JSE_Sql.class);
 		add(names, JSE_Util.class);
+		add(names, JSE_XmlSax.class);
+		add(names, JSE_XmlSaxExt.class);
 		
 		names.addAll(Tests4J_JSE_v1_8_ReferenceGroup.INSTANCE.getClassNames());
 		

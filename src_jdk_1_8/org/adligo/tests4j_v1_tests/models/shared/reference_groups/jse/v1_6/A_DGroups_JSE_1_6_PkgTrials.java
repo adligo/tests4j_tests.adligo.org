@@ -40,18 +40,24 @@ implements I_MetaTrialParams<A_DGroups_JSE_1_6_PkgTrials>, I_CountingPackageTria
 		add(I_JSE_1_6_IOTrial.class);
 		add(I_JSE_1_6_LogTrial.class);
 		add(I_JSE_1_6_MathTrial.class);
+		add(I_JSE_1_6_NIOTrial.class);
 		add(I_JSE_1_6_SqlTrial.class);
 		add(I_JSE_1_6_UtilTrial.class);
 		add(I_JSE_1_6_UtilConcurrentTrial.class);
+		add(I_JSE_1_6_XmlSaxTrial.class);
+		add(I_JSE_1_6_XmlSaxExtTrial.class);
 		
 		add(JSE_1_6_LangTrial.class);
 		add(JSE_1_6_LangAnnotTrial.class);
 		add(JSE_1_6_LogTrial.class);
 		add(JSE_1_6_MathTrial.class);
+		add(JSE_1_6_NIOTrial.class);
 		add(JSE_1_6_SqlTrial.class);
 		add(JSE_1_6_UtilTrial.class);
 		add(JSE_1_6_UtilConcurrentTrial.class);
 		add(JSE_1_6_IOTrial.class);
+		add(JSE_1_6_XmlSaxTrial.class);
+		add(JSE_1_6_XmlSaxExtTrial.class);
 	}
 
 	@Override

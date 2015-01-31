@@ -22,6 +22,12 @@ public class JSE_MathTrial extends SourceFileCountingTrial {
 		assertEquals("java.math.MathContext",JSE_Math.MATH_CONTEXT);
 		assertEquals("java.math.RoundingMode",JSE_Math.ROUNDING_MODE);
 		assertEquals(JSE_Math.class.getName(), JSE_Math.INSTANCE.getClass().getName());
+		
+    assertEquals("BIG_DECIMAL",JSE_Math.INSTANCE.getConstantName("java.math.BigDecimal"));
+    assertEquals("BIG_INTEGER",JSE_Math.INSTANCE.getConstantName("java.math.BigInteger"));
+    assertEquals("MATH_CONTEXT",JSE_Math.INSTANCE.getConstantName("java.math.MathContext"));
+    assertEquals("ROUNDING_MODE",JSE_Math.INSTANCE.getConstantName("java.math.RoundingMode"));
+
 	}
 	@Override
 	public int getTests(I_CountType type) {
@@ -30,7 +36,7 @@ public class JSE_MathTrial extends SourceFileCountingTrial {
 
 	@Override
 	public int getAsserts(I_CountType type) {
-		int thisAsserts = 6;
+		int thisAsserts = 10;
 		//code coverage and circular dependencies +
 		//custom afterTrialTests
 		//+ see above
@@ -44,7 +50,7 @@ public class JSE_MathTrial extends SourceFileCountingTrial {
 
 	@Override
 	public int getUniqueAsserts(I_CountType type) {
-		int thisUniqueAsserts = 6;
+		int thisUniqueAsserts = 10;
 		//code coverage and circular dependencies +
 		//custom afterTrialTests
 		//+ see above

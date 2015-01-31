@@ -13,12 +13,22 @@ import org.adligo.tests4j_tests.references_groups.Tests4J_JSE_v1_6_GwtReferenceG
 @SourceFileScope (sourceClass=JSE_1_6_LangAnnot.class,minCoverage=88.0)
 @AllowedReferences (groups={Tests4J_JSE_v1_6_GwtReferenceGroup.class})
 public class JSE_1_6_LangAnnotTrial extends SourceFileCountingTrial {
-	public static final int ASSERTS = 12;
-	public static final int UASSERTS = 1;
+	public static final int ASSERTS = 22;
+	public static final int UASSERTS = 11;
 	
 	@Test
 	public void testSingletonClasses() {
 		delegateSingletonClassAsserts(this, JSE_1_6_LangAnnot.INSTANCE);
+    assertEquals("ANNOTATION",JSE_1_6_LangAnnot.INSTANCE.getConstantName("java.lang.annotation.Annotation"));
+    assertEquals("ELEMENT_TYPE",JSE_1_6_LangAnnot.INSTANCE.getConstantName("java.lang.annotation.ElementType"));
+    assertEquals("RETENTION_POLICY",JSE_1_6_LangAnnot.INSTANCE.getConstantName("java.lang.annotation.RetentionPolicy"));
+    assertEquals("ANNOTATION_TYPE_MISMATCH_EXCEPTION",JSE_1_6_LangAnnot.INSTANCE.getConstantName("java.lang.annotation.AnnotationTypeMismatchException"));
+    assertEquals("INCOMPLETE_ANNOTATION_EXCEPTION",JSE_1_6_LangAnnot.INSTANCE.getConstantName("java.lang.annotation.IncompleteAnnotationException"));
+    assertEquals("ANNOTATION_FORMAT_ERROR",JSE_1_6_LangAnnot.INSTANCE.getConstantName("java.lang.annotation.AnnotationFormatError"));
+    assertEquals("DOCUMENTED",JSE_1_6_LangAnnot.INSTANCE.getConstantName("java.lang.annotation.Documented"));
+    assertEquals("INHERITED",JSE_1_6_LangAnnot.INSTANCE.getConstantName("java.lang.annotation.Inherited"));
+    assertEquals("RETENTION",JSE_1_6_LangAnnot.INSTANCE.getConstantName("java.lang.annotation.Retention"));
+    assertEquals("TARGET",JSE_1_6_LangAnnot.INSTANCE.getConstantName("java.lang.annotation.Target"));
 	}
 	
 	public static void delegateSingletonClassAsserts(I_Asserts asserts, I_ReferenceGroup dg) {

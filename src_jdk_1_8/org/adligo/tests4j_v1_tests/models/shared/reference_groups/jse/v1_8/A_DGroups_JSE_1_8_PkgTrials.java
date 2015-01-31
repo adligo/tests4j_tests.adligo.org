@@ -1,6 +1,5 @@
 package org.adligo.tests4j_v1_tests.models.shared.reference_groups.jse.v1_8;
 
-import org.adligo.tests4j.models.shared.reference_groups.jse.v1_8.I_JSE_1_8_UtilConcurrent;
 import org.adligo.tests4j.run.api.Tests4J;
 import org.adligo.tests4j.system.shared.api.Tests4J_Params;
 import org.adligo.tests4j.system.shared.trials.I_MetaTrialParams;
@@ -35,14 +34,21 @@ implements I_MetaTrialParams<A_DGroups_JSE_1_8_PkgTrials>, I_CountingPackageTria
 	}
 
 	public void addTrials() throws Exception {
-		add(I_JSE_1_8_LangTrial.class);
+	  add(I_JSE_1_8_IOTrial.class);
+	  add(I_JSE_1_8_LangTrial.class);
 		add(I_JSE_1_8_LangAnnotTrial.class);
-		add(I_JSE_1_8_UtilTrial.class);
-		add(I_JSE_1_8_MathTrial.class);
 		add(I_JSE_1_8_LogTrial.class);
-		add(I_JSE_1_8_IOTrial.class);
+		
+		add(I_JSE_1_8_MathTrial.class);
+		add(I_JSE_1_8_NIOTrial.class);
+		add(I_JSE_1_8_NIOFileTrial.class);
+		
 		add(I_JSE_1_8_SqlTrial.class);
+		add(I_JSE_1_8_UtilTrial.class);
 		add(I_JSE_1_8_UtilConcurrentTrial.class);
+		
+		add(I_JSE_1_8_XmlSaxTrial.class);
+		add(I_JSE_1_8_XmlSaxExtTrial.class);
 	}
 
 	@Override

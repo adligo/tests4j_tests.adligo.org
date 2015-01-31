@@ -17,6 +17,22 @@ public class JSE_1_6_LogTrial extends SourceFileCountingTrial {
 	@Test
 	public void testSingletonClasses() {
 		delegateSingletonClassAsserts(this, JSE_1_6_Log.INSTANCE);
+    assertEquals("FILTER",JSE_1_6_Log.INSTANCE.getConstantName("java.util.logging.Filter"));
+    assertEquals("CONSOLE_HANDLER",JSE_1_6_Log.INSTANCE.getConstantName("java.util.logging.ConsoleHandler"));
+    assertEquals("ERROR_MANAGER",JSE_1_6_Log.INSTANCE.getConstantName("java.util.logging.ErrorManager"));
+    assertEquals("FILE_HANDLER",JSE_1_6_Log.INSTANCE.getConstantName("java.util.logging.FileHandler"));
+    assertEquals("FORMATTER",JSE_1_6_Log.INSTANCE.getConstantName("java.util.Formatter"));
+    assertEquals("HANDLER",JSE_1_6_Log.INSTANCE.getConstantName("java.util.logging.Handler"));
+    assertEquals("LEVEL",JSE_1_6_Log.INSTANCE.getConstantName("java.util.logging.Level"));
+    assertEquals("LOGGER",JSE_1_6_Log.INSTANCE.getConstantName("java.util.logging.Logger"));
+    assertEquals("LOGGING_PERMISSION",JSE_1_6_Log.INSTANCE.getConstantName("java.util.logging.LoggingPermission"));
+    assertEquals("LOG_MANAGER",JSE_1_6_Log.INSTANCE.getConstantName("java.util.logging.LogManager"));
+    assertEquals("LOG_RECORD",JSE_1_6_Log.INSTANCE.getConstantName("java.util.logging.LogRecord"));
+    assertEquals("MEMORY_HANDLER",JSE_1_6_Log.INSTANCE.getConstantName("java.util.logging.MemoryHandler"));
+    assertEquals("SIMPLE_FORMATTER",JSE_1_6_Log.INSTANCE.getConstantName("java.util.logging.SimpleFormatter"));
+    assertEquals("SOCKET_HANDLER",JSE_1_6_Log.INSTANCE.getConstantName("java.util.logging.SocketHandler"));
+    assertEquals("STREAM_HANDLER",JSE_1_6_Log.INSTANCE.getConstantName("java.util.logging.StreamHandler"));
+    assertEquals("XMLFORMATTER",JSE_1_6_Log.INSTANCE.getConstantName("java.util.logging.XMLFormatter"));
 	}
 	
 	public static void delegateSingletonClassAsserts(I_Asserts asserts, I_ReferenceGroup dg) {
@@ -47,7 +63,7 @@ public class JSE_1_6_LogTrial extends SourceFileCountingTrial {
 
 	@Override
 	public int getAsserts(I_CountType type) {
-		int thisAsserts = 17;
+		int thisAsserts = 33;
 		//code coverage and circular dependencies +
 		//custom afterTrialTests
 		//+ see above
@@ -61,7 +77,7 @@ public class JSE_1_6_LogTrial extends SourceFileCountingTrial {
 
 	@Override
 	public int getUniqueAsserts(I_CountType type) {
-		int thisUniqueAsserts = 1;
+		int thisUniqueAsserts = 17;
 		//code coverage and circular dependencies +
 		//custom afterTrialTests
 		//+ see above

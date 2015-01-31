@@ -1,10 +1,14 @@
 package org.adligo.tests4j_tests.references_groups;
 
+import org.adligo.tests4j.models.shared.reference_groups.jse.JSE_IO;
+import org.adligo.tests4j.models.shared.reference_groups.jse.JSE_NIO;
+import org.adligo.tests4j.models.shared.reference_groups.jse.JSE_NIOFile;
 import org.adligo.tests4j.models.shared.reference_groups.jse.JSE_UtilConcurrent;
 import org.adligo.tests4j.run.common.ClassesDelegate;
 import org.adligo.tests4j.run.common.ConcurrentQualifiedMap;
 import org.adligo.tests4j.run.common.Holder;
 import org.adligo.tests4j.run.common.I_Classes;
+import org.adligo.tests4j.run.common.I_FileMatcher;
 import org.adligo.tests4j.run.common.I_InitalValueFactory;
 import org.adligo.tests4j.run.common.I_JavaPackageNode;
 import org.adligo.tests4j.run.common.I_Memory;
@@ -43,6 +47,7 @@ public class Tests4J_RunCommon_ReferenceGroup extends Tests4J_ReferenceGroup {
 		add(names, Holder.class);
 		
 		add(names, I_Classes.class);
+		add(names, I_FileMatcher.class);
 		add(names, I_InitalValueFactory.class);
 		add(names, I_JavaPackageNode.class);
 		add(names, I_Notifier.class);
@@ -67,6 +72,9 @@ public class Tests4J_RunCommon_ReferenceGroup extends Tests4J_ReferenceGroup {
 		add(names, ThreadsDelegate.class);
 		
 		names.addAll(JSE_UtilConcurrent.INSTANCE.getClassNames());
+		names.addAll(JSE_IO.INSTANCE.getClassNames());
+		names.addAll(JSE_NIO.INSTANCE.getClassNames());
+		names.addAll(JSE_NIOFile.INSTANCE.getClassNames());
 		names.addAll(Tests4J_Summary_ReferenceGroup.INSTANCE.getClassNames());
 		
 		setupDelegates(names);

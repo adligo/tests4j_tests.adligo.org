@@ -64,6 +64,55 @@ public class JSE_SqlTrial extends SourceFileCountingTrial {
 		assertEquals("java.sql.SQLTransientException",JSE_Sql.SQLTRANSIENT_EXCEPTION);
 		assertEquals("java.sql.SQLWarning",JSE_Sql.SQLWARNING);
 		assertEquals(JSE_Sql.class.getName(), JSE_Sql.INSTANCE.getClass().getName());
+		
+    assertEquals("ARRAY",JSE_Sql.INSTANCE.getConstantName("java.sql.Array"));
+    assertEquals("BLOB",JSE_Sql.INSTANCE.getConstantName("java.sql.Blob"));
+    assertEquals("CALLABLE_STATEMENT",JSE_Sql.INSTANCE.getConstantName("java.sql.CallableStatement"));
+    assertEquals("CLOB",JSE_Sql.INSTANCE.getConstantName("java.sql.Clob"));
+    assertEquals("CONNECTION",JSE_Sql.INSTANCE.getConstantName("java.sql.Connection"));
+    assertEquals("DATABASE_META_DATA",JSE_Sql.INSTANCE.getConstantName("java.sql.DatabaseMetaData"));
+    assertEquals("DRIVER",JSE_Sql.INSTANCE.getConstantName("java.sql.Driver"));
+    assertEquals("NCLOB",JSE_Sql.INSTANCE.getConstantName("java.sql.NClob"));
+    assertEquals("PARAMETER_META_DATA",JSE_Sql.INSTANCE.getConstantName("java.sql.ParameterMetaData"));
+    assertEquals("PREPARED_STATEMENT",JSE_Sql.INSTANCE.getConstantName("java.sql.PreparedStatement"));
+    assertEquals("REF",JSE_Sql.INSTANCE.getConstantName("java.sql.Ref"));
+    assertEquals("RESULT_SET",JSE_Sql.INSTANCE.getConstantName("java.sql.ResultSet"));
+    assertEquals("RESULT_SET_META_DATA",JSE_Sql.INSTANCE.getConstantName("java.sql.ResultSetMetaData"));
+    assertEquals("ROW_ID",JSE_Sql.INSTANCE.getConstantName("java.sql.RowId"));
+    assertEquals("SAVEPOINT",JSE_Sql.INSTANCE.getConstantName("java.sql.Savepoint"));
+    assertEquals("SQLDATA",JSE_Sql.INSTANCE.getConstantName("java.sql.SQLData"));
+    assertEquals("SQLINPUT",JSE_Sql.INSTANCE.getConstantName("java.sql.SQLInput"));
+    assertEquals("SQLOUTPUT",JSE_Sql.INSTANCE.getConstantName("java.sql.SQLOutput"));
+    assertEquals("SQLXML",JSE_Sql.INSTANCE.getConstantName("java.sql.SQLXML"));
+    assertEquals("STATEMENT",JSE_Sql.INSTANCE.getConstantName("java.sql.Statement"));
+    assertEquals("STRUCT",JSE_Sql.INSTANCE.getConstantName("java.sql.Struct"));
+    assertEquals("WRAPPER",JSE_Sql.INSTANCE.getConstantName("java.sql.Wrapper"));
+    assertEquals("DATE",JSE_Sql.INSTANCE.getConstantName("java.sql.Date"));
+    assertEquals("DRIVER_MANAGER",JSE_Sql.INSTANCE.getConstantName("java.sql.DriverManager"));
+    assertEquals("DRIVER_PROPERTY_INFO",JSE_Sql.INSTANCE.getConstantName("java.sql.DriverPropertyInfo"));
+    assertEquals("SQLPERMISSION",JSE_Sql.INSTANCE.getConstantName("java.sql.SQLPermission"));
+    assertEquals("TIME",JSE_Sql.INSTANCE.getConstantName("java.sql.Time"));
+    assertEquals("TIMESTAMP",JSE_Sql.INSTANCE.getConstantName("java.sql.Timestamp"));
+    assertEquals("TYPES",JSE_Sql.INSTANCE.getConstantName("java.sql.Types"));
+    assertEquals("CLIENT_INFO_STATUS",JSE_Sql.INSTANCE.getConstantName("java.sql.ClientInfoStatus"));
+    assertEquals("PSEUDO_COLUMN_USAGE",JSE_Sql.INSTANCE.getConstantName("java.sql.PseudoColumnUsage"));
+    assertEquals("ROW_ID_LIFETIME",JSE_Sql.INSTANCE.getConstantName("java.sql.RowIdLifetime"));
+    assertEquals("BATCH_UPDATE_EXCEPTION",JSE_Sql.INSTANCE.getConstantName("java.sql.BatchUpdateException"));
+    assertEquals("DATA_TRUNCATION",JSE_Sql.INSTANCE.getConstantName("java.sql.DataTruncation"));
+    assertEquals("SQLCLIENT_INFO_EXCEPTION",JSE_Sql.INSTANCE.getConstantName("java.sql.SQLClientInfoException"));
+    assertEquals("SQLDATA_EXCEPTION",JSE_Sql.INSTANCE.getConstantName("java.sql.SQLDataException"));
+    assertEquals("SQLEXCEPTION",JSE_Sql.INSTANCE.getConstantName("java.sql.SQLException"));
+    assertEquals("SQLFEATURE_NOT_SUPPORTED_EXCEPTION",JSE_Sql.INSTANCE.getConstantName("java.sql.SQLFeatureNotSupportedException"));
+    assertEquals("SQLINTEGRITY_CONSTRAINT_VIOLATION_EXCEPTION",JSE_Sql.INSTANCE.getConstantName("java.sql.SQLIntegrityConstraintViolationException"));
+    assertEquals("SQLINVALID_AUTHORIZATION_SPEC_EXCEPTION",JSE_Sql.INSTANCE.getConstantName("java.sql.SQLInvalidAuthorizationSpecException"));
+    assertEquals("SQLNON_TRANSIENT_CONNECTION_EXCEPTION",JSE_Sql.INSTANCE.getConstantName("java.sql.SQLNonTransientConnectionException"));
+    assertEquals("SQLRECOVERABLE_EXCEPTION",JSE_Sql.INSTANCE.getConstantName("java.sql.SQLRecoverableException"));
+    assertEquals("SQLSYNTAX_ERROR_EXCEPTION",JSE_Sql.INSTANCE.getConstantName("java.sql.SQLSyntaxErrorException"));
+    assertEquals("SQLTIMEOUT_EXCEPTION",JSE_Sql.INSTANCE.getConstantName("java.sql.SQLTimeoutException"));
+    assertEquals("SQLTRANSACTION_ROLLBACK_EXCEPTION",JSE_Sql.INSTANCE.getConstantName("java.sql.SQLTransactionRollbackException"));
+    assertEquals("SQLTRANSIENT_CONNECTION_EXCEPTION",JSE_Sql.INSTANCE.getConstantName("java.sql.SQLTransientConnectionException"));
+    assertEquals("SQLTRANSIENT_EXCEPTION",JSE_Sql.INSTANCE.getConstantName("java.sql.SQLTransientException"));
+    assertEquals("SQLWARNING",JSE_Sql.INSTANCE.getConstantName("java.sql.SQLWarning"));
 	}
 	
 	@Override
@@ -73,7 +122,7 @@ public class JSE_SqlTrial extends SourceFileCountingTrial {
 
 	@Override
 	public int getAsserts(I_CountType type) {
-		int thisAsserts = 49;
+		int thisAsserts = 97;
 		//code coverage and circular dependencies +
 		//custom afterTrialTests
 		//+ see above
@@ -87,7 +136,7 @@ public class JSE_SqlTrial extends SourceFileCountingTrial {
 
 	@Override
 	public int getUniqueAsserts(I_CountType type) {
-		int thisUniqueAsserts = 49;
+		int thisUniqueAsserts = 97;
 		//code coverage and circular dependencies +
 		//custom afterTrialTests
 		//+ see above

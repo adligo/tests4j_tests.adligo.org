@@ -26,7 +26,19 @@ public class JSE_LangAnnotTrial extends SourceFileCountingTrial {
 		assertEquals("java.lang.annotation.Retention",JSE_LangAnnot.RETENTION);
 		assertEquals("java.lang.annotation.Target",JSE_LangAnnot.TARGET);
 		assertEquals(JSE_LangAnnot.class.getName(), JSE_LangAnnot.INSTANCE.getClass().getName());
+	
+		assertEquals("ANNOTATION",JSE_LangAnnot.INSTANCE.getConstantName("java.lang.annotation.Annotation"));
+    assertEquals("ELEMENT_TYPE",JSE_LangAnnot.INSTANCE.getConstantName("java.lang.annotation.ElementType"));
+    assertEquals("RETENTION_POLICY",JSE_LangAnnot.INSTANCE.getConstantName("java.lang.annotation.RetentionPolicy"));
+    assertEquals("ANNOTATION_TYPE_MISMATCH_EXCEPTION",JSE_LangAnnot.INSTANCE.getConstantName("java.lang.annotation.AnnotationTypeMismatchException"));
+    assertEquals("INCOMPLETE_ANNOTATION_EXCEPTION",JSE_LangAnnot.INSTANCE.getConstantName("java.lang.annotation.IncompleteAnnotationException"));
+    assertEquals("ANNOTATION_FORMAT_ERROR",JSE_LangAnnot.INSTANCE.getConstantName("java.lang.annotation.AnnotationFormatError"));
+    assertEquals("DOCUMENTED",JSE_LangAnnot.INSTANCE.getConstantName("java.lang.annotation.Documented"));
+    assertEquals("INHERITED",JSE_LangAnnot.INSTANCE.getConstantName("java.lang.annotation.Inherited"));
+    assertEquals("RETENTION",JSE_LangAnnot.INSTANCE.getConstantName("java.lang.annotation.Retention"));
+    assertEquals("TARGET",JSE_LangAnnot.INSTANCE.getConstantName("java.lang.annotation.Target"));
 	}
+	
 	@Override
 	public int getTests(I_CountType type) {
 		return super.getTests(type, 1, true);
@@ -34,7 +46,7 @@ public class JSE_LangAnnotTrial extends SourceFileCountingTrial {
 
 	@Override
 	public int getAsserts(I_CountType type) {
-		int thisAsserts = 11;
+		int thisAsserts = 21;
 		//code coverage and circular dependencies +
 		//custom afterTrialTests
 		//+ see above
@@ -48,7 +60,7 @@ public class JSE_LangAnnotTrial extends SourceFileCountingTrial {
 
 	@Override
 	public int getUniqueAsserts(I_CountType type) {
-		int thisUniqueAsserts = 11;
+		int thisUniqueAsserts = 21;
 		//code coverage and circular dependencies +
 		//custom afterTrialTests
 		//+ see above

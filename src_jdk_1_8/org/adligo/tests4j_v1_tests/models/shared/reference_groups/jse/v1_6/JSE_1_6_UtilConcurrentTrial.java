@@ -68,7 +68,58 @@ public class JSE_1_6_UtilConcurrentTrial extends SourceFileCountingTrial {
     assertEquals("EXECUTION_EXCEPTION",map.get("java.util.concurrent.ExecutionException"));
     assertEquals("REJECTED_EXECUTION_EXCEPTION",map.get("java.util.concurrent.RejectedExecutionException"));
     assertEquals("TIMEOUT_EXCEPTION",map.get("java.util.concurrent.TimeoutException"));
+  
+    assertEquals("BLOCKING_DEQUE",JSE_1_6_UtilConcurrent.INSTANCE.getConstantName("java.util.concurrent.BlockingDeque"));
+    assertEquals("BLOCKING_QUEUE",JSE_1_6_UtilConcurrent.INSTANCE.getConstantName("java.util.concurrent.BlockingQueue"));
+    assertEquals("CALLABLE",JSE_1_6_UtilConcurrent.INSTANCE.getConstantName("java.util.concurrent.Callable"));
+    assertEquals("COMPLETION_SERVICE",JSE_1_6_UtilConcurrent.INSTANCE.getConstantName("java.util.concurrent.CompletionService"));
+    assertEquals("CONCURRENT_MAP",JSE_1_6_UtilConcurrent.INSTANCE.getConstantName("java.util.concurrent.ConcurrentMap"));
+    assertEquals("CONCURRENT_NAVIGABLE_MAP",JSE_1_6_UtilConcurrent.INSTANCE.getConstantName("java.util.concurrent.ConcurrentNavigableMap"));
+    assertEquals("DELAYED",JSE_1_6_UtilConcurrent.INSTANCE.getConstantName("java.util.concurrent.Delayed"));
+    assertEquals("EXECUTOR",JSE_1_6_UtilConcurrent.INSTANCE.getConstantName("java.util.concurrent.Executor"));
+    assertEquals("EXECUTOR_SERVICE",JSE_1_6_UtilConcurrent.INSTANCE.getConstantName("java.util.concurrent.ExecutorService"));
+    assertEquals("FUTURE",JSE_1_6_UtilConcurrent.INSTANCE.getConstantName("java.util.concurrent.Future"));
+    assertEquals("REJECTED_EXECUTION_HANDLER",JSE_1_6_UtilConcurrent.INSTANCE.getConstantName("java.util.concurrent.RejectedExecutionHandler"));
+    assertEquals("RUNNABLE_FUTURE",JSE_1_6_UtilConcurrent.INSTANCE.getConstantName("java.util.concurrent.RunnableFuture"));
+    assertEquals("RUNNABLE_SCHEDULED_FUTURE",JSE_1_6_UtilConcurrent.INSTANCE.getConstantName("java.util.concurrent.RunnableScheduledFuture"));
+    assertEquals("SCHEDULED_EXECUTOR_SERVICE",JSE_1_6_UtilConcurrent.INSTANCE.getConstantName("java.util.concurrent.ScheduledExecutorService"));
+    assertEquals("SCHEDULED_FUTURE",JSE_1_6_UtilConcurrent.INSTANCE.getConstantName("java.util.concurrent.ScheduledFuture"));
+    assertEquals("THREAD_FACTORY",JSE_1_6_UtilConcurrent.INSTANCE.getConstantName("java.util.concurrent.ThreadFactory"));
+    assertEquals("ABSTRACT_EXECUTOR_SERVICE",JSE_1_6_UtilConcurrent.INSTANCE.getConstantName("java.util.concurrent.AbstractExecutorService"));
+    assertEquals("ARRAY_BLOCKING_QUEUE",JSE_1_6_UtilConcurrent.INSTANCE.getConstantName("java.util.concurrent.ArrayBlockingQueue"));
+    assertEquals("CONCURRENT_HASH_MAP",JSE_1_6_UtilConcurrent.INSTANCE.getConstantName("java.util.concurrent.ConcurrentHashMap"));
+    assertEquals("CONCURRENT_LINKED_QUEUE",JSE_1_6_UtilConcurrent.INSTANCE.getConstantName("java.util.concurrent.ConcurrentLinkedQueue"));
+    assertEquals("CONCURRENT_SKIP_LIST_MAP",JSE_1_6_UtilConcurrent.INSTANCE.getConstantName("java.util.concurrent.ConcurrentSkipListMap"));
+    assertEquals("CONCURRENT_SKIP_LIST_SET",JSE_1_6_UtilConcurrent.INSTANCE.getConstantName("java.util.concurrent.ConcurrentSkipListSet"));
+    assertEquals("COPY_ON_WRITE_ARRAY_LIST",JSE_1_6_UtilConcurrent.INSTANCE.getConstantName("java.util.concurrent.CopyOnWriteArrayList"));
+    assertEquals("COPY_ON_WRITE_ARRAY_SET",JSE_1_6_UtilConcurrent.INSTANCE.getConstantName("java.util.concurrent.CopyOnWriteArraySet"));
+    assertEquals("COUNT_DOWN_LATCH",JSE_1_6_UtilConcurrent.INSTANCE.getConstantName("java.util.concurrent.CountDownLatch"));
+    assertEquals("CYCLIC_BARRIER",JSE_1_6_UtilConcurrent.INSTANCE.getConstantName("java.util.concurrent.CyclicBarrier"));
+    assertEquals("DELAY_QUEUE",JSE_1_6_UtilConcurrent.INSTANCE.getConstantName("java.util.concurrent.DelayQueue"));
+    assertEquals("EXCHANGER",JSE_1_6_UtilConcurrent.INSTANCE.getConstantName("java.util.concurrent.Exchanger"));
+    assertEquals("EXECUTOR_COMPLETION_SERVICE",JSE_1_6_UtilConcurrent.INSTANCE.getConstantName("java.util.concurrent.ExecutorCompletionService"));
+    assertEquals("EXECUTORS",JSE_1_6_UtilConcurrent.INSTANCE.getConstantName("java.util.concurrent.Executors"));
+    assertEquals("FUTURE_TASK",JSE_1_6_UtilConcurrent.INSTANCE.getConstantName("java.util.concurrent.FutureTask"));
+    assertEquals("LINKED_BLOCKING_DEQUE",JSE_1_6_UtilConcurrent.INSTANCE.getConstantName("java.util.concurrent.LinkedBlockingDeque"));
+    assertEquals("LINKED_BLOCKING_QUEUE",JSE_1_6_UtilConcurrent.INSTANCE.getConstantName("java.util.concurrent.LinkedBlockingQueue"));
+    assertEquals("PRIORITY_BLOCKING_QUEUE",JSE_1_6_UtilConcurrent.INSTANCE.getConstantName("java.util.concurrent.PriorityBlockingQueue"));
+    assertEquals("SCHEDULED_THREAD_POOL_EXECUTOR",JSE_1_6_UtilConcurrent.INSTANCE.getConstantName("java.util.concurrent.ScheduledThreadPoolExecutor"));
+    assertEquals("SEMAPHORE",JSE_1_6_UtilConcurrent.INSTANCE.getConstantName("java.util.concurrent.Semaphore"));
+    assertEquals("SYNCHRONOUS_QUEUE",JSE_1_6_UtilConcurrent.INSTANCE.getConstantName("java.util.concurrent.SynchronousQueue"));
+    assertEquals("THREAD_POOL_EXECUTOR",JSE_1_6_UtilConcurrent.INSTANCE.getConstantName("java.util.concurrent.ThreadPoolExecutor"));
+    assertEquals("THREAD_POOL_EXECUTOR",JSE_1_6_UtilConcurrent.INSTANCE.getConstantName("java.util.concurrent.ThreadPoolExecutor"));
+    assertEquals("ABORT_POLICY",JSE_1_6_UtilConcurrent.INSTANCE.getConstantName("java.util.concurrent.ThreadPoolExecutor$AbortPolicy"));
+    assertEquals("CALLER_RUNS_POLICY",JSE_1_6_UtilConcurrent.INSTANCE.getConstantName("java.util.concurrent.ThreadPoolExecutor$CallerRunsPolicy"));
+    assertEquals("DISCARD_OLDEST_POLICY",JSE_1_6_UtilConcurrent.INSTANCE.getConstantName("java.util.concurrent.ThreadPoolExecutor$DiscardOldestPolicy"));
+    assertEquals("DISCARD_POLICY",JSE_1_6_UtilConcurrent.INSTANCE.getConstantName("java.util.concurrent.ThreadPoolExecutor$DiscardPolicy"));
+    assertEquals("TIME_UNIT",JSE_1_6_UtilConcurrent.INSTANCE.getConstantName("java.util.concurrent.TimeUnit"));
+    assertEquals("BROKEN_BARRIER_EXCEPTION",JSE_1_6_UtilConcurrent.INSTANCE.getConstantName("java.util.concurrent.BrokenBarrierException"));
+    assertEquals("CANCELLATION_EXCEPTION",JSE_1_6_UtilConcurrent.INSTANCE.getConstantName("java.util.concurrent.CancellationException"));
+    assertEquals("EXECUTION_EXCEPTION",JSE_1_6_UtilConcurrent.INSTANCE.getConstantName("java.util.concurrent.ExecutionException"));
+    assertEquals("REJECTED_EXECUTION_EXCEPTION",JSE_1_6_UtilConcurrent.INSTANCE.getConstantName("java.util.concurrent.RejectedExecutionException"));
+    assertEquals("TIMEOUT_EXCEPTION",JSE_1_6_UtilConcurrent.INSTANCE.getConstantName("java.util.concurrent.TimeoutException"));
   }
+  
 	@Test
 	public void testSingletonClasses() {
 		delegateSingletonClassAsserts(this, JSE_1_6_UtilConcurrent.INSTANCE);
@@ -133,7 +184,7 @@ public class JSE_1_6_UtilConcurrentTrial extends SourceFileCountingTrial {
 
 	@Override
 	public int getAsserts(I_CountType type) {
-		int thisAsserts = 98;
+		int thisAsserts = 147;
 		//code coverage and circular dependencies +
 		//custom afterTrialTests
 		//+ see above
