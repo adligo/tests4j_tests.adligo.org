@@ -10,6 +10,7 @@ import org.adligo.tests4j_tests.base_trials.SourceFileCountingTrial;
 import org.mockito.invocation.InvocationOnMock;
 
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
 @SourceFileScope (sourceClass=MockMethod.class, minCoverage=22.0)
 public class MockMethodTrial extends SourceFileCountingTrial {
@@ -152,21 +153,82 @@ public class MockMethodTrial extends SourceFileCountingTrial {
   @SuppressWarnings({"boxing", "unchecked"})
   @Test
   public void testConstructorFactory() throws Exception {
-    //ok you would probably never need to mock a list
-    ArgMap<String> map = new ArgMap<String>(new I_ReturnFactory<String>() {
+    //ok you would probably never need to mock a list, but it is
+    //a easy class to work with for proving the ArgMapWorks
+    final AtomicInteger callCounter = new AtomicInteger(); 
+    MockMethod<String> getMock = new MockMethod<String>(new I_ReturnFactory<String>() {
 
       @Override
       public String create(Object[] keys) {
+        callCounter.incrementAndGet();
         return "" + keys[0];
       }
     });
-    MockMethod<String> getMock = new MockMethod<String>(map);
     List<String> list = mock(List.class);
     when(list.get((anyInt()))).then(getMock);
-    assertEquals("123", list.get(123));
-    assertEquals("456", list.get(456));
-    assertEquals("789", list.get(789));
-    assertEquals("12", list.get(12));
+    String val = list.get(123);
+    assertEquals(1, callCounter.get());
+    assertEquals("123", val);
+    assertSame(val, list.get(123));
+    
+    val = list.get(456);
+    assertEquals(2, callCounter.get());
+    assertEquals("456", val);
+    assertSame(val, list.get(456));
+    
+    val = list.get(789);
+    assertEquals(3, callCounter.get());
+    assertEquals("789", val);
+    assertSame(val, list.get(789));
+    
+    val = list.get(12);
+    assertEquals(4, callCounter.get());
+    assertEquals("12", val);
+    assertSame(val, list.get(12));
+    
+    callCounter.set(0);
+    MockMethod<String> getMockNoCache = new MockMethod<String>(new I_ReturnFactory<String>() {
+
+      @Override
+      public String create(Object[] keys) {
+        callCounter.incrementAndGet();
+        return "" + keys[0];
+      }
+    }, false);
+    list = mock(List.class);
+    when(list.get((anyInt()))).then(getMockNoCache);
+    val = list.get(123);
+    assertEquals(1, callCounter.get());
+    assertEquals("123", val);
+    String nextVal = list.get(123);
+    assertNotSame(val, nextVal);
+    assertEquals(val, nextVal);
+    assertEquals(2, callCounter.get());
+    
+    val = list.get(456);
+    assertEquals(3, callCounter.get());
+    assertEquals("456", val);
+    nextVal = list.get(456);
+    assertNotSame(val, nextVal);
+    assertEquals(val, nextVal);
+    assertEquals(4, callCounter.get());
+    
+    val = list.get(789);
+    
+    assertEquals(5, callCounter.get());
+    assertEquals("789", val);
+    nextVal = list.get(789);
+    assertNotSame(val, nextVal);
+    assertEquals(val, nextVal);
+    assertEquals(6, callCounter.get());
+    
+    val = list.get(12);
+    assertEquals(7, callCounter.get());
+    assertEquals("12", val);
+    nextVal = list.get(12);
+    assertNotSame(val, nextVal);
+    assertEquals(val, nextVal);
+    assertEquals(8, callCounter.get());
   }
   @Override
   public int getTests(I_CountType type) {
@@ -175,7 +237,7 @@ public class MockMethodTrial extends SourceFileCountingTrial {
 
   @Override
   public int getAsserts(I_CountType type) {
-    int thisAsserts = 23;
+    int thisAsserts = 51;
     //code coverage and circular dependencies 
     int thisAfterAsserts = 2;
     if (type.isFromMetaWithCoverage()) {
@@ -187,7 +249,7 @@ public class MockMethodTrial extends SourceFileCountingTrial {
 
   @Override
   public int getUniqueAsserts(I_CountType type) {
-    int thisUniqueAsserts = 19;
+    int thisUniqueAsserts = 35;
     //code coverage and circular dependencies 
     int thisAfterUniqueAsserts = 2;
     if (type.isFromMetaWithCoverage()) {

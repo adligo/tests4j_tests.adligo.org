@@ -8,12 +8,14 @@ import org.adligo.tests4j_4mockito.ObjParams;
 import org.adligo.tests4j_tests.base_trials.I_CountType;
 import org.adligo.tests4j_tests.base_trials.SourceFileCountingTrial;
 
+import java.util.concurrent.atomic.AtomicInteger;
+
 @SourceFileScope (sourceClass=ArgMap.class, minCoverage=22.0)
 public class ArgMapTrial extends SourceFileCountingTrial {
 
   @SuppressWarnings("boxing")
 	@Test
-	public void testConstructorsNoArgt() {
+	public void testConstructorsNoArg() {
 	  ArgMap<String> map = new ArgMap<String>();
     assertNull(map.getVar(1));
     
@@ -54,16 +56,38 @@ public class ArgMapTrial extends SourceFileCountingTrial {
 	@SuppressWarnings("boxing")
 	@Test
   public void testConstructorsFactoryAndDefault() {
-     ArgMap<String> map = new ArgMap<String>("hey", new I_ReturnFactory<String>() {
+	  final AtomicInteger callCounter = new AtomicInteger(); 
+	  ArgMap<String> map = new ArgMap<String>("hey", new I_ReturnFactory<String>() {
 
        @Override
        public String create(Object[] keys) {
+         callCounter.incrementAndGet();
          return "1" + keys[0];
        }
-     });
-     assertEquals("11", map.getVar(1));
-     
-   }
+    });
+	  String val = map.getVar(1);
+    assertEquals("11", val);
+    assertEquals(1, callCounter.get());
+    assertSame(val, map.getVar(1));
+    assertEquals(1, callCounter.get());
+    
+    callCounter.set(0);
+    ArgMap<String> noCache = new ArgMap<String>("hey", new I_ReturnFactory<String>() {
+      int counter = 0;
+      @Override
+      public String create(Object[] keys) {
+        callCounter.incrementAndGet();
+        if (counter >= 10) {
+          counter = 0;
+        }
+        return "" + counter++;
+      }
+    }, false);
+    for (int i = 0; i < 20; i++) {
+      noCache.get(new Object[] {});
+    }
+    assertEquals(20, callCounter.get());
+  }
 	
 	@SuppressWarnings("boxing")
 	@Test
@@ -136,7 +160,7 @@ public class ArgMapTrial extends SourceFileCountingTrial {
 
 	@Override
 	public int getAsserts(I_CountType type) {
-		int thisAsserts = 42;
+		int thisAsserts = 46;
 		//code coverage and circular dependencies 
 		int thisAfterAsserts = 2;
 		if (type.isFromMetaWithCoverage()) {
@@ -148,7 +172,7 @@ public class ArgMapTrial extends SourceFileCountingTrial {
 
 	@Override
 	public int getUniqueAsserts(I_CountType type) {
-		int thisUniqueAsserts = 22;
+		int thisUniqueAsserts = 25;
 		//code coverage and circular dependencies 
 		int thisAfterUniqueAsserts = 2;
 		if (type.isFromMetaWithCoverage()) {
