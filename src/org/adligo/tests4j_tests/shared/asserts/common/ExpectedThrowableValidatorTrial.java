@@ -15,7 +15,7 @@ import org.adligo.tests4j_tests.base_trials.I_CountType;
 import org.adligo.tests4j_tests.base_trials.SourceFileCountingTrial;
 import org.adligo.tests4j_tests.references_groups.Tests4J_AssertsCommon_GwtReferenceGroup;
 
-@SourceFileScope (sourceClass=ExpectedThrowableValidator.class, minCoverage=58.0)
+@SourceFileScope (sourceClass=ExpectedThrowableValidator.class, minCoverage=54.0)
 @AllowedReferences (groups=Tests4J_AssertsCommon_GwtReferenceGroup.class)
 public class ExpectedThrowableValidatorTrial extends SourceFileCountingTrial {
 
@@ -74,21 +74,7 @@ public class ExpectedThrowableValidatorTrial extends SourceFileCountingTrial {
               (Class<? extends Throwable>) null);
         }
     });
-		assertThrown(new ExpectedThrowable(NullPointerException.class), 
-        new I_Thrower() {
-          @Override
-          public void run() {
-            new ExpectedThrowableValidator(null, IllegalArgumentException.class, (I_ExpectedThrowable) null);
-          }
-      });
-		assertThrown(new ExpectedThrowable(NullPointerException.class), 
-				new I_Thrower() {
-					@Override
-					public void run() {
-						new ExpectedThrowableValidator(Tests4J_EnglishConstants.ENGLISH, 
-						    IllegalArgumentException.class, (I_ExpectedThrowable) null);
-					}
-			});
+
 		assertThrown(new ExpectedThrowable(NullPointerException.class), 
         new I_Thrower() {
           @Override
@@ -105,22 +91,7 @@ public class ExpectedThrowableValidatorTrial extends SourceFileCountingTrial {
                 NullPointerException.class, MatchType.EQUALS);
           }
       });
-		assertThrown(new ExpectedThrowable(NullPointerException.class), 
-        new I_Thrower() {
-          @Override
-          public void run() {
-            new ExpectedThrowableValidator(null, new NullPointerException(null), MatchType.EQUALS);
-          }
-      });
-		assertThrown(new ExpectedThrowable(new IllegalArgumentException(
-        messages.getExpectedThrownDataWithEqualsOrContainMatchTypesRequireAMessage())), 
-        new I_Thrower() {
-          @Override
-          public void run() {
-            new ExpectedThrowableValidator(Tests4J_EnglishConstants.ENGLISH, 
-                new NullPointerException(null), MatchType.EQUALS);
-          }
-      });
+
 		assertThrown(new ExpectedThrowable(NullPointerException.class), 
         new I_Thrower() {
           @Override
@@ -137,15 +108,7 @@ public class ExpectedThrowableValidatorTrial extends SourceFileCountingTrial {
                 NullPointerException.class, MatchType.CONTAINS);
           }
       });
-		assertThrown(new ExpectedThrowable(new IllegalArgumentException(
-		    messages.getExpectedThrownDataWithEqualsOrContainMatchTypesRequireAMessage())), 
-        new I_Thrower() {
-          @Override
-          public void run() {
-            new ExpectedThrowableValidator(Tests4J_EnglishConstants.ENGLISH, 
-                new NullPointerException(null), MatchType.CONTAINS);
-          }
-      });
+
 		assertThrown(new ExpectedThrowable(NullPointerException.class), 
 	      new I_Thrower() {
 	        @Override
@@ -164,6 +127,7 @@ public class ExpectedThrowableValidatorTrial extends SourceFileCountingTrial {
 	
 	}
 	
+  
 	@Test
 	public void testConstructorAndGets() {
 		//test pass through
@@ -191,19 +155,6 @@ public class ExpectedThrowableValidatorTrial extends SourceFileCountingTrial {
 		assertEquals(NullPointerException.class, expCause.getThrowableClass());
 		assertSame(MatchType.ANY, expCause.getMatchType());
     
-		
-		obj = new ExpectedThrowableValidator(Tests4J_EnglishConstants.ENGLISH,NullPointerException.class,
-				new ExpectedThrowableValidator(Tests4J_EnglishConstants.ENGLISH,
-				    new IllegalStateException("Some error message."), MatchType.CONTAINS));
-		assertEquals(NullPointerException.class, obj.getThrowableClass());
-		expCause = obj.getExpectedCause();
-		assertSame(MatchType.ANY, obj.getMatchType());
-		
-		assertNotNull(expCause);
-		assertEquals(IllegalStateException.class, expCause.getThrowableClass());
-		assertEquals("Some error message.", expCause.getMessage());
-		assertSame(MatchType.CONTAINS, expCause.getMatchType());
-		
 		obj = new ExpectedThrowableValidator(Tests4J_EnglishConstants.ENGLISH, 
 		    NullPointerException.class, MatchType.NULL,
 				new ExpectedThrowableValidator(Tests4J_EnglishConstants.ENGLISH, 
@@ -217,26 +168,41 @@ public class ExpectedThrowableValidatorTrial extends SourceFileCountingTrial {
 		assertEquals("Some error message.", expCause.getMessage());
 		assertSame(MatchType.EQUALS, expCause.getMatchType());
 		
-		ExpectedThrowableValidator threePete = new ExpectedThrowableValidator(
-		    Tests4J_EnglishConstants.ENGLISH, RuntimeException.class, MatchType.NULL,
-				new ExpectedThrowableValidator(Tests4J_EnglishConstants.ENGLISH, NullPointerException.class,
-				new ExpectedThrowableValidator(
-				    Tests4J_EnglishConstants.ENGLISH,new IllegalStateException("Some error message."))));
-		assertEquals(RuntimeException.class, threePete.getThrowableClass());
-		assertEquals(MatchType.NULL, threePete.getMatchType());
-		
-		expCause = threePete.getExpectedCause();
-		assertNotNull(expCause);
-		assertEquals(NullPointerException.class, expCause.getThrowableClass());
-		assertEquals(MatchType.ANY, expCause.getMatchType());
-		
-		expCause = expCause.getExpectedCause();
-		assertNotNull(expCause);
-		assertEquals(IllegalStateException.class, expCause.getThrowableClass());
-		assertEquals("Some error message.", expCause.getMessage());
-		assertEquals(MatchType.EQUALS, expCause.getMatchType());
 	}
 	
+	@Test
+  public void testConstructorCopiesAndGets() {
+	  ExpectedThrowableValidator obj = new ExpectedThrowableValidator(Tests4J_EnglishConstants.ENGLISH,
+        new ExpectedThrowableValidator(Tests4J_EnglishConstants.ENGLISH, 
+            new IllegalStateException("Some error message.")));
+	  
+	  ExpectedThrowableValidator obj2 = new ExpectedThrowableValidator(Tests4J_EnglishConstants.ENGLISH,
+        obj);
+    assertSame(IllegalStateException.class, obj2.getThrowableClass());
+    assertEquals("Some error message.", obj2.getMessage());
+    assertSame(MatchType.EQUALS, obj2.getMatchType());
+    assertNull(obj2.getExpectedCause());
+    
+    //test pass through
+    obj = new ExpectedThrowableValidator(Tests4J_EnglishConstants.ENGLISH,
+        new ExpectedThrowableValidator(Tests4J_EnglishConstants.ENGLISH, 
+            new IllegalStateException("Some error message."),
+            new ExpectedThrowableValidator(Tests4J_EnglishConstants.ENGLISH, 
+                new NullPointerException("Somes null."), MatchType.CONTAINS)));
+    
+    obj2 = new ExpectedThrowableValidator(Tests4J_EnglishConstants.ENGLISH,
+        obj);
+    assertSame(IllegalStateException.class, obj2.getThrowableClass());
+    assertEquals("Some error message.", obj2.getMessage());
+    assertSame(MatchType.EQUALS, obj2.getMatchType());
+    
+    I_ExpectedThrowable cause = obj2.getExpectedCause();
+    assertNotNull(cause);
+    assertSame(NullPointerException.class, cause.getThrowableClass());
+    assertEquals("Somes null.", cause.getMessage());
+    assertSame(MatchType.CONTAINS, cause.getMatchType());
+    
+	}
 	@SuppressWarnings("boxing")
   @Test
 	public void testEqualsHashCode() {
@@ -268,15 +234,7 @@ public class ExpectedThrowableValidatorTrial extends SourceFileCountingTrial {
 				    Tests4J_EnglishConstants.ENGLISH, new IllegalArgumentException("iae2")));
 	  ExpectedThrowableValidator j = new ExpectedThrowableValidator(Tests4J_EnglishConstants.ENGLISH, 
         new ExpectedThrowableValidator(Tests4J_EnglishConstants.ENGLISH, IllegalStateException.class));
-	  ExpectedThrowableValidator k = new ExpectedThrowableValidator(
-	      Tests4J_EnglishConstants.ENGLISH, 
-        new ExpectedThrowableValidator(
-            Tests4J_EnglishConstants.ENGLISH, new IllegalStateException("Some error message."), MatchType.CONTAINS));
-	  ExpectedThrowableValidator l = new ExpectedThrowableValidator(
-	      Tests4J_EnglishConstants.ENGLISH, 
-        new ExpectedThrowableValidator(
-            Tests4J_EnglishConstants.ENGLISH, new IllegalStateException("Some error message."), MatchType.NULL));
-		
+
 		assertEquals(a, a);
 		assertEquals(a.hashCode(), a.hashCode());
 		
@@ -307,21 +265,16 @@ public class ExpectedThrowableValidatorTrial extends SourceFileCountingTrial {
 		assertNotEquals(a, j);
     assertNotEquals(a.hashCode(), j.hashCode());
     
-    assertNotEquals(a,k);
-    assertNotEquals(a.hashCode(), k.hashCode());
-    
-    assertNotEquals(a, l);
-    assertNotEquals(a.hashCode(), l.hashCode());
 	}
 	
 	@Override
 	public int getTests(I_CountType type) {
-		return super.getTests(type, 3, true);
+		return super.getTests(type, 4, true);
 	}
 
 	@Override
 	public int getAsserts(I_CountType type) {
-		int asserts = 72;
+		int asserts = 59;
 		if (type.isFromMetaWithCoverage()) {
 			//code coverage and circular dependencies
 			return super.getAsserts(type,asserts + 3);
@@ -332,7 +285,7 @@ public class ExpectedThrowableValidatorTrial extends SourceFileCountingTrial {
 
 	@Override
 	public int getUniqueAsserts(I_CountType type) {
-		int uasserts = 43;
+		int uasserts = 37;
 		if (type.isFromMetaWithCoverage()) {
 			return super.getUniqueAsserts(type, uasserts + 3);
 		} else {
