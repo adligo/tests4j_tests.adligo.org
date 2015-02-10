@@ -124,5 +124,11 @@ public class SystemRunnerMock implements I_JseSystem {
     return "en";
   }
 
+  @Override
+  public void interruptCurrentThread() {
+    // TODO Auto-generated method stub
+    
+  }
+
 
 }
