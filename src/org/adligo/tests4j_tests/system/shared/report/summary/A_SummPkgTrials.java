@@ -46,10 +46,15 @@ implements I_MetaTrialParams<A_SummPkgTrials>, I_CountingPackageTrials {
 		add(SetupProgressDisplayTrial.class);
 		add(SetupProcessDisplayTrial.class);
 		
+		add(TextDataDisplayTrial.class);
+		add(TextLineCompareDisplayTrial.class);
+		
 		add(TestDisplayTrial.class);
 		add(TestFailedDisplayTrial.class);
 		
 		add(TestsProgressDisplayTrial.class);
+		
+		add(ThrownFailureComparisonDisplayTrial.class);
 		
 		add(TrialDisplayTrial.class);
 		add(TrialFailedDisplayTrial.class);

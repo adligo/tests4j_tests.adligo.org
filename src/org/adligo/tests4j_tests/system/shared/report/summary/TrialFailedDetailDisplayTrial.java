@@ -111,18 +111,24 @@ public class TrialFailedDetailDisplayTrial extends SourceFileCountingTrial {
     when(messageMock_.getIndent()).thenReturn("indent ");
     when(messageMock_.getFailedEOS()).thenReturn(" failed.");
     when(messageMock_.getExpected()).thenReturn("Expected:");
-    when(messageMock_.getTheFollowingActualLineNumberNotExpected()).thenReturn("The following lines weren't in the expected;");
+    when(messageMock_.getActual()).thenReturn("Actual:");
+    when(messageMock_.getTheFollowingActualLineNumberNotExpected()).thenReturn("The following actual lines weren't expected;");
     display.logTrialFailure(btrm);
     
     assertEquals("someTrialName failed.\n" +
         "indent someTrialName.testFoo() failed.\n" +
         "indent The objects must be equal.\n" +
         "indent Expected:\n" +
-        "indent indent ''\n" +
-        "indent The following lines weren't in the expected;\n" +
-        "indent 1: 1\n" +
-        "indent 2: 2\n" +
-        "indent 3: 3\n", logRecord_.getArg(0));
+        "indent ''\n" +
+        "indent Actual:\n" +
+        "indent 1: '1'\n" +
+        "indent 2: '2'\n" +
+        "indent 3: '3'\n" +
+        "indent The following actual lines weren't expected;\n" +
+        "indent indent 1: '1'\n" +
+        "indent indent 2: '2'\n" +
+        "indent indent 3: '3'\n" 
+        , logRecord_.getArg(0));
     assertEquals(1, logRecord_.count());
     assertEquals(0, onThrowableRecord_.count());
   }
@@ -151,19 +157,25 @@ public class TrialFailedDetailDisplayTrial extends SourceFileCountingTrial {
 	    when(messageMock_.getIndent()).thenReturn("indent ");
 	    when(messageMock_.getFailedEOS()).thenReturn(" failed.");
 	    when(messageMock_.getActual()).thenReturn("Actual:");
+	    when(messageMock_.getExpected()).thenReturn("Expected:");
 	    when(messageMock_.getTheFollowingExpectedLineNumbersWereMissing()).thenReturn(
-	        "The following lines weren't in the expected;");
+	        "The following expected lines were missing;");
 	    display.logTrialFailure(btrm);
+	    
 	    
 	    assertEquals("someTrialName failed.\n" +
 	        "indent someTrialName.testFoo() failed.\n" +
 	        "indent The objects must be equal.\n" +
-	        "indent The following lines weren't in the expected;\n" +
-	        "indent 1: 1\n" +
-	        "indent 2: 2\n" +
-	        "indent 3: 3\n" +
+	        "indent Expected:\n" +
+	        "indent 1: '1'\n" +
+          "indent 2: '2'\n" +
+          "indent 3: '3'\n" +
+	        "indent The following expected lines were missing;\n" +
+	        "indent indent 1: '1'\n" +
+	        "indent indent 2: '2'\n" +
+	        "indent indent 3: '3'\n" + 
 	        "indent Actual:\n" +
-	        "indent indent ''\n" , logRecord_.getArg(0));
+          "indent ''\n", logRecord_.getArg(0));
 	    assertEquals(1, logRecord_.count());
 	    assertEquals(0, onThrowableRecord_.count());
 	  }

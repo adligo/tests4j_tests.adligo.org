@@ -1,11 +1,8 @@
 package org.adligo.tests4j_tests.references_groups;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import org.adligo.tests4j.system.shared.report.summary.AbstractProcessDisplay;
-import org.adligo.tests4j.system.shared.report.summary.DefaultReporterStates;
 import org.adligo.tests4j.system.shared.report.summary.AllowedReferencesFailureException;
+import org.adligo.tests4j.system.shared.report.summary.DefaultReporterStates;
 import org.adligo.tests4j.system.shared.report.summary.LineDiffTextDisplay;
 import org.adligo.tests4j.system.shared.report.summary.PercentFormat;
 import org.adligo.tests4j.system.shared.report.summary.RemoteProcessDisplay;
@@ -16,12 +13,18 @@ import org.adligo.tests4j.system.shared.report.summary.SummaryReporter;
 import org.adligo.tests4j.system.shared.report.summary.TestDisplay;
 import org.adligo.tests4j.system.shared.report.summary.TestFailedDisplay;
 import org.adligo.tests4j.system.shared.report.summary.TestsProgressDisplay;
+import org.adligo.tests4j.system.shared.report.summary.TextDataDisplay;
+import org.adligo.tests4j.system.shared.report.summary.TextLineCompareDisplay;
 import org.adligo.tests4j.system.shared.report.summary.ThreadDisplay;
+import org.adligo.tests4j.system.shared.report.summary.ThrownFailureComparisonDisplay;
 import org.adligo.tests4j.system.shared.report.summary.TrialDisplay;
 import org.adligo.tests4j.system.shared.report.summary.TrialFailedDetailDisplay;
 import org.adligo.tests4j.system.shared.report.summary.TrialFailedDisplay;
 import org.adligo.tests4j.system.shared.report.summary.TrialsProcessDisplay;
 import org.adligo.tests4j.system.shared.report.summary.TrialsProgressDisplay;
+
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  *  @diagram_sync with PackageDependencies.class on 10/1/1014
@@ -44,10 +47,15 @@ public class Tests4J_Summary_ReferenceGroup extends Tests4J_ReferenceGroup {
 		add(names, SetupProcessDisplay.class);
 		add(names, SetupProgressDisplay.class);
 		add(names, SummaryReporter.class);
+		add(names, TextDataDisplay.class);
+		add(names, TextLineCompareDisplay.class);
+		
 		add(names, TestDisplay.class);
 		add(names, TestFailedDisplay.class);
 		add(names, TestsProgressDisplay.class);
 		add(names, ThreadDisplay.class);
+		add(names, ThrownFailureComparisonDisplay.class);
+		
 		add(names, TrialDisplay.class);
 		add(names, TrialFailedDetailDisplay.class);
 		add(names, TrialFailedDisplay.class);
