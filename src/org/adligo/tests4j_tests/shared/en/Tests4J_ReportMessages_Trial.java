@@ -15,7 +15,7 @@ import org.adligo.tests4j_tests.shared.i18n.I18N_Asserter;
 @AllowedReferences (groups=Tests4J_EN_GwtReferenceGroup.class)
 public class Tests4J_ReportMessages_Trial extends SourceFileCountingTrial {
 
-	private static final int ASSERTS = 79;
+	private static final int ASSERTS = 82;
 
 	@Test
 	public void testMessages() {
@@ -67,6 +67,8 @@ public class Tests4J_ReportMessages_Trial extends SourceFileCountingTrial {
 				messages.getTheFollowingExpectedLineNumbersWereMissing());
 		asserter.assertConstant("The following actual line numbers not in the expected text: ", 
 				messages.getTheFollowingActualLineNumberNotExpected());
+		asserter.assertConstant("The following text was NOT found in the actual text;", 
+        messages.getTheFollowingTextWasNotFoundInTheActualText());
 		
 		asserter.assertConstant("Starting process <X/> with <Y/> threads.", 
 				messages.getStartingProcessXWithYThreads());

@@ -14,7 +14,7 @@ import org.adligo.tests4j_tests.base_trials.I_CountType;
 import org.adligo.tests4j_tests.base_trials.SourceFileCountingTrial;
 import org.adligo.tests4j_tests.references_groups.Tests4J_Summary_GwtReferenceGroup;
 
-@SourceFileScope (sourceClass=TextLineCompareDisplay.class, minCoverage=86.0)
+@SourceFileScope (sourceClass=TextLineCompareDisplay.class, minCoverage=84.0)
 @AllowedReferences (groups=Tests4J_Summary_GwtReferenceGroup.class)
 public class TextLineCompareDisplayTrial extends SourceFileCountingTrial {
   private I_Tests4J_Log logMock_;
@@ -68,6 +68,37 @@ public class TextLineCompareDisplayTrial extends SourceFileCountingTrial {
 	  
 	}
 	 
+	 @Test
+	  public void testMethodDisplayStringEmptiles() {
+	    display_.addStringCompare("", null);
+	    String actual = display_.getDefaultResult();
+	    assertEquals("\t:Expected:\n" +
+	          "\t''\n" +
+	          "\t:Actual:\n" +
+	          "\tnull\n", actual);
+	    
+	    display_.addStringCompare("", "");
+      actual = display_.getDefaultResult();
+      assertEquals("\t:Expected:\n" +
+            "\t''\n" +
+            "\t:Actual:\n" +
+            "\t''\n", actual);
+      
+      display_.addStringCompare("a", "");
+      actual = display_.getDefaultResult();
+      assertEquals("\t:Expected:\n" +
+            "\t'a'\n" +
+            "\t:Actual:\n" +
+            "\t''\n", actual);
+      
+      display_.addStringCompare("", "a");
+      actual = display_.getDefaultResult();
+      assertEquals("\t:Expected:\n" +
+            "\t''\n" +
+            "\t:Actual:\n" +
+            "\t'a'\n", actual);
+	  }
+	 
 	@SuppressWarnings("boxing")
   @Test
   public void testMethodDisplayStringNullsRTL() {
@@ -91,6 +122,63 @@ public class TextLineCompareDisplayTrial extends SourceFileCountingTrial {
           "\t\t1: 'exp'*'ed'\n" +
           "\t:Actual:\n" +
           "\t'ect'\n" , actual);
+    
+    display_.addStringCompare("\t", "");
+    actual = display_.getDefaultResult();
+    assertEquals("\t:Expected:\n" +
+          "\t'\t'\n" +
+          "\t:Actual:\n" +
+          "\t''\n", actual);
+    
+    display_.addStringCompare("", "\t");
+    actual = display_.getDefaultResult();
+    assertEquals("\t:Expected:\n" +
+          "\t''\n" +
+          "\t:Actual:\n" +
+          "\t'\t'\n", actual);
+    
+    display_.addStringCompare("\t", "a");
+    actual = display_.getDefaultResult();
+    assertEquals("\t:Expected:\n" +
+          "\t'\t'\n" +
+          "\t:Actual:\n" +
+          "\t'a'\n", actual);
+    
+    display_.addStringCompare("\t", "\ta");
+    actual = display_.getDefaultResult();
+    assertEquals("\t:Expected:\n" +
+          "\t'\t'\n" +
+          "\t:Actual:\n" +
+          "\t'\ta'\n" +
+          "\t\t:Differences:\n" +
+          "\t\t1: 'a'\n", actual);
+    
+    display_.addStringCompare("\t", "a\t");
+    actual = display_.getDefaultResult();
+    assertEquals("\t:Expected:\n" +
+          "\t'\t'\n" +
+          "\t:Actual:\n" +
+          "\t'a\t'\n" +
+          "\t\t:Differences:\n" +
+          "\t\t1: 'a'\n", actual);
+    
+    display_.addStringCompare("a\t", "\t");
+    actual = display_.getDefaultResult();
+    assertEquals("\t:Expected:\n" +
+          "\t'a\t'\n" +
+          "\t\t:Differences:\n" +
+          "\t\t1: 'a'\n" +
+          "\t:Actual:\n" +
+          "\t'\t'\n" , actual);
+    
+    display_.addStringCompare("\ta", "\t");
+    actual = display_.getDefaultResult();
+    assertEquals("\t:Expected:\n" +
+          "\t'\ta'\n" +
+          "\t\t:Differences:\n" +
+          "\t\t1: 'a'\n" +
+          "\t:Actual:\n" +
+          "\t'\t'\n" , actual);
   }
 	 
   @SuppressWarnings("boxing")
@@ -156,6 +244,17 @@ public class TextLineCompareDisplayTrial extends SourceFileCountingTrial {
           "\t:The following actual lines are missing:\n" +
           "\t\t2: 'lineA'\n" +
           "\t\t3: 'lineB'\n", actual);
+    
+    display_.addStringCompare("expected\nlineA\nlineB\t", "expected\nlineA\nlineB");
+    actual = display_.getDefaultResult();
+    assertEquals("\t:Expected:\n" +
+          "\t1: 'expected'\n" +
+          "\t2: 'lineA'\n" +
+          "\t3: 'lineB\t'\n" +
+          "\t:Actual:\n" +
+          "\t1: 'expected'\n" +
+          "\t2: 'lineA'\n" +
+          "\t3: 'lineB'\n" , actual);
   }
   
   @SuppressWarnings("boxing")
@@ -180,12 +279,12 @@ public class TextLineCompareDisplayTrial extends SourceFileCountingTrial {
   
 	@Override
 	public int getTests(I_CountType type) {
-		return super.getTests(type, 8, true);
+		return super.getTests(type, 9, true);
 	}
 
 	@Override
 	public int getAsserts(I_CountType type) {
-		int thisAsserts = 8;
+		int thisAsserts = 20;
 		//code coverage and circular dependencies +
 		//custom afterTrialTests
 		//+ see above
@@ -199,7 +298,7 @@ public class TextLineCompareDisplayTrial extends SourceFileCountingTrial {
 
 	@Override
 	public int getUniqueAsserts(I_CountType type) {
-		int thisUniqueAsserts = 8;
+		int thisUniqueAsserts = 20;
 		//code coverage and circular dependencies +
 		//custom afterTrialTests
 		//+ see above

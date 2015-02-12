@@ -840,16 +840,40 @@ public class TextLinesCompareTrial extends SourceFileCountingTrial {
 		assertNull(diff.getIndexes());
 	}
 
-
+  @SuppressWarnings("boxing")
+  @Test
+  public void testMultiLine3x3TabAtEndOfLine() {
+    TextLinesCompare tlc = new TextLinesCompare();
+    I_TextLinesCompareResult tlcr = tlc.compare(Tests4J_EnglishConstants.ENGLISH, 
+        "exp\nlineA\nlineB\t", "exp\nlineA\nlineB", true);
+    I_TextLines actual = tlcr.getActualLines();
+    assertEquals("exp", actual.getLine(0));
+    assertEquals("lineA", actual.getLine(1));
+    assertEquals("lineB", actual.getLine(2));
+    assertEquals(3, actual.getLines());
+    
+    I_TextLines expected = tlcr.getExpectedLines();
+    assertEquals("exp", expected.getLine(0));
+    assertEquals("lineA", expected.getLine(1));
+    assertEquals("lineB\t", expected.getLine(2));
+    assertEquals(3, expected.getLines());
+    
+    List<I_LineDiff> diffs =  tlcr.getLineDiffs();
+    I_LineDiff ld = diffs.get(2);
+    assertNotNull(ld);
+    assertEquals(LineDiffType.PartialMatch ,ld.getType());
+    assertEquals(2, ld.getExpectedLineNbr());
+    assertEquals(2, ld.getActualLineNbr());
+  }
 	
 	@Override
 	public int getTests(I_CountType type) {
-		return super.getTests(type, 17, true);
+		return super.getTests(type, 18, true);
 	}
 	
 	@Override
 	public int getAsserts(I_CountType type) {
-		int asserts = 410;
+		int asserts = 422;
 		if (type.isFromMetaWithCoverage()) {
 			//code coverage and circular dependencies
 			return super.getAsserts(type, asserts + 3);
@@ -860,7 +884,7 @@ public class TextLinesCompareTrial extends SourceFileCountingTrial {
 
 	@Override
 	public int getUniqueAsserts(I_CountType type) {
-		int uasserts = 243;
+		int uasserts = 251;
 		if (type.isFromMetaWithCoverage()) {
 			return super.getUniqueAsserts(type, uasserts + 3);
 		} else {

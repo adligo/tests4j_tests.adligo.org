@@ -7,14 +7,14 @@ import org.adligo.tests4j.system.shared.trials.Test;
 import org.adligo.tests4j_tests.base_trials.I_CountType;
 import org.adligo.tests4j_tests.base_trials.SourceFileCountingTrial;
 import org.adligo.tests4j_tests.references_groups.Tests4J_AssertsLineText_GwtReferenceGroup;
-import org.adligo.tests4j_tests.references_groups.Tests4J_AssertsLineText_ReferenceGroup;
 
 @SourceFileScope (sourceClass=TextLines.class,minCoverage=97.0)
 @AllowedReferences (groups=Tests4J_AssertsLineText_GwtReferenceGroup.class)
 public class TextLinesTrial extends SourceFileCountingTrial {
 
 	
-	@Test
+	@SuppressWarnings("boxing")
+  @Test
 	public void testLinesWithNormalizedLineFeeds() {
 		TextLines lines = new TextLines("a\n" +
 				"b");
@@ -32,7 +32,8 @@ public class TextLinesTrial extends SourceFileCountingTrial {
 		assertEquals("b", lines.getLine(2));
 	}
 	
-	@Test
+	@SuppressWarnings("boxing")
+  @Test
 	public void testLinesWithOutNormalizedLineFeeds() {
 		TextLines lines = new TextLines("a\n" +
 				"b", false);
@@ -50,7 +51,8 @@ public class TextLinesTrial extends SourceFileCountingTrial {
 		assertEquals("b", lines.getLine(2));
 	}
 	
-	@Test
+	@SuppressWarnings("boxing")
+  @Test
 	public void testEmptyLines() {
 		TextLines lines = new TextLines("\n\n\n", true);
 		assertEquals(3, lines.getLines());
@@ -72,7 +74,8 @@ public class TextLinesTrial extends SourceFileCountingTrial {
 		assertEquals("", lines.getLine(3));
 	}
 	
-	@Test
+	@SuppressWarnings("boxing")
+  @Test
 	public void testToString() {
 		TextLines lines = new TextLines("a\n" +
 				"b", false);
@@ -86,14 +89,32 @@ public class TextLinesTrial extends SourceFileCountingTrial {
 		assertEquals("TextLines [lines=[a\n, b]]", actual);
 	}
 	
+	@SuppressWarnings("boxing")
+  @Test
+  public void testTabsInLines() {
+    TextLines lines = new TextLines("\t\n\n\t\n", true);
+    assertEquals(3, lines.getLines());
+    assertEquals("\t", lines.getLine(0));
+    assertEquals("", lines.getLine(1));
+    assertEquals("\t", lines.getLine(2));
+    
+    
+    lines = new TextLines("a\ta\r\ta\t\r\tb\t\r", true);
+    assertEquals(3, lines.getLines());
+    assertEquals("a\ta", lines.getLine(0));
+    assertEquals("\ta\t", lines.getLine(1));
+    assertEquals("\tb\t", lines.getLine(2));
+    
+  }
+	
 	@Override
 	public int getTests(I_CountType type) {
-		return super.getTests(type, 4, true);
+		return super.getTests(type, 5, true);
 	}
 	
 	@Override
 	public int getAsserts(I_CountType type) {
-		int asserts = 30;
+		int asserts = 38;
 		if (type.isFromMetaWithCoverage()) {
 			//code coverage and circular dependencies
 			return super.getAsserts(type, asserts + 3);
@@ -104,7 +125,7 @@ public class TextLinesTrial extends SourceFileCountingTrial {
 
 	@Override
 	public int getUniqueAsserts(I_CountType type) {
-		int uasserts = 17;
+		int uasserts = 23;
 		if (type.isFromMetaWithCoverage()) {
 			return super.getUniqueAsserts(type, uasserts + 3);
 		} else {
