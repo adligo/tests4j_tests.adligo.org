@@ -1,6 +1,7 @@
 package org.adligo.tests4j_tests.run.helpers;
 
 import org.adligo.tests4j.run.api.Tests4J;
+import org.adligo.tests4j.run.helpers.ClassFilterMutant;
 import org.adligo.tests4j.system.shared.api.Tests4J_Params;
 import org.adligo.tests4j.system.shared.trials.I_MetaTrialParams;
 import org.adligo.tests4j_4jacoco.plugin.factories.MockitoPluginFactory;
@@ -36,6 +37,7 @@ implements I_MetaTrialParams<A_RunHelpPkgTrials>, I_CountingPackageTrials {
 	
 	public void addTrials() throws Exception {
 		add(CachedClassBytesClassLoaderTrial.class);
+		add(ClassFilterMutantTrial.class);
 	}
 
 	@Override

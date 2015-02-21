@@ -26,14 +26,14 @@ import org.adligo.tests4j_tests.run.helpers.class_loading_mocks.MockWithNothing;
 @AllowedReferences (groups=Tests4J_Association_GwtReferenceGroup.class)
 public class ClassParentsLocalTrial extends SourceFileCountingTrial {
 	
-	
+  @SuppressWarnings("unused")
 	@Test
 	public void testConstructorExceptions() throws Exception {
 		assertThrown(new ExpectedThrowable(
 				NullPointerException.class),
 				new I_Thrower() {
 					
-					@Override
+          @Override
 					public void run() throws Throwable {
 						new ClassParentsLocal((Class<?>) null);
 					}
@@ -74,7 +74,8 @@ public class ClassParentsLocalTrial extends SourceFileCountingTrial {
 		assertMockWithExtensionA(cpmA2);
 	}
 	
-	private void assertSimpleObject(I_ClassParentsLocal cpm) {
+	@SuppressWarnings("boxing")
+  private void assertSimpleObject(I_ClassParentsLocal cpm) {
 		assertEquals(Object.class, cpm.getTarget());
 		assertEquals(Object.class.getName(), cpm.getName());
 		List<I_ClassParents> parents = cpm.getParents();
@@ -88,7 +89,8 @@ public class ClassParentsLocalTrial extends SourceFileCountingTrial {
 		assertEquals("java.util.Collections$EmptyList", parentNames.getClass().getName());
 	}
 	
-	private void assertSimpleClass(I_ClassParentsLocal cpm) {
+	@SuppressWarnings("boxing")
+  private void assertSimpleClass(I_ClassParentsLocal cpm) {
 		assertEquals(Class.class, cpm.getTarget());
 		assertEquals(Class.class.getName(), cpm.getName());
 		List<I_ClassParents> parents = cpm.getParents();
@@ -106,7 +108,8 @@ public class ClassParentsLocalTrial extends SourceFileCountingTrial {
 		assertEquals("java.util.Collections$UnmodifiableRandomAccessList", parentNames.getClass().getName());
 	}
 	
-	private void assertMockWithNothing(I_ClassParentsLocal cpm) {
+	@SuppressWarnings("boxing")
+  private void assertMockWithNothing(I_ClassParentsLocal cpm) {
 		assertEquals(MockWithNothing.class, cpm.getTarget());
 		assertEquals(MockWithNothing.class.getName(), cpm.getName());
 		List<I_ClassParents> parents = cpm.getParents();
@@ -124,7 +127,8 @@ public class ClassParentsLocalTrial extends SourceFileCountingTrial {
 		assertEquals("java.util.Collections$UnmodifiableRandomAccessList", parentNames.getClass().getName());
 	}
 	
-	private void assertMockWithExtensionA(I_ClassParentsLocal cpm) {
+	@SuppressWarnings("boxing")
+  private void assertMockWithExtensionA(I_ClassParentsLocal cpm) {
 		assertEquals(MockWithExtensionA.class, cpm.getTarget());
 		assertEquals(MockWithExtensionA.class.getName(), cpm.getName());
 		List<I_ClassParents> parents = cpm.getParents();
@@ -167,7 +171,8 @@ public class ClassParentsLocalTrial extends SourceFileCountingTrial {
 		assertObjectMockI_GetAndSetLongInterface(cpm2);
 	}
 	
-	private void assertMockI_GetLong(I_ClassParentsLocal cpm) {
+	@SuppressWarnings("boxing")
+  private void assertMockI_GetLong(I_ClassParentsLocal cpm) {
 		Class<?> clazz = MockI_GetLong.class;
 		assertEquals(clazz, cpm.getTarget());
 		assertEquals(clazz.getName(), cpm.getName());
@@ -182,7 +187,8 @@ public class ClassParentsLocalTrial extends SourceFileCountingTrial {
 		assertEquals("java.util.Collections$EmptyList", parentNames.getClass().getName());
 	}
 	
-	private void assertMockI_SetLong(I_ClassParentsLocal cpm) {
+	@SuppressWarnings("boxing")
+  private void assertMockI_SetLong(I_ClassParentsLocal cpm) {
 		Class<?> clazz = MockI_SetLong.class;
 		assertEquals(clazz, cpm.getTarget());
 		assertEquals(clazz.getName(), cpm.getName());
@@ -197,7 +203,8 @@ public class ClassParentsLocalTrial extends SourceFileCountingTrial {
 		assertEquals("java.util.Collections$EmptyList", parentNames.getClass().getName());
 	}
 	
-	private void assertMockI_GetAndSetLong(I_ClassParentsLocal cpm) {
+	@SuppressWarnings("boxing")
+  private void assertMockI_GetAndSetLong(I_ClassParentsLocal cpm) {
 		Class<?> clazz = MockI_GetAndSetLong.class;
 		assertEquals(clazz, cpm.getTarget());
 		assertEquals(clazz.getName(), cpm.getName());
@@ -216,7 +223,8 @@ public class ClassParentsLocalTrial extends SourceFileCountingTrial {
 		assertEquals("java.util.Collections$UnmodifiableRandomAccessList", parentNames.getClass().getName());
 	}
 	
-	private void assertObjectMockI_GetAndSetLongInterface(I_ClassParentsLocal cpm) {
+	@SuppressWarnings("boxing")
+  private void assertObjectMockI_GetAndSetLongInterface(I_ClassParentsLocal cpm) {
 		Class<?> clazz = Object.class;
 		assertEquals(clazz, cpm.getTarget());
 		assertEquals(clazz.getName(), cpm.getName());

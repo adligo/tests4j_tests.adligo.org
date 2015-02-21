@@ -8,13 +8,13 @@ import org.adligo.tests4j.system.shared.trials.SourceFileScope;
 import org.adligo.tests4j.system.shared.trials.Test;
 import org.adligo.tests4j_tests.base_trials.I_CountType;
 import org.adligo.tests4j_tests.base_trials.SourceFileCountingTrial;
-import org.adligo.tests4j_tests.references_groups.Tests4J_AssertsReference_GwtReferenceGroup;
 import org.adligo.tests4j_tests.references_groups.Tests4J_Association_GwtReferenceGroup;
 
 @SourceFileScope (sourceClass=ClassAlias.class, minCoverage=80.0)
 @AllowedReferences (groups=Tests4J_Association_GwtReferenceGroup.class)
 public class ClassAliasTrial extends SourceFileCountingTrial {
 
+  @SuppressWarnings("unused")
 	@Test
 	public void testConstructorExceptions() {
 		assertThrown(new ExpectedThrowable(
@@ -27,17 +27,27 @@ public class ClassAliasTrial extends SourceFileCountingTrial {
 					}
 				});
 		assertThrown(new ExpectedThrowable(
-				new IllegalArgumentException(ClassAlias.NO_NAME)),
+				IllegalArgumentException.class),
 				new I_Thrower() {
 					
-					@Override
+          @Override
 					public void run() throws Throwable {
 						new ClassAlias((String) null);
 					}
 				});
+		assertThrown(new ExpectedThrowable(
+        new IllegalArgumentException("[B")),
+        new I_Thrower() {
+          
+          @Override
+          public void run() throws Throwable {
+            new ClassAlias("[B");
+          }
+        });
 	}
 
-	@Test
+	@SuppressWarnings("boxing")
+  @Test
 	public void testConstructorGettersAndComparator() {
 		ClassAlias ca = new ClassAlias(Object.class);
 		assertEquals(Object.class.getName(), ca.getName());
@@ -60,7 +70,8 @@ public class ClassAliasTrial extends SourceFileCountingTrial {
 	}
 	
 	
-	@Test
+	@SuppressWarnings("boxing")
+  @Test
 	public void testEqualsHashCode_AndToString() {
 		ClassAlias a = new ClassAlias(Object.class);
 		ClassAlias b = new ClassAlias(Class.class);
@@ -86,7 +97,7 @@ public class ClassAliasTrial extends SourceFileCountingTrial {
 
 	@Override
 	public int getAsserts(I_CountType type) {
-		int thisAsserts = 24;
+		int thisAsserts = 25;
 		//code coverage and circular dependencies +
 		//custom afterTrialTests
 		//+ see above
@@ -100,7 +111,7 @@ public class ClassAliasTrial extends SourceFileCountingTrial {
 
 	@Override
 	public int getUniqueAsserts(I_CountType type) {
-		int thisUniqueAsserts = 9;
+		int thisUniqueAsserts = 10;
 		//code coverage and circular dependencies +
 		//custom afterTrialTests
 		//+ see above

@@ -208,7 +208,7 @@ public class CachedClassBytesClassLoaderTrial extends SourceFileCountingTrial {
 	
 	@Override
 	public int getTests(I_CountType type) {
-		return super.getTests(type, 6);
+		return super.getTests(type, 6, false);
 	}
 
 	@Override

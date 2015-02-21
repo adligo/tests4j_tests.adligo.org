@@ -1,9 +1,5 @@
 package org.adligo.tests4j_tests.shared.common;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
 import org.adligo.tests4j.shared.asserts.common.ExpectedThrowable;
 import org.adligo.tests4j.shared.asserts.common.I_Thrower;
 import org.adligo.tests4j.shared.asserts.reference.AllowedReferences;
@@ -16,12 +12,30 @@ import org.adligo.tests4j_tests.references_groups.Tests4J_Common_ReferenceGroup;
 import org.adligo.tests4j_tests.shared.common.mocks.BaseMockClass;
 import org.adligo.tests4j_tests.shared.common.mocks.ChildMockClass;
 
-@SourceFileScope (sourceClass=ClassMethods.class, minCoverage=57.0)
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
+@SourceFileScope (sourceClass=ClassMethods.class, minCoverage=88.0)
 @AllowedReferences (groups=Tests4J_Common_ReferenceGroup.class)
 public class ClassMethodsTrial extends SourceFileCountingTrial {
 
 	private static final String CLASS_METHODS_TYPE = "Lorg/adligo/tests4j/shared/common/ClassMethods;";
 
+	 @SuppressWarnings("boxing")
+	  public void assertConstants() throws Exception {
+	    assertEquals(SpecialClasses.getBooleanClass().getName(), ClassMethods.BOOLEAN);
+	    assertEquals(SpecialClasses.getByteClass().getName(), ClassMethods.BYTE);
+	    assertEquals(SpecialClasses.getCharClass().getName(), ClassMethods.CHAR);
+	    assertEquals(SpecialClasses.getDoubleClass().getName(), ClassMethods.DOUBLE);
+	    assertEquals(SpecialClasses.getFloatClass().getName(), ClassMethods.FLOAT);
+	    assertEquals(SpecialClasses.getIntClass().getName(), ClassMethods.INT);
+	    assertEquals(SpecialClasses.getLongClass().getName(), ClassMethods.LONG);
+	    assertEquals(SpecialClasses.getShortClass().getName(), ClassMethods.SHORT);
+	    assertEquals(SpecialClasses.getVoidClass().getName(), ClassMethods.VOID);
+	  }
+	  
+	 
 	@Test
 	public void testCreateArrays() {
 		assertEquals("", ClassMethods.createArrayChars(0));
@@ -45,7 +59,8 @@ public class ClassMethodsTrial extends SourceFileCountingTrial {
 		assertEquals("ClassMethodsTrial", ClassMethods.getSimpleName(this.getClass()));
 	}
 	
-	@Test
+	@SuppressWarnings("boxing")
+  @Test
 	public void testToNames() {
 		
 		List<String> names = ClassMethods.toNames(null);
@@ -176,7 +191,8 @@ public class ClassMethodsTrial extends SourceFileCountingTrial {
 		assertGetArrays(5, "[[[[[");
 	}
 	
-	public void assertGetArrays(int count, String prefix) {
+	@SuppressWarnings("boxing")
+  public void assertGetArrays(int count, String prefix) {
 		assertEquals(count,
 				ClassMethods.getArrays(prefix + CLASS_METHODS_TYPE));
 		assertEquals(count,
@@ -216,6 +232,61 @@ public class ClassMethodsTrial extends SourceFileCountingTrial {
 		assertFalse(ClassMethods.isPrimitiveClassChar('['));
 	}
 	
+	@Test
+	public void testIsPrimitiveOrArrayOfPrimitives() throws Exception {
+	  
+    assertTrue(ClassMethods.isPrimitiveOrArrayOfPrimitives(
+        SpecialClasses.getBooleanClass().getName()));
+    String name = SpecialClasses.getBooleanArrayClass().getName();
+    assertTrue(ClassMethods.isPrimitiveOrArrayOfPrimitives(
+        name));
+    
+    assertTrue(ClassMethods.isPrimitiveOrArrayOfPrimitives(
+        SpecialClasses.getByteClass().getName()));
+    assertTrue(ClassMethods.isPrimitiveOrArrayOfPrimitives(
+        SpecialClasses.getByteArrayClass().getName()));
+    
+    assertTrue(ClassMethods.isPrimitiveOrArrayOfPrimitives(
+        SpecialClasses.getCharClass().getName()));
+    assertTrue(ClassMethods.isPrimitiveOrArrayOfPrimitives(
+        SpecialClasses.getCharArrayClass().getName()));
+    
+    assertTrue(ClassMethods.isPrimitiveOrArrayOfPrimitives(
+        SpecialClasses.getDoubleClass().getName()));
+    assertTrue(ClassMethods.isPrimitiveOrArrayOfPrimitives(
+        SpecialClasses.getDoubleArrayClass().getName()));
+    
+    assertTrue(ClassMethods.isPrimitiveOrArrayOfPrimitives(
+        SpecialClasses.getFloatClass().getName()));
+    assertTrue(ClassMethods.isPrimitiveOrArrayOfPrimitives(
+        SpecialClasses.getFloatArrayClass().getName()));
+    
+    assertTrue(ClassMethods.isPrimitiveOrArrayOfPrimitives(
+        SpecialClasses.getIntClass().getName()));
+    assertTrue(ClassMethods.isPrimitiveOrArrayOfPrimitives(
+        SpecialClasses.getIntArrayClass().getName()));
+    
+    assertTrue(ClassMethods.isPrimitiveOrArrayOfPrimitives(
+        SpecialClasses.getLongClass().getName()));
+    assertTrue(ClassMethods.isPrimitiveOrArrayOfPrimitives(
+        SpecialClasses.getLongArrayClass().getName()));
+    
+    assertTrue(ClassMethods.isPrimitiveOrArrayOfPrimitives(
+        SpecialClasses.getShortClass().getName()));
+    assertTrue(ClassMethods.isPrimitiveOrArrayOfPrimitives(
+        SpecialClasses.getShortArrayClass().getName()));
+    
+    assertTrue(ClassMethods.isPrimitiveOrArrayOfPrimitives(
+        SpecialClasses.getVoidClass().getName()));
+    
+    assertTrue(ClassMethods.isPrimitiveOrArrayOfPrimitives("[[B"));
+    assertFalse(ClassMethods.isPrimitiveOrArrayOfPrimitives("[[BB"));
+    
+    assertFalse(ClassMethods.isPrimitiveOrArrayOfPrimitives("L"));
+    assertFalse(ClassMethods.isPrimitiveOrArrayOfPrimitives("[L"));
+    assertFalse(ClassMethods.isPrimitiveOrArrayOfPrimitives("[[L"));
+	}
+	 
 	@Test
 	public void testIsClass() {
 		assertTrue(ClassMethods.isClass('L'));
@@ -267,12 +338,12 @@ public class ClassMethodsTrial extends SourceFileCountingTrial {
 	
 	@Override
 	public int getTests(I_CountType type) {
-		return super.getTests(type, 14, true);
+		return super.getTests(type, 15, true);
 	}
 	
 	@Override
 	public int getAsserts(I_CountType type) {
-		int tests = 149;
+		int tests = 171;
 		if (type.isFromMetaWithCoverage()) {
 			//code coverage and circular dependencies
 			return super.getAsserts(type,tests + 3);
@@ -283,7 +354,7 @@ public class ClassMethodsTrial extends SourceFileCountingTrial {
 
 	@Override
 	public int getUniqueAsserts(I_CountType type) {
-		int utests = 99;
+		int utests = 101;
 		if (type.isFromMetaWithCoverage()) {
 			return super.getUniqueAsserts(type, utests + 3);
 		} else {
