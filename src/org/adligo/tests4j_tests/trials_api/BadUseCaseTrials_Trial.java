@@ -3,6 +3,7 @@ package org.adligo.tests4j_tests.trials_api;
 import org.adligo.tests4j.models.shared.coverage.I_PackageCoverageBrief;
 import org.adligo.tests4j.models.shared.results.I_ApiTrialResult;
 import org.adligo.tests4j.system.shared.trials.IgnoreTest;
+import org.adligo.tests4j.system.shared.trials.Ignored;
 import org.adligo.tests4j.system.shared.trials.PackageScope;
 import org.adligo.tests4j.system.shared.trials.Test;
 import org.adligo.tests4j_tests.base_trials.ApiCountingTrial;
@@ -84,7 +85,7 @@ public class BadUseCaseTrials_Trial extends ApiCountingTrial {
 	}
 	
 	@Test
-	@IgnoreTest
+	@IgnoreTest (values=@Ignored(ignoredBy = "scott", ignoredOn = "2015-02-23"))
 	public void testNoUseCaseAnnotationTrialFails()  throws Exception {
 		NoUseCaseAnnotationTrial.runTestDelegate(this);
 	}
@@ -105,13 +106,13 @@ public class BadUseCaseTrials_Trial extends ApiCountingTrial {
 	}
 	
 	@Test
-	@IgnoreTest
+	@IgnoreTest (values=@Ignored(ignoredBy = "scott", ignoredOn = "2015-02-23"))
 	public void testUseCaseAnnotationEmptyUseCaseName()  throws Exception {
 		UseCaseAnnotationEmptyUseCaseScope.runTestDelegate(this);
 	}
 	
 	@Test
-	@IgnoreTest
+	@IgnoreTest (values=@Ignored(ignoredBy = "scott", ignoredOn = "2015-02-23"))
 	public void testUseCaseAnnotationUnknownUseCaseName()  throws Exception {
 		UseCaseAnnotationNameUnknown.runTestDelegate(this);
 	}

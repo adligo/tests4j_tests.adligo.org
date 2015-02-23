@@ -59,6 +59,8 @@ import org.adligo.tests4j.system.shared.trials.I_TrialParamsAware;
 import org.adligo.tests4j.system.shared.trials.I_TrialParamsFactory;
 import org.adligo.tests4j.system.shared.trials.I_UseCaseTrial;
 import org.adligo.tests4j.system.shared.trials.IgnoreTest;
+import org.adligo.tests4j.system.shared.trials.IgnoreTrial;
+import org.adligo.tests4j.system.shared.trials.Ignored;
 import org.adligo.tests4j.system.shared.trials.OmitCodeCoverage;
 import org.adligo.tests4j.system.shared.trials.PackageScope;
 import org.adligo.tests4j.system.shared.trials.PlatformType;
@@ -231,7 +233,9 @@ public class PackageDiscoveryTrial extends SourceFileCountingTrial {
 		assertContains(classNames, I_SubProgress.class.getName());
 		assertContains(classNames, I_UseCaseTrial.class.getName());
 		
+		assertContains(classNames, Ignored.class.getName());
 		assertContains(classNames, IgnoreTest.class.getName());
+		assertContains(classNames, IgnoreTrial.class.getName());
 		
 		assertContains(classNames, OmitCodeCoverage.class.getName());
 		assertContains(classNames, PlatformType.class.getName());
@@ -260,7 +264,7 @@ public class PackageDiscoveryTrial extends SourceFileCountingTrial {
 		assertContains(classNames, UseCaseScope.class.getName());
 		assertContains(classNames, UseCaseTrial.class.getName());
 		
-		assertEquals(46, classNames.size());
+		assertEquals(47, classNames.size());
 		List<I_PackageDiscovery> children =  cd.getSubPackages();
 		
 		
@@ -341,7 +345,7 @@ public class PackageDiscoveryTrial extends SourceFileCountingTrial {
 
 	@Override
 	public int getAsserts(I_CountType type) {
-		int thisAsserts = 118;
+		int thisAsserts = 120;
 		//code coverage and circular dependencies +
 		//custom afterTrialTests
 		//+ see above
@@ -355,7 +359,7 @@ public class PackageDiscoveryTrial extends SourceFileCountingTrial {
 
 	@Override
 	public int getUniqueAsserts(I_CountType type) {
-		int thisUniqueAsserts = 118;
+		int thisUniqueAsserts = 120;
 		//code coverage and circular dependencies +
 		//custom afterTrialTests
 		//+ see above

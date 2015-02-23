@@ -1,11 +1,12 @@
 package org.adligo.tests4j_tests.trials_api.bad_mock_api_trials;
 
-import org.adligo.tests4j.shared.asserts.common.I_Asserts;
 import org.adligo.tests4j.system.shared.trials.ApiTrial;
 import org.adligo.tests4j.system.shared.trials.BeforeTrial;
 import org.adligo.tests4j.system.shared.trials.PackageScope;
 import org.adligo.tests4j.system.shared.trials.Test;
 import org.adligo.tests4j.system.shared.trials.TrialRecursion;
+
+import java.util.Map;
 
 /**
  * this trial is run 50 times in a mock test run
@@ -27,7 +28,7 @@ public class SimpleRerunTrial extends ApiTrial {
 	private static boolean success = false;
 	
 	@BeforeTrial
-	public static void beforeTrial() {
+	public static void beforeTrial(Map<String,Object> params) {
 		success = false;
 	}
 	

@@ -7,6 +7,7 @@ import org.adligo.tests4j.models.shared.coverage.I_PackageCoverageBrief;
 import org.adligo.tests4j.models.shared.metadata.I_TrialMetadata;
 import org.adligo.tests4j.models.shared.metadata.I_TrialRunMetadata;
 import org.adligo.tests4j.models.shared.results.I_ApiTrialResult;
+import org.adligo.tests4j.models.shared.results.I_TrialFailure;
 import org.adligo.tests4j.models.shared.results.I_TrialResult;
 import org.adligo.tests4j.system.shared.trials.I_Trial;
 import org.adligo.tests4j.system.shared.trials.IgnoreTest;
@@ -118,7 +119,6 @@ public class BadApiTrials_Trial extends ApiCountingTrial {
 	
 	@SuppressWarnings("boxing")
   @Test
-	@IgnoreTest
 	public void testTrialRunOverlapPrevention() throws Exception {
 		ExpectedPassRunner runner = new ExpectedPassRunner();
 		List<Class<? extends I_Trial>> trials = new ArrayList<>();
@@ -148,7 +148,15 @@ public class BadApiTrials_Trial extends ApiCountingTrial {
 		for (int i = 0; i < 50; i++) {
 			I_TrialResult result = results.get(i);
 			assertNotNull(result);
-			assertTrue(result.isPassed());
+			if (!result.isPassed()) {
+			  List<I_TrialFailure> failures =  result.getFailures();
+			  for (I_TrialFailure failure: failures) {
+			    String message = failure.getMessage();
+			    System.out.println(message);
+			  }
+			  
+			}
+			assertTrue("trial " + i, result.isPassed());
 		}
 	}
 
@@ -183,10 +191,9 @@ public class BadApiTrials_Trial extends ApiCountingTrial {
 				NoPackageScopeAnnotationTrial.getAsserts()+
 				ProtectedTestTrial.getAsserts()+
 				StaticTestTrial.getAsserts()   +
-				TestWithParamsTrial.getAsserts();
-		    //+ 305;//305 is from testTrialRunOverlapPrevention
-		//overrode afterTrialTests above
-		if (type.isFromMetaWithCoverage()) {
+				TestWithParamsTrial.getAsserts()
+		    + 305;//305 is from testTrialRunOverlapPrevention
+				if (type.isFromMetaWithCoverage()) {
 			return super.getAsserts(type, asserts + 1);
 		} else {
 			return super.getAsserts(type, asserts);
@@ -195,8 +202,7 @@ public class BadApiTrials_Trial extends ApiCountingTrial {
 
 	@Override
 	public int getUniqueAsserts(I_CountType type) {
-		int uAsserts = 225; //was 333
-		//overrode afterTrialTests above
+		int uAsserts = 382; 
 		if (type.isFromMetaWithCoverage()) {
 			return super.getUniqueAsserts(type, uAsserts + 1);
 		} else {

@@ -71,6 +71,7 @@ implements I_MetaTrialParams<A_TrialsPkgTrials>, I_CountingPackageTrials {
 		add(UseCaseScopeTrial.class);
 		
 		add(TestTrial.class);
+		add(IgnoredTrial.class);
 		add(IgnoreTestTrial.class);
 		add(IgnoreTrialTrial.class);
 		add(TrialRecursionTrial.class);
