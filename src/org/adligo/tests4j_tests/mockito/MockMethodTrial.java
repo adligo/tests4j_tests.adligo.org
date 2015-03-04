@@ -1,5 +1,7 @@
 package org.adligo.tests4j_tests.mockito;
 
+import org.adligo.tests4j.shared.asserts.common.ExpectedThrowable;
+import org.adligo.tests4j.shared.asserts.common.I_Thrower;
 import org.adligo.tests4j.system.shared.trials.SourceFileScope;
 import org.adligo.tests4j.system.shared.trials.Test;
 import org.adligo.tests4j_4mockito.ArgMap;
@@ -12,9 +14,40 @@ import org.mockito.invocation.InvocationOnMock;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
-@SourceFileScope (sourceClass=MockMethod.class, minCoverage=22.0)
+@SourceFileScope (sourceClass=MockMethod.class, minCoverage=85.0)
 public class MockMethodTrial extends SourceFileCountingTrial {
 
+  @SuppressWarnings({"boxing"})
+  @Test
+  public void testClear() throws Throwable {
+    //ok you would probably never need to mock a list
+    MockMethod<String> getMock = new MockMethod<String>();
+    getMock.push("11");
+    getMock.push("22");
+    getMock.push("33");
+    getMock.push("44");
+    
+    InvocationOnMock mock = mock(InvocationOnMock.class);
+    when(mock.getArguments()).thenReturn(new Object[] {"in1"});
+    getMock.answer(mock);
+    
+    assertEquals("in1", getMock.getArg(0));
+    assertEquals(1, getMock.count());
+    getMock.clear();
+    assertThrown(new ExpectedThrowable(new IndexOutOfBoundsException("Index: 0, Size: 0")),
+        new I_Thrower() {
+
+          @Override
+          public void run() throws Throwable {
+            getMock.getArg(0);
+          }});
+    assertEquals(0, getMock.count());
+    
+    getMock.answer(mock);
+    assertEquals("in1", getMock.getArg(0));
+    assertEquals(1, getMock.count());
+  }
+  
   @Test
   public void testGetArgumentsSingle() throws Exception {
     MockMethod<String> rec = new MockMethod<String>("hey");
@@ -133,7 +166,7 @@ public class MockMethodTrial extends SourceFileCountingTrial {
     }
   }
   
-  @SuppressWarnings({"boxing", "unchecked"})
+  @SuppressWarnings({"unchecked"})
   @Test
   public void testPush() throws Exception {
     //ok you would probably never need to mock a list
@@ -232,12 +265,12 @@ public class MockMethodTrial extends SourceFileCountingTrial {
   }
   @Override
   public int getTests(I_CountType type) {
-    return super.getTests(type, 7, false);
+    return super.getTests(type, 8, false);
   }
 
   @Override
   public int getAsserts(I_CountType type) {
-    int thisAsserts = 51;
+    int thisAsserts = 57;
     //code coverage and circular dependencies 
     int thisAfterAsserts = 2;
     if (type.isFromMetaWithCoverage()) {
@@ -249,7 +282,7 @@ public class MockMethodTrial extends SourceFileCountingTrial {
 
   @Override
   public int getUniqueAsserts(I_CountType type) {
-    int thisUniqueAsserts = 35;
+    int thisUniqueAsserts = 39;
     //code coverage and circular dependencies 
     int thisAfterUniqueAsserts = 2;
     if (type.isFromMetaWithCoverage()) {
