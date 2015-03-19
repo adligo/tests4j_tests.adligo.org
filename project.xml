@@ -10,7 +10,9 @@
         <lns:library>mockito</lns:library>
         <lns:dependency group="java" artifact="java" version="default" type="ide">
 	    	<lns:ide name="eclipse" >
-	    		<lns:arg key="src" value="src,src_jdk_1_8" />
+	    		<lns:args>
+	    			<lns:param key="src" value="src,src_jdk_1_8" />
+	    		</lns:args>
 	    	</lns:ide>
 	    </lns:dependency>
         <pns:project>gwt_refs.adligo.org</pns:project>
