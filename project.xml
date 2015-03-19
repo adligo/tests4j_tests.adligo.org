@@ -23,9 +23,9 @@
     </pns:dependencies>
     <pns:stages>
         <pns:stage name="jar" >
-        	<pns:params>
+        	<cns:params>
             	<cns:param key="srcDirs" value="src,src_jdk_1_8" />
-            </pns:params>
+            </cns:params>
         </pns:stage>
         <pns:stage name="test" />
         <pns:stage name="publish" />
