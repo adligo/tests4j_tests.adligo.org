@@ -63,6 +63,8 @@ implements I_MetaTrialParams<A_RunCommonPkgTrials>, I_CountingPackageTrials {
 	  add(ThreadsDelegateTrial.class);
 	  add(HolderTrial.class);
 	  
+	  add(Tests4J_ThreadFactoryTrial.class);
+	  
 	  add(ThreadGroupFilterTrial.class);
 	  add(ThreadGroupLocalTrial.class);
 	  add(ThreadingFactoryTrial.class);

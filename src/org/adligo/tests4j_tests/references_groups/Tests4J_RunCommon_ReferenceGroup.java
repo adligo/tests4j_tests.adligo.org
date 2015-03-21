@@ -30,6 +30,7 @@ import org.adligo.tests4j.run.common.ThreadsDelegate;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  *  @diagram_sync with PackageDependencies.class on 10/1/1014
@@ -41,6 +42,8 @@ public class Tests4J_RunCommon_ReferenceGroup extends Tests4J_ReferenceGroup {
 	
 	private Tests4J_RunCommon_ReferenceGroup() {
 		Set<String> names = new HashSet<String>();
+		
+		add(names, AtomicInteger.class);
 		
 		add(names, ClassesDelegate.class);
 		add(names, ConcurrentQualifiedMap.class);
