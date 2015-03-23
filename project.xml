@@ -4,6 +4,11 @@
 	xmlns:pns="http://www.adligo.org/fabricate/xml/io_v1/project_v1_0.xsd" 
     xmlns:lns="http://www.adligo.org/fabricate/xml/io_v1/library_v1_0.xsd" 
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" >
+    <pns:attributes>
+    	<cns:param key="srcDirs" value="src,src_jdk_1_8">
+    		<cns:param key="c2eKeyNested" value="c2eValNested"/>
+    	</cns:param>
+    </pns:attributes>
     <pns:dependencies>
         <lns:library>ide</lns:library>
         <lns:library>jacoco</lns:library>
@@ -21,14 +26,6 @@
         <pns:project>tests4j_4mockito.adligo.org</pns:project>
        
     </pns:dependencies>
-    <pns:stages>
-        <pns:stage name="jar" >
-        	<cns:params>
-            	<cns:param key="srcDirs" value="src,src_jdk_1_8" />
-            </cns:params>
-        </pns:stage>
-        <pns:stage name="test" />
-        <pns:stage name="publish" />
-    </pns:stages>
+    
     
  </pns:fabricate_project>
