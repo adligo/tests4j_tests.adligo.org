@@ -29,8 +29,6 @@ import org.adligo.tests4j_tests.run.helpers.class_loading_mocks.MockWithStaticIn
 import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.Opcodes;
 
-import com.sun.org.apache.regexp.internal.recompile;
-
 @SourceFileScope (sourceClass=ReferenceTrackingClassVisitor.class, minCoverage=36.0)
 public class ReferenceTrackingClassVisitorTrial extends SourceFileCountingTrial {
 	public static final String PRINT_STREAM = "Ljava/io/PrintStream;";
@@ -92,7 +90,8 @@ public class ReferenceTrackingClassVisitorTrial extends SourceFileCountingTrial 
 		rtcv.reset();
 	}
 	
-	@Test
+	@SuppressWarnings("boxing")
+  @Test
 	public void testFindReferences_001_MockWithNothing() throws Exception {
 		Class<?> clazz = MockWithNothing.class;
 		String className = clazz.getName();
@@ -110,7 +109,8 @@ public class ReferenceTrackingClassVisitorTrial extends SourceFileCountingTrial 
 		assertEquals(2, classNames.size());
 	}
 	
-	@Test
+	@SuppressWarnings("boxing")
+  @Test
 	public void testFindReferences_002_MockWithMethodReturn() throws Exception {
 		Class<?> clazz = MockWithMethodReturn.class;
 		String className = clazz.getName();
@@ -129,7 +129,8 @@ public class ReferenceTrackingClassVisitorTrial extends SourceFileCountingTrial 
 		assertEquals(3, classNames.size());
 	}
 	
-	@Test
+	@SuppressWarnings("boxing")
+  @Test
 	public void testFindReferences_003_MockWithField() throws Exception {
 		Class<?> clazz = MockWithField.class;
 		String className = clazz.getName();
@@ -148,7 +149,8 @@ public class ReferenceTrackingClassVisitorTrial extends SourceFileCountingTrial 
 		assertEquals(3, classNames.size());
 	}
 	
-	@Test
+	@SuppressWarnings("boxing")
+  @Test
 	public void testFindReferences_004_MockWithMethodParams() throws Exception {
 		Class<?> clazz = MockWithMethodParams.class;
 		String className = clazz.getName();
@@ -166,7 +168,8 @@ public class ReferenceTrackingClassVisitorTrial extends SourceFileCountingTrial 
 		assertEquals(2, classNames.size());
 	}
 	
-	@Test
+	@SuppressWarnings("boxing")
+  @Test
 	public void testFindReferences_005_MockWithImportOnlyInMethod() throws Exception {
 		Class<?> clazz = MockWithImportOnlyInMethod.class;
 		String className = clazz.getName();
@@ -188,7 +191,8 @@ public class ReferenceTrackingClassVisitorTrial extends SourceFileCountingTrial 
 	}
 	
 	
-	@Test
+	@SuppressWarnings("boxing")
+  @Test
 	public void testFindReferences_006_MockWithStaticField() throws Exception {
 		Class<?> clazz = MockWithStaticField.class;
 		String className = clazz.getName();
@@ -208,7 +212,8 @@ public class ReferenceTrackingClassVisitorTrial extends SourceFileCountingTrial 
 		assertEquals(3, classNames.size());
 	}
 	
-	@Test
+	@SuppressWarnings("boxing")
+  @Test
 	public void testFindReferences_007_MockWithStaticInitalizer() throws Exception {
 		Class<?> clazz = MockWithStaticInitalizer.class;
 		String className = clazz.getName();
@@ -230,7 +235,8 @@ public class ReferenceTrackingClassVisitorTrial extends SourceFileCountingTrial 
 	
 
 	
-	@Test
+	@SuppressWarnings("boxing")
+  @Test
 	public void testFindReferences_008_MockWithArray() throws Exception {
 		Class<?> clazz = MockWithArray.class;
 		String className = clazz.getName();
@@ -250,7 +256,8 @@ public class ReferenceTrackingClassVisitorTrial extends SourceFileCountingTrial 
 		assertEquals(3, classNames.size());
 	}
 	
-	@Test
+	@SuppressWarnings("boxing")
+  @Test
 	public void testFindReferences_009_MockWithMethodException() throws Exception {
 		Class<?> clazz = MockWithMethodException.class;
 		String className = clazz.getName();
@@ -270,7 +277,8 @@ public class ReferenceTrackingClassVisitorTrial extends SourceFileCountingTrial 
 		assertEquals(3, classNames.size());
 	}
 	
-	@Test
+	@SuppressWarnings("boxing")
+  @Test
 	public void testFindReferences_010_MockWithMethodExceptionBlock() throws Exception {
 		Class<?> clazz = MockWithMethodExceptionBlock.class;
 		String className = clazz.getName();
@@ -300,7 +308,8 @@ public class ReferenceTrackingClassVisitorTrial extends SourceFileCountingTrial 
 	 * 
 	 * @throws Exception
 	 */
-	@Test
+	@SuppressWarnings("boxing")
+  @Test
 	public void testFindReferences_011_MockWithAbstractMethodReturn() throws Exception {
 		Class<?> clazz = MockWithAbstractMethodReturn.class;
 		String className = clazz.getName();
@@ -326,7 +335,8 @@ public class ReferenceTrackingClassVisitorTrial extends SourceFileCountingTrial 
 	 * 
 	 * @throws Exception
 	 */
-	@Test
+	@SuppressWarnings("boxing")
+  @Test
 	public void testFindReferences_012_MockWithAbstractMethodParam() throws Exception {
 		Class<?> clazz = MockWithAbstractMethodParam.class;
 		String className = clazz.getName();
@@ -352,7 +362,8 @@ public class ReferenceTrackingClassVisitorTrial extends SourceFileCountingTrial 
 	 * 
 	 * @throws Exception
 	 */
-	@Test
+	@SuppressWarnings("boxing")
+  @Test
 	public void testFindReferences_013_MockWithAbstractMethodException() throws Exception {
 		Class<?> clazz = MockWithAbstractMethodException.class;
 		String className = clazz.getName();
@@ -371,7 +382,8 @@ public class ReferenceTrackingClassVisitorTrial extends SourceFileCountingTrial 
 		assertEquals(2, classNames.size());
 	}
 	
-	@Test
+	@SuppressWarnings("boxing")
+  @Test
 	public void testFindReferences_014_JacocoInitAndData() throws Exception {
 		
 		rtcv.reset();
@@ -395,7 +407,8 @@ public class ReferenceTrackingClassVisitorTrial extends SourceFileCountingTrial 
 		assertEquals(1, crefs.size());
 	}
 	
-	@Test
+	@SuppressWarnings("boxing")
+  @Test
 	public void testFindReferences_100_MockWithEverything() throws Exception {
 		Class<?> clazz = MockWithEverything.class;
 		String className = clazz.getName();

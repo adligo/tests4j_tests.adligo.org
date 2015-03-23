@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="src" path="src_jdk_1_8"/>
+	<classpathentry kind="src" path="src_jdk_1.8"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/tests4j_4jacoco.adligo.org"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/tests4j.adligo.org"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
