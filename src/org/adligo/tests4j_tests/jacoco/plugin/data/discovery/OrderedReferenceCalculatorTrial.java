@@ -149,7 +149,8 @@ public class OrderedReferenceCalculatorTrial extends SourceFileCountingTrial {
     lastMissing.put(Integer.class.getName(), intVals);
     
     I_ClassFilter filter = mock(I_ClassFilter.class);
-    when(filter.isFiltered(any())).thenReturn(true);
+    when(filter.isFiltered(any(String.class))).thenReturn(true);
+    when(filter.isFiltered(any(Class.class))).thenReturn(true);
     
     OrderedReferenceCalculator calculator = new OrderedReferenceCalculator(filter, 
         logMock, Tests4J_EnglishConstants.ENGLISH, refMap, String.class);
