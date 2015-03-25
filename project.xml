@@ -29,5 +29,7 @@
        
     </pns:dependencies>
     
-    
+    <pns:stages>
+        <pns:stage name="jar" />
+    </pns:stages>
  </pns:fabricate_project>
