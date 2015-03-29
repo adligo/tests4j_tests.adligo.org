@@ -12,16 +12,9 @@
     	<cns:param key="jdkSrcDir" value="src_jdk_"/>
     </pns:attributes>
     <pns:dependencies>
-        <lns:library>ide</lns:library>
         <lns:library>jacoco</lns:library>
         <lns:library>mockito</lns:library>
-        <lns:dependency group="java" artifact="java" version="default" type="ide">
-	    	<lns:ide name="eclipse" >
-	    		<lns:args>
-	    			<cns:param key="src" value="src,src_jdk_1_8" />
-	    		</lns:args>
-	    	</lns:ide>
-	    </lns:dependency>
+        
         <pns:project>gwt_refs.adligo.org</pns:project>
         <pns:project>tests4j.adligo.org</pns:project>
         <pns:project>tests4j_4jacoco.adligo.org</pns:project>
